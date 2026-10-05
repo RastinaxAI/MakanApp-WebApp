@@ -1,0 +1,22 @@
+{
+  "name": "makan-web",
+  "private": true,
+  "version": "2.1.0",
+  "type": "module",
+  "description": "ماکان — وب اپلیکیشن آموزش مجازی و هوشمند (PWA)",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc --noEmit && vite build && node scripts/build-sw.mjs",
+    "preview": "vite preview --host",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "icons": "node scripts/gen-icons.mjs",
+    "serve:dist": "node scripts/serve-dist.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.2",
+    "vitest": "^3.2.4"
+  }
+}
