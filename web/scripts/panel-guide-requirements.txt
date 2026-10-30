@@ -1,0 +1,7 @@
+reportlab==4.4.9
+pypdf==6.10.0
+Pillow==12.3.0
+python-bidi==0.6.12
+arabic-reshaper==3.0.1
+fonttools==4.68.0
+Brotli==1.2.1

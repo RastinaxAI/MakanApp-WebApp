@@ -16,3 +16,4 @@ __pycache__/
 .makan-qa-sessions/
 output/review/
 output/delivery/
+.venv-guide/

@@ -1,0 +1,19 @@
+{
+  "environment": "isolated local fixture at 3132/3457; screenshots of current application code; fictional data",
+  "productionBackendWrites": false,
+  "captures": [
+    "login",
+    "workspaces",
+    "education-mobile",
+    "bottom-nav",
+    "sidebar",
+    "assignment",
+    "exam",
+    "chat",
+    "preferences",
+    "assistant",
+    "manager",
+    "parent",
+    "invitation"
+  ]
+}

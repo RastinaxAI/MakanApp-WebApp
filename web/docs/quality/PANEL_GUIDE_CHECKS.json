@@ -1,0 +1,13 @@
+{
+  "readmeLinksPassed": true,
+  "sourceImagesUsed": 13,
+  "capturePassed": true,
+  "formatPassed": true,
+  "typecheckPassed": true,
+  "lintPassed": true,
+  "visuallyReviewedPages": 10,
+  "productRuntimeChanged": false,
+  "applicationBuildRerun": false,
+  "fullSuiteRerun": false,
+  "deploymentVerifiedInThisStage": false
+}

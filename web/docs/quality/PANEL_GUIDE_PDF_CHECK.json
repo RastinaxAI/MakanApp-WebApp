@@ -1,0 +1,17 @@
+{
+  "pages": 10,
+  "bookmarks": 10,
+  "bytes": 602642,
+  "sha256": "82ef67eca3a73449bfd8009ddf70660c039be30a1a3a0eb32f2f5c12482c5552",
+  "fonts": [
+    "/AAAAAA+MakanGuide-Guide",
+    "/AAAAAA+MakanGuide-GuideBold",
+    "/Helvetica"
+  ],
+  "textOutsidePage": 0,
+  "renderedPages": 10,
+  "screenshots": 13,
+  "captureEnvironment": "isolated fictional fixture",
+  "realBackendWrites": false,
+  "realCredentialsIncluded": false
+}

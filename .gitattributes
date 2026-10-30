@@ -1,0 +1,4 @@
+# Document and image bytes must survive checkout without line-ending conversion.
+*.pdf binary
+*.png binary
+*.woff2 binary
