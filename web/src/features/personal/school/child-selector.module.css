@@ -1,0 +1,114 @@
+.card {
+  padding: 24px;
+  margin-bottom: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.heading > div {
+  flex: 1;
+  min-width: 0;
+}
+.heading h2 {
+  font-size: 18px;
+}
+.heading p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.selected {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--primary);
+}
+.selection {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.selection > div {
+  flex: 1;
+  min-width: 0;
+}
+.selection label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.selection select {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 12px 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font: inherit;
+}
+.selection select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.spinner {
+  color: var(--primary);
+  animation: child-spin 1s linear infinite;
+}
+@keyframes child-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (max-width: 600px) {
+  .card {
+    padding: 18px;
+  }
+  .heading {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .selected {
+    margin-inline-start: auto;
+  }
+  .selection {
+    gap: 10px;
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  .selection select {
+    font-size: 14px;
+  }
+}

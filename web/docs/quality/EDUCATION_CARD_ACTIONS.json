@@ -1,0 +1,61 @@
+{
+  "recordedAtUtc": "2026-10-30T09:27:34.949462+03:30",
+  "scope": "Filled primary actions for lesson, homework and exam cards; retained data and role-specific destinations. Class back links consolidated into the existing header.",
+  "qualityCommand": "npm run quality",
+  "qualityLog": "EDUCATION_CARD_ACTIONS.log",
+  "format": true,
+  "lint": true,
+  "typecheck": true,
+  "build": true,
+  "unit": {
+    "passed": 196,
+    "files": 37
+  },
+  "fullBrowser": {
+    "startTime": "2026-10-30T05:48:42.314Z",
+    "duration": 269577.69299999997,
+    "expected": 64,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "followup": {
+    "log": "EDUCATION_CARD_ACTIONS_FINAL_FIXED.log",
+    "browser": {
+      "startTime": "2026-10-30T05:56:11.061Z",
+      "duration": 22517.923000000003,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reason": "Rebuilt and retested class/header paths after removing the remaining in-content back links. These six are a subset, not extra unique scenarios."
+  },
+  "correctedCheck": {
+    "log": "EDUCATION_CARD_ACTIONS_FINAL.log",
+    "issue": "ChevronRight was still needed by Parent class navigation; restored the import and reran checks before preview."
+  },
+  "visual": {
+    "command": "node tmp/capture-education-cards.mjs",
+    "log": "EDUCATION_CARD_ACTIONS_VISUAL.log",
+    "fixtureApp": 3133,
+    "fixtureBackend": 3458,
+    "screenshots": 9,
+    "viewports": [
+      390,
+      834,
+      1440
+    ],
+    "directory": "output/review/education-card-actions",
+    "manuallyViewed": [
+      "lessons-390.png",
+      "assignments-834.png",
+      "exams-1440.png"
+    ]
+  },
+  "apiChanges": 0,
+  "liveBackendWrites": 0,
+  "addedDependencies": 0,
+  "newRegressionTests": 0,
+  "preview": "Production Ready on http://127.0.0.1:3130; GET /enter HTTP 200; sessions preserved."
+}

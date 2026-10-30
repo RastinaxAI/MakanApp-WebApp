@@ -1,0 +1,156 @@
+import { test, expect, type BrowserContext } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+test.use({ actionTimeout: 25000, navigationTimeout: 30000 });
+const origin = 'http://127.0.0.1:3130';
+test('saved Teacher contact opens through explicit Personal switch from Student school workspace', async ({
+  browser,
+}) => {
+  const contexts: BrowserContext[] = [];
+  const headers = { Origin: origin };
+  const report: any = {
+    checkedAt: new Date().toISOString(),
+    mode: 'REAL SEEDED STUDENT / TEACHER — contacts UI, no mock',
+    checks: [],
+    errors: [],
+  };
+  async function login(phone: string) {
+    const context = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Tehran' });
+    contexts.push(context);
+    const challenge = await context.request.post('/api/client/auth/challenge', {
+      headers,
+      data: { phoneNumber: phone },
+    });
+    expect(challenge.status()).toBe(202);
+    const verify = await context.request.post('/api/client/auth/verify', {
+      headers,
+      data: {
+        phoneNumber: phone,
+        challengeId: (await challenge.json()).challengeId,
+        code: '123456',
+        deviceName: 'Saved contact workspace regression',
+      },
+    });
+    expect(verify.ok()).toBeTruthy();
+    const state = await (await context.request.get('/api/client/session')).json();
+    return { context, state };
+  }
+  try {
+    const student = await login('09120000101'),
+      teacher = await login('09120000102');
+    const spaces = await (
+      await student.context.request.get('/api/client/backend/api/v1/workspaces/me', {
+        headers: { 'X-Makan-Context': student.state.revision },
+      })
+    ).json();
+    const w = spaces.find((w: any) => w.workspaceType === 'Organization' && w.role === 'Student');
+    expect(w).toBeTruthy();
+    expect(
+      (
+        await student.context.request.post('/api/client/backend/api/v1/workspaces/select', {
+          headers: { ...headers, 'X-Makan-Context': student.state.revision },
+          data: { workspaceType: 'Organization', membershipId: w.membershipId, role: w.role },
+        })
+      ).ok(),
+    ).toBeTruthy();
+    student.state = await (await student.context.request.get('/api/client/session')).json();
+    const orgStatus = await (
+      await student.context.request.get('/api/client/backend/api/v1/me/messaging-status', {
+        headers: { 'X-Makan-Context': student.state.revision },
+      })
+    ).json();
+    report.organizationStatus = orgStatus;
+    const page = await student.context.newPage();
+    page.on('pageerror', (e) => report.errors.push(e.message));
+    const mutations: { path: string; body: any }[] = [];
+    page.on('request', (r) => {
+      if (r.method() === 'POST' && r.url().endsWith('/api/v1/conversations/direct'))
+        mutations.push({ path: new URL(r.url()).pathname, body: r.postDataJSON() });
+    });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/personal/contacts');
+    await expect(
+      page.getByText(
+        'اکنون در فضای آموزشگاه هستید. برای پیام شخصی به مخاطبان، وارد فضای شخصی شوید.',
+        { exact: true },
+      ),
+    ).toBeVisible();
+    let row = page
+      .locator('article')
+      .filter({ has: page.getByText('@dev.Teacher', { exact: true }) });
+    await expect(row).toHaveCount(1);
+    const proceed = row.getByRole('button', { name: 'ادامه در فضای شخصی', exact: true });
+    await expect(proceed).toBeEnabled();
+    expect(mutations).toHaveLength(0);
+    await mkdir('docs/screenshots/contacts-workspace', { recursive: true });
+    await page.screenshot({
+      path: 'docs/screenshots/contacts-workspace/school-contact-mobile.png',
+    });
+    await proceed.click();
+    await expect(page).toHaveURL(origin + '/personal/contacts');
+    row = page.locator('article').filter({ has: page.getByText('@dev.Teacher', { exact: true }) });
+    const start = row.getByRole('button', { name: 'گفت‌وگو', exact: true });
+    await expect(start).toBeEnabled();
+    student.state = await (await student.context.request.get('/api/client/session')).json();
+    expect(student.state.context.workspaceType).toBe('Personal');
+    report.personalStatus = await (
+      await student.context.request.get('/api/client/backend/api/v1/me/messaging-status', {
+        headers: { 'X-Makan-Context': student.state.revision },
+      })
+    ).json();
+    report.checks.push(
+      'Saved contact retained; explicit workspace selection returns to contacts; Direct button becomes enabled',
+    );
+    expect(mutations).toHaveLength(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await page.screenshot({
+      path: 'docs/screenshots/contacts-workspace/personal-contact-mobile.png',
+    });
+    const direct = page.waitForResponse(
+      (r) => r.url().endsWith('/api/v1/conversations/direct') && r.request().method() === 'POST',
+    );
+    await start.click();
+    const opened = await direct;
+    const body = await opened.json();
+    expect(opened.ok(), JSON.stringify(body)).toBeTruthy();
+    expect(body.scope).toBe('Personal');
+    expect(body.otherParticipant.userId).toBe(teacher.state.user.id);
+    await expect(page.getByLabel('متن پیام', { exact: true })).toBeVisible();
+    report.conversationId = body.conversationId;
+    const receiver = await teacher.context.newPage();
+    receiver.on('pageerror', (e) => report.errors.push(e.message));
+    await receiver.goto('/personal/messages/' + body.conversationId);
+    await expect(receiver.getByLabel('متن پیام', { exact: true })).toBeVisible();
+    const text = 'آزمون رفع دکمهٔ مخاطبین — دانشجو به استاد — ' + Date.now();
+    await page.getByLabel('متن پیام', { exact: true }).fill(text);
+    const sent = page.waitForResponse(
+      (r) =>
+        r.url().endsWith('/' + body.conversationId + '/messages') &&
+        r.request().method() === 'POST',
+    );
+    await page.getByRole('button', { name: 'ارسال پیام', exact: true }).click();
+    const receipt = await sent;
+    expect(receipt.ok(), await receipt.text()).toBeTruthy();
+    await expect(
+      receiver.locator('[data-message-room] article').filter({ hasText: text }),
+    ).toBeVisible();
+    report.checks.push(
+      'Direct opened by clicking saved contact; Student UI sends and separate Teacher browser receives actual text',
+    );
+    expect(mutations).toHaveLength(1);
+    expect(mutations[0].body).toEqual({ targetUserId: teacher.state.user.id, scope: 'Personal' });
+    expect(report.errors).toEqual([]);
+    report.outcome = 'PASS';
+  } catch (e) {
+    report.outcome = 'FAIL';
+    report.failure = String(e);
+    throw e;
+  } finally {
+    await writeFile('docs/contacts-workspace-live-qa.json', JSON.stringify(report, null, 2) + '\n');
+    for (const context of contexts) {
+      await context.request.post('/api/client/auth/logout', { headers }).catch(() => {});
+      await context.close();
+    }
+  }
+});

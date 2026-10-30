@@ -1,0 +1,35 @@
+name: Makan client quality
+on:
+  push:
+    paths: ['web/**', 'compose.yaml', 'package.json', '.github/workflows/makan-client-quality.yml']
+  pull_request:
+    paths: ['web/**', 'compose.yaml', 'package.json', '.github/workflows/makan-client-quality.yml']
+permissions:
+  contents: read
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: web
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: web/.nvmrc
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run quality
+      # Build from the Docker allowlist too; host builds cannot detect missing context inputs.
+      - run: docker build --target runtime --tag makan-client:ci .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: client-test-evidence
+          path: web/test-results
+          retention-days: 7

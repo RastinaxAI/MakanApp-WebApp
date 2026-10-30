@@ -1,0 +1,4 @@
+name: makan-client
+include:
+  - path: ./web/compose.yaml
+    env_file: ./web/.env.docker

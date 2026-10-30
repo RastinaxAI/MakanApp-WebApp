@@ -1,0 +1,72 @@
+{
+  "recordedAtUtc": "2026-10-30T06:42:52.018659+00:00",
+  "scope": [
+    "Red profile logout",
+    "Direct workspace entry",
+    "Parent child selector",
+    "Teacher lesson and evaluation attachments"
+  ],
+  "qualityLog": "PROFILE_WORKSPACE_ATTACHMENTS_FINAL.log",
+  "format": true,
+  "lint": true,
+  "typecheck": true,
+  "generated": true,
+  "build": true,
+  "unit": {
+    "passed": 196,
+    "files": 37
+  },
+  "fullBrowser": {
+    "startTime": "2026-10-30T06:34:54.699Z",
+    "duration": 289843.391,
+    "expected": 66,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "followUp": {
+    "log": "PROFILE_WORKSPACE_ATTACHMENTS_FOLLOWUP.log",
+    "command": "npm run lint; npm run test:e2e -- tests/browser/workspace-child-attachments.spec.ts tests/browser/learning.spec.ts",
+    "browser": {
+      "startTime": "2026-10-30T06:41:40.623Z",
+      "duration": 22252.270999999997,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "change": "Fixture lesson body normalized from nullable command to non-null response string; product code/build unchanged."
+  },
+  "uniquePassingBrowserScenarios": 67,
+  "fullSuiteRerunAfterLastFixtureCorrection": false,
+  "finalKnownUnresolvedFailures": 0,
+  "newBrowserScenarios": 3,
+  "sourceModuleBoundaries": 152,
+  "visual": {
+    "widths": [
+      390,
+      834,
+      1440
+    ],
+    "directory": "output/review/profile-workspace-attachments",
+    "screenshots": 11,
+    "manuallyViewed": [
+      "profile-logout-mobile.png",
+      "workspaces-834.png",
+      "teacher-received-files.png",
+      "teacher-files-390.png",
+      "teacher-files-834.png",
+      "parent-390.png",
+      "parent-1440.png"
+    ]
+  },
+  "layoutDiagnostic": "PROFILE_ATTACHMENTS_LAYOUT.log: 390px viewport, 390px document; no overflow.",
+  "apiChanges": 0,
+  "liveBackendWrites": 0,
+  "addedDependencies": 0,
+  "limitations": [
+    "Automated and visual verification used local fixtures; authenticated live backend flows were not re-tested in this UI-only change.",
+    "The full 67-scenario run had one fixture failure; all 5 affected/follow-up scenarios passed after correcting it. No additional full-suite run is claimed."
+  ],
+  "preview": "Production Ready at http://127.0.0.1:3130; GET /enter HTTP 200; existing session directory preserved."
+}

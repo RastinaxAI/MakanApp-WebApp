@@ -1,0 +1,1245 @@
+{
+  "checkedAtUtc": "2026-10-29T13:34:20.514572+00:00",
+  "server": "http://94.184.32.84:8090",
+  "sourcePdf": {
+    "name": "MakanApp_Product_Decisions_FA.pdf",
+    "pages": 19,
+    "sha256": "4b05190a79fb2b5e962d3b4df75edc9d2e0140c77becf6a17a0448c83d0cb172",
+    "modified": false
+  },
+  "method": "Contract and source inspection, anonymous GET only; no service mutations or fresh authenticated behavior tests",
+  "openapi": {
+    "url": "http://94.184.32.84:8090/openapi/v1.json",
+    "status": 200,
+    "sha256": "ecbb1721d7f6f673cc0f67cea6e1ab38b9cf8214b9d44673c5653e1dd890d051",
+    "pathCount": 291,
+    "schemaCount": 572,
+    "addedPathCount": 0,
+    "removedPathCount": 0,
+    "comparisonScope": "Path sets only; equality of implementations or full schemas is not inferred.",
+    "eventStreamResponseDeclarations": 0
+  },
+  "http": [
+    {
+      "method": "GET",
+      "path": "/swagger/index.html",
+      "status": 200,
+      "authenticated": false
+    },
+    {
+      "method": "GET",
+      "path": "/openapi/v1.json",
+      "status": 200,
+      "authenticated": false
+    },
+    {
+      "method": "GET",
+      "path": "/swagger/v1/swagger.json",
+      "status": 404,
+      "authenticated": false
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "authenticated": false,
+      "path": "/swagger/index.js"
+    },
+    {
+      "status": 401,
+      "method": "GET",
+      "authenticated": false,
+      "path": "/hubs/messaging"
+    },
+    {
+      "status": 401,
+      "method": "GET",
+      "authenticated": false,
+      "path": "/api/v1/conversations"
+    },
+    {
+      "status": 401,
+      "method": "GET",
+      "authenticated": false,
+      "path": "/api/v1/commerce/summary"
+    },
+    {
+      "status": 401,
+      "method": "GET",
+      "authenticated": false,
+      "path": "/api/v1/notifications"
+    }
+  ],
+  "contracts": {
+    "/api/v1/ai/chat": {
+      "post": {
+        "tags": [
+          "Ai"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAiChatCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAiChatCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendAiChatCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiChatResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiChatResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiChatResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ConversationListFilter"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 30
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          },
+          {
+            "name": "folderId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "default": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConversationSummaryResult"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConversationSummaryResult"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConversationSummaryResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations/{conversationId}/changes": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "afterCursor",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationChangePageResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationChangePageResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationChangePageResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations/{conversationId}/messages": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "beforeSequence",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "topicId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationMessagePageResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationMessagePageResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationMessagePageResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Conversations"
+        ],
+        "parameters": [
+          {
+            "name": "conversationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendMessageCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiptResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiptResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageReceiptResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/academic/classes/{classId}/learners": {
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "description": "نشست معتبر و Workspace سازمانی جاری لازم است؛ OrganizationId ارسالی از کلاینت مجوز نیست. فقط Manager یا Teacher با Assignment فعال همان کلاس. شناسهٔ رابطه از User/Person/Membership جداست؛ وضعیت پیش‌فرض Active. مرجع یا مجوز نامعتبر 404. فهرست‌ها items/totalCount/page/pageSize/dataAsOfUtc دارند؛ ترتیب پایدار با شناسهٔ یکتا به‌عنوان tie-breaker. status اختیاری و enum رشته‌ای؛ فیلدهای اختیاری null هستند. تغییر هم‌زمان داده بین صفحات snapshot واحد تضمین نمی‌کند.",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "description": "جست‌وجوی trimشده تا ۱۰۰ نویسه؛ فقط در محدودهٔ مجاز",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "description": "صفحه از ۱؛ حداکثر 100000",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "description": "۱ تا ۱۰۰؛ پیش‌فرض ۵۰",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 50
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchoolPageOfClassLearnerResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchoolPageOfClassLearnerResult"
+                },
+                "example": {
+                  "dataAsOfUtc": "2026-10-28T12:00:00Z",
+                  "page": 1,
+                  "pageSize": 50,
+                  "totalCount": 1,
+                  "items": [
+                    {
+                      "enrollmentId": "00000000-0000-0000-0000-000000000001",
+                      "learnerOrganizationPersonId": "00000000-0000-0000-0000-000000000002",
+                      "personId": "00000000-0000-0000-0000-000000000003",
+                      "userId": null,
+                      "displayName": "فراگیر",
+                      "username": null,
+                      "profilePhoto": null,
+                      "status": "Active",
+                      "enrolledAtUtc": "2026-10-28T12:00:00Z",
+                      "endedAtUtc": null,
+                      "version": "AAAAAAAAAAE="
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchoolPageOfClassLearnerResult"
+                },
+                "example": {
+                  "dataAsOfUtc": "2026-10-28T12:00:00Z",
+                  "page": 1,
+                  "pageSize": 50,
+                  "totalCount": 1,
+                  "items": [
+                    {
+                      "enrollmentId": "00000000-0000-0000-0000-000000000001",
+                      "learnerOrganizationPersonId": "00000000-0000-0000-0000-000000000002",
+                      "personId": "00000000-0000-0000-0000-000000000003",
+                      "userId": null,
+                      "displayName": "فراگیر",
+                      "username": null,
+                      "profilePhoto": null,
+                      "status": "Active",
+                      "enrolledAtUtc": "2026-10-28T12:00:00Z",
+                      "endedAtUtc": null,
+                      "version": "AAAAAAAAAAE="
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 400,
+                  "code": "SCHOOL_REQUEST_INVALID",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 401,
+                  "code": "AUTH_REQUIRED",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 403,
+                  "code": "WORKSPACE_NOT_ALLOWED",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 404,
+                  "code": "CLASS_NOT_FOUND",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/academic/classes/{classId}/teachers": {
+      "get": {
+        "tags": [
+          "Classes"
+        ],
+        "description": "نشست معتبر و Workspace سازمانی جاری لازم است؛ OrganizationId ارسالی از کلاینت مجوز نیست. فقط Manager یا Teacher با Assignment فعال همان کلاس. شناسهٔ رابطه از User/Person/Membership جداست؛ وضعیت پیش‌فرض Active. مرجع یا مجوز نامعتبر 404. فهرست‌ها items/totalCount/page/pageSize/dataAsOfUtc دارند؛ ترتیب پایدار با شناسهٔ یکتا به‌عنوان tie-breaker. status اختیاری و enum رشته‌ای؛ فیلدهای اختیاری null هستند. تغییر هم‌زمان داده بین صفحات snapshot واحد تضمین نمی‌کند.",
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "Search",
+            "in": "query",
+            "description": "جست‌وجوی trimشده تا ۱۰۰ نویسه؛ فقط در محدودهٔ مجاز",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "description": "صفحه از ۱؛ حداکثر 100000",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 1
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "description": "۱ تا ۱۰۰؛ پیش‌فرض ۵۰",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "example": 50
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": null
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchoolPageOfClassTeacherResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchoolPageOfClassTeacherResult"
+                },
+                "example": {
+                  "dataAsOfUtc": "2026-10-28T12:00:00Z",
+                  "page": 1,
+                  "pageSize": 50,
+                  "totalCount": 1,
+                  "items": [
+                    {
+                      "teacherAssignmentId": "00000000-0000-0000-0000-000000000001",
+                      "teacherMembershipId": "00000000-0000-0000-0000-000000000002",
+                      "userId": "00000000-0000-0000-0000-000000000003",
+                      "personId": null,
+                      "displayName": "مدرس",
+                      "username": null,
+                      "profilePhoto": null,
+                      "status": "Active",
+                      "assignedAtUtc": "2026-10-28T12:00:00Z",
+                      "endedAtUtc": null,
+                      "version": "AAAAAAAAAAE="
+                    }
+                  ]
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SchoolPageOfClassTeacherResult"
+                },
+                "example": {
+                  "dataAsOfUtc": "2026-10-28T12:00:00Z",
+                  "page": 1,
+                  "pageSize": 50,
+                  "totalCount": 1,
+                  "items": [
+                    {
+                      "teacherAssignmentId": "00000000-0000-0000-0000-000000000001",
+                      "teacherMembershipId": "00000000-0000-0000-0000-000000000002",
+                      "userId": "00000000-0000-0000-0000-000000000003",
+                      "personId": null,
+                      "displayName": "مدرس",
+                      "username": null,
+                      "profilePhoto": null,
+                      "status": "Active",
+                      "assignedAtUtc": "2026-10-28T12:00:00Z",
+                      "endedAtUtc": null,
+                      "version": "AAAAAAAAAAE="
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 400,
+                  "code": "SCHOOL_REQUEST_INVALID",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 401,
+                  "code": "AUTH_REQUIRED",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 403,
+                  "code": "WORKSPACE_NOT_ALLOWED",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "ProblemDetails؛ مجوز، وضعیت یا نسخهٔ معتبر لازم است.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": 404,
+                  "code": "CLASS_NOT_FOUND",
+                  "correlationId": "example-correlation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Classes"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignTeacherCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignTeacherCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignTeacherCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeacherAssignmentResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeacherAssignmentResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeacherAssignmentResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/academic/classes/{classId}/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "parameters": [
+          {
+            "name": "classId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSessionCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/commerce/summary": {
+      "get": {
+        "tags": [
+          "Commerce"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagerCommerceSummaryDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagerCommerceSummaryDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagerCommerceSummaryDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "schemas": {
+    "SendAiChatCommand": {
+      "required": [
+        "message",
+        "conversationId"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": true
+        }
+      }
+    },
+    "AiChatResult": {
+      "required": [
+        "requestId",
+        "correlationId",
+        "conversationId",
+        "answer",
+        "insights",
+        "risks",
+        "recommendations",
+        "sources"
+      ],
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string",
+          "nullable": true
+        },
+        "conversationId": {
+          "type": "string",
+          "nullable": true
+        },
+        "answer": {
+          "$ref": "#/components/schemas/AiMessage"
+        },
+        "insights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AiInsight"
+          }
+        },
+        "risks": {
+          "type": "array",
+          "items": {}
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AiRecommendation"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AiSourceReference"
+          }
+        }
+      }
+    },
+    "SendMessageCommand": {
+      "type": "object",
+      "properties": {
+        "clientMessageId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "kind": {
+          "$ref": "#/components/schemas/MessageKind"
+        },
+        "text": {
+          "type": "string",
+          "nullable": true
+        },
+        "attachmentIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nullable": true
+        },
+        "replyToMessageId": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": true
+        },
+        "mentionedUserIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nullable": true
+        },
+        "contactUserId": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": true
+        },
+        "topicId": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": true
+        },
+        "isSilent": {
+          "type": "boolean"
+        }
+      }
+    },
+    "MessageReceiptResult": {
+      "required": [
+        "messageId",
+        "conversationId",
+        "clientMessageId",
+        "sequence",
+        "kind",
+        "sentAtUtc",
+        "status",
+        "version"
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "conversationId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "clientMessageId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "kind": {
+          "$ref": "#/components/schemas/MessageKind"
+        },
+        "sentAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "$ref": "#/components/schemas/MessageReceiptStatus"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "ConversationChangeResult": {
+      "required": [
+        "changeId",
+        "type",
+        "resourceId",
+        "resourceVersion",
+        "cursor",
+        "occurredAtUtc",
+        "actorUserId",
+        "payloadVersion"
+      ],
+      "type": "object",
+      "properties": {
+        "changeId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "$ref": "#/components/schemas/MessagingChangeType"
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourceVersion": {
+          "type": "string",
+          "nullable": true
+        },
+        "cursor": {
+          "type": "string"
+        },
+        "occurredAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "actorUserId": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": true
+        },
+        "payloadVersion": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "peerReadThroughSequence": {
+          "type": "integer",
+          "format": "int64",
+          "default": null,
+          "nullable": true
+        }
+      }
+    },
+    "ConversationChangePageResult": {
+      "required": [
+        "changes",
+        "nextCursor",
+        "hasMore"
+      ],
+      "type": "object",
+      "properties": {
+        "changes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ConversationChangeResult"
+          }
+        },
+        "nextCursor": {
+          "type": "string"
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ManagerCommerceSummaryDto": {
+      "required": [
+        "organizationId",
+        "state",
+        "subscription",
+        "entitlements",
+        "quotas",
+        "dataAsOfUtc"
+      ],
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "state": {
+          "$ref": "#/components/schemas/CommerceSummaryState"
+        },
+        "subscription": {
+          "$ref": "#/components/schemas/CommerceSubscriptionDto"
+        },
+        "entitlements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommerceEntitlementDto"
+          }
+        },
+        "quotas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CommerceQuotaDto"
+          }
+        },
+        "dataAsOfUtc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CommerceQuotaDto": {
+      "required": [
+        "key",
+        "limit",
+        "currentUsage",
+        "remaining",
+        "isUnlimited",
+        "isOverQuota",
+        "usageSource"
+      ],
+      "type": "object",
+      "properties": {
+        "key": {
+          "$ref": "#/components/schemas/QuotaKey"
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "nullable": true
+        },
+        "currentUsage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "remaining": {
+          "type": "integer",
+          "format": "int64",
+          "nullable": true
+        },
+        "isUnlimited": {
+          "type": "boolean"
+        },
+        "isOverQuota": {
+          "type": "boolean"
+        },
+        "usageSource": {
+          "$ref": "#/components/schemas/QuotaUsageSource"
+        }
+      }
+    }
+  },
+  "existingClientEvidence": [
+    "src/features/personal/messaging/live.tsx",
+    "src/lib/messaging-hub-protocol.ts",
+    "src/app/api/client/hub/[[...path]]/route.ts",
+    "src/features/personal/messaging/messenger.tsx",
+    "src/features/personal/messaging/conversation-room.tsx",
+    "src/features/personal/assistant.tsx",
+    "src/features/personal/school/parent-daily.tsx",
+    "src/features/personal/school/lessons.tsx"
+  ],
+  "newAcceptanceTests": {
+    "previousProductScenarios": 29,
+    "realtimeScenarios": 36,
+    "executedInThisReview": 0
+  },
+  "limitations": [
+    "No backend source review",
+    "No fresh authenticated functional integration test",
+    "No load or chaos test executed",
+    "Proposed routes and events are not implemented by this document"
+  ]
+}

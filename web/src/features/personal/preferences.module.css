@@ -1,0 +1,95 @@
+.page {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+  display: grid;
+  gap: 24px;
+  padding-block: 8px 24px;
+}
+.heading h1 {
+  font-size: 26px;
+  font-weight: 750;
+  line-height: 1.7;
+  margin: 0;
+}
+.list {
+  display: grid;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.list > .row {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  min-height: 82px;
+  margin: 0;
+  padding: 18px 22px;
+  background: transparent;
+  color: var(--text);
+  border: 0;
+  border-radius: 0;
+  text-decoration: none;
+  text-align: start;
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+}
+.list > .row + .row {
+  border-top: 1px solid var(--border);
+}
+.list > .row:hover {
+  background: var(--soft);
+}
+.list > .row:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -3px;
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 14px;
+}
+.row strong {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.8;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.chevron {
+  color: var(--muted);
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 600px) {
+  .page {
+    gap: 20px;
+    padding-top: 4px;
+  }
+  .heading h1 {
+    font-size: 23px;
+  }
+  .list {
+    border-radius: 18px;
+  }
+  .list > .row {
+    padding: 16px;
+    gap: 12px;
+    min-height: 76px;
+    grid-template-columns: 40px minmax(0, 1fr) 18px;
+  }
+  .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 13px;
+  }
+}

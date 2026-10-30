@@ -1,0 +1,47 @@
+{
+  "recordedAtUtc": "2026-10-30T08:55:27.268129+03:30",
+  "change": "Filled class entry button; contextual back links consolidated into the right-side header arrow.",
+  "command": "npm run quality",
+  "log": "HEADER_BACK_QUALITY.log",
+  "result": "passed",
+  "unit": {
+    "passed": 196,
+    "files": 37
+  },
+  "browser": {
+    "startTime": "2026-10-30T05:20:12.664Z",
+    "duration": 273663.281,
+    "expected": 64,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "format": true,
+  "lint": true,
+  "typecheck": true,
+  "generatedCheck": true,
+  "productionBuild": true,
+  "moduleBoundaries": 150,
+  "cycles": 0,
+  "newDependencies": 0,
+  "apiChanges": 0,
+  "verification": "Local fixture 3457/app3132. No live server writes.",
+  "screenshots": "output/review/header-back",
+  "widths": [
+    390,
+    834,
+    1440
+  ],
+  "manuallyViewed": [
+    "classes-390.png",
+    "lesson-1440.png"
+  ],
+  "checks": [
+    "filled link without nested interactive elements",
+    "no CTA arrow",
+    "direct lesson back targets its class lessons tab",
+    "header back honors unsaved edits",
+    "settings retain contextual parent destination"
+  ],
+  "preview": "Production restarted on http://127.0.0.1:3130; Ready and GET /enter HTTP 200; sessions preserved."
+}

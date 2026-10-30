@@ -1,0 +1,100 @@
+{
+  "recordedAtUtc": "2026-10-30T08:05:06.512003+00:00",
+  "scope": "Manager-only school dashboard, reports, class staffing/enrollment, member directory and guardian invitation lifecycle",
+  "checks": {
+    "format": true,
+    "lint": true,
+    "sourceModuleBoundaries": 156,
+    "cycles": 0,
+    "typecheck": true,
+    "generated": true,
+    "build": true,
+    "unit": {
+      "passed": 196,
+      "files": 37
+    }
+  },
+  "fullBrowser": {
+    "startTime": "2026-10-30T07:53:12.246Z",
+    "duration": 273778.352,
+    "expected": 70,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "finalPresentationFollowup": {
+    "stats": {
+      "startTime": "2026-10-30T07:59:33.892Z",
+      "duration": 52652.012,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Manager mobile roster cards, button bounds, localized report values and existing reference flows; 9 are a subset of the 70 scenarios."
+  },
+  "additionalReportVerification": {
+    "stats": {
+      "startTime": "2026-10-30T08:02:53.890Z",
+      "duration": 27643.664999999997,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "All report tabs, class performance null values, member role filters, class relationships and guardian consent; 3 are a subset of the 70 scenarios."
+  },
+  "newBrowserScenarios": 3,
+  "uniqueBrowserScenarios": 70,
+  "commands": [
+    "npm run quality (initial run; 67 passed, 3 failed)",
+    "npm run format:check",
+    "npm run lint",
+    "npm run typecheck",
+    "npm run test",
+    "npm run generated:check",
+    "npm run build",
+    "npm run test:e2e (70 passed)",
+    "npm run test:e2e -- tests/browser/manager-workspace.spec.ts tests/browser/reference-fidelity.spec.ts (9 passed after presentation changes)",
+    "npm run test:e2e -- tests/browser/manager-workspace.spec.ts (3 passed with extra report and member assertions)"
+  ],
+  "visual": {
+    "widths": [
+      390,
+      834,
+      1440
+    ],
+    "directory": "output/review/manager-workspace",
+    "screenshots": 9,
+    "manuallyViewed": [
+      "dashboard-390.png",
+      "dashboard-1440.png",
+      "dashboard-834.png",
+      "class-controls-390.png",
+      "class-390.png",
+      "class-1440.png"
+    ]
+  },
+  "contractRead": "HTTP 200 Swagger/index.js and /openapi/v1.json; 291 paths; relevant operations match local snapshot. /swagger/v1/swagger.json is not the configured schema URL.",
+  "integrationStatus": "Client connections implemented and verified with isolated fixtures. No authenticated live backend mutations were tested.",
+  "backendHandoff": {
+    "source": "docs/API_GAPS.md G17",
+    "export": "output/reports/MANAGER_BACKEND_GAPS_FA.md",
+    "gaps": [
+      "Manager-scoped role/membership invitation and administration API",
+      "Persistent organization outgoing invitation list/detail",
+      "Versioned class edit and atomic bulk/replacement operations",
+      "Guardian names and detailed teacher content activity read model"
+    ]
+  },
+  "apiChanges": 0,
+  "liveBackendWrites": 0,
+  "addedDependencies": 0,
+  "preview": "Production http://127.0.0.1:3130, existing session directory preserved",
+  "notClaimed": [
+    "Production deployment or CI run",
+    "Pixel-level Figma equivalence",
+    "Actual server security or live end-to-end mutation verification",
+    "A second full-suite run after final presentation-only changes"
+  ]
+}

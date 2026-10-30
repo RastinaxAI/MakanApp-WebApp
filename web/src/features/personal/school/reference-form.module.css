@@ -1,0 +1,136 @@
+.intro {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin: 0;
+}
+.classLabel {
+  font-size: 12px;
+  color: var(--muted);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+.body fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.body label,
+.uploadField > span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+}
+.body textarea {
+  min-height: 104px;
+  height: 104px;
+}
+.body input:not([type='file']):not([type='checkbox']),
+.body textarea,
+.body select {
+  border-radius: 10px;
+  border-color: var(--border);
+  padding: 12px 14px;
+  min-height: 52px;
+  font-size: 14px;
+  background: var(--surface);
+}
+.actions {
+  position: fixed;
+  z-index: 24;
+  inset-inline-start: var(--personal-nav, 0px);
+  inset-inline-end: 0;
+  bottom: 0;
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 24px max(16px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 -6px 22px #24283e03;
+}
+.actions > :global(.button) {
+  width: 100%;
+  max-width: 620px;
+}
+.actions > :global(.button):not([type='submit']) {
+  width: 180px;
+  max-width: 180px;
+  background: var(--soft);
+  color: var(--text);
+}
+.uploadField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px dashed var(--primary-border);
+  border-radius: 12px;
+  background: var(--bg);
+  min-height: 154px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--primary) !important;
+}
+.upload strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+.upload span,
+.upload small {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.fileInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.note {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.sectionLabel {
+  font-size: 14px;
+  font-weight: 650;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+@media (max-width: 767px) {
+  .intro {
+    font-size: 14px;
+  }
+  .body {
+    gap: 20px;
+  }
+  .actions {
+    min-height: 82px;
+    padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+  }
+  .actions > :global(.button):not([type='submit']) {
+    display: none;
+  }
+}

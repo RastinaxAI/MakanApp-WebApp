@@ -1,0 +1,141 @@
+{
+  "checkedAtUtc": "2026-10-29T18:24:58.135408+00:00",
+  "scope": "Read-only public contract and active client source review; documentation only. No authenticated browser service checks this turn, backend source unavailable.",
+  "openapi": {
+    "origin": "http://94.184.32.84:8090",
+    "url": "/openapi/v1.json",
+    "httpStatus": 200,
+    "swaggerHttpStatus": 200,
+    "sha256": "ecbb1721d7f6f673cc0f67cea6e1ab38b9cf8214b9d44673c5653e1dd890d051",
+    "paths": 291,
+    "schemas": 572,
+    "operations": 332,
+    "addedPaths": [],
+    "removedPaths": [],
+    "changedSchemas": []
+  },
+  "sourcePdf": {
+    "path": "output/pdf/MakanApp_Project_Rescan_Backend_Gaps_FA.pdf",
+    "pages": 11,
+    "sha256": "fbed2895cc58bfd713b1fbf1703a46a5556052d551c9657d50ff935e62f8de45"
+  },
+  "existingOfficialClassRoute": "POST /api/v1/organization/classes/{classId}/conversation",
+  "officialClassResultFields": [
+    "conversationId",
+    "organizationId",
+    "classId",
+    "activeMemberCount"
+  ],
+  "officialClassRouteInClientSdk": false,
+  "conversationSummaryClassBinding": [],
+  "workspaceResultFields": [
+    "workspaceType",
+    "organizationId",
+    "organizationName",
+    "membershipId",
+    "role",
+    "displayName",
+    "status"
+  ],
+  "examAnswerFields": [
+    "clientOperationId",
+    "writeLeaseVersion",
+    "expectedRevisionNumber",
+    "selectedOptionId",
+    "textAnswer"
+  ],
+  "aiRequestFields": [
+    "message",
+    "conversationId"
+  ],
+  "client": {
+    "operations": 159,
+    "schemas": 305
+  },
+  "priorValidation": {
+    "checkedAtUtc": "2026-10-29T18:11:04.241798+00:00",
+    "scope": "Preference layout and weekly school agenda; monthly UI replaced on explicit user request. Existing API, roles and access guards retained.",
+    "command": "npm run quality",
+    "format": "passed",
+    "lint": "passed;127 module boundaries;no cycles",
+    "typecheck": "passed",
+    "generated": "passed",
+    "build": "passed",
+    "unit": {
+      "passed": 186,
+      "files": 35,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "startTime": "2026-10-29T18:07:29.768Z",
+      "duration": 159773.79400000002,
+      "expected": 38,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "widths": [
+      320,
+      390,
+      834,
+      1440
+    ],
+    "visualReview": "Mobile, tablet and desktop screenshots checked. Shared row/icon/chevron alignment, range/button bounds and no horizontal overflow asserted; dark preference card and dialog focus restoration covered.",
+    "screenshots": "output/review/preferences-weekly",
+    "log": "docs/quality/PREFERENCES_WEEKLY_QUALITY.log",
+    "logSha256": "e2652e84a3751fd87c7e59c191fddee0ffb4b81d11371106d6571860cedd8e79",
+    "runtimeApi": "GET /api/v1/academic/schedule?fromUtc=...&toUtc=...; local Saturday 00:00 through Friday 23:59:59.999 converted to UTC. No new endpoint.",
+    "tests": [
+      "populated current/adjacent week fixture sessions",
+      "no outside-week session displayed",
+      "failed next-week read stays an error, retry loads correct sessions",
+      "Saturday/Friday and Nowruz/leap-day boundaries",
+      "same preference geometry for links and dialog buttons",
+      "dialog return focus and existing privacy destination",
+      "overnight sessions show the end calendar day; same-day sessions do not add an extra day label"
+    ],
+    "limitations": [
+      "Automated mutations use local fixtures; not proof of backend security.",
+      "Notification and device-management feature dialogs remain unavailable as before; this task only changes their layout.",
+      "Physical devices and hosted CI not exercised."
+    ],
+    "productionReadOnlyReview": "Final production preview at 3130 restarted with existing sessions preserved. Existing user session displayed aligned preferences and supplied class a673db51-f459-4777-833c-fd35ad40ce68. Real 23:07–00:07 session showed end day 7 Aban 1405. No live profile, invitation or session data mutated. Tab returned to preferences."
+  },
+  "applicationChangesThisTask": false,
+  "remoteProductDataMutationsThisTask": false,
+  "filesReviewed": [
+    "src/features/personal/pages.tsx",
+    "src/features/personal/shell.tsx",
+    "src/features/personal/messaging/create.tsx",
+    "src/features/personal/messaging/contacts.tsx",
+    "src/features/personal/messaging/live.tsx",
+    "src/features/personal/school/class-detail.tsx",
+    "src/generated/api/contract.json",
+    "contracts/client-surface.json",
+    "docs/API_GAPS.md"
+  ],
+  "deliverable": {
+    "path": "output/pdf/MakanApp_Backend_Handoff_v2_Official_Spaces_FA.pdf",
+    "pages": 23,
+    "sha256": "54c350f27712e5f35a68864abf3bd3e2b79be160cfd54b959af8e441235a3ed1",
+    "bytes": 1368075,
+    "generator": "scripts/create-backend-handoff-v2.mjs"
+  },
+  "documentQa": {
+    "pageLayoutChecks": 23,
+    "verticalOverflow": 0,
+    "horizontalOverflow": 0,
+    "blankPages": 0,
+    "renderedPages": 23,
+    "renderDpi": 95,
+    "visualReview": "All 23 final page renders reviewed in four contact sheets, plus full-size page checks for RTL decision table, route table and JSON. No clipping, footer overlap or broken Persian glyphs observed.",
+    "sourcePdfPreserved": true,
+    "syntaxCheck": "node --check scripts/create-backend-handoff-v2.mjs: passed",
+    "generator": "node scripts/create-backend-handoff-v2.mjs: passed",
+    "applicationTestsRerun": false,
+    "acceptanceScenarios": 45,
+    "acceptanceScenariosExecuted": 0,
+    "renderedIntermediates": "tmp/pdfs/backend-handoff-v2"
+  }
+}

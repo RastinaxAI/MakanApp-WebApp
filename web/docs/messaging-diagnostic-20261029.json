@@ -1,0 +1,243 @@
+{
+  "checkedAt": "2026-10-29T06:24:01.704Z",
+  "server": "http://94.184.32.84:8090",
+  "userReportedTrace": "00-dc4846a1c01cc355739008a2bf574122-67a0a9992c539927-00",
+  "accounts": [
+    {
+      "role": "Student",
+      "requests": [
+        {
+          "path": "/api/client/session",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/me",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub/negotiate?negotiateVersion=1",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea/messages?limit=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea/me/restriction",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea/read",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea/messages?limit=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/d68c2b5d-9bbe-48a4-bbd1-39fc60d685ea/me/restriction",
+          "status": 200
+        }
+      ],
+      "uiErrors": [],
+      "challenge": 202,
+      "verify": 200,
+      "bootstrap": 200,
+      "workspace": "Personal",
+      "activeRole": null,
+      "pageErrorVisible": 0,
+      "alerts": [
+        ""
+      ]
+    },
+    {
+      "role": "Teacher",
+      "requests": [
+        {
+          "path": "/api/client/session",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/me",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub/negotiate?negotiateVersion=1",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        }
+      ],
+      "uiErrors": [],
+      "challenge": 202,
+      "verify": 200,
+      "bootstrap": 200,
+      "workspace": "Personal",
+      "activeRole": null,
+      "pageErrorVisible": 0,
+      "alerts": [
+        ""
+      ]
+    },
+    {
+      "role": "Parent",
+      "requests": [
+        {
+          "path": "/api/client/session",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/me",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub/negotiate?negotiateVersion=1",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        }
+      ],
+      "uiErrors": [],
+      "challenge": 202,
+      "verify": 200,
+      "bootstrap": 200,
+      "workspace": "Personal",
+      "activeRole": null,
+      "pageErrorVisible": 0,
+      "alerts": [
+        ""
+      ]
+    },
+    {
+      "role": "Manager",
+      "requests": [
+        {
+          "path": "/api/client/session",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/me",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub/negotiate?negotiateVersion=1",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/hub",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations?filter=All&page=1&pageSize=30",
+          "status": 401
+        }
+      ],
+      "uiErrors": [],
+      "challenge": 202,
+      "verify": 200,
+      "bootstrap": 200,
+      "workspace": "Personal",
+      "activeRole": null,
+      "pageErrorVisible": 0,
+      "alerts": [
+        ""
+      ]
+    }
+  ]
+}

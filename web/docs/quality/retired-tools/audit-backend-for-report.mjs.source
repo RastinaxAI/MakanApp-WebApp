@@ -1,0 +1,162 @@
+import fs from 'node:fs/promises';
+const base = 'http://94.184.32.84:8090';
+const report = {
+  checkedAt: new Date().toISOString(),
+  server: base,
+  method:
+    'Direct HTTP requests; fresh seeded sessions; no chat, privacy, file or membership mutations',
+  requests: [],
+  contracts: {},
+};
+async function request(role, path, token, data, keep = false) {
+  const r = await fetch(base + path, {
+    method: data === undefined ? 'GET' : 'POST',
+    headers: {
+      ...(token ? { Authorization: 'Bearer ' + token } : {}),
+      ...(data === undefined ? {} : { 'Content-Type': 'application/json' }),
+    },
+    ...(data === undefined ? {} : { body: JSON.stringify(data) }),
+    signal: AbortSignal.timeout(25000),
+  });
+  const body = await r.json().catch(() => null);
+  const item = {
+    role,
+    method: data === undefined ? 'GET' : 'POST',
+    path,
+    status: r.status,
+    contentType: r.headers.get('content-type'),
+    code: body?.code ?? null,
+    traceId: body?.traceId ?? null,
+  };
+  if (keep)
+    item.safeSummary = Array.isArray(body)
+      ? { count: body.length }
+      : body
+        ? {
+            fields: Object.keys(body),
+            ...(path.endsWith('messaging-status')
+              ? {
+                  verificationStatus: body.verificationStatus,
+                  effectiveAgeCategory: body.effectiveAgeCategory,
+                  nextAction: body.nextAction,
+                  allowedActions: body.allowedActions,
+                }
+              : {}),
+            ...(path.endsWith('/profile') ? {} : {}),
+          }
+        : null;
+  report.requests.push(item);
+  console.log(role, item.method, path, r.status, item.code ?? '');
+  return { body, status: r.status };
+}
+try {
+  const r = await fetch(base + '/openapi/v1.json', { signal: AbortSignal.timeout(25000) });
+  const api = await r.json();
+  report.contracts = {
+    status: r.status,
+    paths: Object.keys(api.paths ?? {}).length,
+    info: api.info,
+    profile: api.components?.schemas?.CompleteProfileCommand,
+    aiChat: api.components?.schemas?.SendAiChatCommand,
+    fileContent200: api.paths?.['/api/v1/files/{fileId}/content']?.get?.responses?.['200'],
+    conversationParameters: api.paths?.['/api/v1/conversations']?.get?.parameters?.map(
+      (p) => p.name,
+    ),
+    existing: Object.keys(api.paths ?? {}).filter(
+      (p) =>
+        /notifications|auth\/sessions|academic\/.*lessons|organization\/members|commerce\/summary/.test(
+          p,
+        ) && !p.startsWith('/api/admin'),
+    ),
+  };
+  const swagger = await fetch(base + '/swagger/index.html', { signal: AbortSignal.timeout(25000) });
+  report.requests.push({
+    role: 'Public',
+    method: 'GET',
+    path: '/swagger/index.html',
+    status: swagger.status,
+  });
+  const cls = 'a673db51-f459-4777-833c-fd35ad40ce68';
+  const chat = '68f10dcc-d3f6-4c67-95b2-adb87576ab9e';
+  const lesson = '73bdf5ca-cb13-4840-8804-69b8fc5d20fd';
+  for (const [role, phone] of [
+    ['Student', '09120000101'],
+    ['Teacher', '09120000102'],
+    ['Parent', '09120000103'],
+    ['Manager', '09120000104'],
+  ]) {
+    const c = await request(role, '/api/v1/auth/otp/challenges', null, { phoneNumber: phone });
+    if (c.status !== 202) continue;
+    const v = await request(role, '/api/v1/auth/otp/verify', null, {
+      phoneNumber: phone,
+      challengeId: c.body.challengeId,
+      code: '123456',
+      deviceName: 'Backend report read-only audit',
+    });
+    if (v.status !== 200 || !v.body.accessToken) continue;
+    const token = v.body.accessToken;
+    await request(role, '/api/v1/me', token, undefined, true);
+    await request(role, '/api/v1/me/messaging-status', token, undefined, true);
+    const ws = await request(role, '/api/v1/workspaces/me', token);
+    await request(
+      role,
+      '/api/v1/conversations?filter=All&page=1&pageSize=30',
+      token,
+      undefined,
+      true,
+    );
+    if (role === 'Student' || role === 'Teacher') {
+      await request(role, `/api/v1/conversations/${chat}`, token);
+      await request(role, `/api/v1/conversations/${chat}/messages?limit=5`, token, undefined, true);
+    }
+    if (role === 'Student') {
+      for (const p of [
+        '/api/v1/contacts?page=1&pageSize=20&favoritesOnly=false',
+        '/api/v1/messaging/privacy',
+        '/api/v1/messaging/blocks',
+        '/api/v1/auth/sessions',
+        '/api/v1/notifications/unread-count',
+        '/api/v1/commerce/summary',
+      ])
+        await request(role, p, token, undefined, true);
+    }
+    const w = ws.body?.find((w) => w.workspaceType === 'Organization' && w.role === role);
+    if (!w) continue;
+    await request(role, '/api/v1/workspaces/select', token, {
+      workspaceType: 'Organization',
+      membershipId: w.membershipId,
+      role: w.role,
+    });
+    if (role !== 'Parent') {
+      const classes = await request(role, '/api/v1/academic/classes', token, undefined, true);
+      report.requests.at(-1).containsSeedClass = classes.body?.some((c) => c.id === cls) ?? false;
+      await request(role, '/api/v1/dashboards/' + role.toLowerCase(), token, undefined, true);
+      for (const type of ['learners', 'teachers'])
+        await request(
+          role,
+          `/api/v1/academic/classes/${cls}/${type}?Page=1&PageSize=30`,
+          token,
+          undefined,
+          true,
+        );
+    } else await request(role, '/api/v1/guardian/children', token, undefined, true);
+    await request(role, `/api/v1/academic/lessons/${lesson}`, token, undefined, true);
+    if (role === 'Manager')
+      for (const p of [
+        '/api/v1/organization/members?Page=1&PageSize=30',
+        '/api/v1/academic/courses?Page=1&PageSize=30',
+        '/api/v1/academic/periods?Page=1&PageSize=30',
+        '/api/v1/commerce/summary',
+      ])
+        await request(role, p, token, undefined, true);
+  }
+} catch (e) {
+  report.interruption = e.message;
+  process.exitCode = 1;
+}
+await fs.mkdir('docs', { recursive: true });
+await fs.writeFile(
+  'docs/backend-report-readonly-audit-20261029.json',
+  JSON.stringify(report, null, 2),
+);
+console.log('Report saved; secrets and response content not persisted.');

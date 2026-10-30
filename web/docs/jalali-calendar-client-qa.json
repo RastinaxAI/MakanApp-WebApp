@@ -1,0 +1,30 @@
+{
+  "mode": "CLIENT FIXTURES ONLY. Actual JalaliDatePicker package and app UI; local fixture backend, not real service authorization.",
+  "checks": [
+    "Real picker year/month and keyboard day selection; Persian manual input; invalid leap day blocked; Gregorian DOB PATCH and reload",
+    "Picker remains inside Radix dialog; Escape closes calendar only; period range validated; local date/time becomes correct UTC with Asia/Tehran"
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "profile": "2000-01-01"
+    },
+    {
+      "period": {
+        "title": "دورهٔ نمونهٔ تقویم",
+        "startDate": "2026-03-21",
+        "endDate": "2027-03-20"
+      }
+    },
+    {
+      "session": {
+        "title": "جلسهٔ نمونهٔ تقویم",
+        "startUtc": "2026-10-29T11:15:00.000Z",
+        "endUtc": "2026-10-29T12:00:00.000Z",
+        "timeZoneId": "Asia/Tehran",
+        "meetingUrl": null
+      }
+    }
+  ],
+  "outcome": "PASSED"
+}

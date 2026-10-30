@@ -1,0 +1,174 @@
+{
+  "recordedAtUtc": "2026-10-29T21:10:54.958644+00:00",
+  "scope": "Stage two: assessment/release/results, homework draft editing and conversation detail views. Not completion of all 146 page entries or Figma frame creation.",
+  "application": "web / Next.js five-role client",
+  "verification": {
+    "baselineTypecheck": {
+      "command": "npm run typecheck",
+      "result": "passed",
+      "log": "EXPANSION_NEXT_BASELINE.log"
+    },
+    "release": {
+      "command": "npm run quality",
+      "log": "EXPANSION_NEXT_RELEASE.log",
+      "result": "passed",
+      "format": true,
+      "lint": true,
+      "typecheck": true,
+      "generatedCheck": true,
+      "productionBuild": true,
+      "unit": {
+        "passed": 195,
+        "files": 37
+      },
+      "browser": {
+        "startTime": "2026-10-29T21:06:06.053Z",
+        "duration": 252021.36,
+        "expected": 62,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "sdk": {
+      "operations": 169,
+      "schemas": 319,
+      "platformAdminPaths": 0
+    },
+    "moduleBoundaries": 149,
+    "cycles": 0,
+    "newDependencies": 0,
+    "isolation": {
+      "backendPort": 3457,
+      "applicationPort": 3132,
+      "externalBrowserNetworkForbidden": true,
+      "liveBackendWrites": 0,
+      "liveAuthenticatedServerBehaviorProven": false
+    },
+    "visual": {
+      "widths": [
+        390,
+        834,
+        1440
+      ],
+      "directories": [
+        "output/review/assessment-expansion",
+        "output/review/conversation-pages"
+      ],
+      "assessmentScreens": 8,
+      "conversationScreens": 4,
+      "darkAssessmentViewport": 390,
+      "checks": [
+        "document overflow",
+        "nested forms",
+        "visible principal controls",
+        "actual UI screenshots"
+      ],
+      "manuallyViewed": [
+        "evaluate-390",
+        "evaluate-1440",
+        "info-390",
+        "settings-834",
+        "media-1440",
+        "exam-grade-1440",
+        "exam-question-390",
+        "exam-publication-dark-390",
+        "info-390-final-four-tabs"
+      ],
+      "figmaPixelMatchVerified": false
+    },
+    "followup": {
+      "command": "npm run test:browser -- tests/browser/conversation-pages.spec.ts --grep 'detail pages preserve'",
+      "log": "EXPANSION_NEXT_FOOTER_QA.log",
+      "stats": {
+        "startTime": "2026-10-29T21:10:57.395Z",
+        "duration": 10788.953,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "checks": "Added checks scroll to the final action and ensure it stays fully above the fixed mobile/tablet dock. Same scenario, not an extra unique test count."
+    }
+  },
+  "contract": {
+    "url": "http://94.184.32.84:8090/openapi/v1.json",
+    "publicGetStatus": 200,
+    "paths": 291,
+    "schemas": 572,
+    "diff": {
+      "paths": {
+        "added": [],
+        "removed": [],
+        "changed": []
+      },
+      "schemas": {
+        "added": [],
+        "removed": [],
+        "changed": []
+      }
+    },
+    "notProofOfExecution": true
+  },
+  "earlierRuns": [
+    {
+      "log": "ASSESSMENT_TARGET.log",
+      "passed": 3,
+      "failed": 1,
+      "reason": "Real client race: old grading GET could remount and erase the first completion-feedback edit. Fixed confirmed cache seeding/cancellation, stable form keys and explicit version conflict replacement."
+    },
+    {
+      "log": "ASSESSMENT_TARGET_FIXED.log",
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "log": "EXPANSION_NEXT_TARGET.log",
+      "passed": 8,
+      "failed": 3,
+      "reason": "Publish fixture was not the schema-defined PublishAssignmentResult; two implicit select labels corrected to explicit associations. Assertions were not removed."
+    },
+    {
+      "log": "EXPANSION_NEXT_QUALITY.log",
+      "passed": 61,
+      "failed": 1,
+      "reason": "Parent test selected a nonexistent accessible name; corrected to the real child button and waits for confirmed selection."
+    },
+    {
+      "log": "EXPANSION_NEXT_FINAL.log",
+      "passed": 61,
+      "failed": 1,
+      "reason": "Expanded visual test feedback text duplicated a heading; unique fixture feedback now identifies the intended rendered value."
+    }
+  ],
+  "coverage": {
+    "ledger": "design/figma-expansion/app-implementation.json",
+    "report": "docs/quality/EXPANSION_COVERAGE.md",
+    "entries": 164,
+    "counts": {
+      "existing-client": 45,
+      "partial-client": 33,
+      "frontend-remaining": 15,
+      "contract-or-policy-dependent": 21,
+      "implemented-client-local-fixture": 31,
+      "partial-client-local-fixture": 4,
+      "development-sample": 15
+    },
+    "countsAreNotUniqueRoutesOrCompletedScreens": true
+  },
+  "gaps": "docs/API_GAPS.md / G16.1–G16.7; G14/G15 retained",
+  "limits": [
+    "Remaining front-end work is explicitly classified, not called missing backend.",
+    "Full permission flag vocabulary, pre-release homework state, released exam answer sheet, resources/AI/catalog and official pair contracts remain separate.",
+    "No physical-device or hosted-CI run.",
+    "No live authenticated role/ACL or websocket delivery guarantees.",
+    "No Figma writes or full visual equivalence assertion."
+  ],
+  "preview": {
+    "origin": "http://127.0.0.1:3130",
+    "backend": "http://94.184.32.84:8090",
+    "restartAndGetCheck": "passed; production Ready, GET /enter HTTP 200; no authenticated live mutation",
+    "sessionDirectoryPreserved": true
+  },
+  "deletedFiles": []
+}

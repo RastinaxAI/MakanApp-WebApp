@@ -1,0 +1,107 @@
+{
+  "checkedAt": "2026-10-29T11:19:57.728440+00:00",
+  "scope": "web five-role Next.js client",
+  "node": "v24.19.0",
+  "qualityCommand": "npm run quality",
+  "qualityExitCode": 0,
+  "checks": {
+    "format": "PASS",
+    "lint": "PASS - unused declarations and 105 source-module boundaries",
+    "typecheck": "PASS",
+    "generated": "PASS - 159 operations / 305 schemas",
+    "build": "PASS"
+  },
+  "unit": {
+    "passed": 164,
+    "failed": 0,
+    "skipped": 0,
+    "files": 31,
+    "baselinePassed": 147
+  },
+  "browser": {
+    "startTime": "2026-10-29T11:15:46.413Z",
+    "duration": 63779.558000000005,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cleanCheckout": {
+    "node": "v24.19.0",
+    "target": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tmp\\clean-checkout-6q9l3C",
+    "sources": [
+      "src",
+      "public",
+      "contracts",
+      "design",
+      "scripts",
+      "tests",
+      "output/design",
+      "docs/quality/SCREEN_COVERAGE.json",
+      "docs/api-matrix.md",
+      "package.json",
+      "package-lock.json",
+      "tsconfig.json",
+      "next.config.ts",
+      "next-env.d.ts",
+      "postcss.config.mjs",
+      "vitest.config.mts",
+      "playwright.config.ts",
+      ".prettierignore",
+      ".prettierrc.json",
+      ".env.example"
+    ],
+    "results": [
+      {
+        "command": "npm ci --no-audit --no-fund --prefer-offline",
+        "exitCode": 0,
+        "log": "test-results/clean-checkout/install.log"
+      },
+      {
+        "command": "npm run generated:check",
+        "exitCode": 0,
+        "log": "test-results/clean-checkout/generated-check.log"
+      },
+      {
+        "command": "npm run lint",
+        "exitCode": 0,
+        "log": "test-results/clean-checkout/lint.log"
+      },
+      {
+        "command": "npm run test",
+        "exitCode": 0,
+        "log": "test-results/clean-checkout/test.log"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "log": "test-results/clean-checkout/build.log"
+      }
+    ]
+  },
+  "remoteAccountWrites": 0,
+  "notExecuted": [
+    "13 historical live test source files",
+    "Hosted GitHub Actions",
+    "Docker rebuild",
+    "Real backend authenticated write integration",
+    "Physical mobile/tablet devices",
+    "Expo",
+    "Figma"
+  ],
+  "design": {
+    "implemented": 32,
+    "partial": 40,
+    "not-implemented": 42,
+    "unavailable": 5,
+    "excluded-owner": 11
+  },
+  "cleanup": "Source deletions/moves completed; recursive temp cleanup denied by automatic approval; retained per temp-cleanup.json",
+  "localSmoke": {
+    "origin": "http://127.0.0.1:3130",
+    "GET /enter": 200,
+    "GET /api/client/session without cookie": 401,
+    "productionServer": "running",
+    "remoteAuthenticatedVerification": false
+  }
+}

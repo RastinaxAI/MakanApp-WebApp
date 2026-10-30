@@ -1,0 +1,1002 @@
+{
+  "transitionCount": 73,
+  "screenCount": 130,
+  "deviceRule": "Resolve target to the frame with the SAME viewport. Do not link mobile frames to tablet/desktop frames.",
+  "startFrames": {
+    "student": "S01",
+    "teacher": "T01",
+    "teacherAssignment": "T05",
+    "teacherExam": "T10",
+    "messenger": "C01",
+    "profile": "U01",
+    "onboarding": "A01",
+    "teacherSchedule": "T19",
+    "teacherGrading": "T24",
+    "manager": "M01",
+    "parent": "P01",
+    "contacts": "U07",
+    "notifications": "U10"
+  },
+  "transitions": [
+    {
+      "from": "A01",
+      "actionRole": "primary",
+      "actionText": "شروع با شماره همراه",
+      "to": "A02",
+      "condition": "challenge_created"
+    },
+    {
+      "from": "A02",
+      "actionRole": "primary",
+      "actionText": "تأیید و ادامه",
+      "to": "A03",
+      "condition": "otp_verified_profile_incomplete"
+    },
+    {
+      "from": "A03",
+      "actionRole": "primary",
+      "actionText": "ذخیره و ادامه",
+      "to": "A04",
+      "condition": "profile_saved"
+    },
+    {
+      "from": "A04",
+      "actionRole": "primary",
+      "actionText": "ورود به آموزشگاه",
+      "to": "S01",
+      "condition": "student_workspace_selected"
+    },
+    {
+      "from": "S01",
+      "actionRole": "primary",
+      "actionText": "ادامه یادگیری",
+      "to": "S03"
+    },
+    {
+      "from": "S02",
+      "actionRole": "primary",
+      "actionText": "باز کردن کلاس",
+      "to": "S03"
+    },
+    {
+      "from": "S03",
+      "actionRole": "primary",
+      "actionText": "ادامه درس",
+      "to": "S04"
+    },
+    {
+      "from": "S03",
+      "actionText": "تکلیف‌ها",
+      "to": "S07",
+      "actionRole": "tab:assignments"
+    },
+    {
+      "from": "S07",
+      "actionRole": "primary",
+      "actionText": "دیدن تکلیف",
+      "to": "S08"
+    },
+    {
+      "from": "S08",
+      "actionRole": "primary",
+      "actionText": "شروع پاسخ",
+      "to": "S09",
+      "condition": "draft_attempt_created_or_resumed"
+    },
+    {
+      "from": "S09",
+      "actionRole": "primary",
+      "actionText": "بازبینی پاسخ",
+      "to": "S17",
+      "condition": "draft_saved_and_review_loaded"
+    },
+    {
+      "from": "S10",
+      "actionRole": "primary",
+      "actionText": "بازگشت به تکلیف",
+      "to": "S08"
+    },
+    {
+      "from": "S03",
+      "actionText": "آزمون‌ها",
+      "to": "S11",
+      "actionRole": "tab:exams"
+    },
+    {
+      "from": "S11",
+      "actionRole": "primary",
+      "actionText": "جزئیات آزمون",
+      "to": "S12"
+    },
+    {
+      "from": "S12",
+      "actionRole": "primary",
+      "actionText": "شروع آزمون",
+      "to": "S13",
+      "condition": "attempt_started_or_active_attempt_resumed"
+    },
+    {
+      "from": "S13",
+      "actionText": "مرور پاسخ‌ها",
+      "to": "S14",
+      "actionRole": "review"
+    },
+    {
+      "from": "S14",
+      "actionRole": "primary",
+      "actionText": "تحویل نهایی",
+      "to": "S15",
+      "condition": "finalization_confirmed_and_receipt_loaded"
+    },
+    {
+      "from": "S15",
+      "actionRole": "primary",
+      "actionText": "بازگشت به آزمون‌ها",
+      "to": "S11"
+    },
+    {
+      "from": "T01",
+      "actionRole": "primary",
+      "actionText": "ساخت محتوای آموزشی",
+      "to": "T02"
+    },
+    {
+      "from": "T02",
+      "actionRole": "primary",
+      "actionText": "ذخیره پیش‌نویس",
+      "to": "T03",
+      "condition": "draft_lesson_created"
+    },
+    {
+      "from": "T03",
+      "actionRole": "primary",
+      "actionText": "ذخیره تغییرات",
+      "to": "T04",
+      "condition": "draft_lesson_saved"
+    },
+    {
+      "from": "T04",
+      "actionRole": "primary",
+      "actionText": "انتشار درس",
+      "to": "T01",
+      "condition": "lesson_publish_confirmed"
+    },
+    {
+      "from": "T04",
+      "actionText": "بازگشت به ویرایش",
+      "to": "T03",
+      "actionRole": "edit"
+    },
+    {
+      "from": "T05",
+      "actionRole": "primary",
+      "actionText": "ذخیره پیش‌نویس",
+      "to": "T06",
+      "condition": "draft_assignment_created"
+    },
+    {
+      "from": "T06",
+      "actionRole": "primary",
+      "actionText": "ذخیره تغییرات",
+      "to": "T23",
+      "condition": "draft_assignment_saved_for_review"
+    },
+    {
+      "from": "T10",
+      "actionRole": "primary",
+      "actionText": "ساخت پیش‌نویس",
+      "to": "T21",
+      "condition": "draft_exam_created"
+    },
+    {
+      "from": "T12",
+      "actionRole": "primary",
+      "actionText": "افزودن به آزمون",
+      "to": "T21",
+      "condition": "question_saved"
+    },
+    {
+      "from": "T14",
+      "actionText": "ویرایش سؤال",
+      "to": "T21",
+      "actionRole": "editQuestion"
+    },
+    {
+      "from": "T13",
+      "actionRole": "primary",
+      "actionText": "ذخیره سؤال",
+      "to": "T21",
+      "condition": "question_saved"
+    },
+    {
+      "from": "T14",
+      "actionRole": "primary",
+      "actionText": "انتشار آزمون",
+      "to": "T01",
+      "condition": "exam_publish_confirmed"
+    },
+    {
+      "from": "C01",
+      "actionRole": "primary",
+      "actionText": "پیام جدید",
+      "to": "C02"
+    },
+    {
+      "from": "C01",
+      "actionText": "مریم رضایی · جزوه را فرستادم",
+      "to": "C03",
+      "actionRole": "conversationRow"
+    },
+    {
+      "from": "C02",
+      "actionRole": "primary",
+      "actionText": "شروع گفتگو",
+      "to": "C03",
+      "condition": "authorized_recipient_selected"
+    },
+    {
+      "from": "C02",
+      "actionText": "گروه جدید",
+      "to": "C06",
+      "actionRole": "createGroup"
+    },
+    {
+      "from": "C06",
+      "actionRole": "primary",
+      "actionText": "ایجاد گروه",
+      "to": "C08",
+      "condition": "group_created"
+    },
+    {
+      "from": "C08",
+      "actionRole": "primary",
+      "actionText": "ویرایش اطلاعات",
+      "to": "C09"
+    },
+    {
+      "from": "C09",
+      "actionRole": "primary",
+      "actionText": "ذخیره تغییرات",
+      "to": "C08",
+      "condition": "group_info_saved"
+    },
+    {
+      "from": "C08",
+      "actionText": "اعضا و مجوزها",
+      "to": "C10",
+      "actionRole": "members"
+    },
+    {
+      "from": "U01",
+      "actionRole": "primary",
+      "actionText": "ویرایش پروفایل",
+      "to": "U02"
+    },
+    {
+      "from": "U02",
+      "actionRole": "primary",
+      "actionText": "ذخیره تغییرات",
+      "to": "U01",
+      "condition": "profile_saved"
+    },
+    {
+      "from": "U01",
+      "actionText": "امنیت و حریم خصوصی",
+      "to": "U04",
+      "actionRole": "privacy"
+    },
+    {
+      "from": "U01",
+      "actionText": "تنظیم اعلان‌ها",
+      "to": "U05",
+      "actionRole": "notifications"
+    },
+    {
+      "from": "U01",
+      "actionText": "امنیت و دستگاه‌ها",
+      "to": "U06",
+      "actionRole": "sessions"
+    },
+    {
+      "from": "U01",
+      "actionText": "ذخیره‌شده‌ها",
+      "to": "C14",
+      "actionRole": "savedMessages"
+    },
+    {
+      "from": "U09",
+      "actionRole": "primary",
+      "actionText": "ذخیره مخاطب",
+      "to": "U07",
+      "condition": "contact_saved"
+    },
+    {
+      "from": "T19",
+      "actionRole": "primary",
+      "actionText": "ثبت برنامه",
+      "to": "S05",
+      "condition": "recurring_schedule_created_teacher_context"
+    },
+    {
+      "from": "T20",
+      "actionRole": "primary",
+      "actionText": "ذخیره تغییرات",
+      "to": "S05",
+      "condition": "recurring_schedule_updated_teacher_context"
+    },
+    {
+      "from": "T21",
+      "actionRole": "primary",
+      "actionText": "افزودن سؤال",
+      "to": "T12"
+    },
+    {
+      "from": "U10",
+      "actionRole": "primary",
+      "actionText": "باز کردن اعلان",
+      "to": "S08",
+      "condition": "selected_notification_targets_authorized_assignment"
+    },
+    {
+      "from": "T22",
+      "actionRole": "primary",
+      "actionText": "ثبت اصلاح",
+      "to": "T09",
+      "condition": "correction_revision_saved_and_release_required"
+    },
+    {
+      "from": "S17",
+      "actionRole": "primary",
+      "actionText": "تحویل نهایی تکلیف",
+      "to": "S10",
+      "condition": "submission_confirmed_and_receipt_loaded"
+    },
+    {
+      "from": "T23",
+      "actionRole": "primary",
+      "actionText": "انتشار تکلیف",
+      "to": "T01",
+      "condition": "assignment_publish_confirmed"
+    },
+    {
+      "from": "M11",
+      "actionRole": "primary",
+      "actionText": "ثبت درس",
+      "to": "M08",
+      "condition": "course_created"
+    },
+    {
+      "from": "M12",
+      "actionRole": "primary",
+      "actionText": "ثبت مدرس کلاس",
+      "to": "M01",
+      "condition": "teacher_assigned"
+    },
+    {
+      "from": "U11",
+      "actionRole": "primary",
+      "actionText": "شروع گفتگو",
+      "to": "C03",
+      "condition": "can_start_direct_and_conversation_resolved"
+    },
+    {
+      "from": "C25",
+      "actionRole": "primary",
+      "actionText": "ارسال دعوت",
+      "to": "C10",
+      "condition": "invitation_created_pending_acceptance"
+    },
+    {
+      "from": "T24",
+      "actionRole": "primary",
+      "actionText": "شروع تصحیح",
+      "to": "T25",
+      "condition": "authorized_finalized_attempt_grading_loaded"
+    },
+    {
+      "from": "T25",
+      "actionRole": "primary",
+      "actionText": "ذخیره و سؤال بعد",
+      "to": "T26",
+      "condition": "last_question_saved_and_all_required_scores_present"
+    },
+    {
+      "from": "T26",
+      "actionRole": "primary",
+      "actionText": "انتشار نتیجه آزمون",
+      "to": "T24",
+      "condition": "grade_completed_then_release_confirmed"
+    },
+    {
+      "from": "C27",
+      "actionRole": "primary",
+      "actionText": "موضوع جدید",
+      "to": "C28",
+      "condition": "topic_create_allowed"
+    },
+    {
+      "from": "C28",
+      "actionRole": "primary",
+      "actionText": "ساخت موضوع",
+      "to": "C27",
+      "condition": "topic_created"
+    },
+    {
+      "from": "C29",
+      "actionRole": "primary",
+      "actionText": "ذخیره تغییرات",
+      "to": "C27",
+      "condition": "topic_saved"
+    },
+    {
+      "from": "M13",
+      "actionRole": "primary",
+      "actionText": "بررسی وضعیت",
+      "to": "M13",
+      "condition": "export_status_refreshed_illustrative_only"
+    },
+    {
+      "from": "U07",
+      "actionRole": "primary",
+      "actionText": "افزودن مخاطب",
+      "to": "U09"
+    },
+    {
+      "from": "T07",
+      "actionRole": "primary",
+      "actionText": "شروع ارزیابی",
+      "to": "T08",
+      "condition": "submitted_attempt_loaded"
+    },
+    {
+      "from": "T08",
+      "actionRole": "primary",
+      "actionText": "ذخیره ارزیابی",
+      "to": "T09",
+      "condition": "evaluation_draft_saved"
+    },
+    {
+      "from": "T09",
+      "actionRole": "primary",
+      "actionText": "انتشار نتیجه",
+      "to": "T07",
+      "condition": "evaluation_release_confirmed"
+    },
+    {
+      "from": "C10",
+      "actionRole": "primary",
+      "actionText": "دعوت عضو",
+      "to": "C25",
+      "condition": "member_invitation_allowed"
+    },
+    {
+      "from": "C04",
+      "actionText": "موضوع‌ها: پرسش و پاسخ، تمرین‌ها",
+      "to": "C27",
+      "actionRole": "topics"
+    },
+    {
+      "from": "C08",
+      "actionText": "رسانه‌ها، فایل‌ها و لینک‌ها",
+      "to": "C26",
+      "actionRole": "media"
+    },
+    {
+      "from": "T21",
+      "actionText": "۳. مقدار x · چندگزینه‌ای · ۱۰ امتیاز",
+      "to": "T13",
+      "actionRole": "questionRow"
+    },
+    {
+      "from": "T21",
+      "actionText": "بازبینی و انتشار آزمون",
+      "to": "T14",
+      "actionRole": "reviewExam"
+    },
+    {
+      "from": "C27",
+      "actionText": "پرسش و پاسخ · باز",
+      "to": "C29",
+      "actionRole": "editTopic"
+    }
+  ],
+  "backRoutes": [
+    {
+      "from": "A02",
+      "actionRole": "back",
+      "to": "A01"
+    },
+    {
+      "from": "S02",
+      "actionRole": "back",
+      "to": "S01"
+    },
+    {
+      "from": "S03",
+      "actionRole": "back",
+      "to": "S02"
+    },
+    {
+      "from": "S04",
+      "actionRole": "back",
+      "to": "S03"
+    },
+    {
+      "from": "S05",
+      "actionRole": "back",
+      "to": "S01"
+    },
+    {
+      "from": "S06",
+      "actionRole": "back",
+      "to": "S05"
+    },
+    {
+      "from": "S07",
+      "actionRole": "back",
+      "to": "S03"
+    },
+    {
+      "from": "S08",
+      "actionRole": "back",
+      "to": "S07"
+    },
+    {
+      "from": "S09",
+      "actionRole": "back",
+      "to": "S08",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "S10",
+      "actionRole": "back",
+      "to": "S08"
+    },
+    {
+      "from": "S11",
+      "actionRole": "back",
+      "to": "S03"
+    },
+    {
+      "from": "S12",
+      "actionRole": "back",
+      "to": "S11"
+    },
+    {
+      "from": "S13",
+      "actionRole": "back",
+      "to": "S11",
+      "condition": "confirm_leave_active_attempt_without_finalizing"
+    },
+    {
+      "from": "S14",
+      "actionRole": "back",
+      "to": "S13"
+    },
+    {
+      "from": "S15",
+      "actionRole": "back",
+      "to": "S11"
+    },
+    {
+      "from": "S16",
+      "actionRole": "back",
+      "to": "S01"
+    },
+    {
+      "from": "T02",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T03",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T04",
+      "actionRole": "back",
+      "to": "T03"
+    },
+    {
+      "from": "T05",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T06",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T07",
+      "actionRole": "back",
+      "to": "T01"
+    },
+    {
+      "from": "T08",
+      "actionRole": "back",
+      "to": "T07"
+    },
+    {
+      "from": "T09",
+      "actionRole": "back",
+      "to": "T08"
+    },
+    {
+      "from": "T10",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T11",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T12",
+      "actionRole": "back",
+      "to": "T21",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T13",
+      "actionRole": "back",
+      "to": "T21",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T14",
+      "actionRole": "back",
+      "to": "T21"
+    },
+    {
+      "from": "T15",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T16",
+      "actionRole": "back",
+      "to": "T01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T17",
+      "actionRole": "back",
+      "to": "T01"
+    },
+    {
+      "from": "T18",
+      "actionRole": "back",
+      "to": "T17",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C02",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "C03",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "C04",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "C05",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "C06",
+      "actionRole": "back",
+      "to": "C02",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C07",
+      "actionRole": "back",
+      "to": "C02",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C08",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "C09",
+      "actionRole": "back",
+      "to": "C08",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C10",
+      "actionRole": "back",
+      "to": "C08"
+    },
+    {
+      "from": "C11",
+      "actionRole": "back",
+      "to": "C10",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C12",
+      "actionRole": "back",
+      "to": "C08",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C13",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "C14",
+      "actionRole": "back",
+      "to": "U01"
+    },
+    {
+      "from": "C15",
+      "actionRole": "back",
+      "to": "C04",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C16",
+      "actionRole": "back",
+      "to": "C04"
+    },
+    {
+      "from": "C17",
+      "actionRole": "back",
+      "to": "C04",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C18",
+      "actionRole": "back",
+      "to": "C04",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C19",
+      "actionRole": "back",
+      "to": "C04",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C20",
+      "actionRole": "back",
+      "to": "C04"
+    },
+    {
+      "from": "C21",
+      "actionRole": "back",
+      "to": "C03",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C22",
+      "actionRole": "back",
+      "to": "C03",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C23",
+      "actionRole": "back",
+      "to": "C01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C24",
+      "actionRole": "back",
+      "to": "C01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "U02",
+      "actionRole": "back",
+      "to": "U01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "U03",
+      "actionRole": "back",
+      "to": "U02",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "U04",
+      "actionRole": "back",
+      "to": "U01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "U05",
+      "actionRole": "back",
+      "to": "U01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "U06",
+      "actionRole": "back",
+      "to": "U01"
+    },
+    {
+      "from": "U07",
+      "actionRole": "back",
+      "to": "U01"
+    },
+    {
+      "from": "U08",
+      "actionRole": "back",
+      "to": "U07",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "E03",
+      "actionRole": "back",
+      "to": "S11"
+    },
+    {
+      "from": "E05",
+      "actionRole": "back",
+      "to": "C01"
+    },
+    {
+      "from": "U09",
+      "actionRole": "back",
+      "to": "U07",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T19",
+      "actionRole": "back",
+      "to": "S05",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T20",
+      "actionRole": "back",
+      "to": "S05",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T21",
+      "actionRole": "back",
+      "to": "T11"
+    },
+    {
+      "from": "U10",
+      "actionRole": "back",
+      "to": "U01"
+    },
+    {
+      "from": "T22",
+      "actionRole": "back",
+      "to": "T07",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "S17",
+      "actionRole": "back",
+      "to": "S09"
+    },
+    {
+      "from": "T23",
+      "actionRole": "back",
+      "to": "T06"
+    },
+    {
+      "from": "M11",
+      "actionRole": "back",
+      "to": "M08",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "M12",
+      "actionRole": "back",
+      "to": "M01",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "U11",
+      "actionRole": "back",
+      "to": "U07"
+    },
+    {
+      "from": "C25",
+      "actionRole": "back",
+      "to": "C10",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C26",
+      "actionRole": "back",
+      "to": "C08"
+    },
+    {
+      "from": "T24",
+      "actionRole": "back",
+      "to": "T01"
+    },
+    {
+      "from": "T25",
+      "actionRole": "back",
+      "to": "T24",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "T26",
+      "actionRole": "back",
+      "to": "T25",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C27",
+      "actionRole": "back",
+      "to": "C04"
+    },
+    {
+      "from": "C28",
+      "actionRole": "back",
+      "to": "C27",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "C29",
+      "actionRole": "back",
+      "to": "C27",
+      "condition": "confirm_discard_only_if_unsaved_changes"
+    },
+    {
+      "from": "M13",
+      "actionRole": "back",
+      "to": "M10"
+    }
+  ],
+  "globalNavigation": {
+    "آموزشگاه": {
+      "student": "S01",
+      "teacher": "T01",
+      "parent": "P02",
+      "manager": "M01"
+    },
+    "پیام‌ها": "C01",
+    "پروفایل": "U01",
+    "کوپایلت": {
+      "to": "E04",
+      "condition": "Only if showing an explicitly disabled-capability entry; do not imply active AI."
+    }
+  },
+  "notes": [
+    "This is an illustrative offline prototype map. It does not make live API calls or prove that all routes were installed in Figma.",
+    "The direct Figma pilot contains five exploratory mobile frames and known layout issues; it is not the final verified native design.",
+    "All transitions preserve the current viewport and authorized user/workspace/child context.",
+    "Primary action labels match all-screen-specs.json. Row and text actions must resolve to the exact visible label.",
+    "S09 saves/reviews draft -> S17; only S17 submits -> S10 after a confirmed receipt. S10 returns to task details, not a mutable submitted draft.",
+    "T05/T06 create/edit a draft; T23 is the explicit assignment publication step.",
+    "T10/T11 lead to question list T21; T12/T13 create/edit questions; T14 reviews and publishes.",
+    "T25 loops through grading questions; its route to T26 only applies after the last required score is saved. Complete and release remain separate server states.",
+    "Back is navigation only; never invoke submit, publish, start, recreate or delete. Confirm leaving only when relevant unsaved input exists.",
+    "U04/U05 may save in place; U06 revoke-all needs explicit destructive confirmation, not a navigation shortcut.",
+    "C26 file open is an authorized file preview/download, not another logical screen transition; the offline demo must not fetch real protected files.",
+    "M13 stays on the progress page while checking state; download becomes available only when Completed and authorized.",
+    "OTP profile/workspace steps do not navigate back to a consumed verification code. Account change is a separate explicit flow.",
+    "Contacts, enrollment, invitations and role picks never create permissions client-side. Disabled AI and payment paths remain explicitly gated."
+  ]
+}

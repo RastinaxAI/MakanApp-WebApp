@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-29T08:57:15.643Z",
+  "mode": "REAL SEEDED STUDENT / TEACHER",
+  "checks": [
+    "Default Messages opens actual Personal inbox when Teacher was in Organization workspace",
+    "Student message updates preview, unread badge and moves Direct to first row on Teacher inbox without navigation or reload",
+    "Explicit Organization inbox remains available; main Messages returns to Personal and preserves received thread"
+  ],
+  "errors": [],
+  "networkFailures": [
+    {
+      "path": "/api/client/hub/negotiate",
+      "status": 409,
+      "code": "CONTEXT_CHANGED"
+    },
+    {
+      "path": "/api/client/hub/negotiate",
+      "status": 409,
+      "code": "CONTEXT_CHANGED"
+    },
+    {
+      "path": "/api/client/hub",
+      "status": 400,
+      "code": "UNSUPPORTED_HUB_CONTROL"
+    },
+    {
+      "path": "/api/client/hub",
+      "status": 409,
+      "code": "CONTEXT_CHANGED"
+    },
+    {
+      "path": "/api/client/hub/negotiate",
+      "status": 409,
+      "code": "CONTEXT_CHANGED"
+    }
+  ],
+  "conversationId": "68f10dcc-d3f6-4c67-95b2-adb87576ab9e",
+  "receivedInMs": 806,
+  "outcome": "PASS",
+  "qaGroupId": "47c5f6c1-d1e6-4b91-a207-1523f090ef71",
+  "cleanup": "QA-only group retained for reproducible ordering checks; labeled test messages added; profile, privacy and memberships unchanged"
+}

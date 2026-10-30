@@ -1,0 +1,71 @@
+{
+  "checkedAtUtc": "2026-10-29T17:38:16.575381+00:00",
+  "scope": "Profile edit and education redesign; existing API contracts retained. No backend source or remote product-data mutations.",
+  "command": "npm run quality",
+  "format": "passed",
+  "lint": "passed;127 module boundaries;no cycles",
+  "typecheck": "passed",
+  "generated": "passed",
+  "build": "passed",
+  "unit": {
+    "files": 35,
+    "passed": 184,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "startTime": "2026-10-29T17:31:35.010Z",
+    "duration": 141584.385,
+    "expected": 36,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "viewportWidths": [
+    320,
+    390,
+    767,
+    768,
+    834,
+    1024,
+    1199,
+    1200,
+    1440
+  ],
+  "screenshots": "output/review/school-redesign",
+  "log": "docs/quality/SCHOOL_REDESIGN_QUALITY.log",
+  "logSha256": "43e85325353a82bf684643d955aedf50b7a30e609e4069f916266ae30d29722b",
+  "fileCount": 254,
+  "srcFileCount": 153,
+  "removed": [
+    {
+      "path": "src/features/personal/school/feed.module.css",
+      "reason": "Superseded overview layout; no source/script/design/test import or runtime read; build verified after deletion."
+    }
+  ],
+  "sourceBoundaries": [
+    "profile-edit.tsx + profile-edit.module.css",
+    "school/class-detail.tsx",
+    "school/feed.tsx + upcoming.tsx",
+    "school/calendar-model.ts + schedule.tsx",
+    "school/invitations.tsx"
+  ],
+  "designCoverage": {
+    "implemented": 38,
+    "partial": 35,
+    "not-implemented": 41,
+    "unavailable": 5,
+    "excluded-owner": 11
+  },
+  "limitations": [
+    "Fixture tests are not backend authorization proof.",
+    "Parent class list derives from published child dashboard activity; parent lesson view remains explicitly unavailable.",
+    "Teacher/Manager nearest deadlines derive from authorized class APIs; scalable dashboard read model proposed in G14.15.",
+    "Physical device, hosted CI and deployment not tested."
+  ],
+  "productionPreview": {
+    "origin": "http://127.0.0.1:3130",
+    "restart": "ready; existing session directory preserved",
+    "review": "Read-only browser review in existing user session: profile edit, supplied class, lessons, current/next month and school overview rendered without visible API error. Current/next month and lessons of supplied class were empty. No live acceptance/decline/profile-save performed."
+  }
+}

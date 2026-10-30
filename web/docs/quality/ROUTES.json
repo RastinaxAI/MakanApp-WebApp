@@ -1,0 +1,153 @@
+{
+  "pageFiles": 24,
+  "pages": [
+    {
+      "route": "/personal/ai",
+      "source": "src/app/(personal)/personal/ai/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/assistant",
+      "source": "src/app/(personal)/personal/assistant/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/contacts",
+      "source": "src/app/(personal)/personal/contacts/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/education/[...section]",
+      "source": "src/app/(personal)/personal/education/[...section]/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/education",
+      "source": "src/app/(personal)/personal/education/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/invitations",
+      "source": "src/app/(personal)/personal/invitations/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/messages/[id]",
+      "source": "src/app/(personal)/personal/messages/[id]/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/messages/new",
+      "source": "src/app/(personal)/personal/messages/new/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/messages",
+      "source": "src/app/(personal)/personal/messages/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal",
+      "source": "src/app/(personal)/personal/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/privacy",
+      "source": "src/app/(personal)/personal/privacy/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/profile/edit",
+      "source": "src/app/(personal)/personal/profile/edit/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/profile",
+      "source": "src/app/(personal)/personal/profile/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/profile/preferences",
+      "source": "src/app/(personal)/personal/profile/preferences/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/resources",
+      "source": "src/app/(personal)/personal/resources/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/settings/appearance",
+      "source": "src/app/(personal)/personal/settings/appearance/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/settings/blocked",
+      "source": "src/app/(personal)/personal/settings/blocked/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/settings",
+      "source": "src/app/(personal)/personal/settings/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/settings/privacy",
+      "source": "src/app/(personal)/personal/settings/privacy/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/subscription",
+      "source": "src/app/(personal)/personal/subscription/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/personal/workspaces",
+      "source": "src/app/(personal)/personal/workspaces/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/enter",
+      "source": "src/app/enter/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/",
+      "source": "src/app/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    },
+    {
+      "route": "/welcome",
+      "source": "src/app/welcome/page.tsx",
+      "backendVerification": "Not inferred from route presence"
+    }
+  ],
+  "catchAllPatterns": [
+    "/personal/education/classes",
+    "/personal/education/classes/{classId}",
+    "/personal/education/classes/{classId}/lessons/new",
+    "/personal/education/classes/{classId}/assignments/new",
+    "/personal/education/lessons/{lessonId}",
+    "/personal/education/lessons/{lessonId}/edit",
+    "/personal/education/lessons/{lessonId}/review",
+    "/personal/education/assignments",
+    "/personal/education/assignments/{assignmentId}",
+    "/personal/education/assignments/{assignmentId}/answer",
+    "/personal/education/assignments/{assignmentId}/review",
+    "/personal/education/assignments/{assignmentId}/receipt",
+    "/personal/education/exams",
+    "/personal/education/exams/{examId}",
+    "/personal/education/exams/{examId}/edit",
+    "/personal/education/people",
+    "/personal/education/members",
+    "/personal/education/teachers",
+    "/personal/education/students",
+    "/personal/education/guardians",
+    "/personal/education/schedule",
+    "/personal/education/resources",
+    "/personal/education/search",
+    "/personal/education/invitations"
+  ],
+  "canonicalValidator": "src/config/navigation.ts:isSchoolPath",
+  "note": "Access requires valid session/context and server authorization; route inventory is not authorization proof."
+}

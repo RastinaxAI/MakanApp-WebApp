@@ -1,0 +1,2175 @@
+{
+  "product": "MakanApp",
+  "reviewDate": "2026-10-29",
+  "sources": {
+    "pdf": {
+      "path": "upload/MakanApp-Frontend-Backend-Contract (2).pdf",
+      "pages": 428,
+      "revision": "701cba057b358d9cf6d15d681389d0f8d22ac6d6",
+      "declaredOperations": 332,
+      "declaredPaths": 291,
+      "declaredSchemas": 570
+    },
+    "liveOpenApi": {
+      "path": "openapi-live.json",
+      "title": "MakanApp.Api | v1",
+      "version": "1.0.0",
+      "operations": 332,
+      "paths": 291,
+      "schemas": 572
+    }
+  },
+  "drift": {
+    "additionalNamedSchemas": [
+      "ConversationListFilter",
+      "IFormFile"
+    ],
+    "interpretation": "ConversationListFilter enum and IFormFile binary schema were inline in PDF endpoint tables. Verified key UI routes and DTOs match; no new feature inferred.",
+    "verifiedAgainst": [
+      "CompleteProfileCommand",
+      "CreateClassCommand",
+      "CreateClassLessonCommand",
+      "UpdateClassLessonCommand",
+      "CreateAssignmentDraftCommand",
+      "CreateExamDraftCommand",
+      "CreateManagedConversationCommand",
+      "UpdateMessagingPrivacyCommand",
+      "UpdateNotificationPreferenceCommand"
+    ]
+  },
+  "statusMeaning": {
+    "supported": "HTTP contract exists; permission and lifecycle checks still apply. Does not prove end-to-end deployment success.",
+    "proposed": "No confirmed endpoint/field; requires explicit future product/backend scope.",
+    "feature-gated": "HTTP contract exists but runtime/service readiness is conditional or explicitly deferred in source."
+  },
+  "globalDesignRules": [
+    "Persian RTL; client dates/times localized for Asia/Tehran while API date-time values remain UTC.",
+    "GUID and rowversion are hidden integration fields, not labels shown to users.",
+    "Create/edit/read/publish screens separated where supported.",
+    "401 login;403 denied;404 missing/hidden;409/412 conflict;429 rate limit. Preserve user draft on errors.",
+    "Do not blind-retry mutations or fabricate successful receipts; use declared idempotency and version semantics."
+  ],
+  "workflows": [
+    {
+      "id": "W01",
+      "titleFa": "ورود و نشست",
+      "status": "supported",
+      "roles": [
+        "All"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/auth/otp/challenges",
+          "requestSchema": "RequestOtpCommand",
+          "pdfPages": [
+            37
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/auth/otp/verify",
+          "requestSchema": "VerifyOtpCommand",
+          "pdfPages": [
+            37
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/auth/refresh",
+          "requestSchema": "RefreshSessionCommand",
+          "pdfPages": [
+            38
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/auth/sessions",
+          "requestSchema": null,
+          "pdfPages": [
+            38
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/v1/auth/sessions/{sessionId}",
+          "requestSchema": null,
+          "pdfPages": [
+            39
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/auth/sessions/revoke-others",
+          "requestSchema": null,
+          "pdfPages": [
+            39
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/auth/logout",
+          "requestSchema": null,
+          "pdfPages": [
+            37
+          ]
+        }
+      ],
+      "designRules": [
+        "Phone entry and OTP are separate pages. Use server resend/expiry timestamps. Do not hardcode six digits. Normalize Persian/Arabic digits. No public mock bypass."
+      ],
+      "sourcePdfPages": [
+        16,
+        17,
+        37,
+        38,
+        39
+      ]
+    },
+    {
+      "id": "W02",
+      "titleFa": "پروفایل و عکس",
+      "status": "supported",
+      "roles": [
+        "All"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/me",
+          "requestSchema": null,
+          "pdfPages": [
+            53,
+            62,
+            67
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/me/profile",
+          "requestSchema": "CompleteProfileCommand",
+          "pdfPages": [
+            177
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/files",
+          "requestSchema": null,
+          "pdfPages": [
+            124
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/me/profile-photo",
+          "requestSchema": "SetProfilePhotoCommand",
+          "pdfPages": [
+            178
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/v1/me/profile-photo",
+          "requestSchema": null,
+          "pdfPages": [
+            178
+          ]
+        }
+      ],
+      "designRules": [
+        "Separate view/edit/photo pages. firstName,lastName,displayName(nullable),username,dateOfBirth(optional Gregorian date). No bio/password/phone edit/social stats fields. Ready personal JPEG/PNG own upload; protected download. DOB is not age proof."
+      ],
+      "sourcePdfPages": [
+        17,
+        237,
+        263,
+        264,
+        358,
+        359
+      ]
+    },
+    {
+      "id": "W03",
+      "titleFa": "انتخاب محیط، نقش و فرزند",
+      "status": "supported",
+      "roles": [
+        "All",
+        "Parent"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/workspaces/me",
+          "requestSchema": null,
+          "pdfPages": [
+            211
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/workspaces/current",
+          "requestSchema": null,
+          "pdfPages": [
+            211
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/workspaces/select",
+          "requestSchema": "SelectWorkspaceCommand",
+          "pdfPages": [
+            212
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/guardian/children",
+          "requestSchema": null,
+          "pdfPages": [
+            126
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/guardian/children/{organizationPersonId}/select",
+          "requestSchema": null,
+          "pdfPages": [
+            126
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/invitations",
+          "requestSchema": null,
+          "pdfPages": [
+            127
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/invitations/{invitationId}/accept",
+          "requestSchema": "AcceptInvitationCommand",
+          "pdfPages": [
+            128
+          ]
+        }
+      ],
+      "designRules": [
+        "Only permitted workspaces/roles shown. Student/Teacher/Parent/Manager are organization roles. Personal is separate. Child context is authorized server-side. Consent to guardian invitation is explicit."
+      ],
+      "sourcePdfPages": [
+        16,
+        17,
+        18,
+        316,
+        414
+      ]
+    },
+    {
+      "id": "W04",
+      "titleFa": "خانه متناسب با نقش",
+      "status": "supported",
+      "roles": [
+        "Student",
+        "Teacher",
+        "Parent",
+        "Manager"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/dashboards/student",
+          "requestSchema": null,
+          "pdfPages": [
+            103
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/dashboards/teacher",
+          "requestSchema": null,
+          "pdfPages": [
+            104
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/dashboards/parent",
+          "requestSchema": null,
+          "pdfPages": [
+            103
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/dashboards/manager",
+          "requestSchema": null,
+          "pdfPages": [
+            103
+          ]
+        }
+      ],
+      "designRules": [
+        "Four distinct role homes. Data cards may use Instagram visual language, but represent actual lessons, tasks, classes, schedule and authorized channel messages. No aggregate social-post API."
+      ],
+      "sourcePdfPages": [
+        18,
+        19,
+        103,
+        104
+      ]
+    },
+    {
+      "id": "W05",
+      "titleFa": "کلاس، دوره و درس",
+      "status": "supported",
+      "roles": [
+        "Manager",
+        "Teacher",
+        "Student"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/classes",
+          "requestSchema": null,
+          "pdfPages": [
+            36,
+            39,
+            44
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes",
+          "requestSchema": "CreateClassCommand",
+          "pdfPages": [
+            36,
+            40,
+            44
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/courses",
+          "requestSchema": null,
+          "pdfPages": [
+            101
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/courses",
+          "requestSchema": "CreateCourseCommand",
+          "pdfPages": [
+            102
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/periods",
+          "requestSchema": null,
+          "pdfPages": [
+            26
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/periods",
+          "requestSchema": "CreateAcademicPeriodCommand",
+          "pdfPages": [
+            26
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/classes/{classId}/learners",
+          "requestSchema": null,
+          "pdfPages": [
+            46
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/classes/{classId}/teachers",
+          "requestSchema": null,
+          "pdfPages": [
+            47
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/enrollments",
+          "requestSchema": "EnrollLearnerCommand",
+          "pdfPages": [
+            45
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/teachers",
+          "requestSchema": "AssignTeacherCommand",
+          "pdfPages": [
+            48
+          ]
+        }
+      ],
+      "designRules": [
+        "Create class: academicPeriodId,courseId,title,capacity,activateImmediately. Manager creates class; resource authorization controls roster. No supported class/course/period edit route."
+      ],
+      "sourcePdfPages": [
+        18,
+        26,
+        27,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        102,
+        254,
+        255
+      ]
+    },
+    {
+      "id": "W06",
+      "titleFa": "جزوه: افزودن، ویرایش و انتشار",
+      "status": "supported",
+      "roles": [
+        "Manager",
+        "Teacher",
+        "Student"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/classes/{classId}/lessons",
+          "requestSchema": null,
+          "pdfPages": [
+            39
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/lessons",
+          "requestSchema": "CreateClassLessonCommand",
+          "pdfPages": [
+            40
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/lessons/{lessonId}",
+          "requestSchema": null,
+          "pdfPages": [
+            41
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/lessons/{lessonId}",
+          "requestSchema": "UpdateClassLessonCommand",
+          "pdfPages": [
+            42
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/lessons/{lessonId}/publish",
+          "requestSchema": "PublishClassLessonCommand",
+          "pdfPages": [
+            43
+          ]
+        }
+      ],
+      "designRules": [
+        "Create and edit pages distinct. title,plain body,displayOrder,fileAssetIds; edit expectedVersion. Draft hidden from student; published immutable; Parent has no independent lesson grant. Publish needs text or file."
+      ],
+      "sourcePdfPages": [
+        18,
+        40,
+        41,
+        42,
+        255,
+        405
+      ]
+    },
+    {
+      "id": "W07",
+      "titleFa": "تکلیف: افزودن، ویرایش و انتشار",
+      "status": "supported",
+      "roles": [
+        "Teacher",
+        "Manager",
+        "Student"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/assignments",
+          "requestSchema": null,
+          "pdfPages": [
+            34,
+            207,
+            208
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/classes/{classId}/assignments",
+          "requestSchema": null,
+          "pdfPages": [
+            36
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/assignments",
+          "requestSchema": "CreateAssignmentDraftCommand",
+          "pdfPages": [
+            36
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/assignments/{assignmentId}",
+          "requestSchema": null,
+          "pdfPages": [
+            34,
+            207,
+            208
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/assignments/{assignmentId}",
+          "requestSchema": "UpdateAssignmentDraftCommand",
+          "pdfPages": [
+            35
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/assignments/{assignmentId}/publish",
+          "requestSchema": "PublishAssignmentCommand",
+          "pdfPages": [
+            35
+          ]
+        }
+      ],
+      "designRules": [
+        "title,description,dueAtUtc,allowLateSubmission,maxAttempts,maxScore. Separate create/edit/review-publish. Grade scale is 0..configured maxScore, not universally 20. Respect frozen published version."
+      ],
+      "sourcePdfPages": [
+        18,
+        35,
+        36,
+        37,
+        254,
+        405
+      ]
+    },
+    {
+      "id": "W08",
+      "titleFa": "پاسخ تکلیف و رسید تحویل",
+      "status": "supported",
+      "roles": [
+        "Student"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/assignments/{assignmentId}/attempts",
+          "requestSchema": null,
+          "pdfPages": [
+            207
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/assignments/{assignmentId}/attempts/me",
+          "requestSchema": null,
+          "pdfPages": [
+            207
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}",
+          "requestSchema": null,
+          "pdfPages": [
+            105,
+            107,
+            108
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/draft",
+          "requestSchema": "SaveSubmissionDraftCommand",
+          "pdfPages": [
+            210
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/attachments",
+          "requestSchema": "AttachSubmissionFileCommand",
+          "pdfPages": [
+            209
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/attachments/{fileAssetId}",
+          "requestSchema": null,
+          "pdfPages": [
+            209
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/submit",
+          "requestSchema": "FinalSubmitAssignmentCommand",
+          "pdfPages": [
+            210
+          ]
+        }
+      ],
+      "designRules": [
+        "Draft, attachment processing, final submission and receipt are distinct. Retain draft on network error; deadline/attempt allowance from server; no fabricated submit success."
+      ],
+      "sourcePdfPages": [
+        18,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        375,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "id": "W09",
+      "titleFa": "تصحیح و انتشار نتیجه",
+      "status": "supported",
+      "roles": [
+        "Teacher",
+        "Manager",
+        "Student",
+        "Parent"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/evaluations/queue",
+          "requestSchema": null,
+          "pdfPages": [
+            104
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/evaluation/submission",
+          "requestSchema": null,
+          "pdfPages": [
+            107
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/evaluation",
+          "requestSchema": "SaveEvaluationDraftCommand",
+          "pdfPages": [
+            105
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/evaluation/release",
+          "requestSchema": "ReleaseEvaluationCommand",
+          "pdfPages": [
+            106
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/evaluation/corrections",
+          "requestSchema": "CorrectReleasedEvaluationCommand",
+          "pdfPages": [
+            106
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/result",
+          "requestSchema": null,
+          "pdfPages": [
+            108
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/submission-attempts/{attemptId}/guardian-result",
+          "requestSchema": null,
+          "pdfPages": [
+            107
+          ]
+        }
+      ],
+      "designRules": [
+        "Evaluation edit, publish and correction separate tasks. Student/Parent see only released grade and allowed feedback; private evaluator note excluded. Correction requires reason/version."
+      ],
+      "sourcePdfPages": [
+        18,
+        105,
+        106,
+        107,
+        108,
+        365,
+        374,
+        375
+      ]
+    },
+    {
+      "id": "W10",
+      "titleFa": "ساخت و مدیریت آزمون",
+      "status": "supported",
+      "roles": [
+        "Teacher",
+        "Manager"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/exams",
+          "requestSchema": "CreateExamDraftCommand",
+          "pdfPages": [
+            113
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/exams/{examId}/editor",
+          "requestSchema": null,
+          "pdfPages": [
+            120
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/exams/{examId}",
+          "requestSchema": "UpdateExamDraftCommand",
+          "pdfPages": [
+            117,
+            122
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exams/{examId}/questions",
+          "requestSchema": "AddExamQuestionCommand",
+          "pdfPages": [
+            121
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/exams/{examId}/questions/{questionId}",
+          "requestSchema": "UpdateExamQuestionCommand",
+          "pdfPages": [
+            122
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/exams/{examId}/teacher-preview",
+          "requestSchema": null,
+          "pdfPages": [
+            123
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/exams/{examId}/student-preview",
+          "requestSchema": null,
+          "pdfPages": [
+            122
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exams/{examId}/publish",
+          "requestSchema": "PublishExamCommand",
+          "pdfPages": [
+            120
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exams/{examId}/versions",
+          "requestSchema": "CreateNextExamVersionCommand",
+          "pdfPages": [
+            123
+          ]
+        }
+      ],
+      "designRules": [
+        "Separate exam create/edit/question create/question edit/preview/publish. Date window,duration,maxAttempts,maxScore,randomization. Published question snapshot frozen; new version explicit."
+      ],
+      "sourcePdfPages": [
+        18,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        257,
+        258,
+        407,
+        408
+      ]
+    },
+    {
+      "id": "W11",
+      "titleFa": "شرکت در آزمون و تصحیح",
+      "status": "supported",
+      "roles": [
+        "Student",
+        "Teacher",
+        "Parent"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exams/{examId}/attempts/start",
+          "requestSchema": "StartExamCommand",
+          "pdfPages": [
+            119
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/exams/{examId}/attempts/me/active",
+          "requestSchema": null,
+          "pdfPages": [
+            119
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/answers/{attemptQuestionId}",
+          "requestSchema": "SaveExamAnswerCommand",
+          "pdfPages": [
+            114
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/write-lease/transfer",
+          "requestSchema": null,
+          "pdfPages": [
+            117
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/finalize",
+          "requestSchema": "FinalizeExamCommand",
+          "pdfPages": [
+            115
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/receipt",
+          "requestSchema": null,
+          "pdfPages": [
+            116
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/exams/{examId}/grading",
+          "requestSchema": null,
+          "pdfPages": [
+            112
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/grading/questions/{attemptQuestionId}",
+          "requestSchema": "GradeExamQuestionCommand",
+          "pdfPages": [
+            111
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/grading/complete",
+          "requestSchema": "CompleteExamGradeCommand",
+          "pdfPages": [
+            110
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/exam-attempts/{attemptId}/grade/release",
+          "requestSchema": "ReleaseExamGradeCommand",
+          "pdfPages": [
+            109
+          ]
+        }
+      ],
+      "designRules": [
+        "Server deadline and autosave acknowledgments. Explicit other-device conflict/transfer page. Final receipt only after server finalization; no auto-finalize/grace assumption. Grade private until released."
+      ],
+      "sourcePdfPages": [
+        18,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "id": "W12",
+      "titleFa": "برنامه و حضورغیاب",
+      "status": "supported",
+      "roles": [
+        "Teacher",
+        "Manager",
+        "Student",
+        "Parent"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/schedule",
+          "requestSchema": null,
+          "pdfPages": [
+            195
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/schedule-rules",
+          "requestSchema": "CreateScheduleRuleCommand",
+          "pdfPages": [
+            194
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/schedule-rules/{scheduleRuleId}",
+          "requestSchema": "UpdateScheduleRuleCommand",
+          "pdfPages": [
+            195
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/academic/classes/{classId}/sessions",
+          "requestSchema": "CreateSessionCommand",
+          "pdfPages": [
+            203
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/sessions/{sessionId}",
+          "requestSchema": "UpdateSessionCommand",
+          "pdfPages": [
+            204,
+            205
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/academic/sessions/{sessionId}/attendance",
+          "requestSchema": null,
+          "pdfPages": [
+            204
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/academic/sessions/{sessionId}/attendance",
+          "requestSchema": "RecordAttendanceCommand",
+          "pdfPages": [
+            205
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/academic/sessions/{sessionId}/attendance/{attendanceId}",
+          "requestSchema": "CorrectAttendanceCommand",
+          "pdfPages": [
+            205
+          ]
+        }
+      ],
+      "designRules": [
+        "Session create/edit separate; recurring schedule create/edit separate. Local time + timeZoneId and date range. Missing attendance is unrecorded, not absent. Correction requires reason."
+      ],
+      "sourcePdfPages": [
+        18,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197,
+        261,
+        262,
+        410
+      ]
+    },
+    {
+      "id": "W13",
+      "titleFa": "پرونده مدرسه و رضایت والد",
+      "status": "supported",
+      "roles": [
+        "Manager",
+        "Parent"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/organization/people",
+          "requestSchema": null,
+          "pdfPages": [
+            53,
+            142,
+            143
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/organization/people",
+          "requestSchema": "CreateOrganizationPersonCommand",
+          "pdfPages": [
+            54,
+            142,
+            144
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/organization/people/{id}",
+          "requestSchema": null,
+          "pdfPages": [
+            143
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/organization/people/{id}",
+          "requestSchema": "UpdateOrganizationPersonNamesCommand",
+          "pdfPages": [
+            143
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/organization/people/{id}/invitations",
+          "requestSchema": "CreatePersonLinkInvitationCommand",
+          "pdfPages": [
+            144,
+            145
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/organization/people/{learnerId}/guardian-invitations",
+          "requestSchema": "CreateSchoolGuardianInvitationCommand",
+          "pdfPages": [
+            199
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/organization/guardian-relations",
+          "requestSchema": null,
+          "pdfPages": [
+            200,
+            201
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/organization/guardian-relations/{id}/revoke",
+          "requestSchema": "OnboardingStateCommand",
+          "pdfPages": [
+            202
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/organization/members",
+          "requestSchema": null,
+          "pdfPages": [
+            141
+          ]
+        }
+      ],
+      "designRules": [
+        "Person record distinct from account/membership/enrollment. Only allowed names editable for unlinked/nonshared identity. Guardian invite exactly one username or phone; existing account; future expiry <=30d; reason; explicit consent. No child private Direct browsing."
+      ],
+      "sourcePdfPages": [
+        17,
+        18,
+        259,
+        262
+      ]
+    },
+    {
+      "id": "W14",
+      "titleFa": "صندوق پیام، کانال و ذخیره‌ها",
+      "status": "supported",
+      "roles": [
+        "Personal",
+        "AuthorizedOrganizationMember"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations",
+          "requestSchema": null,
+          "pdfPages": [
+            57,
+            58,
+            60
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}",
+          "requestSchema": null,
+          "pdfPages": [
+            57,
+            58,
+            60
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/messages",
+          "requestSchema": null,
+          "pdfPages": [
+            60,
+            73,
+            74
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/discover",
+          "requestSchema": null,
+          "pdfPages": [
+            79
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/saved",
+          "requestSchema": null,
+          "pdfPages": [
+            80,
+            193
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/messages/search",
+          "requestSchema": null,
+          "pdfPages": [
+            129
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/media",
+          "requestSchema": null,
+          "pdfPages": [
+            86
+          ]
+        }
+      ],
+      "designRules": [
+        "Inbox filters All/Direct/Group/Channel/Unread/Archived/Saved. Channel stream is permitted message history, not social feed endpoint. Search supports current authorization and attachment/link/topic filters."
+      ],
+      "sourcePdfPages": [
+        18,
+        19,
+        21,
+        22,
+        78,
+        79,
+        80,
+        81,
+        86
+      ]
+    },
+    {
+      "id": "W15",
+      "titleFa": "شروع و مدیریت گفتگو",
+      "status": "supported",
+      "roles": [
+        "Personal",
+        "AuthorizedConversationAdmin"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/direct",
+          "requestSchema": "StartDirectConversationCommand",
+          "pdfPages": [
+            79
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/groups",
+          "requestSchema": "CreateManagedConversationCommand",
+          "pdfPages": [
+            80
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/channels",
+          "requestSchema": "CreateManagedConversationCommand",
+          "pdfPages": [
+            78
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/conversations/{conversationId}/info",
+          "requestSchema": "UpdateConversationInfoCommand",
+          "pdfPages": [
+            57
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/conversations/{conversationId}/settings",
+          "requestSchema": "UpdateConversationSettingsCommand",
+          "pdfPages": [
+            100
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/members",
+          "requestSchema": null,
+          "pdfPages": [
+            86
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/members",
+          "requestSchema": "AddConversationMemberCommand",
+          "pdfPages": [
+            87
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/conversations/{conversationId}/members/{targetUserId}/role",
+          "requestSchema": "ChangeConversationMemberRoleCommand",
+          "pdfPages": [
+            89
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/conversations/{conversationId}/members/{targetUserId}/permissions",
+          "requestSchema": "UpdateConversationPermissionsCommand",
+          "pdfPages": [
+            88
+          ]
+        }
+      ],
+      "designRules": [
+        "Separate new Direct recipient flow; group/channel create; edit info; edit settings; member permissions. Group info supports title/description, not confirmed photo upload. Respect canStartDirect/age/privacy."
+      ],
+      "sourcePdfPages": [
+        18,
+        19,
+        58,
+        59,
+        78,
+        79,
+        87,
+        88,
+        89,
+        258,
+        406
+      ]
+    },
+    {
+      "id": "W16",
+      "titleFa": "ارسال و ویرایش پیام",
+      "status": "supported",
+      "roles": [
+        "AuthorizedConversationMember"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/messages",
+          "requestSchema": "SendMessageCommand",
+          "pdfPages": [
+            73,
+            74,
+            90
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}",
+          "requestSchema": "EditMessageCommand",
+          "pdfPages": [
+            91
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/for-me",
+          "requestSchema": null,
+          "pdfPages": [
+            92
+          ]
+        },
+        {
+          "method": "DELETE",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/for-everyone",
+          "requestSchema": null,
+          "pdfPages": [
+            92
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/forward",
+          "requestSchema": "ForwardMessageCommand",
+          "pdfPages": [
+            93
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/reactions",
+          "requestSchema": "AddReactionCommand",
+          "pdfPages": [
+            93
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/scheduled-messages",
+          "requestSchema": "ScheduleMessageCommand",
+          "pdfPages": [
+            196,
+            197
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/scheduled-messages",
+          "requestSchema": null,
+          "pdfPages": [
+            196
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/scheduled-messages/{id}/cancel",
+          "requestSchema": "CancelScheduledMessageCommand",
+          "pdfPages": [
+            197
+          ]
+        }
+      ],
+      "designRules": [
+        "Edit message separate page per design request. Text/image/video/voice/file/contact kinds exist; voice/video calls do not. Sending/review/blocked/unavailable/sent distinct. Scheduled is not Sent. Respect edit/delete window and versions."
+      ],
+      "sourcePdfPages": [
+        18,
+        19,
+        21,
+        22,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        299,
+        384
+      ]
+    },
+    {
+      "id": "W17",
+      "titleFa": "موضوع، نظرسنجی و چک‌لیست",
+      "status": "supported",
+      "roles": [
+        "AuthorizedConversationMember"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/topics",
+          "requestSchema": "CreateConversationTopicCommand",
+          "pdfPages": [
+            76
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/conversations/{conversationId}/topics/{topicId}",
+          "requestSchema": "UpdateConversationTopicCommand",
+          "pdfPages": [
+            77
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/polls",
+          "requestSchema": "CreateConversationPollCommand",
+          "pdfPages": [
+            75
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/poll/vote",
+          "requestSchema": "VoteConversationPollCommand",
+          "pdfPages": [
+            74
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/poll/close",
+          "requestSchema": "CloseConversationPollCommand",
+          "pdfPages": [
+            73
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/checklists",
+          "requestSchema": "CreateConversationChecklistCommand",
+          "pdfPages": [
+            59
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/checklist",
+          "requestSchema": "UpdateConversationChecklistCommand",
+          "pdfPages": [
+            60,
+            61
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/checklist/items/{itemId}",
+          "requestSchema": "SetChecklistItemCommand",
+          "pdfPages": [
+            61
+          ]
+        }
+      ],
+      "designRules": [
+        "Separate create topic/edit topic/create poll/create checklist/edit checklist. Quiz key not exposed before permitted time. Personal and Collaborative checklist state distinct. Poll vote may be immutable."
+      ],
+      "sourcePdfPages": [
+        21,
+        22,
+        60,
+        61,
+        73,
+        74,
+        75,
+        76,
+        77,
+        255,
+        256,
+        405,
+        406,
+        407
+      ]
+    },
+    {
+      "id": "W18",
+      "titleFa": "مخاطبان و حریم خصوصی",
+      "status": "supported",
+      "roles": [
+        "Personal"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/contacts",
+          "requestSchema": null,
+          "pdfPages": [
+            54,
+            55
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/contacts",
+          "requestSchema": "SaveUserContactCommand",
+          "pdfPages": [
+            55
+          ]
+        },
+        {
+          "method": "PATCH",
+          "path": "/api/v1/contacts/{contactUserId}",
+          "requestSchema": "UpdateUserContactCommand",
+          "pdfPages": [
+            56
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/people/search",
+          "requestSchema": null,
+          "pdfPages": [
+            146
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/people/{userId}",
+          "requestSchema": null,
+          "pdfPages": [
+            147
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/me/messaging-status",
+          "requestSchema": null,
+          "pdfPages": [
+            53
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/messaging/privacy",
+          "requestSchema": null,
+          "pdfPages": [
+            132
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/messaging/privacy",
+          "requestSchema": "UpdateMessagingPrivacyCommand",
+          "pdfPages": [
+            132
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/messaging/blocks",
+          "requestSchema": null,
+          "pdfPages": [
+            133
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/messaging/blocks/{userId}",
+          "requestSchema": null,
+          "pdfPages": [
+            134
+          ]
+        }
+      ],
+      "designRules": [
+        "Contact add/edit separate; savedName/isFavorite. Privacy for Direct/phone visibility/phone discovery/invites/online/lastSeen. Unknown age protected like minor. No exposure of private Hidden reasons."
+      ],
+      "sourcePdfPages": [
+        18,
+        19,
+        55,
+        56,
+        57,
+        304,
+        305,
+        358,
+        408,
+        410
+      ]
+    },
+    {
+      "id": "W19",
+      "titleFa": "دعوت و ایمنی گفتگو",
+      "status": "supported",
+      "roles": [
+        "AuthorizedConversationMember",
+        "AuthorizedConversationAdmin"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/invite-links",
+          "requestSchema": "CreateInviteLinkCommand",
+          "pdfPages": [
+            65
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/messaging/invite-links/redeem",
+          "requestSchema": "RedeemInviteLinkCommand",
+          "pdfPages": [
+            66
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/join-requests",
+          "requestSchema": null,
+          "pdfPages": [
+            66
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/messaging/join-requests/{requestId}/approve",
+          "requestSchema": "CompleteJoinRequestCommand",
+          "pdfPages": [
+            67
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/conversations/{conversationId}/members/{userId}/restriction",
+          "requestSchema": "SetMemberRestrictionCommand",
+          "pdfPages": [
+            58
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/conversations/{conversationId}/messages/{messageId}/reports",
+          "requestSchema": "ReportMessageCommand",
+          "pdfPages": [
+            129
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/moderation/cases",
+          "requestSchema": null,
+          "pdfPages": [
+            69,
+            70,
+            71
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/conversations/{conversationId}/moderation/cases/{caseId}",
+          "requestSchema": null,
+          "pdfPages": [
+            70,
+            71
+          ]
+        }
+      ],
+      "designRules": [
+        "Invite expires/max uses/approval. Pending join separate from joined. Restriction uses current authorization. Report receipt not automatic removal. Moderation evidence restricted to case."
+      ],
+      "sourcePdfPages": [
+        18,
+        19,
+        21,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        257
+      ]
+    },
+    {
+      "id": "W20",
+      "titleFa": "گزارش‌ها و خروجی",
+      "status": "supported",
+      "roles": [
+        "Student",
+        "Teacher",
+        "Parent",
+        "Manager"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/student/grades",
+          "requestSchema": null,
+          "pdfPages": [
+            189
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/student/attendance",
+          "requestSchema": null,
+          "pdfPages": [
+            187
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/parent/assignments",
+          "requestSchema": null,
+          "pdfPages": [
+            184
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/teacher/classes/{classId}/assignments",
+          "requestSchema": null,
+          "pdfPages": [
+            190
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/manager/assessments",
+          "requestSchema": null,
+          "pdfPages": [
+            180
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/reports/exports",
+          "requestSchema": "CreateReportExportCommand",
+          "pdfPages": [
+            179
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/exports/{jobId}",
+          "requestSchema": null,
+          "pdfPages": [
+            179,
+            180
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/reports/exports/{jobId}/download",
+          "requestSchema": null,
+          "pdfPages": [
+            180
+          ]
+        }
+      ],
+      "designRules": [
+        "Role-filtered report types. CSV job Queued/Processing/Completed/Failed; only ready completed authorized download. Source permissions rechecked during job and download."
+      ],
+      "sourcePdfPages": [
+        19,
+        261,
+        366,
+        367
+      ]
+    },
+    {
+      "id": "W21",
+      "titleFa": "اعلان‌ها و تنظیمات",
+      "status": "supported",
+      "roles": [
+        "All"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/notifications",
+          "requestSchema": null,
+          "pdfPages": [
+            135,
+            136,
+            139
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/notifications/unread-count",
+          "requestSchema": null,
+          "pdfPages": [
+            139
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/notifications/{notificationId}/read",
+          "requestSchema": null,
+          "pdfPages": [
+            140
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/notification-preferences",
+          "requestSchema": null,
+          "pdfPages": [
+            137
+          ]
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/notification-preferences/{category}",
+          "requestSchema": "UpdateNotificationPreferenceCommand",
+          "pdfPages": [
+            138
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/notifications/devices/web-push/configuration",
+          "requestSchema": null,
+          "pdfPages": [
+            136
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/notifications/devices/web-push",
+          "requestSchema": "RegisterWebPushCommand",
+          "pdfPages": [
+            136
+          ]
+        }
+      ],
+      "designRules": [
+        "In-app list supported. Push preference constrained by isMandatory/canDisablePush; quiet hours and timezone. Push runtime remains pending in document; registered/accepted is not delivered. General SMS unavailable."
+      ],
+      "sourcePdfPages": [
+        19,
+        21,
+        409
+      ]
+    },
+    {
+      "id": "W22",
+      "titleFa": "اشتراک و پرداخت",
+      "status": "feature-gated",
+      "roles": [
+        "AuthorizedCommerceRole"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/v1/commerce/summary",
+          "requestSchema": null,
+          "pdfPages": [
+            51
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/commerce/orders",
+          "requestSchema": null,
+          "pdfPages": [
+            49,
+            50
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/commerce/orders",
+          "requestSchema": "CreateOrderCommand",
+          "pdfPages": [
+            49,
+            50
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/commerce/orders/{orderId}",
+          "requestSchema": null,
+          "pdfPages": [
+            50
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/commerce/orders/{orderId}/payments",
+          "requestSchema": "InitiatePaymentCommand",
+          "pdfPages": [
+            50
+          ]
+        }
+      ],
+      "designRules": [
+        "Contract supports order lifecycle. Real payment gateway unavailable per document; design pending/unavailable. Success only after server verification. No public plans listing route; do not expose Platform plans as unrestricted purchase feed."
+      ],
+      "sourcePdfPages": [
+        19,
+        49,
+        50,
+        51,
+        258,
+        424
+      ]
+    },
+    {
+      "id": "W23",
+      "titleFa": "دستیار هوشمند",
+      "status": "feature-gated",
+      "roles": [
+        "Student",
+        "Teacher",
+        "Parent",
+        "Manager"
+      ],
+      "operations": [
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/chat",
+          "requestSchema": "SendAiChatCommand",
+          "pdfPages": [
+            28
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/study-plan",
+          "requestSchema": "CreateStudyPlanCommand",
+          "pdfPages": [
+            32
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/homeworks/{assignmentId}/explain",
+          "requestSchema": "ExplainHomeworkCommand",
+          "pdfPages": [
+            29
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/exams/{examId}/prepare",
+          "requestSchema": null,
+          "pdfPages": [
+            28
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/parents/child-summary",
+          "requestSchema": null,
+          "pdfPages": [
+            31
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/teachers/classes/{classId}/summary",
+          "requestSchema": null,
+          "pdfPages": [
+            33
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/ai/managers/school-summary",
+          "requestSchema": null,
+          "pdfPages": [
+            30
+          ]
+        }
+      ],
+      "designRules": [
+        "12 endpoints total; representative 7 mapped here. Default disabled; full runtime verification deferred in document. Context403/rate429/invalid502/unavailable503/timeout504; no provider raw error or blind auto retry."
+      ],
+      "sourcePdfPages": [
+        20,
+        23,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "id": "W24",
+      "titleFa": "مدیریت پلتفرم",
+      "status": "supported",
+      "roles": [
+        "PlatformAuthorized"
+      ],
+      "operations": [
+        {
+          "method": "GET",
+          "path": "/api/admin/v1/me",
+          "requestSchema": null,
+          "pdfPages": [
+            156,
+            159
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/v1/organizations",
+          "requestSchema": null,
+          "pdfPages": [
+            165,
+            166,
+            167
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/admin/v1/organizations",
+          "requestSchema": "CreatePlatformOrganizationCommand",
+          "pdfPages": [
+            166,
+            167,
+            169
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/v1/users",
+          "requestSchema": null,
+          "pdfPages": [
+            51,
+            174
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/v1/moderation/cases",
+          "requestSchema": null,
+          "pdfPages": [
+            160,
+            161,
+            163
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/admin/v1/commerce/plans",
+          "requestSchema": "CreatePlatformPlanCommand",
+          "pdfPages": [
+            149,
+            150
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/api/admin/v1/commerce/plans/{planId}/versions",
+          "requestSchema": "CreatePlatformPlanVersionCommand",
+          "pdfPages": [
+            150
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/v1/operations/health",
+          "requestSchema": null,
+          "pdfPages": [
+            172
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/api/admin/v1/audit-logs",
+          "requestSchema": null,
+          "pdfPages": [
+            27
+          ]
+        }
+      ],
+      "designRules": [
+        "Separate role/capabilities, school Manager is not Platform admin. Additional IAM/provisioning/education/finance/operations workflows exist. No MFA/TOTP/recovery/step-up screens. No unrestricted Direct/Contacts browsing/impersonation/manual payment-success."
+      ],
+      "sourcePdfPages": [
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        260,
+        261
+      ]
+    },
+    {
+      "id": "W25",
+      "titleFa": "گسترش پیشنهادی؛ خارج از قرارداد جاری",
+      "status": "proposed",
+      "roles": [],
+      "operations": [],
+      "features": [
+        "Social posts and ranking feed",
+        "Stories/Reels",
+        "Follow/follower counters",
+        "Personal bio",
+        "Live or voice/video calling",
+        "Edit class/course/academic period",
+        "Group/channel photo upload"
+      ],
+      "designRules": [
+        "No corresponding supported route or DTO field was found in this snapshot. Do not present as implemented. Obtain new product/backend scope before integrating. Avatar shortcuts may represent authorized classes/channels without Stories semantics."
+      ],
+      "sourcePdfPages": [
+        17,
+        18,
+        21,
+        22,
+        254,
+        255,
+        257,
+        258,
+        237
+      ]
+    }
+  ]
+}

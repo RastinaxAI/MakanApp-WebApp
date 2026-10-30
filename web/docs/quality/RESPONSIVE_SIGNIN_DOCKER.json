@@ -1,0 +1,8 @@
+{
+  "Image": "sha256:8ace1d457915467deb054b9600835135015e075d4283918225ed804cd81d814f",
+  "OwnerHealth": "healthy",
+  "ComposeExitCode": 0,
+  "Health": "healthy",
+  "SessionVolume": "makan-client_sessions",
+  "TagMatches": true
+}

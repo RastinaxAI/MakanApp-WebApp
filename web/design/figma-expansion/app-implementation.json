@@ -1,0 +1,1774 @@
+{
+  "version": 2,
+  "updatedAtUtc": "2026-10-29T20:58:44.352913+00:00",
+  "scope": "All 146 page and 18 overlay inventory entries classified against current client/contracts. Status is not a count of unique routes, fully completed screens or Figma frames.",
+  "sourceInventory": "inventory.json",
+  "preservedExistingCoverage": "../implementation-map.json",
+  "verification": {
+    "fixtureBackendPort": 3457,
+    "fixtureAppPort": 3132,
+    "externalMutationRequests": 0,
+    "viewports": [
+      390,
+      834,
+      1440
+    ],
+    "liveAuthenticatedActionsTested": false
+  },
+  "entries": [
+    {
+      "id": "AUTH-01",
+      "title": "ورود با شمارهٔ همراه",
+      "status": "existing-client",
+      "note": "Existing challenge, verification and retry flow; covered by existing browser suite.",
+      "route": "/enter",
+      "source": "src/features/auth/login.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "AUTH-02",
+      "title": "واردکردن کد و مدیریت ارسال مجدد",
+      "status": "existing-client",
+      "note": "Existing challenge, verification and retry flow; covered by existing browser suite.",
+      "route": "/enter",
+      "source": "src/features/auth/login.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "AUTH-03",
+      "title": "ثبت مشخصات اولیهٔ حساب",
+      "status": "partial-client",
+      "note": "Profile editing and self-declared birth date exist; mandatory first-run profile policy remains separate.",
+      "route": "/personal/profile/edit",
+      "source": "src/features/personal/profile-edit.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "AUTH-04",
+      "title": "تکمیل پروفایل و تاریخ تولد",
+      "status": "partial-client",
+      "note": "Profile editing and self-declared birth date exist; mandatory first-run profile policy remains separate.",
+      "route": "/personal/profile/edit",
+      "source": "src/features/personal/profile-edit.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "AUTH-05",
+      "title": "نمایش وضعیت تأیید اطلاعات و اقدام موردنیاز",
+      "status": "existing-client",
+      "note": "Messaging age/verification status rendered from server; self-declaration does not become verified age.",
+      "route": "/personal/profile",
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "AUTH-06",
+      "title": "انتخاب آموزشگاه و نقش‌های مجاز",
+      "status": "existing-client",
+      "note": "Explicit identity-bound role/workspace selection; four destinations retained.",
+      "route": "/personal/workspaces",
+      "source": "src/features/auth/workspace-selection.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "AUTH-07",
+      "title": "فهرست دعوت‌های دریافتی",
+      "status": "partial-client",
+      "note": "Invitation list with detail and consent; standalone invitation detail remains.",
+      "route": "/personal/invitations",
+      "source": "src/features/personal/school/invitations.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "AUTH-08",
+      "title": "جزئیات دعوت، شرایط و پذیرش یا رد",
+      "status": "partial-client",
+      "note": "Invitation list with detail and consent; standalone invitation detail remains.",
+      "route": "/personal/invitations",
+      "source": "src/features/personal/school/invitations.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "AUTH-09",
+      "title": "وضعیت درخواست عضویت",
+      "status": "frontend-remaining",
+      "note": "Dedicated membership request lifecycle is not implemented; verify the required read model before adding UI.",
+      "route": null,
+      "source": null,
+      "contractStatus": "requires-further-contract-review",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "AUTH-10",
+      "title": "بازیابی دسترسی هنگام پایان نشست یا لغو نقش",
+      "status": "partial-client",
+      "note": "Existing expiration/context recovery; not every revoked-role recovery surface has a dedicated page.",
+      "route": "/enter",
+      "source": "src/features/personal/provider.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-01",
+      "title": "نمای کلی پروفایل و فضاهای من",
+      "status": "existing-client",
+      "note": "Overview, spaces and account identity; G15.1 space card policy remains separately open.",
+      "route": "/personal/profile",
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G15.1"
+    },
+    {
+      "id": "PROFILE-02",
+      "title": "ویرایش مشخصات فردی",
+      "status": "existing-client",
+      "note": "Existing grouped edit form and real profile service.",
+      "route": "/personal/profile/edit",
+      "source": "src/features/personal/profile-edit.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-03",
+      "title": "مشاهدهٔ پروفایل عمومی خود",
+      "status": "frontend-remaining",
+      "note": "Separate public self-profile preview is not implemented; only permitted public identity may be shown.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-04",
+      "title": "مدیریت تصویر پروفایل",
+      "status": "existing-client",
+      "note": "Existing authenticated photo flow and preview; not a new standalone photo route.",
+      "route": "/personal/profile/edit",
+      "source": "src/features/personal/profile-photo.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-05",
+      "title": "اطلاعات یادگیری خوداظهاری",
+      "status": "contract-or-policy-dependent",
+      "note": "Learning self-declarations require agreed fields and role-independent semantics.",
+      "route": null,
+      "source": null,
+      "contractStatus": "requires-product-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "PROFILE-06",
+      "title": "حساب و ترجیحات",
+      "status": "existing-client",
+      "note": "Account preference links lead to real subpages.",
+      "route": "/personal/profile/preferences",
+      "source": "src/features/personal/settings.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-07",
+      "title": "حریم خصوصی پیام‌رسان",
+      "status": "existing-client",
+      "note": "Versioned real privacy settings with retained failed edits.",
+      "route": "/personal/settings/privacy",
+      "source": "src/features/personal/messaging/privacy.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-08",
+      "title": "حساب‌های مسدودشده",
+      "status": "existing-client",
+      "note": "Existing blocked-account and unblock flow.",
+      "route": "/personal/settings/blocked",
+      "source": "src/features/personal/messaging/privacy.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-09",
+      "title": "تنظیمات اعلان‌ها",
+      "status": "implemented-client-local-fixture",
+      "note": "Category links and individual forms; personal/organization scope and server versions.",
+      "route": "/personal/settings/notifications",
+      "source": "src/features/personal/notification-settings.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "PROFILE-10",
+      "title": "امنیت و دستگاه‌های متصل",
+      "status": "implemented-client-local-fixture",
+      "note": "Own session list and explicit revoke-others confirmation; not MFA implementation.",
+      "route": "/personal/settings/devices",
+      "source": "src/features/personal/security-devices.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "PROFILE-11",
+      "title": "جزئیات هر دستگاه و پایان نشست آن",
+      "status": "implemented-client-local-fixture",
+      "note": "Authorized own session detail; end-other-session confirmation and current logout.",
+      "route": "/personal/settings/devices/:id",
+      "source": "src/features/personal/security-devices.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "PROFILE-12",
+      "title": "ظاهر",
+      "status": "existing-client",
+      "note": "Current light/dark choice; no new system-theme promise.",
+      "route": "/personal/settings/appearance",
+      "source": "src/features/personal/settings.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PROFILE-13",
+      "title": "تنظیمات دریافت خودکار رسانه و مصرف اینترنت",
+      "status": "frontend-remaining",
+      "note": "Local auto-download/storage policy and implementation remain; not automatically a missing backend endpoint.",
+      "route": null,
+      "source": null,
+      "contractStatus": "local-policy-needed",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "PROFILE-14",
+      "title": "مدیریت فایل‌ها و حافظهٔ محلی برنامه",
+      "status": "frontend-remaining",
+      "note": "Local auto-download/storage policy and implementation remain; not automatically a missing backend endpoint.",
+      "route": null,
+      "source": null,
+      "contractStatus": "local-policy-needed",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "PROFILE-15",
+      "title": "پشتیبانی و درخواست‌های ثبت‌شده",
+      "status": "contract-or-policy-dependent",
+      "note": "Support/deletion contracts not identified in the public snapshot; a different existing service may be supplied.",
+      "route": null,
+      "source": null,
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "PROFILE-16",
+      "title": "جزئیات درخواست پشتیبانی و پیگیری پاسخ",
+      "status": "contract-or-policy-dependent",
+      "note": "Support/deletion contracts not identified in the public snapshot; a different existing service may be supplied.",
+      "route": null,
+      "source": null,
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "PROFILE-17",
+      "title": "شرایط استفاده و سیاست حریم خصوصی",
+      "status": "contract-or-policy-dependent",
+      "note": "Needs approved terms/privacy copy; not invented legal text or necessarily a backend change.",
+      "route": null,
+      "source": null,
+      "contractStatus": "approved-content-needed",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "PROFILE-18",
+      "title": "مدیریت حساب و درخواست حذف حساب، در صورت پشتیبانی بک‌اند",
+      "status": "contract-or-policy-dependent",
+      "note": "Support/deletion contracts not identified in the public snapshot; a different existing service may be supplied.",
+      "route": null,
+      "source": null,
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "MANAGER-01",
+      "title": "نمای آموزشگاه",
+      "status": "existing-client",
+      "note": "Nearest authorized activities and management links.",
+      "route": "/personal/education",
+      "source": "src/features/personal/school/feed.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-02",
+      "title": "مشخصات آموزشگاه",
+      "status": "frontend-remaining",
+      "note": "Dedicated school profile/detail page remains; do not conflate a workspace label with all school metadata.",
+      "route": null,
+      "source": null,
+      "contractStatus": "requires-further-contract-review",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "MANAGER-03",
+      "title": "اعضای آموزشگاه",
+      "status": "partial-client",
+      "note": "Existing paginated member/role lists; Teacher and Student destinations also exist. Full lifecycle is not complete.",
+      "route": "/personal/education/members",
+      "source": "src/features/personal/school/directory.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-04",
+      "title": "جزئیات عضو",
+      "status": "frontend-remaining",
+      "note": "Organization-person invitation APIs exist; separate member detail/invite/outgoing list UI remains. A person detail is not membership detail.",
+      "route": null,
+      "source": "src/features/personal/school/onboarding.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "MANAGER-05",
+      "title": "دعوت عضو",
+      "status": "frontend-remaining",
+      "note": "Organization-person invitation APIs exist; separate member detail/invite/outgoing list UI remains. A person detail is not membership detail.",
+      "route": null,
+      "source": "src/features/personal/school/onboarding.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "MANAGER-06",
+      "title": "مدیریت دعوت‌ها",
+      "status": "frontend-remaining",
+      "note": "Organization-person invitation APIs exist; separate member detail/invite/outgoing list UI remains. A person detail is not membership detail.",
+      "route": null,
+      "source": "src/features/personal/school/onboarding.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "MANAGER-07",
+      "title": "معلمان",
+      "status": "partial-client",
+      "note": "Existing paginated member/role lists; Teacher and Student destinations also exist. Full lifecycle is not complete.",
+      "route": "/personal/education/teachers",
+      "source": "src/features/personal/school/directory.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-08",
+      "title": "دانش‌آموزان",
+      "status": "partial-client",
+      "note": "Existing paginated member/role lists; Teacher and Student destinations also exist. Full lifecycle is not complete.",
+      "route": "/personal/education/students",
+      "source": "src/features/personal/school/directory.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-09",
+      "title": "والدین و روابط",
+      "status": "partial-client",
+      "note": "Existing relationships and independent guardian invitation; full consent/relation lifecycle remains.",
+      "route": "/personal/education/guardians",
+      "source": "src/features/personal/school/manager.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-10",
+      "title": "کلاس‌ها",
+      "status": "existing-client",
+      "note": "Existing authorized classes; class creation is Manager only.",
+      "route": "/personal/education/classes",
+      "source": "src/features/personal/school/manager.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-11",
+      "title": "ایجاد کلاس",
+      "status": "implemented-client-local-fixture",
+      "note": "Manager only; course/period picker; server-confirmed creation.",
+      "route": "/personal/education/classes/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "MANAGER-12",
+      "title": "بازبینی کلاس",
+      "status": "implemented-client-local-fixture",
+      "note": "Summary and explicit commit; invalid deep links cannot commit.",
+      "route": "/personal/education/classes/new?step=review",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "MANAGER-13",
+      "title": "ویرایش کلاس",
+      "status": "contract-or-policy-dependent",
+      "note": "Class update operation not identified in snapshot; request actual contract, not a fabricated PATCH.",
+      "route": null,
+      "source": null,
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "MANAGER-14",
+      "title": "مدیریت اعضای کلاس",
+      "status": "implemented-client-local-fixture",
+      "note": "Existing enrollment service; roster separate from organization membership.",
+      "route": "/personal/education/classes/:id/enrollments/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "MANAGER-15",
+      "title": "مدیریت معلمان کلاس",
+      "status": "implemented-client-local-fixture",
+      "note": "Manager assigns teachers through the existing service.",
+      "route": "/personal/education/classes/:id/teachers/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "MANAGER-16",
+      "title": "برنامهٔ هفتگی",
+      "status": "existing-client",
+      "note": "Week navigation with server date range; existing suite covers boundaries.",
+      "route": "/personal/education/schedule",
+      "source": "src/features/personal/school/schedule.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MANAGER-17",
+      "title": "ارتباطات رسمی",
+      "status": "contract-or-policy-dependent",
+      "note": "Full school group+channel pair and activity automation require authoritative binding.",
+      "route": null,
+      "source": null,
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G15.2"
+    },
+    {
+      "id": "MANAGER-18",
+      "title": "اشتراک و مصرف سازمان",
+      "status": "frontend-remaining",
+      "note": "Manager commerce summary exists in contract; the complete client page remains frontend work.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "CLASS-01",
+      "title": "نمای کلاس",
+      "status": "existing-client",
+      "note": "Independent class with four URL-backed tabs.",
+      "route": "/personal/education/classes/:id",
+      "source": "src/features/personal/school/class-detail.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-02",
+      "title": "اعضای کلاس",
+      "status": "implemented-client-local-fixture",
+      "note": "Authorized learner/teacher lists; actions restricted to Manager.",
+      "route": "/personal/education/classes/:id/members",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "CLASS-03",
+      "title": "جلسه‌ها",
+      "status": "existing-client",
+      "note": "Existing class sessions and weekly schedule.",
+      "route": "/personal/education/classes/:id?tab=sessions",
+      "source": "src/features/personal/school/schedule.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-04",
+      "title": "جزئیات جلسه",
+      "status": "implemented-client-local-fixture",
+      "note": "Session detail, class relationship, safe join link, confirmed cancellation.",
+      "route": "/personal/education/sessions/:id",
+      "source": "src/features/personal/school/session-page.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "CLASS-05",
+      "title": "ایجاد جلسه",
+      "status": "implemented-client-local-fixture",
+      "note": "Teacher/Manager, authorized class, valid date interval, review before create.",
+      "route": "/personal/education/classes/:id/sessions/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "CLASS-06",
+      "title": "ویرایش جلسه",
+      "status": "implemented-client-local-fixture",
+      "note": "Scheduled sessions only; expected version and retained draft on failure.",
+      "route": "/personal/education/sessions/:id/edit",
+      "source": "src/features/personal/school/session-page.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "CLASS-07",
+      "title": "جزوه و کتاب‌ها",
+      "status": "existing-client",
+      "note": "Paginated class lessons; not a complete public/personal library.",
+      "route": "/personal/education/classes/:id?tab=lessons",
+      "source": "src/features/personal/school/lessons.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-08",
+      "title": "نمایش درس و جزوه",
+      "status": "existing-client",
+      "note": "Existing lesson body and authorized attachment download.",
+      "route": "/personal/education/lessons/:id",
+      "source": "src/features/personal/school/lessons.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-09",
+      "title": "ایجاد درس یا جزوه",
+      "status": "existing-client",
+      "note": "Existing lesson authoring and file lifecycle.",
+      "route": "/personal/education/classes/:id/lessons/new",
+      "source": "src/features/personal/school/lessons.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-10",
+      "title": "ویرایش پیش‌نویس محتوا.",
+      "status": "existing-client",
+      "note": "Versioned draft editing.",
+      "route": "/personal/education/lessons/:id/edit",
+      "source": "src/features/personal/school/lessons.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-11",
+      "title": "بازبینی محتوا پیش از انتشار.",
+      "status": "existing-client",
+      "note": "Existing lesson publication review; confirmation styling still differs in this older flow.",
+      "route": "/personal/education/lessons/:id/review",
+      "source": "src/features/personal/school/lessons.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-12",
+      "title": "یادداشت‌های خصوصی معلم.",
+      "status": "contract-or-policy-dependent",
+      "note": "Private teacher notes are distinct from published lessons; agree lifecycle, source type and permissions.",
+      "route": null,
+      "source": null,
+      "contractStatus": "requires-product-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G15.4"
+    },
+    {
+      "id": "CLASS-13",
+      "title": "نکته‌های منتشرشدهٔ کلاس.",
+      "status": "contract-or-policy-dependent",
+      "note": "Private teacher notes are distinct from published lessons; agree lifecycle, source type and permissions.",
+      "route": null,
+      "source": null,
+      "contractStatus": "requires-product-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G15.4"
+    },
+    {
+      "id": "CLASS-14",
+      "title": "تکالیف کلاس.",
+      "status": "existing-client",
+      "note": "Existing class assignment list.",
+      "route": "/personal/education/classes/:id?tab=assignments",
+      "source": "src/features/personal/school/learning.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "CLASS-15",
+      "title": "آزمون‌های کلاس.",
+      "status": "partial-client",
+      "note": "Published exam list; author draft discovery remains G16.4.",
+      "route": "/personal/education/classes/:id?tab=exams",
+      "source": "src/features/personal/school/exams.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "CLASS-16",
+      "title": "گروه و کانال رسمی کلاس.",
+      "status": "contract-or-policy-dependent",
+      "note": "Existing singular class-conversation operation does not prove the required group+channel pair.",
+      "route": null,
+      "source": null,
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G15.2"
+    },
+    {
+      "id": "HOMEWORK-01",
+      "title": "ایجاد تکلیف",
+      "status": "partial-client",
+      "note": "Existing create form preserved; standalone create-review stage is not complete.",
+      "route": "/personal/education/classes/:id/assignments/new",
+      "source": "src/features/personal/school/learning.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-02",
+      "title": "ویرایش پیش‌نویس تکلیف",
+      "status": "implemented-client-local-fixture",
+      "note": "Versioned edit, URL review, retained failed draft and explicit conflict replacement.",
+      "route": "/personal/education/assignments/:id/edit",
+      "source": "src/features/personal/school/assignment-editor.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-03",
+      "title": "بازبینی و انتشار تکلیف",
+      "status": "implemented-client-local-fixture",
+      "note": "Audience/class/settings summary and explicit publish confirmation.",
+      "route": "/personal/education/assignments/:id/publish-review",
+      "source": "src/features/personal/school/assignment-editor.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-04",
+      "title": "جزئیات تکلیف و فایل‌های آن",
+      "status": "partial-client",
+      "note": "Assignment detail exists; teacher source-file attachment contract remains distinct from student answer files.",
+      "route": "/personal/education/assignments/:id",
+      "source": "src/features/personal/school/learning.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.7"
+    },
+    {
+      "id": "HOMEWORK-05",
+      "title": "پاسخ‌نامهٔ دانش‌آموز با متن و پیوست",
+      "status": "existing-client",
+      "note": "Existing versioned S09 → S17 → S10 flow, real answer files and server-confirmed receipt.",
+      "route": "/personal/education/assignments/:id/answer",
+      "source": "src/features/personal/school/submission-flow.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-06",
+      "title": "بازبینی متن و فایل‌ها",
+      "status": "existing-client",
+      "note": "Existing versioned S09 → S17 → S10 flow, real answer files and server-confirmed receipt.",
+      "route": "/personal/education/assignments/:id/review",
+      "source": "src/features/personal/school/submission-flow.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-07",
+      "title": "رسید معتبر تحویل",
+      "status": "existing-client",
+      "note": "Existing versioned S09 → S17 → S10 flow, real answer files and server-confirmed receipt.",
+      "route": "/personal/education/assignments/:id/receipt",
+      "source": "src/features/personal/school/submission-flow.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-08",
+      "title": "تلاش‌ها و پاسخ‌های قبلی خود دانش‌آموز",
+      "status": "implemented-client-local-fixture",
+      "note": "Own attempts only, draft continuation and published-result links.",
+      "route": "/personal/education/assignments/:id/history",
+      "source": "src/features/personal/school/assessment-results.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-09",
+      "title": "فهرست پاسخ‌های دریافت‌شده و وضعیت ارزیابی",
+      "status": "implemented-client-local-fixture",
+      "note": "Server-filtered evaluation queue; API returns an array, no fabricated pagination.",
+      "route": "/personal/education/assignments/:id/evaluations",
+      "source": "src/features/personal/school/assignment-evaluation.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-10",
+      "title": "مشاهدهٔ پاسخ، پیوست و ثبت ارزیابی",
+      "status": "implemented-client-local-fixture",
+      "note": "Authorized answer and Ready attachments, bounded score, separate feedback/private note, versioned draft/correction.",
+      "route": "/personal/education/submissions/:id/evaluate",
+      "source": "src/features/personal/school/assignment-evaluation.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-11",
+      "title": "بازبینی بازخورد قابل نمایش پیش از انتشار",
+      "status": "implemented-client-local-fixture",
+      "note": "Only audience-visible feedback shown in publication review; explicit versioned release.",
+      "route": "/personal/education/submissions/:id/evaluation-review",
+      "source": "src/features/personal/school/assignment-evaluation.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "HOMEWORK-12",
+      "title": "نمره و بازخورد منتشرشده",
+      "status": "partial-client",
+      "note": "Published student/guardian DTOs connected; pre-release state contract still G16.2.",
+      "route": "/personal/education/submissions/:id/result",
+      "source": "src/features/personal/school/assessment-results.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.2"
+    },
+    {
+      "id": "EXAM-01",
+      "title": "فهرست آزمون‌های مجاز",
+      "status": "partial-client",
+      "note": "Existing permitted published list; full author draft listing not proved.",
+      "route": "/personal/education/exams",
+      "source": "src/features/personal/school/exams.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.4"
+    },
+    {
+      "id": "EXAM-02",
+      "title": "ایجاد آزمون برای معلم مجاز",
+      "status": "implemented-client-local-fixture",
+      "note": "Authorized class; draft creation only, separate from publication.",
+      "route": "/personal/education/classes/:id/exams/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "EXAM-03",
+      "title": "تنظیمات زمان، مهلت و تعداد تلاش طبق قرارداد",
+      "status": "partial-client-local-fixture",
+      "note": "Creation supports schema-backed duration/deadline/attempt fields; independent full edit settings remains.",
+      "route": "/personal/education/classes/:id/exams/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "EXAM-04",
+      "title": "مدیریت سؤال‌ها و ترتیب آن‌ها",
+      "status": "partial-client",
+      "note": "Question list/add implemented; full editing/reordering remains frontend work.",
+      "route": "/personal/education/exams/:id/edit",
+      "source": "src/features/personal/school/exams.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-05",
+      "title": "ایجاد یا ویرایش سؤال",
+      "status": "partial-client-local-fixture",
+      "note": "Independent question creation implemented; full question editing/reordering not completed.",
+      "route": "/personal/education/exams/:id/questions/new",
+      "source": "src/features/personal/school/creation-pages.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "EXAM-06",
+      "title": "پیش‌نمایش آزمون",
+      "status": "partial-client-local-fixture",
+      "note": "Author question/answer-key review; not a student simulation preview.",
+      "route": "/personal/education/exams/:id/review",
+      "source": "src/features/personal/school/exam-review.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "EXAM-07",
+      "title": "بازبینی و انتشار",
+      "status": "implemented-client-local-fixture",
+      "note": "Author review with existing versioned publish operation and explicit confirmation.",
+      "route": "/personal/education/exams/:id/review",
+      "source": "src/features/personal/school/exam-review.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "EXAM-08",
+      "title": "معرفی آزمون برای دانش‌آموز",
+      "status": "existing-client",
+      "note": "Safe introduction, timed attempt, saved-answer review and real receipt; several states share the current route.",
+      "route": "/personal/education/exams/:id",
+      "source": "src/features/personal/school/exam-taking.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-09",
+      "title": "اتاق آزمون با تایمر و پاسخ‌برگ",
+      "status": "existing-client",
+      "note": "Safe introduction, timed attempt, saved-answer review and real receipt; several states share the current route.",
+      "route": "/personal/education/exams/:id",
+      "source": "src/features/personal/school/exam-taking.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-10",
+      "title": "مرور پاسخ‌های ذخیره‌شده پیش از تحویل",
+      "status": "existing-client",
+      "note": "Safe introduction, timed attempt, saved-answer review and real receipt; several states share the current route.",
+      "route": "/personal/education/exams/:id",
+      "source": "src/features/personal/school/exam-taking.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-11",
+      "title": "رسید ثبت نهایی",
+      "status": "existing-client",
+      "note": "Safe introduction, timed attempt, saved-answer review and real receipt; several states share the current route.",
+      "route": "/personal/education/exams/:id",
+      "source": "src/features/personal/school/exam-taking.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-12",
+      "title": "سابقهٔ تلاش‌های دانش‌آموز",
+      "status": "implemented-client-local-fixture",
+      "note": "Own attempt history and outcome links.",
+      "route": "/personal/education/exams/:id/history",
+      "source": "src/features/personal/school/assessment-results.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-13",
+      "title": "نتیجه و پاسخ‌نامهٔ منتشرشده",
+      "status": "partial-client",
+      "note": "Overall released score/status/audience feedback connected. Per-question released answer sheet is not in this read model.",
+      "route": "/personal/education/exam-submissions/:id/result",
+      "source": "src/features/personal/school/assessment-results.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.3"
+    },
+    {
+      "id": "EXAM-14",
+      "title": "فهرست تلاش‌های قابل ارزیابی برای معلم",
+      "status": "implemented-client-local-fixture",
+      "note": "Server-filtered grading queue and explicit initialize action.",
+      "route": "/personal/education/exams/:id/grading",
+      "source": "src/features/personal/school/exam-grading.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-15",
+      "title": "ارزیابی پاسخ‌های تشریحی",
+      "status": "implemented-client-local-fixture",
+      "note": "Manual question grade with expected version, bounded score, learner feedback and private author note.",
+      "route": "/personal/education/exam-submissions/:id/questions/:questionId",
+      "source": "src/features/personal/school/exam-grading.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "EXAM-16",
+      "title": "بازبینی و انتشار نتایج",
+      "status": "implemented-client-local-fixture",
+      "note": "Completion distinct from release; publication confirmation and correction revision; stable release clientOperationId.",
+      "route": "/personal/education/exam-submissions/:id/grading-review",
+      "source": "src/features/personal/school/exam-grading.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-01",
+      "title": "انتخاب فرزند و آموزشگاه معتبر",
+      "status": "existing-client",
+      "note": "Explicit authorized child and organization; validated relation/context.",
+      "route": "/personal/education",
+      "source": "src/features/personal/school/parent-daily.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-02",
+      "title": "نمای وضعیت فرزند انتخاب‌شده",
+      "status": "existing-client",
+      "note": "Explicit authorized child and organization; validated relation/context.",
+      "route": "/personal/education",
+      "source": "src/features/personal/school/parent-daily.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-03",
+      "title": "کلاس‌های مجاز همان فرزند",
+      "status": "partial-client",
+      "note": "Dashboard-authorized child classes; full permitted class library remains separate.",
+      "route": "/personal/education/classes",
+      "source": "src/features/personal/school/class-detail.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-04",
+      "title": "برنامهٔ هفتگی فرزند",
+      "status": "existing-client",
+      "note": "Server-authorized selected-child schedule; no authority inferred from Parent role alone.",
+      "route": "/personal/education/schedule",
+      "source": "src/features/personal/school/schedule.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-05",
+      "title": "تکالیف و وضعیت تحویل",
+      "status": "partial-client",
+      "note": "Existing selected-child reports; not all independent attempt/result navigation is complete.",
+      "route": "/personal/education/assignments",
+      "source": "src/features/personal/school-portal.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-06",
+      "title": "آزمون‌ها و نتایج منتشرشده",
+      "status": "partial-client",
+      "note": "Existing selected-child reports; not all independent attempt/result navigation is complete.",
+      "route": "/personal/education/exams",
+      "source": "src/features/personal/school-portal.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-07",
+      "title": "جزئیات بازخورد قابل مشاهده",
+      "status": "partial-client",
+      "note": "Dedicated guardian-safe result for selected child; exam outcome route also exists, full result directory remains.",
+      "route": "/personal/education/submissions/:id/result",
+      "source": "src/features/personal/school/assessment-results.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-08",
+      "title": "دعوت‌ها و روابط والد–فرزند",
+      "status": "partial-client",
+      "note": "Existing explicit consent; separate full relationship-detail route remains.",
+      "route": "/personal/invitations",
+      "source": "src/features/personal/school/invitations.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "PARENT-09",
+      "title": "ارتباطات رسمی مجاز والد",
+      "status": "contract-or-policy-dependent",
+      "note": "Official parent group/channel membership policy and source bindings remain G15.",
+      "route": null,
+      "source": null,
+      "contractStatus": "requires-product-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G15.2"
+    },
+    {
+      "id": "MESSAGES-01",
+      "title": "فهرست گفت‌وگوها",
+      "status": "existing-client",
+      "note": "Existing personal/organization inbox, server pagination and live/poll refresh.",
+      "route": "/personal/messages",
+      "source": "src/features/personal/messaging/messenger.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-02",
+      "title": "جستجوی پیام‌رسان",
+      "status": "partial-client",
+      "note": "Inbox search exists; dedicated cross-message search API UI remains.",
+      "route": "/personal/messages?q=:query",
+      "source": "src/features/personal/messaging/messenger.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-03",
+      "title": "دفترچهٔ مخاطبین",
+      "status": "existing-client",
+      "note": "Existing address book, username/phone resolution and save/start-direct flow.",
+      "route": "/personal/contacts",
+      "source": "src/features/personal/messaging/contacts.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-04",
+      "title": "افزودن مخاطب",
+      "status": "existing-client",
+      "note": "Existing address book, username/phone resolution and save/start-direct flow.",
+      "route": "/personal/contacts",
+      "source": "src/features/personal/messaging/contacts.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-05",
+      "title": "جزئیات مخاطب",
+      "status": "partial-client",
+      "note": "Contact action dialog exists; dedicated public/contact-detail page remains.",
+      "route": "/personal/contacts",
+      "source": "src/features/personal/messaging/contacts.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-06",
+      "title": "گفت‌وگوی مستقیم",
+      "status": "existing-client",
+      "note": "Existing direct chat, media transfer and real message confirmation.",
+      "route": "/personal/messages/:id",
+      "source": "src/features/personal/messaging/conversation-room.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-07",
+      "title": "اطلاعات گفت‌وگو",
+      "status": "implemented-client-local-fixture",
+      "note": "Separate info page; direct and managed types use their respective read models.",
+      "route": "/personal/messages/:id/info",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-08",
+      "title": "رسانه‌ها و فایل‌ها",
+      "status": "implemented-client-local-fixture",
+      "note": "Server cursor paging/filter, deduplication, existing authorized media renderer.",
+      "route": "/personal/messages/:id/media",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-09",
+      "title": "ایجاد گروه",
+      "status": "existing-client",
+      "note": "Existing real group creation, visibility/history and participant selection.",
+      "route": "/personal/messages/new?kind=groups",
+      "source": "src/features/personal/messaging/create.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-10",
+      "title": "جزئیات گروه",
+      "status": "implemented-client-local-fixture",
+      "note": "Separate info page; direct and managed types use their respective read models.",
+      "route": "/personal/messages/:id/info",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-11",
+      "title": "اعضای گروه",
+      "status": "implemented-client-local-fixture",
+      "note": "Server-paginated participants; not only the embedded metadata array.",
+      "route": "/personal/messages/:id/members",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-12",
+      "title": "مدیریت گروه",
+      "status": "partial-client",
+      "note": "Owner/UserManaged visibility/history and versioned save; full admin/member lifecycle remains.",
+      "route": "/personal/messages/:id/settings",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.1"
+    },
+    {
+      "id": "MESSAGES-13",
+      "title": "ایجاد کانال",
+      "status": "existing-client",
+      "note": "Existing real channel creation.",
+      "route": "/personal/messages/new?kind=channels",
+      "source": "src/features/personal/messaging/create.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-14",
+      "title": "جزئیات و مدیریت کانال",
+      "status": "partial-client",
+      "note": "Owner/UserManaged visibility/history and versioned save; full admin/member lifecycle remains.",
+      "route": "/personal/messages/:id/settings",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.1"
+    },
+    {
+      "id": "MESSAGES-15",
+      "title": "آرشیو",
+      "status": "implemented-client-local-fixture",
+      "note": "Server archive/unarchive confirmation and existing archived inbox filter.",
+      "route": "/personal/messages?filter=Archived",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-16",
+      "title": "پیام‌های ذخیره‌شده",
+      "status": "partial-client",
+      "note": "Existing Saved filter; initiating saved chat and full organization/labels remains.",
+      "route": "/personal/messages?filter=Saved",
+      "source": "src/features/personal/messaging/messenger.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-17",
+      "title": "درخواست‌های پیام",
+      "status": "frontend-remaining",
+      "note": "Invitation/report operations exist in backend contract; request UI, action policy and integration still need implementation.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "MESSAGES-18",
+      "title": "گزارش تخلف",
+      "status": "frontend-remaining",
+      "note": "Invitation/report operations exist in backend contract; request UI, action policy and integration still need implementation.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "ASSISTANT-01",
+      "title": "فهرست دفترچه‌ها یا فضاهای مطالعه",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-02",
+      "title": "ایجاد دفترچه",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-03",
+      "title": "فضای اصلی دفترچه",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-04",
+      "title": "افزودن منبع از دامنه‌های مجاز",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-05",
+      "title": "مشاهدهٔ منبع و وضعیت پردازش",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-06",
+      "title": "مطالعهٔ منبع و مشاهدهٔ بخش مورد استناد",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-07",
+      "title": "انتخاب منابع گفت‌وگو",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-08",
+      "title": "گفت‌وگو با دستیار",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-09",
+      "title": "تاریخچهٔ گفت‌وگوهای همان زمینه",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-10",
+      "title": "یادداشت‌ها و پاسخ‌های ذخیره‌شده",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-11",
+      "title": "خلاصه‌ها و راهنمای مطالعه",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-12",
+      "title": "فلش‌کارت‌ها",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-13",
+      "title": "تمرین یا آزمون مطالعاتی تولیدشده",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-14",
+      "title": "انتخاب مدل و محل مصرف",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "ASSISTANT-15",
+      "title": "سهمیه، مصرف و وضعیت درخواست‌ها",
+      "status": "development-sample",
+      "note": "Current assistant is an explicitly separate sample; notebook/source/model/funding/streaming contracts are not substituted with plain chat.",
+      "route": "/personal/assistant",
+      "source": "src/features/personal/assistant.tsx",
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-01",
+      "title": "منابع من",
+      "status": "contract-or-policy-dependent",
+      "note": "Resources placeholder exists; file upload alone is not a resource/library/ACL/processing API.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-02",
+      "title": "جزئیات منبع و دسترسی‌های آن",
+      "status": "contract-or-policy-dependent",
+      "note": "Resources placeholder exists; file upload alone is not a resource/library/ACL/processing API.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-03",
+      "title": "بارگذاری منبع",
+      "status": "contract-or-policy-dependent",
+      "note": "Resources placeholder exists; file upload alone is not a resource/library/ACL/processing API.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-04",
+      "title": "ویرایش اطلاعات منبع",
+      "status": "contract-or-policy-dependent",
+      "note": "Resources placeholder exists; file upload alone is not a resource/library/ACL/processing API.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-05",
+      "title": "کتابخانهٔ عمومی ماکان",
+      "status": "contract-or-policy-dependent",
+      "note": "Resources placeholder exists; file upload alone is not a resource/library/ACL/processing API.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-06",
+      "title": "منابع مجاز کلاس و آموزشگاه",
+      "status": "contract-or-policy-dependent",
+      "note": "Resources placeholder exists; file upload alone is not a resource/library/ACL/processing API.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "not-identified-in-snapshot",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    },
+    {
+      "id": "RESOURCES-07",
+      "title": "فهرست اشتراک‌های قابل خرید",
+      "status": "contract-or-policy-dependent",
+      "note": "Purchase flow requires a valid offered planVersionId/catalog and authoritative payment state; do not invent pricing/entitlements.",
+      "route": null,
+      "source": null,
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "RESOURCES-08",
+      "title": "مقایسهٔ امکانات معتبر اشتراک‌ها",
+      "status": "contract-or-policy-dependent",
+      "note": "Purchase flow requires a valid offered planVersionId/catalog and authoritative payment state; do not invent pricing/entitlements.",
+      "route": null,
+      "source": null,
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "RESOURCES-09",
+      "title": "جزئیات اشتراک فعال و مصرف",
+      "status": "frontend-remaining",
+      "note": "Commerce summary/order-list/order-detail endpoints exist; full client view remains frontend work. Individual vs organization DTO scope must be checked.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "RESOURCES-10",
+      "title": "سفارش و بررسی خرید",
+      "status": "contract-or-policy-dependent",
+      "note": "Purchase flow requires a valid offered planVersionId/catalog and authoritative payment state; do not invent pricing/entitlements.",
+      "route": null,
+      "source": null,
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "RESOURCES-11",
+      "title": "وضعیت پرداخت و رسید تأییدشده",
+      "status": "contract-or-policy-dependent",
+      "note": "Purchase flow requires a valid offered planVersionId/catalog and authoritative payment state; do not invent pricing/entitlements.",
+      "route": null,
+      "source": null,
+      "contractStatus": "partial-existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "RESOURCES-12",
+      "title": "تاریخچهٔ سفارش‌ها",
+      "status": "frontend-remaining",
+      "note": "Commerce summary/order-list/order-detail endpoints exist; full client view remains frontend work. Individual vs organization DTO scope must be checked.",
+      "route": null,
+      "source": "src/features/personal/pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.6"
+    },
+    {
+      "id": "RESOURCES-13",
+      "title": "مرکز اعلان‌ها",
+      "status": "implemented-client-local-fixture",
+      "note": "Server pagination, unread filter and mark-read, no fabricated detail endpoint.",
+      "route": "/personal/notifications",
+      "source": "src/features/personal/notifications.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "RESOURCES-14",
+      "title": "جزئیات اعلان و رفتن به منبع مرتبط",
+      "status": "partial-client-local-fixture",
+      "note": "Detail text within center and supported source links; no standalone detail API assumed.",
+      "route": "/personal/notifications",
+      "source": "src/features/personal/notifications.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "OVERLAY-01",
+      "title": "تغییر فضا یا نقش",
+      "status": "existing-client",
+      "note": "Existing role/workspace dialog with context invalidation and focus restoration.",
+      "route": "/personal",
+      "source": "src/features/personal/shell.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-02",
+      "title": "جستجوی سریع",
+      "status": "partial-client",
+      "note": "Education quick search exists; complete product-wide search remains.",
+      "route": "/personal/education/search",
+      "source": "src/features/personal/school/search.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-03",
+      "title": "فیلتر و مرتب‌سازی",
+      "status": "partial-client",
+      "note": "Existing server-backed inline filters; not every domain has a unified filter dialog.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-04",
+      "title": "انتخاب فرزند",
+      "status": "existing-client",
+      "note": "Existing explicit child selection and context reload.",
+      "route": "/personal/education",
+      "source": "src/features/personal/shell.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-05",
+      "title": "افزودن پیوست چت",
+      "status": "existing-client",
+      "note": "Existing camera/gallery/file picker, upload progress, preview and download.",
+      "route": "/personal/messages/:id",
+      "source": "src/features/personal/messaging/media.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-06",
+      "title": "پیش‌نمایش رسانه",
+      "status": "existing-client",
+      "note": "Existing camera/gallery/file picker, upload progress, preview and download.",
+      "route": "/personal/messages/:id",
+      "source": "src/features/personal/messaging/media.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-07",
+      "title": "عملیات روی پیام",
+      "status": "partial-client",
+      "note": "Existing reply/outbox actions; full edit/delete/pin/report menu remains.",
+      "route": "/personal/messages/:id",
+      "source": "src/features/personal/messaging/conversation-room.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-08",
+      "title": "انتقال پیام",
+      "status": "frontend-remaining",
+      "note": "Forward/delete endpoints must use server permissions and references; full UI remains, not automatically missing backend.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-09",
+      "title": "حذف پیام یا محتوا",
+      "status": "frontend-remaining",
+      "note": "Forward/delete endpoints must use server permissions and references; full UI remains, not automatically missing backend.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-10",
+      "title": "Block و Unblock",
+      "status": "existing-client",
+      "note": "Existing block/unblock controls; full styling unification of old confirmations remains.",
+      "route": "/personal/settings/blocked",
+      "source": "src/features/personal/messaging/privacy.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-11",
+      "title": "ترک گروه",
+      "status": "implemented-client-local-fixture",
+      "note": "Explicit leave confirmation for UserManaged; service failure remains in dialog.",
+      "route": "/personal/messages/:id/info",
+      "source": "src/features/personal/messaging/conversation-pages.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-12",
+      "title": "انتشار محتوای آموزشی",
+      "status": "partial-client",
+      "note": "New assignment/exam/grade confirmations; older lesson confirmation remains distinct.",
+      "route": null,
+      "source": "src/components/ui/confirm-action.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "OVERLAY-13",
+      "title": "تحویل تکلیف یا آزمون",
+      "status": "existing-client",
+      "note": "Existing finalize/lease-transfer actions and assignment submission review; exact presentation not universally unified.",
+      "route": "/personal/education/exams/:id",
+      "source": "src/features/personal/school/exam-taking.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-14",
+      "title": "انتقال پاسخ‌دهی آزمون به دستگاه فعلی",
+      "status": "existing-client",
+      "note": "Existing finalize/lease-transfer actions and assignment submission review; exact presentation not universally unified.",
+      "route": "/personal/education/exams/:id",
+      "source": "src/features/personal/school/exam-taking.tsx",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-15",
+      "title": "خروج با تغییر ذخیره‌نشده",
+      "status": "partial-client",
+      "note": "Existing browser/navigation guard; not a fully replaced branded global dialog.",
+      "route": null,
+      "source": "src/components/hooks/use-unsaved-changes.ts",
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase"
+    },
+    {
+      "id": "OVERLAY-16",
+      "title": "لغو یا جابه‌جایی جلسه",
+      "status": "partial-client",
+      "note": "New cancel dialog and independent edit page; automatic reschedule operation not invented.",
+      "route": "/personal/education/sessions/:id",
+      "source": "src/features/personal/school/session-page.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "OVERLAY-17",
+      "title": "پایان نشست دستگاه",
+      "status": "implemented-client-local-fixture",
+      "note": "Revoke confirmation, lock, error retention and cancellation focus restoration.",
+      "route": "/personal/settings/devices/:id",
+      "source": "src/features/personal/security-devices.tsx",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "contractStatus": "existing-contract"
+    },
+    {
+      "id": "OVERLAY-18",
+      "title": "آماده‌نبودن فایل یا اتمام سهمیه",
+      "status": "partial-client",
+      "note": "Existing file-not-ready and error states; source-AI quota behavior still requires valid contract.",
+      "route": null,
+      "source": null,
+      "contractStatus": "existing-contract",
+      "liveAuthenticatedVerification": "not-run-this-phase",
+      "gap": "G16.5"
+    }
+  ],
+  "additionalFlows": [
+    {
+      "route": "/personal/education/people/new",
+      "purpose": "Create organization-person record with stable clientOperationId, not a new authenticated account."
+    },
+    {
+      "route": "/personal/education/people/:id",
+      "purpose": "Read authorized organization-person details."
+    },
+    {
+      "route": "/personal/education/people/:id/edit",
+      "purpose": "Edit allowed names using expected versions."
+    },
+    {
+      "route": "/personal/education/courses/new",
+      "purpose": "Create course catalog item and return to retained class draft."
+    },
+    {
+      "route": "/personal/education/periods/new",
+      "purpose": "Create academic period with date-only interval."
+    },
+    {
+      "route": "/personal/education/guardians/new",
+      "purpose": "Existing consent-based guardian invitation on an independent page; does not cover every parent management feature."
+    },
+    {
+      "route": "/personal/settings/notifications/:category",
+      "purpose": "Versioned category preference form; respects mandatory channel rules."
+    }
+  ],
+  "remainingAreas": [
+    "Advanced assessment and result publication",
+    "Full member/guardian lifecycle and consent detail",
+    "Remaining messenger/media views",
+    "Resources, subscription and commerce workflows",
+    "Resource-grounded assistant and explicit funding/context",
+    "Official organization/class group+channel and publication automation"
+  ],
+  "statusDefinitions": {
+    "not-reassessed-in-this-phase": "Not an implementation claim or a claim of missing API. See existing coverage and inspect before subsequent work.",
+    "implemented-client-local-fixture": "New client behavior written against existing DTOs and tested locally; not proof of live server security.",
+    "partial-client-local-fixture": "Only the explicitly stated portion of this inventory entry was delivered.",
+    "existing-client": "Client source exists and was reviewed; use detailed note for partial behavior. Current full suite does not prove every server operation.",
+    "partial-client": "Only stated portion exists; missing details remain visible.",
+    "frontend-remaining": "Frontend work remains. Do not infer missing backend.",
+    "contract-or-policy-dependent": "Contract not identified, insufficient, or product policy unresolved; existing service may be supplied.",
+    "development-sample": "Explicit isolated sample, not live integration."
+  },
+  "counts": {
+    "existing-client": 45,
+    "partial-client": 33,
+    "frontend-remaining": 15,
+    "contract-or-policy-dependent": 21,
+    "implemented-client-local-fixture": 31,
+    "partial-client-local-fixture": 4,
+    "development-sample": 15
+  }
+}

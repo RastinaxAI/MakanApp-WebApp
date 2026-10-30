@@ -1,0 +1,205 @@
+import { test, expect } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { parseJalaliInput } from '../../src/lib/jalali-date';
+const origin = 'http://127.0.0.1:3132';
+test('JalaliDatePicker in profile and class dialogs submits Gregorian API values', async ({
+  browser,
+}) => {
+  test.skip(
+    process.env.MAKAN_GUIDE_QA_FIXTURES !== 'true',
+    'Explicit isolated client-fixture server required. This is not real backend acceptance.',
+  );
+  const context = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Tehran' }),
+    page = await context.newPage();
+  const report: {
+    mode: string;
+    checks: string[];
+    errors: string[];
+    requests: unknown[];
+    outcome?: string;
+  } = {
+    mode: 'CLIENT FIXTURES ONLY. Actual JalaliDatePicker package and app UI; local fixture backend, not real service authorization.',
+    checks: [],
+    errors: [],
+    requests: [],
+  };
+  page.on('pageerror', (error) => report.errors.push(error.message));
+  await context.addInitScript(() =>
+    document.addEventListener('DOMContentLoaded', () => {
+      const badge = document.createElement('div');
+      badge.textContent = 'آزمون تقویم — سرویس محلی ساختگی';
+      badge.style.cssText =
+        'position:fixed;left:6px;bottom:80px;z-index:99999;background:#fff2b7;color:#422900;padding:6px 10px;font:12px sans-serif;pointer-events:none';
+      document.body.append(badge);
+    }),
+  );
+  async function login(phone: string) {
+    const a = await context.request.post('/api/client/auth/challenge', {
+      headers: { Origin: origin },
+      data: { phoneNumber: phone },
+    });
+    expect(a.ok()).toBeTruthy();
+    const v = await context.request.post('/api/client/auth/verify', {
+      headers: { Origin: origin },
+      data: {
+        phoneNumber: phone,
+        challengeId: (await a.json()).challengeId,
+        code: '123456',
+        deviceName: 'Jalali calendar isolated QA',
+      },
+    });
+    expect(v.ok()).toBeTruthy();
+    return (await context.request.get('/api/client/session')).json();
+  }
+  try {
+    await mkdir('docs/screenshots/jalali-calendar', { recursive: true });
+    await login('09120000107');
+    await page.goto('/personal/profile/edit');
+    const birth = page.getByLabel('تاریخ تولد (اختیاری)', { exact: true });
+    await birth.fill('۱۴۰۰/۱۲/۳۰');
+    expect(await birth.evaluate((input: HTMLInputElement) => input.validity.valid)).toBe(false);
+    await birth.fill('۱۳۷۸/۱۰/۱۱');
+    expect(await birth.evaluate((input: HTMLInputElement) => input.validity.valid)).toBe(true);
+    const patch = page.waitForRequest(
+      (r) => r.url().endsWith('/api/v1/me/profile') && r.method() === 'PATCH',
+    );
+    await page.getByRole('button', { name: 'ثبت تغییرات', exact: true }).click();
+    const payload = (await patch).postDataJSON();
+    expect(payload.dateOfBirth).toBe('2000-01-01');
+    report.requests.push({ profile: payload.dateOfBirth });
+    await expect(page).toHaveURL(/\/personal\/profile$/);
+    await page.goto('/personal/profile/edit');
+    await expect(birth).toHaveValue('1378/10/11');
+    const field = birth.locator('xpath=ancestor::div[contains(@class,"makan-date-field")]');
+    await field.getByRole('button', { name: 'باز کردن تقویم شمسی', exact: true }).click();
+    await expect(
+      field.getByRole('group', { name: 'انتخاب تاریخ شمسی', exact: true }),
+    ).toBeVisible();
+    await field.getByRole('combobox', { name: 'سال شمسی', exact: true }).selectOption('1403');
+    await field.getByRole('combobox', { name: 'ماه شمسی', exact: true }).selectOption('1');
+    const selectedDay = field
+      .locator('.jdp-day:not(.not-in-month)[role="button"]')
+      .filter({ hasText: /^۱$/ });
+    await selectedDay.focus();
+    await page.keyboard.press('Enter');
+    await expect(birth).toBeFocused();
+    await expect(birth).toHaveValue(/۱۴۰۳\/۰۱\/۰۱|1403\/01\/01/);
+    const chosen = page.waitForRequest(
+      (r) => r.url().endsWith('/api/v1/me/profile') && r.method() === 'PATCH',
+    );
+    await page.getByRole('button', { name: 'ثبت تغییرات', exact: true }).click();
+    expect((await chosen).postDataJSON().dateOfBirth).toBe('2024-03-20');
+    report.checks.push(
+      'Real picker year/month and keyboard day selection; Persian manual input; invalid leap day blocked; Gregorian DOB PATCH and reload',
+    );
+    await page.goto('/personal/profile/edit');
+    for (const [width, height, name] of [
+      [390, 844, 'mobile'],
+      [820, 1180, 'tablet'],
+      [1440, 1000, 'desktop'],
+    ] as const) {
+      await page.setViewportSize({ width, height });
+      await field.getByRole('button', { name: 'باز کردن تقویم شمسی', exact: true }).click();
+      await expect(field.getByRole('group', { name: 'انتخاب تاریخ شمسی' })).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      await field.screenshot({ path: `docs/screenshots/jalali-calendar/profile-${name}.png` });
+      await field.getByRole('button', { name: 'بستن تقویم شمسی', exact: true }).click();
+    }
+    await page.evaluate(() => {
+      localStorage.setItem('makan-theme', 'dark');
+      window.dispatchEvent(new Event('makan-theme-changed'));
+    });
+    await field.getByRole('button', { name: 'باز کردن تقویم شمسی', exact: true }).click();
+    await field.screenshot({ path: 'docs/screenshots/jalali-calendar/profile-dark.png' });
+    await page.evaluate(() => {
+      localStorage.setItem('makan-theme', 'light');
+      window.dispatchEvent(new Event('makan-theme-changed'));
+    });
+    let state = await login('09120000104');
+    const spaces = await (
+      await context.request.get('/api/client/backend/api/v1/workspaces/me', {
+        headers: { 'X-Makan-Context': state.revision },
+      })
+    ).json();
+    const manager = spaces.find((s: any) => s.role === 'Manager');
+    expect(
+      (
+        await context.request.post('/api/client/backend/api/v1/workspaces/select', {
+          headers: { Origin: origin, 'X-Makan-Context': state.revision },
+          data: {
+            workspaceType: 'Organization',
+            membershipId: manager.membershipId,
+            role: 'Manager',
+          },
+        })
+      ).ok(),
+    ).toBeTruthy();
+    await page.goto('/personal/education/classes');
+    await page.getByRole('button', { name: 'ایجاد کلاس', exact: true }).click();
+    let dialog = page.getByRole('dialog');
+    await dialog.getByLabel('عنوان دوره', { exact: true }).fill('دورهٔ نمونهٔ تقویم');
+    await dialog.getByLabel('شروع دوره', { exact: true }).fill('۱۴۰۵/۰۱/۰۱');
+    const end = dialog.getByLabel('پایان دوره', { exact: true });
+    await end.fill('۱۴۰۴/۱۲/۲۹');
+    expect(await end.evaluate((e: HTMLInputElement) => e.validity.valid)).toBe(false);
+    await end.fill('۱۴۰۵/۱۲/۲۹');
+    const endField = end.locator('xpath=ancestor::div[contains(@class,"makan-date-field")]');
+    await endField.getByRole('button', { name: 'باز کردن تقویم شمسی', exact: true }).click();
+    await expect(
+      dialog.getByRole('group', { name: 'انتخاب تاریخ شمسی', exact: true }),
+    ).toBeVisible();
+    await dialog.screenshot({ path: 'docs/screenshots/jalali-calendar/period-dialog.png' });
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeVisible();
+    const period = page.waitForRequest(
+      (r) => r.url().endsWith('/api/v1/academic/periods') && r.method() === 'POST',
+    );
+    await dialog.getByRole('button', { name: 'ثبت دوره', exact: true }).click();
+    const periodBody = (await period).postDataJSON();
+    expect(periodBody.startDate).toBe(parseJalaliInput('۱۴۰۵/۰۱/۰۱'));
+    expect(periodBody.endDate).toBe(parseJalaliInput('۱۴۰۵/۱۲/۲۹'));
+    report.requests.push({ period: periodBody });
+    await page.goto('/personal/education/classes/c1111111-1111-4111-8111-111111111111');
+    await page.getByRole('button', { name: 'ایجاد جلسه', exact: true }).click();
+    dialog = page.getByRole('dialog');
+    await dialog.getByLabel('عنوان جلسه', { exact: true }).fill('جلسهٔ نمونهٔ تقویم');
+    const start = dialog.getByLabel('شروع جلسه', { exact: true }),
+      finish = dialog.getByLabel('پایان جلسه', { exact: true });
+    await start.fill('۱۴۰۵/۰۸/۰۷ ۱۴:۳۰');
+    await finish.fill('۱۴۰۵/۰۸/۰۷ ۱۵:۳۰');
+    const timeField = start.locator('xpath=ancestor::div[contains(@class,"makan-date-field")]');
+    await timeField.getByRole('button', { name: 'باز کردن تقویم شمسی', exact: true }).click();
+    await expect(
+      dialog.getByRole('group', { name: 'انتخاب تاریخ و ساعت شمسی', exact: true }),
+    ).toBeVisible();
+    await expect(timeField.getByRole('combobox', { name: 'سال شمسی', exact: true })).toHaveValue(
+      '1405',
+    );
+    await expect(timeField.getByRole('combobox', { name: 'ساعت', exact: true })).toHaveValue('14');
+    await expect(timeField.getByRole('combobox', { name: 'دقیقه', exact: true })).toHaveValue('30');
+    await timeField.getByRole('combobox', { name: 'دقیقه', exact: true }).selectOption('45');
+    await dialog.screenshot({ path: 'docs/screenshots/jalali-calendar/session-dialog.png' });
+    await timeField.getByRole('button', { name: 'بستن تقویم شمسی', exact: true }).click();
+    const session = page.waitForRequest(
+      (r) => r.url().endsWith('/sessions') && r.method() === 'POST',
+    );
+    await dialog.getByRole('button', { name: 'ثبت جلسه', exact: true }).click();
+    const sessionBody = (await session).postDataJSON();
+    expect(sessionBody.startUtc).toBe('2026-10-29T11:15:00.000Z');
+    expect(sessionBody.endUtc).toBe('2026-10-29T12:00:00.000Z');
+    report.requests.push({ session: sessionBody });
+    report.checks.push(
+      'Picker remains inside Radix dialog; Escape closes calendar only; period range validated; local date/time becomes correct UTC with Asia/Tehran',
+    );
+    expect(report.errors).toEqual([]);
+    report.outcome = 'PASSED';
+  } catch (error) {
+    report.outcome = 'FAILED';
+    throw error;
+  } finally {
+    await context.close();
+    await writeFile('docs/jalali-calendar-client-qa.json', JSON.stringify(report, null, 2) + '\n');
+  }
+});

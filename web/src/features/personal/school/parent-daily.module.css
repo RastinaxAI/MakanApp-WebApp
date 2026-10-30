@@ -1,0 +1,94 @@
+.intro {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.identity h1 {
+  font-size: 24px;
+  line-height: 1.55;
+}
+.identity p {
+  font-size: 13px;
+  color: var(--muted);
+}
+.avatar {
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 28px;
+  border: 4px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--border);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.metrics > div {
+  padding: 16px 10px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.metrics strong {
+  display: block;
+  font-size: 24px;
+}
+.metrics span {
+  font-size: 11px;
+  color: var(--muted);
+}
+.notice {
+  display: flex;
+  gap: 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.9;
+}
+.activities h2 {
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 84px;
+  font-size: 14px;
+}
+.row > span:nth-child(2) {
+  flex: 1;
+}
+.row strong {
+  display: block;
+  font-size: 14px;
+}
+.row small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+}

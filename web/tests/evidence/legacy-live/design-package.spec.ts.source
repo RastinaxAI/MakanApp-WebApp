@@ -1,0 +1,170 @@
+import { test, expect, type BrowserContext, type Page } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+
+const origin = 'http://127.0.0.1:3130';
+const sizes = [
+  { name: 'mobile', width: 390, height: 844 },
+  { name: 'tablet', width: 834, height: 1194 },
+  { name: 'desktop', width: 1440, height: 1000 },
+];
+
+test('design package: real role pages, responsive navigation, profile, theme and mobile school form', async ({
+  browser,
+}) => {
+  const contexts: BrowserContext[] = [];
+  const report = {
+    checkedAt: new Date().toISOString(),
+    mode: 'REAL SEEDED BACKEND :8090; no route interception, no sample data',
+    checks: [] as string[],
+    errors: [] as string[],
+    screenshots: [] as string[],
+    outcome: 'RUNNING',
+  };
+  await mkdir('docs/screenshots/design-package', { recursive: true });
+  async function screen(page: Page, file: string) {
+    await expect(page.locator('#personal-content')).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    await expect(page.locator('.skeleton-wrap')).toHaveCount(0);
+    expect(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      file + ' horizontal overflow',
+    ).toBeTruthy();
+    const path = `docs/screenshots/design-package/${file}.png`;
+    await page.screenshot({ path, fullPage: false });
+    report.screenshots.push(path);
+  }
+  try {
+    for (const [role, phone] of [
+      ['Student', '09120000101'],
+      ['Teacher', '09120000102'],
+      ['Manager', '09120000104'],
+      ['Parent', '09120000103'],
+    ]) {
+      const context = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Tehran' });
+      contexts.push(context);
+      const page = await context.newPage();
+      page.on('pageerror', (e) => report.errors.push(`${role}: ${e.message}`));
+      const headers = { Origin: origin };
+      const c = await context.request.post('/api/client/auth/challenge', {
+        headers,
+        data: { phoneNumber: phone },
+      });
+      expect(c.status()).toBe(202);
+      const v = await context.request.post('/api/client/auth/verify', {
+        headers,
+        data: {
+          phoneNumber: phone,
+          challengeId: (await c.json()).challengeId,
+          code: '123456',
+          deviceName: 'Design package responsive QA',
+        },
+      });
+      expect(v.ok()).toBeTruthy();
+      let state = await (await context.request.get('/api/client/session')).json();
+      const spaces = await (
+        await context.request.get('/api/client/backend/api/v1/workspaces/me', {
+          headers: { 'X-Makan-Context': state.revision },
+        })
+      ).json();
+      const w = spaces.find((item: any) => item.role === role);
+      expect(w).toBeTruthy();
+      async function schoolContext() {
+        state = await (await context.request.get('/api/client/session')).json();
+        const r = await context.request.post('/api/client/backend/api/v1/workspaces/select', {
+          headers: { ...headers, 'X-Makan-Context': state.revision },
+          data: { workspaceType: 'Organization', membershipId: w.membershipId, role: w.role },
+        });
+        expect(r.ok()).toBeTruthy();
+      }
+      await schoolContext();
+      for (const size of role === 'Student' ? sizes : [sizes[0], sizes[2]]) {
+        await page.setViewportSize({ width: size.width, height: size.height });
+        await page.goto('/personal/education');
+        await expect(page.getByRole('navigation', { name: 'بخش‌های آموزشگاه' })).toBeVisible();
+        if (role !== 'Parent') {
+          await expect(
+            page.getByRole('navigation', { name: 'دسترسی سریع آموزشگاه' }),
+          ).toBeVisible();
+          await expect(page.getByRole('heading', { name: 'جلسه‌های پیش رو' })).toBeVisible();
+        }
+        const nav = page
+          .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
+          .filter({ visible: true });
+        await expect(nav).toHaveCount(1);
+        await expect(nav.getByRole('link')).toHaveCount(4);
+        await screen(page, `${role.toLowerCase()}-education-${size.name}`);
+        if (role === 'Student') {
+          for (const [path, heading] of [
+            ['profile', 'پروفایل شما'],
+            ['settings', 'تنظیمات'],
+            ['contacts', 'مخاطبین شما'],
+            ['messages', 'پیام‌ها'],
+          ]) {
+            await page.goto('/personal/' + path);
+            await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
+            if (path === 'profile') {
+              await expect(page.getByRole('region', { name: 'فضاهای من' })).toBeVisible();
+              await page.getByText('مشخصات فردی', { exact: true }).click();
+              await expect(page.getByText('تاریخ تولد خوداظهاری', { exact: true })).toBeVisible();
+              await page.getByText('مشخصات فردی', { exact: true }).click();
+            }
+            await screen(page, `student-${path}-${size.name}`);
+          }
+          await page.goto('/personal/messages/68f10dcc-d3f6-4c67-95b2-adb87576ab9e');
+          await expect(page.getByRole('textbox', { name: 'متن پیام' })).toBeVisible();
+          await screen(page, `student-chat-${size.name}`);
+          if (size.name === 'mobile') {
+            await expect(
+              page.getByRole('navigation', { name: 'ناوبری حساب شخصی' }).filter({ visible: true }),
+            ).toHaveCount(0);
+          }
+          await schoolContext();
+        }
+      }
+      if (role === 'Manager') {
+        await page.setViewportSize({ width: 390, height: 844 });
+        await page.goto('/personal/education/classes');
+        await page.getByRole('button', { name: 'ایجاد کلاس', exact: true }).click();
+        const dialog = page.getByRole('dialog', { name: 'ایجاد کلاس', exact: true });
+        await expect(dialog).toBeVisible();
+        const box = await dialog.boundingBox();
+        expect(box?.width).toBe(390);
+        expect(box?.height).toBe(844);
+        await screen(page, 'manager-class-form-mobile');
+        await page.keyboard.press('Escape');
+        await expect(dialog).not.toBeVisible();
+        await expect(page.getByRole('button', { name: 'ایجاد کلاس', exact: true })).toBeFocused();
+        report.checks.push(
+          'Manager create-class form fills mobile viewport and closes without submitting',
+        );
+      }
+      if (role === 'Teacher') {
+        await page.goto('/personal/education/classes');
+        await expect(page.getByRole('button', { name: 'ایجاد کلاس', exact: true })).toHaveCount(0);
+        report.checks.push('Teacher still cannot create a class');
+      }
+      if (role === 'Student') {
+        await page.goto('/personal/settings/appearance');
+        await page.getByRole('radio', { name: 'تاریک' }).check();
+        await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+        await page.goto('/personal/profile');
+        await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+        await screen(page, 'student-profile-dark-desktop');
+        await page.goto('/personal/settings/appearance');
+        await page.getByRole('radio', { name: 'روشن' }).check();
+        report.checks.push('Theme changes through settings and persists across navigation');
+      }
+      report.checks.push(
+        `${role}: real authentication, school workspace and responsive pages rendered`,
+      );
+    }
+    expect(report.errors).toEqual([]);
+    report.outcome = 'PASS';
+  } catch (error) {
+    report.outcome = 'FAIL';
+    throw error;
+  } finally {
+    await writeFile('docs/design-package-live-qa.json', JSON.stringify(report, null, 2));
+    await Promise.all(contexts.map((context) => context.close()));
+  }
+});

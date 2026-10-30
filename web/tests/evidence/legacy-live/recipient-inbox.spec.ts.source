@@ -1,0 +1,175 @@
+import { test, expect, type BrowserContext } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+test.use({ actionTimeout: 25000, navigationTimeout: 30000 });
+const origin = 'http://127.0.0.1:3130';
+test('real Teacher inbox receives Student conversation and promotes it above older chats without refresh', async ({
+  browser,
+}) => {
+  const contexts: BrowserContext[] = [];
+  const headers = { Origin: origin };
+  const report: any = {
+    checkedAt: new Date().toISOString(),
+    mode: 'REAL SEEDED STUDENT / TEACHER',
+    checks: [],
+    errors: [],
+    networkFailures: [],
+  };
+  let qaGroup: string | undefined, teacher: any;
+  async function login(phone: string) {
+    const context = await browser.newContext({
+      baseURL: origin,
+      viewport: { width: 390, height: 844 },
+    });
+    contexts.push(context);
+    const c = await context.request.post('/api/client/auth/challenge', {
+      headers,
+      data: { phoneNumber: phone },
+    });
+    const v = await context.request.post('/api/client/auth/verify', {
+      headers,
+      data: {
+        phoneNumber: phone,
+        challengeId: (await c.json()).challengeId,
+        code: '123456',
+        deviceName: 'Recipient inbox ordering QA',
+      },
+    });
+    expect(v.ok()).toBeTruthy();
+    return { context, state: await (await context.request.get('/api/client/session')).json() };
+  }
+  async function api(a: any, path: string, data?: unknown) {
+    a.state = await (await a.context.request.get('/api/client/session')).json();
+    const r = await a.context.request.fetch('/api/client/backend' + path, {
+      method: data ? 'POST' : 'GET',
+      headers: { ...headers, 'X-Makan-Context': a.state.revision },
+      ...(data ? { data } : {}),
+      timeout: 30000,
+    });
+    const body = await r.json().catch(() => null);
+    if (!r.ok())
+      report.networkFailures.push({
+        path,
+        status: r.status(),
+        code: body?.code,
+        traceId: body?.traceId,
+      });
+    expect(r.ok(), JSON.stringify(body)).toBeTruthy();
+    return body;
+  }
+  try {
+    const student = await login('09120000101');
+    teacher = await login('09120000102');
+    const ws = await api(teacher, '/api/v1/workspaces/me');
+    const w = ws.find((w: any) => w.role === 'Teacher');
+    await api(teacher, '/api/v1/workspaces/select', {
+      workspaceType: 'Organization',
+      membershipId: w.membershipId,
+      role: w.role,
+    });
+    const page = await teacher.context.newPage();
+    page.on('pageerror', (e: Error) => report.errors.push(e.message));
+    page.on('response', async (r: any) => {
+      if (r.status() >= 400 && new URL(r.url()).pathname.startsWith('/api/client/')) {
+        const problem = await r.json().catch(() => ({}));
+        report.networkFailures.push({
+          path: new URL(r.url()).pathname,
+          status: r.status(),
+          code: problem.code,
+          traceId: problem.traceId,
+        });
+      }
+    });
+    await page.goto('/personal/messages');
+    await expect(page.getByText('گفتگوهای شخصی شما', { exact: true })).toBeVisible();
+    teacher.state = await (await teacher.context.request.get('/api/client/session')).json();
+    expect(teacher.state.context.workspaceType).toBe('Personal');
+    report.checks.push(
+      'Default Messages opens actual Personal inbox when Teacher was in Organization workspace',
+    );
+    const direct = await api(student, '/api/v1/conversations/direct', {
+      targetUserId: teacher.state.user.id,
+      scope: 'Personal',
+    });
+    const directId = direct.conversationId;
+    report.conversationId = directId;
+    const existingGroups = await api(
+      teacher,
+      '/api/v1/conversations?filter=Group&page=1&pageSize=30',
+    );
+    const prior = existingGroups.find((g: any) => g.title === 'آزمون ترتیب فهرست دریافت ماکان');
+    const group =
+      prior ??
+      (await api(teacher, '/api/v1/conversations/groups', {
+        clientOperationId: crypto.randomUUID(),
+        scope: 'Personal',
+        title: 'آزمون ترتیب فهرست دریافت ماکان',
+        description: 'گروه موقت QA؛ پس از تست بایگانی می‌شود.',
+        initialParticipantUserIds: null,
+        visibility: 'Private',
+        groupHistoryPolicy: 'FullHistory',
+      }));
+    qaGroup = group.conversationId;
+    await api(teacher, `/api/v1/conversations/${qaGroup}/messages`, {
+      clientMessageId: crypto.randomUUID(),
+      kind: 'Text',
+      text: 'پیام آزمایشی برای ترتیب اولیهٔ فهرست',
+      attachmentIds: null,
+      replyToMessageId: null,
+    });
+    const list = page.getByRole('region', { name: 'فهرست گفتگوها' });
+    const rows = list.locator('a[href^="/personal/messages/"]');
+    await expect(rows.first()).toHaveAttribute('href', new RegExp(qaGroup!));
+    const text = 'آزمون نمایش در فهرست معلم — ' + Date.now();
+    const started = Date.now();
+    await api(student, `/api/v1/conversations/${directId}/messages`, {
+      clientMessageId: crypto.randomUUID(),
+      kind: 'Text',
+      text,
+      attachmentIds: null,
+      replyToMessageId: null,
+    });
+    await expect(rows.first()).toHaveAttribute('href', new RegExp(directId));
+    await expect(rows.first()).toContainText(text);
+    await expect(rows.first().locator('b')).toBeVisible();
+    report.receivedInMs = Date.now() - started;
+    report.checks.push(
+      'Student message updates preview, unread badge and moves Direct to first row on Teacher inbox without navigation or reload',
+    );
+    await mkdir('docs/screenshots/incoming-message', { recursive: true });
+    await page.screenshot({ path: 'docs/screenshots/incoming-message/teacher-inbox-after.png' });
+    const navigation = page
+      .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
+      .filter({ visible: true });
+    await page.getByRole('button', { name: /فضای کار:/ }).click();
+    const picker = page.getByRole('dialog', { name: 'انتخاب فضای کار' });
+    await picker
+      .getByRole('button')
+      .filter({ hasText: w.organizationName })
+      .filter({ hasText: 'استاد' })
+      .click();
+    await expect(page).toHaveURL(/\/personal\/messages\?view=organization$/);
+    await expect(page.getByText('گفتگوهای آموزشگاه انتخاب‌شده', { exact: true })).toBeVisible();
+    await expect(rows.filter({ hasText: text })).toHaveCount(0);
+    await navigation.getByRole('link', { name: 'پیام‌ها', exact: true }).click();
+    await expect(page.getByText('گفتگوهای شخصی شما', { exact: true })).toBeVisible();
+    await expect(rows.first()).toContainText(text);
+    report.checks.push(
+      'Explicit Organization inbox remains available; main Messages returns to Personal and preserves received thread',
+    );
+    expect(report.errors).toEqual([]);
+    report.outcome = 'PASS';
+  } catch (e) {
+    report.outcome = 'FAIL';
+    report.failure = String(e);
+    throw e;
+  } finally {
+    report.qaGroupId = qaGroup;
+    report.cleanup =
+      'QA-only group retained for reproducible ordering checks; labeled test messages added; profile, privacy and memberships unchanged';
+    await writeFile('docs/recipient-inbox-live-qa.json', JSON.stringify(report, null, 2) + '\n');
+    for (const c of contexts) {
+      await c.request.post('/api/client/auth/logout', { headers }).catch(() => {});
+      await c.close();
+    }
+  }
+});

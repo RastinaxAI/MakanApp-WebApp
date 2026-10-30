@@ -1,0 +1,178 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { chromium } from '@playwright/test';
+
+const root = process.cwd();
+const output = path.join(root, 'output/pdf/makan-school-backend-handoff-rtl.pdf');
+const temporary = path.join(root, 'tmp/pdfs/school-backend-handoff');
+await fs.mkdir(path.dirname(output), { recursive: true });
+await fs.mkdir(temporary, { recursive: true });
+const arabic = await fs.readFile(
+  'node_modules/@fontsource-variable/vazirmatn/files/vazirmatn-arabic-wght-normal.woff2',
+);
+const latin = await fs.readFile(
+  'node_modules/@fontsource-variable/vazirmatn/files/vazirmatn-latin-wght-normal.woff2',
+);
+const logo = await fs.readFile('public/icons/makan-192.png');
+const code = (text) => `<code dir="ltr">${text}</code>`;
+const pages = [
+  {
+    label: 'دامنه و تصمیم قطعی محصول',
+    title: 'درخواست تکمیل بک‌اند آموزشگاه',
+    body: `<p class="lead">سند قابل تحویل به تیم بک‌اند ماکان؛ شامل شواهد فعلی، قراردادهای پیشنهادی، حدود دسترسی و معیارهای پذیرش.</p>
+ <div class="decision"><strong>تصمیم نهایی: کلاس را مدیر می‌سازد؛ معلم جلسه ایجاد می‌کند.</strong><p>معلم مجوز ساخت کلاس سازمانی ندارد. او فقط در کلاس‌هایی که انتساب فعال دارد، جلسه و فعالیت آموزشی مجاز ایجاد می‌کند. درخواست قبلی برای گسترش مجوز ساخت کلاس معلم، لغو شده است.</p></div>
+ <h2>نقش‌ها و مسئولیت‌ها</h2>
+ <table><thead><tr><th>نقش</th><th>دامنهٔ مورد انتظار</th></tr></thead><tbody>
+ <tr><td>مدیر</td><td>ساخت کلاس، ظرفیت و تقسیم‌بندی دانش‌آموزان، انتساب یک یا چند معلم و مدیریت روابط معتبر والد و فرزند در آموزشگاه خودش.</td></tr>
+ <tr><td>معلم</td><td>مشاهدهٔ دانش‌آموزان کلاس منتسب، ایجاد جلسه، درس و جزوه، تکلیف و آزمون در محدودهٔ مجاز همان کلاس؛ بدون ساخت کلاس سازمانی.</td></tr>
+ <tr><td>دانش‌آموز</td><td>دسترسی به کلاس ثبت‌نام‌شده، جلسه و محتوای مجاز، انجام تکلیف و شرکت در آزمون.</td></tr>
+ <tr><td>والد</td><td>انتخاب فرزند از رابطهٔ معتبر و مشاهدهٔ اطلاعات آموزشی مجاز همان فرزند؛ بدون دسترسی عمومی به چت خصوصی یا همهٔ منابع کلاس.</td></tr>
+ </tbody></table>
+ <h2>مبنای بررسی و اولویت اجرا</h2>
+ <p>این سند بر اساس قرارداد و آزمون‌های ثبت‌شدهٔ <bdi>2026-10-28</bdi> روی سرور <bdi>http://94.184.32.84:8090</bdi> تهیه شده است. ساخت کلاس مدیر، ثبت‌نام و انتساب معلم، تکلیف، آزمون و گزارش والد با حساب‌های آزمایشی بررسی شده‌اند؛ این نتیجه، پذیرش کامل امنیت یا کل محصول نیست.</p>
+ <div class="note">اولویت‌های تکمیل: ۱) دفترچهٔ اعضا و فهرست کامل کلاس، ۲) جریان معتبر افزودن والد، ۳) محتوای درس و جزوه، ۴) تکمیل کاتالوگ‌ها و مستندات جلسه.</div>
+ <p class="small">هر مسیر و فیلد تازه در این سند <strong>پیشنهادی و نیازمند توافق</strong> است. نبود مسیر در Swagger به‌تنهایی اثبات نبود پیاده‌سازی نیست؛ در صورت وجود سرویس، قرارداد و نمونهٔ پاسخ آن ارائه شود.</p>`,
+  },
+  {
+    label: 'درخواست ۱ / محتوای آموزشی',
+    title: 'درس، جزوه و فایل‌های کلاس',
+    body: `<div class="status"><span>وضعیت بررسی‌شده</span><p>ساخت ${code('Course')} موجود است، اما Course با محتوای درس و جزوه یکی نیست. در قرارداد بررسی‌شده، جریان مستقل ساخت، انتشار و دریافت محتوای کلاسی مشاهده نشد. آپلود فایل به‌تنهایی، جزوهٔ قابل مشاهده برای دانش‌آموز ایجاد نمی‌کند.</p></div>
+ <h2>قرارداد پیشنهادی</h2>
+ <table class="api"><thead><tr><th>عملیات</th><th>مسیر پیشنهادی</th></tr></thead><tbody>
+ <tr><td>فهرست محتوای کلاس</td><td>${code('GET /api/v1/academic/classes/{classId}/lessons')}</td></tr>
+ <tr><td>ساخت پیش‌نویس</td><td>${code('POST /api/v1/academic/classes/{classId}/lessons')}</td></tr>
+ <tr><td>مشاهده و ویرایش</td><td>${code('GET / PATCH /api/v1/academic/lessons/{lessonId}')}</td></tr>
+ <tr><td>انتشار محتوا</td><td>${code('POST /api/v1/academic/lessons/{lessonId}/publish')}</td></tr>
+ </tbody></table>
+ <p>اطلاعات مورد نیاز: شناسهٔ محتوا، سازمان و کلاس، مرجع درس در صورت نیاز، عنوان، متن، ترتیب نمایش، وضعیت انتشار، نسخه، زمان انتشار و مرجع معتبر ایجادکننده. هر پیوست باید شناسهٔ فایل، نام، نوع، اندازه و وضعیت دسترس‌پذیری معتبر داشته باشد.</p>
+ <h2>رفتار و مجوز</h2>
+ <ul><li>معلم فقط با انتساب فعال به همان کلاس محتوا آماده و منتشر کند. دانش‌آموز ثبت‌نام‌شده فقط محتوای منتشرشدهٔ مجاز را ببیند.</li>
+ <li>دسترسی والد به جزوه نیازمند تصمیم صریح محصول است؛ فعال‌بودن رابطهٔ والد به‌تنهایی کافی نیست.</li>
+ <li>دریافت فایل اصلی نیز مجوز کلاس و محتوا را بررسی کند؛ دانستن شناسه یا پیوند قدیمی جای مجوز معتبر نباشد.</li>
+ <li>آماده‌شدن فایل، انتشار درس و آماده‌بودن منبع برای AI مستقل باشند. فایل پیام‌رسان بدون قرارداد معتبر به منبع آموزشی تبدیل نشود.</li>
+ <li>فهرست با جستجو، وضعیت، ترتیب پایدار و صفحه‌بندی سرور ارائه شود؛ ویرایش با نسخهٔ معتبر انجام شود.</li></ul>
+ <div class="accept"><strong>معیار پذیرش</strong><p>معلم جزوهٔ دارای متن و فایل را منتشر کند؛ دانش‌آموز ثبت‌نام‌شده آن را دریافت کند؛ حساب خارج از کلاس دسترسی نگیرد. پس از لغو دسترسی، درخواست جدید دریافت فایل نیز رد شود.</p></div>`,
+  },
+  {
+    label: 'درخواست ۲ / دفترچه و فهرست کلاس',
+    title: 'اعضای کامل و دانش‌آموزان کلاس',
+    body: `<div class="status"><span>وضعیت بررسی‌شده</span><p>${code('GET /api/v1/organization/people')} نام و پرونده را می‌دهد، اما اطلاعات کافی برای دفترچهٔ نقش‌دار و انتخاب حساب یا عضویت معتبر ندارد. گزارش معلمان و ثبت‌نام‌ها موجود است؛ گزارش فعالیت تکلیف معلم نیز جای فهرست کامل دانش‌آموزان کلاس نیست.</p></div>
+ <h2>فهرست‌های پیشنهادی</h2>
+ <table class="api"><thead><tr><th>فهرست</th><th>مسیر پیشنهادی</th></tr></thead><tbody>
+ <tr><td>اعضای آموزشگاه</td><td>${code('GET /api/v1/organization/members')}</td></tr>
+ <tr><td>دانش‌آموزان کلاس</td><td>${code('GET /api/v1/academic/classes/{classId}/learners')}</td></tr>
+ <tr><td>معلمان کلاس</td><td>${code('GET /api/v1/academic/classes/{classId}/teachers')}</td></tr>
+ </tbody></table>
+ <p>پاسخ شامل نام نمایشی و مراجع لازم برای اقدام بعدی باشد: حساب متصل در صورت وجود، پروندهٔ سازمانی، عضویت و نقش، ثبت‌نام دانش‌آموز یا انتساب معلم، وضعیت و نسخهٔ مورد نیاز تغییرات. <strong>شناسهٔ حساب، پرونده، عضویت، ثبت‌نام و انتساب یکسان نیستند.</strong></p>
+ <ul><li>جستجو، فیلتر نقش و وضعیت و صفحه‌بندی در سرور انجام شود؛ تعداد کل و ترتیب پایدار برگردد.</li>
+ <li>فهرست نامزدهای قابل انتساب از فهرست افراد منتسب فعلی جدا باشد. برای پایان یا تغییر انتساب، شناسهٔ معتبر همان رابطه ارائه شود.</li>
+ <li>مدیر فقط اعضای سازمان فعال و معلم فقط دانش‌آموزان کلاس مجاز خودش را ببیند؛ دفترچهٔ کل سازمان برای معلم باز نشود.</li>
+ <li>نام یا مرجع قابل resolve مجازِ ارسال‌کننده در پاسخ تحویل‌شده لازم است؛ DTO فعلی پاسخ تکلیف، هویت نمایشی ارسال‌کننده ندارد.</li></ul>
+ <div class="accept"><strong>معیار پذیرش</strong><p>دانش‌آموز تازه، پیش از اولین جلسه یا تکلیف، در فهرست کلاس دیده شود. دو معلم پس از انتساب و بارگذاری مجدد نمایش داده شوند؛ پایان انتساب یکی، دیگری را حذف نکند. فرد دارای دو نقش نیز دو حساب مستقل نشود.</p></div>
+ <p class="small">معلم در تست فعلی به دفترچهٔ کل سازمان با ${code('403 WORKSPACE_NOT_ALLOWED')} دسترسی نگرفت؛ این محدودیت باید حفظ شود و فهرست کلاسیِ مجاز جایگزین نیاز عملیاتی شود.</p>`,
+  },
+  {
+    label: 'درخواست ۳ / رابطهٔ والد و فرزند',
+    title: 'افزودن والد بدون دانستن UUID',
+    body: `<div class="status"><span>وضعیت بررسی‌شده</span><p>ساخت و فعال‌سازی رابطهٔ والد و فرزند موجود است، اما ساخت رابطه به ${code('guardianUserId')} نیاز دارد. جستجوی شخصی ${code('dev.Parent')} برای مدیر، پاسخ ${code('200')} با ${code('isDiscoverable=false')} داشت؛ بنابراین جستجوی پیام‌رسان راه قابل اتکایی برای افزودن والد نیست.</p></div>
+ <p>رابطهٔ آزمایشی با هویت معلومِ حساب تست از API مدیر ساخته و فعال شد و والد گزارش فرزند را خواند. این نتیجه، اثبات کامل‌بودن جریان جستجو و افزودن والد از رابط مدیر نیست.</p>
+ <h2>راه‌حل پیشنهادی</h2>
+ <p>جریان دعوت و تطبیق هویت والد ارائه شود. پیشنهاد اصلی، دعوت با شماره یا نام کاربری و تأیید از سمت حساب مقصد است. راه جایگزین، lookup سازمانیِ مجاز با کمینهٔ اطلاعات و سیاست مشخص است. این دو مسیر، پیشنهاد قراردادند و سرویس آماده معرفی نمی‌شوند.</p>
+ <ul><li>فرزند از پروندهٔ معتبر همان آموزشگاه انتخاب شود؛ حساب مقصد و رابطه با فرزند به روش معتبر تأیید شوند.</li>
+ <li>وضعیت دعوت، تأیید، رد، انقضا و مسیر پیگیری روشن باشد. شباهت نام یا دانستن شماره، رابطه را خودکار فعال نکند.</li>
+ <li>پاسخ رابطه، نام نمایشی والد و فرزند، مراجع معتبر، وضعیت، زمان اعتبار و نسخه را بدهد؛ فقط شناسهٔ خام برای رابط روزمره کافی نیست.</li>
+ <li>مسیرهای موجود ساخت، فعال‌سازی، پایان و لغو رابطه با دلیل و نسخهٔ معتبر حفظ شوند.</li>
+ <li>حریم خصوصی پیدا‌شدن در پیام‌رسان برای افزودن والد تغییر نکند؛ رابطه نیز مجوز خواندن چت خصوصی یا همهٔ جزوه‌ها نسازد.</li></ul>
+ <div class="accept"><strong>معیار پذیرش</strong><p>مدیر بدون دانستن UUID، والد را وارد جریان معتبر اتصال کند. والد دو فرزند را مستقل انتخاب کند و فقط گزارش فرزند انتخاب‌شده را ببیند. لغو رابطهٔ یک فرزند، دسترسی همان فرزند را ببندد و رابطهٔ معتبر دیگر محفوظ بماند.</p></div>
+ <p class="small">در تست فعلی، والد بدون فرزند انتخاب‌شده ${code('404 CHILD_CONTEXT_NOT_FOUND')} گرفت و خواندن عمومی کلاس‌ها برای او با ${code('403 ACADEMIC_READ_NOT_ALLOWED')} رد شد. این محدودیت‌ها نقصی برای حذف‌کردن نیستند.</p>`,
+  },
+  {
+    label: 'الزام قطعی / کلاس در برابر جلسه',
+    title: 'مدیر کلاس می‌سازد، معلم جلسه',
+    body: `<div class="decision"><strong>ایجاد کلاس توسط معلم از دامنهٔ توسعه حذف شده است.</strong><p>نباید مجوز Teacher برای ساخت کلاس سازمانی باز شود یا مسیر تأیید ساخت کلاس معلم اضافه شود. کلاس، ثبت‌نام و انتساب‌ها تحت مدیریت مدیر آموزشگاه باقی می‌مانند.</p></div>
+ <div class="operation">${code('POST /api/v1/academic/classes')}<p>مدیرِ مجاز در سازمان فعال کلاس ایجاد کند؛ معلم مجوز ندارد.</p></div>
+ <div class="operation">${code('POST /api/v1/academic/classes/{classId}/sessions')}<p>معلم با انتساب فعال به همان کلاس بتواند جلسه ایجاد کند؛ مجوز مدیر در سازمان خودش حفظ شود.</p></div>
+ <h2>شواهد واقعی</h2>
+ <p>ساخت کلاس با نقش Teacher در تست واقعی ${code('403 MANAGER_ROLE_REQUIRED')} گرفت؛ ایجاد جلسه در کلاس منتسب توسط همان نقش پاسخ ${code('201')} داد. <strong>رد ساخت کلاس برای معلم با تصمیم جدید صحیح است و دیگر کمبود بک‌اند محسوب نمی‌شود.</strong></p>
+ <h2>تثبیت قرارداد و کنترل دسترسی</h2>
+ <ul><li>مجوز ایجاد جلسه بر اساس سازمان فعال، کلاس و انتساب معتبرِ زمان درخواست بررسی شود؛ عنوان نقش به‌تنهایی کافی نیست.</li>
+ <li>با پایان انتساب معلم، ایجاد جلسهٔ جدید در آن کلاس رد شود؛ معلم نتواند برای کلاس نامرتبط جلسه بسازد.</li>
+ <li>شروع، پایان، منطقهٔ زمانی، پیوند جلسهٔ اختیاری و خطاهای اعتبارسنجی در OpenAPI روشن باشند. ویرایش یا لغو جلسه فقط طبق مجوز موجود و نسخهٔ معتبر انجام شود.</li>
+ <li>پایان عضویت، کلاس یا انتساب، سوابق سازمانی را شخصی یا حذف نکند؛ سیاست نگهداشت باید مشخص باشد.</li></ul>
+ <div class="accept"><strong>معیار پذیرش</strong><p>مدیر کلاس را ایجاد و معلم را منتسب کند؛ معلم جلسه بسازد؛ ساخت کلاس تازه و ساخت جلسه برای کلاس دیگر برای او رد شود. پس از پایان انتساب، درخواست ایجاد جلسهٔ جدید نیز مجاز نباشد.</p></div>
+ <p class="small">مرجع پیگیری تست رد ساخت کلاس Teacher:</p><div class="trace" dir="ltr">00-8805431729bbc4ac789ee3e51687695b-4a952bf27b915b2a-00</div>`,
+  },
+  {
+    label: 'قرارداد مشترک و تحویل',
+    title: 'چک‌لیست پذیرش تیم بک‌اند',
+    body: `<h2>تکمیل کاتالوگ و مستندات</h2>
+ <p>فهرست سازمانیِ مجاز درس‌ها و دوره‌ها با وضعیت، جستجو و صفحه‌بندی ارائه شود. ساخت ${code('Course')} و ${code('AcademicPeriod')} موجود است، اما فهرست آن‌ها در قرارداد بررسی‌شده مشاهده نشد. انتخابگر نباید فقط به موارد استفاده‌شده در کلاس‌های قبلی وابسته باشد.</p>
+ <p>در ${code('GET /api/v1/academic/schedule')}، نیاز و حدود مجاز ${code('fromUtc / toUtc')} روشن شود. بدون بازه، خطای ${code('SESSION_TIME_INVALID')} دیده شد؛ فرانت‌اند اکنون بازهٔ صریح می‌فرستد و پاسخ ۲۰۰ آن دوباره بررسی شده است.</p>
+ <h2>الزامات مشترک قرارداد</h2>
+ <ul><li>برای هر عملیات: درخواست و پاسخ نمونه، فیلدهای nullable، enumها، مجوز نقش و منبع، خطا و اقدام بعدی مشخص باشند.</li>
+ <li>ساخت‌های تکرارپذیر شناسهٔ عملیات یا سازوکار معتبر جلوگیری از تکرار و رسید قابل پیگیری داشته باشند؛ timeout به معنی انجام‌نشدن عملیات فرض نشود.</li>
+ <li>تغییرات هم‌زمان با نسخهٔ معتبر کنترل شوند. تاریخِ دوره بدون ساعت بماند؛ زمان جلسه با معنای صریح UTC و منطقهٔ زمانی مدیریت شود.</li>
+ <li>لغو دسترسی در خواندن، دریافت فایل و جریان زنده اعمال شود. تغییر نقش یا سازمان، دادهٔ زمینهٔ قبلی را به درخواست جدید وارد نکند.</li></ul>
+ <h2>سناریوی تحویل قابل تکرار</h2>
+ <ol><li>مدیر دو کلاس، چند دانش‌آموز و دو معلم را مدیریت و انتساب‌ها را پس از reload مشاهده کند.</li>
+ <li>فهرست کلاس پیش از ایجاد فعالیت کامل باشد؛ معلم کلاس نامرتبط را نبیند.</li>
+ <li>معلمِ منتسب جلسه و جزوه بسازد؛ دانش‌آموز مجاز جلسه و محتوای منتشرشده را دریافت کند.</li>
+ <li>والد دارای دو فرزند، گزارش هر فرزند را مستقل ببیند؛ لغو یک رابطه دسترسی دیگری را قطع نکند.</li>
+ <li>دانش‌آموز تکلیف و آزمون را ثبت کند؛ پاسخ صحیح معلم و دادهٔ خصوصی او به دانش‌آموز یا والد نرسد.</li></ol>
+ <div class="note"><strong>مواردی که نبود بک‌اند نیستند:</strong> APIهای تکلیف، آزمون، ارزیابی، انتشار نمره، پیوست پاسخ تکلیف و حضور و غیاب وجود دارند. بخش‌هایی از رابط آن‌ها هنوز باقی است. مسیر عمومی آزمون‌ها نیز نباید بدون بررسی، فهرست کامل پیش‌نویس‌های معلم فرض شود.</div>
+ <p class="small">خروجی مورد انتظار: OpenAPI به‌روز، نمونه‌های موفق و ناموفق، دادهٔ تست مجاز و گزارش اجرای سناریوها. API موجود، اتصال نوشته‌شده و رفتار واقعاً بررسی‌شده باید جدا گزارش شوند.</p>`,
+  },
+];
+
+const css = `
+.operation{border:1px solid #dce7ef;border-radius:10px;padding:10px 14px;margin:10px 0}.operation>code{display:block;text-align:left;direction:ltr;font-size:11.5px}.operation p{margin:5px 0 0;font-size:12px}
+@font-face{font-family:Makan;src:url(data:font/woff2;base64,${arabic.toString('base64')}) format('woff2');font-weight:100 900;font-style:normal;unicode-range:U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200F,U+FB50-FDFF,U+FE70-FEFC;}
+@font-face{font-family:Makan;src:url(data:font/woff2;base64,${latin.toString('base64')}) format('woff2');font-weight:100 900;font-style:normal;unicode-range:U+0000-00FF,U+2000-200B,U+2010-206F;}
+@page{size:A4;margin:0}*{box-sizing:border-box}html,body{margin:0;padding:0;color:#173448;background:#fff;font-family:Makan,Tahoma,sans-serif;font-size:13px;line-height:1.95;-webkit-print-color-adjust:exact;print-color-adjust:exact}.page{width:210mm;height:297mm;padding:14mm 17mm 15mm;position:relative;break-after:page;display:flex;flex-direction:column}.page:last-child{break-after:auto}.top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d9e5ee;padding-bottom:9px;margin-bottom:16px;flex-shrink:0}.brand{display:flex;align-items:center;gap:8px;color:#1169b8;font-weight:800;font-size:18px}.brand img{width:32px;height:32px;object-fit:contain}.top small{font-size:10px;color:#61798b}.kicker{font-size:11px;color:#1169b8;font-weight:650;margin-bottom:5px}h1{font-size:25px;line-height:1.6;margin:0 0 15px;font-weight:800;letter-spacing:-.4px}h2{font-size:15px;font-weight:750;margin:18px 0 7px;color:#1169b8}p{margin:7px 0;text-align:right}strong{font-weight:750}.lead{font-size:14px;color:#527084;line-height:2;margin-bottom:16px}.content{flex:1;min-height:0}.decision{padding:14px 17px;border-radius:12px;border-right:4px solid #1169b8;background:#edf6fc;margin:12px 0 16px}.decision>strong{color:#075da5;font-size:14px}.decision p{margin-bottom:0}.status{border:1px solid #dbe6ee;border-radius:12px;padding:11px 15px;background:#f7fafc}.status>span{font-size:10px;font-weight:750;color:#547084}.status p{margin-top:3px}.note{background:#f0f8f7;border:1px solid #cee7e3;padding:12px 15px;border-radius:12px;margin:14px 0;color:#195b56}.accept{padding:12px 15px;border-top:2px solid #128079;background:#f3f9f8;border-radius:0 0 10px 10px;margin-top:15px}.accept>strong{color:#0f7069;font-size:12px}.accept p{margin:5px 0 0}.small{font-size:10.5px;color:#617787;line-height:1.9}.trace{font-family:Consolas,monospace;font-size:10px;text-align:left;color:#5a7180;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;margin:11px 0 12px;font-size:12px;line-height:1.85}th{text-align:right;background:#edf4f9;color:#174e78;font-weight:750}td,th{padding:9px 11px;border:1px solid #dce7ef;vertical-align:top}td:first-child{width:21%;font-weight:650}.api{font-size:11.2px}.api td:first-child{width:30%;font-size:11.5px}.api td:last-child{direction:ltr;text-align:left}.api code{display:block;text-align:left;line-height:1.7}code{font-family:Consolas,'Courier New',monospace;font-size:.91em;unicode-bidi:isolate;direction:ltr;display:inline-block;max-width:100%;overflow-wrap:anywhere;color:#224c6c}ul,ol{padding-right:21px;padding-left:0;margin:7px 0}li{padding-right:3px;margin:6px 0}li::marker{color:#1169b8;font-weight:700}footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #d9e5ee;padding-top:8px;margin-top:14px;font-size:10px;color:#637b8c;flex-shrink:0}bdi{unicode-bidi:isolate;direction:ltr}
+`;
+const fa = (n) => new Intl.NumberFormat('fa-IR').format(n);
+const html = `<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>درخواست تکمیل بک‌اند آموزشگاه ماکان</title><style>${css}</style></head><body>${pages.map((page, i) => `<section class="page"><header class="top"><div class="brand"><img src="data:image/png;base64,${logo.toString('base64')}" alt="">ماکان</div><small>ویژهٔ تیم بک‌اند / نسخهٔ اصلاح‌شده</small></header><div class="content"><div class="kicker">${page.label}</div><h1>${page.title}</h1>${page.body}</div><footer><span>مبنای شواهد: ۲۸ اکتبر ۲۰۲۶</span><span>صفحهٔ ${fa(i + 1)} از ${fa(pages.length)}</span></footer></section>`).join('')}</body></html>`;
+await fs.writeFile(path.join(temporary, 'source.html'), html);
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+try {
+  const page = await browser.newPage({ viewport: { width: 794, height: 1123 } });
+  await page.setContent(html, { waitUntil: 'load' });
+  await page.evaluate(() => document.fonts.ready);
+  const layout = await page.locator('.page').evaluateAll((pages) =>
+    pages.map((page, index) => {
+      const body = page.querySelector('.content'),
+        footer = page.querySelector('footer');
+      const children = [...body.children];
+      const last = children.at(-1);
+      return {
+        page: index + 1,
+        bodyHeight: body.clientHeight,
+        contentHeight: body.scrollHeight,
+        lastBottom: last.getBoundingClientRect().bottom,
+        footerTop: footer.getBoundingClientRect().top,
+        width: page.clientWidth,
+        scrollWidth: page.scrollWidth,
+      };
+    }),
+  );
+  await fs.writeFile(path.join(temporary, 'layout.json'), JSON.stringify(layout, null, 2));
+  if (
+    layout.some(
+      (item) =>
+        item.contentHeight > item.bodyHeight + 1 ||
+        item.lastBottom > item.footerTop - 5 ||
+        item.scrollWidth > item.width + 1,
+    )
+  )
+    throw new Error('Page content does not fit: ' + JSON.stringify(layout));
+  await page.pdf({
+    path: output,
+    format: 'A4',
+    printBackground: true,
+    preferCSSPageSize: true,
+    tagged: true,
+  });
+  console.log(JSON.stringify({ output, pages: pages.length, layout }, null, 2));
+} finally {
+  await browser.close();
+}

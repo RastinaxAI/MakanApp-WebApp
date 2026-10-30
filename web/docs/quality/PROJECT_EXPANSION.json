@@ -1,0 +1,131 @@
+{
+  "recordedAtUtc": "2026-10-29T20:21:45.087043+00:00",
+  "scope": "First application implementation batch based on approved expansion inventory; not all 146 pages or Figma edits.",
+  "commands": [
+    {
+      "command": "npm run typecheck",
+      "stage": "baseline",
+      "result": "passed"
+    },
+    {
+      "command": "npm run api:generate",
+      "result": "passed",
+      "operations": 163,
+      "schemas": 314
+    },
+    {
+      "command": "npm run quality",
+      "log": "PROJECT_EXPANSION_QUALITY.log",
+      "result": "initial browser locator failure; 48 passed, 1 failed; corrected without weakening assertions"
+    },
+    {
+      "command": "npm run quality",
+      "log": "PROJECT_EXPANSION_FINAL.log",
+      "result": "passed",
+      "format": true,
+      "lint": true,
+      "typecheck": true,
+      "generatedCheck": true,
+      "productionBuild": true,
+      "unitTests": {
+        "passed": 193,
+        "files": 36
+      },
+      "browserTests": {
+        "passed": 49,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "command": "npm run test:browser -- tests/browser/project-expansion-visual.spec.ts",
+      "log": "PROJECT_EXPANSION_VISUAL.log",
+      "result": "passed",
+      "tests": 1
+    },
+    {
+      "command": "npm run test:browser",
+      "log": "PROJECT_EXPANSION_BROWSER_FINAL.log",
+      "result": "passed",
+      "stats": {
+        "startTime": "2026-10-29T20:18:01.343Z",
+        "duration": 192345.542,
+        "expected": 50,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "architecture": {
+    "moduleBoundariesChecked": 141,
+    "cycles": 0,
+    "newDependencies": 0,
+    "frameworkChanged": false
+  },
+  "visual": {
+    "screenshots": "output/review/project-expansion",
+    "pages": 9,
+    "viewports": [
+      390,
+      834,
+      1440
+    ],
+    "darkViewport": 390,
+    "manualViews": [
+      "class-create-390",
+      "class-create-1440",
+      "session-create-834",
+      "exam-create-390",
+      "notification-preference-dark-390"
+    ],
+    "checks": [
+      "RTL existing shell retained",
+      "no horizontal overflow",
+      "no nested forms",
+      "principal control visible"
+    ],
+    "pixelPerfectFigmaVerification": false
+  },
+  "apiContract": {
+    "url": "http://94.184.32.84:8090/openapi/v1.json",
+    "publicGetStatus": 200,
+    "paths": 291,
+    "schemas": 572,
+    "comparison": {
+      "addedPaths": [],
+      "removedPaths": [],
+      "changedPaths": [],
+      "addedSchemas": [],
+      "removedSchemas": [],
+      "changedSchemas": []
+    },
+    "liveAuthenticatedActionsTested": false
+  },
+  "isolation": {
+    "fixtureBackendPort": 3457,
+    "fixtureAppPort": 3132,
+    "externalWrites": 0,
+    "backendSecurityProven": false
+  },
+  "preview": {
+    "url": "http://127.0.0.1:3130",
+    "mode": "production",
+    "server": "http://94.184.32.84:8090",
+    "launcher": "node scripts/design-review.mjs --production",
+    "restarted": true,
+    "enterGetStatus": 200,
+    "sessionDirectoryPreserved": true
+  },
+  "implementationLedger": "design/figma-expansion/app-implementation.json",
+  "limitations": [
+    "Remaining inventory entries require subsequent implementation and contract review; not all are backend-blocked.",
+    "No live authenticated mutation QA in this phase.",
+    "No physical mobile device or hosted CI execution.",
+    "No Figma modifications or full pixel match claim.",
+    "No exactly-once class creation guarantee beyond existing backend contract.",
+    "Resource-grounded AI, official group/channel automation and existing G14/G15 gaps remain."
+  ],
+  "deletions": []
+}

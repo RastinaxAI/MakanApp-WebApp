@@ -1,0 +1,55 @@
+{
+  "outcome": "PASSED",
+  "mode": "Real local route/UI/PWA checks without login or backend writes; not authenticated service acceptance.",
+  "removed": [
+    {
+      "path": "/login",
+      "status": 404
+    },
+    {
+      "path": "/login?access=unavailable",
+      "status": 404
+    },
+    {
+      "path": "/admin",
+      "status": 404
+    },
+    {
+      "path": "/admin/users",
+      "status": 404
+    },
+    {
+      "path": "/organization",
+      "status": 404
+    },
+    {
+      "path": "/organization/classes",
+      "status": 404
+    },
+    {
+      "path": "/api/session",
+      "status": 404
+    },
+    {
+      "path": "/api/backend/api/admin/v1/me",
+      "status": 404
+    },
+    {
+      "path": "/design-review",
+      "status": 404
+    },
+    {
+      "path": "/design-review/atlas/plans",
+      "status": 404
+    },
+    {
+      "path": "/guides/makan-owner-guide.pdf",
+      "status": 404
+    }
+  ],
+  "oldAuth": 404,
+  "clientAdminBypass": 404,
+  "legacyCookieGrantsPersonalSession": false,
+  "manifestStart": "/personal",
+  "pageErrors": []
+}

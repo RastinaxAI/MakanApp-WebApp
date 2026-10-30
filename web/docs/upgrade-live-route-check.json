@@ -1,0 +1,119 @@
+{
+  "checkedAt": "2026-10-29T05:33:37.437Z",
+  "base": "http://127.0.0.1:3130",
+  "authentication": "No cookies or tokens; no OTP request or upstream write.",
+  "checks": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 307,
+      "expected": 307,
+      "location": "/personal",
+      "passed": true
+    },
+    {
+      "path": "/personal",
+      "method": "GET",
+      "status": 307,
+      "expected": 307,
+      "location": "/enter",
+      "passed": true
+    },
+    {
+      "path": "/admin",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/enter",
+      "method": "GET",
+      "status": 200,
+      "expected": 200,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 401,
+      "expected": 401,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/session",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/login",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/auth/challenge",
+      "method": "POST",
+      "status": 404,
+      "expected": 404,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/backend/api/admin/v1/me",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/client/backend/api/v1/me",
+      "method": "GET",
+      "status": 401,
+      "expected": 401,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/client/backend/api/admin/v1/me",
+      "method": "GET",
+      "status": 404,
+      "expected": 404,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/client/hub?id=unbound-test-connection",
+      "method": "GET",
+      "status": 401,
+      "expected": 401,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/client/hub/negotiate?negotiateVersion=1",
+      "method": "POST",
+      "status": 401,
+      "expected": 401,
+      "location": null,
+      "passed": true
+    },
+    {
+      "path": "/api/client/auth/verify",
+      "method": "POST",
+      "status": 403,
+      "expected": 403,
+      "location": null,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "node": "v24.19.0",
+  "target": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tmp\\clean-checkout-WqEiAV",
+  "sources": [
+    "src",
+    "public",
+    "contracts",
+    "design",
+    "scripts",
+    "tests",
+    "output/design",
+    "package.json",
+    "package-lock.json",
+    "tsconfig.json",
+    "next.config.ts",
+    "next-env.d.ts",
+    "postcss.config.mjs",
+    "vitest.config.mts",
+    "playwright.config.ts",
+    ".prettierignore",
+    ".prettierrc.json",
+    ".env.example"
+  ],
+  "results": [
+    {
+      "command": "npm ci --no-audit --no-fund",
+      "exitCode": 0,
+      "log": "test-results/clean-checkout/install.log"
+    },
+    {
+      "command": "npm run generated:check",
+      "exitCode": 1,
+      "log": "test-results/clean-checkout/generated-check.log"
+    }
+  ]
+}

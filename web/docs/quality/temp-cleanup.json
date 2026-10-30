@@ -1,0 +1,29 @@
+[
+  {
+    "path": "tmp/design-package-20261029",
+    "files": 20,
+    "bytes": 5296540,
+    "reason": "Temporary extracted duplicate/reference screenshot/intermediate PDF render; canonical design source, original user ZIP/PDF and final output retained.",
+    "dependencyEvidence": "No active import/package/config reads these directories; old report generator retired as .source.",
+    "status": "retained-autoapproval-blocked",
+    "note": "Recursive removal rejected by automatic tool approval (blocked by policy, no further reason supplied). No deletion performed."
+  },
+  {
+    "path": "tmp/design-reference-shots",
+    "files": 5,
+    "bytes": 344464,
+    "reason": "Temporary extracted duplicate/reference screenshot/intermediate PDF render; canonical design source, original user ZIP/PDF and final output retained.",
+    "dependencyEvidence": "No active import/package/config reads these directories; old report generator retired as .source.",
+    "status": "retained-autoapproval-blocked",
+    "note": "Recursive removal rejected by automatic tool approval (blocked by policy, no further reason supplied). No deletion performed."
+  },
+  {
+    "path": "tmp/pdfs",
+    "files": 28,
+    "bytes": 5248656,
+    "reason": "Temporary extracted duplicate/reference screenshot/intermediate PDF render; canonical design source, original user ZIP/PDF and final output retained.",
+    "dependencyEvidence": "No active import/package/config reads these directories; old report generator retired as .source.",
+    "status": "retained-autoapproval-blocked",
+    "note": "Recursive removal rejected by automatic tool approval (blocked by policy, no further reason supplied). No deletion performed."
+  }
+]

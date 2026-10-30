@@ -1,0 +1,90 @@
+[
+  {
+    "path": "src/generated/api/client-contract.json",
+    "action": "delete",
+    "bytes": 178544,
+    "sha256": "46f4231646de8d6b7fadc767d9e731100040c619de79dbcd80c8c80194576613",
+    "reason": "Byte-identical generated registry; client and server now read a single canonical file.",
+    "regenerate": "npm run api:generate",
+    "dependencyEvidence": "Only client-contract.ts imported it; import and generator updated."
+  },
+  {
+    "path": "src/components/ui/data-table.tsx",
+    "action": "delete",
+    "bytes": 2674,
+    "sha256": "53bc8224138021612681b16eae3235a0ca35a83e669b9e1b5bc6679a171b7a88",
+    "reason": "Unreferenced leftover generic table from owner UI; its only package import was @tanstack/react-table.",
+    "regenerate": "Not generated; historical backup available during this operation.",
+    "dependencyEvidence": "Full src/tests/scripts scan: DataTable/data-table appears only in this file and CSS, no imports, dynamic loaders or CI use."
+  },
+  {
+    "path": "scripts/guide-fixture-preview.mjs",
+    "action": "move",
+    "destination": "docs/quality/retired-tools/guide-fixture-preview.mjs.source",
+    "reason": "Replaced by modular isolated fixture backend; old prototype fallback responses and calendar-only seed model are obsolete.",
+    "dependencyEvidence": "No package script or active test imports; historical docs mention old tool as evidence only."
+  },
+  {
+    "path": "scripts/create-school-backend-pdf.mjs",
+    "action": "move",
+    "destination": "docs/quality/retired-tools/create-school-backend-pdf.mjs.source",
+    "reason": "Historical pre-701cba0 generator contains superseded missing-endpoint claims; kept as non-executable source to prevent overwriting older reports.",
+    "dependencyEvidence": "No package script or active test imports; historical docs mention old tool as evidence only."
+  },
+  {
+    "path": "README.md",
+    "action": "move",
+    "destination": "docs/quality/retired-tools/README-before-quality.md.source",
+    "sha256": "16aa5008748004681409255e265c75a63492325a6c484c2acd949cddd76a49b9",
+    "reason": "Obsolete executable/documentation retained as historical evidence; active isolated tests and current README replace it.",
+    "dependencyEvidence": "No active package script/import; historical docs may mention original name."
+  },
+  {
+    "path": "tests/e2e/client-scope.spec.ts",
+    "action": "move",
+    "destination": "tests/evidence/legacy-live/client-scope-guest.spec.ts.source",
+    "sha256": "71005904ed73e97f249439310e692abbb565087991439e21d9c9ec3623fddc17",
+    "reason": "Obsolete executable/documentation retained as historical evidence; active isolated tests and current README replace it.",
+    "dependencyEvidence": "No active package script/import; historical docs may mention original name."
+  },
+  {
+    "path": "scripts/audit-backend-for-report.mjs",
+    "action": "move",
+    "destination": "docs/quality/retired-tools/audit-backend-for-report.mjs.source",
+    "sha256": "1876ffc6b2f4c297daeafcea2d0de96f599ff5cc47237dbd4936dfe6057d9363",
+    "reason": "Obsolete executable/documentation retained as historical evidence; active isolated tests and current README replace it.",
+    "dependencyEvidence": "No active package script/import; historical docs may mention original name."
+  },
+  {
+    "path": "scripts/audit-school-api.mjs",
+    "action": "move",
+    "destination": "docs/quality/retired-tools/audit-school-api.mjs.source",
+    "sha256": "050c6c011fbe4ada04e6f94eec92e8156e945373fc98a633c9329337f32550d5",
+    "reason": "Obsolete executable/documentation retained as historical evidence; active isolated tests and current README replace it.",
+    "dependencyEvidence": "No active package script/import; historical docs may mention original name."
+  },
+  {
+    "path": "scripts/create-backend-audit-pdf.mjs",
+    "action": "move",
+    "destination": "docs/quality/retired-tools/create-backend-audit-pdf.mjs.source",
+    "sha256": "6580ee5e0ac92d71e94afbd780069e51d9fae57be4cba8cc24bafb268662ece9",
+    "reason": "Obsolete executable/documentation retained as historical evidence; active isolated tests and current README replace it.",
+    "dependencyEvidence": "No active package script/import; historical docs may mention original name."
+  },
+  {
+    "path": "docs/DESIGN.md",
+    "action": "move-history-and-replace",
+    "destination": "docs/quality/retired-tools/DESIGN-before-v2.md.source",
+    "reason": "Earlier directions retained as history; canonical documentation now matches v2 and isolated QA.",
+    "sha256": "e6f46246f3c5a2c1abcbeea8251db257ccbdf12bc708aae33fdac2f892e3901c",
+    "dependencyEvidence": "Canonical filename retained for links; history is non-executable."
+  },
+  {
+    "path": "docs/PLAN.md",
+    "action": "move-history-and-replace",
+    "destination": "docs/quality/retired-tools/PLAN-before-quality.md.source",
+    "reason": "Earlier directions retained as history; canonical documentation now matches v2 and isolated QA.",
+    "sha256": "7410715bb222dfe2236c5351d301a95005e2f6e9d60265c399b4b5f56cf38c77",
+    "dependencyEvidence": "Canonical filename retained for links; history is non-executable."
+  }
+]

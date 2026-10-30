@@ -1,0 +1,335 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/tests/browser",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/test-results/browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node scripts/test-server.mjs",
+      "url": "http://127.0.0.1:3132/enter",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "manager-workspace.spec.ts",
+      "file": "manager-workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7122,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T07:50:41.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "db72e834893325376852-1f9434c0534a42f708eb",
+          "file": "manager-workspace.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20614,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })\u001b[22m\n\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\manager-workspace.spec.ts:89:80",
+                    "location": {
+                      "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\manager-workspace.spec.ts",
+                      "column": 80,
+                      "line": 89
+                    },
+                    "snippet": "  87 |   await expect(page.getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })).toBeVisible();\n  88 |   await expect(page.getByRole('link', { name: 'ایجاد جلسه', exact: true })).toHaveCount(0);\n> 89 |   await request.post(fixture + '/__test__/fault', {\n     |                                                    ^\n  90 |     data: { path: '/end', method: 'POST', status: 503 },\n  91 |   });\n  92 |   await page.getByRole('button', { name: 'حذف از کلاس · معلم اول', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\manager-workspace.spec.ts",
+                        "column": 80,
+                        "line": 89
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })\u001b[22m\n\n\n  87 |   await expect(page.getByRole('cell', { name: 'دانش‌آموز دوم', exact: true })).toBeVisible();\n  88 |   await expect(page.getByRole('link', { name: 'ایجاد جلسه', exact: true })).toHaveCount(0);\n> 89 |   await request.post(fixture + '/__test__/fault', {\n     |                                                    ^\n  90 |     data: { path: '/end', method: 'POST', status: 503 },\n  91 |   });\n  92 |   await page.getByRole('button', { name: 'حذف از کلاس · معلم اول', exact: true }).click();\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\manager-workspace.spec.ts:89:80"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T07:50:49.046Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\manager-workspace-Manager--62909-elected-class-relationships\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\manager-workspace-Manager--62909-elected-class-relationships\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\manager-workspace-Manager--62909-elected-class-relationships\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\manager-workspace.spec.ts",
+                    "column": 80,
+                    "line": 89
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "db72e834893325376852-8964b1ea95dfc7ed42a9",
+          "file": "manager-workspace.spec.ts",
+          "line": 56,
+          "column": 5
+        },
+        {
+          "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7875,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T07:51:11.433Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "db72e834893325376852-daeedb6ffeee238c6843",
+          "file": "manager-workspace.spec.ts",
+          "line": 133,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "workspace-child-attachments.spec.ts",
+      "file": "workspace-child-attachments.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "one workspace click enters it once; a failed switch never claims entry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2859,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T07:51:20.438Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "97e591dc4387b0ba8861-b9014bdccf27be12cd6b",
+          "file": "workspace-child-attachments.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4929,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T07:51:23.326Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "97e591dc4387b0ba8861-e4288965c4c829a9edba",
+          "file": "workspace-child-attachments.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3469,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T07:51:28.281Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "97e591dc4387b0ba8861-4b14050ea8dc5ee8f56e",
+          "file": "workspace-child-attachments.spec.ts",
+          "line": 103,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T07:50:38.472Z",
+    "duration": 54097.28,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

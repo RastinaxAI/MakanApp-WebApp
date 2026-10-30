@@ -1,0 +1,66 @@
+{
+  "QualityExitCode": 0,
+  "Commands": [
+    "npm run quality",
+    "npx playwright test tests/browser/sign-in-layout.spec.ts"
+  ],
+  "Unit": {
+    "passed": 248,
+    "failed": 0,
+    "files": 46
+  },
+  "Browser": {
+    "startTime": "2026-10-30T18:02:26.675Z",
+    "duration": 456956.514,
+    "expected": 98,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "TargetedAfterAccessibilityFix": {
+    "passed": 3,
+    "failed": 0
+  },
+  "InitialBrowser": {
+    "passed": 97,
+    "failed": 1,
+    "resolved": "OTP accessible name changed when validation error appeared; fixed aria-label and error description"
+  },
+  "ViewportWidths": [
+    320,
+    390,
+    767,
+    768,
+    834,
+    1024,
+    1199,
+    1200,
+    1440,
+    1920
+  ],
+  "Navigation": {
+    "mobileBelow": 768,
+    "tabletBelow": 1024,
+    "desktopFrom": 1024
+  },
+  "CanonicalInvitations": "/personal/education/invitations",
+  "EntryJavascriptDecodedBytes": {
+    "previousRelease": 650076,
+    "current": 541635,
+    "reductionPercent": 16.7
+  },
+  "PerformanceEnvironment": "isolated local fixture; decoded JS size is not total network transfer or guaranteed backend speed",
+  "BackendDomainWrites": false,
+  "CIExecuted": false,
+  "PhysicalDevicesTested": false,
+  "ExtraResponsiveRun": {
+    "startTime": "2026-10-30T18:16:57.934Z",
+    "duration": 54398.013000000006,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "UniqueBrowserScenariosVerified": 99,
+  "ExtraChecks": "Manager pages at 1024 plus four-tab client-side navigation at 1199/1024/834/1024; layout and navigation, not new backend-report verification"
+}

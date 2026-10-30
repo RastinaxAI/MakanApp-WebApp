@@ -1,0 +1,1080 @@
+{
+  "sourceZip": "Makan-Design-Package.zip",
+  "sha256": "d96a6e8825b19bf0aaece9c7c1e17a698718d8abe6a41aa0a3947be9e9c15070",
+  "filesChecksumVerified": 19,
+  "sourceScreenCount": 130,
+  "warning": "Reference supported is a package label, not proof of runtime integration. Existing workflows share routes and dialogs; complete screen parity is not claimed.",
+  "viewports": {
+    "mobile": {
+      "width": 390,
+      "height": 844
+    },
+    "tablet": {
+      "width": 834,
+      "height": 1194
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "designDirection": {
+    "surface": "white",
+    "text": "near-black",
+    "accent": "blue",
+    "style": "Instagram-like density, hairline separators, simple line icons, circular identity; Makan brand",
+    "navigation": [
+      "آموزشگاه",
+      "پیام‌ها",
+      "کوپایلت (فقط اگر فعال باشد)",
+      "پروفایل"
+    ],
+    "mobile": "Single-pane stack; bottom tabs; full-route create/edit; primary action visible near thumb; safe area.",
+    "tablet": "Right compact rail, master-detail where useful; forms centered at max 600–640 px.",
+    "desktop": "Right nav, central reading/form column, left contextual panel; independent scroll panes in Messenger.",
+    "forms": "One task per page; required labels and helper text; error adjacent to field; preserve unsaved draft; sticky save.",
+    "accessibility": "48 px minimum hit areas, readable 16 px body, 4.5:1 body contrast, visible focus, labels and non-color status."
+  },
+  "screens": [
+    {
+      "id": "A01",
+      "title": "به ماکان خوش آمدید",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "A02",
+      "title": "کد تأیید را وارد کنید",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "A03",
+      "title": "خودتان را معرفی کنید",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "A04",
+      "title": "کجا ادامه می‌دهید؟",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "A05",
+      "title": "دعوت‌های من",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "A06",
+      "title": "بررسی دعوت",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "A07",
+      "title": "فضای شخصی شما",
+      "module": "onboarding",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/enter, /personal/profile/edit, /personal/invitations"
+    },
+    {
+      "id": "S01",
+      "title": "امروز من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S02",
+      "title": "کلاس‌های من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S03",
+      "title": "ریاضی نهم",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S04",
+      "title": "معادله‌های خطی",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S05",
+      "title": "برنامه من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S06",
+      "title": "جلسه ریاضی",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S07",
+      "title": "تکلیف‌های من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S08",
+      "title": "تمرین فصل سوم",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S09",
+      "title": "پاسخ من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S10",
+      "title": "رسید تحویل تکلیف",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S11",
+      "title": "آزمون‌های من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S12",
+      "title": "پیش از شروع آزمون",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S13",
+      "title": "آزمون فصل سوم",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S14",
+      "title": "مرور و تحویل آزمون",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S15",
+      "title": "رسید آزمون",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S16",
+      "title": "پیشرفت من",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "S17",
+      "title": "بازبینی پاسخ تکلیف",
+      "module": "learning",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T01",
+      "title": "روزِ کاری من",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T02",
+      "title": "افزودن درس",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T03",
+      "title": "ویرایش درس",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T04",
+      "title": "بازبینی و انتشار درس",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T05",
+      "title": "افزودن تکلیف",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T06",
+      "title": "ویرایش تکلیف",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T07",
+      "title": "ارزیابی پاسخ‌ها",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T08",
+      "title": "ارزیابی پاسخ سارا",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T09",
+      "title": "انتشار بازخورد",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T10",
+      "title": "افزودن آزمون",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T11",
+      "title": "ویرایش آزمون",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T12",
+      "title": "افزودن سؤال",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T13",
+      "title": "ویرایش سؤال",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T14",
+      "title": "بازبینی آزمون",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T15",
+      "title": "افزودن جلسه",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T16",
+      "title": "ویرایش جلسه",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T17",
+      "title": "ثبت حضور",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T18",
+      "title": "اصلاح حضور",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T19",
+      "title": "افزودن برنامه هفتگی",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T20",
+      "title": "ویرایش برنامه هفتگی",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T21",
+      "title": "سؤال‌های آزمون",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T22",
+      "title": "اصلاح نتیجه تکلیف",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T23",
+      "title": "بازبینی و انتشار تکلیف",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T24",
+      "title": "تصحیح آزمون‌ها",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T25",
+      "title": "تصحیح پاسخ آزمون",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "T26",
+      "title": "بازبینی و انتشار نتیجه آزمون",
+      "module": "teaching",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M01",
+      "title": "آموزشگاه آفتاب",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M02",
+      "title": "افراد آموزشگاه",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M03",
+      "title": "افزودن فرد",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M04",
+      "title": "ویرایش پرونده",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M05",
+      "title": "افزودن کلاس",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M06",
+      "title": "ثبت‌نام در کلاس",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M07",
+      "title": "دعوت والد",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M08",
+      "title": "ترم‌ها و درس‌ها",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M09",
+      "title": "افزودن ترم",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M10",
+      "title": "گزارش‌های آموزشگاه",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M11",
+      "title": "افزودن درس آموزشگاه",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M12",
+      "title": "افزودن مدرس به کلاس",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "M13",
+      "title": "آماده‌سازی گزارش",
+      "module": "management",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education/*"
+    },
+    {
+      "id": "P01",
+      "title": "فرزندان من",
+      "module": "guardian",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education"
+    },
+    {
+      "id": "P02",
+      "title": "امروزِ سارا",
+      "module": "guardian",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education"
+    },
+    {
+      "id": "P03",
+      "title": "گزارش پیشرفت سارا",
+      "module": "guardian",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education"
+    },
+    {
+      "id": "P04",
+      "title": "تأیید ارتباط با فرزند",
+      "module": "guardian",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/education"
+    },
+    {
+      "id": "C01",
+      "title": "پیام‌ها",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C02",
+      "title": "پیام جدید",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C03",
+      "title": "مریم رضایی",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C04",
+      "title": "ریاضی نهم",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C05",
+      "title": "کانال آموزشگاه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C06",
+      "title": "ساخت گروه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C07",
+      "title": "ساخت کانال",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C08",
+      "title": "درباره گروه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C09",
+      "title": "ویرایش اطلاعات گروه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C10",
+      "title": "اعضا و دسترسی‌ها",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C11",
+      "title": "تنظیم دسترسی عضو",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C12",
+      "title": "لینک دعوت جدید",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C13",
+      "title": "جستجوی پیام‌ها",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C14",
+      "title": "ذخیره‌شده‌ها",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C15",
+      "title": "نظرسنجی جدید",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C16",
+      "title": "نتیجه نظرسنجی",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C17",
+      "title": "فهرست کار جدید",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C18",
+      "title": "ویرایش فهرست کار",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C19",
+      "title": "زمان‌بندی پیام",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C20",
+      "title": "پیام‌های زمان‌بندی‌شده",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C21",
+      "title": "ویرایش پیام",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C22",
+      "title": "گزارش پیام",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C23",
+      "title": "پوشه جدید",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C24",
+      "title": "ویرایش پوشه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C25",
+      "title": "دعوت عضو به گروه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C26",
+      "title": "رسانه‌ها و فایل‌های گروه",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C27",
+      "title": "موضوع‌های گفتگو",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C28",
+      "title": "افزودن موضوع",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "C29",
+      "title": "ویرایش موضوع",
+      "module": "messenger",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/messages/*"
+    },
+    {
+      "id": "U01",
+      "title": "پروفایل من",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U02",
+      "title": "ویرایش پروفایل",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U03",
+      "title": "عکس پروفایل",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U04",
+      "title": "حریم خصوصی",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U05",
+      "title": "اعلان‌ها",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U06",
+      "title": "امنیت و دستگاه‌ها",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U07",
+      "title": "مخاطبان",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U08",
+      "title": "ویرایش مخاطب",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U09",
+      "title": "افزودن مخاطب",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U10",
+      "title": "اعلان‌های من",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "U11",
+      "title": "مریم رضایی",
+      "module": "profile",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/profile, /personal/settings/*, /personal/contacts"
+    },
+    {
+      "id": "W01",
+      "title": "یادگیری، کنار هم",
+      "module": "marketing",
+      "referenceStatus": "proposed",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/subscription"
+    },
+    {
+      "id": "W02",
+      "title": "راهکار مناسب آموزشگاه شما",
+      "module": "marketing",
+      "referenceStatus": "proposed",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/subscription"
+    },
+    {
+      "id": "W03",
+      "title": "اشتراک و ظرفیت",
+      "module": "marketing",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/subscription"
+    },
+    {
+      "id": "W04",
+      "title": "بررسی سفارش",
+      "module": "marketing",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/subscription"
+    },
+    {
+      "id": "W05",
+      "title": "سفارش‌های من",
+      "module": "marketing",
+      "referenceStatus": "supported",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/subscription"
+    },
+    {
+      "id": "W06",
+      "title": "وضعیت پرداخت",
+      "module": "marketing",
+      "referenceStatus": "disabled",
+      "deliveryScope": "Not implemented as a complete independent screen in this delivery",
+      "routeFamily": "/personal/subscription"
+    },
+    {
+      "id": "B01",
+      "title": "مدیریت ماکان",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B02",
+      "title": "آموزشگاه‌ها",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B03",
+      "title": "افزودن آموزشگاه",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B04",
+      "title": "پرونده آموزشگاه",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B05",
+      "title": "کاربران",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B06",
+      "title": "بررسی گزارش‌ها",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B07",
+      "title": "جزئیات پرونده گزارش",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B08",
+      "title": "پلن‌ها و نسخه‌ها",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B09",
+      "title": "نسخه جدید پلن",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B10",
+      "title": "سلامت سرویس‌ها",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "B11",
+      "title": "تاریخچه اقدامات",
+      "module": "platform",
+      "referenceStatus": "supported",
+      "deliveryScope": "Excluded: separate platform-owner application",
+      "routeFamily": null
+    },
+    {
+      "id": "E01",
+      "title": "اتصال برقرار نیست",
+      "module": "states",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "shared error/loading/disabled states"
+    },
+    {
+      "id": "E02",
+      "title": "تغییرات تازه‌ای وجود دارد",
+      "module": "states",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "shared error/loading/disabled states"
+    },
+    {
+      "id": "E03",
+      "title": "آزمون روی دستگاه دیگری فعال است",
+      "module": "states",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "shared error/loading/disabled states"
+    },
+    {
+      "id": "E04",
+      "title": "کوپایلت هنوز فعال نیست",
+      "module": "states",
+      "referenceStatus": "disabled",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "shared error/loading/disabled states"
+    },
+    {
+      "id": "E05",
+      "title": "پیامی پیدا نشد",
+      "module": "states",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "shared error/loading/disabled states"
+    },
+    {
+      "id": "E06",
+      "title": "این بخش در دسترس نیست",
+      "module": "states",
+      "referenceStatus": "supported",
+      "deliveryScope": "Existing workflow uses shared visual foundation; screen-by-screen parity not claimed",
+      "routeFamily": "shared error/loading/disabled states"
+    }
+  ]
+}

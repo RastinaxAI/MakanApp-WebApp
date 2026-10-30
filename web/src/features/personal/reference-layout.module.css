@@ -1,0 +1,154 @@
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 620px) 250px;
+  gap: 40px;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+}
+.content {
+  line-height: normal;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.context {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 28px;
+  padding: 4px 0;
+  font-size: 13px;
+  min-width: 0;
+}
+.workspace {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+}
+.workspace > div {
+  min-width: 0;
+  flex: 1;
+}
+.workspace strong,
+.session strong {
+  display: block;
+  font-size: 13px;
+}
+.workspace small,
+.session small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.workspace button {
+  border: 0;
+  background: none;
+  color: var(--primary);
+  font-size: 12px;
+  min-height: 44px;
+  padding: 0 4px;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  font-size: 16px;
+  overflow: hidden;
+}
+.context h2 {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 650;
+}
+.context p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+.notice {
+  display: flex;
+  gap: 10px;
+  background: var(--primary-soft);
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--primary);
+}
+.session {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+}
+.session > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.schedule {
+  color: var(--primary);
+  font-size: 12px;
+  text-align: center;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+}
+.context .footer {
+  font-size: 11px;
+  line-height: 2.5;
+}
+.role {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.formContent {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+}
+@media (max-width: 1199px) {
+  .columns {
+    display: block;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+  .context {
+    display: none;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .content:not(.formContent) {
+    gap: 26px;
+  }
+}
+@media (max-width: 767px) {
+  .content {
+    gap: 20px;
+  }
+  .formContent {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+}

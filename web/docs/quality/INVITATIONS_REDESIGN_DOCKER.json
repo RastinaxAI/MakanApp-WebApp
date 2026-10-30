@@ -1,0 +1,10 @@
+{
+  "Health": "healthy",
+  "Image": "sha256:1a271bec3878286ef43837bf0acd05a119374253908a730b0ab66a9a5719ce71",
+  "ImageMatches": true,
+  "EntryStatus": 200,
+  "SessionsVolume": [
+    "makan-client_sessions:/app/.makan-sessions",
+    ""
+  ]
+}

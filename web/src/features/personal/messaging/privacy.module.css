@@ -1,0 +1,129 @@
+.page {
+  max-width: 960px;
+  margin-inline: auto;
+}
+.form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.intro {
+  padding: 24px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.intro > svg {
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.intro h2 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: 750;
+}
+.intro p,
+.field p,
+.footer p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.9;
+  margin: 0;
+}
+.group {
+  padding: 8px 24px 0;
+  border: 0;
+  margin: 0;
+  min-width: 0;
+}
+.group legend {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  padding: 22px 0 6px;
+}
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(160px, 210px);
+  align-items: center;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+.field label {
+  font-size: 14px;
+  font-weight: 650;
+  display: block;
+  margin-bottom: 5px;
+}
+.field select {
+  width: 100%;
+  min-height: 48px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+}
+.feedback {
+  padding: 16px 24px 0;
+}
+.success {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px;
+  background: var(--success-soft);
+  color: var(--success);
+  border-radius: 12px;
+  font-size: 13px;
+}
+.footer {
+  position: static;
+  padding: 22px 24px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+.buttons > :global(.button) {
+  min-height: 48px;
+  min-width: 160px;
+}
+@media (max-width: 600px) {
+  .intro,
+  .footer {
+    padding: 20px;
+  }
+  .group {
+    padding-inline: 20px;
+  }
+  .field {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .field select {
+    max-width: none;
+  }
+  .buttons > :global(.button) {
+    flex: 1;
+    min-width: 120px;
+  }
+  .feedback {
+    padding-inline: 20px;
+  }
+}

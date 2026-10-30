@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-29T08:12:50.937Z",
+  "mode": "REAL SEEDED BACKEND",
+  "checks": [
+    {
+      "check": "Student POST text",
+      "status": 200
+    },
+    {
+      "check": "Message notice visible on recipient Contacts",
+      "visible": false
+    },
+    {
+      "check": "Teacher REST history contains text",
+      "status": 200,
+      "passed": true
+    },
+    {
+      "check": "Recipient inbox shows text after opening Messages",
+      "passed": true
+    },
+    {
+      "check": "Recipient open chat receives without refresh",
+      "status": 200,
+      "passed": true,
+      "elapsedMs": 2270
+    }
+  ],
+  "eventTargets": [
+    "ConversationChanged",
+    "ConversationChanged",
+    "ConversationChanged"
+  ]
+}

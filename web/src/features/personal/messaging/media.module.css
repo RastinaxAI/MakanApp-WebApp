@@ -1,0 +1,381 @@
+.attachButton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  min-width: 44px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+}
+.attachButton:hover {
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+.attachButton b {
+  position: absolute;
+  top: 0;
+  inset-inline-end: 0;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--surface);
+  font-size: 9px;
+  padding: 1px 5px;
+}
+.attachMenu {
+  min-width: 240px;
+  padding: 8px !important;
+}
+.attachMenu > [role='menuitem'] {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  outline: 0;
+}
+.attachMenu > [role='menuitem'] > svg:first-child {
+  color: var(--primary);
+}
+.attachMenu > [role='menuitem'][data-highlighted] {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.sendSheet {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+.draftList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 38dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px;
+}
+.draftCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 16px;
+  min-width: 0;
+}
+.draftThumb {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--primary-soft);
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+}
+.draftThumb img,
+.draftThumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.draftInfo {
+  flex: 1;
+  min-width: 0;
+}
+.draftInfo > strong {
+  display: block;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.draftInfo > small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-block: 3px;
+}
+.remove {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+}
+.remove:hover {
+  background: var(--surface);
+  color: var(--danger);
+}
+.ready,
+.selected {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: var(--teal);
+  font-size: 10px;
+}
+.selected {
+  color: var(--muted);
+}
+.itemError {
+  display: block;
+  color: var(--danger);
+  font-size: 10px;
+  line-height: 1.9;
+}
+.caption {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.caption textarea {
+  resize: vertical;
+  min-height: 70px;
+  max-height: 160px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+.transferError {
+  font-size: 11px;
+  line-height: 1.9;
+  color: var(--danger);
+  overflow-wrap: anywhere;
+}
+.sheetActions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+}
+.sheetActions > button {
+  min-height: 46px;
+}
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.meter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  padding-block: 8px;
+  min-width: 0;
+}
+.meter > span {
+  font-size: 10px;
+  color: var(--muted);
+}
+.meter progress {
+  height: 5px;
+  accent-color: var(--primary);
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.meter small {
+  font-size: 9px;
+  color: var(--muted);
+}
+.pendingFiles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-block: 8px;
+  min-width: 0;
+}
+.pendingFiles > span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: var(--primary);
+  overflow-wrap: anywhere;
+}
+.pendingFiles svg {
+  flex-shrink: 0;
+}
+.attachment {
+  margin-block: 10px;
+  width: 320px;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.mediaAttachment {
+  width: 400px;
+}
+.attachment > .meter,
+.attachment > .transferError,
+.attachment > .itemError {
+  padding: 0 14px 12px;
+}
+.fileIntro,
+.fileReady {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  min-width: 0;
+}
+.fileIntro > div {
+  flex: 1;
+  min-width: 0;
+}
+.fileIntro strong,
+.fileReady strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.fileIntro small,
+.fileReady small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 4px;
+}
+.fileIcon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.fileIntro > button,
+.fileReady > a {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.fileReady > span {
+  flex: 1;
+  min-width: 0;
+}
+.fileReady > svg {
+  flex-shrink: 0;
+  color: var(--primary);
+}
+.attachment > video,
+.imageLink,
+.imageLink img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  display: block;
+  background: var(--bg);
+}
+.attachment > audio {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 0;
+}
+.imageLink img {
+  min-height: 60px;
+}
+.imageLink {
+  cursor: zoom-in;
+}
+.fileReady {
+  padding: 10px 12px;
+}
+.fileReady a {
+  background: transparent;
+}
+.fileReady a:hover {
+  background: var(--primary-soft);
+}
+@media (max-width: 600px) {
+  .draftThumb {
+    width: 60px;
+    height: 60px;
+  }
+  .draftCard {
+    padding: 10px;
+    gap: 10px;
+  }
+  .draftInfo > strong {
+    font-size: 12px;
+  }
+  .caption textarea {
+    font-size: 16px;
+  }
+  .sheetActions {
+    flex-wrap: wrap;
+  }
+  .sheetActions > button {
+    flex: 1;
+    min-width: 140px;
+  }
+  .fileIntro strong,
+  .fileReady strong {
+    font-size: 12px;
+  }
+  .fileIntro small,
+  .fileReady small {
+    font-size: 10px;
+  }
+  .attachment {
+    width: 290px;
+  }
+  .mediaAttachment {
+    width: 320px;
+  }
+  .fileIntro {
+    padding: 12px;
+    gap: 10px;
+  }
+  .meter > span {
+    font-size: 11px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spin {
+    animation: none;
+  }
+}
+.attachButton {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+}
+.draftCard {
+  border-radius: 12px;
+  background: var(--soft);
+}
+.attachMenu > [role='menuitem'] {
+  min-height: 52px;
+  font-size: 14px;
+}

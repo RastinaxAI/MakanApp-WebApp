@@ -1,0 +1,356 @@
+{
+  "checkedAtUtc": "2026-10-30T15:21:13.439Z",
+  "environment": "http://94.184.32.84:8090",
+  "kind": "remote test read smoke; auth/session mutations only",
+  "domainWrites": false,
+  "rows": [
+    {
+      "role": "Student",
+      "reads": [
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes/{id}/assignments",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces/activities",
+          "status": 404,
+          "code": "CONVERSATION_NOT_FOUND"
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        }
+      ],
+      "sessionOnlyMutations": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "status": 204
+        }
+      ],
+      "contextPreserved": true,
+      "workspace": {
+        "hasEffectiveEducationalRole": true,
+        "personalWorkspaceVisible": false,
+        "usableRole": true
+      },
+      "personalInbox": {
+        "status": 200,
+        "onlyPersonal": true
+      },
+      "classPair": {
+        "group": "Missing",
+        "channel": "Missing",
+        "groupCapabilities": {
+          "canRead": false,
+          "canSend": false,
+          "canManage": false
+        },
+        "channelCapabilities": {
+          "canRead": false,
+          "canSend": false,
+          "canManage": false
+        }
+      },
+      "deliveries": null
+    },
+    {
+      "role": "Teacher",
+      "reads": [
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes/{id}/assignments",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces/activities",
+          "status": 404,
+          "code": "CONVERSATION_NOT_FOUND"
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        }
+      ],
+      "sessionOnlyMutations": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "status": 204
+        }
+      ],
+      "contextPreserved": true,
+      "workspace": {
+        "hasEffectiveEducationalRole": true,
+        "personalWorkspaceVisible": false,
+        "usableRole": true
+      },
+      "personalInbox": {
+        "status": 200,
+        "onlyPersonal": true
+      },
+      "classPair": {
+        "group": "Missing",
+        "channel": "Missing",
+        "groupCapabilities": {
+          "canRead": false,
+          "canSend": false,
+          "canManage": false
+        },
+        "channelCapabilities": {
+          "canRead": false,
+          "canSend": false,
+          "canManage": false
+        }
+      },
+      "deliveries": null
+    },
+    {
+      "role": "Parent",
+      "reads": [
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        }
+      ],
+      "sessionOnlyMutations": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "status": 204
+        }
+      ],
+      "contextPreserved": true,
+      "workspace": {
+        "hasEffectiveEducationalRole": true,
+        "personalWorkspaceVisible": false,
+        "usableRole": true
+      },
+      "personalInbox": {
+        "status": 200,
+        "onlyPersonal": true
+      }
+    },
+    {
+      "role": "Manager",
+      "reads": [
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/changes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/official-spaces",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes/{id}/assignments",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces/activities",
+          "status": 404,
+          "code": "CONVERSATION_NOT_FOUND"
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "status": 200
+        }
+      ],
+      "sessionOnlyMutations": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "status": 204
+        }
+      ],
+      "contextPreserved": true,
+      "workspace": {
+        "hasEffectiveEducationalRole": true,
+        "personalWorkspaceVisible": false,
+        "usableRole": true
+      },
+      "personalInbox": {
+        "status": 200,
+        "onlyPersonal": true
+      },
+      "organizationPair": {
+        "group": "Missing",
+        "channel": "Missing"
+      },
+      "classPair": {
+        "group": "Missing",
+        "channel": "Missing",
+        "groupCapabilities": {
+          "canRead": false,
+          "canSend": false,
+          "canManage": false
+        },
+        "channelCapabilities": {
+          "canRead": false,
+          "canSend": false,
+          "canManage": false
+        }
+      },
+      "deliveries": null
+    }
+  ]
+}

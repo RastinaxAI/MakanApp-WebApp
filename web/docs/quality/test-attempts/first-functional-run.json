@@ -1,0 +1,679 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/tests/browser",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/test-results/browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node scripts/test-server.mjs",
+      "url": "http://127.0.0.1:3132/enter",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "client-scope.spec.ts",
+      "file": "client-scope.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "client entry, install targets and former platform surfaces",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4703,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:39:06.851Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9799699548287a55c353-0c3c89e5104c6b0392bf",
+          "file": "client-scope.spec.ts",
+          "line": 3,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "learning.spec.ts",
+      "file": "learning.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Teacher uses independent lesson create, edit and review pages; Student reads only Published",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 18429,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/lessons\\/.+\\/review$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3132/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 15000ms\u001b[22m\n\u001b[2m    18 × unexpected value \"http://127.0.0.1:3132/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/lessons\\/.+\\/review$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3132/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 15000ms\u001b[22m\n\u001b[2m    18 × unexpected value \"http://127.0.0.1:3132/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new\"\u001b[22m\n\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\learning.spec.ts:5:96",
+                    "location": {
+                      "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\learning.spec.ts",
+                      "column": 96,
+                      "line": 5
+                    },
+                    "snippet": "  3 |  await login(context,'Teacher');await page.goto(`/personal/education/classes/${ids.class}/lessons/new`);\n  4 |  await page.getByLabel('عنوان درس و جزوه',{exact:true}).fill('جزوهٔ آزمایشی مستقل');await page.getByLabel('متن درس',{exact:true}).fill('متن درس نمونه برای بررسی ذخیره و انتشار');\n> 5 |  await page.getByRole('button',{name:'ذخیرهٔ پیش‌نویس',exact:true}).click();await expect(page).toHaveURL(/\\/lessons\\/.+\\/review$/);\n    |                                                                                                ^\n  6 |  const lessonId=page.url().split('/').at(-2)!;\n  7 |  await expect(page.getByText('متن درس نمونه برای بررسی ذخیره و انتشار',{exact:true})).toBeVisible();\n  8 |  const student=await browser.newContext({baseURL:'http://127.0.0.1:3132'});const state=await login(student);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\learning.spec.ts",
+                        "column": 96,
+                        "line": 5
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/\\/lessons\\/.+\\/review$/\u001b[39m\nReceived string:  \u001b[31m\"http://127.0.0.1:3132/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 15000ms\u001b[22m\n\u001b[2m    18 × unexpected value \"http://127.0.0.1:3132/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new\"\u001b[22m\n\n\n  3 |  await login(context,'Teacher');await page.goto(`/personal/education/classes/${ids.class}/lessons/new`);\n  4 |  await page.getByLabel('عنوان درس و جزوه',{exact:true}).fill('جزوهٔ آزمایشی مستقل');await page.getByLabel('متن درس',{exact:true}).fill('متن درس نمونه برای بررسی ذخیره و انتشار');\n> 5 |  await page.getByRole('button',{name:'ذخیرهٔ پیش‌نویس',exact:true}).click();await expect(page).toHaveURL(/\\/lessons\\/.+\\/review$/);\n    |                                                                                                ^\n  6 |  const lessonId=page.url().split('/').at(-2)!;\n  7 |  await expect(page.getByText('متن درس نمونه برای بررسی ذخیره و انتشار',{exact:true})).toBeVisible();\n  8 |  const student=await browser.newContext({baseURL:'http://127.0.0.1:3132'});const state=await login(student);\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\learning.spec.ts:5:96"
+                    },
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:39:13.911Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\learning-Teacher-uses-inde-7f5ee-tudent-reads-only-Published\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\learning-Teacher-uses-inde-7f5ee-tudent-reads-only-Published\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\learning.spec.ts",
+                    "column": 96,
+                    "line": 5
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0ec79b0c4f511f16424-dfc104a1d5f39493b8c5",
+          "file": "learning.spec.ts",
+          "line": 2,
+          "column": 5
+        },
+        {
+          "title": "exam saves an answer and shows a receipt only after accepted finalization",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5150,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:41:00.436Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0ec79b0c4f511f16424-3fdfc219e75d01ec3609",
+          "file": "learning.spec.ts",
+          "line": 17,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "messaging.spec.ts",
+      "file": "messaging.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two isolated accounts exchange messages and update recipient inbox without reload",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10665,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('پاسخ آزمایشی استاد', { exact: true })\nExpected: visible\nError: strict mode violation: getByText('پاسخ آزمایشی استاد', { exact: true }) resolved to 2 elements:\n    1) <span class=\"PslEpa_preview\">پاسخ آزمایشی استاد</span> aka getByRole('link', { name: 'استاد آزمایشی استاد آزمایشی ۱۴:۱۱ پاسخ آزمایشی استاد ۱' })\n    2) <p dir=\"auto\">پاسخ آزمایشی استاد</p> aka getByLabel('پیام‌های گفتگو').getByText('پاسخ آزمایشی استاد')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByText('پاسخ آزمایشی استاد', { exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('پاسخ آزمایشی استاد', { exact: true })\nExpected: visible\nError: strict mode violation: getByText('پاسخ آزمایشی استاد', { exact: true }) resolved to 2 elements:\n    1) <span class=\"PslEpa_preview\">پاسخ آزمایشی استاد</span> aka getByRole('link', { name: 'استاد آزمایشی استاد آزمایشی ۱۴:۱۱ پاسخ آزمایشی استاد ۱' })\n    2) <p dir=\"auto\">پاسخ آزمایشی استاد</p> aka getByLabel('پیام‌های گفتگو').getByText('پاسخ آزمایشی استاد')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByText('پاسخ آزمایشی استاد', { exact: true })\u001b[22m\n\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\messaging.spec.ts:7:234",
+                    "location": {
+                      "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\messaging.spec.ts",
+                      "column": 234,
+                      "line": 7
+                    },
+                    "snippet": "   5 |  await sender.getByRole('textbox',{name:'متن پیام',exact:true}).fill('سلام آزمایشی از دانشجو');await sender.getByRole('button',{name:'ارسال پیام',exact:true}).click();\n   6 |  await expect(receiver.getByText('سلام آزمایشی از دانشجو',{exact:true})).toBeVisible();await receiver.getByRole('link').filter({hasText:'سلام آزمایشی از دانشجو'}).click();\n>  7 |  await receiver.getByRole('textbox',{name:'متن پیام',exact:true}).fill('پاسخ آزمایشی استاد');await receiver.getByRole('button',{name:'ارسال پیام',exact:true}).click();await expect(sender.getByText('پاسخ آزمایشی استاد',{exact:true})).toBeVisible();\n     |                                                                                                                                                                                                                                          ^\n   8 |  }finally{await a.close();await b.close();}\n   9 | });\n  10 | for(const role of ['Parent','Manager'])test(`${role} cannot read a Student private conversation through the BFF`,async({context,page})=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\messaging.spec.ts",
+                        "column": 234,
+                        "line": 7
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('پاسخ آزمایشی استاد', { exact: true })\nExpected: visible\nError: strict mode violation: getByText('پاسخ آزمایشی استاد', { exact: true }) resolved to 2 elements:\n    1) <span class=\"PslEpa_preview\">پاسخ آزمایشی استاد</span> aka getByRole('link', { name: 'استاد آزمایشی استاد آزمایشی ۱۴:۱۱ پاسخ آزمایشی استاد ۱' })\n    2) <p dir=\"auto\">پاسخ آزمایشی استاد</p> aka getByLabel('پیام‌های گفتگو').getByText('پاسخ آزمایشی استاد')\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByText('پاسخ آزمایشی استاد', { exact: true })\u001b[22m\n\n\n   5 |  await sender.getByRole('textbox',{name:'متن پیام',exact:true}).fill('سلام آزمایشی از دانشجو');await sender.getByRole('button',{name:'ارسال پیام',exact:true}).click();\n   6 |  await expect(receiver.getByText('سلام آزمایشی از دانشجو',{exact:true})).toBeVisible();await receiver.getByRole('link').filter({hasText:'سلام آزمایشی از دانشجو'}).click();\n>  7 |  await receiver.getByRole('textbox',{name:'متن پیام',exact:true}).fill('پاسخ آزمایشی استاد');await receiver.getByRole('button',{name:'ارسال پیام',exact:true}).click();await expect(sender.getByText('پاسخ آزمایشی استاد',{exact:true})).toBeVisible();\n     |                                                                                                                                                                                                                                          ^\n   8 |  }finally{await a.close();await b.close();}\n   9 | });\n  10 | for(const role of ['Parent','Manager'])test(`${role} cannot read a Student private conversation through the BFF`,async({context,page})=>{\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\messaging.spec.ts:7:234"
+                    },
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:41:08.763Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\messaging-two-isolated-acc-8d497-ipient-inbox-without-reload\\test-failed-1.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\messaging-two-isolated-acc-8d497-ipient-inbox-without-reload\\test-failed-2.png"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\messaging.spec.ts",
+                    "column": 234,
+                    "line": 7
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "107d361b6fc8beba4b6c-4390bbab2d94732b8cd4",
+          "file": "messaging.spec.ts",
+          "line": 2,
+          "column": 5
+        },
+        {
+          "title": "Parent cannot read a Student private conversation through the BFF",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5629,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:25.841Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "107d361b6fc8beba4b6c-87a0c6c18e4a45a2513b",
+          "file": "messaging.spec.ts",
+          "line": 10,
+          "column": 44
+        },
+        {
+          "title": "Manager cannot read a Student private conversation through the BFF",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1923,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:37.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "107d361b6fc8beba4b6c-85110735f0b8753ab11b",
+          "file": "messaging.spec.ts",
+          "line": 10,
+          "column": 44
+        }
+      ]
+    },
+    {
+      "title": "profile.spec.ts",
+      "file": "profile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "profile form retains user input after a failed save and persists theme through settings",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5587,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:38.985Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e8b79b4ee550a37632f1-a57e7544da0fb6fc42a3",
+          "file": "profile.spec.ts",
+          "line": 2,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "responsive.spec.ts",
+      "file": "responsive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3703,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:44.623Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-75ae675e7d216c3d87ce",
+          "file": "responsive.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "focused chat and independent form reserve their own footer without the tablet dock",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1326,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:48.354Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-7b5fc4ee90e0da63e490",
+          "file": "responsive.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "workspace dialog restores focus and changing context clears prior role data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1882,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:49.701Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-6228f46b748d4560ab0d",
+          "file": "responsive.spec.ts",
+          "line": 15,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "submission.spec.ts",
+      "file": "submission.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S09 → S17 → S10 persists drafts, retains text on save failure and submits once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5177,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:51.754Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "48ae8393f0a7471bc116-9270473960b3ebd0f1c4",
+          "file": "submission.spec.ts",
+          "line": 2,
+          "column": 5
+        },
+        {
+          "title": "a receipt deep link cannot announce success before actual submission",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 17697,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"هنوز توسط سرویس تأیید نشده\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    18 × locator resolved to <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"هنوز توسط سرویس تأیید نشده\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    18 × locator resolved to <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\submission.spec.ts:31:40",
+                    "location": {
+                      "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\submission.spec.ts",
+                      "column": 40,
+                      "line": 31
+                    },
+                    "snippet": "  29 |  await login(context);await page.goto(`/personal/education/assignments/${ids.assignment}/answer`);await page.getByRole('button',{name:'شروع پاسخ جدید',exact:true}).click();\n  30 |  await page.goto(`/personal/education/assignments/${ids.assignment}/receipt?attempt=${ids.attempt}`);\n> 31 |  await expect(page.getByRole('alert')).toContainText('هنوز توسط سرویس تأیید نشده');await expect(page.getByRole('heading',{name:'تکلیف تحویل داده شد'})).toHaveCount(0);\n     |                                        ^\n  32 | });\n  33 | test('unsaved draft survives reload and cancelled link navigation',async({page,context})=>{\n  34 |  await login(context);await page.goto(`/personal/education/assignments/${ids.assignment}/answer`);await page.getByRole('button',{name:'شروع پاسخ جدید',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\submission.spec.ts",
+                        "column": 40,
+                        "line": 31
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alert')\nExpected substring: \u001b[32m\"هنوز توسط سرویس تأیید نشده\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m\nTimeout: 15000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alert')\u001b[22m\n\u001b[2m    18 × locator resolved to <div role=\"alert\" aria-live=\"assertive\" id=\"__next-route-announcer__\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n  29 |  await login(context);await page.goto(`/personal/education/assignments/${ids.assignment}/answer`);await page.getByRole('button',{name:'شروع پاسخ جدید',exact:true}).click();\n  30 |  await page.goto(`/personal/education/assignments/${ids.assignment}/receipt?attempt=${ids.attempt}`);\n> 31 |  await expect(page.getByRole('alert')).toContainText('هنوز توسط سرویس تأیید نشده');await expect(page.getByRole('heading',{name:'تکلیف تحویل داده شد'})).toHaveCount(0);\n     |                                        ^\n  32 | });\n  33 | test('unsaved draft survives reload and cancelled link navigation',async({page,context})=>{\n  34 |  await login(context);await page.goto(`/personal/education/assignments/${ids.assignment}/answer`);await page.getByRole('button',{name:'شروع پاسخ جدید',exact:true}).click();\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\submission.spec.ts:31:40"
+                    },
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:42:56.971Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\submission-a-receipt-deep--ce025-ss-before-actual-submission\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\submission-a-receipt-deep--ce025-ss-before-actual-submission\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\submission.spec.ts",
+                    "column": 40,
+                    "line": 31
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "48ae8393f0a7471bc116-a4c69d88aaa177c72841",
+          "file": "submission.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "unsaved draft survives reload and cancelled link navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2935,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T10:44:16.858Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "48ae8393f0a7471bc116-ba5d5c44a596c7225ca2",
+          "file": "submission.spec.ts",
+          "line": 33,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-29T10:39:03.457Z",
+    "duration": 317803.63,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

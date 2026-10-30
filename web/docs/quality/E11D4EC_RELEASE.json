@@ -1,0 +1,72 @@
+{
+  "recordedAtUtc": "2026-10-30T10:06:15.050795+00:00",
+  "release": "e11d4ec",
+  "scope": "Manager school UX and new client integration contract",
+  "contract": {
+    "livePaths": 322,
+    "clientOperations": 200,
+    "schemas": 377,
+    "platformAdminOperations": 0,
+    "source": "http://94.184.32.84:8090/openapi/v1.json"
+  },
+  "checks": {
+    "format": true,
+    "lint": true,
+    "sourceModuleBoundaries": 170,
+    "cycles": 0,
+    "typecheck": true,
+    "generated": true,
+    "build": true,
+    "unit": {
+      "passed": 210,
+      "failed": 0,
+      "skipped": 0,
+      "files": 40,
+      "source": "E11D4EC_FINAL_QUALITY.log"
+    }
+  },
+  "fullBrowser": {
+    "startTime": "2026-10-30T09:57:24.867Z",
+    "duration": 331439.056,
+    "expected": 76,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "presentationFollowup": {
+    "stats": {
+      "startTime": "2026-10-30T10:03:55.835Z",
+      "duration": 37144.225999999995,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Only final member-selector CSS rows changed after the full run; rebuilt and reran 4 Manager scenarios. These are a subset of the 76, not additional unique scenarios."
+  },
+  "visual": {
+    "widths": [
+      390,
+      834,
+      1440
+    ],
+    "images": 12,
+    "path": "output/review/e11d4ec-manager",
+    "isolatedServers": "app3133/fixture3458; no external backend calls",
+    "horizontalOverflow": false
+  },
+  "preview": {
+    "url": "http://127.0.0.1:3130/enter",
+    "httpStatus": 200,
+    "sessionsPreserved": true,
+    "backend": "http://94.184.32.84:8090",
+    "publicDeployment": false
+  },
+  "limits": [
+    "Backend source not available",
+    "No live authentication or domain mutations performed this turn",
+    "AI runtime and real gateway remain disabled per release guide",
+    "Real server end-to-end, device push, multi-replica and WebSocket acceptance not rerun",
+    "Full browser suite was not rerun after the final CSS-only selector refinement; targeted Manager flows and isolated visual QA passed on that final build"
+  ]
+}

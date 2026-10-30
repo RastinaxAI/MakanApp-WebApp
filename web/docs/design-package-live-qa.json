@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-29T09:04:01.776Z",
+  "mode": "REAL SEEDED BACKEND :8090; no route interception, no sample data",
+  "checks": [
+    "Theme changes through settings and persists across navigation",
+    "Student: real authentication, school workspace and responsive pages rendered",
+    "Teacher still cannot create a class",
+    "Teacher: real authentication, school workspace and responsive pages rendered",
+    "Manager create-class form fills mobile viewport and closes without submitting",
+    "Manager: real authentication, school workspace and responsive pages rendered",
+    "Parent: real authentication, school workspace and responsive pages rendered"
+  ],
+  "errors": [],
+  "screenshots": [
+    "docs/screenshots/design-package/student-education-mobile.png",
+    "docs/screenshots/design-package/student-profile-mobile.png",
+    "docs/screenshots/design-package/student-settings-mobile.png",
+    "docs/screenshots/design-package/student-contacts-mobile.png",
+    "docs/screenshots/design-package/student-messages-mobile.png",
+    "docs/screenshots/design-package/student-chat-mobile.png",
+    "docs/screenshots/design-package/student-education-tablet.png",
+    "docs/screenshots/design-package/student-profile-tablet.png",
+    "docs/screenshots/design-package/student-settings-tablet.png",
+    "docs/screenshots/design-package/student-contacts-tablet.png",
+    "docs/screenshots/design-package/student-messages-tablet.png",
+    "docs/screenshots/design-package/student-chat-tablet.png",
+    "docs/screenshots/design-package/student-education-desktop.png",
+    "docs/screenshots/design-package/student-profile-desktop.png",
+    "docs/screenshots/design-package/student-settings-desktop.png",
+    "docs/screenshots/design-package/student-contacts-desktop.png",
+    "docs/screenshots/design-package/student-messages-desktop.png",
+    "docs/screenshots/design-package/student-chat-desktop.png",
+    "docs/screenshots/design-package/student-profile-dark-desktop.png",
+    "docs/screenshots/design-package/teacher-education-mobile.png",
+    "docs/screenshots/design-package/teacher-education-desktop.png",
+    "docs/screenshots/design-package/manager-education-mobile.png",
+    "docs/screenshots/design-package/manager-education-desktop.png",
+    "docs/screenshots/design-package/manager-class-form-mobile.png",
+    "docs/screenshots/design-package/parent-education-mobile.png",
+    "docs/screenshots/design-package/parent-education-desktop.png"
+  ],
+  "outcome": "PASS"
+}

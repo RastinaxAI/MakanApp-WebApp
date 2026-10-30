@@ -1,0 +1,41 @@
+{
+  "mode": "REAL SEEDED BACKEND :8090 — no interception or mock",
+  "releaseGuide": "701cba0",
+  "checkedAt": "2026-10-29T07:35:09.302Z",
+  "checks": [
+    "Manager directory, role filter and actual server search",
+    "Course and academic period selectors read independent catalogs",
+    "Assigned Teacher sees authoritative learner and teacher rosters; no Create Class",
+    "Teacher creates draft with actual file, updates with version and publishes; Student denied draft",
+    "Student reads Published lesson and exact private attachment bytes; Parent denied handout",
+    "Manager sends official username invitation; Parent explicitly consents; matching child becomes active"
+  ],
+  "errors": [],
+  "ids": {
+    "classId": "a673db51-f459-4777-833c-fd35ad40ce68",
+    "lessonId": "73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+    "guardianTestPersonId": "895c69ba-f485-4528-8a16-f81d2321c215",
+    "invitationId": "5cd07599-3ec4-4f9c-87d9-c7ac68929c16"
+  },
+  "outcome": "PASS",
+  "nonSuccessResponses": [
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/lessons/73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+      "status": 404,
+      "code": "LESSON_NOT_FOUND",
+      "traceId": "00-dde6e40baf49b2012a2e4cf11de11d1c-fa82d420ff3869aa-00",
+      "expected": true,
+      "checkedRule": "Draft is hidden from Student"
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/academic/lessons/73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+      "status": 404,
+      "code": "LESSON_NOT_FOUND",
+      "traceId": "00-5f899282ab6bf49feadece0265dab4dd-4b7cc36887ec2d7d-00",
+      "expected": true,
+      "checkedRule": "Parent cannot access Lesson/Handout"
+    }
+  ]
+}

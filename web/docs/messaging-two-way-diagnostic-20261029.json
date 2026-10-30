@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-29T06:25:58.182Z",
+  "mode": "REAL SEEDED BACKEND",
+  "checks": [
+    {
+      "actor": "Student",
+      "path": "/api/v1/people/resolve",
+      "status": 200
+    },
+    {
+      "actor": "Student",
+      "path": "/api/v1/conversations/direct",
+      "status": 201
+    },
+    {
+      "actor": "Student",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "status": 200
+    },
+    {
+      "actor": "Teacher",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages?limit=30",
+      "status": 200
+    },
+    {
+      "actor": "Teacher",
+      "check": "separate recipient history contains sent clientMessageId",
+      "passed": true
+    },
+    {
+      "actor": "Teacher",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "status": 200
+    },
+    {
+      "actor": "Student",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages?limit=30",
+      "status": 200
+    },
+    {
+      "actor": "Student",
+      "check": "separate recipient history contains sent clientMessageId",
+      "passed": true
+    }
+  ],
+  "discovery": {
+    "found": true,
+    "shape": [
+      "isDiscoverable",
+      "profile"
+    ]
+  },
+  "conversationId": "68f10dcc-d3f6-4c67-95b2-adb87576ab9e"
+}

@@ -1,0 +1,18 @@
+# Only application build inputs enter the build context. Never copy local secrets or sessions.
+**
+!package.json
+!package-lock.json
+!next.config.ts
+!next-env.d.ts
+!tsconfig.json
+!postcss.config.mjs
+!src/
+!src/**
+!contracts/
+!contracts/client-surface.json
+!design/
+!design/tokens.json
+!public/
+!public/**
+!scripts/
+!scripts/docker-start.mjs

@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-29",
+  "scope": "Role context remains authoritative; tabs do not select another workspace. Assistant and inbox header cleanup; readable output; persistent PWA offer dismissal.",
+  "rootCause": "Messenger automatically selected Personal workspace on entry from an organization. Returning to Education therefore requested a role again.",
+  "changes": [
+    "Removed automatic workspace mutation on inbox navigation",
+    "Explicit Makan brand/title selection and existing profile choices",
+    "Contact and personal group/channel context actions lead to profile for explicit selection",
+    "Removed duplicate assistant header, tagline and tour button",
+    "Removed inbox context heading",
+    "16px assistant answers and up to 960px output dialog",
+    "Assistant height reserves the bottom dock including its send button",
+    "Removed update popup/reload approval UI",
+    "Install offer with persistent localStorage dismissal, native prompt and manual help"
+  ],
+  "checks": {
+    "fullQuality": {
+      "command": "npm run quality",
+      "passed": true,
+      "unit": {
+        "files": 31,
+        "passed": 164,
+        "failed": 0,
+        "skipped": 0
+      },
+      "browser": {
+        "passed": 27,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0
+      },
+      "evidence": "Observed successful complete command output; the JSON reporter was subsequently replaced by the focused run."
+    },
+    "focused": {
+      "command": "npx playwright test tests/browser/navigation-experience.spec.ts tests/browser/responsive.spec.ts",
+      "stats": {
+        "startTime": "2026-10-29T14:10:33.975Z",
+        "duration": 37092.606,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "scope": "After the final assistant height fix and stronger send-button assertion; before two CTA wording-only edits."
+    }
+  },
+  "browserScenarios": [
+    "Student/Teacher/Parent/Manager role stable across all four tabs, reload and another tab; no selection POST",
+    "Explicit Makan chooser opens on request",
+    "Assistant output size and scroll layout at 390/834/1440",
+    "Output dialog width; hidden repeated headers; readable sample label",
+    "Install offer dismissal survives reload and another tab",
+    "Native install prompt invoked only after click; no page reload"
+  ],
+  "screenshots": [
+    "test-results/navigation-experience/assistant-390.png",
+    "test-results/navigation-experience/assistant-834.png",
+    "test-results/navigation-experience/assistant-1440.png",
+    "test-results/navigation-experience/pwa-offer-390.png"
+  ],
+  "remoteWriteTests": 0,
+  "limitations": [
+    "Local fixture integration, not fresh live backend acceptance",
+    "Native installation prompt was simulated; physical OS installation not verified",
+    "Assistant remains explicitly a sample/unavailable service; no AI integration claim",
+    "Dismissal is stored per browser/origin; no cross-device account preference API assumed"
+  ],
+  "finalBuild": "passed; rebuilt after CTA wording edits",
+  "localProductionSmoke": [
+    {
+      "status": 200,
+      "path": "/enter"
+    },
+    {
+      "status": 200,
+      "path": "/welcome"
+    },
+    {
+      "status": 401,
+      "path": "/api/client/session"
+    }
+  ]
+}

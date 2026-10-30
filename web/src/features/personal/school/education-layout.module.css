@@ -1,0 +1,167 @@
+.navigation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 28px;
+  padding: 6px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.managerNavigation {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+@media (max-width: 900px) {
+  .managerNavigation {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.navigation a,
+.classTabs a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 52px;
+  padding: 12px 8px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.navigation a[aria-current='page'],
+.classTabs a[aria-current='page'] {
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 700;
+}
+.classPage {
+  display: grid;
+  gap: 24px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-size: 13px;
+  min-height: 44px;
+  justify-self: start;
+}
+.classHeading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+}
+.classHeading h1 {
+  font-size: 26px;
+  line-height: 1.6;
+  margin: 4px 0;
+}
+.classHeading p,
+.classHeading span:not(.courseIcon) {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.courseIcon {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 30px;
+  flex-shrink: 0;
+}
+.classTabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+}
+.classContent {
+  min-width: 0;
+}
+.classContent h1 {
+  font-size: 21px;
+}
+.classTabsMembers {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.memberContent {
+  display: grid;
+  gap: 18px;
+}
+.classList,
+.parentItems {
+  display: grid;
+  gap: 16px;
+}
+.classList > a,
+.parentItems article {
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 18px;
+}
+.classList > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.classList h2,
+.parentItems h2 {
+  font-size: 16px;
+}
+.parentItems p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 10px;
+}
+@media (max-width: 700px) {
+  .navigation a {
+    flex-direction: column;
+    gap: 7px;
+    font-size: 11px;
+    line-height: 1.7;
+    padding: 10px 4px;
+  }
+  .navigation {
+    gap: 3px;
+    border-radius: 16px;
+    margin-bottom: 22px;
+  }
+  .classHeading {
+    padding: 20px;
+    gap: 12px;
+  }
+  .classHeading h1 {
+    font-size: 22px;
+  }
+  .courseIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+  .classTabs a {
+    flex-direction: column;
+    gap: 8px;
+    font-size: 11px;
+    padding: 10px 2px;
+    min-height: 72px;
+  }
+  .classPage {
+    gap: 20px;
+  }
+}

@@ -1,0 +1,1054 @@
+{
+  "checkedAt": "2026-10-29T09:11:50.334Z",
+  "server": "http://94.184.32.84:8090",
+  "method": "Direct HTTP requests; fresh seeded sessions; no chat, privacy, file or membership mutations",
+  "requests": [
+    {
+      "role": "Public",
+      "method": "GET",
+      "path": "/swagger/index.html",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Student",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "phoneNumber",
+          "isProfileComplete",
+          "firstName",
+          "lastName",
+          "displayName",
+          "username",
+          "dateOfBirth",
+          "profilePhoto"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "verificationStatus",
+          "effectiveAgeCategory",
+          "allowedActions",
+          "nextAction",
+          "version"
+        ],
+        "verificationStatus": "Unverified",
+        "effectiveAgeCategory": "Unknown",
+        "nextAction": "VerificationRequired",
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverRelatedUsers",
+          "CreatePrivatePersonalGroup",
+          "CreateDirectWithAuthorizedRelationship"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 2
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e",
+      "status": 404,
+      "contentType": "application/problem+json",
+      "code": "CONVERSATION_NOT_FOUND",
+      "traceId": "00-e6aaa62437bb035ad28292db2cbb0073-9f65e419ca57c958-00"
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages?limit=5",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "messages",
+          "nextBeforeSequence"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/contacts?page=1&pageSize=20&favoritesOnly=false",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "items",
+          "page",
+          "pageSize",
+          "hasMore"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/messaging/privacy",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "directMessagesAudience",
+          "phoneNumberVisibilityAudience",
+          "phoneNumberDiscoveryAudience",
+          "groupInvitesAudience",
+          "isExplicit",
+          "version",
+          "onlineAudience",
+          "lastSeenAudience"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/messaging/blocks",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 0
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/auth/sessions",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 18
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/notifications/unread-count",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "count"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/commerce/summary",
+      "status": 403,
+      "contentType": "application/problem+json",
+      "code": "COMMERCE_SUMMARY_NOT_ALLOWED",
+      "traceId": "00-7d3fc7553c53bcb2f5674e05e04fbc85-be44346406577a79-00",
+      "safeSummary": {
+        "fields": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "code",
+          "traceId",
+          "correlationId"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "POST",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/academic/classes",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 2
+      },
+      "containsSeedClass": true
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/dashboards/student",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "organizationId",
+          "audience",
+          "nextSession",
+          "nearestAssignmentDeadline",
+          "recentReleasedFeedback",
+          "upcomingExams",
+          "attendanceSummary",
+          "pendingAssignmentCount"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/learners?Page=1&PageSize=30",
+      "status": 404,
+      "contentType": "application/problem+json",
+      "code": "CLASS_NOT_FOUND",
+      "traceId": "00-21c3fa572f7ef34543f0fe9df5c8dbb8-741ac634272e1ee0-00",
+      "safeSummary": {
+        "fields": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "code",
+          "traceId",
+          "correlationId"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/teachers?Page=1&PageSize=30",
+      "status": 404,
+      "contentType": "application/problem+json",
+      "code": "CLASS_NOT_FOUND",
+      "traceId": "00-79c64e98b047801a45455ea9ec182b26-075989181c48de97-00",
+      "safeSummary": {
+        "fields": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "code",
+          "traceId",
+          "correlationId"
+        ]
+      }
+    },
+    {
+      "role": "Student",
+      "method": "GET",
+      "path": "/api/v1/academic/lessons/73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "organizationId",
+          "classId",
+          "courseId",
+          "title",
+          "body",
+          "displayOrder",
+          "status",
+          "revisionNumber",
+          "version",
+          "createdByUserId",
+          "createdAtUtc",
+          "updatedAtUtc",
+          "publishedAtUtc",
+          "attachments",
+          "replayed"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Teacher",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "phoneNumber",
+          "isProfileComplete",
+          "firstName",
+          "lastName",
+          "displayName",
+          "username",
+          "dateOfBirth",
+          "profilePhoto"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "verificationStatus",
+          "effectiveAgeCategory",
+          "allowedActions",
+          "nextAction",
+          "version"
+        ],
+        "verificationStatus": "Unverified",
+        "effectiveAgeCategory": "Unknown",
+        "nextAction": "VerificationRequired",
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverRelatedUsers",
+          "CreatePrivatePersonalGroup",
+          "CreateDirectWithAuthorizedRelationship"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 2
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e",
+      "status": 404,
+      "contentType": "application/problem+json",
+      "code": "CONVERSATION_NOT_FOUND",
+      "traceId": "00-12fc18a45a8cb59b92ac5662fcd6bf35-485a45ce9022097c-00"
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages?limit=5",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "messages",
+          "nextBeforeSequence"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "POST",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/academic/classes",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 2
+      },
+      "containsSeedClass": true
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/dashboards/teacher",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "organizationId",
+          "audience",
+          "assignedClasses",
+          "upcomingSessions",
+          "attendancePending",
+          "assignmentGradingQueue",
+          "examGradingQueue"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/learners?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/teachers?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Teacher",
+      "method": "GET",
+      "path": "/api/v1/academic/lessons/73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "organizationId",
+          "classId",
+          "courseId",
+          "title",
+          "body",
+          "displayOrder",
+          "status",
+          "revisionNumber",
+          "version",
+          "createdByUserId",
+          "createdAtUtc",
+          "updatedAtUtc",
+          "publishedAtUtc",
+          "attachments",
+          "replayed"
+        ]
+      }
+    },
+    {
+      "role": "Parent",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Parent",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Parent",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "phoneNumber",
+          "isProfileComplete",
+          "firstName",
+          "lastName",
+          "displayName",
+          "username",
+          "dateOfBirth",
+          "profilePhoto"
+        ]
+      }
+    },
+    {
+      "role": "Parent",
+      "method": "GET",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "verificationStatus",
+          "effectiveAgeCategory",
+          "allowedActions",
+          "nextAction",
+          "version"
+        ],
+        "verificationStatus": "Unverified",
+        "effectiveAgeCategory": "Unknown",
+        "nextAction": "VerificationRequired",
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverRelatedUsers",
+          "CreatePrivatePersonalGroup",
+          "CreateDirectWithAuthorizedRelationship"
+        ]
+      }
+    },
+    {
+      "role": "Parent",
+      "method": "GET",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Parent",
+      "method": "GET",
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 0
+      }
+    },
+    {
+      "role": "Parent",
+      "method": "POST",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Parent",
+      "method": "GET",
+      "path": "/api/v1/guardian/children",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 2
+      }
+    },
+    {
+      "role": "Parent",
+      "method": "GET",
+      "path": "/api/v1/academic/lessons/73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+      "status": 404,
+      "contentType": "application/problem+json",
+      "code": "LESSON_NOT_FOUND",
+      "traceId": "00-9070eeaadcaedf439fc119b5ce523378-33728268fc02e2e0-00",
+      "safeSummary": {
+        "fields": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "code",
+          "traceId",
+          "correlationId"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Manager",
+      "method": "POST",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "phoneNumber",
+          "isProfileComplete",
+          "firstName",
+          "lastName",
+          "displayName",
+          "username",
+          "dateOfBirth",
+          "profilePhoto"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "verificationStatus",
+          "effectiveAgeCategory",
+          "allowedActions",
+          "nextAction",
+          "version"
+        ],
+        "verificationStatus": "Unverified",
+        "effectiveAgeCategory": "Unknown",
+        "nextAction": "VerificationRequired",
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverRelatedUsers",
+          "CreatePrivatePersonalGroup",
+          "CreateDirectWithAuthorizedRelationship"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 0
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "POST",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/academic/classes",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "count": 3
+      },
+      "containsSeedClass": true
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/dashboards/manager",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "organizationId",
+          "audience",
+          "operationalCounts",
+          "onboarding",
+          "upcomingSessions",
+          "sessionsMissingMeetingLink",
+          "attendancePending",
+          "pendingInvitationCount",
+          "assignmentGradingQueue",
+          "examGradingQueue"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/learners?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/teachers?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/academic/lessons/73bdf5ca-cb13-4840-8804-69b8fc5d20fd",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "id",
+          "organizationId",
+          "classId",
+          "courseId",
+          "title",
+          "body",
+          "displayOrder",
+          "status",
+          "revisionNumber",
+          "version",
+          "createdByUserId",
+          "createdAtUtc",
+          "updatedAtUtc",
+          "publishedAtUtc",
+          "attachments",
+          "replayed"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/organization/members?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/academic/courses?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/academic/periods?Page=1&PageSize=30",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "dataAsOfUtc",
+          "page",
+          "pageSize",
+          "totalCount",
+          "items"
+        ]
+      }
+    },
+    {
+      "role": "Manager",
+      "method": "GET",
+      "path": "/api/v1/commerce/summary",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "code": null,
+      "traceId": null,
+      "safeSummary": {
+        "fields": [
+          "organizationId",
+          "state",
+          "subscription",
+          "entitlements",
+          "quotas",
+          "dataAsOfUtc"
+        ]
+      }
+    }
+  ],
+  "contracts": {
+    "status": 200,
+    "paths": 291,
+    "info": {
+      "title": "MakanApp.Api | v1",
+      "version": "1.0.0"
+    },
+    "profile": {
+      "required": [
+        "firstName",
+        "lastName",
+        "displayName",
+        "username"
+      ],
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string",
+          "nullable": true
+        },
+        "username": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "default": null,
+          "nullable": true
+        }
+      }
+    },
+    "aiChat": {
+      "required": [
+        "message",
+        "conversationId"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string",
+          "format": "uuid",
+          "nullable": true
+        }
+      }
+    },
+    "fileContent200": {
+      "description": "OK",
+      "content": {
+        "text/plain": {
+          "schema": {
+            "$ref": "#/components/schemas/FileStreamResult"
+          }
+        },
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/FileStreamResult"
+          }
+        },
+        "text/json": {
+          "schema": {
+            "$ref": "#/components/schemas/FileStreamResult"
+          }
+        }
+      }
+    },
+    "conversationParameters": [
+      "filter",
+      "page",
+      "pageSize",
+      "q",
+      "folderId"
+    ],
+    "existing": [
+      "/api/v1/auth/sessions",
+      "/api/v1/auth/sessions/{sessionId}",
+      "/api/v1/auth/sessions/revoke-others",
+      "/api/v1/academic/classes/{classId}/lessons",
+      "/api/v1/academic/lessons/{lessonId}",
+      "/api/v1/academic/lessons/{lessonId}/publish",
+      "/api/v1/commerce/summary",
+      "/api/v1/notifications/devices/web-push/configuration",
+      "/api/v1/notifications/devices",
+      "/api/v1/notifications/devices/web-push",
+      "/api/v1/notifications/devices/{registrationId}",
+      "/api/v1/notifications",
+      "/api/v1/notifications/unread-count",
+      "/api/v1/notifications/{notificationId}/read",
+      "/api/v1/organization/members"
+    ]
+  }
+}

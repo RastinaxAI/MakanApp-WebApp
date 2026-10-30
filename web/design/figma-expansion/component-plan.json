@@ -1,0 +1,596 @@
+{
+  "status": "planned-not-created",
+  "components": [
+    {
+      "name": "Button",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "IconButton",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "TextField",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "TextArea",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Select",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Radio",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Switch",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "FormSection",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "FormActionBar",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Card",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Badge",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "RoleBadge",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "OfficialBadge",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Avatar",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ProfileSpaceRow",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "DesktopSidebar",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "MobileBottomNav",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "TabletDock",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "PageHeader",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Tabs",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "SearchField",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "FilterPanel",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Pagination",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "DataTable",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "MemberRow",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ClassCard",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "WeekNavigator",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "SessionCard",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "AssignmentCard",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "SubmissionStepIndicator",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "AttachmentPicker",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "AttachmentRow",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "TransferProgress",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "SubmissionReceipt",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ExamTimer",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ExamQuestionMap",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "QuestionCard",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ExamReviewItem",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ConversationRow",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "MessageBubble",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ActivityMessageCard",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "MessageComposer",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "MediaPreview",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "NotebookCard",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ResourceRow",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ProcessingState",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "SourceCitation",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "AiResponse",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "UsageSummary",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Dialog",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "BottomSheet",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Popover",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "Toast",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "EmptyState",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "ErrorState",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "AccessRevokedState",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    },
+    {
+      "name": "LoadingSkeleton",
+      "required": "reuse existing compatible component before creating",
+      "states": [
+        "default",
+        "focus",
+        "disabled",
+        "busy-or-error-when-relevant"
+      ]
+    }
+  ],
+  "templates": [
+    "authoritative-receipt",
+    "detail-with-authorized-actions",
+    "independent-form",
+    "messenger-room",
+    "notebook-source-chat-studio",
+    "review-before-commit",
+    "scoped-list-or-overview",
+    "settings-grouped-rows",
+    "timed-exam-room"
+  ]
+}

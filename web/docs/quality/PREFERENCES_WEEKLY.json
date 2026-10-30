@@ -1,0 +1,50 @@
+{
+  "checkedAtUtc": "2026-10-29T18:11:04.241798+00:00",
+  "scope": "Preference layout and weekly school agenda; monthly UI replaced on explicit user request. Existing API, roles and access guards retained.",
+  "command": "npm run quality",
+  "format": "passed",
+  "lint": "passed;127 module boundaries;no cycles",
+  "typecheck": "passed",
+  "generated": "passed",
+  "build": "passed",
+  "unit": {
+    "passed": 186,
+    "files": 35,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "startTime": "2026-10-29T18:07:29.768Z",
+    "duration": 159773.79400000002,
+    "expected": 38,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "widths": [
+    320,
+    390,
+    834,
+    1440
+  ],
+  "visualReview": "Mobile, tablet and desktop screenshots checked. Shared row/icon/chevron alignment, range/button bounds and no horizontal overflow asserted; dark preference card and dialog focus restoration covered.",
+  "screenshots": "output/review/preferences-weekly",
+  "log": "docs/quality/PREFERENCES_WEEKLY_QUALITY.log",
+  "logSha256": "e2652e84a3751fd87c7e59c191fddee0ffb4b81d11371106d6571860cedd8e79",
+  "runtimeApi": "GET /api/v1/academic/schedule?fromUtc=...&toUtc=...; local Saturday 00:00 through Friday 23:59:59.999 converted to UTC. No new endpoint.",
+  "tests": [
+    "populated current/adjacent week fixture sessions",
+    "no outside-week session displayed",
+    "failed next-week read stays an error, retry loads correct sessions",
+    "Saturday/Friday and Nowruz/leap-day boundaries",
+    "same preference geometry for links and dialog buttons",
+    "dialog return focus and existing privacy destination",
+    "overnight sessions show the end calendar day; same-day sessions do not add an extra day label"
+  ],
+  "limitations": [
+    "Automated mutations use local fixtures; not proof of backend security.",
+    "Notification and device-management feature dialogs remain unavailable as before; this task only changes their layout.",
+    "Physical devices and hosted CI not exercised."
+  ],
+  "productionReadOnlyReview": "Final production preview at 3130 restarted with existing sessions preserved. Existing user session displayed aligned preferences and supplied class a673db51-f459-4777-833c-fd35ad40ce68. Real 23:07–00:07 session showed end day 7 Aban 1405. No live profile, invitation or session data mutated. Tab returned to preferences."
+}

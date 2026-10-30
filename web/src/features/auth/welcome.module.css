@@ -1,0 +1,114 @@
+.page {
+  min-height: 100dvh;
+  background: var(--bg);
+}
+.page > header {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 28px;
+  border-bottom: 1px solid var(--border);
+}
+.page > header strong {
+  font-size: 26px;
+  font-weight: 800;
+}
+.page > header a {
+  font-size: 14px;
+  color: var(--primary);
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  padding: 0 12px;
+}
+.page main {
+  max-width: 692px;
+  margin: auto;
+  padding: 30px 36px 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.badge {
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-radius: 999px;
+  padding: 4px 10px;
+  align-self: flex-start;
+}
+.page h1 {
+  font-size: 48px;
+  line-height: 1.4;
+  letter-spacing: -1px;
+}
+.page main > p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.page h2 {
+  font-size: 16px;
+}
+.role {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 84px;
+}
+.role > span {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e3e6fc;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 50%;
+  font-size: 16px;
+}
+.role > div {
+  flex: 1;
+}
+.role strong {
+  display: block;
+  font-size: 14px;
+}
+.role small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.page > footer {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  min-height: 84px;
+  padding: 16px 24px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+}
+.page > footer a {
+  max-width: 620px;
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .page > header {
+    height: 58px;
+    padding: 4px 12px;
+    border: 0;
+  }
+  .page main {
+    padding: 20px 20px 110px;
+  }
+  .page h1 {
+    font-size: 38px;
+  }
+  .page > footer {
+    padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+  }
+}

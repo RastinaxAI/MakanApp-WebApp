@@ -1,0 +1,31 @@
+[
+  {
+    "name": "entry",
+    "status": 200,
+    "expected": 200,
+    "nextAssets": true
+  },
+  {
+    "name": "anonymous session",
+    "status": 401,
+    "expected": 401
+  },
+  {
+    "name": "cross-origin rejection",
+    "status": 403,
+    "expected": 403
+  },
+  {
+    "name": "anonymous logout",
+    "status": 204,
+    "expected": 204,
+    "cookieName": "makan_client_session_8080"
+  },
+  {
+    "name": "worker",
+    "status": 200,
+    "expected": 200,
+    "currentWorker": true,
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  }
+]

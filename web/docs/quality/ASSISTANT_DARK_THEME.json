@@ -1,0 +1,229 @@
+{
+  "date": "2026-10-29",
+  "scope": "Assistant top banners removed, single-line composer, expanded response area, coherent dark palette and semantic surfaces.",
+  "quality": {
+    "command": "npm run quality",
+    "exitCode": 0,
+    "unit": {
+      "files": 32,
+      "passed": 166,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browserStats": {
+      "startTime": "2026-10-29T14:34:46.838Z",
+      "duration": 114082.379,
+      "expected": 28,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "steps": [
+      "format:check",
+      "lint",
+      "typecheck",
+      "test",
+      "generated:check",
+      "build",
+      "test:e2e"
+    ]
+  },
+  "themeContrast": {
+    "minimumRequired": 4.5,
+    "pairs": {
+      "light": [
+        {
+          "foreground": "text",
+          "background": "bg",
+          "ratio": 13.775
+        },
+        {
+          "foreground": "text",
+          "background": "surface",
+          "ratio": 14.502
+        },
+        {
+          "foreground": "text",
+          "background": "soft",
+          "ratio": 13.203
+        },
+        {
+          "foreground": "text",
+          "background": "primary-soft",
+          "ratio": 12.829
+        },
+        {
+          "foreground": "text",
+          "background": "incoming-message",
+          "ratio": 12.865
+        },
+        {
+          "foreground": "muted",
+          "background": "bg",
+          "ratio": 5.084
+        },
+        {
+          "foreground": "muted",
+          "background": "surface",
+          "ratio": 5.352
+        },
+        {
+          "foreground": "muted",
+          "background": "soft",
+          "ratio": 4.873
+        },
+        {
+          "foreground": "primary",
+          "background": "primary-soft",
+          "ratio": 4.969
+        },
+        {
+          "foreground": "on-primary",
+          "background": "primary-button",
+          "ratio": 5.617
+        },
+        {
+          "foreground": "on-primary",
+          "background": "primary-hover",
+          "ratio": 7.023
+        },
+        {
+          "foreground": "on-primary",
+          "background": "danger-button",
+          "ratio": 4.89
+        },
+        {
+          "foreground": "success",
+          "background": "success-soft",
+          "ratio": 4.714
+        },
+        {
+          "foreground": "warning",
+          "background": "warning-soft",
+          "ratio": 4.622
+        }
+      ],
+      "dark": [
+        {
+          "foreground": "text",
+          "background": "bg",
+          "ratio": 15.573
+        },
+        {
+          "foreground": "text",
+          "background": "surface",
+          "ratio": 13.791
+        },
+        {
+          "foreground": "text",
+          "background": "soft",
+          "ratio": 11.857
+        },
+        {
+          "foreground": "text",
+          "background": "primary-soft",
+          "ratio": 10.61
+        },
+        {
+          "foreground": "text",
+          "background": "incoming-message",
+          "ratio": 11.857
+        },
+        {
+          "foreground": "muted",
+          "background": "bg",
+          "ratio": 8.723
+        },
+        {
+          "foreground": "muted",
+          "background": "surface",
+          "ratio": 7.725
+        },
+        {
+          "foreground": "muted",
+          "background": "soft",
+          "ratio": 6.642
+        },
+        {
+          "foreground": "primary",
+          "background": "primary-soft",
+          "ratio": 6.257
+        },
+        {
+          "foreground": "on-primary",
+          "background": "primary-button",
+          "ratio": 5.205
+        },
+        {
+          "foreground": "on-primary",
+          "background": "primary-hover",
+          "ratio": 4.786
+        },
+        {
+          "foreground": "on-primary",
+          "background": "danger-button",
+          "ratio": 5.644
+        },
+        {
+          "foreground": "success",
+          "background": "success-soft",
+          "ratio": 7.683
+        },
+        {
+          "foreground": "warning",
+          "background": "warning-soft",
+          "ratio": 7.999
+        }
+      ]
+    },
+    "scope": "Selected design-token text/action combinations, not full WCAG conformance."
+  },
+  "uiChecks": [
+    "No availability banner or notebook heading above workbench",
+    "Single native text input and send button share a row; form <=62px",
+    "Enter submits exactly one sample response",
+    "Disabled real-service mode and explicit sample labels retained",
+    "16px answer text, output scroll and unobstructed send button",
+    "Dark appearance survives reload and explicit workspace selection via profile",
+    "Light theme can be restored from profile settings"
+  ],
+  "screenshots": [
+    "test-results/assistant-theme/assistant-dark-390.png",
+    "test-results/assistant-theme/assistant-dark-834.png",
+    "test-results/assistant-theme/assistant-dark-1440.png",
+    "test-results/assistant-theme/chat-dark-390.png",
+    "test-results/assistant-theme/chat-dark-834.png",
+    "test-results/assistant-theme/chat-dark-1440.png",
+    "test-results/assistant-theme/education-dark-390.png",
+    "test-results/assistant-theme/education-dark-834.png",
+    "test-results/assistant-theme/education-dark-1440.png",
+    "test-results/assistant-theme/profile-dark-390.png",
+    "test-results/assistant-theme/profile-dark-834.png",
+    "test-results/assistant-theme/profile-dark-1440.png"
+  ],
+  "lightScreenshotsFolder": "test-results/navigation-experience",
+  "preview": "output/design/assistant-dark-mobile.png",
+  "source": "design/tokens.json",
+  "generatedCss": "src/design/tokens.css",
+  "initialFindings": [
+    "Light secondary text on soft and dark hover action were below 4.5; palette values corrected without reducing the assertion",
+    "Initial dark UI test attempted a personal chat from Organization; test now switches explicitly through Profile, preserving authorization behavior"
+  ],
+  "remoteWriteTests": 0,
+  "limits": [
+    "No new live AI integration",
+    "No new authenticated live server test",
+    "No physical-device or hosted CI validation",
+    "Token contrast checks are not a full accessibility audit"
+  ],
+  "localProductionSmoke": [
+    {
+      "status": 200,
+      "path": "/enter"
+    },
+    {
+      "status": 401,
+      "path": "/api/client/session"
+    }
+  ]
+}

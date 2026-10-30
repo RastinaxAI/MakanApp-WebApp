@@ -1,0 +1,65 @@
+{
+  "Guide": "MakanApp-Frontend-Backend-42c51a3-FA.pdf",
+  "SourcePages": 84,
+  "ClientOperations": 205,
+  "Schemas": 390,
+  "OpenApiPaths": 327,
+  "QualityExitCode": 0,
+  "Unit": {
+    "Passed": 228,
+    "Files": 44,
+    "Failed": 0
+  },
+  "Browser": {
+    "Passed": 93,
+    "Skipped": 0,
+    "Flaky": 0,
+    "Failed": 0
+  },
+  "Preview": {
+    "Port": 3130,
+    "EntryStatus": 200,
+    "SessionsPreserved": true,
+    "QueueFixIncluded": true
+  },
+  "Live": {
+    "TestReadOnlyDomain": true,
+    "Roles": [
+      "Student",
+      "Teacher",
+      "Parent",
+      "Manager"
+    ],
+    "SampledOfficialPairs": "Missing/Missing",
+    "DomainWrites": false,
+    "ActivityLookup": "404 CONVERSATION_NOT_FOUND",
+    "ContextPreserved": true
+  },
+  "Docker": {
+    "Image": "sha256:def659edc78f2fe3d672f2a3fa3ab0e4c204e7f35a16c28e3752fc5bf17acd29",
+    "ContainerImage": "sha256:def659edc78f2fe3d672f2a3fa3ab0e4c204e7f35a16c28e3752fc5bf17acd29",
+    "ImageMatches": true,
+    "Health": "healthy",
+    "EntryStatus": 200,
+    "AnonymousSessionStatus": 401,
+    "ServiceWorkerStatus": 200,
+    "SessionsVolume": [
+      "makan-client_sessions:/app/.makan-sessions",
+      ""
+    ],
+    "LocalOnly": true,
+    "QueueFixIncluded": true
+  },
+  "BackendRequests": [
+    "G19.1",
+    "G19.2",
+    "G19.3"
+  ],
+  "Limits": [
+    "No backend source or migrations",
+    "No real official activity send verified",
+    "No hosted CI or public deployment",
+    "No Expo/Figma update"
+  ],
+  "SnapshotQueueRegressionTests": 5
+}

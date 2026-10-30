@@ -1,0 +1,593 @@
+{
+  "release": "701cba0",
+  "checkedAt": "2026-10-29T07:18:46.140Z",
+  "checks": [
+    {
+      "role": "Student",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "shape": [
+        "challengeId",
+        "expiresAtUtc",
+        "resendAvailableAtUtc"
+      ]
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "shape": [
+        "accessToken",
+        "tokenType",
+        "expiresAtUtc",
+        "refreshToken",
+        "refreshExpiresAtUtc",
+        "user"
+      ]
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "shape": [
+        "verificationStatus",
+        "effectiveAgeCategory",
+        "allowedActions",
+        "nextAction",
+        "version"
+      ]
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "shape": "array",
+      "count": 2
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/classes",
+      "status": 200,
+      "shape": "array",
+      "count": 2
+    },
+    {
+      "role": "Student",
+      "classId": "a673db51-f459-4777-833c-fd35ad40ce68"
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/learners?Page=1&PageSize=30",
+      "status": 404,
+      "code": "CLASS_NOT_FOUND",
+      "traceId": "00-62ee1c7fce0bb93a718fb0b1408c34be-b22652af81840d7e-00"
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/teachers?Page=1&PageSize=30",
+      "status": 404,
+      "code": "CLASS_NOT_FOUND",
+      "traceId": "00-ff81fd7a80f5a06d0d384853e1bda842-e1d33b36b7ce9655-00"
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/lessons?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 0
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/organization/members?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-6f12bbe9d7fcb114da6f9b235c8c7437-135898cffe2f2203-00"
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/courses?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-180fa9fc88358ffa962da10ad981366a-9115aaebf33fda74-00"
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/academic/periods?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-105222b3afe65fd83ae097fb2846a63e-2360cb2162b8d027-00"
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/invitations",
+      "status": 200,
+      "shape": "array",
+      "count": 0
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Student",
+      "path": "/api/v1/auth/logout",
+      "status": 204,
+      "shape": []
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "shape": [
+        "challengeId",
+        "expiresAtUtc",
+        "resendAvailableAtUtc"
+      ]
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "shape": [
+        "accessToken",
+        "tokenType",
+        "expiresAtUtc",
+        "refreshToken",
+        "refreshExpiresAtUtc",
+        "user"
+      ]
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "shape": [
+        "verificationStatus",
+        "effectiveAgeCategory",
+        "allowedActions",
+        "nextAction",
+        "version"
+      ]
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "shape": "array",
+      "count": 2
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/academic/classes",
+      "status": 200,
+      "shape": "array",
+      "count": 2
+    },
+    {
+      "role": "Teacher",
+      "classId": "a673db51-f459-4777-833c-fd35ad40ce68"
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/learners?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 1
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/teachers?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 1
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/lessons?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 0
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/organization/members?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-52786c915f1e3e864ab697cd8754c3f4-a7ce63d0b0bc2ed4-00"
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/academic/courses?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-7beab11be141ec7b0e32c00724c186fd-04cd28752631b092-00"
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/academic/periods?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-5e934258f92966c86892e97fce17a2af-f8de43c5d404db09-00"
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/invitations",
+      "status": 200,
+      "shape": "array",
+      "count": 0
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/v1/auth/logout",
+      "status": 204,
+      "shape": []
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "shape": [
+        "challengeId",
+        "expiresAtUtc",
+        "resendAvailableAtUtc"
+      ]
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "shape": [
+        "accessToken",
+        "tokenType",
+        "expiresAtUtc",
+        "refreshToken",
+        "refreshExpiresAtUtc",
+        "user"
+      ]
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "shape": [
+        "verificationStatus",
+        "effectiveAgeCategory",
+        "allowedActions",
+        "nextAction",
+        "version"
+      ]
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "shape": "array",
+      "count": 2
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/academic/classes",
+      "status": 403,
+      "code": "ACADEMIC_READ_NOT_ALLOWED",
+      "traceId": "00-76e6193538d46dd1ed460fc0cf92e1db-ccb0cb186ef44295-00"
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/organization/members?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-8b8ccc68508d3a06a6024130b955b0bb-561c200c5c70af07-00"
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/academic/courses?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-4d984f9d5096732e42ffa23e6dc7e358-53d54465ed46f4f9-00"
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/academic/periods?Page=1&PageSize=30",
+      "status": 403,
+      "code": "WORKSPACE_NOT_ALLOWED",
+      "traceId": "00-fbf8a000f6ed2462dac9a8a4d1ba6e66-092a11610e3d3da8-00"
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/invitations",
+      "status": 200,
+      "shape": "array",
+      "count": 0
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Parent",
+      "path": "/api/v1/auth/logout",
+      "status": 204,
+      "shape": []
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/auth/otp/challenges",
+      "status": 202,
+      "shape": [
+        "challengeId",
+        "expiresAtUtc",
+        "resendAvailableAtUtc"
+      ]
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/auth/otp/verify",
+      "status": 200,
+      "shape": [
+        "accessToken",
+        "tokenType",
+        "expiresAtUtc",
+        "refreshToken",
+        "refreshExpiresAtUtc",
+        "user"
+      ]
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/me/messaging-status",
+      "status": 200,
+      "shape": [
+        "verificationStatus",
+        "effectiveAgeCategory",
+        "allowedActions",
+        "nextAction",
+        "version"
+      ]
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "shape": "array",
+      "count": 2
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/academic/classes",
+      "status": 200,
+      "shape": "array",
+      "count": 3
+    },
+    {
+      "role": "Manager",
+      "classId": "a673db51-f459-4777-833c-fd35ad40ce68"
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/learners?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 1
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/teachers?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 1
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/academic/classes/a673db51-f459-4777-833c-fd35ad40ce68/lessons?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 0
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/organization/members?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 4
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/academic/courses?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 3
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/academic/periods?Page=1&PageSize=30",
+      "status": 200,
+      "shape": [
+        "dataAsOfUtc",
+        "page",
+        "pageSize",
+        "totalCount",
+        "items"
+      ],
+      "count": 2
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/invitations",
+      "status": 200,
+      "shape": "array",
+      "count": 0
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/workspaces/select",
+      "status": 200,
+      "shape": [
+        "actorId",
+        "userId",
+        "sessionId",
+        "workspaceType",
+        "organizationId",
+        "membershipId",
+        "activeRole",
+        "subjectOrganizationPersonId"
+      ]
+    },
+    {
+      "role": "Manager",
+      "path": "/api/v1/auth/logout",
+      "status": 204,
+      "shape": []
+    }
+  ]
+}

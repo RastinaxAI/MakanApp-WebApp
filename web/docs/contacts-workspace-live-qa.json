@@ -1,0 +1,33 @@
+{
+  "checkedAt": "2026-10-29T08:55:42.073Z",
+  "mode": "REAL SEEDED STUDENT / TEACHER — contacts UI, no mock",
+  "checks": [
+    "Saved contact retained; explicit workspace selection returns to contacts; Direct button becomes enabled",
+    "Direct opened by clicking saved contact; Student UI sends and separate Teacher browser receives actual text"
+  ],
+  "errors": [],
+  "organizationStatus": {
+    "verificationStatus": "Unverified",
+    "effectiveAgeCategory": "Unknown",
+    "allowedActions": [
+      "ReadExistingConversations",
+      "DiscoverRelatedUsers"
+    ],
+    "nextAction": "VerificationRequired",
+    "version": "AAAAAAAAdWU="
+  },
+  "personalStatus": {
+    "verificationStatus": "Unverified",
+    "effectiveAgeCategory": "Unknown",
+    "allowedActions": [
+      "ReadExistingConversations",
+      "DiscoverRelatedUsers",
+      "CreatePrivatePersonalGroup",
+      "CreateDirectWithAuthorizedRelationship"
+    ],
+    "nextAction": "VerificationRequired",
+    "version": "AAAAAAAAdWU="
+  },
+  "conversationId": "68f10dcc-d3f6-4c67-95b2-adb87576ab9e",
+  "outcome": "PASS"
+}

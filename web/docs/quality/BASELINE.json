@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-29T10:15:23.414Z",
+  "scope": "web Next.js five-role client; root Vite and independent owner application preserved",
+  "stack": {
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "typescript": "5.9.3",
+    "packageManager": "npm",
+    "lockfile": 3
+  },
+  "baseline": {
+    "unit": {
+      "passed": 147,
+      "files": 25
+    },
+    "typecheck": "PASS",
+    "build": "PASS",
+    "guestE2e": {
+      "passed": 1
+    },
+    "lint": "No existing lint command; strict unused analysis found 8 declarations"
+  },
+  "backend": {
+    "sourceAvailable": false,
+    "liveReadOnlyOpenApiPaths": 291,
+    "contractPathsMatch": true,
+    "writeTests": "Not executed; prohibited by latest request"
+  },
+  "design": {
+    "reference": "v2.0",
+    "screens": 130,
+    "fullClientParity": false
+  },
+  "stages": [
+    "baseline",
+    "isolated-tests",
+    "domain-navigation-and-workflows",
+    "v2-responsive-design",
+    "verified-cleanup",
+    "clean-install-build-ci-report"
+  ]
+}

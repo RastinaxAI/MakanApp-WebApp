@@ -1,0 +1,25 @@
+{
+  "checkedAtUtc": "2026-10-30T13:08:40.186015+00:00",
+  "lint": "passed; 175 module boundaries; no cycles",
+  "build": "passed; TypeScript included",
+  "browser": {
+    "startTime": "2026-10-30T13:01:58.577Z",
+    "duration": 21412.549,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "preview": {
+    "port": 3130,
+    "entryStatus": 200,
+    "sessionsPreserved": true
+  },
+  "docker": {
+    "image": "sha256:9d2a0a9bb4a391f93abf1805f6bb9f71fba0e1a052ddad251c788162fa61016e",
+    "health": "healthy",
+    "httpStatus": 200
+  },
+  "scope": "Teacher class navigation; existing Manager view and role permissions preserved",
+  "liveBackendWrites": false
+}

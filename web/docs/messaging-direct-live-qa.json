@@ -1,0 +1,664 @@
+{
+  "checkedAt": "2026-10-29T07:39:26.340Z",
+  "mode": "REAL SEEDED BACKEND :8090",
+  "checks": [
+    {
+      "role": "Student",
+      "check": "login and actual inbox UI",
+      "passed": true
+    },
+    {
+      "role": "Teacher",
+      "check": "login and actual inbox UI",
+      "passed": true
+    },
+    {
+      "role": "Parent",
+      "check": "login and actual inbox UI",
+      "passed": true
+    },
+    {
+      "role": "Manager",
+      "check": "login and actual inbox UI",
+      "passed": true
+    },
+    {
+      "check": "start direct",
+      "pair": "Parent/Manager",
+      "status": 404,
+      "code": "DIRECT_RECIPIENT_NOT_AVAILABLE",
+      "traceId": "00-0fdac02c8f1346f4d6634e897aef5f31-ee8ce67eda810dc5-00"
+    },
+    {
+      "check": "start direct",
+      "pair": "Student/Teacher",
+      "status": 200
+    },
+    {
+      "check": "sent through UI and visible in separate recipient browser",
+      "from": "Student",
+      "to": "Teacher",
+      "passed": true
+    },
+    {
+      "check": "sent through UI and visible in separate recipient browser",
+      "from": "Teacher",
+      "to": "Student",
+      "passed": true
+    },
+    {
+      "check": "direct attachment upload and send",
+      "status": 422,
+      "code": "MESSAGE_SAFETY_REVIEW_REQUIRED",
+      "traceId": "00-73cb772f1364a21c99d340a1cbbf5ad8-26e716c28945159c-00"
+    }
+  ],
+  "network": [
+    {
+      "role": "Student",
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/workspaces/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub/negotiate",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/workspaces/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub/negotiate",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/backend/api/v1/workspaces/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/hub/negotiate",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/backend/api/v1/workspaces/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/hub/negotiate",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/workspaces/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub/negotiate",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/session",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/workspaces/me",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub/negotiate",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/files",
+      "method": "POST",
+      "status": 201
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read-states",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Parent",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/hub",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Manager",
+      "path": "/api/client/backend/api/v1/conversations",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "role": "Teacher",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/read",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "role": "Student",
+      "path": "/api/client/backend/api/v1/conversations/68f10dcc-d3f6-4c67-95b2-adb87576ab9e/messages",
+      "method": "POST",
+      "status": 422,
+      "code": "MESSAGE_SAFETY_REVIEW_REQUIRED",
+      "traceId": "00-73cb772f1364a21c99d340a1cbbf5ad8-26e716c28945159c-00"
+    }
+  ],
+  "errors": [],
+  "parentManagerChat": "BLOCKED_BY_BACKEND_RECIPIENT_AVAILABILITY — no policy bypass or successful delivery claimed",
+  "attachmentDelivery": "BLOCKED_BY_BACKEND_SAFETY — upload succeeds; attachment is not delivered and no bypass is attempted",
+  "outcome": "STUDENT_TEACHER_TEXT_CHAT_VERIFIED — OTHER_BACKEND_LIMITATIONS_RECORDED"
+}

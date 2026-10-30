@@ -1,0 +1,329 @@
+import { test, expect, type BrowserContext } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { jalaliInputValue } from '../../src/lib/jalali-date';
+const origin =
+  process.env.MAKAN_GUIDE_QA_FIXTURES === 'true'
+    ? 'http://127.0.0.1:3132'
+    : 'http://127.0.0.1:3130';
+const fixtureMode = process.env.MAKAN_GUIDE_QA_FIXTURES === 'true';
+const reportPath = fixtureMode
+  ? 'docs/integration-guide-client-fixture-qa.json'
+  : 'docs/integration-guide-live-qa.json';
+async function login(context: BrowserContext, phone: string) {
+  const challenge = await context.request.post('/api/client/auth/challenge', {
+    headers: { Origin: origin },
+    data: { phoneNumber: phone },
+  });
+  expect(challenge.ok()).toBeTruthy();
+  const result = await context.request.post('/api/client/auth/verify', {
+    headers: { Origin: origin },
+    data: {
+      phoneNumber: phone,
+      challengeId: (await challenge.json()).challengeId,
+      code: '123456',
+      deviceName: 'Makan release guide QA',
+    },
+  });
+  if (!result.ok()) {
+    const problem = await result.json();
+    throw new Error(
+      `Seed login failed: ${result.status()} ${problem.code ?? ''} ${problem.traceId ?? ''}`,
+    );
+  }
+  return (await context.request.get('/api/client/session')).json();
+}
+test('release guide: profile date, PNG/JPEG photo persistence and controlled guardian form', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Tehran' });
+  const page = await context.newPage();
+  const report: any = {
+    outcome: 'RUNNING',
+    mode: fixtureMode
+      ? 'CLIENT QA ONLY — isolated local fixture backend; not actual service integration or security verification.'
+      : 'REAL SEEDED BACKEND',
+    guide: '20261028-final-6f274767',
+    checkedAt: new Date().toISOString(),
+    checks: [],
+    errors: [],
+    failures: [],
+    cleanup: [],
+  };
+  page.on('pageerror', (error) => report.errors.push(error.message));
+  if (fixtureMode)
+    await context.addInitScript(() => {
+      document.addEventListener('DOMContentLoaded', () => {
+        const badge = document.createElement('div');
+        badge.textContent = 'آزمون رابط — سرویس محلی ساختگی';
+        badge.style.cssText =
+          'position:fixed;left:8px;bottom:80px;z-index:99999;background:#fff2b7;color:#422900;padding:6px 12px;border:1px solid #bc8400;border-radius:8px;font:12px sans-serif;pointer-events:none';
+        document.body.append(badge);
+      });
+    });
+  let state: Awaited<ReturnType<typeof login>>;
+  try {
+    state = await login(context, '09120000107');
+  } catch (error) {
+    report.outcome = fixtureMode ? 'FAILED' : 'BLOCKED_AT_AUTHENTICATION';
+    report.failures.push({ phase: 'login', error: String(error) });
+    await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
+    await context.close();
+    throw error;
+  }
+  const original = state.user;
+  const headers = () => ({ Origin: origin, 'X-Makan-Context': state.revision });
+  const backend = '/api/client/backend';
+  const identity = {
+    firstName: original.firstName,
+    lastName: original.lastName,
+    displayName: original.displayName,
+    username: original.username,
+  };
+  await mkdir('docs/screenshots/integration-guide', { recursive: true });
+  try {
+    await page.goto('/personal/profile/edit');
+    await expect(page.getByRole('heading', { name: 'ویرایش پروفایل', exact: true })).toBeVisible();
+    await expect(page.getByLabel('تاریخ تولد (اختیاری)', { exact: true })).toBeVisible();
+    // The seed Support profile is authorized QA data. Null does not clear DOB on this backend;
+    // a formerly empty DOB intentionally retains this documented fixture date after the run.
+    const dob = original.dateOfBirth || '2000-01-01';
+    await page.getByLabel('تاریخ تولد (اختیاری)', { exact: true }).fill(jalaliInputValue(dob));
+    if (dob !== (original.dateOfBirth || ''))
+      await expect(page.getByLabel('انتخاب عکس پروفایل', { exact: true })).toBeDisabled();
+    await page.getByRole('button', { name: 'ثبت تغییرات', exact: true }).click();
+    await expect(page).toHaveURL(/\/personal\/profile$/);
+    state = await (await context.request.get('/api/client/session')).json();
+    expect(state.user.dateOfBirth).toBe(dob);
+    report.checks.push({
+      name: 'DOB persisted through actual UI and GET me',
+      passed: true,
+      fixtureDate: dob,
+      previouslyEmpty: !original.dateOfBirth,
+    });
+    const omitted = await context.request.patch(backend + '/api/v1/me/profile', {
+      headers: headers(),
+      data: identity,
+    });
+    expect(omitted.ok()).toBeTruthy();
+    expect((await (await context.request.get('/api/client/session')).json()).user.dateOfBirth).toBe(
+      dob,
+    );
+    const nullDate = await context.request.patch(backend + '/api/v1/me/profile', {
+      headers: headers(),
+      data: { ...identity, dateOfBirth: null },
+    });
+    expect(nullDate.ok()).toBeTruthy();
+    expect((await (await context.request.get('/api/client/session')).json()).user.dateOfBirth).toBe(
+      dob,
+    );
+    const future = await context.request.patch(backend + '/api/v1/me/profile', {
+      headers: headers(),
+      data: { ...identity, dateOfBirth: '2099-01-01' },
+    });
+    const futureBody = await future.json();
+    expect(future.status()).toBe(400);
+    expect(futureBody.code).toBe('PROFILE_VALIDATION_FAILED');
+    report.checks.push({
+      name: 'DOB omission/null preserve; future rejected',
+      passed: true,
+      status: future.status(),
+      code: futureBody.code,
+    });
+    for (const mime of ['image/png', 'image/jpeg']) {
+      await page.goto('/personal/profile/edit');
+      const base64 = await page.evaluate((type) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 96;
+        const ctx = canvas.getContext('2d')!;
+        ctx.fillStyle = '#2879ec';
+        ctx.fillRect(0, 0, 96, 96);
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 30px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('QA', 48, 60);
+        return canvas.toDataURL(type).split(',')[1];
+      }, mime);
+      await page.getByLabel('انتخاب عکس پروفایل', { exact: true }).setInputFiles({
+        name: mime === 'image/png' ? 'makan-seed-qa.png' : 'makan-seed-qa.jpg',
+        mimeType: mime,
+        buffer: Buffer.from(base64, 'base64'),
+      });
+      const put = page.waitForResponse(
+        (r) => r.url().endsWith('/api/v1/me/profile-photo') && r.request().method() === 'PUT',
+      );
+      const uploads: string[] = [];
+      const trackUpload = (request: import('@playwright/test').Request) => {
+        if (request.url().endsWith('/api/client/profile-media') && request.method() === 'POST')
+          uploads.push(request.url());
+      };
+      page.on('request', trackUpload);
+      await page.getByRole('button', { name: 'ثبت عکس', exact: true }).click();
+      if (fixtureMode && mime === 'image/png') {
+        await expect(page.locator('main').getByRole('alert')).toContainText(
+          'هنوز در حال آماده‌سازی',
+        );
+        await page.getByRole('button', { name: 'بررسی و ثبت عکس', exact: true }).click();
+        expect(uploads).toHaveLength(1);
+        report.checks.push({
+          name: 'Pending upload does not claim success; retry uses metadata without a duplicate upload',
+          passed: true,
+        });
+      }
+      const response = await put;
+      page.off('request', trackUpload);
+      report.checks.push({ name: 'profile photo set ' + mime, status: response.status() });
+      expect(response.ok()).toBeTruthy();
+      await expect(page.getByLabel('انتخاب عکس پروفایل', { exact: true })).toBeVisible();
+      state = await (await context.request.get('/api/client/session')).json();
+      expect(state.user.profilePhoto.contentType).toBe(mime);
+      const download = await context.request.get(
+        '/api/client/profile-media/' + state.user.profilePhoto.fileAssetId,
+        { headers: headers() },
+      );
+      report.checks.push({
+        name: 'authenticated profile image bytes ' + mime,
+        status: download.status(),
+        bytes: (await download.body()).length,
+      });
+      expect(download.ok()).toBeTruthy();
+      await page.goto('/personal/profile');
+      await expect(page.locator('main img')).toHaveCount(1);
+      await expect
+        .poll(() =>
+          page
+            .locator('main img')
+            .first()
+            .evaluate((img: HTMLImageElement) => img.naturalWidth),
+        )
+        .toBeGreaterThan(0);
+    }
+    for (const [width, height, suffix] of [
+      [390, 844, 'mobile'],
+      [820, 1180, 'tablet'],
+      [1440, 1000, 'desktop'],
+    ] as const) {
+      await page.setViewportSize({ width, height });
+      await expect(page.getByRole('heading', { name: 'پروفایل شما', exact: true })).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      await page.screenshot({
+        path: `docs/screenshots/integration-guide/profile-${suffix}.png`,
+        fullPage: true,
+      });
+    }
+    await page.goto('/personal/profile/edit');
+    await page.getByLabel('انتخاب عکس پروفایل', { exact: true }).setInputFiles({
+      name: 'rejected.webp',
+      mimeType: 'image/webp',
+      buffer: Buffer.from('unsupported fixture'),
+    });
+    await expect(page.locator('main').getByRole('alert')).toContainText('فقط عکس JPEG یا PNG');
+    await expect(page.getByRole('button', { name: 'ثبت عکس', exact: true })).toHaveCount(0);
+    report.checks.push({ name: 'WebP rejected in UI before upload', passed: true });
+    await page.reload();
+    for (const [width, height, suffix] of [
+      [390, 844, 'mobile'],
+      [820, 1180, 'tablet'],
+    ] as const) {
+      await page.setViewportSize({ width, height });
+      await expect(page.getByLabel('انتخاب عکس پروفایل', { exact: true })).toBeVisible();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+        true,
+      );
+      await page.screenshot({
+        path: `docs/screenshots/integration-guide/edit-${suffix}.png`,
+        fullPage: true,
+      });
+    }
+    const deleted = page.waitForResponse(
+      (r) => r.url().endsWith('/api/v1/me/profile-photo') && r.request().method() === 'DELETE',
+    );
+    await page.getByRole('button', { name: 'حذف عکس پروفایل', exact: true }).click();
+    expect((await deleted).status()).toBe(204);
+    await expect(page.getByRole('button', { name: 'حذف عکس پروفایل', exact: true })).toHaveCount(0);
+    state = await (await context.request.get('/api/client/session')).json();
+    expect(state.user.profilePhoto).toBeNull();
+    report.checks.push({ name: 'DELETE profile-photo 204 and GET me null', passed: true });
+    expect(report.errors).toEqual([]);
+  } catch (error) {
+    report.outcome = 'FAILED';
+    report.failures.push({ phase: 'profile', error: String(error) });
+    throw error;
+  } finally {
+    const restore = await context.request[original.profilePhoto ? 'put' : 'delete'](
+      backend + '/api/v1/me/profile-photo',
+      {
+        headers: headers(),
+        ...(original.profilePhoto
+          ? { data: { fileAssetId: original.profilePhoto.fileAssetId } }
+          : {}),
+      },
+    );
+    report.cleanup.push({
+      profilePhotoRestored: restore.ok(),
+      dateOfBirth: fixtureMode
+        ? 'temporary local fixture; discarded when fixture server stops'
+        : original.dateOfBirth
+          ? 'original unchanged'
+          : 'QA seed retains 2000-01-01; API has no clear operation',
+    });
+    await context.close();
+    await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
+  }
+  const manager = await browser.newContext({ baseURL: origin });
+  try {
+    const m = await login(manager, '09120000104');
+    const spaces = await (
+      await manager.request.get(backend + '/api/v1/workspaces/me', {
+        headers: { 'X-Makan-Context': m.revision },
+      })
+    ).json();
+    const workspace = spaces.find((w: any) => w.role === 'Manager');
+    expect(
+      (
+        await manager.request.post(backend + '/api/v1/workspaces/select', {
+          headers: { Origin: origin, 'X-Makan-Context': m.revision },
+          data: {
+            workspaceType: 'Organization',
+            membershipId: workspace.membershipId,
+            role: 'Manager',
+          },
+        })
+      ).ok(),
+    ).toBeTruthy();
+    const p = await manager.newPage();
+    await p.goto('/personal/education/guardians');
+    await p.getByRole('button', { name: 'افزودن رابطهٔ والد و فرزند', exact: true }).click();
+    const dialog = p.getByRole('dialog');
+    await expect(dialog.getByLabel('نام کاربری والد', { exact: true })).toBeVisible();
+    await expect(dialog.getByLabel('شناسهٔ حساب والد', { exact: true })).toHaveCount(0);
+    const submit = dialog.getByRole('button', { name: 'ارسال دعوت والد', exact: true });
+    await expect(submit).toBeDisabled();
+    await dialog.getByLabel('نام کاربری والد', { exact: true }).fill('dev.Parent');
+    await dialog.getByLabel('پروندهٔ فرزند', { exact: true }).selectOption({ index: 1 });
+    await dialog.getByLabel('دلیل دعوت والد', { exact: true }).fill('بررسی فرم بدون ارسال دعوت');
+    await expect(submit).toBeDisabled();
+    const expires = new Date(Date.now() + 86400000 + 3.5 * 3600000).toISOString().slice(0, 16);
+    await dialog
+      .getByLabel('زمان انقضای دعوت', { exact: true })
+      .fill(jalaliInputValue(expires, true));
+    await expect(submit).toBeEnabled();
+    await p.screenshot({
+      path: 'docs/screenshots/integration-guide/guardian-invitation-form.png',
+      fullPage: true,
+    });
+    report.checks.push({
+      name: '701cba0 official guardian invitation form without raw account IDs; no mutation submitted',
+      passed: true,
+    });
+    report.outcome = 'PASSED';
+  } catch (error) {
+    report.outcome = 'FAILED';
+    report.failures.push({ phase: 'manager-form', error: String(error) });
+    throw error;
+  } finally {
+    await manager.close();
+    await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
+  }
+});

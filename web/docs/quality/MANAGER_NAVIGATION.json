@@ -1,0 +1,66 @@
+{
+  "checkedAtUtc": "2026-10-30T13:45:20.390571+00:00",
+  "lint": {
+    "passed": true,
+    "moduleBoundaries": 176,
+    "cycles": 0
+  },
+  "productionBuild": {
+    "passed": true,
+    "typeScriptIncluded": true
+  },
+  "browser": {
+    "passed": 10,
+    "failed": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "runs": [
+      {
+        "startTime": "2026-10-30T13:36:51.108Z",
+        "duration": 84835.137,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      {
+        "startTime": "2026-10-30T13:38:21.512Z",
+        "duration": 12348.203,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    ],
+    "fullSuiteRerun": false
+  },
+  "initialBrowser": {
+    "passed": 8,
+    "failed": 1,
+    "cause": "Fixture restored before retry click; background refresh could remove button. Recovery now follows actual trusted retry click; assertions retained."
+  },
+  "preview": {
+    "port": 3130,
+    "entryStatus": 200,
+    "sessionsPreserved": true
+  },
+  "screenshots": {
+    "directory": "output/review/manager-navigation",
+    "count": 22,
+    "widths": [
+      320,
+      390,
+      834,
+      1440
+    ]
+  },
+  "backendChanges": false,
+  "liveBackendWrites": false,
+  "docker": {
+    "image": "sha256:9479c4715f44ec9d92ed64fcf76e4f4214e795a0558cbba0227fda3ee5912beb",
+    "health": "healthy",
+    "httpStatus": 200,
+    "port": 8080,
+    "sessionsPreserved": true
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "version": "2.0",
+  "sourceZip": "Makan-Design-Package (1).zip",
+  "sha256": "1d8206576eb1c45eaa3ec8460e6b1ea9ea11bf7fe83d7d6d49f9c6e8c08d2ba8",
+  "screenCount": 130,
+  "scope": "Reference prototype only; platform screens are excluded from the five-role client; prototype interactions simulate data and do not call APIs."
+}

@@ -1,0 +1,10 @@
+{
+  "pages": 20,
+  "fontResourcesEmbedded": true,
+  "containsLoginSecrets": false,
+  "fileBytes": 1454002,
+  "testCases": 80,
+  "visualReview": "All 20 pages reviewed as rendered contact sheets; pages 1,4,12,20 also reviewed at full size. No clipping, overlap, missing glyphs or blank pages observed.",
+  "renderTool": "Poppler pdftoppm; 1400px page images",
+  "layoutGate": "PASS"
+}

@@ -1,0 +1,14 @@
+{
+  "entry": 200,
+  "anonymousSession": 401,
+  "worker": 200,
+  "badPhone": {
+    "status": 400,
+    "code": "VALIDATION_ERROR"
+  },
+  "badOtp": {
+    "status": 400,
+    "code": "VALIDATION_ERROR"
+  },
+  "scope": "public GETs and invalid-only auth submissions; no OTP challenge, message or domain mutation"
+}

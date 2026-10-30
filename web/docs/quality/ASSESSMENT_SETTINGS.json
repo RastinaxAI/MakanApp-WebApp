@@ -1,0 +1,95 @@
+{
+  "checkedAtUtc": "2026-10-29T19:05:46.590482+00:00",
+  "change": "Assignment answer sheet, exam room and privacy form redesign",
+  "baseline": {
+    "typecheck": "passed before edits"
+  },
+  "quality": {
+    "format": "passed",
+    "lint": "passed; 129 source module boundaries, no cycles",
+    "typecheck": "passed",
+    "generated": "verified 159 operations/305 schemas; unchanged source contract",
+    "build": "passed",
+    "unitPassed": 192,
+    "unitFiles": 36,
+    "browserPassed": 42,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "log": "docs/quality/ASSESSMENT_SETTINGS_QUALITY.log",
+    "logSha256": "70e181d1ac631459ad4057ad057e5f91cce23f23155d872b5044845aef4b22e1"
+  },
+  "finalCssRegression": {
+    "reason": "Polished file picker after visual review; accessible native file input retained visually hidden",
+    "build": "passed again",
+    "browserPassed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "log": "docs/quality/ASSESSMENT_SETTINGS_FINAL.log",
+    "logSha256": "05bcdf4e8146fe10b411981fd5dec9964bbb95cb5d7decfa09a3bb3311ab84ab"
+  },
+  "newTests": {
+    "unit": 6,
+    "browser": 4,
+    "behaviors": [
+      "server-anchored monotonic countdown, invalid dates, expiration and full-hour formatting",
+      "no fabricated final receipt on clock expiration",
+      "failed answer refresh preserves edited choice and dirty state",
+      "saved answer map and review use server-confirmed data",
+      "privacy failed PUT retains edits; next save uses returned version; duplicate mutex",
+      "in-flow form actions and 320/390/834/1440 viewport overflow checks"
+    ]
+  },
+  "visualReview": {
+    "directory": "output/review/assessment-settings",
+    "widths": [320, 390, 834, 1440],
+    "images": [
+      "assignment-1440.png",
+      "assignment-320.png",
+      "assignment-390.png",
+      "assignment-834.png",
+      "exam-1440.png",
+      "exam-320.png",
+      "exam-390.png",
+      "exam-834.png",
+      "exam-review-desktop.png",
+      "privacy-1440.png",
+      "privacy-320.png",
+      "privacy-390.png",
+      "privacy-834.png",
+      "privacy-dark-mobile.png"
+    ],
+    "reviewed": "Mobile, tablet and desktop assignment/exam/privacy renders plus final dark privacy and final accessible file picker reviewed; no visible horizontal overflow or action overlap."
+  },
+  "runtime": {
+    "preview": "http://127.0.0.1:3130",
+    "entryHttpStatus": 200,
+    "productionRestarted": true,
+    "sessionDirectoryPreserved": ".makan-qa-sessions",
+    "backendOrigin": "http://94.184.32.84:8090"
+  },
+  "limitations": [
+    "All automated mutations use local fixture3457/app3132; no live answer, attachment, privacy or exam submission performed.",
+    "Authenticated in-app browser connection unavailable this turn; supplied real attempt not newly verified.",
+    "Exam attachment endpoint still not in existing SaveExamAnswerCommand; disabled control and existing API gap retained.",
+    "Physical-device camera/file picker/virtual keyboard and hosted CI not exercised."
+  ],
+  "changedSources": [
+    "src/features/personal/school/assessment.module.css",
+    "src/features/personal/school/submission-flow.tsx",
+    "src/features/personal/school/exam-taking.tsx",
+    "src/features/personal/school/exam-reference.module.css",
+    "src/features/personal/school/exam-clock.ts",
+    "src/features/personal/school/use-exam-clock.ts",
+    "src/features/personal/school/school.module.css",
+    "src/features/personal/messaging/privacy.tsx",
+    "src/features/personal/messaging/privacy.module.css",
+    "tests/fixtures/backend/messaging.mjs",
+    "tests/unit/exam-clock.test.ts",
+    "tests/browser/assessment-settings.spec.ts",
+    "tests/browser/learning.spec.ts"
+  ],
+  "applicationApiContractChanged": false,
+  "liveProductDataMutated": false
+}

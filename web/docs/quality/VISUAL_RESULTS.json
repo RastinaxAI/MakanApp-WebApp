@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-29",
+  "scope": "Next.js five-role client, PDF visual matching; owner excluded",
+  "reference": {
+    "pdfPagesReviewed": 14,
+    "inScopePreviewScreens": 13,
+    "navigationException": [
+      "آموزشگاه",
+      "دستیار ماکان",
+      "پیام‌ها",
+      "پروفایل"
+    ],
+    "figmaFileExecution": false
+  },
+  "fullQualityGate": {
+    "command": "npm run quality",
+    "result": "passed",
+    "evidence": "Observed successful command completion before final CSS spacing adjustment. JSON browser reporter was replaced by the focused run.",
+    "unit": {
+      "passed": 164,
+      "files": 31,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "gates": [
+      "format",
+      "lint",
+      "typecheck",
+      "unit",
+      "generated",
+      "build",
+      "browser"
+    ]
+  },
+  "finalFocusedRun": {
+    "commands": [
+      "npm run build",
+      "npx playwright test tests/browser/reference-fidelity.spec.ts tests/browser/responsive.spec.ts"
+    ],
+    "build": "passed",
+    "browserStats": {
+      "startTime": "2026-10-29T12:36:51.778Z",
+      "duration": 42418.286,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "reason": "Final tablet content spacing and stricter x/y reference geometry assertions."
+  },
+  "geometry": [
+    {
+      "screen": "S01",
+      "width": 390,
+      "actualCover": {
+        "x": 33,
+        "y": 381.640625,
+        "width": 324,
+        "height": 176
+      },
+      "targetCover": {
+        "x": 33,
+        "y": 381.640625,
+        "width": 324,
+        "height": 176
+      },
+      "note": "Reference OS status omitted; four navigation destinations are the explicit user exception."
+    },
+    {
+      "screen": "S01",
+      "width": 834,
+      "actualCover": {
+        "x": 320,
+        "y": 445.734375,
+        "width": 440,
+        "height": 230
+      },
+      "targetCover": {
+        "x": 320,
+        "y": 445.734375,
+        "width": 440,
+        "height": 230
+      },
+      "note": "Reference OS status omitted; four navigation destinations are the explicit user exception."
+    },
+    {
+      "screen": "S01",
+      "width": 1440,
+      "actualCover": {
+        "x": 459,
+        "y": 422.734375,
+        "width": 586,
+        "height": 190
+      },
+      "targetCover": {
+        "x": 459,
+        "y": 422.734375,
+        "width": 586,
+        "height": 190
+      },
+      "note": "Reference OS status omitted; four navigation destinations are the explicit user exception."
+    }
+  ],
+  "actualScreenshots": {
+    "screens": [
+      "S01",
+      "C01",
+      "C03",
+      "U01",
+      "A01",
+      "A04",
+      "T02",
+      "T03",
+      "T05",
+      "S13",
+      "P02",
+      "M01",
+      "W01"
+    ],
+    "widths": [
+      390,
+      834,
+      1440
+    ],
+    "count": 39,
+    "folder": "test-results/reference-match",
+    "comparisons": [
+      "output/design/S01-comparison-mobile.png",
+      "output/design/U01-comparison-mobile.png"
+    ]
+  },
+  "coverage": {
+    "implemented": 35,
+    "partial": 38,
+    "not-implemented": 41,
+    "unavailable": 5,
+    "excluded-owner": 11
+  },
+  "remoteWriteTests": 0,
+  "notVerifiedThisStage": [
+    "Live backend integration",
+    "Backend security",
+    "Physical devices",
+    "Hosted CI",
+    "Expo",
+    "Clean checkout reproduction (previous-stage result only)",
+    "Pixel diff of all 130 source screens"
+  ],
+  "localProductionSmoke": [
+    {
+      "path": "/enter",
+      "status": 200
+    },
+    {
+      "path": "/welcome",
+      "status": 200
+    },
+    {
+      "path": "/api/client/session",
+      "status": 401
+    }
+  ]
+}

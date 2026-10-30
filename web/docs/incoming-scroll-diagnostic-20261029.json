@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-29T08:14:40.485Z",
+  "mode": "REAL SEEDED BACKEND — viewport regression",
+  "before": {
+    "items": 15,
+    "top": 1098,
+    "height": 1762,
+    "client": 664
+  },
+  "sendStatus": 200,
+  "after": {
+    "items": 16,
+    "top": 1275,
+    "height": 1957,
+    "client": 664
+  },
+  "messageInViewport": true
+}

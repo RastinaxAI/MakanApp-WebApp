@@ -1,0 +1,9 @@
+node_modules
+.next
+.makan-sessions
+.makan-test-sessions
+contracts
+src/generated
+test-results
+playwright-report
+next-env.d.ts

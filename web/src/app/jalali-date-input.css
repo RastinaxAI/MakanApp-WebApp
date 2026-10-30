@@ -1,0 +1,118 @@
+.makan-date-field {
+  min-width: 0;
+  width: 100%;
+}
+.makan-date-control {
+  position: relative;
+  width: 100%;
+}
+.makan-date-control > input {
+  width: 100%;
+  padding-right: 46px !important;
+  padding-left: 12px !important;
+  min-height: 46px;
+}
+.makan-date-control > .makan-date-trigger {
+  position: absolute;
+  inset-inline-start: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  cursor: pointer;
+}
+.makan-date-trigger:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.makan-date-trigger:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.makan-date-error {
+  display: block;
+  color: var(--danger, #b42318);
+  font-size: 12px;
+  margin-top: 8px;
+  line-height: 1.9;
+}
+.makan-jdp-host {
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+}
+@container (max-width: 280px) {
+  .makan-jdp-host jdp-container .jdp-years,
+  .makan-jdp-host jdp-container .jdp-months {
+    width: 95%;
+    margin-block: 0 6px;
+    font-size: 1rem;
+  }
+}
+.makan-jdp-host > jdp-overlay {
+  display: none !important;
+}
+.makan-jdp-host > jdp-container {
+  position: relative !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100%;
+  min-width: 0;
+  max-width: 380px;
+  margin-top: 10px;
+  font-family: inherit;
+  --jdp-day-size: 53px;
+  --jdp-color-0: var(--surface);
+  --jdp-color-1: var(--bg);
+  --jdp-color-2: var(--border);
+  --jdp-color-3: var(--border-strong, var(--border));
+  --jdp-color-4: var(--muted);
+  --jdp-color-5: var(--text);
+  --jdp-primary: var(--primary);
+  --jdp-red: var(--danger, #b42318);
+  border-radius: 16px;
+  padding: 10px;
+  animation: none;
+  box-shadow: 0 0 0 1px var(--border);
+  z-index: auto !important;
+}
+.makan-jdp-host jdp-container .jdp-day {
+  border-radius: 9px;
+  height: 42px;
+  line-height: 42px;
+  margin-block: 2px;
+}
+.makan-jdp-host jdp-container .jdp-icon-plus,
+.makan-jdp-host jdp-container .jdp-icon-minus {
+  min-width: 30px;
+  min-height: 34px;
+  border-radius: 8px;
+}
+.makan-jdp-host jdp-container .jdp-year select,
+.makan-jdp-host jdp-container .jdp-month select,
+.makan-jdp-host jdp-container .jdp-time select {
+  min-height: 38px;
+  min-width: 0;
+  font-weight: 600;
+}
+.makan-jdp-host jdp-container .jdp-footer {
+  gap: 7px;
+}
+.makan-jdp-host jdp-container .jdp-footer > div {
+  border-radius: 9px;
+  min-height: 38px;
+  line-height: 38px;
+}
+.makan-jdp-host jdp-container [role='button']:focus-visible,
+.makan-jdp-host jdp-container select:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}

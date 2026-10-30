@@ -1,0 +1,1190 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/tests/browser",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/test-results/browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/OmidrezaBagheriyan/Desktop/Makan Application/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node scripts/test-server.mjs",
+      "url": "http://127.0.0.1:3132/enter",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "assessment-evaluation.spec.ts",
+      "file": "assessment-evaluation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "assignment evaluation retains failed drafts, previews audience feedback and releases only after confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8886,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:45:10.296Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-8476aaf8d00ee1ef01f9",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "exam manual grading separates saving, completion and publication, and supports a correction revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6054,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:45:24.003Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-79e1d93761e81c6f75b0",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "student and parent cannot open author data; unpublished results and unrelated attachments do not masquerade as success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:45:30.140Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-82d30dbd968c03a404ca",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 133,
+          "column": 5
+        },
+        {
+          "title": "new assessment pages remain readable without overflow at three viewports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20211,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:45:39.587Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-324c0a5b36353c2f682c",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 178,
+          "column": 5
+        },
+        {
+          "title": "editing and publishing a homework draft uses versioned review and retains a failed save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3511,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:45:59.820Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-7085c46ea8fbc84ca003",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 304,
+          "column": 5
+        },
+        {
+          "title": "a server version change preserves the local evaluation draft until explicit replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3366,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:03.350Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-9d454c8050d480ee464d",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 346,
+          "column": 5
+        },
+        {
+          "title": "parent result uses the selected child relation and guardian feedback without author notes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3098,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:06.737Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06b9d9eeb29ac0eafa3f-5790e7c926e561b345ed",
+          "file": "assessment-evaluation.spec.ts",
+          "line": 403,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "manager-workspace.spec.ts",
+      "file": "manager-workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "multi-selection preserves successful members and retries only unresolved additions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2083,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:09.863Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "db72e834893325376852-8ba1bd9f5ff5154a0b14",
+          "file": "manager-workspace.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7178,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:11.970Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "db72e834893325376852-1f9434c0534a42f708eb",
+          "file": "manager-workspace.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:19.170Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "db72e834893325376852-8964b1ea95dfc7ed42a9",
+          "file": "manager-workspace.spec.ts",
+          "line": 103,
+          "column": 5
+        },
+        {
+          "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:26.490Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "db72e834893325376852-daeedb6ffeee238c6843",
+          "file": "manager-workspace.spec.ts",
+          "line": 207,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "preferences-weekly.spec.ts",
+      "file": "preferences-weekly.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3276,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:32.779Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4163c45e8e639b9802b7-69758f762f4143b5239e",
+          "file": "preferences-weekly.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3566,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:36.077Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4163c45e8e639b9802b7-d70cab9ae043a5c404c4",
+          "file": "preferences-weekly.spec.ts",
+          "line": 62,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "reference-fidelity.spec.ts",
+      "file": "reference-fidelity.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "responsive reference details and updated overview at 390, 834 and 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13040,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:39.685Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-a05187432cb023a90ead",
+          "file": "reference-fidelity.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "workspace selection is explicit and a Student cannot author a class assignment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2409,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:52.747Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-66025c1302d4dc92468a",
+          "file": "reference-fidelity.spec.ts",
+          "line": 145,
+          "column": 5
+        },
+        {
+          "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3560,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:55.198Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-c169044fe31c3c6cb900",
+          "file": "reference-fidelity.spec.ts",
+          "line": 170,
+          "column": 5
+        },
+        {
+          "title": "exam question navigation retains answers and exposes final review separately",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2890,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:46:58.777Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-fb8bca0e43a907b48707",
+          "file": "reference-fidelity.spec.ts",
+          "line": 207,
+          "column": 5
+        },
+        {
+          "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2394,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:47:01.688Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-d9d85d32715981274b7c",
+          "file": "reference-fidelity.spec.ts",
+          "line": 237,
+          "column": 5
+        },
+        {
+          "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2219,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:47:04.102Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-b3619173210313f3773d",
+          "file": "reference-fidelity.spec.ts",
+          "line": 258,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "release-e11.spec.ts",
+      "file": "release-e11.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "background session checks do not cancel a foreground child selection",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1998,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m3\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts:38:30",
+                    "location": {
+                      "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                      "column": 30,
+                      "line": 38
+                    },
+                    "snippet": "  36 |   }\n  37 |   await expect(page.getByRole('heading', { name: 'سارا احمدی', exact: true })).toBeVisible();\n> 38 |   expect(foregroundRequests).toBe(1);\n     |                              ^\n  39 | });\n  40 | test('account replay refreshes a school snapshot without navigation or a page polling timer', async ({\n  41 |   page,"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                        "column": 30,
+                        "line": 38
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n\n  36 |   }\n  37 |   await expect(page.getByRole('heading', { name: 'سارا احمدی', exact: true })).toBeVisible();\n> 38 |   expect(foregroundRequests).toBe(1);\n     |                              ^\n  39 | });\n  40 | test('account replay refreshes a school snapshot without navigation or a page polling timer', async ({\n  41 |   page,\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts:38:30"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:47:06.348Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-background-ses-e1529--foreground-child-selection\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-background-ses-e1529--foreground-child-selection\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-background-ses-e1529--foreground-child-selection\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                    "column": 30,
+                    "line": 38
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "222089e280cab7485370-2be261dcb1710bb6c243",
+          "file": "release-e11.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "account replay refreshes a school snapshot without navigation or a page polling timer",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16727,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'کلاس نمونه', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'کلاس نمونه', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'کلاس نمونه', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'کلاس نمونه', exact: true })\u001b[22m\n\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts:47:80",
+                    "location": {
+                      "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                      "column": 80,
+                      "line": 47
+                    },
+                    "snippet": "  45 |   await login(context);\n  46 |   await page.goto(root + '/classes');\n> 47 |   await expect(page.getByRole('heading', { name: 'کلاس نمونه', exact: true })).toBeVisible();\n     |                                                                                ^\n  48 |   await page.waitForResponse(\n  49 |     (r) => r.url().includes('/realtime/changes?') && new URL(r.url()).searchParams.has('cursor'),\n  50 |   );"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                        "column": 80,
+                        "line": 47
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'کلاس نمونه', exact: true })\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'کلاس نمونه', exact: true })\u001b[22m\n\n\n  45 |   await login(context);\n  46 |   await page.goto(root + '/classes');\n> 47 |   await expect(page.getByRole('heading', { name: 'کلاس نمونه', exact: true })).toBeVisible();\n     |                                                                                ^\n  48 |   await page.waitForResponse(\n  49 |     (r) => r.url().includes('/realtime/changes?') && new URL(r.url()).searchParams.has('cursor'),\n  50 |   );\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts:47:80"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:47:12.456Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-account-replay-9767c-ion-or-a-page-polling-timer\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-account-replay-9767c-ion-or-a-page-polling-timer\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-account-replay-9767c-ion-or-a-page-polling-timer\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                    "column": 80,
+                    "line": 47
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "222089e280cab7485370-5ecaf23bc24954884ad5",
+          "file": "release-e11.spec.ts",
+          "line": 40,
+          "column": 5
+        },
+        {
+          "title": "exam file-only answer waits for Ready, enforces policy, handles conflict and downloads private bytes",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 60343,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                        "column": 3,
+                        "line": 85
+                      },
+                      "message": "Error: locator.setInputFiles: Test timeout of 60000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('انتخاب پیوست پاسخ آزمون', { exact: true })\u001b[22m\n\n\n  83 |   await page.getByRole('button', { name: 'شروع آزمون', exact: true }).click();\n  84 |   const input = page.getByLabel('انتخاب پیوست پاسخ آزمون', { exact: true });\n> 85 |   await input.setInputFiles({\n     |   ^\n  86 |     name: 'wrong.png',\n  87 |     mimeType: 'image/png',\n  88 |     buffer: Buffer.from('image'),\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts:85:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:47:32.301Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-exam-file-only-40e8c-and-downloads-private-bytes\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-exam-file-only-40e8c-and-downloads-private-bytes\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-exam-file-only-40e8c-and-downloads-private-bytes\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "222089e280cab7485370-c6902344054fc94bbb84",
+          "file": "release-e11.spec.ts",
+          "line": 66,
+          "column": 5
+        },
+        {
+          "title": "personal commerce shows unknown usage honestly and an order never activates subscription",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2789,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:48:34.708Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "222089e280cab7485370-37c82dcf3a3964cb2c87",
+          "file": "release-e11.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "personal class invitation needs recipient acceptance and grants no organization role",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 60416,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 60000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts",
+                        "column": 5,
+                        "line": 222
+                      },
+                      "message": "Error: browserContext.close: Test ended.\nBrowser logs:\n\n<launching> C:\\Users\\OmidrezaBagheriyan\\AppData\\Local\\ms-playwright\\chromium-1194\\chrome-win\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\\Users\\OMIDRE~1\\AppData\\Local\\Temp\\playwright_chromiumdev_profile-Sb3K7g --remote-debugging-pipe --no-startup-window\n<launched> pid=10680\n[pid=10680][err] [10680:14380:1030/131842.114:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT\n[pid=10680][err] [10680:14380:1030/131903.013:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT\n[pid=10680] <gracefully close start>\n\n  220 |     expect(state.context.activeRole).toBeNull();\n  221 |   } finally {\n> 222 |     await student.close();\n      |     ^\n  223 |   }\n  224 |   await page.reload();\n  225 |   await expect(page.getByText('عضو ۱ · فعال', { exact: true })).toBeVisible();\n    at C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\tests\\browser\\release-e11.spec.ts:222:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:48:37.821Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-personal-class-189bd-grants-no-organization-role\\test-failed-2.png"
+                    },
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-personal-class-189bd-grants-no-organization-role\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-personal-class-189bd-grants-no-organization-role\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\test-results\\browser\\release-e11-personal-class-189bd-grants-no-organization-role\\trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "222089e280cab7485370-a655733c2c40cdcc0cc1",
+          "file": "release-e11.spec.ts",
+          "line": 195,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "responsive.spec.ts",
+      "file": "responsive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4611,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:49:41.781Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-75ae675e7d216c3d87ce",
+          "file": "responsive.spec.ts",
+          "line": 3,
+          "column": 5
+        },
+        {
+          "title": "focused chat and independent form reserve their own footer without the tablet dock",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1978,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:49:47.133Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-7b5fc4ee90e0da63e490",
+          "file": "responsive.spec.ts",
+          "line": 38,
+          "column": 5
+        },
+        {
+          "title": "workspace dialog restores focus and changing context clears prior role data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1915,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T09:49:49.134Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-6228f46b748d4560ab0d",
+          "file": "responsive.spec.ts",
+          "line": 53,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T09:45:05.136Z",
+    "duration": 286927.04699999996,
+    "expected": 23,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

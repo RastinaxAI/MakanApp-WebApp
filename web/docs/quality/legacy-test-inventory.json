@@ -1,0 +1,80 @@
+[
+  {
+    "source": "tests/personal/attachment-receiver.spec.ts",
+    "destination": "tests/evidence/legacy-live/attachment-receiver.spec.ts.source",
+    "sha256": "6076a6bb30a1bfeb30e5fcdcf431f360e1996ef8a8e136bed5f6ada1380d1418",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/contacts-workspace.spec.ts",
+    "destination": "tests/evidence/legacy-live/contacts-workspace.spec.ts.source",
+    "sha256": "783d824b479bc406ab4894e4f084ef90328fae2834ed867f27696677f06d6e11",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/design-package.spec.ts",
+    "destination": "tests/evidence/legacy-live/design-package.spec.ts.source",
+    "sha256": "e6df267d92ff018c08ad8371b4bf72a50ed9cf979b50cb50dbf93bc0b2dbd9c4",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/integration-guide.spec.ts",
+    "destination": "tests/evidence/legacy-live/integration-guide.spec.ts.source",
+    "sha256": "9206b1224abf7930135ec13558f1a5d6a2aef38953f24d7c8aeeb9e66d916a32",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/jalali-calendar.spec.ts",
+    "destination": "tests/evidence/legacy-live/jalali-calendar.spec.ts.source",
+    "sha256": "78b619ed7571b0e76256a1e104a9d58580f6ff9a1dca19a8473e1420a665f475",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/login-diagnostic.spec.ts",
+    "destination": "tests/evidence/legacy-live/login-diagnostic.spec.ts.source",
+    "sha256": "ecee6d6cd3aea253ac275974834a9dd57b4b142c00e187f6589838da3862c672",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/messenger-direct.spec.ts",
+    "destination": "tests/evidence/legacy-live/messenger-direct.spec.ts.source",
+    "sha256": "95f992a0223d858d70f5e6ef184a4e8aca390386b0e65dd315e1b9d66d895668",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/navigation-media.spec.ts",
+    "destination": "tests/evidence/legacy-live/navigation-media.spec.ts.source",
+    "sha256": "7b424ad0215a55e40d6ec9a85ce263e3509b973de94ce111b0af933e6f0a4f38",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/recipient-inbox.spec.ts",
+    "destination": "tests/evidence/legacy-live/recipient-inbox.spec.ts.source",
+    "sha256": "bb313eaedebd5c8af441bd51ae9dec2865a7653baf1dbf36cfb2d8eff25a1fa0",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/release-701cba0.spec.ts",
+    "destination": "tests/evidence/legacy-live/release-701cba0.spec.ts.source",
+    "sha256": "b993ad6039fd31c1a322124c60d293590e2c8d9036049fc59af7780ee705e0a1",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/school-access.spec.ts",
+    "destination": "tests/evidence/legacy-live/school-access.spec.ts.source",
+    "sha256": "fe452b685fe88b8d7b02d747d0eb26cbb4b1171c0ecd1cf9ccc03bcdeabc38bd",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/school-review.spec.ts",
+    "destination": "tests/evidence/legacy-live/school-review.spec.ts.source",
+    "sha256": "3bb9f051732058793b97454f38e1d4b8db32697f37b5cc54df7cd97ba8b99052",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  },
+  {
+    "source": "tests/personal/school.spec.ts",
+    "destination": "tests/evidence/legacy-live/school.spec.ts.source",
+    "sha256": "88895c4b6faa8c8039ba0e53205416e813942ecfe77f658752f676d3ad2c34a2",
+    "reason": "Historical live integration scenario writes to remote seeded backend; preserved verbatim as evidence; replaced in daily gate by isolated browser scenarios. Not executed in this task."
+  }
+]

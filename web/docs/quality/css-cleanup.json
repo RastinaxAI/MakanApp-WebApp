@@ -1,0 +1,70 @@
+{
+  "applied": true,
+  "files": [
+    {
+      "file": "src\\app\\globals.css",
+      "beforeBytes": 19421,
+      "afterBytes": 17291,
+      "beforeSha256": "208e58227bedc6e7115ecf90dd74ac31dfd01b52360ff4b36697ee1cec8ccac9",
+      "removedSelectors": [
+        ".table-scroll",
+        ".data-table",
+        ".data-table th",
+        ".data-table td",
+        ".data-table tr:last-child td",
+        ".data-table tbody tr:hover",
+        ".data-table td",
+        ".data-table th",
+        ".data-table",
+        ".data-table th",
+        ".data-table thead",
+        ".data-table tbody tr:hover",
+        ".table-scroll",
+        ".table-scroll:focus-visible",
+        ".data-cards",
+        ".data-card",
+        ".data-card dl",
+        ".data-card-field",
+        ".data-card-field:last-child",
+        ".data-card-field dt",
+        ".data-card-field dd",
+        ".data-card-field[data-primary]",
+        ".data-card-field[data-primary] dt",
+        ".data-card-field[data-primary] dd",
+        ".data-card .badge",
+        ".data-card-field"
+      ],
+      "reason": "No static assignment/import for these local/global class selectors in application source; dynamic module selectors retained."
+    }
+  ],
+  "initialPassSummary": {
+    "removedSelectors": 538,
+    "files": [
+      [
+        "src/app/globals.css",
+        371
+      ],
+      [
+        "src/features/personal/assistant.module.css",
+        2
+      ],
+      [
+        "src/features/personal/messaging/media.module.css",
+        2
+      ],
+      [
+        "src/features/personal/messaging/messenger.module.css",
+        1
+      ],
+      [
+        "src/features/personal/personal.module.css",
+        154
+      ],
+      [
+        "src/features/personal/school/school.module.css",
+        8
+      ]
+    ],
+    "evidence": "Recorded console output of initial source-graph CSS pass; detailed retained backups exist for the module files. Current files array describes the follow-up DataTable cleanup."
+  }
+}

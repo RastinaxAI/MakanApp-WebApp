@@ -1,0 +1,290 @@
+import { test, expect, type BrowserContext } from '@playwright/test';
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
+import { jalaliInputValue } from '../../src/lib/jalali-date';
+const origin = 'http://127.0.0.1:3130',
+  root = '/personal/education';
+test.use({ actionTimeout: 25000, navigationTimeout: 30000 });
+type Account = {
+  role: string;
+  context: BrowserContext;
+  page: Awaited<ReturnType<BrowserContext['newPage']>>;
+  state: any;
+};
+test('701cba0 real school: directory, rosters, catalog, lesson draft/publish/file and guardian consent', async ({
+  browser,
+}) => {
+  const accounts: Account[] = [];
+  const report: any = {
+    mode: 'REAL SEEDED BACKEND :8090 — no interception or mock',
+    releaseGuide: '701cba0',
+    checkedAt: new Date().toISOString(),
+    checks: [],
+    errors: [],
+    nonSuccessResponses: [],
+    ids: {},
+  };
+  const hdr = { Origin: origin };
+  async function api(
+    a: Account,
+    path: string,
+    data?: unknown,
+    method = data === undefined ? 'GET' : 'POST',
+  ) {
+    console.log('701cba0 API', a.role, method, path);
+    a.state = await (await a.context.request.get('/api/client/session', { timeout: 30000 })).json();
+    const r = await a.context.request.fetch('/api/client/backend' + path, {
+      method,
+      timeout: 30000,
+      headers: { ...hdr, 'X-Makan-Context': a.state.revision },
+      ...(data === undefined ? {} : { data }),
+    });
+    if (!r.ok()) {
+      const p = await r.json().catch(() => ({}));
+      report.nonSuccessResponses.push({
+        role: a.role,
+        path,
+        status: r.status(),
+        code: p.code,
+        traceId: p.traceId,
+      });
+    }
+    return r;
+  }
+  async function screen(a: Account, name: string) {
+    await a.page.screenshot({ path: `docs/screenshots/release-701cba0/${name}.png` });
+    expect(await a.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+  }
+  try {
+    await mkdir('docs/screenshots/release-701cba0', { recursive: true });
+    for (const [role, phone] of [
+      ['Manager', '09120000104'],
+      ['Teacher', '09120000102'],
+      ['Student', '09120000101'],
+      ['Parent', '09120000103'],
+    ]) {
+      console.log('701cba0 login', role);
+      const context = await browser.newContext({
+        baseURL: origin,
+        timezoneId: 'Asia/Tehran',
+        acceptDownloads: true,
+      });
+      const page = await context.newPage();
+      const a: Account = { role, context, page, state: null };
+      accounts.push(a);
+      page.on('pageerror', (e) => report.errors.push({ role, message: e.message }));
+      page.on('dialog', (d) => d.accept());
+      const challenge = await context.request.post('/api/client/auth/challenge', {
+        headers: hdr,
+        data: { phoneNumber: phone },
+      });
+      expect(challenge.status()).toBe(202);
+      const verified = await context.request.post('/api/client/auth/verify', {
+        headers: hdr,
+        data: {
+          phoneNumber: phone,
+          challengeId: (await challenge.json()).challengeId,
+          code: '123456',
+          deviceName: 'School release 701cba0 QA',
+        },
+      });
+      expect(verified.ok()).toBeTruthy();
+      a.state = await (await context.request.get('/api/client/session')).json();
+      const spaces = await (await api(a, '/api/v1/workspaces/me')).json();
+      const w = spaces.find((s: any) => s.workspaceType === 'Organization' && s.role === role);
+      expect(w).toBeTruthy();
+      expect(
+        (
+          await api(a, '/api/v1/workspaces/select', {
+            workspaceType: 'Organization',
+            membershipId: w.membershipId,
+            role: w.role,
+          })
+        ).ok(),
+      ).toBeTruthy();
+    }
+    const [manager, teacher, student, parent] = accounts;
+    const tc = await (await api(teacher, '/api/v1/academic/classes')).json(),
+      sc = await (await api(student, '/api/v1/academic/classes')).json();
+    const cl = tc.find((c: any) => sc.some((s: any) => s.id === c.id));
+    expect(cl).toBeTruthy();
+    report.ids.classId = cl.id;
+    await manager.page.goto(root + '/members');
+    await expect(
+      manager.page.getByRole('heading', { name: 'اعضای آموزشگاه', exact: true }),
+    ).toBeVisible();
+    await expect(
+      manager.page.getByRole('cell', { name: 'Development Teacher', exact: true }),
+    ).toBeVisible();
+    await manager.page.getByLabel('نقش عضو', { exact: true }).selectOption('Teacher');
+    await expect(
+      manager.page.getByRole('cell', { name: 'Development Teacher', exact: true }),
+    ).toBeVisible();
+    await manager.page.getByLabel('جستجوی اعضای آموزشگاه').fill('no-such-member-701cba0');
+    await manager.page.getByRole('button', { name: 'جستجو', exact: true }).click();
+    await expect(
+      manager.page.getByText('عضوی با این شرایط پیدا نشد', { exact: true }),
+    ).toBeVisible();
+    report.checks.push('Manager directory, role filter and actual server search');
+    await screen(manager, 'members-desktop');
+    await manager.page.goto(root + '/classes');
+    await manager.page.getByRole('button', { name: 'ایجاد کلاس', exact: true }).click();
+    const catalog = manager.page.getByRole('dialog');
+    await expect(catalog.getByLabel('درس از کاتالوگ')).toBeVisible();
+    expect(await catalog.getByLabel('درس از کاتالوگ').locator('option').count()).toBeGreaterThan(1);
+    await expect(catalog.getByLabel('دوره از کاتالوگ')).toBeVisible();
+    await catalog.getByRole('button', { name: 'بستن', exact: true }).click();
+    report.checks.push('Course and academic period selectors read independent catalogs');
+    await teacher.page.goto(root + '/classes/' + cl.id);
+    await expect(teacher.page.getByRole('button', { name: 'ایجاد کلاس', exact: true })).toHaveCount(
+      0,
+    );
+    await teacher.page.getByRole('button', { name: 'دانش‌آموزان', exact: true }).click();
+    await expect(
+      teacher.page.getByRole('cell', { name: 'Development Student', exact: true }),
+    ).toBeVisible();
+    await teacher.page.getByRole('button', { name: 'معلمان', exact: true }).click();
+    await expect(
+      teacher.page.getByRole('cell', { name: 'Development Teacher', exact: true }),
+    ).toBeVisible();
+    report.checks.push(
+      'Assigned Teacher sees authoritative learner and teacher rosters; no Create Class',
+    );
+    await teacher.page.getByRole('button', { name: 'درس و جزوه', exact: true }).click();
+    await teacher.page.getByRole('button', { name: 'ایجاد درس و جزوه', exact: true }).click();
+    const form = teacher.page.getByRole('dialog');
+    const stamp = String(Date.now());
+    const title = 'درس آزمایشی انتشار 701cba0 ' + stamp;
+    await form.getByLabel('عنوان درس و جزوه', { exact: true }).fill(title);
+    await form
+      .getByLabel('متن درس', { exact: true })
+      .fill('این محتوای آموزشی فقط برای آزمون انتشار و دسترسی کلاس است.');
+    const bytes = Buffer.from('Makan 701cba0 lesson attachment QA\n');
+    const upload = teacher.page.waitForResponse(
+      (r) =>
+        new URL(r.url()).pathname === '/api/client/school-files' && r.request().method() === 'POST',
+    );
+    await form
+      .getByLabel('پیوست درس', { exact: true })
+      .setInputFiles({ name: 'lesson-701cba0.txt', mimeType: 'text/plain', buffer: bytes });
+    expect((await upload).ok()).toBeTruthy();
+    await expect(form.getByText('lesson-701cba0.txt', { exact: true })).toBeVisible();
+    await form.getByRole('button', { name: 'ذخیرهٔ پیش‌نویس', exact: true }).click();
+    await form.getByRole('link', { name: 'بازبینی و انتشار درس', exact: true }).click();
+    await expect(teacher.page.getByRole('heading', { name: title, exact: true })).toBeVisible();
+    const lessonId = new URL(teacher.page.url()).pathname.split('/').at(-1)!;
+    report.ids.lessonId = lessonId;
+    const forbiddenDraft = await api(student, '/api/v1/academic/lessons/' + lessonId);
+    expect([403, 404]).toContain(forbiddenDraft.status());
+    await teacher.page.getByRole('button', { name: 'ویرایش پیش‌نویس', exact: true }).click();
+    const edit = teacher.page.getByRole('dialog');
+    await edit.getByLabel('متن درس', { exact: true }).fill('نسخهٔ بازبینی‌شدهٔ درس برای انتشار.');
+    await edit.getByRole('button', { name: 'ذخیرهٔ پیش‌نویس', exact: true }).click();
+    await expect(edit).not.toBeVisible();
+    await teacher.page.getByRole('button', { name: 'انتشار درس', exact: true }).click();
+    await expect(
+      teacher.page.getByText('این درس منتشر شده است و ویرایش آن در این نسخه امکان‌پذیر نیست.', {
+        exact: true,
+      }),
+    ).toBeVisible();
+    report.checks.push(
+      'Teacher creates draft with actual file, updates with version and publishes; Student denied draft',
+    );
+    await student.page.goto(root + '/lessons/' + lessonId);
+    await expect(student.page.getByRole('heading', { name: title, exact: true })).toBeVisible();
+    await expect(
+      student.page.getByText('نسخهٔ بازبینی‌شدهٔ درس برای انتشار.', { exact: true }),
+    ).toBeVisible();
+    const download = student.page.waitForEvent('download');
+    await student.page.getByRole('button', { name: 'دریافت فایل', exact: true }).click();
+    const file = await download;
+    expect(await readFile((await file.path())!)).toEqual(bytes);
+    await expect(
+      student.page.getByRole('button', { name: 'ویرایش پیش‌نویس', exact: true }),
+    ).toHaveCount(0);
+    await student.page.setViewportSize({ width: 390, height: 844 });
+    await screen(student, 'student-lesson-mobile');
+    const parentDenied = await api(parent, '/api/v1/academic/lessons/' + lessonId);
+    expect([403, 404]).toContain(parentDenied.status());
+    report.checks.push(
+      'Student reads Published lesson and exact private attachment bytes; Parent denied handout',
+    );
+    const personName = 'فرزند آزمایشی دعوت ' + stamp;
+    const person = await api(manager, '/api/v1/organization/people', {
+      clientOperationId: crypto.randomUUID(),
+      firstName: 'آزمون',
+      lastName: 'دعوت',
+      displayName: personName,
+      reason: 'آزمون مجاز دعوت والد در انتشار 701cba0',
+    });
+    expect(person.ok()).toBeTruthy();
+    const personId = (await person.json()).id;
+    report.ids.guardianTestPersonId = personId;
+    await manager.page.goto(root + '/guardians');
+    await manager.page
+      .getByRole('button', { name: 'افزودن رابطهٔ والد و فرزند', exact: true })
+      .click();
+    const invitation = manager.page.getByRole('dialog');
+    await invitation.getByLabel('جستجوی پروندهٔ فرزند', { exact: true }).fill(personName);
+    await invitation.getByRole('button', { name: 'جستجو', exact: true }).click();
+    await invitation.getByLabel('پروندهٔ فرزند', { exact: true }).selectOption(personId);
+    await invitation
+      .getByLabel('نام کاربری والد', { exact: true })
+      .fill(parent.state.user.username);
+    const expires = new Date(Date.now() + 86400000 + 3.5 * 3600000).toISOString().slice(0, 16);
+    await invitation
+      .getByLabel('زمان انقضای دعوت', { exact: true })
+      .fill(jalaliInputValue(expires, true));
+    await invitation
+      .getByLabel('دلیل دعوت والد', { exact: true })
+      .fill('آزمون رضایت صریح والد برای همین پرونده');
+    const invited = manager.page.waitForResponse(
+      (r) => r.url().includes('/guardian-invitations') && r.request().method() === 'POST',
+    );
+    await invitation.getByRole('button', { name: 'ارسال دعوت والد', exact: true }).click();
+    const result = await invited;
+    expect(result.ok(), await result.text()).toBeTruthy();
+    const receipt = await result.json();
+    report.ids.invitationId = receipt.id;
+    await expect(
+      invitation.getByRole('heading', { name: 'دعوت در انتظار تأیید والد', exact: true }),
+    ).toBeVisible();
+    await parent.page.goto('/personal/invitations');
+    const card = parent.page.locator('section').filter({ hasText: personName });
+    await expect(card).toHaveCount(1);
+    await expect(card.getByRole('button', { name: 'پذیرش دعوت', exact: true })).toBeDisabled();
+    await card.getByRole('checkbox').check();
+    await card.getByRole('button', { name: 'پذیرش دعوت', exact: true }).click();
+    await expect(card.getByRole('button', { name: 'پذیرش دعوت', exact: true })).toHaveCount(0);
+    const children = await (await api(parent, '/api/v1/guardian/children')).json();
+    expect(
+      children.some(
+        (child: any) =>
+          child.learnerOrganizationPersonId === personId && child.relationStatus === 'Active',
+      ),
+    ).toBe(true);
+    report.checks.push(
+      'Manager sends official username invitation; Parent explicitly consents; matching child becomes active',
+    );
+    await screen(parent, 'parent-invitations');
+    expect(report.errors).toEqual([]);
+    report.outcome = 'PASS';
+  } catch (e) {
+    report.outcome = 'FAIL';
+    report.error = String(e);
+    throw e;
+  } finally {
+    await writeFile('docs/release-701cba0-live-qa.json', JSON.stringify(report, null, 2) + '\n');
+    for (const a of accounts) {
+      await api(a, '/api/v1/workspaces/select', {
+        workspaceType: 'Personal',
+        membershipId: null,
+        role: null,
+      }).catch(() => {});
+      await a.context.request.post('/api/client/auth/logout', { headers: hdr }).catch(() => {});
+      await a.context.close();
+    }
+    await writeFile('docs/release-701cba0-live-qa.json', JSON.stringify(report, null, 2) + '\n');
+  }
+});

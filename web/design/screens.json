@@ -1,0 +1,3582 @@
+{
+  "product": "Makan / ماکان",
+  "language": "fa-IR",
+  "direction": "rtl",
+  "viewports": {
+    "mobile": {
+      "width": 390,
+      "height": 844
+    },
+    "tablet": {
+      "width": 834,
+      "height": 1194
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 1000
+    }
+  },
+  "designDirection": {
+    "surface": "#F8F9FC porcelain with white cards",
+    "text": "#24283E; muted #6B7085",
+    "accent": "#5058D9 cobalt; mint and apricot accents",
+    "style": "Refined Makan identity: compact line glyphs, soft cards, original notebook-grid motif, restrained 150 ms feedback",
+    "navigation": [
+      "آموزشگاه",
+      "پیام‌ها",
+      "کوپایلت (فقط اگر فعال باشد)",
+      "پروفایل"
+    ],
+    "mobile": "Single pane; three bottom tabs; glyphs 20 px / nav 22 px; standard hit targets 48 px, minimum 44 px; shortcut circles 48 px. Independent create/edit forms.",
+    "tablet": "Full-width stage with centered flow-layout bottom dock, 4–5 labeled role-aware destinations, max width 620 px, height 80 px, radius 26 px, 18 px bottom margin. No side rail. Split Messenger where useful. Hide dock during public/auth/form/exam/conversation focus, keep dedicated action footer.",
+    "desktop": "Right navigation retained; central reading/form column, left contextual panel; softer v2 styling.",
+    "forms": "One task per page; required labels and helper text; error adjacent to field; preserve unsaved draft; sticky save.",
+    "accessibility": "Readable 16 px body, glyph size separate from 44 px minimum / 48 px standard hit targets, visible focus, labels, semantic statuses, reduced-motion support.",
+    "version": "2.0"
+  },
+  "globalConstraints": [
+    "Sample data only; no invented measured KPIs, prices or testimonials.",
+    "No Stories/Reels/social followers, profile bio/post grid or voice/video calls; APIs do not support these.",
+    "Class, course, period edit APIs absent. Create pages supported; active edit routes excluded.",
+    "Published lessons and assessment versions immutable; explicit new exam version flow only.",
+    "No private child Direct/messages access in Parent/Manager or blanket platform access.",
+    "No MFA/TOTP/recovery/step-up screens in current contract.",
+    "Payment and AI capability states explicitly disabled/unavailable as contract specifies.",
+    "Human form labels exclude operation IDs and version tokens; these remain developer metadata.",
+    "Persian numerals for display; normalize input; ISO/Gregorian/UTC for transfer; Asia/Tehran for user time.",
+    "Show real maxScore, not an assumed global score of 20; absence of attendance is unrecorded."
+  ],
+  "source": "Attached API contract, reviewed 2026-10-29, plus attached product diagram. Semantic capability labels; runtime success not proven.",
+  "screens": [
+    {
+      "id": "A01",
+      "module": "onboarding",
+      "role": "all",
+      "title": "به ماکان خوش آمدید",
+      "kind": "auth",
+      "subtitle": "یادگیری و ارتباط، در کنار هم.",
+      "primaryCTA": "شروع با شماره همراه",
+      "content": [
+        "ورود امن با پیامک",
+        "حساب شخصی و فضای آموزشگاه",
+        "ادامه به معنی پذیرش شرایط استفاده است."
+      ],
+      "fields": [
+        {
+          "name": "phoneNumber",
+          "label": "شماره همراه",
+          "value": "۰۹۱۲ ۳۴۵ ۶۷۸۹",
+          "type": "tel"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/auth/otp/challenges"
+    },
+    {
+      "id": "A02",
+      "module": "onboarding",
+      "role": "all",
+      "title": "کد تأیید را وارد کنید",
+      "kind": "auth",
+      "subtitle": "کد ارسال‌شده به شماره همراهتان را بنویسید.",
+      "primaryCTA": "تأیید و ادامه",
+      "content": [
+        "ویرایش شماره",
+        "ارسال دوباره تا ۰۰:۴۲",
+        "کد را دریافت نکردید؟ پس از پایان زمان دوباره درخواست کنید."
+      ],
+      "fields": [
+        {
+          "name": "code",
+          "label": "کد پیامک‌شده",
+          "value": "",
+          "type": "otp"
+        }
+      ],
+      "status": "supported",
+      "notes": "OTP length and countdown come from challenge response; do not hardcode six digits.",
+      "endpoint": "POST /api/v1/auth/otp/verify"
+    },
+    {
+      "id": "A03",
+      "module": "onboarding",
+      "role": "all",
+      "title": "خودتان را معرفی کنید",
+      "kind": "form",
+      "subtitle": "نامی که دوستان و آموزشگاه می‌بینند.",
+      "primaryCTA": "ذخیره و ادامه",
+      "content": [
+        "نام کاربری شما با @ نمایش داده می‌شود.",
+        "وارد کردن تاریخ تولد اختیاری است."
+      ],
+      "fields": [
+        {
+          "name": "firstName",
+          "label": "نام",
+          "value": "سارا",
+          "type": "text"
+        },
+        {
+          "name": "lastName",
+          "label": "نام خانوادگی",
+          "value": "احمدی",
+          "type": "text"
+        },
+        {
+          "name": "displayName",
+          "label": "نام نمایشی",
+          "value": "سارا احمدی",
+          "type": "text"
+        },
+        {
+          "name": "username",
+          "label": "نام کاربری",
+          "value": "sara.ahmadi",
+          "type": "text"
+        },
+        {
+          "name": "dateOfBirth",
+          "label": "تاریخ تولد",
+          "value": "",
+          "type": "date"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/me/profile"
+    },
+    {
+      "id": "A04",
+      "module": "onboarding",
+      "role": "all",
+      "title": "کجا ادامه می‌دهید؟",
+      "kind": "list",
+      "subtitle": "فضاهای در دسترس شما، همیشه کنار هم.",
+      "primaryCTA": "ورود به آموزشگاه",
+      "content": [
+        "حساب شخصی · ارتباطات شما",
+        "آموزشگاه آفتاب · دانش‌آموز",
+        "آموزشگاه آفتاب · والد"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Only authorized workspaces; never let role choice grant permissions.",
+      "endpoint": "GET /api/v1/workspaces/me + POST /api/v1/workspaces/select"
+    },
+    {
+      "id": "A05",
+      "module": "onboarding",
+      "role": "all",
+      "title": "دعوت‌های من",
+      "kind": "list",
+      "subtitle": "دعوت‌های آموزشگاه و ارتباط حساب را اینجا بررسی کنید.",
+      "primaryCTA": "بررسی دعوت",
+      "content": [
+        "آموزشگاه آفتاب · دعوت برای پیوستن",
+        "در انتظار پاسخ شما",
+        "دعوت پذیرفته‌شده"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/invitations"
+    },
+    {
+      "id": "A06",
+      "module": "onboarding",
+      "role": "all",
+      "title": "بررسی دعوت",
+      "kind": "detail",
+      "subtitle": "قبل از پیوستن، آموزشگاه و نقش را بررسی کنید.",
+      "primaryCTA": "پذیرش دعوت",
+      "content": [
+        "آموزشگاه آفتاب",
+        "نقش پیشنهادی: دانش‌آموز",
+        "اعتبار دعوت: تا ۱۵ آبان ۱۴۰۵",
+        "رد دعوت"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Acceptance is explicit; do not silently bind identity or guardian relation.",
+      "endpoint": "POST /api/v1/invitations/{invitationId}/accept"
+    },
+    {
+      "id": "A07",
+      "module": "onboarding",
+      "role": "personal",
+      "title": "فضای شخصی شما",
+      "kind": "home",
+      "subtitle": "برای ارتباط با دوستان، حساب شخصی آماده است.",
+      "primaryCTA": "رفتن به پیام‌ها",
+      "content": [
+        "پیام‌ها و مخاطبان",
+        "ذخیره‌شده‌ها",
+        "پروفایل و تنظیمات",
+        "دعوت آموزشگاه را از بخش «دعوت‌های من» بررسی کنید."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/workspaces/current"
+    },
+    {
+      "id": "S01",
+      "module": "learning",
+      "role": "student",
+      "title": "امروز من",
+      "kind": "home",
+      "subtitle": "سلام سارا؛ هر روز یک قدم رو به جلو.",
+      "primaryCTA": "ادامه یادگیری",
+      "content": [
+        "کلاس‌های من · ریاضی، زبان، علوم",
+        "کلاس بعدی · ریاضی نهم · ۱۶:۳۰",
+        "برای انجام · تمرین معادله‌های خطی",
+        "اعلان‌های آموزشگاه"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/dashboards/student"
+    },
+    {
+      "id": "S02",
+      "module": "learning",
+      "role": "student",
+      "title": "کلاس‌های من",
+      "kind": "list",
+      "subtitle": "همه کلاس‌ها، با یک نگاه.",
+      "primaryCTA": "باز کردن کلاس",
+      "content": [
+        "ریاضی نهم · خانم رضایی",
+        "زبان انگلیسی · آقای امیری",
+        "علوم تجربی · خانم کریمی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/classes"
+    },
+    {
+      "id": "S03",
+      "module": "learning",
+      "role": "student",
+      "title": "ریاضی نهم",
+      "kind": "detail",
+      "subtitle": "یادگیری، تمرین و گفتگو در یک کلاس.",
+      "primaryCTA": "ادامه درس",
+      "content": [
+        "درس‌ها · تکلیف‌ها · آزمون‌ها · برنامه",
+        "آخرین درس · معادله‌های خطی",
+        "تکلیف جدید · تمرین فصل سوم",
+        "گفتگوی رسمی کلاس"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/classes + class-scoped reads"
+    },
+    {
+      "id": "S04",
+      "module": "learning",
+      "role": "student",
+      "title": "معادله‌های خطی",
+      "kind": "detail",
+      "subtitle": "درس سوم · ریاضی نهم",
+      "primaryCTA": "دیدن پیوست‌ها",
+      "content": [
+        "در این درس با حل معادله‌های یک‌مجهولی آشنا می‌شویم.",
+        "جزوه فصل سوم.pdf",
+        "تمرین پیشنهادی: حل نمونه‌های درس"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Plain body and attachments; no invented video player or completion API.",
+      "endpoint": "GET /api/v1/academic/lessons/{lessonId}"
+    },
+    {
+      "id": "S05",
+      "module": "learning",
+      "role": "student",
+      "title": "برنامه من",
+      "kind": "list",
+      "subtitle": "زمان کلاس‌ها را راحت پیدا کنید.",
+      "primaryCTA": "جزئیات جلسه",
+      "content": [
+        "امروز · پنجشنبه",
+        "۱۶:۳۰ — ریاضی نهم",
+        "۱۸:۰۰ — زبان انگلیسی",
+        "هفته بعد"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/schedule"
+    },
+    {
+      "id": "S06",
+      "module": "learning",
+      "role": "student",
+      "title": "جلسه ریاضی",
+      "kind": "detail",
+      "subtitle": "پنجشنبه · ۱۶:۳۰ تا ۱۷:۳۰ · تهران",
+      "primaryCTA": "ورود به جلسه",
+      "content": [
+        "حل تمرین فصل سوم",
+        "وضعیت: برنامه‌ریزی‌شده",
+        "جلسه آنلاین · Google Meet",
+        "حضور: هنوز ثبت نشده"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Meeting URL opens external meeting; no in-app call claim.",
+      "endpoint": "GET /api/v1/academic/sessions/{sessionId}"
+    },
+    {
+      "id": "S07",
+      "module": "learning",
+      "role": "student",
+      "title": "تکلیف‌های من",
+      "kind": "list",
+      "subtitle": "مرتب‌شده بر اساس مهلت تحویل.",
+      "primaryCTA": "دیدن تکلیف",
+      "content": [
+        "برای انجام · تمرین فصل سوم",
+        "تحویل‌شده · کاربرگ اول",
+        "نتیجه منتشرشده · تمرین هفته قبل"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/assignments"
+    },
+    {
+      "id": "S08",
+      "module": "learning",
+      "role": "student",
+      "title": "تمرین فصل سوم",
+      "kind": "detail",
+      "subtitle": "ریاضی نهم · خانم رضایی",
+      "primaryCTA": "شروع پاسخ",
+      "content": [
+        "سؤال‌های ۱ تا ۵ را حل کنید و مراحل را بنویسید.",
+        "مهلت تحویل: جمعه ۸ آبان، ساعت ۲۰:۰۰",
+        "حداکثر امتیاز: ۱۰۰",
+        "تعداد تلاش مجاز: ۲",
+        "تحویل پس از مهلت بسته می‌شود."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/assignments/{assignmentId}"
+    },
+    {
+      "id": "S09",
+      "module": "learning",
+      "role": "student",
+      "title": "پاسخ من",
+      "kind": "form",
+      "subtitle": "پاسخ را بنویسید یا فایل خود را پیوست کنید.",
+      "primaryCTA": "بازبینی پاسخ",
+      "content": [
+        "پیش‌نویس پاسخ",
+        "افزودن فایل",
+        "پیش از تحویل، پاسخ و فایل‌ها را مرور کنید."
+      ],
+      "fields": [
+        {
+          "name": "answerText",
+          "label": "پاسخ تشریحی",
+          "value": "برای حل معادله، ابتدا ۴ را از دو طرف کم می‌کنیم؛ سپس دو طرف را بر ۲ تقسیم می‌کنیم.",
+          "type": "textarea"
+        },
+        {
+          "name": "fileAssetIds",
+          "label": "فایل‌های پاسخ",
+          "value": "پاسخ تمرین فصل سوم.pdf",
+          "type": "file"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST attempts + PATCH submission-attempts/{id}/draft"
+    },
+    {
+      "id": "S10",
+      "module": "learning",
+      "role": "student",
+      "title": "رسید تحویل تکلیف",
+      "kind": "detail",
+      "subtitle": "پاسخ شما برای مدرس فرستاده شد.",
+      "primaryCTA": "بازگشت به تکلیف",
+      "content": [
+        "تلاش اول از ۲ تلاش",
+        "تحویل: ۷ آبان، ساعت ۱۸:۴۲",
+        "در انتظار ارزیابی مدرس",
+        "پیوست: پاسخ تمرین فصل سوم.pdf"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Only show after successful submit/reconciliation.",
+      "endpoint": "POST /api/v1/academic/submission-attempts/{attemptId}/submit"
+    },
+    {
+      "id": "S11",
+      "module": "learning",
+      "role": "student",
+      "title": "آزمون‌های من",
+      "kind": "list",
+      "subtitle": "آماده باشید و با آرامش شروع کنید.",
+      "primaryCTA": "جزئیات آزمون",
+      "content": [
+        "آزمون فصل سوم · در دسترس",
+        "آزمون فصل دوم · نتیجه منتشرشده",
+        "آزمون بعدی · هنوز شروع نشده"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/exams"
+    },
+    {
+      "id": "S12",
+      "module": "learning",
+      "role": "student",
+      "title": "پیش از شروع آزمون",
+      "kind": "exam",
+      "subtitle": "شرایط آزمون را بخوانید، سپس شروع کنید.",
+      "primaryCTA": "شروع آزمون",
+      "content": [
+        "مدت: ۴۵ دقیقه",
+        "حداکثر امتیاز: ۱۰۰",
+        "پس از پاسخ‌گویی، «تحویل نهایی» را بزنید.",
+        "پایان دسترسی: امروز، ساعت ۲۰:۰۰"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET student-preview + POST attempts/start"
+    },
+    {
+      "id": "S13",
+      "module": "learning",
+      "role": "student",
+      "title": "آزمون فصل سوم",
+      "kind": "exam",
+      "subtitle": "سؤال ۳ از ۱۲ · زمان باقی‌مانده: ۳۲:۱۸",
+      "primaryCTA": "سؤال بعد",
+      "content": [
+        "اگر ۲x + ۴ = ۱۲ باشد، مقدار x چند است؟",
+        "گزینه اول: ۲",
+        "گزینه دوم: ۴",
+        "گزینه سوم: ۶",
+        "گزینه چهارم: ۸",
+        "پاسخ ذخیره شد",
+        "مرور پاسخ‌ها"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Show save pending/ack/error distinctly; no correct answer disclosure.",
+      "endpoint": "PUT /api/v1/academic/exam-attempts/{attemptId}/answers/{attemptQuestionId}"
+    },
+    {
+      "id": "S14",
+      "module": "learning",
+      "role": "student",
+      "title": "مرور و تحویل آزمون",
+      "kind": "exam",
+      "subtitle": "پاسخ‌ها را یک بار دیگر مرور کنید.",
+      "primaryCTA": "تحویل نهایی",
+      "content": [
+        "۹ سؤال پاسخ داده شده",
+        "۳ سؤال بدون پاسخ",
+        "پس از تحویل امکان ادامه پاسخ‌گویی نیست.",
+        "بازگشت به سؤال‌ها"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/exam-attempts/{attemptId}/finalize"
+    },
+    {
+      "id": "S15",
+      "module": "learning",
+      "role": "student",
+      "title": "رسید آزمون",
+      "kind": "detail",
+      "subtitle": "تحویل نهایی شما تأیید شده است.",
+      "primaryCTA": "بازگشت به آزمون‌ها",
+      "content": [
+        "تحویل: ۷ آبان، ساعت ۱۹:۴۳",
+        "تلاش اول",
+        "در انتظار اعلام نتیجه",
+        "این رسید در سوابق آزمون شما می‌ماند."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/exam-attempts/{attemptId}/receipt"
+    },
+    {
+      "id": "S16",
+      "module": "learning",
+      "role": "student",
+      "title": "پیشرفت من",
+      "kind": "detail",
+      "subtitle": "نتیجه‌های منتشرشده و روند حضور شما.",
+      "primaryCTA": "دیدن جزئیات",
+      "content": [
+        "آزمون فصل دوم · ۸۶ از ۱۰۰",
+        "تکلیف فصل دوم · ۱۸ از ۲۰",
+        "حضور: ۸ حاضر · ۱ غایب · ۱ ثبت‌نشده",
+        "بازخورد مدرس: روش حل را دقیق‌تر توضیح بده."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Respect each assessment maxScore; missing attendance is not absent.",
+      "endpoint": "GET /api/v1/reports/student/grades"
+    },
+    {
+      "id": "S17",
+      "module": "learning",
+      "role": "student",
+      "title": "بازبینی پاسخ تکلیف",
+      "kind": "detail",
+      "subtitle": "پاسخ و فایل‌ها را یک بار دیگر بررسی کنید.",
+      "primaryCTA": "تحویل نهایی تکلیف",
+      "content": [
+        "تمرین فصل سوم · ریاضی نهم",
+        "پاسخ تشریحی آماده است.",
+        "پیوست: پاسخ تمرین فصل سوم.pdf",
+        "مهلت تحویل: جمعه ۸ آبان، ساعت ۲۰:۰۰",
+        "پس از تحویل، این پاسخ دیگر پیش‌نویس نیست.",
+        "بازگشت و ویرایش پاسخ"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "S09 -> S17 -> S10 only after a successful server receipt. Back returns to S09 preserving draft. FinalSubmitAssignmentCommand idempotency/version fields remain hidden. In-flight disables duplicate action; network error keeps review and reconciles server state.",
+      "endpoint": "GET /api/v1/academic/submission-attempts/{attemptId} + POST /api/v1/academic/submission-attempts/{attemptId}/submit"
+    },
+    {
+      "id": "T01",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "روزِ کاری من",
+      "kind": "home",
+      "subtitle": "سلام خانم رضایی؛ امروز از کجا شروع کنیم؟",
+      "primaryCTA": "ساخت محتوای آموزشی",
+      "content": [
+        "۲ جلسه امروز",
+        "۶ پاسخ در انتظار ارزیابی",
+        "کلاس‌های من",
+        "پیش‌نویس‌های اخیر"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/dashboards/teacher"
+    },
+    {
+      "id": "T02",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "افزودن درس",
+      "kind": "form",
+      "subtitle": "یک موضوع روشن، یک درس تازه.",
+      "primaryCTA": "ذخیره پیش‌نویس",
+      "content": [
+        "کلاس: ریاضی نهم",
+        "پس از بازبینی می‌توانید منتشر کنید."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان درس",
+          "value": "معادله‌های خطی",
+          "type": "text"
+        },
+        {
+          "name": "body",
+          "label": "متن درس",
+          "value": "در یک معادله خطی، مجهول توان اول دارد. برای یافتن x، در دو طرف معادله عمل یکسان انجام می‌دهیم.",
+          "type": "textarea"
+        },
+        {
+          "name": "displayOrder",
+          "label": "ترتیب نمایش",
+          "value": "۳",
+          "type": "number"
+        },
+        {
+          "name": "fileAssetIds",
+          "label": "پیوست‌های درس",
+          "value": "جزوه معادله‌های خطی.pdf",
+          "type": "file"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/lessons"
+    },
+    {
+      "id": "T03",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ویرایش درس",
+      "kind": "form",
+      "subtitle": "پیش‌نویس را کامل کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "وضعیت: پیش‌نویس",
+        "آخرین ذخیره: امروز، ساعت ۱۰:۲۴"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان درس",
+          "value": "معادله‌های خطی",
+          "type": "text"
+        },
+        {
+          "name": "body",
+          "label": "متن درس",
+          "value": "در یک معادله خطی، مجهول توان اول دارد. برای یافتن x، در دو طرف معادله عمل یکسان انجام می‌دهیم.",
+          "type": "textarea"
+        },
+        {
+          "name": "displayOrder",
+          "label": "ترتیب نمایش",
+          "value": "۳",
+          "type": "number"
+        },
+        {
+          "name": "fileAssetIds",
+          "label": "پیوست‌های درس",
+          "value": "جزوه معادله‌های خطی.pdf",
+          "type": "file"
+        }
+      ],
+      "status": "supported",
+      "notes": "Published lessons are immutable. expectedVersion required.",
+      "endpoint": "PATCH /api/v1/academic/lessons/{lessonId}"
+    },
+    {
+      "id": "T04",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "بازبینی و انتشار درس",
+      "kind": "detail",
+      "subtitle": "دانش‌آموزان نسخه منتشرشده را می‌بینند.",
+      "primaryCTA": "انتشار درس",
+      "content": [
+        "معادله‌های خطی",
+        "۱ جزوه پیوست · متن درس کامل است.",
+        "پس از انتشار این نسخه قابل ویرایش نیست.",
+        "بازگشت به ویرایش"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/lessons/{lessonId}/publish"
+    },
+    {
+      "id": "T05",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "افزودن تکلیف",
+      "kind": "form",
+      "subtitle": "تمرین را با هدف و مهلت مشخص بسازید.",
+      "primaryCTA": "ذخیره پیش‌نویس",
+      "content": [
+        "کلاس: ریاضی نهم",
+        "انتشار پس از بازبینی"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان تکلیف",
+          "value": "تمرین فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "شرح تکلیف",
+          "value": "سؤال‌های ۱ تا ۵ جزوه را حل کنید و مراحل حل را بنویسید.",
+          "type": "textarea"
+        },
+        {
+          "name": "dueAtUtc",
+          "label": "مهلت تحویل",
+          "value": "۸ آبان ۱۴۰۵، ساعت ۲۰:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "maxScore",
+          "label": "حداکثر امتیاز",
+          "value": "۱۰۰",
+          "type": "number"
+        },
+        {
+          "name": "maxAttempts",
+          "label": "تلاش مجاز",
+          "value": "۲",
+          "type": "number"
+        },
+        {
+          "name": "allowLateSubmission",
+          "label": "پذیرش پس از مهلت",
+          "value": "خاموش",
+          "type": "toggle"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/assignments"
+    },
+    {
+      "id": "T06",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ویرایش تکلیف",
+      "kind": "form",
+      "subtitle": "تنظیمات پیش‌نویس را تغییر دهید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "وضعیت: پیش‌نویس",
+        "امتیاز و مهلت تحویل را پیش از انتشار بررسی کنید."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان تکلیف",
+          "value": "تمرین فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "شرح تکلیف",
+          "value": "سؤال‌های ۱ تا ۵ جزوه را حل کنید و مراحل حل را بنویسید.",
+          "type": "textarea"
+        },
+        {
+          "name": "dueAtUtc",
+          "label": "مهلت تحویل",
+          "value": "۸ آبان ۱۴۰۵، ساعت ۲۰:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "maxScore",
+          "label": "حداکثر امتیاز",
+          "value": "۱۰۰",
+          "type": "number"
+        },
+        {
+          "name": "maxAttempts",
+          "label": "تلاش مجاز",
+          "value": "۲",
+          "type": "number"
+        },
+        {
+          "name": "allowLateSubmission",
+          "label": "پذیرش پس از مهلت",
+          "value": "خاموش",
+          "type": "toggle"
+        }
+      ],
+      "status": "supported",
+      "notes": "Use expected assignment/version tokens. Published content frozen.",
+      "endpoint": "PATCH /api/v1/academic/assignments/{assignmentId}"
+    },
+    {
+      "id": "T07",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ارزیابی پاسخ‌ها",
+      "kind": "list",
+      "subtitle": "هر پاسخ، یک فرصت برای بازخورد سازنده.",
+      "primaryCTA": "شروع ارزیابی",
+      "content": [
+        "سارا احمدی · تمرین فصل سوم",
+        "علی محمدی · تمرین فصل سوم",
+        "نگار حسینی · تمرین فصل دوم"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/academic/evaluations/queue"
+    },
+    {
+      "id": "T08",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ارزیابی پاسخ سارا",
+      "kind": "form",
+      "subtitle": "پاسخ و فایل‌ها را کنار بازخورد ببینید.",
+      "primaryCTA": "ذخیره ارزیابی",
+      "content": [
+        "مشاهده پاسخ دانش‌آموز",
+        "حداکثر امتیاز این تکلیف: ۱۰۰",
+        "یادداشت خصوصی برای دانش‌آموز نمایش داده نمی‌شود."
+      ],
+      "fields": [
+        {
+          "name": "score",
+          "label": "امتیاز",
+          "value": "۸۶",
+          "type": "number"
+        },
+        {
+          "name": "learnerFeedback",
+          "label": "بازخورد دانش‌آموز",
+          "value": "روش حل درست است؛ مراحل میانی را کامل‌تر بنویس.",
+          "type": "textarea"
+        },
+        {
+          "name": "guardianVisibleFeedback",
+          "label": "بازخورد قابل نمایش به والد",
+          "value": "سارا در حل معادله پیشرفت خوبی داشته است.",
+          "type": "textarea"
+        },
+        {
+          "name": "teacherPrivateNote",
+          "label": "یادداشت خصوصی مدرس",
+          "value": "در جلسه بعد درباره ساده‌سازی عبارت‌ها تمرین بیشتری داشته باشیم.",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PUT /api/v1/academic/submission-attempts/{attemptId}/evaluation"
+    },
+    {
+      "id": "T09",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "انتشار بازخورد",
+      "kind": "detail",
+      "subtitle": "دانش‌آموز و والد می‌توانند بازخورد مربوط به خود را ببینند.",
+      "primaryCTA": "انتشار نتیجه",
+      "content": [
+        "امتیاز: ۸۶ از ۱۰۰",
+        "بازخورد: روش حل درست است؛ واحدها را دقیق‌تر بنویس.",
+        "بازگشت به ارزیابی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/submission-attempts/{attemptId}/evaluation/release"
+    },
+    {
+      "id": "T10",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "افزودن آزمون",
+      "kind": "form",
+      "subtitle": "ابتدا زمان و قواعد آزمون را مشخص کنید.",
+      "primaryCTA": "ساخت پیش‌نویس",
+      "content": [
+        "مرحله بعد: افزودن سؤال‌ها"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان آزمون",
+          "value": "آزمون فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "توضیحات",
+          "value": "مبحث معادله‌های خطی و ساده‌سازی عبارت‌ها",
+          "type": "textarea"
+        },
+        {
+          "name": "availableFromUtc",
+          "label": "شروع دسترسی",
+          "value": "۱۰ آبان ۱۴۰۵، ساعت ۱۸:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "availableUntilUtc",
+          "label": "پایان دسترسی",
+          "value": "۱۰ آبان ۱۴۰۵، ساعت ۲۰:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "durationMinutes",
+          "label": "مدت آزمون",
+          "value": "۴۵",
+          "type": "number"
+        },
+        {
+          "name": "maxAttempts",
+          "label": "تلاش مجاز",
+          "value": "۱",
+          "type": "number"
+        },
+        {
+          "name": "maxScore",
+          "label": "حداکثر امتیاز",
+          "value": "۱۰۰",
+          "type": "number"
+        },
+        {
+          "name": "randomizationPolicy",
+          "label": "ترتیب سؤال‌ها",
+          "value": "ثابت",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/exams"
+    },
+    {
+      "id": "T11",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ویرایش آزمون",
+      "kind": "form",
+      "subtitle": "تنظیمات نسخه پیش‌نویس را بازبینی کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "نسخه منتشرشده تغییر نمی‌کند."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان آزمون",
+          "value": "آزمون فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "توضیحات",
+          "value": "مبحث معادله‌های خطی و ساده‌سازی عبارت‌ها",
+          "type": "textarea"
+        },
+        {
+          "name": "availableFromUtc",
+          "label": "شروع دسترسی",
+          "value": "۱۰ آبان ۱۴۰۵، ساعت ۱۸:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "availableUntilUtc",
+          "label": "پایان دسترسی",
+          "value": "۱۰ آبان ۱۴۰۵، ساعت ۲۰:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "durationMinutes",
+          "label": "مدت آزمون",
+          "value": "۴۵",
+          "type": "number"
+        },
+        {
+          "name": "maxAttempts",
+          "label": "تلاش مجاز",
+          "value": "۱",
+          "type": "number"
+        },
+        {
+          "name": "maxScore",
+          "label": "حداکثر امتیاز",
+          "value": "۱۰۰",
+          "type": "number"
+        },
+        {
+          "name": "randomizationPolicy",
+          "label": "ترتیب سؤال‌ها",
+          "value": "ثابت",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/academic/exams/{examId}"
+    },
+    {
+      "id": "T12",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "افزودن سؤال",
+      "kind": "form",
+      "subtitle": "صورت سؤال و امتیاز را روشن بنویسید.",
+      "primaryCTA": "افزودن به آزمون",
+      "content": [
+        "آزمون فصل سوم",
+        "گزینه صحیح را مشخص کنید."
+      ],
+      "fields": [
+        {
+          "name": "order",
+          "label": "ترتیب سؤال",
+          "value": "۳",
+          "type": "number"
+        },
+        {
+          "name": "type",
+          "label": "نوع سؤال",
+          "value": "چندگزینه‌ای",
+          "type": "select"
+        },
+        {
+          "name": "prompt",
+          "label": "صورت سؤال",
+          "value": "اگر ۲x + ۴ = ۱۲ باشد، مقدار x چند است؟",
+          "type": "textarea"
+        },
+        {
+          "name": "score",
+          "label": "امتیاز سؤال",
+          "value": "۱۰",
+          "type": "number"
+        },
+        {
+          "name": "options",
+          "label": "گزینه‌ها و تعیین پاسخ صحیح",
+          "value": "۲ / ۴ (پاسخ صحیح) / ۶ / ۸",
+          "type": "options"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/exams/{examId}/questions"
+    },
+    {
+      "id": "T13",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ویرایش سؤال",
+      "kind": "form",
+      "subtitle": "سؤال پیش‌نویس را اصلاح کنید.",
+      "primaryCTA": "ذخیره سؤال",
+      "content": [
+        "سؤال سوم",
+        "پیش‌نمایش دانش‌آموز"
+      ],
+      "fields": [
+        {
+          "name": "order",
+          "label": "ترتیب سؤال",
+          "value": "۳",
+          "type": "number"
+        },
+        {
+          "name": "type",
+          "label": "نوع سؤال",
+          "value": "چندگزینه‌ای",
+          "type": "select"
+        },
+        {
+          "name": "prompt",
+          "label": "صورت سؤال",
+          "value": "اگر ۲x + ۴ = ۱۲ باشد، مقدار x چند است؟",
+          "type": "textarea"
+        },
+        {
+          "name": "score",
+          "label": "امتیاز سؤال",
+          "value": "۱۰",
+          "type": "number"
+        },
+        {
+          "name": "options",
+          "label": "گزینه‌ها و تعیین پاسخ صحیح",
+          "value": "۲ / ۴ (پاسخ صحیح) / ۶ / ۸",
+          "type": "options"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/academic/exams/{examId}/questions/{questionId}"
+    },
+    {
+      "id": "T14",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "بازبینی آزمون",
+      "kind": "detail",
+      "subtitle": "قبل از انتشار، محتوا و امتیازها را بررسی کنید.",
+      "primaryCTA": "انتشار آزمون",
+      "content": [
+        "۱۲ سؤال",
+        "جمع امتیازها: ۱۰۰",
+        "پیش‌نمایش مدرس",
+        "پیش‌نمایش دانش‌آموز",
+        "زمان و قواعد آزمون",
+        "ویرایش سؤال"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "New published version uses explicit /versions route, not editing previous answers.",
+      "endpoint": "GET teacher-preview + POST /api/v1/academic/exams/{examId}/publish"
+    },
+    {
+      "id": "T15",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "افزودن جلسه",
+      "kind": "form",
+      "subtitle": "زمان و مسیر ورود را مشخص کنید.",
+      "primaryCTA": "ثبت جلسه",
+      "content": [
+        "کلاس: ریاضی نهم"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان جلسه",
+          "value": "حل تمرین فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "startUtc",
+          "label": "شروع جلسه",
+          "value": "۷ آبان ۱۴۰۵، ساعت ۱۶:۳۰",
+          "type": "datetime"
+        },
+        {
+          "name": "endUtc",
+          "label": "پایان جلسه",
+          "value": "۷ آبان ۱۴۰۵، ساعت ۱۷:۳۰",
+          "type": "datetime"
+        },
+        {
+          "name": "timeZoneId",
+          "label": "منطقه زمانی",
+          "value": "تهران",
+          "type": "select"
+        },
+        {
+          "name": "meetingUrl",
+          "label": "لینک جلسه آنلاین",
+          "value": "لینک Google Meet",
+          "type": "url"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/sessions"
+    },
+    {
+      "id": "T16",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ویرایش جلسه",
+      "kind": "form",
+      "subtitle": "تغییر زمان را پیش از ذخیره بررسی کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "وضعیت: برنامه‌ریزی‌شده",
+        "جلسه هنوز برگزار نشده است."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان جلسه",
+          "value": "حل تمرین فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "startUtc",
+          "label": "شروع جلسه",
+          "value": "۷ آبان ۱۴۰۵، ساعت ۱۶:۳۰",
+          "type": "datetime"
+        },
+        {
+          "name": "endUtc",
+          "label": "پایان جلسه",
+          "value": "۷ آبان ۱۴۰۵، ساعت ۱۷:۳۰",
+          "type": "datetime"
+        },
+        {
+          "name": "timeZoneId",
+          "label": "منطقه زمانی",
+          "value": "تهران",
+          "type": "select"
+        },
+        {
+          "name": "meetingUrl",
+          "label": "لینک جلسه آنلاین",
+          "value": "لینک Google Meet",
+          "type": "url"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/academic/sessions/{sessionId}"
+    },
+    {
+      "id": "T17",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ثبت حضور",
+      "kind": "list",
+      "subtitle": "وضعیت هر دانش‌آموز را جداگانه ثبت کنید.",
+      "primaryCTA": "ذخیره حضور",
+      "content": [
+        "سارا احمدی · حاضر",
+        "علی محمدی · تأخیر",
+        "نگار حسینی · ثبت‌نشده",
+        "حاضر / غایب / تأخیر / موجه"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PUT /api/v1/academic/sessions/{sessionId}/attendance"
+    },
+    {
+      "id": "T18",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "اصلاح حضور",
+      "kind": "form",
+      "subtitle": "دلیل اصلاح در سابقه ثبت می‌شود.",
+      "primaryCTA": "ثبت اصلاح",
+      "content": [
+        "سارا احمدی · جلسه فصل سوم",
+        "وضعیت قبلی: غایب"
+      ],
+      "fields": [
+        {
+          "name": "status",
+          "label": "وضعیت جدید",
+          "value": "حاضر",
+          "type": "select"
+        },
+        {
+          "name": "correctionReason",
+          "label": "دلیل اصلاح",
+          "value": "دانش‌آموز از ابتدای جلسه حاضر بوده و وضعیت او اشتباه ثبت شده است.",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/academic/sessions/{sessionId}/attendance/{attendanceId}"
+    },
+    {
+      "id": "T19",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "افزودن برنامه هفتگی",
+      "kind": "form",
+      "subtitle": "یک بار تنظیم کنید؛ جلسه‌های تکرارشونده را منظم ببینید.",
+      "primaryCTA": "ثبت برنامه",
+      "content": [
+        "کلاس: ریاضی نهم",
+        "زمان‌ها بر اساس منطقه زمانی انتخاب‌شده هستند."
+      ],
+      "fields": [
+        {
+          "name": "sessionTitle",
+          "label": "عنوان جلسه",
+          "value": "کلاس هفتگی ریاضی",
+          "type": "text"
+        },
+        {
+          "name": "localDayOfWeek",
+          "label": "روز هفته",
+          "value": "پنجشنبه",
+          "type": "select"
+        },
+        {
+          "name": "localStartTime",
+          "label": "ساعت شروع",
+          "value": "۱۶:۳۰",
+          "type": "time"
+        },
+        {
+          "name": "durationMinutes",
+          "label": "مدت جلسه (دقیقه)",
+          "value": "۶۰",
+          "type": "number"
+        },
+        {
+          "name": "timeZoneId",
+          "label": "منطقه زمانی",
+          "value": "تهران",
+          "type": "select"
+        },
+        {
+          "name": "effectiveFrom",
+          "label": "شروع برنامه",
+          "value": "۱۴ آبان ۱۴۰۵",
+          "type": "date"
+        },
+        {
+          "name": "effectiveUntil",
+          "label": "پایان برنامه",
+          "value": "۲۶ آذر ۱۴۰۵",
+          "type": "date"
+        },
+        {
+          "name": "meetingUrl",
+          "label": "لینک جلسه آنلاین (اختیاری)",
+          "value": "",
+          "type": "url"
+        }
+      ],
+      "status": "supported",
+      "notes": "Separate from one-off session T15; entry from S05 schedule in teacher context. 8-field form is vertically scrollable. Hide IDs. Convert local calendar display to ISO date/time using Asia/Tehran timezone.",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/schedule-rules"
+    },
+    {
+      "id": "T20",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "ویرایش برنامه هفتگی",
+      "kind": "form",
+      "subtitle": "زمان تازه و تاریخ شروع تغییر را مشخص کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "برنامه فعلی: پنجشنبه‌ها، ساعت ۱۶:۳۰",
+        "پیش از ذخیره، بازه و زمان جلسه‌ها را بازبینی کنید."
+      ],
+      "fields": [
+        {
+          "name": "sessionTitle",
+          "label": "عنوان جلسه",
+          "value": "کلاس هفتگی ریاضی",
+          "type": "text"
+        },
+        {
+          "name": "localDayOfWeek",
+          "label": "روز هفته",
+          "value": "پنجشنبه",
+          "type": "select"
+        },
+        {
+          "name": "localStartTime",
+          "label": "ساعت شروع",
+          "value": "۱۶:۳۰",
+          "type": "time"
+        },
+        {
+          "name": "durationMinutes",
+          "label": "مدت جلسه (دقیقه)",
+          "value": "۶۰",
+          "type": "number"
+        },
+        {
+          "name": "timeZoneId",
+          "label": "منطقه زمانی",
+          "value": "تهران",
+          "type": "select"
+        },
+        {
+          "name": "effectiveFrom",
+          "label": "شروع برنامه",
+          "value": "۱۴ آبان ۱۴۰۵",
+          "type": "date"
+        },
+        {
+          "name": "effectiveUntil",
+          "label": "پایان برنامه",
+          "value": "۲۶ آذر ۱۴۰۵",
+          "type": "date"
+        },
+        {
+          "name": "applyFromDate",
+          "label": "اعمال تغییر از تاریخ",
+          "value": "۲۱ آبان ۱۴۰۵",
+          "type": "date"
+        },
+        {
+          "name": "meetingUrl",
+          "label": "لینک جلسه آنلاین (اختیاری)",
+          "value": "",
+          "type": "url"
+        }
+      ],
+      "status": "supported",
+      "notes": "Distinct from T19 and one-off session T16. applyFromDate is separately REQUIRED by UpdateScheduleRuleCommand; do not omit. expectedRowVersion hidden, conflict preserves draft. Do not promise retroactive impact before server response.",
+      "endpoint": "PATCH /api/v1/academic/schedule-rules/{scheduleRuleId}"
+    },
+    {
+      "id": "T21",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "سؤال‌های آزمون",
+      "kind": "list",
+      "subtitle": "سؤال‌ها را بسازید، مرتب کنید و جداگانه ویرایش کنید.",
+      "primaryCTA": "افزودن سؤال",
+      "content": [
+        "آزمون فصل سوم · نسخه پیش‌نویس",
+        "۱. حل معادله · تشریحی · ۱۰ امتیاز",
+        "۲. ساده‌سازی عبارت · چندگزینه‌ای · ۵ امتیاز",
+        "۳. مقدار x · چندگزینه‌ای · ۱۰ امتیاز",
+        "بازبینی و انتشار آزمون"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "T10/T11 -> T21. CTA -> T12 create; each question -> T13 edit; review link -> T14. Question list differs from preview. Deletion uses exact DELETE /api/v1/academic/exams/{examId}/questions/{questionId}; published frozen version does not expose edit.",
+      "endpoint": "GET /api/v1/academic/exams/{examId}/editor"
+    },
+    {
+      "id": "T22",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "اصلاح نتیجه تکلیف",
+      "kind": "form",
+      "subtitle": "دلیل اصلاح را ثبت کنید تا سابقه روشن بماند.",
+      "primaryCTA": "ثبت اصلاح",
+      "content": [
+        "سارا احمدی · تمرین فصل سوم",
+        "امتیاز منتشرشده قبلی: ۸۶ از ۱۰۰",
+        "یادداشت خصوصی فقط برای مدرس‌های مجاز است."
+      ],
+      "fields": [
+        {
+          "name": "score",
+          "label": "امتیاز اصلاح‌شده",
+          "value": "۹۰",
+          "type": "number"
+        },
+        {
+          "name": "learnerFeedback",
+          "label": "بازخورد دانش‌آموز",
+          "value": "پاسخ مرحله دوم کامل بود؛ امتیاز آن اصلاح شد.",
+          "type": "textarea"
+        },
+        {
+          "name": "guardianVisibleFeedback",
+          "label": "بازخورد قابل نمایش به والد",
+          "value": "پس از بازبینی، امتیاز تکلیف اصلاح شد.",
+          "type": "textarea"
+        },
+        {
+          "name": "teacherPrivateNote",
+          "label": "یادداشت خصوصی مدرس",
+          "value": "",
+          "type": "textarea"
+        },
+        {
+          "name": "correctionReason",
+          "label": "دلیل اصلاح",
+          "value": "امتیاز مرحله دوم پاسخ در ارزیابی قبلی محاسبه نشده بود.",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "Exact CorrectReleasedEvaluationCommand fields; expectedReleasedEvaluationRowVersion hidden. This is separate from T08 draft evaluation. Follow returned status/releasedAtUtc; do not claim immediate publication if server returns Draft. Route to T09 release when appropriate.",
+      "endpoint": "POST /api/v1/academic/submission-attempts/{attemptId}/evaluation/corrections"
+    },
+    {
+      "id": "T23",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "بازبینی و انتشار تکلیف",
+      "kind": "detail",
+      "subtitle": "دانش‌آموزان پس از انتشار می‌توانند پاسخ بدهند.",
+      "primaryCTA": "انتشار تکلیف",
+      "content": [
+        "تمرین فصل سوم · ریاضی نهم",
+        "مهلت تحویل: جمعه ۸ آبان، ساعت ۲۰:۰۰",
+        "حداکثر امتیاز: ۱۰۰ · تعداد تلاش: ۲",
+        "تحویل پس از مهلت: بسته",
+        "پیش‌نمایش متن تکلیف",
+        "بازگشت و ویرایش"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Closes T05/T06 missing publication step. Versions become immutable when published. Show publish failure/conflict inline and preserve existing draft; never show student visibility until successful response.",
+      "endpoint": "GET /api/v1/academic/assignments/{assignmentId} + POST /api/v1/academic/assignments/{assignmentId}/publish"
+    },
+    {
+      "id": "T24",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "تصحیح آزمون‌ها",
+      "kind": "list",
+      "subtitle": "پاسخ‌های تحویل‌شده را به ترتیب بررسی کنید.",
+      "primaryCTA": "شروع تصحیح",
+      "content": [
+        "آزمون فصل سوم · ریاضی نهم",
+        "سارا احمدی · آماده تصحیح",
+        "علی محمدی · در حال تصحیح",
+        "نگار حسینی · ارزیابی کامل، منتشرنشده",
+        "فیلتر: همه · در انتظار · تکمیل‌شده"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Exam grading is separate from assignment queue T07. Row opens T25 with current attempt snapshot; POST grading obtains/starts authorized revision, no request body. Only finalized attempts qualify.",
+      "endpoint": "GET /api/v1/academic/exams/{examId}/grading + POST /api/v1/academic/exam-attempts/{attemptId}/grading"
+    },
+    {
+      "id": "T25",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "تصحیح پاسخ آزمون",
+      "kind": "form",
+      "subtitle": "امتیاز هر سؤال را همراه با دلیل روشن ثبت کنید.",
+      "primaryCTA": "ذخیره و سؤال بعد",
+      "content": [
+        "سارا احمدی · آزمون فصل سوم",
+        "سؤال ۳ از ۱۲ · حداکثر ۱۰ امتیاز",
+        "پاسخ دانش‌آموز: دو طرف معادله را بر ۲ تقسیم می‌کنیم.",
+        "مشاهده سؤال و پاسخ کامل",
+        "مرور نهایی ارزیابی"
+      ],
+      "fields": [
+        {
+          "name": "awardedScore",
+          "label": "امتیاز این سؤال",
+          "value": "۸",
+          "type": "number"
+        },
+        {
+          "name": "learnerFeedback",
+          "label": "بازخورد این پاسخ",
+          "value": "روش حل درست است؛ مرحله کم کردن ۴ را هم بنویس.",
+          "type": "textarea"
+        },
+        {
+          "name": "evaluatorPrivateNote",
+          "label": "یادداشت خصوصی مدرس",
+          "value": "",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "Exact GradeExamQuestionCommand fields. expectedGradeRowVersion hidden and refreshed after save. Score bounded by question max, private note not learner-visible. T24 -> T25 -> T26; unfinished grading stays draft. Show auto-graded/manual question distinction from server.",
+      "endpoint": "GET /api/v1/academic/exam-attempts/{attemptId}/grading + PATCH /api/v1/academic/exam-attempts/{attemptId}/grading/questions/{attemptQuestionId}"
+    },
+    {
+      "id": "T26",
+      "module": "teaching",
+      "role": "teacher",
+      "title": "بازبینی و انتشار نتیجه آزمون",
+      "kind": "form",
+      "subtitle": "بازخورد هر مخاطب را پیش از انتشار بررسی کنید.",
+      "primaryCTA": "انتشار نتیجه آزمون",
+      "content": [
+        "سارا احمدی · آزمون فصل سوم",
+        "۱۲ سؤال ارزیابی شده · مجموع ۸۸ از ۱۰۰",
+        "دانش‌آموز و والد فقط بازخورد مربوط به خود را می‌بینند."
+      ],
+      "fields": [
+        {
+          "name": "learnerFeedback",
+          "label": "بازخورد دانش‌آموز",
+          "value": "حل معادله‌ها خوب بود؛ مراحل محاسبه را کامل‌تر بنویس.",
+          "type": "textarea"
+        },
+        {
+          "name": "guardianVisibleFeedback",
+          "label": "بازخورد قابل نمایش به والد",
+          "value": "سارا بر مفاهیم فصل مسلط است و به تمرین دقت محاسبات نیاز دارد.",
+          "type": "textarea"
+        },
+        {
+          "name": "evaluatorPrivateNote",
+          "label": "یادداشت خصوصی مدرس",
+          "value": "",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "One review task with explicit final publish action. Save/complete grade first with CompleteExamGradeCommand, then release with refreshed expectedGradeRowVersion and clientOperationId. Distinguish Completed vs Released if release fails; never show published on complete alone. Do not show private note in learner/guardian previews.",
+      "endpoint": "POST /api/v1/academic/exam-attempts/{attemptId}/grading/complete + POST /api/v1/academic/exam-attempts/{attemptId}/grade/release"
+    },
+    {
+      "id": "M01",
+      "module": "management",
+      "role": "manager",
+      "title": "آموزشگاه آفتاب",
+      "kind": "home",
+      "subtitle": "تصویر روشن از آموزشگاه، در یک نگاه.",
+      "primaryCTA": "مدیریت آموزشگاه",
+      "content": [
+        "کلاس‌های فعال",
+        "ثبت‌نام‌ها",
+        "وضعیت حضور",
+        "کارهای نیازمند توجه"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/dashboards/manager"
+    },
+    {
+      "id": "M02",
+      "module": "management",
+      "role": "manager",
+      "title": "افراد آموزشگاه",
+      "kind": "list",
+      "subtitle": "پرونده‌ها، دعوت‌ها و اعضای آموزشگاه.",
+      "primaryCTA": "افزودن فرد",
+      "content": [
+        "سارا احمدی · دانش‌آموز",
+        "مریم رضایی · معلم",
+        "علی محمدی · دعوت در انتظار"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/organization/people"
+    },
+    {
+      "id": "M03",
+      "module": "management",
+      "role": "manager",
+      "title": "افزودن فرد",
+      "kind": "form",
+      "subtitle": "اطلاعات اولیه فرد را در آموزشگاه ثبت کنید.",
+      "primaryCTA": "ایجاد پرونده",
+      "content": [
+        "پس از ثبت، می‌توانید برای اتصال حساب دعوت بفرستید."
+      ],
+      "fields": [
+        {
+          "name": "firstName",
+          "label": "نام",
+          "value": "سارا",
+          "type": "text"
+        },
+        {
+          "name": "lastName",
+          "label": "نام خانوادگی",
+          "value": "احمدی",
+          "type": "text"
+        },
+        {
+          "name": "displayName",
+          "label": "نام نمایشی",
+          "value": "سارا احمدی",
+          "type": "text"
+        },
+        {
+          "name": "reason",
+          "label": "دلیل ثبت یا تغییر",
+          "value": "ثبت پرونده دانش‌آموز جدید در ترم پاییز",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/organization/people"
+    },
+    {
+      "id": "M04",
+      "module": "management",
+      "role": "manager",
+      "title": "ویرایش پرونده",
+      "kind": "form",
+      "subtitle": "نام ثبت‌شده در پرونده را اصلاح کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "پرونده مستقل",
+        "هنوز به حساب کاربری متصل نشده است."
+      ],
+      "fields": [
+        {
+          "name": "firstName",
+          "label": "نام",
+          "value": "سارا",
+          "type": "text"
+        },
+        {
+          "name": "lastName",
+          "label": "نام خانوادگی",
+          "value": "احمدی",
+          "type": "text"
+        },
+        {
+          "name": "displayName",
+          "label": "نام نمایشی",
+          "value": "سارا احمدی",
+          "type": "text"
+        },
+        {
+          "name": "reason",
+          "label": "دلیل ثبت یا تغییر",
+          "value": "اصلاح نام نمایشی مطابق درخواست دانش‌آموز",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/organization/people/{id}"
+    },
+    {
+      "id": "M05",
+      "module": "management",
+      "role": "manager",
+      "title": "افزودن کلاس",
+      "kind": "form",
+      "subtitle": "ترم، درس و ظرفیت را انتخاب کنید.",
+      "primaryCTA": "ایجاد کلاس",
+      "content": [
+        "مرحله بعد: انتخاب معلم و ثبت‌نام دانش‌آموز"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "نام کلاس",
+          "value": "ریاضی نهم",
+          "type": "text"
+        },
+        {
+          "name": "academicPeriodId",
+          "label": "ترم",
+          "value": "پاییز ۱۴۰۵",
+          "type": "select"
+        },
+        {
+          "name": "courseId",
+          "label": "درس",
+          "value": "ریاضی",
+          "type": "select"
+        },
+        {
+          "name": "capacity",
+          "label": "ظرفیت",
+          "value": "۲۵",
+          "type": "number"
+        },
+        {
+          "name": "activateImmediately",
+          "label": "فعال‌سازی فوری",
+          "value": "روشن",
+          "type": "toggle"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/classes"
+    },
+    {
+      "id": "M06",
+      "module": "management",
+      "role": "manager",
+      "title": "ثبت‌نام در کلاس",
+      "kind": "form",
+      "subtitle": "دانش‌آموز و کلاس را پیش از ثبت بررسی کنید.",
+      "primaryCTA": "ثبت‌نام دانش‌آموز",
+      "content": [
+        "ریاضی نهم · ۵ جای خالی",
+        "مدرس: مریم رضایی · ترم پاییز ۱۴۰۵"
+      ],
+      "fields": [
+        {
+          "name": "learnerOrganizationPersonId",
+          "label": "دانش‌آموز",
+          "value": "سارا احمدی",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/enrollments"
+    },
+    {
+      "id": "M07",
+      "module": "management",
+      "role": "manager",
+      "title": "دعوت والد",
+      "kind": "form",
+      "subtitle": "والد پس از پذیرش دعوت، گزارش آموزشی فرزند را می‌بیند.",
+      "primaryCTA": "ارسال دعوت",
+      "content": [
+        "دانش‌آموز: سارا احمدی",
+        "فقط یکی از شماره همراه یا نام کاربری را وارد کنید."
+      ],
+      "fields": [
+        {
+          "name": "phoneNumber",
+          "label": "شماره همراه والد",
+          "value": "",
+          "type": "tel"
+        },
+        {
+          "name": "username",
+          "label": "یا نام کاربری والد",
+          "value": "",
+          "type": "text"
+        },
+        {
+          "name": "expiresAtUtc",
+          "label": "اعتبار دعوت",
+          "value": "۱۵ آبان ۱۴۰۵، ساعت ۱۸:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "reason",
+          "label": "توضیح دعوت",
+          "value": "دعوت برای پیگیری وضعیت آموزشی سارا",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/organization/people/{learnerId}/guardian-invitations"
+    },
+    {
+      "id": "M08",
+      "module": "management",
+      "role": "manager",
+      "title": "ترم‌ها و درس‌ها",
+      "kind": "list",
+      "subtitle": "ساختار آموزشی پیش از تعریف کلاس.",
+      "primaryCTA": "افزودن ترم",
+      "content": [
+        "پاییز ۱۴۰۵",
+        "بهار ۱۴۰۵",
+        "درس‌ها: ریاضی، زبان، علوم",
+        "افزودن درس"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "No existing term/course edit endpoint; do not expose active edit.",
+      "endpoint": "GET periods + GET courses"
+    },
+    {
+      "id": "M09",
+      "module": "management",
+      "role": "manager",
+      "title": "افزودن ترم",
+      "kind": "form",
+      "subtitle": "بازه زمانی ترم را مشخص کنید.",
+      "primaryCTA": "ثبت ترم",
+      "content": [
+        "بازه زمانی کلاس‌های این ترم"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "نام ترم",
+          "value": "پاییز ۱۴۰۵",
+          "type": "text"
+        },
+        {
+          "name": "startDate",
+          "label": "تاریخ شروع",
+          "value": "۱ مهر ۱۴۰۵",
+          "type": "date"
+        },
+        {
+          "name": "endDate",
+          "label": "تاریخ پایان",
+          "value": "۳۰ آذر ۱۴۰۵",
+          "type": "date"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/periods"
+    },
+    {
+      "id": "M10",
+      "module": "management",
+      "role": "manager",
+      "title": "گزارش‌های آموزشگاه",
+      "kind": "detail",
+      "subtitle": "حضور، ارزیابی و ظرفیت را کنار هم ببینید.",
+      "primaryCTA": "درخواست خروجی",
+      "content": [
+        "کلاس: ریاضی نهم · بازه: آبان ۱۴۰۵",
+        "حضور و غیاب",
+        "ثبت‌نام‌ها",
+        "بار کاری مدرس‌ها",
+        "آخرین خروجی: در حال آماده‌سازی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/reports/manager/* + POST exports"
+    },
+    {
+      "id": "M11",
+      "module": "management",
+      "role": "manager",
+      "title": "افزودن درس آموزشگاه",
+      "kind": "form",
+      "subtitle": "نام درس پایه را برای کلاس‌های آموزشگاه ثبت کنید.",
+      "primaryCTA": "ثبت درس",
+      "content": [
+        "نمونه: ریاضی، علوم تجربی، زبان انگلیسی",
+        "پس از ثبت، هنگام ساخت کلاس قابل انتخاب است."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "نام درس",
+          "value": "ریاضی نهم",
+          "type": "text"
+        }
+      ],
+      "status": "supported",
+      "notes": "Entry from M08 course list and M05 course selector. This is Course catalog creation, distinct from Class Lesson/handout T02. No course-edit API, so do not add edit control.",
+      "endpoint": "POST /api/v1/academic/courses"
+    },
+    {
+      "id": "M12",
+      "module": "management",
+      "role": "manager",
+      "title": "افزودن مدرس به کلاس",
+      "kind": "form",
+      "subtitle": "مدرس دارای عضویت فعال آموزشگاه را انتخاب کنید.",
+      "primaryCTA": "ثبت مدرس کلاس",
+      "content": [
+        "کلاس: ریاضی نهم · ترم پاییز ۱۴۰۵",
+        "مدرس پس از ثبت، به بخش‌های مجاز این کلاس دسترسی خواهد داشت."
+      ],
+      "fields": [
+        {
+          "name": "teacherMembershipId",
+          "label": "انتخاب مدرس",
+          "value": "مریم رضایی",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "Exact AssignTeacherCommand field teacherMembershipId, not userId/personId. Member picker from authorized GET /api/v1/organization/members. Distinct from creating a user or granting arbitrary school role. Show already-active assignment error.",
+      "endpoint": "POST /api/v1/academic/classes/{classId}/teachers"
+    },
+    {
+      "id": "M13",
+      "module": "management",
+      "role": "manager",
+      "title": "آماده‌سازی گزارش",
+      "kind": "detail",
+      "subtitle": "پس از تکمیل، فایل گزارش همین‌جا آماده دریافت می‌شود.",
+      "primaryCTA": "بررسی وضعیت",
+      "content": [
+        "گزارش حضور ریاضی نهم · آبان ۱۴۰۵",
+        "وضعیت: در حال آماده‌سازی",
+        "قالب خروجی: CSV",
+        "می‌توانید از این صفحه خارج شوید و دوباره برگردید."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "M10 request export -> M13 with real returned jobId. Queued/Processing use check-status; Completed enables download; Failed shows retry request action with context. Download authorization rechecked; no fabricated progress percentage or clickable file before Completed. This screen is also reusable for authorized teacher/parent/student exports.",
+      "endpoint": "GET /api/v1/reports/exports/{jobId} + GET /api/v1/reports/exports/{jobId}/download"
+    },
+    {
+      "id": "P01",
+      "module": "guardian",
+      "role": "parent",
+      "title": "فرزندان من",
+      "kind": "list",
+      "subtitle": "فرزند موردنظر را برای دیدن گزارش انتخاب کنید.",
+      "primaryCTA": "دیدن وضعیت آموزشی",
+      "content": [
+        "سارا احمدی · آموزشگاه آفتاب",
+        "نیما احمدی · آموزشگاه آفتاب"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/guardian/children"
+    },
+    {
+      "id": "P02",
+      "module": "guardian",
+      "role": "parent",
+      "title": "امروزِ سارا",
+      "kind": "home",
+      "subtitle": "همراه رشد او، با اطلاعات آموزشی روشن.",
+      "primaryCTA": "گزارش پیشرفت",
+      "content": [
+        "جلسه بعدی",
+        "تکلیف‌های نزدیک",
+        "نتیجه‌های منتشرشده",
+        "حضور و غیاب"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "No private Messenger content or contacts for parent.",
+      "endpoint": "GET /api/v1/dashboards/parent"
+    },
+    {
+      "id": "P03",
+      "module": "guardian",
+      "role": "parent",
+      "title": "گزارش پیشرفت سارا",
+      "kind": "detail",
+      "subtitle": "فقط نتیجه‌ها و بازخوردهای منتشرشده.",
+      "primaryCTA": "جزئیات نتیجه",
+      "content": [
+        "ریاضی · آزمون فصل دوم · ۸۶ از ۱۰۰",
+        "تمرین فصل سوم · تحویل‌شده",
+        "جلسه امروز · حاضر",
+        "بازخورد مدرس: پیشرفت خوبی در حل معادله داشته است."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/reports/parent/*"
+    },
+    {
+      "id": "P04",
+      "module": "guardian",
+      "role": "parent",
+      "title": "تأیید ارتباط با فرزند",
+      "kind": "detail",
+      "subtitle": "نام فرزند و آموزشگاه را پیش از تأیید بررسی کنید.",
+      "primaryCTA": "تأیید ارتباط",
+      "content": [
+        "آموزشگاه آفتاب",
+        "سارا احمدی",
+        "با تأیید، گزارش آموزشی سارا برای شما فعال می‌شود.",
+        "رد دعوت"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Requires explicit confirmGuardianRelation=true; no chat access.",
+      "endpoint": "POST /api/v1/invitations/{invitationId}/accept"
+    },
+    {
+      "id": "C01",
+      "module": "messenger",
+      "role": "all",
+      "title": "پیام‌ها",
+      "kind": "list",
+      "subtitle": "ارتباط‌های شخصی و گفتگوهای آموزشگاه.",
+      "primaryCTA": "پیام جدید",
+      "content": [
+        "جستجوی گفتگو",
+        "همه · شخصی · گروه‌ها · کانال‌ها",
+        "مریم رضایی · جزوه را فرستادم",
+        "گروه ریاضی نهم · تمرین امروز",
+        "کانال آموزشگاه · اطلاعیه جدید"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/conversations"
+    },
+    {
+      "id": "C02",
+      "module": "messenger",
+      "role": "all",
+      "title": "پیام جدید",
+      "kind": "list",
+      "subtitle": "دوست یا مخاطب خود را پیدا کنید.",
+      "primaryCTA": "شروع گفتگو",
+      "content": [
+        "جستجوی افراد",
+        "مخاطبان اخیر",
+        "گروه جدید",
+        "کانال جدید"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Use canStartDirect/allowedActions; respect protected minor/unknown-age policy.",
+      "endpoint": "GET /api/v1/people/search + POST conversations/direct"
+    },
+    {
+      "id": "C03",
+      "module": "messenger",
+      "role": "all",
+      "title": "مریم رضایی",
+      "kind": "conversation",
+      "subtitle": "معلم ریاضی · آموزشگاه آفتاب",
+      "primaryCTA": "ارسال پیام",
+      "content": [
+        "سلام، برای تمرین امروز یک سؤال دارم.",
+        "سلام سارا، بفرست تا بررسی کنیم.",
+        "جزوه فصل سوم.pdf",
+        "پیام بنویسید…"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "No voice/video call button; media messages allowed; sending/failed/sent distinct.",
+      "endpoint": "GET/POST /api/v1/conversations/{conversationId}/messages"
+    },
+    {
+      "id": "C04",
+      "module": "messenger",
+      "role": "all",
+      "title": "ریاضی نهم",
+      "kind": "conversation",
+      "subtitle": "گفتگوی رسمی کلاس",
+      "primaryCTA": "ارسال پیام",
+      "content": [
+        "پیام سنجاق‌شده: برنامه این هفته",
+        "خانم رضایی: تمرین‌های امروز را اینجا ببینید.",
+        "فایل تمرین.pdf",
+        "موضوع‌ها: پرسش و پاسخ، تمرین‌ها"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/conversations/{conversationId}"
+    },
+    {
+      "id": "C05",
+      "module": "messenger",
+      "role": "all",
+      "title": "کانال آموزشگاه",
+      "kind": "conversation",
+      "subtitle": "اطلاعیه‌ها و مطالب آموزشگاه",
+      "primaryCTA": "دیدن جزئیات کانال",
+      "content": [
+        "اطلاعیه زمان کلاس‌های هفته آینده",
+        "فایل برنامه.pdf",
+        "واکنش به پیام",
+        "ذخیره پیام"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Photo-led channel MESSAGE cards supported; not general social posts/followers.",
+      "endpoint": "GET /api/v1/conversations/{conversationId}/messages"
+    },
+    {
+      "id": "C06",
+      "module": "messenger",
+      "role": "all",
+      "title": "ساخت گروه",
+      "kind": "form",
+      "subtitle": "یک فضای روشن برای گفتگوی مشترک.",
+      "primaryCTA": "ایجاد گروه",
+      "content": [
+        "نام، اعضا و حریم گروه را مشخص کنید."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "نام گروه",
+          "value": "گروه حل تمرین",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "توضیحات",
+          "value": "پرسش‌ها و تمرین‌های ریاضی نهم",
+          "type": "textarea"
+        },
+        {
+          "name": "scope",
+          "label": "فضا",
+          "value": "شخصی",
+          "type": "select"
+        },
+        {
+          "name": "initialParticipantUserIds",
+          "label": "اعضا",
+          "value": "مریم رضایی، سارا احمدی، علی محمدی",
+          "type": "people"
+        },
+        {
+          "name": "visibility",
+          "label": "دیده‌شدن",
+          "value": "خصوصی",
+          "type": "select"
+        },
+        {
+          "name": "groupHistoryPolicy",
+          "label": "تاریخچه برای اعضای جدید",
+          "value": "نمایش پیام‌های قبلی",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "No group photo upload field in contract.",
+      "endpoint": "POST /api/v1/conversations/groups"
+    },
+    {
+      "id": "C07",
+      "module": "messenger",
+      "role": "all",
+      "title": "ساخت کانال",
+      "kind": "form",
+      "subtitle": "مطالب را برای اعضای کانال منتشر کنید.",
+      "primaryCTA": "ایجاد کانال",
+      "content": [
+        "نام و نوع دسترسی کانال"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "نام کانال",
+          "value": "آموزشگاه آفتاب",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "توضیحات",
+          "value": "برنامه کلاس‌ها و خبرهای آموزشگاه آفتاب",
+          "type": "textarea"
+        },
+        {
+          "name": "scope",
+          "label": "فضا",
+          "value": "آموزشگاه",
+          "type": "select"
+        },
+        {
+          "name": "visibility",
+          "label": "دیده‌شدن",
+          "value": "خصوصی",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "Only if server grants creation capability.",
+      "endpoint": "POST /api/v1/conversations/channels"
+    },
+    {
+      "id": "C08",
+      "module": "messenger",
+      "role": "all",
+      "title": "درباره گروه",
+      "kind": "detail",
+      "subtitle": "اطلاعات، اعضا و فایل‌ها در یک صفحه.",
+      "primaryCTA": "ویرایش اطلاعات",
+      "content": [
+        "گروه حل تمرین",
+        "اعضا و مجوزها",
+        "رسانه‌ها، فایل‌ها و لینک‌ها",
+        "لینک دعوت",
+        "تنظیمات اعلان",
+        "خروج از گروه"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/conversations/{conversationId}"
+    },
+    {
+      "id": "C09",
+      "module": "messenger",
+      "role": "all",
+      "title": "ویرایش اطلاعات گروه",
+      "kind": "form",
+      "subtitle": "نام و توضیحات را تغییر دهید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "دسترسی اعضا در صفحه جداگانه تنظیم می‌شود."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "نام گروه",
+          "value": "گروه حل تمرین",
+          "type": "text"
+        },
+        {
+          "name": "description",
+          "label": "توضیحات",
+          "value": "پرسش‌ها و تمرین‌های ریاضی نهم",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/conversations/{conversationId}/info"
+    },
+    {
+      "id": "C10",
+      "module": "messenger",
+      "role": "all",
+      "title": "اعضا و دسترسی‌ها",
+      "kind": "list",
+      "subtitle": "نقش‌ها را شفاف و با حداقل دسترسی تنظیم کنید.",
+      "primaryCTA": "دعوت عضو",
+      "content": [
+        "مریم رضایی · مالک",
+        "سارا احمدی · عضو",
+        "مدیران گروه",
+        "درخواست‌های عضویت"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/conversations/{conversationId}/members"
+    },
+    {
+      "id": "C11",
+      "module": "messenger",
+      "role": "all",
+      "title": "تنظیم دسترسی عضو",
+      "kind": "form",
+      "subtitle": "فقط دسترسی موردنیاز را فعال کنید.",
+      "primaryCTA": "ذخیره دسترسی",
+      "content": [
+        "سارا احمدی",
+        "دسترسی‌های این عضو در گروه حل تمرین"
+      ],
+      "fields": [
+        {
+          "name": "role",
+          "label": "نقش",
+          "value": "عضو",
+          "type": "select"
+        },
+        {
+          "name": "permissions",
+          "label": "مجوزهای مدیریت",
+          "value": "افزودن اعضا: خاموش",
+          "type": "checkboxes"
+        },
+        {
+          "name": "restriction",
+          "label": "محدودیت ارسال",
+          "value": "بدون محدودیت",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH members/{id}/role + permissions / PUT restriction"
+    },
+    {
+      "id": "C12",
+      "module": "messenger",
+      "role": "all",
+      "title": "لینک دعوت جدید",
+      "kind": "form",
+      "subtitle": "اعتبار و تعداد استفاده را کنترل کنید.",
+      "primaryCTA": "ساخت لینک دعوت",
+      "content": [
+        "دعوت با لینک خصوصی",
+        "می‌توانید لینک را هر زمان غیرفعال کنید."
+      ],
+      "fields": [
+        {
+          "name": "expiresAtUtc",
+          "label": "انقضا",
+          "value": "۱۵ آبان ۱۴۰۵، ساعت ۲۰:۰۰",
+          "type": "datetime"
+        },
+        {
+          "name": "maximumUses",
+          "label": "حداکثر استفاده",
+          "value": "۱۰",
+          "type": "number"
+        },
+        {
+          "name": "requiresApproval",
+          "label": "نیاز به تأیید مدیر",
+          "value": "روشن",
+          "type": "toggle"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/invite-links"
+    },
+    {
+      "id": "C13",
+      "module": "messenger",
+      "role": "all",
+      "title": "جستجوی پیام‌ها",
+      "kind": "list",
+      "subtitle": "پیام، فایل یا لینک موردنظر را پیدا کنید.",
+      "primaryCTA": "باز کردن نتیجه",
+      "content": [
+        "جستجو: تمرین",
+        "فیلتر: گفتگو، فایل، لینک، موضوع",
+        "ریاضی نهم · تمرین فصل سوم",
+        "مریم رضایی · فایل تمرین"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/messages/search"
+    },
+    {
+      "id": "C14",
+      "module": "messenger",
+      "role": "all",
+      "title": "ذخیره‌شده‌ها",
+      "kind": "conversation",
+      "subtitle": "هر چیزی که می‌خواهید دوباره پیدا کنید.",
+      "primaryCTA": "افزودن برچسب",
+      "content": [
+        "جزوه فصل سوم.pdf",
+        "پیام ذخیره‌شده از گروه ریاضی",
+        "برچسب‌ها: درس، برنامه، مهم"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/conversations/saved"
+    },
+    {
+      "id": "C15",
+      "module": "messenger",
+      "role": "all",
+      "title": "نظرسنجی جدید",
+      "kind": "form",
+      "subtitle": "یک سؤال روشن، چند انتخاب ساده.",
+      "primaryCTA": "ارسال نظرسنجی",
+      "content": [
+        "تنظیمات رأی‌گیری را پیش از ارسال بررسی کنید."
+      ],
+      "fields": [
+        {
+          "name": "question",
+          "label": "سؤال",
+          "value": "کدام زمان مناسب‌تر است؟",
+          "type": "text"
+        },
+        {
+          "name": "options",
+          "label": "گزینه‌ها",
+          "value": "شنبه / دوشنبه",
+          "type": "options"
+        },
+        {
+          "name": "allowsMultipleAnswers",
+          "label": "چند انتخاب",
+          "value": "خاموش",
+          "type": "toggle"
+        },
+        {
+          "name": "isAnonymous",
+          "label": "رأی ناشناس",
+          "value": "روشن",
+          "type": "toggle"
+        },
+        {
+          "name": "isQuiz",
+          "label": "حالت آزمون",
+          "value": "خاموش",
+          "type": "toggle"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/polls"
+    },
+    {
+      "id": "C16",
+      "module": "messenger",
+      "role": "all",
+      "title": "نتیجه نظرسنجی",
+      "kind": "detail",
+      "subtitle": "زمان جلسه حل تمرین",
+      "primaryCTA": "ثبت رأی",
+      "content": [
+        "شنبه · ۶ رأی",
+        "دوشنبه · ۴ رأی",
+        "۱۰ شرکت‌کننده",
+        "رأی‌گیری ناشناس است."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Anonymous and quiz visibility rules; close state disables vote.",
+      "endpoint": "GET/POST messages/{messageId}/poll"
+    },
+    {
+      "id": "C17",
+      "module": "messenger",
+      "role": "all",
+      "title": "فهرست کار جدید",
+      "kind": "form",
+      "subtitle": "کارها را مشخص و قابل پیگیری کنید.",
+      "primaryCTA": "ارسال فهرست",
+      "content": [
+        "شخصی: وضعیت هر نفر جداست.",
+        "گروهی: وضعیت مشترک است."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان فهرست",
+          "value": "آمادگی برای آزمون",
+          "type": "text"
+        },
+        {
+          "name": "mode",
+          "label": "نوع فهرست",
+          "value": "شخصی",
+          "type": "select"
+        },
+        {
+          "name": "items",
+          "label": "موارد",
+          "value": "مرور جزوه / حل تمرین / پرسش‌ها",
+          "type": "items"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/checklists"
+    },
+    {
+      "id": "C18",
+      "module": "messenger",
+      "role": "all",
+      "title": "ویرایش فهرست کار",
+      "kind": "form",
+      "subtitle": "عنوان و موارد فهرست را تغییر دهید.",
+      "primaryCTA": "ذخیره فهرست",
+      "content": [
+        "آمادگی برای آزمون",
+        "عنوان و موارد را بازبینی کنید."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان فهرست",
+          "value": "آمادگی برای آزمون",
+          "type": "text"
+        },
+        {
+          "name": "mode",
+          "label": "نوع فهرست",
+          "value": "شخصی",
+          "type": "select"
+        },
+        {
+          "name": "items",
+          "label": "موارد",
+          "value": "مرور جزوه / حل تمرین / پرسش‌ها",
+          "type": "items"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PUT /api/v1/conversations/{conversationId}/messages/{messageId}/checklist"
+    },
+    {
+      "id": "C19",
+      "module": "messenger",
+      "role": "all",
+      "title": "زمان‌بندی پیام",
+      "kind": "form",
+      "subtitle": "تاریخ و ساعت ارسال را انتخاب کنید.",
+      "primaryCTA": "ثبت زمان‌بندی",
+      "content": [
+        "هنوز ارسال نشده",
+        "زمان به وقت تهران"
+      ],
+      "fields": [
+        {
+          "name": "message.text",
+          "label": "متن پیام",
+          "value": "یادآوری: جلسه حل تمرین امروز ساعت ۱۶:۳۰ شروع می‌شود.",
+          "type": "textarea"
+        },
+        {
+          "name": "scheduledAtUtc",
+          "label": "زمان ارسال",
+          "value": "۷ آبان ۱۴۰۵، ساعت ۱۶:۰۰",
+          "type": "datetime"
+        }
+      ],
+      "status": "supported",
+      "notes": "Scheduled intent is not Sent; scheduled edit absent—cancel and recreate.",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/scheduled-messages"
+    },
+    {
+      "id": "C20",
+      "module": "messenger",
+      "role": "all",
+      "title": "پیام‌های زمان‌بندی‌شده",
+      "kind": "list",
+      "subtitle": "پیام‌های منتظر ارسال را مدیریت کنید.",
+      "primaryCTA": "دیدن جزئیات",
+      "content": [
+        "یادآوری جلسه · امروز ۱۶:۰۰ · زمان‌بندی‌شده",
+        "ارسال ناموفق · نیاز به بررسی",
+        "لغو زمان‌بندی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/conversations/{conversationId}/scheduled-messages"
+    },
+    {
+      "id": "C21",
+      "module": "messenger",
+      "role": "all",
+      "title": "ویرایش پیام",
+      "kind": "form",
+      "subtitle": "متن پیام خود را اصلاح کنید.",
+      "primaryCTA": "ذخیره پیام",
+      "content": [
+        "گروه ریاضی نهم",
+        "پیام شما پس از ذخیره با برچسب «ویرایش‌شده» دیده می‌شود."
+      ],
+      "fields": [
+        {
+          "name": "text",
+          "label": "متن پیام",
+          "value": "تمرین امروز را تا ساعت ۱۸ بفرستید.",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/conversations/{conversationId}/messages/{messageId}"
+    },
+    {
+      "id": "C22",
+      "module": "messenger",
+      "role": "all",
+      "title": "گزارش پیام",
+      "kind": "form",
+      "subtitle": "مشکل را مشخص کنید تا بررسی شود.",
+      "primaryCTA": "ثبت گزارش",
+      "content": [
+        "گزارش به دریافت‌کننده پیام نشان داده نمی‌شود."
+      ],
+      "fields": [
+        {
+          "name": "reason",
+          "label": "نوع مشکل",
+          "value": "محتوای نامناسب",
+          "type": "select"
+        },
+        {
+          "name": "description",
+          "label": "توضیح اختیاری",
+          "value": "این پیام با موضوع گفتگو ارتباط ندارد و حاوی توهین است.",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/messages/{messageId}/reports"
+    },
+    {
+      "id": "C23",
+      "module": "messenger",
+      "role": "all",
+      "title": "پوشه جدید",
+      "kind": "form",
+      "subtitle": "گفتگوها را با نظم دلخواه دسته‌بندی کنید.",
+      "primaryCTA": "ذخیره پوشه",
+      "content": [
+        "پوشه شخصی شماست."
+      ],
+      "fields": [
+        {
+          "name": "name",
+          "label": "نام پوشه",
+          "value": "درس‌ها",
+          "type": "text"
+        },
+        {
+          "name": "includedTypes",
+          "label": "نوع گفتگوها",
+          "value": "گروه‌ها و کانال‌ها",
+          "type": "select"
+        },
+        {
+          "name": "unreadOnly",
+          "label": "فقط خوانده‌نشده‌ها",
+          "value": "خاموش",
+          "type": "toggle"
+        },
+        {
+          "name": "overrides",
+          "label": "گفتگوهای انتخابی",
+          "value": "ریاضی نهم، کانال آموزشگاه",
+          "type": "conversations"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PUT /api/v1/messaging/folders/{folderId}"
+    },
+    {
+      "id": "C24",
+      "module": "messenger",
+      "role": "all",
+      "title": "ویرایش پوشه",
+      "kind": "form",
+      "subtitle": "نام و گفتگوهای پوشه را تغییر دهید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "پوشه: درس‌ها"
+      ],
+      "fields": [
+        {
+          "name": "name",
+          "label": "نام پوشه",
+          "value": "درس‌ها",
+          "type": "text"
+        },
+        {
+          "name": "includedTypes",
+          "label": "نوع گفتگوها",
+          "value": "گروه‌ها و کانال‌ها",
+          "type": "select"
+        },
+        {
+          "name": "unreadOnly",
+          "label": "فقط خوانده‌نشده‌ها",
+          "value": "خاموش",
+          "type": "toggle"
+        },
+        {
+          "name": "overrides",
+          "label": "گفتگوهای انتخابی",
+          "value": "ریاضی نهم، کانال آموزشگاه",
+          "type": "conversations"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PUT /api/v1/messaging/folders/{folderId}"
+    },
+    {
+      "id": "C25",
+      "module": "messenger",
+      "role": "all",
+      "title": "دعوت عضو به گروه",
+      "kind": "form",
+      "subtitle": "حساب موردنظر و اعتبار دعوت را مشخص کنید.",
+      "primaryCTA": "ارسال دعوت",
+      "content": [
+        "گروه حل تمرین",
+        "دعوت پس از پذیرش، اجازه عضویت می‌دهد."
+      ],
+      "fields": [
+        {
+          "name": "targetUserId",
+          "label": "انتخاب مخاطب",
+          "value": "علی محمدی · @ali.mohammadi",
+          "type": "select"
+        },
+        {
+          "name": "expiresAtUtc",
+          "label": "اعتبار دعوت تا",
+          "value": "۱۴ آبان ۱۴۰۵، ساعت ۲۰:۰۰",
+          "type": "datetime"
+        }
+      ],
+      "status": "supported",
+      "notes": "C10 invite CTA -> C25. Exact CreateConversationInvitationCommand. Eligibility and current admin permissions checked server-side. Sent invitation is not joined membership; show invitation pending result. Actual invited user ID hidden behind selector.",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/invitations"
+    },
+    {
+      "id": "C26",
+      "module": "messenger",
+      "role": "all",
+      "title": "رسانه‌ها و فایل‌های گروه",
+      "kind": "list",
+      "subtitle": "پیوست‌های این گفتگو را راحت پیدا کنید.",
+      "primaryCTA": "باز کردن فایل",
+      "content": [
+        "فایل‌ها · تصویرها · ویدیوها",
+        "جزوه فصل سوم.pdf · امروز",
+        "تمرین معادله‌ها.pdf · دیروز",
+        "تصویر حل تمرین · ۵ آبان",
+        "نمایش فایل‌های قدیمی‌تر"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "C08 media action -> C26. Protected media only; actual thumbnails from authorized assets. Never expose Bearer tokens in download URLs. Permission/revoked/file-not-ready states handled. No unsupported Instagram gallery-post semantics.",
+      "endpoint": "GET /api/v1/conversations/{conversationId}/media"
+    },
+    {
+      "id": "C27",
+      "module": "messenger",
+      "role": "all",
+      "title": "موضوع‌های گفتگو",
+      "kind": "list",
+      "subtitle": "پرسش‌ها و تمرین‌ها را در مسیر مناسب ادامه دهید.",
+      "primaryCTA": "موضوع جدید",
+      "content": [
+        "ریاضی نهم",
+        "پرسش و پاسخ · باز",
+        "تمرین‌های فصل سوم · باز",
+        "آزمون فصل دوم · بسته"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Closes existing C04 topics affordance. CTA -> C28 for permitted members/admins; row opens authorized topic-filtered messages; edit action -> C29. Closed topics cannot be selected for new sends.",
+      "endpoint": "GET /api/v1/conversations/{conversationId}/topics"
+    },
+    {
+      "id": "C28",
+      "module": "messenger",
+      "role": "all",
+      "title": "افزودن موضوع",
+      "kind": "form",
+      "subtitle": "یک عنوان کوتاه کمک می‌کند پیام‌ها راحت‌تر پیدا شوند.",
+      "primaryCTA": "ساخت موضوع",
+      "content": [
+        "گفتگو: ریاضی نهم",
+        "نمونه: پرسش و پاسخ، تمرین‌های فصل سوم"
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان موضوع",
+          "value": "تمرین‌های فصل سوم",
+          "type": "text"
+        }
+      ],
+      "status": "supported",
+      "notes": "C27 -> C28. CreateConversationTopicCommand also needs hidden clientTopicId. Permissions server checked; no duplicate submit. Success returns to topic list or created topic messages.",
+      "endpoint": "POST /api/v1/conversations/{conversationId}/topics"
+    },
+    {
+      "id": "C29",
+      "module": "messenger",
+      "role": "all",
+      "title": "ویرایش موضوع",
+      "kind": "form",
+      "subtitle": "عنوان و وضعیت موضوع را جداگانه تنظیم کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "گفتگو: ریاضی نهم",
+        "موضوع بسته برای فرستادن پیام جدید قابل انتخاب نیست."
+      ],
+      "fields": [
+        {
+          "name": "title",
+          "label": "عنوان موضوع",
+          "value": "تمرین‌های فصل سوم",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "label": "وضعیت موضوع",
+          "value": "باز",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "Exact UpdateConversationTopicCommand title/status/expectedVersion. Status enum Open/Closed. Separate from C28 creation. current topic state and version authoritative; preserve draft on conflict.",
+      "endpoint": "PUT /api/v1/conversations/{conversationId}/topics/{topicId}"
+    },
+    {
+      "id": "U01",
+      "module": "profile",
+      "role": "all",
+      "title": "پروفایل من",
+      "kind": "profile",
+      "subtitle": "هویت شما، در همه فضاهای ماکان.",
+      "primaryCTA": "ویرایش پروفایل",
+      "content": [
+        "سارا احمدی",
+        "@sara.ahmadi",
+        "فضاهای من",
+        "ذخیره‌شده‌ها",
+        "امنیت و حریم خصوصی",
+        "تنظیم اعلان‌ها",
+        "امنیت و دستگاه‌ها"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "No bio/follower/following counts or post grid.",
+      "endpoint": "GET /api/v1/me"
+    },
+    {
+      "id": "U02",
+      "module": "profile",
+      "role": "all",
+      "title": "ویرایش پروفایل",
+      "kind": "form",
+      "subtitle": "اطلاعاتی که خودتان کنترل می‌کنید.",
+      "primaryCTA": "ذخیره تغییرات",
+      "content": [
+        "تغییر عکس پروفایل",
+        "نام کاربری: sara.ahmadi"
+      ],
+      "fields": [
+        {
+          "name": "firstName",
+          "label": "نام",
+          "value": "سارا",
+          "type": "text"
+        },
+        {
+          "name": "lastName",
+          "label": "نام خانوادگی",
+          "value": "احمدی",
+          "type": "text"
+        },
+        {
+          "name": "displayName",
+          "label": "نام نمایشی",
+          "value": "سارا احمدی",
+          "type": "text"
+        },
+        {
+          "name": "username",
+          "label": "نام کاربری",
+          "value": "sara.ahmadi",
+          "type": "text"
+        },
+        {
+          "name": "dateOfBirth",
+          "label": "تاریخ تولد",
+          "value": "",
+          "type": "date"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/me/profile"
+    },
+    {
+      "id": "U03",
+      "module": "profile",
+      "role": "all",
+      "title": "عکس پروفایل",
+      "kind": "form",
+      "subtitle": "عکس شخصی خود را انتخاب کنید.",
+      "primaryCTA": "ثبت عکس",
+      "content": [
+        "انتخاب JPEG یا PNG",
+        "پیش‌نمایش عکس",
+        "حذف عکس فعلی"
+      ],
+      "fields": [
+        {
+          "name": "fileAssetId",
+          "label": "فایل عکس",
+          "value": "",
+          "type": "image"
+        }
+      ],
+      "status": "supported",
+      "notes": "Own Ready personal file; organizationId=null.",
+      "endpoint": "PUT/DELETE /api/v1/me/profile-photo"
+    },
+    {
+      "id": "U04",
+      "module": "profile",
+      "role": "all",
+      "title": "حریم خصوصی",
+      "kind": "settings",
+      "subtitle": "انتخاب کنید چه کسانی با شما ارتباط بگیرند.",
+      "primaryCTA": "ذخیره تنظیمات",
+      "content": [
+        "دریافت پیام خصوصی",
+        "نمایش شماره همراه",
+        "پیدا کردن با شماره همراه",
+        "دعوت به گروه",
+        "نمایش آنلاین بودن",
+        "آخرین بازدید"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET/PUT /api/v1/messaging/privacy"
+    },
+    {
+      "id": "U05",
+      "module": "profile",
+      "role": "all",
+      "title": "اعلان‌ها",
+      "kind": "settings",
+      "subtitle": "اعلان‌های مهم، در زمان مناسب.",
+      "primaryCTA": "ذخیره تنظیمات",
+      "content": [
+        "پیام‌ها · فعالیت‌های آموزشی · حساب",
+        "اعلان روی این دستگاه: روشن",
+        "اعلان پیامکی: فعلاً در دسترس نیست",
+        "ساعت‌های سکوت: ۲۲:۰۰ تا ۰۷:۰۰",
+        "منطقه زمانی: تهران"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/notification-preferences + PUT category"
+    },
+    {
+      "id": "U06",
+      "module": "profile",
+      "role": "all",
+      "title": "امنیت و دستگاه‌ها",
+      "kind": "list",
+      "subtitle": "دستگاه‌های واردشده به حساب را بررسی کنید.",
+      "primaryCTA": "خروج از سایر دستگاه‌ها",
+      "content": [
+        "این دستگاه · تلفن همراه · فعال اکنون",
+        "مرورگر دسکتاپ · آخرین فعالیت امروز ۱۰:۲۴",
+        "برای پایان دسترسی، یک دستگاه را انتخاب کنید."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "No unsupported MFA/TOTP/step-up flows.",
+      "endpoint": "GET /api/v1/auth/sessions"
+    },
+    {
+      "id": "U07",
+      "module": "profile",
+      "role": "all",
+      "title": "مخاطبان",
+      "kind": "list",
+      "subtitle": "افرادی که ذخیره کرده‌اید.",
+      "primaryCTA": "افزودن مخاطب",
+      "content": [
+        "مریم رضایی · برگزیده",
+        "علی محمدی",
+        "نگار حسینی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET/POST /api/v1/contacts"
+    },
+    {
+      "id": "U08",
+      "module": "profile",
+      "role": "all",
+      "title": "ویرایش مخاطب",
+      "kind": "form",
+      "subtitle": "نام دلخواه فقط برای شما نمایش داده می‌شود.",
+      "primaryCTA": "ذخیره مخاطب",
+      "content": [
+        "حساب: @maryam.rezaei"
+      ],
+      "fields": [
+        {
+          "name": "savedName",
+          "label": "نام دلخواه",
+          "value": "خانم رضایی",
+          "type": "text"
+        },
+        {
+          "name": "isFavorite",
+          "label": "برگزیده",
+          "value": "روشن",
+          "type": "toggle"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "PATCH /api/v1/contacts/{contactUserId}"
+    },
+    {
+      "id": "U09",
+      "module": "profile",
+      "role": "all",
+      "title": "افزودن مخاطب",
+      "kind": "form",
+      "subtitle": "حساب موردنظر را پیدا کنید و با نام دلخواه ذخیره کنید.",
+      "primaryCTA": "ذخیره مخاطب",
+      "content": [
+        "انتخاب از حساب‌های قابل دسترس",
+        "نام دلخواه فقط برای شما نمایش داده می‌شود."
+      ],
+      "fields": [
+        {
+          "name": "contactUserId",
+          "label": "انتخاب حساب",
+          "value": "مریم رضایی · @maryam.rezaei",
+          "type": "select"
+        },
+        {
+          "name": "savedName",
+          "label": "نام دلخواه (اختیاری)",
+          "value": "خانم رضایی",
+          "type": "text"
+        }
+      ],
+      "status": "supported",
+      "notes": "U07 add CTA -> U09 -> U07; U08 remains separate edit. Search/resolve only discoverable existing accounts, never create an account from a phone number. contactUserId is chosen by display name; exact SaveUserContactCommand fields verified live.",
+      "endpoint": "POST /api/v1/contacts"
+    },
+    {
+      "id": "U10",
+      "module": "profile",
+      "role": "all",
+      "title": "اعلان‌های من",
+      "kind": "list",
+      "subtitle": "خبرهای مهم آموزشگاه و حساب شما.",
+      "primaryCTA": "باز کردن اعلان",
+      "content": [
+        "امروز · تکلیف تازه برای ریاضی نهم",
+        "امروز · نتیجه تمرین فصل دوم منتشر شد",
+        "دیروز · زمان جلسه زبان تغییر کرد",
+        "دعوت آموزشگاه منتظر پاسخ شماست.",
+        "تنظیمات اعلان‌ها"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Separate notification inbox from U05 notification preferences. Bell -> U10; settings link -> U05. Deep link target must be server-provided and authorized. Mark read only after selected item is opened; provide unread and all filter states.",
+      "endpoint": "GET /api/v1/notifications + POST /api/v1/notifications/{notificationId}/read"
+    },
+    {
+      "id": "U11",
+      "module": "profile",
+      "role": "all",
+      "title": "مریم رضایی",
+      "kind": "profile",
+      "subtitle": "@maryam.rezaei",
+      "primaryCTA": "شروع گفتگو",
+      "content": [
+        "ذخیره در مخاطبان",
+        "شماره همراه: فقط در صورت مجاز بودن نمایش داده می‌شود.",
+        "گزارش یا مسدود کردن"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Public safe contact profile, separate from U01 own profile. CTA enabled only if canStartDirect true. Contact action -> U09 or U08 depending isSavedContact. Real result controls phone visibility; no age reason leak, bio, follower metrics or social grid. Avatar/name are demo identity.",
+      "endpoint": "GET /api/v1/people/{userId} + POST /api/v1/conversations/direct"
+    },
+    {
+      "id": "W01",
+      "module": "marketing",
+      "role": "public",
+      "title": "یادگیری، کنار هم",
+      "kind": "marketing",
+      "subtitle": "ماکان؛ خانه آموزش و ارتباط شما.",
+      "primaryCTA": "آشنایی با ماکان",
+      "content": [
+        "برای دانش‌آموز، مدرس، والد و مدیر",
+        "آموزشگاه و پیام‌رسان در یک تجربه",
+        "معرفی امکانات",
+        "ورود به برنامه"
+      ],
+      "fields": [],
+      "status": "proposed",
+      "notes": "Static marketing content from supplied diagram; not a backend claim.",
+      "endpoint": ""
+    },
+    {
+      "id": "W02",
+      "module": "marketing",
+      "role": "public",
+      "title": "راهکار مناسب آموزشگاه شما",
+      "kind": "marketing",
+      "subtitle": "نقش‌ها روشن؛ کارها ساده‌تر.",
+      "primaryCTA": "بررسی امکانات",
+      "content": [
+        "مدیریت کلاس و محتوا",
+        "تکلیف، آزمون و بازخورد",
+        "گزارش برای والدین",
+        "ارتباط با حفظ حریم خصوصی"
+      ],
+      "fields": [],
+      "status": "proposed",
+      "notes": "Static product explanation; do not invent statistics/testimonials.",
+      "endpoint": ""
+    },
+    {
+      "id": "W03",
+      "module": "marketing",
+      "role": "manager",
+      "title": "اشتراک و ظرفیت",
+      "kind": "detail",
+      "subtitle": "ظرفیت و امکانات فعال آموزشگاه.",
+      "primaryCTA": "بررسی سفارش‌ها",
+      "content": [
+        "اشتراک آموزشگاه",
+        "اعضای فعال: ۲۴۰ از ۳۰۰ نفر",
+        "فضای فایل: ۱۲ از ۲۰ گیگابایت",
+        "آموزشگاه و پیام‌رسان فعال"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/commerce/summary"
+    },
+    {
+      "id": "W04",
+      "module": "marketing",
+      "role": "manager",
+      "title": "بررسی سفارش",
+      "kind": "form",
+      "subtitle": "پیش از ثبت، جزئیات و مبلغ سفارش را بررسی کنید.",
+      "primaryCTA": "بررسی دوباره مبلغ",
+      "content": [
+        "پلن انتخاب‌شده: آموزشگاه",
+        "مبلغ هنوز دریافت نشده است.",
+        "پس از نمایش مبلغ می‌توانید سفارش را ثبت کنید."
+      ],
+      "fields": [
+        {
+          "name": "planVersionId",
+          "label": "نسخه پلن",
+          "value": "پلن آموزشگاه",
+          "type": "select"
+        }
+      ],
+      "status": "supported",
+      "notes": "No made-up public plan/price catalog; gateway currently unavailable.",
+      "endpoint": "POST /api/v1/commerce/orders"
+    },
+    {
+      "id": "W05",
+      "module": "marketing",
+      "role": "manager",
+      "title": "سفارش‌های من",
+      "kind": "list",
+      "subtitle": "وضعیت هر سفارش را از همین‌جا پیگیری کنید.",
+      "primaryCTA": "مشاهده سفارش",
+      "content": [
+        "سفارش ۱۰۲۴ · در انتظار پرداخت",
+        "سفارش ۱۰۱۸ · در انتظار بررسی",
+        "جزئیات و وضعیت پرداخت هر سفارش"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/v1/commerce/orders"
+    },
+    {
+      "id": "W06",
+      "module": "marketing",
+      "role": "manager",
+      "title": "وضعیت پرداخت",
+      "kind": "detail",
+      "subtitle": "درگاه پرداخت در حال حاضر در دسترس نیست.",
+      "primaryCTA": "بازگشت به سفارش",
+      "content": [
+        "سفارش شما حفظ شده است.",
+        "در حال حاضر امکان پرداخت وجود ندارد.",
+        "وضعیت را بعداً از صفحه سفارش بررسی کنید."
+      ],
+      "fields": [],
+      "status": "disabled",
+      "notes": "Do not offer fake successful payment, refund, reconciliation.",
+      "endpoint": "POST /api/v1/commerce/orders/{orderId}/payments"
+    },
+    {
+      "id": "B01",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "مدیریت ماکان",
+      "kind": "home",
+      "subtitle": "نمای کلی عملیات و کارهای نیازمند بررسی.",
+      "primaryCTA": "بررسی عملیات",
+      "content": [
+        "آموزشگاه‌ها",
+        "راه‌اندازی‌ها",
+        "سفارش‌ها",
+        "پرونده‌های گزارش‌شده",
+        "سلامت سرویس‌ها"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/me"
+    },
+    {
+      "id": "B02",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "آموزشگاه‌ها",
+      "kind": "list",
+      "subtitle": "جستجو و بررسی سازمان‌های ثبت‌شده.",
+      "primaryCTA": "افزودن آموزشگاه",
+      "content": [
+        "آموزشگاه آفتاب · فعال",
+        "آموزشگاه اندیشه · در حال راه‌اندازی",
+        "فیلتر وضعیت"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/organizations"
+    },
+    {
+      "id": "B03",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "افزودن آموزشگاه",
+      "kind": "form",
+      "subtitle": "اطلاعات اولیه و دلیل ثبت را وارد کنید.",
+      "primaryCTA": "ایجاد آموزشگاه",
+      "content": [
+        "پس از ایجاد، مدیر آموزشگاه را دعوت کنید."
+      ],
+      "fields": [
+        {
+          "name": "name",
+          "label": "نام آموزشگاه",
+          "value": "آموزشگاه آفتاب",
+          "type": "text"
+        },
+        {
+          "name": "reason",
+          "label": "دلیل ثبت",
+          "value": "راه‌اندازی آموزشگاه آفتاب برای ترم پاییز",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/admin/v1/organizations"
+    },
+    {
+      "id": "B04",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "پرونده آموزشگاه",
+      "kind": "detail",
+      "subtitle": "اطلاعات عملیاتی و دسترسی‌ها.",
+      "primaryCTA": "بررسی اعضا",
+      "content": [
+        "وضعیت آموزشگاه: فعال",
+        "اعضا و نقش‌ها",
+        "اشتراک و ظرفیت",
+        "بررسی اثر تعلیق",
+        "تاریخچه اقدامات"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/organizations/{organizationId}"
+    },
+    {
+      "id": "B05",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "کاربران",
+      "kind": "list",
+      "subtitle": "حساب‌های کاربری و وضعیت دسترسی آن‌ها.",
+      "primaryCTA": "مشاهده کاربر",
+      "content": [
+        "جستجو با نام یا نام کاربری",
+        "کاربران فعال",
+        "کاربران تعلیق‌شده",
+        "بررسی وضعیت سنی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/users"
+    },
+    {
+      "id": "B06",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "بررسی گزارش‌ها",
+      "kind": "list",
+      "subtitle": "پرونده‌های نیازمند رسیدگی.",
+      "primaryCTA": "باز کردن پرونده",
+      "content": [
+        "در انتظار بررسی",
+        "در حال بررسی",
+        "بسته‌شده",
+        "فیلتر دلیل گزارش"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/moderation/cases"
+    },
+    {
+      "id": "B07",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "جزئیات پرونده گزارش",
+      "kind": "detail",
+      "subtitle": "گزارش و شواهد مربوط به همین پرونده.",
+      "primaryCTA": "شروع بررسی",
+      "content": [
+        "پیام گزارش‌شده",
+        "دلیل: محتوای نامناسب",
+        "فایل پیوست گزارش",
+        "ثبت تصمیم و دلیل",
+        "اتمام بررسی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "No unrestricted private chat browsing; evidence access scoped and audited.",
+      "endpoint": "GET /api/admin/v1/moderation/cases/{caseId}"
+    },
+    {
+      "id": "B08",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "پلن‌ها و نسخه‌ها",
+      "kind": "list",
+      "subtitle": "نسخه‌های قابل انتشار را جدا مدیریت کنید.",
+      "primaryCTA": "ایجاد نسخه پلن",
+      "content": [
+        "پلن آموزشگاه",
+        "نسخه پیش‌نویس",
+        "نسخه منتشرشده",
+        "ظرفیت‌ها و امکانات هر نسخه"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/commerce/plans"
+    },
+    {
+      "id": "B09",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "نسخه جدید پلن",
+      "kind": "form",
+      "subtitle": "قیمت و ظرفیت‌ها برای این نسخه ثبت می‌شوند.",
+      "primaryCTA": "ذخیره نسخه",
+      "content": [
+        "انتشار، اقدام جداگانه پس از بازبینی است."
+      ],
+      "fields": [
+        {
+          "name": "priceAmount",
+          "label": "مبلغ",
+          "value": "",
+          "type": "number"
+        },
+        {
+          "name": "currency",
+          "label": "واحد پول",
+          "value": "ریال",
+          "type": "select"
+        },
+        {
+          "name": "entitlements",
+          "label": "امکانات",
+          "value": "مدیریت آموزشگاه، پیام‌رسان",
+          "type": "items"
+        },
+        {
+          "name": "quotas",
+          "label": "ظرفیت‌ها",
+          "value": "۳۰۰ عضو، ۲۰ گیگابایت فایل",
+          "type": "items"
+        },
+        {
+          "name": "reason",
+          "label": "دلیل ایجاد نسخه",
+          "value": "تنظیم ظرفیت پلن برای ترم پاییز",
+          "type": "textarea"
+        }
+      ],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/admin/v1/commerce/plans/{planId}/versions"
+    },
+    {
+      "id": "B10",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "سلامت سرویس‌ها",
+      "kind": "detail",
+      "subtitle": "وضعیت سرویس، کارها و صف‌ها.",
+      "primaryCTA": "بررسی جزئیات",
+      "content": [
+        "سلامت سرویس‌ها",
+        "کارهای پس‌زمینه",
+        "عملیات اعلان",
+        "خطاهای نیازمند بررسی"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/operations/health"
+    },
+    {
+      "id": "B11",
+      "module": "platform",
+      "role": "platform-admin",
+      "title": "تاریخچه اقدامات",
+      "kind": "list",
+      "subtitle": "ردیابی اقدامات مدیریتی با زمینه و دلیل.",
+      "primaryCTA": "اعمال فیلتر",
+      "content": [
+        "کاربر انجام‌دهنده",
+        "زمان",
+        "نوع اقدام",
+        "منبع و نتیجه"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "GET /api/admin/v1/audit-logs"
+    },
+    {
+      "id": "E01",
+      "module": "states",
+      "role": "all",
+      "title": "اتصال برقرار نیست",
+      "kind": "detail",
+      "subtitle": "پیش‌نویس شما حفظ شده؛ پس از اتصال دوباره تلاش کنید.",
+      "primaryCTA": "تلاش دوباره",
+      "content": [
+        "هنوز چیزی ارسال یا تحویل نشده است.",
+        "بازگشت به پیش‌نویس"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Never claim message Sent or exam finalized without server acknowledgement.",
+      "endpoint": ""
+    },
+    {
+      "id": "E02",
+      "module": "states",
+      "role": "all",
+      "title": "تغییرات تازه‌ای وجود دارد",
+      "kind": "detail",
+      "subtitle": "این مورد در جای دیگری تغییر کرده است.",
+      "primaryCTA": "بررسی نسخه تازه",
+      "content": [
+        "نوشته شما حفظ شده است.",
+        "نسخه تازه را باز کنید و تغییرات خود را دوباره بررسی کنید."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "409/412 conflict; preserve local draft, require review.",
+      "endpoint": ""
+    },
+    {
+      "id": "E03",
+      "module": "states",
+      "role": "student",
+      "title": "آزمون روی دستگاه دیگری فعال است",
+      "kind": "exam",
+      "subtitle": "برای ادامه در این دستگاه، انتقال دسترسی را تأیید کنید.",
+      "primaryCTA": "انتقال به این دستگاه",
+      "content": [
+        "پاسخ‌های ذخیره‌شده حفظ می‌شوند.",
+        "پس از انتقال، پاسخ‌گویی در دستگاه قبلی متوقف می‌شود.",
+        "بازگشت"
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "",
+      "endpoint": "POST /api/v1/academic/exam-attempts/{attemptId}/write-lease/transfer"
+    },
+    {
+      "id": "E04",
+      "module": "states",
+      "role": "all",
+      "title": "کوپایلت هنوز فعال نیست",
+      "kind": "detail",
+      "subtitle": "وقتی این قابلیت برای حساب شما فعال شود، اینجا در دسترس خواهد بود.",
+      "primaryCTA": "بازگشت به آموزشگاه",
+      "content": [
+        "درس‌ها، تکلیف‌ها و پیام‌ها همچنان در دسترس‌اند."
+      ],
+      "fields": [],
+      "status": "disabled",
+      "notes": "AI disabled by default; no mock working chat.",
+      "endpoint": ""
+    },
+    {
+      "id": "E05",
+      "module": "states",
+      "role": "all",
+      "title": "پیامی پیدا نشد",
+      "kind": "list",
+      "subtitle": "عبارت دیگری را برای جستجو امتحان کنید.",
+      "primaryCTA": "پاک کردن جستجو",
+      "content": [
+        "«تمرین هندسه»",
+        "نام مخاطب یا بخشی از متن پیام را جستجو کنید."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "Contextual CTA only when creation capability exists.",
+      "endpoint": ""
+    },
+    {
+      "id": "E06",
+      "module": "states",
+      "role": "all",
+      "title": "این بخش در دسترس نیست",
+      "kind": "detail",
+      "subtitle": "ممکن است دسترسی شما تغییر کرده باشد یا این مورد دیگر موجود نباشد.",
+      "primaryCTA": "بازگشت به فضای من",
+      "content": [
+        "به فضای خود برگردید یا آموزشگاه دیگری انتخاب کنید."
+      ],
+      "fields": [],
+      "status": "supported",
+      "notes": "403/404 and revocation; do not disclose hidden resources.",
+      "endpoint": ""
+    }
+  ]
+}

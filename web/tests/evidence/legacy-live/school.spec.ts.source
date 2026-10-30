@@ -1,0 +1,393 @@
+import { test, expect, type BrowserContext, type Page } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { jalaliInputValue } from '../../src/lib/jalali-date';
+const origin = 'http://127.0.0.1:3130',
+  root = '/personal/education';
+test('real school: manager class, teacher activity, student submission/exam and selected parent', async ({
+  browser,
+}) => {
+  const contexts: BrowserContext[] = [];
+  const report: {
+    checkedAt: string;
+    checks: Record<string, unknown>;
+    errors: string[];
+    failures: unknown[];
+    ids: Record<string, string>;
+  } = { checkedAt: new Date().toISOString(), checks: {}, errors: [], failures: [], ids: {} };
+  await mkdir('docs/screenshots/school', { recursive: true });
+  async function login(role: string, phone: string) {
+    const context = await browser.newContext({
+      baseURL: origin,
+      viewport: { width: 1440, height: 1000 },
+      timezoneId: 'Asia/Tehran',
+    });
+    contexts.push(context);
+    const challenge = await context.request.post('/api/client/auth/challenge', {
+      headers: { Origin: origin },
+      data: { phoneNumber: phone },
+    });
+    expect(challenge.ok()).toBeTruthy();
+    const verified = await context.request.post('/api/client/auth/verify', {
+      headers: { Origin: origin },
+      data: {
+        phoneNumber: phone,
+        challengeId: (await challenge.json()).challengeId,
+        code: '123456',
+        deviceName: 'Makan school UI QA ' + role,
+      },
+    });
+    expect(verified.ok()).toBeTruthy();
+    let session = await (await context.request.get('/api/client/session')).json();
+    const spaces = await (
+      await context.request.get('/api/client/backend/api/v1/workspaces/me', {
+        headers: { 'X-Makan-Context': session.revision },
+      })
+    ).json();
+    const space = spaces.find((s: any) => s.workspaceType === 'Organization' && s.role === role);
+    expect(space).toBeTruthy();
+    const selected = await context.request.post('/api/client/backend/api/v1/workspaces/select', {
+      headers: { Origin: origin, 'X-Makan-Context': session.revision },
+      data: { workspaceType: 'Organization', membershipId: space.membershipId, role },
+    });
+    expect(selected.ok()).toBeTruthy();
+    const page = await context.newPage();
+    page.on('pageerror', (e) => report.errors.push(role + ': ' + e.message));
+    page.on('response', (r) => {
+      if (r.status() >= 400 && r.url().includes('/api/client/backend/'))
+        void r
+          .json()
+          .then((p) =>
+            report.failures.push({
+              role,
+              path: new URL(r.url()).pathname,
+              status: r.status(),
+              code: p.code,
+              traceId: p.traceId,
+            }),
+          )
+          .catch(() => {});
+    });
+    return { context, page };
+  }
+  async function api(context: BrowserContext, path: string, method = 'GET', data?: unknown) {
+    const current = await (await context.request.get('/api/client/session')).json();
+    return context.request.fetch('/api/client/backend' + path, {
+      method,
+      data,
+      headers: { Origin: origin, 'X-Makan-Context': current.revision },
+    });
+  }
+  async function capture(page: Page, name: string) {
+    await expect(page.locator('main')).toBeVisible();
+    const dimensions = await page.evaluate(() => ({
+      width: innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+    }));
+    expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.width);
+    await page.screenshot({ path: 'docs/screenshots/school/' + name + '.png' });
+  }
+  const local = (time: number) => new Date(time + 3.5 * 3600000).toISOString().slice(0, 16);
+  const stamp = String(Date.now()).slice(-7);
+  try {
+    const manager = await login('Manager', '09120000104');
+    await manager.page.goto(root + '/classes');
+    await expect(
+      manager.page.getByRole('heading', { name: 'کلاس‌های آموزشگاه', exact: true }),
+    ).toBeVisible();
+    await manager.page.getByRole('button', { name: 'ایجاد کلاس', exact: true }).click();
+    let dialog = manager.page.getByRole('dialog');
+    await dialog.getByLabel('عنوان درس جدید', { exact: true }).fill('درس آزمایشی وب ' + stamp);
+    await dialog.getByRole('button', { name: 'ثبت درس', exact: true }).click();
+    await expect(dialog.getByLabel('درس از کاتالوگ', { exact: true })).not.toHaveValue('');
+    await dialog.getByLabel('عنوان دوره', { exact: true }).fill('دورهٔ آزمایشی ' + stamp);
+    await dialog.getByLabel('شروع دوره', { exact: true }).fill(jalaliInputValue('2026-01-01'));
+    await dialog.getByLabel('پایان دوره', { exact: true }).fill(jalaliInputValue('2027-12-31'));
+    await dialog.getByRole('button', { name: 'ثبت دوره', exact: true }).click();
+    await expect(dialog.getByLabel('دوره از کاتالوگ', { exact: true })).not.toHaveValue('');
+    const classTitle = 'آزمون آموزشگاه — ' + stamp;
+    await dialog.getByLabel('نام کلاس', { exact: true }).fill(classTitle);
+    await dialog.getByLabel('ظرفیت کلاس', { exact: true }).fill('5');
+    await dialog.getByRole('button', { name: 'ثبت کلاس', exact: true }).click();
+    await dialog.getByRole('link', { name: 'مدیریت دانش‌آموزان و معلمان', exact: true }).click();
+    await expect(
+      manager.page.getByRole('heading', { name: classTitle, exact: true }),
+    ).toBeVisible();
+    const classId = new URL(manager.page.url()).pathname.split('/').at(-1)!;
+    report.ids.classId = classId;
+    await manager.page
+      .getByRole('navigation', { name: 'بخش‌های کلاس' })
+      .getByRole('button', { name: 'دانش‌آموزان', exact: true })
+      .click();
+    await manager.page.getByRole('button', { name: 'ثبت‌نام دانش‌آموز', exact: true }).click();
+    dialog = manager.page.getByRole('dialog');
+    await dialog
+      .getByLabel('پروندهٔ دانش‌آموز', { exact: true })
+      .selectOption({ label: 'Development Student' });
+    await dialog.getByRole('button', { name: 'ثبت‌نام در این کلاس', exact: true }).click();
+    await expect(dialog.getByText('تغییرات ثبت شد.', { exact: true })).toBeVisible();
+    await dialog.getByRole('button', { name: 'بستن', exact: true }).click();
+    await expect(
+      manager.page.getByRole('cell', { name: 'Development Student', exact: true }),
+    ).toBeVisible();
+    await manager.page
+      .getByRole('navigation', { name: 'بخش‌های کلاس' })
+      .getByRole('button', { name: 'معلمان', exact: true })
+      .click();
+    const directory = await (
+      await api(manager.context, '/api/v1/organization/members?Role=Teacher&Page=1&PageSize=30')
+    ).json();
+    const seededTeacher = directory.items.find((member: any) => member.username === 'dev.Teacher');
+    expect(seededTeacher).toBeTruthy();
+    await manager.page
+      .getByLabel('معلم آموزشگاه', { exact: true })
+      .selectOption(seededTeacher.membershipId);
+    await manager.page.getByRole('button', { name: 'افزودن معلم به کلاس', exact: true }).click();
+    await expect(manager.page.getByText('تغییرات ثبت شد.', { exact: true })).toBeVisible();
+    await capture(manager.page, 'manager-class-desktop');
+    report.checks.manager =
+      'Created actual course, date-only period and active class; enrolled seeded Student and assigned seeded Teacher via UI.';
+    const teacher = await login('Teacher', '09120000102');
+    await teacher.page.goto(root + '/classes');
+    await expect(
+      teacher.page.getByRole('heading', { name: classTitle, exact: true }),
+    ).toBeVisible();
+    await teacher.page.goto(root + '/classes/' + classId);
+    await teacher.page
+      .getByRole('navigation', { name: 'بخش‌های کلاس' })
+      .getByRole('button', { name: 'تکلیف‌ها', exact: true })
+      .click();
+    await teacher.page.getByRole('button', { name: 'ایجاد تکلیف', exact: true }).click();
+    dialog = teacher.page.getByRole('dialog');
+    await dialog.getByLabel('عنوان تکلیف', { exact: true }).fill('تکلیف آزمایشی ' + stamp);
+    await dialog
+      .getByLabel('شرح تکلیف', { exact: true })
+      .fill('این تکلیف فقط برای بررسی جریان واقعی آموزشگاه است. پاسخ کوتاه بنویسید.');
+    await dialog
+      .getByLabel('مهلت تحویل', { exact: true })
+      .fill(jalaliInputValue(local(Date.now() + 86400000), true));
+    await dialog.getByLabel('حداکثر دفعات تحویل', { exact: true }).fill('2');
+    await dialog.getByLabel('نمرهٔ کل', { exact: true }).fill('20');
+    await dialog.getByRole('button', { name: 'ذخیرهٔ پیش‌نویس تکلیف', exact: true }).click();
+    await expect(
+      teacher.page.getByRole('heading', { name: 'تکلیف آزمایشی ' + stamp, exact: true }),
+    ).toBeVisible();
+    const assignmentId = new URL(teacher.page.url()).pathname.split('/').at(-1)!;
+    report.ids.assignmentId = assignmentId;
+    await teacher.page
+      .getByRole('button', { name: 'انتشار برای دانش‌آموزان کلاس', exact: true })
+      .click();
+    await expect
+      .poll(async () => {
+        const r = await api(teacher.context, '/api/v1/academic/assignments/' + assignmentId);
+        return (await r.json()).status;
+      })
+      .toBe('Published');
+    report.checks.teacherAssignment =
+      'Teacher created and published an actual assignment for the assigned class.';
+    const student = await login('Student', '09120000101');
+    await student.page.goto(root + '/classes');
+    await expect(
+      student.page.getByRole('heading', { name: classTitle, exact: true }),
+    ).toBeVisible();
+    await student.page.goto(root + '/assignments/' + assignmentId);
+    await student.page.getByRole('button', { name: 'شروع پاسخ جدید', exact: true }).click();
+    await student.page
+      .getByRole('textbox', { name: 'پاسخ تکلیف', exact: true })
+      .fill('پاسخ آزمایشی دانش‌آموز؛ جریان ثبت و تحویل بررسی شد.');
+    await student.page.getByRole('button', { name: 'ذخیرهٔ پاسخ', exact: true }).click();
+    await expect(
+      student.page.getByRole('button', { name: 'تحویل نهایی تکلیف', exact: true }),
+    ).toBeEnabled();
+    await student.page.getByRole('button', { name: 'تحویل نهایی تکلیف', exact: true }).click();
+    await expect(
+      student.page.getByRole('heading', { name: 'تکلیف تحویل داده شد', exact: true }),
+    ).toBeVisible();
+    await capture(student.page, 'student-assignment-desktop');
+    report.checks.studentAssignment =
+      'Student saved and finalized a real text submission; receipt displayed.';
+    await teacher.page.goto(root + '/classes/' + classId);
+    await teacher.page
+      .getByRole('navigation', { name: 'بخش‌های کلاس' })
+      .getByRole('button', { name: 'دانش‌آموزان', exact: true })
+      .click();
+    await expect(
+      teacher.page.getByRole('cell', { name: 'Development Student', exact: true }),
+    ).toBeVisible();
+    await capture(teacher.page, 'teacher-learners-desktop');
+    await teacher.page
+      .getByRole('navigation', { name: 'بخش‌های کلاس' })
+      .getByRole('button', { name: 'آزمون‌ها', exact: true })
+      .click();
+    await teacher.page.getByRole('button', { name: 'ایجاد آزمون', exact: true }).click();
+    dialog = teacher.page.getByRole('dialog');
+    await dialog.getByLabel('عنوان آزمون', { exact: true }).fill('آزمون تست وب ' + stamp);
+    await dialog
+      .getByLabel('توضیحات آزمون', { exact: true })
+      .fill('آزمون آزمایشی جریان آموزشگاه، بدون اثر بر ارزیابی واقعی.');
+    await dialog
+      .getByLabel('آغاز دسترسی', { exact: true })
+      .fill(jalaliInputValue(local(Date.now() - 300000), true));
+    await dialog
+      .getByLabel('پایان دسترسی', { exact: true })
+      .fill(jalaliInputValue(local(Date.now() + 86400000), true));
+    await dialog.getByLabel('مدت آزمون (دقیقه)', { exact: true }).fill('10');
+    await dialog.getByLabel('دفعات مجاز شرکت', { exact: true }).fill('1');
+    await dialog.getByLabel('نمرهٔ کل', { exact: true }).fill('20');
+    await dialog.getByRole('button', { name: 'ایجاد پیش‌نویس آزمون', exact: true }).click();
+    await expect(
+      teacher.page.getByRole('heading', { name: 'آزمون تست وب ' + stamp, exact: true }),
+    ).toBeVisible();
+    const examId = new URL(teacher.page.url()).pathname.split('/').at(-2)!;
+    report.ids.examId = examId;
+    await teacher.page.getByRole('button', { name: 'افزودن پرسش', exact: true }).click();
+    dialog = teacher.page.getByRole('dialog');
+    await dialog.getByLabel('متن پرسش', { exact: true }).fill('یک جمله برای تأیید آزمون بنویسید.');
+    await dialog.getByLabel('نمرهٔ پرسش', { exact: true }).fill('10');
+    await dialog.getByRole('button', { name: 'ثبت پرسش', exact: true }).click();
+    await expect(
+      teacher.page.getByText('یک جمله برای تأیید آزمون بنویسید.', { exact: true }),
+    ).toBeVisible();
+    if (await dialog.isVisible())
+      await dialog.getByRole('button', { name: 'بستن', exact: true }).click();
+    await teacher.page.getByRole('button', { name: 'افزودن پرسش', exact: true }).click();
+    dialog = teacher.page.getByRole('dialog');
+    await dialog.getByLabel('نوع پرسش', { exact: true }).selectOption('ObjectiveSingleChoice');
+    await dialog.getByLabel('متن پرسش', { exact: true }).fill('کدام گزینه برابر با دو است؟');
+    await dialog.getByLabel('نمرهٔ پرسش', { exact: true }).fill('10');
+    for (const n of [1, 2, 3, 4])
+      await dialog.getByLabel('گزینهٔ ' + n, { exact: true }).fill(String(n));
+    await dialog.getByLabel('گزینهٔ صحیح', { exact: true }).selectOption('2');
+    await dialog.getByRole('button', { name: 'ثبت پرسش', exact: true }).click();
+    await expect(
+      teacher.page.getByText('کدام گزینه برابر با دو است؟', { exact: true }),
+    ).toBeVisible();
+    if (await dialog.isVisible())
+      await dialog.getByRole('button', { name: 'بستن', exact: true }).click();
+    await teacher.page.getByRole('button', { name: 'انتشار آزمون برای کلاس', exact: true }).click();
+    await expect(
+      teacher.page.getByRole('button', { name: 'انتشار آزمون برای کلاس', exact: true }),
+    ).toHaveCount(0);
+    report.checks.teacherExam =
+      'Teacher created actual descriptive and single-choice questions and published the exam.';
+    await student.page.goto(root + '/exams/' + examId);
+    await student.page.getByRole('button', { name: 'شروع آزمون', exact: true }).click();
+    const activate = student.page.getByRole('button', {
+      name: 'فعال‌کردن پاسخ‌دهی در این دستگاه',
+      exact: true,
+    });
+    await expect(
+      student.page.getByRole('textbox', { name: 'پاسخ پرسش 1', exact: true }),
+    ).toBeVisible();
+    if (await activate.isVisible()) await activate.click();
+    await expect(
+      student.page.getByRole('textbox', { name: 'پاسخ پرسش 1', exact: true }),
+    ).toBeEnabled();
+    await student.page
+      .getByRole('textbox', { name: 'پاسخ پرسش 1', exact: true })
+      .fill('پاسخ آزمایشی آزمون از نشست مستقل دانش‌آموز.');
+    await student.page.getByRole('button', { name: 'ذخیرهٔ پاسخ 1', exact: true }).click();
+    await student.page.getByRole('radio', { name: '2', exact: true }).check();
+    await student.page.getByRole('button', { name: 'ذخیرهٔ پاسخ 2', exact: true }).click();
+    await expect(
+      student.page.getByRole('button', { name: 'ثبت نهایی آزمون', exact: true }),
+    ).toBeEnabled();
+    await student.page.getByRole('button', { name: 'ثبت نهایی آزمون', exact: true }).click();
+    await expect(
+      student.page.getByRole('heading', { name: 'آزمون ثبت نهایی شد', exact: true }),
+    ).toBeVisible();
+    await capture(student.page, 'student-exam-receipt-desktop');
+    report.checks.studentExam =
+      'Student started, saved descriptive and single-choice server-versioned answers and finalized; real receipt displayed.';
+    await student.page.reload();
+    await expect(
+      student.page.getByRole('button', { name: 'شروع آزمون', exact: true }),
+    ).toBeDisabled();
+    await student.page.getByRole('button', { name: 'مشاهدهٔ رسید ثبت آزمون', exact: true }).click();
+    await expect(student.page.getByText(/پاسخ از 2 پرسش/)).toBeVisible();
+    report.checks.examReload =
+      'Finalized attempt remains visible after reload; max-attempt start disabled and real receipt recovered.';
+    const parent = await login('Parent', '09120000103');
+    const parentState = await (await parent.context.request.get('/api/client/session')).json();
+    const people = await (
+      await api(manager.context, '/api/v1/organization/people?page=1&pageSize=30')
+    ).json();
+    const learner = people.items.find((p: any) => p.displayName === 'Development Student');
+    const existing = await (
+      await api(manager.context, '/api/v1/organization/guardian-relations?page=1&pageSize=30')
+    ).json();
+    let relation = existing.items.find(
+      (item: any) =>
+        item.guardianUserId === parentState.user.id &&
+        item.learnerOrganizationPersonId === learner.id &&
+        ['Pending', 'Active'].includes(item.status),
+    );
+    if (!relation) {
+      const relationResponse = await api(
+        manager.context,
+        '/api/v1/organization/guardian-relations',
+        'POST',
+        {
+          guardianUserId: parentState.user.id,
+          learnerOrganizationPersonId: learner.id,
+          reason: 'رابطهٔ مجاز حساب‌های seed برای آزمون جریان آموزشگاه',
+        },
+      );
+      expect(relationResponse.ok()).toBeTruthy();
+      relation = await relationResponse.json();
+    }
+    if (relation.status === 'Pending') {
+      const activated = await api(
+        manager.context,
+        '/api/v1/organization/guardian-relations/' + relation.id + '/activate',
+        'POST',
+        { expectedRowVersion: relation.rowVersion, reason: 'فعال‌سازی رابطهٔ seed آزمایشی مجاز' },
+      );
+      expect(activated.ok()).toBeTruthy();
+      relation = await activated.json();
+    }
+    report.ids.guardianRelationId = relation.id;
+    await parent.page.goto(root);
+    await parent.page.getByRole('button', { name: /Development Student/ }).click();
+    await expect(
+      parent.page.getByRole('heading', { name: 'وضعیت تکلیف‌های فرزند', exact: true }),
+    ).toBeVisible();
+    await expect(
+      parent.page.getByRole('heading', { name: 'تکلیف آزمایشی ' + stamp, exact: true }),
+    ).toBeVisible();
+    await capture(parent.page, 'parent-progress-desktop');
+    report.checks.parent =
+      'Manager created/activated a real relation with known authorized seed identity through API; parent selected the child through UI and read the actual assignment report.';
+    for (const [name, target] of [
+      ['manager', manager],
+      ['teacher', teacher],
+      ['student', student],
+      ['parent', parent],
+    ] as const) {
+      await target.page.setViewportSize({ width: 390, height: 844 });
+      await capture(target.page, name + '-mobile');
+    }
+    expect(report.errors).toEqual([]);
+  } catch (error) {
+    report.checks.failure = error instanceof Error ? error.message : String(error);
+    const page = contexts.at(-1)?.pages().at(-1);
+    if (page) {
+      report.checks.failureUrl = page.url();
+      report.checks.failureText = (
+        await page
+          .locator('body')
+          .innerText()
+          .catch(() => '')
+      ).slice(0, 5500);
+      await page.screenshot({ path: 'docs/screenshots/school/failure.png' }).catch(() => {});
+    }
+    throw error;
+  } finally {
+    await writeFile('docs/school-live-qa.json', JSON.stringify(report, null, 2) + '\n');
+    for (const context of contexts) {
+      await context.request
+        .post('/api/client/auth/logout', { headers: { Origin: origin } })
+        .catch(() => {});
+      await context.close();
+    }
+  }
+});

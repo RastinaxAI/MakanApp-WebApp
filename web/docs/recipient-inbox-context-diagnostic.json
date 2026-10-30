@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-29T08:19:24.469Z",
+  "mode": "REAL SEEDED TEACHER",
+  "checks": [
+    {
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "conversations": [
+        {
+          "id": "68f10dcc-d3f6-4c67-95b2-adb87576ab9e",
+          "scope": "Personal",
+          "pinned": false,
+          "lastSequence": 16,
+          "unread": 0
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/workspaces/me",
+      "status": 200,
+      "conversations": [
+        {},
+        {}
+      ]
+    },
+    {
+      "path": "/api/v1/workspaces/select",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "conversations": [
+        {
+          "id": "bd495c5c-12d0-4e76-922d-5271c78c0f5d",
+          "scope": "Organization",
+          "pinned": false,
+          "lastSequence": 1,
+          "unread": 0
+        }
+      ]
+    },
+    {
+      "path": "/api/v1/workspaces/select",
+      "status": 200
+    }
+  ]
+}

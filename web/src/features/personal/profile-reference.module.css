@@ -1,0 +1,179 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+.unavailableRow {
+  display: flex;
+}
+.profileCard {
+  position: relative;
+}
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.identity h1 {
+  font-size: 24px;
+  font-weight: 750;
+  line-height: 1.55;
+}
+.identity p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.avatar {
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 4px solid var(--surface);
+  box-shadow: 0 0 0 1px var(--border);
+  border-radius: 50%;
+  font-size: 28px;
+  overflow: hidden;
+}
+.status {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+}
+.edit {
+  width: 100%;
+  border: 0 !important;
+  background: var(--soft);
+  color: var(--text);
+  font-size: 13px;
+  min-height: 48px;
+  border-radius: 8px;
+}
+.links {
+  border-top: 1px solid var(--border);
+  padding-top: 22px;
+}
+.links h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.links > a,
+.links > button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 84px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  text-align: start;
+  padding: 10px 0;
+}
+.links > a > span:nth-child(2),
+.links > button > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.links strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 650;
+}
+.links small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.links > a > svg,
+.links > button > svg {
+  color: var(--muted);
+  width: 16px;
+  height: 16px;
+}
+.settingIcon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+  border-radius: 50%;
+}
+.details {
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+.details summary {
+  min-height: 44px;
+  cursor: pointer;
+}
+.infoCard {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  min-width: 0;
+}
+.infoCard h2 {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+.infoCard > p {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.infoFields {
+  margin: 0;
+}
+.infoFields > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.infoFields > div:last-child {
+  border: 0;
+  padding-bottom: 0;
+}
+.infoFields dt {
+  color: var(--muted);
+  font-size: 13px;
+}
+.infoFields dd {
+  margin: 0;
+  text-align: end;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+@media (max-width: 767px) {
+  .avatar {
+    width: 76px;
+    height: 76px;
+  }
+  .identity {
+    gap: 18px;
+  }
+  .identity h1 {
+    font-size: 24px;
+  }
+  .profile {
+    gap: 20px;
+  }
+  .links > a,
+  .links > button {
+    min-height: 86px;
+  }
+}

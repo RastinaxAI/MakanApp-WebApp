@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-29T06:25:11.106Z",
+  "mode": "REAL SEEDED STUDENT",
+  "checks": [
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=All&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=Direct&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=Group&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=Channel&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=Unread&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=Archived&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    },
+    {
+      "workspace": "Organization",
+      "role": "Student",
+      "path": "/api/v1/conversations?filter=Saved&page=1&pageSize=30",
+      "status": 200,
+      "count": 0
+    }
+  ]
+}

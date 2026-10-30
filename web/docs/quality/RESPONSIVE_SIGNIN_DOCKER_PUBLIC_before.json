@@ -1,0 +1,7 @@
+{
+  "method": "sum of decoded initial HTML script references fetched via HTTP; not browser runtime resources or total page transfer",
+  "origin": "http://127.0.0.1:8080",
+  "scripts": 13,
+  "scriptDecodedBytes": 742952,
+  "entry": 200
+}

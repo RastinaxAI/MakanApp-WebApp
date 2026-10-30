@@ -1,0 +1,209 @@
+import { test, expect, type BrowserContext } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+const origin = 'http://127.0.0.1:3130';
+
+// Explicit real integration against the user-authorized seeded accounts on :8090.
+// Creates labeled QA messages only. No fixture/interception, session export or privacy changes.
+test('seeded roles: direct chat UI, two independent recipients, files and filtered deep links', async ({
+  browser,
+}) => {
+  const contexts: BrowserContext[] = [];
+  const report: any = {
+    checkedAt: new Date().toISOString(),
+    mode: 'REAL SEEDED BACKEND :8090',
+    checks: [],
+    network: [],
+    errors: [],
+  };
+  const pending: Promise<void>[] = [];
+  const headers = { Origin: origin };
+  try {
+    const accounts = [];
+    for (const [role, phone] of [
+      ['Student', '09120000101'],
+      ['Teacher', '09120000102'],
+      ['Parent', '09120000103'],
+      ['Manager', '09120000104'],
+    ]) {
+      const context = await browser.newContext({
+        baseURL: origin,
+        timezoneId: 'Asia/Tehran',
+        acceptDownloads: true,
+      });
+      contexts.push(context);
+      const challenge = await context.request.post('/api/client/auth/challenge', {
+        headers,
+        data: { phoneNumber: phone },
+      });
+      expect(challenge.status()).toBe(202);
+      const verify = await context.request.post('/api/client/auth/verify', {
+        headers,
+        data: {
+          phoneNumber: phone,
+          challengeId: (await challenge.json()).challengeId,
+          code: '123456',
+          deviceName: 'Makan direct chat regression',
+        },
+      });
+      expect(verify.status()).toBe(200);
+      const state = await (await context.request.get('/api/client/session')).json();
+      const page = await context.newPage();
+      page.on('pageerror', (error) => report.errors.push({ role, message: error.message }));
+      page.on('response', (response) => {
+        const url = new URL(response.url());
+        if (!url.pathname.startsWith('/api/client/')) return;
+        pending.push(
+          (async () => {
+            const problem = response.ok() ? {} : await response.json().catch(() => ({}));
+            report.network.push({
+              role,
+              path: url.pathname,
+              method: response.request().method(),
+              status: response.status(),
+              code: problem.code,
+              traceId: problem.traceId,
+            });
+          })(),
+        );
+      });
+      await page.goto('/personal/messages');
+      await expect(page.getByRole('heading', { name: 'پیام‌ها', exact: true })).toBeVisible();
+      await expect(page.locator('[aria-label="فهرست گفتگوها"] .error-state')).toHaveCount(0);
+      accounts.push({ role, context, page, state });
+      report.checks.push({ role, check: 'login and actual inbox UI', passed: true });
+    }
+    await mkdir('docs/screenshots/messaging-direct', { recursive: true });
+    for (const [sender, receiver] of [
+      [accounts[2], accounts[3]],
+      [accounts[0], accounts[1]],
+    ]) {
+      const direct = await sender.context.request.post(
+        '/api/client/backend/api/v1/conversations/direct',
+        {
+          headers: { ...headers, 'X-Makan-Context': sender.state.revision },
+          data: { targetUserId: receiver.state.user.id, scope: 'Personal' },
+        },
+      );
+      const body = await direct.json();
+      report.checks.push({
+        check: 'start direct',
+        pair: sender.role + '/' + receiver.role,
+        status: direct.status(),
+        code: body.code,
+        traceId: body.traceId,
+      });
+      if (!direct.ok() && sender.role === 'Parent') {
+        expect(direct.status()).toBe(404);
+        expect(body.code).toBe('DIRECT_RECIPIENT_NOT_AVAILABLE');
+        report.parentManagerChat =
+          'BLOCKED_BY_BACKEND_RECIPIENT_AVAILABILITY — no policy bypass or successful delivery claimed';
+        continue;
+      }
+      expect(direct.ok(), JSON.stringify(body)).toBeTruthy();
+      const id = body.conversationId;
+      // A filter with no matching rows must not block an authorized direct deep link.
+      for (const account of [sender, receiver]) {
+        await account.page.goto('/personal/messages/' + id + '?q=qa-no-inbox-match');
+        await expect(account.page.getByLabel('متن پیام', { exact: true })).toBeVisible();
+        await expect(account.page.locator('[data-message-room]')).toBeVisible();
+      }
+      for (const [from, to] of [
+        [sender, receiver],
+        [receiver, sender],
+      ]) {
+        const text = `آزمون رابط چت ${from.role} به ${to.role} — ${Date.now()}`;
+        await from.page.getByLabel('متن پیام', { exact: true }).fill(text);
+        const sent = from.page.waitForResponse(
+          (r) => r.url().endsWith('/' + id + '/messages') && r.request().method() === 'POST',
+        );
+        await from.page.getByRole('button', { name: 'ارسال پیام', exact: true }).click();
+        const response = await sent;
+        expect(response.ok(), await response.text()).toBeTruthy();
+        await expect(
+          to.page.locator('[data-message-room] article').filter({ hasText: text }),
+        ).toBeVisible({ timeout: 20000 });
+        report.checks.push({
+          check: 'sent through UI and visible in separate recipient browser',
+          from: from.role,
+          to: to.role,
+          passed: true,
+        });
+      }
+      await sender.page.setViewportSize({ width: 390, height: 844 });
+      await expect(sender.page.getByLabel('متن پیام', { exact: true })).toBeVisible();
+      await sender.page.screenshot({
+        path: `docs/screenshots/messaging-direct/${sender.role}-mobile.png`,
+      });
+      await receiver.page.screenshot({
+        path: `docs/screenshots/messaging-direct/${receiver.role}-desktop.png`,
+      });
+      if (sender.role === 'Student') {
+        await sender.page.getByLabel('انتخاب فایل از دستگاه', { exact: true }).setInputFiles({
+          name: 'makan-direct-qa.txt',
+          mimeType: 'text/plain',
+          buffer: Buffer.from('Makan direct attachment QA 2026-10-29\n'),
+        });
+        const dialog = sender.page.getByRole('dialog', { name: 'ارسال پیوست' });
+        await expect(dialog).toBeVisible();
+        const upload = sender.page.waitForResponse(
+          (r) =>
+            new URL(r.url()).pathname === '/api/client/files' && r.request().method() === 'POST',
+        );
+        const attached = sender.page.waitForResponse(
+          (r) => r.url().endsWith('/' + id + '/messages') && r.request().method() === 'POST',
+        );
+        await dialog.getByRole('button', { name: /ارسال .* پیوست/ }).click();
+        expect((await upload).ok()).toBeTruthy();
+        const sent = await attached;
+        const detail = await sent.json();
+        report.checks.push({
+          check: 'direct attachment upload and send',
+          status: sent.status(),
+          code: detail.code,
+          traceId: detail.traceId,
+        });
+        if (sent.ok()) {
+          await expect(
+            receiver.page.getByText('makan-direct-qa.txt', { exact: true }).first(),
+          ).toBeVisible({ timeout: 20000 });
+          report.attachmentDelivery = 'VERIFIED';
+        } else {
+          expect(sent.status()).toBe(422);
+          expect(detail.code).toBe('MESSAGE_SAFETY_REVIEW_REQUIRED');
+          await expect(
+            sender.page.locator('[data-message-room]').getByRole('alert').filter({
+              hasText:
+                'این پیام برای ارسال به بررسی ایمنی نیاز دارد. برای پیگیری با پشتیبانی تماس بگیرید.',
+            }),
+          ).toBeVisible();
+          await expect(receiver.page.getByText('makan-direct-qa.txt', { exact: true })).toHaveCount(
+            0,
+          );
+          report.attachmentDelivery =
+            'BLOCKED_BY_BACKEND_SAFETY — upload succeeds; attachment is not delivered and no bypass is attempted';
+        }
+      }
+    }
+    await Promise.allSettled(pending);
+    const managedRequests = report.network.filter((n: any) =>
+      /\/conversations\/[0-9a-f-]+$/.test(n.path),
+    );
+    expect(managedRequests).toEqual([]);
+    expect(report.errors).toEqual([]);
+    report.outcome =
+      report.parentManagerChat || report.attachmentDelivery !== 'VERIFIED'
+        ? 'STUDENT_TEACHER_TEXT_CHAT_VERIFIED — OTHER_BACKEND_LIMITATIONS_RECORDED'
+        : 'PASS';
+  } catch (error) {
+    report.outcome = 'FAIL';
+    report.failure = String(error);
+    throw error;
+  } finally {
+    await Promise.allSettled(pending);
+    await writeFile('docs/messaging-direct-live-qa.json', JSON.stringify(report, null, 2) + '\n');
+    for (const context of contexts) {
+      await context.request.post('/api/client/auth/logout', { headers }).catch(() => {});
+      await context.close();
+    }
+  }
+});

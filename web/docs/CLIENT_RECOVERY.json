@@ -1,0 +1,753 @@
+{
+  "reason": "User confirmed keeping the five-role client after concurrent files were moved out of the active Next project.",
+  "source": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\MakanManagement\\archive\\client-before-admin-20261029",
+  "destination": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web",
+  "previousProjectModified": false,
+  "privateEnvironmentCopied": false,
+  "files": [
+    {
+      "path": "src\\app\\(personal)\\personal\\ai\\page.tsx",
+      "sha256": "8d12d79dd9df9976fe4fb8aabea05dd86ba67d2356653b9e5a225816d7849f6b"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\assistant\\page.tsx",
+      "sha256": "8d12d79dd9df9976fe4fb8aabea05dd86ba67d2356653b9e5a225816d7849f6b"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\contacts\\page.tsx",
+      "sha256": "a54711f5366b1304d350fae9c2d6d3e2d810cd930932f366f3bc0f6a1b6c2c71"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\education\\page.tsx",
+      "sha256": "2166081cb8c7d1dc1d76e22958986b1cc7a2a16f74f3a92a6451e293d8042f88"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\education\\[...section]\\page.tsx",
+      "sha256": "e5a49bf83dc94cc52b62d26176db6ffcf55e014fcf10c3f1359d7506774cff49"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\layout.tsx",
+      "sha256": "6f584a281d75a8028505a0be2f84059da3992e0e477c99b4382124adecb314a0"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\messages\\new\\page.tsx",
+      "sha256": "bc0744a49f83119dd142a7a6066ab853d9a7bef8c56076a5d017a59c64797b84"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\messages\\page.tsx",
+      "sha256": "91248e9a6d4d337dfa8977c18cfb60cc6d3ce68488d012b168843a4c8b5e15f0"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\messages\\[id]\\page.tsx",
+      "sha256": "e4e536abcf5298c2c4b02732456ae4a93e5a225ef551137c61dc76337ee165f2"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\page.tsx",
+      "sha256": "2166081cb8c7d1dc1d76e22958986b1cc7a2a16f74f3a92a6451e293d8042f88"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\privacy\\page.tsx",
+      "sha256": "33d25334aa8cae6b92fa6cd3947ff8967c7c83f3429a3f487dd977e46b0f2a76"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\profile\\edit\\page.tsx",
+      "sha256": "5d46291e85863b9b8b513cd7f5761acaca14d5c1688ddadfe8e1ae252ce5adf9"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\profile\\page.tsx",
+      "sha256": "97b0a549259764380a716ba032495902576f91f370ad3b49533f4f5840091daa"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\resources\\page.tsx",
+      "sha256": "1f2f62a22e8141972406cdea4b61de79c9a4934ee2146751ba600e4f3ee3f351"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\settings\\appearance\\page.tsx",
+      "sha256": "f5eaf08db7726fe0dbdf3e55bd691c06a48fb32eb84f2b483114b3b2212520ae"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\settings\\blocked\\page.tsx",
+      "sha256": "e0c832c1c0356ae65152e2ca8050b06535f48f08b3d67845f7121e53dc111f78"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\settings\\page.tsx",
+      "sha256": "0c05e4c1177bae3f2e9e1281ca4decd6ec23deceef2d5841eaa77f8264c468c5"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\settings\\privacy\\page.tsx",
+      "sha256": "33d25334aa8cae6b92fa6cd3947ff8967c7c83f3429a3f487dd977e46b0f2a76"
+    },
+    {
+      "path": "src\\app\\(personal)\\personal\\subscription\\page.tsx",
+      "sha256": "02fcdab13c40feb49b6b4bf91972da9a8baf584f1ee3f0f9cb7463e53a940a0f"
+    },
+    {
+      "path": "src\\app\\api\\client\\auth\\[action]\\route.ts",
+      "sha256": "092e1bb7883fe504abe84df333756affa0f3676e3c79fc70f6f30aa5ba9ba472"
+    },
+    {
+      "path": "src\\app\\api\\client\\backend\\[...path]\\route.ts",
+      "sha256": "a407356e09ee1f6bc47a34e115fd1fd37ff01637e3ae8588a3e5b8ce7756f923"
+    },
+    {
+      "path": "src\\app\\api\\client\\files\\[[...path]]\\route.ts",
+      "sha256": "18da35c916e6627d535a3e4187bc0b554a50ba4d74cdc4ea681f6b372537bea8"
+    },
+    {
+      "path": "src\\app\\api\\client\\hub\\[[...path]]\\route.ts",
+      "sha256": "3c77587013cfeb99ee240239b173a155d93b199508fcef528ea90a411b9361c4"
+    },
+    {
+      "path": "src\\app\\api\\client\\profile-media\\[[...path]]\\route.ts",
+      "sha256": "97b745213569cb22137c995232cd82ed6c125a5a0eb90d4f818fdd74fe546e67"
+    },
+    {
+      "path": "src\\app\\api\\client\\session\\route.ts",
+      "sha256": "de6f0f58ee0575c5d878759a19fb440bb319d6c86567a5b89a4c11c7c93660ee"
+    },
+    {
+      "path": "src\\app\\enter\\page.tsx",
+      "sha256": "0287830e4604d1ea957ac9bb17b58493b970e062d042f29b310bd3b7e16a5b96"
+    },
+    {
+      "path": "src\\app\\error.tsx",
+      "sha256": "76e73ffb45ba17b89a8d52d247b40e335190f36f8a80a0e6bce5778e820a4f99"
+    },
+    {
+      "path": "src\\app\\globals.css",
+      "sha256": "1f2ef905da34272eee1df6330acc9aeeb9ca89c469a0328eef2f045f1c343d5d"
+    },
+    {
+      "path": "src\\app\\jalali-date-input.css",
+      "sha256": "e3fb8d21da35e5302e9c645300e4c179464bacaf41c5d7bdbd0e4e97678990c6"
+    },
+    {
+      "path": "src\\app\\layout.tsx",
+      "sha256": "3f645da4b69ed66bea41482356808670878bb8413fccce28873bed82bd22cf6b"
+    },
+    {
+      "path": "src\\app\\manifest.ts",
+      "sha256": "d9fe4743afbe8d1c0bc644dbab261731a2222c1776420f9d2bfb26d24fe60bea"
+    },
+    {
+      "path": "src\\app\\not-found.tsx",
+      "sha256": "03da4789511fe25461dfb64e89775242fe14f6f198a8a93b9df70b48dce78a69"
+    },
+    {
+      "path": "src\\app\\page.tsx",
+      "sha256": "8ccf5c8d514005fbfc6219e862e0505ff16bdffc5cbbbc0dbc2ed201556237ca"
+    },
+    {
+      "path": "src\\components\\providers.tsx",
+      "sha256": "fbcb0beda1067ac60778951a332b428bc35fc345cbb49ef4d8fec750153d505b"
+    },
+    {
+      "path": "src\\components\\ui\\app-link.tsx",
+      "sha256": "39aad0d86b44e58fe55495d60ffa0215c9ea883ebb9ffc8a4e4aaa5f363a87df"
+    },
+    {
+      "path": "src\\components\\ui\\brand.tsx",
+      "sha256": "30eb425559b1cc6ff2424a44fe59dfcadb53f848908640e45bcd8e0d1b16025e"
+    },
+    {
+      "path": "src\\components\\ui\\button.tsx",
+      "sha256": "ffa95466330c26ee277d1c003025daf75e452f8816c323b67d9759ef59667601"
+    },
+    {
+      "path": "src\\components\\ui\\data-table.tsx",
+      "sha256": "53bc8224138021612681b16eae3235a0ca35a83e669b9e1b5bc6679a171b7a88"
+    },
+    {
+      "path": "src\\components\\ui\\data-view.tsx",
+      "sha256": "75ba9e9a786b389c4bc1650e4ba7bba20199a801f2de9e04c67ef32f23bb9d8d"
+    },
+    {
+      "path": "src\\components\\ui\\dialog.tsx",
+      "sha256": "a9a9431d03ba6dfd33c05136a9bc037afd8a358c0dc9022c99980a626cee5bbc"
+    },
+    {
+      "path": "src\\components\\ui\\jalali-date-input.tsx",
+      "sha256": "17b8c7cd7e1a8a31404e9f7c5c8d311c44b169b60b9d979e04ff3399fd678079"
+    },
+    {
+      "path": "src\\components\\ui\\section-tabs.tsx",
+      "sha256": "feebe5e6e9f82fea1dc98ed1f21cdf8e6e6d04feecb97521a2d6b61dd9c7c1bc"
+    },
+    {
+      "path": "src\\components\\ui\\states.tsx",
+      "sha256": "f45cf207046bf76f035e78bbe02f197c8d62f81e697df5d5864d9f321ed5f3c4"
+    },
+    {
+      "path": "src\\features\\auth\\login.tsx",
+      "sha256": "6aef4867211ee841e3c4537fe910f3ceeb68a7402e43c2779f0dbb975dd46304"
+    },
+    {
+      "path": "src\\features\\personal\\assistant.module.css",
+      "sha256": "854d32be585593aec799f6deb23b675eec2f0f97eb1d8b6000db42a70a51bc76"
+    },
+    {
+      "path": "src\\features\\personal\\assistant.tsx",
+      "sha256": "900ada9d2bd7a76248b089ccba850faa927d0397266d3f2e18d991f56d5e8ba2"
+    },
+    {
+      "path": "src\\features\\personal\\education.tsx",
+      "sha256": "72da8aca2af0c77f6e8f1304a3178008c288cba015518e4b0e2dcdb24c79ccc9"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\contacts.tsx",
+      "sha256": "05647d81c96d78945300875ba2edce00fdd0b4c948e2ba5f0f453c83ffa20cac"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\create.tsx",
+      "sha256": "90fa3e9efb31a0772292f8b1ea1b551f698f32276ff315ac90c186dce99dd0f5"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\directory.ts",
+      "sha256": "717be427ce7772e365ed3b69b658abc7de5fa57c57b84ee5a613a7d110528634"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\live.tsx",
+      "sha256": "b94155c800b5466cc82e35eec6ad46ef406d7ec62eecaffa71ca2b006fd0acd2"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\media-model.ts",
+      "sha256": "f75da3145f93361a33ac86df1dc42a35850ca183a257411c3cbbbfe42f4fe5ae"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\media.module.css",
+      "sha256": "1f1808c0e091b6b4a6aab85926f77c8fc797b995a9d9543e07f2fdd0229c37b5"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\media.tsx",
+      "sha256": "89e47498f1b6a9b489f8dbc040d04901a330d2053e4505df081a09bf088378e5"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\messenger.module.css",
+      "sha256": "dc3d1a160112c566d055ad1b0bf510f86ce35e0480eed7c18938e39dc1d2dca7"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\messenger.tsx",
+      "sha256": "f40f0bc770add6f492c5259be89d061a17e4b2e55b1a0f14f78fa8c41f39bbca"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\model.ts",
+      "sha256": "8754f7048ebbb397c62ff0c923b9919afb5cc17d9d68f544b04f4c8df1cecbde"
+    },
+    {
+      "path": "src\\features\\personal\\messaging\\outbox.ts",
+      "sha256": "feea12602b66d416d52d6de20eb03d786d1287ef69f86c55f2f2142815ae708a"
+    },
+    {
+      "path": "src\\features\\personal\\pages.tsx",
+      "sha256": "0e61faea2f4d3645cce6c0969ba56606e3b9449d7696dba355978b94abaffc90"
+    },
+    {
+      "path": "src\\features\\personal\\personal.module.css",
+      "sha256": "5e285f129a06ef487a3e9247c9bd2c316cf79d8f03f767d12cf14edf78281c43"
+    },
+    {
+      "path": "src\\features\\personal\\profile-model.ts",
+      "sha256": "78511192d7f0add0ceb08bcd8dbc109e824e7c83c90ed18f57b390c83cdd8457"
+    },
+    {
+      "path": "src\\features\\personal\\profile-photo.module.css",
+      "sha256": "f1f28546105639242a1b0f9a3d679fddcebb6b9903715299f9d9e23572ac932f"
+    },
+    {
+      "path": "src\\features\\personal\\profile-photo.tsx",
+      "sha256": "fb99fdbf31144745c749027700f22d0a39368b678ff0c1f2710687a10867e39a"
+    },
+    {
+      "path": "src\\features\\personal\\provider.tsx",
+      "sha256": "b17ba98b64f43801ca0cf7db84827a332d74a479ff0733efa3bc6d7d50a0c077"
+    },
+    {
+      "path": "src\\features\\personal\\school\\exams.tsx",
+      "sha256": "5fe09679fe2261fb89fb1bde82c10c2da2211ed78e2fe8c9859e382a0f222ac6"
+    },
+    {
+      "path": "src\\features\\personal\\school\\learning.tsx",
+      "sha256": "2b24d6c8ce0c299c8bd59f680010e09a7d5c94fc307ba7776d57d94bf7fd97fe"
+    },
+    {
+      "path": "src\\features\\personal\\school\\manager.tsx",
+      "sha256": "44d9dba7ca388502af9c0bfff40a729d1192e0202829883f01008c9fb88260ef"
+    },
+    {
+      "path": "src\\features\\personal\\school\\policy.ts",
+      "sha256": "2d7bf7e15fc18b18a68e255276f32b2d93db23680beb60f915a0e098c8ff3ee9"
+    },
+    {
+      "path": "src\\features\\personal\\school\\school.module.css",
+      "sha256": "00747f1499b2d574717c0f42473c8f9076ede807fa6aa4df7e7b0cea6c09529e"
+    },
+    {
+      "path": "src\\features\\personal\\school\\shared.tsx",
+      "sha256": "812054248f54ba0d810850a778b99fcf0a353bafac0569b5d506514ddf0fd4e4"
+    },
+    {
+      "path": "src\\features\\personal\\school-portal.tsx",
+      "sha256": "3cff71989e7218198ce25373992cc284e28e1b0978afd948ff472bf300b5e77c"
+    },
+    {
+      "path": "src\\features\\personal\\settings.tsx",
+      "sha256": "005be4f3cc834281aa2b2203bd7abd2c2461906ccf5451fd5a4a5d092ab2d284"
+    },
+    {
+      "path": "src\\features\\personal\\shell.tsx",
+      "sha256": "e501f0fbb699bc8a677929b90fedd70e5176af49458abe02f9c6769f64383456"
+    },
+    {
+      "path": "src\\features\\personal\\status-labels.ts",
+      "sha256": "a824561545871922f8c3289c40a5ed3245eeb7d5af82e8893e2d30fdb36d2b80"
+    },
+    {
+      "path": "src\\features\\personal\\theme.ts",
+      "sha256": "7e3e2b58239315c21074b85cc949ed0047b2cde9b2d54143695cc4c27728407f"
+    },
+    {
+      "path": "src\\features\\pwa\\install.tsx",
+      "sha256": "7eb8b6cf04c61fb16ba607109bda8d955f76cc63732211797174d93a14078507"
+    },
+    {
+      "path": "src\\features\\pwa\\provider.tsx",
+      "sha256": "b6beb8f02c3cc36e1581d101f121909741ed648d0247e32893034c7f1e57e64d"
+    },
+    {
+      "path": "src\\generated\\api\\client-contract.json",
+      "sha256": "e52705c48496a69a704948073575c0473359cf8b1a0761213566c645f37ea4a9"
+    },
+    {
+      "path": "src\\generated\\api\\contract.json",
+      "sha256": "e52705c48496a69a704948073575c0473359cf8b1a0761213566c645f37ea4a9"
+    },
+    {
+      "path": "src\\generated\\api\\schema.d.ts",
+      "sha256": "942a79e538f18340532181301f1f93a0f13e06be17e737b877e8313227a1950f"
+    },
+    {
+      "path": "src\\lib\\api\\client-contract.ts",
+      "sha256": "411876a9b32b0652f2b61b1f7d7a27714ad38878c6a79595e480d65c6db005bf"
+    },
+    {
+      "path": "src\\lib\\api\\client.ts",
+      "sha256": "1515a8eb1651823ac0ed9f97511bd9af436b630b9c31ea1ca701bfb7a6488392"
+    },
+    {
+      "path": "src\\lib\\api\\contract.ts",
+      "sha256": "5bc7e2a8a0b1a66001e8ce94f22f9cc0cdf4b169888f707a6e976e3c85b1b4a5"
+    },
+    {
+      "path": "src\\lib\\api\\errors.ts",
+      "sha256": "23cce9fcff3a230be032c9e5dc98604c6045a88a29e8ca8ac66a771d40a0c460"
+    },
+    {
+      "path": "src\\lib\\api\\file-transfer.ts",
+      "sha256": "d212565ea32f5131e1e5444a6746634478e835e8a4d84bfce8983b01a3fb0086"
+    },
+    {
+      "path": "src\\lib\\auth-feedback.ts",
+      "sha256": "39fec99fd55f2ea644de866f70f130b9ca4697edfaa6b14fa8bf094acfbbecd0"
+    },
+    {
+      "path": "src\\lib\\auth-input.ts",
+      "sha256": "2fc9a1d1c4f1dd4f8ff6eeec7d49d3a9a280ef5cd5a489a05252bf867bb19483"
+    },
+    {
+      "path": "src\\lib\\client-surface.ts",
+      "sha256": "2b7a318895093d9e8a8bf0524ef794038274602686ebb9c5ee13ed8087b0e808"
+    },
+    {
+      "path": "src\\lib\\flags.ts",
+      "sha256": "384b5ed7b7f3ee565906317cd7278caa258cc5c1861862321c5fc0ca4e35780c"
+    },
+    {
+      "path": "src\\lib\\formatting.ts",
+      "sha256": "41904926c8e77657b7b0edc569622387884b91d1f2c033a48a78bf4ed6c975ef"
+    },
+    {
+      "path": "src\\lib\\jalali-date.ts",
+      "sha256": "cfca88ed29f1f9b4b88d397f1c9d2674e985c90137d43ad71246bd495be8390d"
+    },
+    {
+      "path": "src\\lib\\jalali-picker-state.ts",
+      "sha256": "b4d8408c372714dcc6b74541e05d3d3f6d7226e0970c5f50121965a2d2c79f81"
+    },
+    {
+      "path": "src\\lib\\login-origin.ts",
+      "sha256": "d633b848cd9495cfde158780cce31e106510967892ad7fda72463900a7c9c62d"
+    },
+    {
+      "path": "src\\lib\\messaging-hub-protocol.ts",
+      "sha256": "73e5d2d49712302ba221cae7780db754b60c56a2fa819bae9f1eec5ff40663d7"
+    },
+    {
+      "path": "src\\lib\\server\\backend.ts",
+      "sha256": "c3a29f32ae15969c687b9d86eba152f6fa75a195d34d1a17572d3dc7c381e480"
+    },
+    {
+      "path": "src\\lib\\server\\client-session.ts",
+      "sha256": "35bfb41b8eee2b69955879718f36cd2b8e0925344209f41a0d6fe31b50f01b31"
+    },
+    {
+      "path": "src\\lib\\server\\config.ts",
+      "sha256": "cd04d25ca7911bdd7b13334e654de664e24db819d601024d123a42a401f10147"
+    },
+    {
+      "path": "src\\lib\\server\\session-lock.ts",
+      "sha256": "04337096a79b214d96fba5a8f24d49fa9c10ffedecfa816fef5891c9492d5e46"
+    },
+    {
+      "path": "src\\lib\\server\\session.ts",
+      "sha256": "fb3f5b3a69436f3519d62ddb06ebfcc736c01ad405214f8aedccbacaf691df09"
+    },
+    {
+      "path": "src\\lib\\utils.ts",
+      "sha256": "c407b940a1b71992691321d7162086f17af79fa371d0e4693926714048699b63"
+    },
+    {
+      "path": "src\\types\\jalalidatepicker.d.ts",
+      "sha256": "e77965948f5398678c39e959443ed4ef930b8bf89853f3c70d24d8e28f71b40d"
+    },
+    {
+      "path": "scripts\\audit-school-api.mjs",
+      "sha256": "8988a443681022e0baae9a775cb271966d193c7874b453bf4643da76ce0f4bda"
+    },
+    {
+      "path": "scripts\\check-upgrade-routes.mjs",
+      "sha256": "02bf30601cc2fc4bf4d9b365914f75b3a91a680899c542d01d750bf9e6955bd7"
+    },
+    {
+      "path": "scripts\\create-school-backend-pdf.mjs",
+      "sha256": "de0b64a92d4700f36f78a794ee3c14c8a5f74be8c9706e16110b6b5f1aecebd4"
+    },
+    {
+      "path": "scripts\\design-review.mjs",
+      "sha256": "853121b1af616bfb0d198c5b7436b0ad24e73690be71a23e5e5329398796651d"
+    },
+    {
+      "path": "scripts\\docker-start.mjs",
+      "sha256": "7f940fc52163e9d5daecbb859553c07070125e4916215964af152d6e0c00ba92"
+    },
+    {
+      "path": "scripts\\fetch-contract.mjs",
+      "sha256": "f30a9bc215944c05c0a356619b583a91ac3f7985d87f762b7a888020fef9d058"
+    },
+    {
+      "path": "scripts\\generate-client-contract.mjs",
+      "sha256": "f026bbb44738e94be267da8f3e523c7267521a21bf2cf65369cf8889cd3d8c14"
+    },
+    {
+      "path": "scripts\\generate-contract.mjs",
+      "sha256": "2f1105dd09cce3f6cae55437535344c4eff393f7cc374d6a09427231468835f3"
+    },
+    {
+      "path": "scripts\\guide-fixture-preview.mjs",
+      "sha256": "eef15175e181691f4b5cec5836ccf9bbc5be2dfe9c5c30a906cdc6e10057099a"
+    },
+    {
+      "path": "contracts\\client-surface.json",
+      "sha256": "4fde6b3d92da23e7bef6d35ae0ef156a37a8c552d08c8a4ac0ccc2fc11093f3c"
+    },
+    {
+      "path": "contracts\\openapi.json",
+      "sha256": "e3b00293ef99706039b316808981508a90a4d4fb59fa87faefac1ff010b115bb"
+    },
+    {
+      "path": "contracts\\platform-permissions.sources.json",
+      "sha256": "46b5a02111dac4d63b822918e4b1807b20563198be56b23907f28e27bd39d1f1"
+    },
+    {
+      "path": "tests\\docker\\startup.spec.ts",
+      "sha256": "1b01705ab6d80124e44dc31468c75f83bc64015359d339d6f77844343b8da48c"
+    },
+    {
+      "path": "tests\\e2e\\client-scope.spec.ts",
+      "sha256": "71005904ed73e97f249439310e692abbb565087991439e21d9c9ec3623fddc17"
+    },
+    {
+      "path": "tests\\fixtures\\media-test-file.txt",
+      "sha256": "be8aefa6bb1f8c1527e29abb7f5009056e5e6e1a4ad64c3a80ad7c5c706efaf5"
+    },
+    {
+      "path": "tests\\fixtures\\media-test-video.mp4",
+      "sha256": "0de2a18d653b876a75889fc4681b7c2821c35ae2e460a3237521fbcff3ee1d1b"
+    },
+    {
+      "path": "tests\\fixtures\\README.md",
+      "sha256": "0eb4f1669aa0aefbfb483442d60979848bf20b58e68bab098de424f78b96d50c"
+    },
+    {
+      "path": "tests\\personal\\attachment-receiver.spec.ts",
+      "sha256": "6076a6bb30a1bfeb30e5fcdcf431f360e1996ef8a8e136bed5f6ada1380d1418"
+    },
+    {
+      "path": "tests\\personal\\integration-guide.spec.ts",
+      "sha256": "62dc911460d84dc65662dda62fa815c256bc29f75a8ab839d9bad304447d8fb7"
+    },
+    {
+      "path": "tests\\personal\\jalali-calendar.spec.ts",
+      "sha256": "1fe9d74cf40b42e6900e0ea1ac65f556954369fc869a70b0b2c0642b11124b23"
+    },
+    {
+      "path": "tests\\personal\\login-diagnostic.spec.ts",
+      "sha256": "ecee6d6cd3aea253ac275974834a9dd57b4b142c00e187f6589838da3862c672"
+    },
+    {
+      "path": "tests\\personal\\navigation-media.spec.ts",
+      "sha256": "7b424ad0215a55e40d6ec9a85ce263e3509b973de94ce111b0af933e6f0a4f38"
+    },
+    {
+      "path": "tests\\personal\\school-access.spec.ts",
+      "sha256": "fe452b685fe88b8d7b02d747d0eb26cbb4b1171c0ecd1cf9ccc03bcdeabc38bd"
+    },
+    {
+      "path": "tests\\personal\\school-review.spec.ts",
+      "sha256": "3bb9f051732058793b97454f38e1d4b8db32697f37b5cc54df7cd97ba8b99052"
+    },
+    {
+      "path": "tests\\personal\\school.spec.ts",
+      "sha256": "05d7571c16a69940a9dff397cd2b6c3f01f643cd04acccf384bc5f06772c35d2"
+    },
+    {
+      "path": "tests\\unit\\auth-feedback.test.ts",
+      "sha256": "480b7c838d0acb98fb874237c5223de1abecf7c74742b602017c83dab2f2f6cd"
+    },
+    {
+      "path": "tests\\unit\\auth-input.test.ts",
+      "sha256": "f2e45760e34f53be1fb5da1b1a49629a562db72edb9d3d1c7520828cc2033add"
+    },
+    {
+      "path": "tests\\unit\\client-auth.test.ts",
+      "sha256": "9ad62f53b4a27205868c6caf8466c24abfdcd398370394d2969863cbb03f2c3f"
+    },
+    {
+      "path": "tests\\unit\\client-context-guard.test.ts",
+      "sha256": "cce6818332e64ded7837721c6eb82e944cc889a14c416d1b098084f4ef587797"
+    },
+    {
+      "path": "tests\\unit\\client-contract.test.ts",
+      "sha256": "5a7fe4aeca8fab4f31864d4f05d14d8031367214099d110d48a9c0111ddaf11a"
+    },
+    {
+      "path": "tests\\unit\\client-hub-route.test.ts",
+      "sha256": "88fdd7b668a63f8be1a00a2de1b627d3af1d1f8bb1ce0a2e24f72a6b1f969a51"
+    },
+    {
+      "path": "tests\\unit\\client-surface.test.ts",
+      "sha256": "18771e08f263756f5fb9ca3db55edbbb4e8bc7c3d495e7ebe6dc4a4e76786c03"
+    },
+    {
+      "path": "tests\\unit\\contract.test.ts",
+      "sha256": "eca6825ad597602cc94a42b9bce7baad693d94b6a7cb4bafd1157e31a26584e9"
+    },
+    {
+      "path": "tests\\unit\\errors.test.ts",
+      "sha256": "10208cfda89a6db246c875b7011589a4857f36895fe618ca4611ca3fdcede8d8"
+    },
+    {
+      "path": "tests\\unit\\file-transfer.test.ts",
+      "sha256": "f48520a2a9719f184e63ab99ce2a5e0e6e3ede5b4359cdf3eab1820f61e81984"
+    },
+    {
+      "path": "tests\\unit\\jalali-date.test.ts",
+      "sha256": "995f920f51d16ff378bac3c20009abbb96a3b19d746147cbe5659753f07cc2e8"
+    },
+    {
+      "path": "tests\\unit\\login-origin.test.ts",
+      "sha256": "108e3c695dca567bfea3eceb338f8432dedfca1d7615f04664525099ffa2371b"
+    },
+    {
+      "path": "tests\\unit\\messaging-files.test.ts",
+      "sha256": "da6ae114db4df6af1f37470a917fb4ee9dc4122ea0ac52d83e7082422c8f37f2"
+    },
+    {
+      "path": "tests\\unit\\messaging-hub-protocol.test.ts",
+      "sha256": "0fc9d5b6cd799d64eb34d349d5ce981d468ba8def392f7d56890e7520e447b54"
+    },
+    {
+      "path": "tests\\unit\\personal-conversation-policy.test.ts",
+      "sha256": "0a643f5f5389bbf163bdde91d73369868137ea54fbaf03ab9b99f6cd9646d59a"
+    },
+    {
+      "path": "tests\\unit\\personal-directory.test.ts",
+      "sha256": "7df83616a469405c50a11469ff11ce4f7d13d565d732a9770c557a7569cf74ad"
+    },
+    {
+      "path": "tests\\unit\\personal-message-queue.test.ts",
+      "sha256": "7f78702cc02c477c68f7a4309d84d1e720432520d52f58fc87af09b30b0d721e"
+    },
+    {
+      "path": "tests\\unit\\profile-media.test.ts",
+      "sha256": "9ad62e1ec5d04cbe6e2f143be056533cfd8b8e2ad666c7cfb79c61f3f4110f43"
+    },
+    {
+      "path": "tests\\unit\\profile-model.test.ts",
+      "sha256": "d6d1ee9d5f7cb81e4df0d50cb76eca4120753485ad857161d7af1ee535f6be1f"
+    },
+    {
+      "path": "tests\\unit\\pwa-worker.test.ts",
+      "sha256": "9e8753d0b26d261972b80c927d7867a10cdc5a5f9d66dde5903bdfb2a1552bb1"
+    },
+    {
+      "path": "tests\\unit\\school-policy.test.ts",
+      "sha256": "24cb08c82105ffcb34d8d600241a22727de116ccd96d9c191cd7b1c0924df979"
+    },
+    {
+      "path": "tests\\unit\\server-only.ts",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "tests\\unit\\session-concurrency.test.ts",
+      "sha256": "eab9f13d7e253b94710e014c48a5f97b4b234c2bfa276cb99a219bd3547d90d7"
+    },
+    {
+      "path": "tests\\unit\\session.test.ts",
+      "sha256": "23b6435d35a367e165978a06cdcdf0d99f9dcb2fef342554a9aca36640b72759"
+    },
+    {
+      "path": ".dockerignore",
+      "sha256": "730e06e4771256db5e7485eeaafbe8a30b7836ce690e00da0c6801a7541f481e"
+    },
+    {
+      "path": "compose.yaml",
+      "sha256": "ac5759e91745a5193cc45a2f7626368b71d40218cf1eb5122b1b8b66f8eeef02"
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "421c422b462b77598ead8d96805440d5c00a3e87eb121853c57bb1f1a66ab146"
+    },
+    {
+      "path": "package.json",
+      "sha256": "f118b684f75aa8a302e6ae994f37c288b9a2fa919622bd2d0a272d4f3e06a72b"
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "f5cf32a7a693805ff51b2e08bac5f23c566b094c78757f71e066f90222b04525"
+    },
+    {
+      "path": "README.md",
+      "sha256": "8e49ff7418edabb012e6d6a92689371ccb8ab20fb4467ba987222b2968293c27"
+    },
+    {
+      "path": "vitest.config.mts",
+      "sha256": "7d018cc4f4d0e883126a3bb66a531724a30f8ef6d89e47d0a678f5d24e62c117"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "e29f4682701868e086e9354b33fe727407463271cef33e2168c904f01687a8cb"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "8fd11a7bcd5c63adfd2e4cdda7e3a6b3718d8ece631ae33e3ced6ac1277d1568"
+    },
+    {
+      "path": "postcss.config.mjs",
+      "sha256": "f50058e0d309cdb3e7c25a1123337338641fb71e988572607d57f47209db1fd1"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "689dd384d130891d1e431916e5a91593201354f52b733d143e62c64633a0ba5e"
+    },
+    {
+      "path": ".prettierrc.json",
+      "sha256": "ecd05dc9cecd8ab83cc395aef7052ce780aba7f5ddb92a2bc079b8f705961fdc"
+    },
+    {
+      "path": ".prettierignore",
+      "sha256": "da7a5127987c2d11bcee7eb1aea164a823b94cd6427270f4a1ee6674e55a79eb"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "c4cc43ddb29564499aa5ac76d103d51e4580f64d07eec8769c6c3528b702960f"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "063098f6cb31bb44c6f8fbea25b3876de7ee1e5f7d00a50dbab506f6415eb7f0"
+    },
+    {
+      "path": "playwright.personal.config.ts",
+      "sha256": "6a7695b09ca7c3a0b89666fc31266bf8154c96aebfb9f36b257ffe9b0dcb07eb"
+    },
+    {
+      "path": "public\\brand\\makan-logo.png",
+      "sha256": "9d948d5ee99a93728231d34a99eceb8bbae2b9d4ea9782809d465cc8b36c209a"
+    },
+    {
+      "path": "public\\icons\\makan-192.png",
+      "sha256": "bd031b7c36a0e8c87a2c7ee15b3cafdb863606a10e5f7117dba3f557e2fe7987"
+    },
+    {
+      "path": "public\\icons\\makan-512.png",
+      "sha256": "bdf2b461a08b5512b05021d6ef033592c4516a48c2e0411ab21fb551ac35e27c"
+    },
+    {
+      "path": "public\\icons\\makan-apple-180.png",
+      "sha256": "bfda64f19e0a5cd60ec5f58d3c3cb4bae92e95c582de1fc9fee72c68bf7f465f"
+    },
+    {
+      "path": "public\\icons\\makan-maskable-512.png",
+      "sha256": "bdf2b461a08b5512b05021d6ef033592c4516a48c2e0411ab21fb551ac35e27c"
+    },
+    {
+      "path": "public\\sw.js",
+      "sha256": "7325077cb779a31eeab4803a610f6d06082b49837c09713d2dd1cabdd68a3b45"
+    },
+    {
+      "path": "public\\offline.html",
+      "sha256": "c1a79072f63662fa0cdc1a9d45261d5a5bb2e6ff4144d23a020fae30fb7a80a9"
+    },
+    {
+      "path": "docs\\PLAN.md",
+      "sha256": "dc4d791fa2be2bb2f714930f10a05a4c5763e2f46d5ea35c0d4421e3ccfb7882"
+    },
+    {
+      "path": "docs\\DESIGN.md",
+      "sha256": "d3a7919a85b55fd0af07224540cfba07b90918f437ea079a9b06edb0f0426135"
+    },
+    {
+      "path": "docs\\API_GAPS.md",
+      "sha256": "01c4b2b3769a4ea9f55130928ec3af73e7f79b753472a508e47be2d8b18b01b5"
+    },
+    {
+      "path": "docs\\PROGRESS.md",
+      "sha256": "3b48c6015d396e1f0fbc153f76c563d3117a848ed04ca642d8e50bb51bdf60ec"
+    },
+    {
+      "path": "docs\\api-matrix.md",
+      "sha256": "c10220733f7b714053be00f0507e28e8ddc439bb97dd6b54e9b9a9edf9f7cd07"
+    },
+    {
+      "path": "docs\\jalali-calendar-client-qa.json",
+      "sha256": "a9fae5ec260a178e6738f31cbed6377c00ed24534f3b359c9c4a765d5ec6496f"
+    },
+    {
+      "path": "docs\\integration-guide-client-fixture-qa.json",
+      "sha256": "b53fc28130bc9051678f54e3545d4a996c574c0b6809fb3d8a20b0dbb1f52666"
+    },
+    {
+      "path": "docs\\screenshots\\jalali-calendar\\period-dialog.png",
+      "sha256": "41915814721058134b5d4476c3b14ba315eca88e549240c65248fb7ddc856687"
+    },
+    {
+      "path": "docs\\screenshots\\jalali-calendar\\profile-dark.png",
+      "sha256": "ecf022c3b7d0aa0f7890d87fec4ef5ae5f58d24ce39f4e14a3ad09f0362d4eb4"
+    },
+    {
+      "path": "docs\\screenshots\\jalali-calendar\\profile-desktop.png",
+      "sha256": "2e8a6e8715b9a326596be0a3a906972d7b15d3da51281519bb735af6f8863bbe"
+    },
+    {
+      "path": "docs\\screenshots\\jalali-calendar\\profile-mobile.png",
+      "sha256": "3a8df2719ae956b91f0b9e5f9b373a2734298e0496c3fde9377b1e39d4b98006"
+    },
+    {
+      "path": "docs\\screenshots\\jalali-calendar\\profile-tablet.png",
+      "sha256": "76c0ab2a0722d3116a6c68b5f08f154208e1bbdbec1db717683f6cb834b435e2"
+    },
+    {
+      "path": "docs\\screenshots\\jalali-calendar\\session-dialog.png",
+      "sha256": "41eecf0a8bdd2787b7d2caa0af12a4aa5d8763cb01ee3dfbc9929be170290049"
+    }
+  ]
+}

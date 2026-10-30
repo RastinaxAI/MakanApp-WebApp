@@ -1,0 +1,912 @@
+{
+  "A01": {
+    "status": "implemented",
+    "route": "/enter",
+    "source": "src/features/auth/login.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "A02": {
+    "status": "implemented",
+    "route": "/enter",
+    "source": "src/features/auth/login.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "A03": {
+    "status": "partial",
+    "route": "/personal/profile/edit",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "local-browser",
+    "gap": "ویرایش موجود است؛ onboarding اجباری مستقل اضافه نشده است."
+  },
+  "A04": {
+    "status": "implemented",
+    "route": "/personal/workspaces",
+    "source": "src/features/auth/workspace-selection.tsx",
+    "verification": "local-browser",
+    "gap": "Workspace options come from the authorized API; explicit selection before continuing."
+  },
+  "A05": {
+    "status": "implemented",
+    "route": "/personal/education/invitations",
+    "source": "src/features/personal/school/invitations.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "A06": {
+    "status": "partial",
+    "route": "/personal/education/invitations",
+    "source": "src/features/personal/school/invitations.tsx",
+    "verification": "local-browser",
+    "gap": "جزئیات و رضایت داخل کارت دعوت قابل بررسی است؛ صفحهٔ مستقل بررسیِ طرح مرجع جداگانه ساخته نشده است."
+  },
+  "A07": {
+    "status": "implemented",
+    "route": "/personal",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "unit-only",
+    "gap": ""
+  },
+  "S01": {
+    "status": "implemented",
+    "route": "/personal/education",
+    "source": "src/features/personal/school/feed.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S02": {
+    "status": "implemented",
+    "route": "/personal/education/classes/{classId}",
+    "source": "src/features/personal/school/class-detail.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S03": {
+    "status": "implemented",
+    "route": "/personal/education/classes/{classId}",
+    "source": "src/features/personal/school/class-detail.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S04": {
+    "status": "implemented",
+    "route": "/personal/education/lessons/{lessonId}",
+    "source": "src/features/personal/school/lessons.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S05": {
+    "status": "implemented",
+    "route": "/personal/education/schedule",
+    "source": "src/features/personal/school/schedule.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S06": {
+    "status": "partial",
+    "route": "/personal/education/schedule",
+    "source": "src/features/personal/school/learning.tsx",
+    "verification": "unit-only",
+    "gap": "برنامه و کارت جلسه موجود؛ جزئیات جلسه در مسیر مستقل نیست."
+  },
+  "S07": {
+    "status": "implemented",
+    "route": "/personal/education/assignments/{assignmentId}",
+    "source": "src/features/personal/school/learning.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S08": {
+    "status": "implemented",
+    "route": "/personal/education/assignments/{assignmentId}",
+    "source": "src/features/personal/school/learning.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S09": {
+    "status": "implemented",
+    "route": "/personal/education/assignments/{assignmentId}/answer",
+    "source": "src/features/personal/school/submission-flow.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S10": {
+    "status": "implemented",
+    "route": "/personal/education/assignments/{assignmentId}/{review|receipt}?attempt={attemptId}",
+    "source": "src/features/personal/school/submission-flow.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "S11": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}",
+    "source": "src/features/personal/school/exam-taking.tsx",
+    "verification": "local-browser",
+    "gap": "ذخیره/ثبت/رسید موجود؛ همهٔ مراحل هنوز URL مستقل ندارند. انتقال write lease این دور یکپارچه تست نشده است."
+  },
+  "S12": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}",
+    "source": "src/features/personal/school/exam-taking.tsx",
+    "verification": "local-browser",
+    "gap": "ذخیره/ثبت/رسید موجود؛ همهٔ مراحل هنوز URL مستقل ندارند. انتقال write lease این دور یکپارچه تست نشده است."
+  },
+  "S13": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}",
+    "source": "src/features/personal/school/exam-taking.tsx",
+    "verification": "local-browser",
+    "gap": "ذخیره/ثبت/رسید موجود؛ همهٔ مراحل هنوز URL مستقل ندارند. انتقال write lease این دور یکپارچه تست نشده است."
+  },
+  "S14": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}",
+    "source": "src/features/personal/school/exam-taking.tsx",
+    "verification": "local-browser",
+    "gap": "ذخیره/ثبت/رسید موجود؛ همهٔ مراحل هنوز URL مستقل ندارند. انتقال write lease این دور یکپارچه تست نشده است."
+  },
+  "S15": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}",
+    "source": "src/features/personal/school/exam-taking.tsx",
+    "verification": "local-browser",
+    "gap": "ذخیره/ثبت/رسید موجود؛ همهٔ مراحل هنوز URL مستقل ندارند. انتقال write lease این دور یکپارچه تست نشده است."
+  },
+  "S16": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "S17": {
+    "status": "implemented",
+    "route": "/personal/education/assignments/{assignmentId}/{review|receipt}?attempt={attemptId}",
+    "source": "src/features/personal/school/submission-flow.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "T01": {
+    "status": "implemented",
+    "route": "/personal/education",
+    "source": "src/features/personal/school/feed.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "T02": {
+    "status": "implemented",
+    "route": "/personal/education/classes/{classId}/lessons/new; /lessons/{lessonId}/{edit|review}",
+    "source": "src/features/personal/school/lessons.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "T03": {
+    "status": "implemented",
+    "route": "/personal/education/classes/{classId}/lessons/new; /lessons/{lessonId}/{edit|review}",
+    "source": "src/features/personal/school/lessons.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "T04": {
+    "status": "implemented",
+    "route": "/personal/education/classes/{classId}/lessons/new; /lessons/{lessonId}/{edit|review}",
+    "source": "src/features/personal/school/lessons.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "T05": {
+    "status": "implemented",
+    "route": "/personal/education/classes/{classId}/assignments/new",
+    "source": "src/features/personal/school/learning.tsx",
+    "verification": "local-browser-form-layout; existing API adapter retained",
+    "gap": "Independent create page; positive live creation was not executed in this redesign."
+  },
+  "T06": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T07": {
+    "status": "partial",
+    "route": "/personal/education/assignments/{assignmentId}",
+    "source": "src/features/personal/school/learning.tsx",
+    "verification": "unit-only",
+    "gap": "ساخت با دیالوگ، نمایش پاسخ و انتشار موجود؛ ویرایش و ارزیابی/بازبینی مستقل کامل نیست."
+  },
+  "T08": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T09": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T10": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}/edit",
+    "source": "src/features/personal/school/exams.tsx",
+    "verification": "unit-only",
+    "gap": "ایجاد/ویرایش و سؤال و انتشار در editor؛ فرم سؤال و بازبینی مستقل ندارد."
+  },
+  "T11": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}/edit",
+    "source": "src/features/personal/school/exams.tsx",
+    "verification": "unit-only",
+    "gap": "ایجاد/ویرایش و سؤال و انتشار در editor؛ فرم سؤال و بازبینی مستقل ندارد."
+  },
+  "T12": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}/edit",
+    "source": "src/features/personal/school/exams.tsx",
+    "verification": "unit-only",
+    "gap": "ایجاد/ویرایش و سؤال و انتشار در editor؛ فرم سؤال و بازبینی مستقل ندارد."
+  },
+  "T13": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T14": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}/edit",
+    "source": "src/features/personal/school/exams.tsx",
+    "verification": "unit-only",
+    "gap": "ایجاد/ویرایش و سؤال و انتشار در editor؛ فرم سؤال و بازبینی مستقل ندارد."
+  },
+  "T15": {
+    "status": "partial",
+    "route": "/personal/education/classes/{classId}",
+    "source": "src/features/personal/school/schedule.tsx",
+    "verification": "unit-only",
+    "gap": "فقط معلم منتسب/مدیر؛ ایجاد جلسه در دیالوگ، معلم ساخت کلاس ندارد."
+  },
+  "T16": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T17": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T18": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T19": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T20": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T21": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}/edit",
+    "source": "src/features/personal/school/exams.tsx",
+    "verification": "unit-only",
+    "gap": "ایجاد/ویرایش و سؤال و انتشار در editor؛ فرم سؤال و بازبینی مستقل ندارد."
+  },
+  "T22": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T23": {
+    "status": "partial",
+    "route": "/personal/education/assignments/{assignmentId}",
+    "source": "src/features/personal/school/learning.tsx",
+    "verification": "unit-only",
+    "gap": "ساخت با دیالوگ، نمایش پاسخ و انتشار موجود؛ ویرایش و ارزیابی/بازبینی مستقل کامل نیست."
+  },
+  "T24": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T25": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "T26": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "M01": {
+    "status": "implemented",
+    "route": "/personal/education",
+    "source": "src/features/personal/school/feed.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "M02": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M03": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M04": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "M05": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M06": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M07": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M08": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M09": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M10": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "M11": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M12": {
+    "status": "partial",
+    "route": "/personal/education/{members|people|classes|students|guardians}",
+    "source": "src/features/personal/school/manager.tsx",
+    "verification": "unit-only",
+    "gap": "عملیات موجود در کارت/دیالوگ؛ همهٔ فرم‌های مستقل v2 پیاده نشده‌اند. خواندن اعضا در school/directory.tsx است."
+  },
+  "M13": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "P01": {
+    "status": "partial",
+    "route": "/personal/education",
+    "source": "src/features/personal/school-portal.tsx",
+    "verification": "unit-only",
+    "gap": "انتخاب فرزند/رابطه موجود؛ fixture این دور فرزند ندارد؛ سناریوی چندفرزند و صفحهٔ مستقل تأیید پوشش مرورگر ندارد."
+  },
+  "P02": {
+    "status": "implemented",
+    "route": "/personal/education",
+    "source": "src/features/personal/school/parent-daily.tsx",
+    "verification": "local-browser-selected-child",
+    "gap": "Shows authorized ParentDashboard only for matching organization/child. No invented grade-level field; multi-child live integration not tested."
+  },
+  "P03": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "P04": {
+    "status": "partial",
+    "route": "/personal/education",
+    "source": "src/features/personal/school-portal.tsx",
+    "verification": "unit-only",
+    "gap": "انتخاب فرزند/رابطه موجود؛ fixture این دور فرزند ندارد؛ سناریوی چندفرزند و صفحهٔ مستقل تأیید پوشش مرورگر ندارد."
+  },
+  "C01": {
+    "status": "implemented",
+    "route": "/personal/messages",
+    "source": "src/features/personal/messaging/messenger.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "C02": {
+    "status": "implemented",
+    "route": "/personal/contacts?view=search",
+    "source": "src/features/personal/messaging/contacts.tsx",
+    "verification": "unit-only",
+    "gap": ""
+  },
+  "C03": {
+    "status": "implemented",
+    "route": "/personal/messages/{conversationId}",
+    "source": "src/features/personal/messaging/conversation-room.tsx",
+    "verification": "local-browser",
+    "gap": "Direct دوطرفه تست شد؛ گروه/کانال/فایل در مرورگر این دور تست یکپارچه نشدند."
+  },
+  "C04": {
+    "status": "implemented",
+    "route": "/personal/messages/{conversationId}",
+    "source": "src/features/personal/messaging/conversation-room.tsx",
+    "verification": "local-browser",
+    "gap": "Direct دوطرفه تست شد؛ گروه/کانال/فایل در مرورگر این دور تست یکپارچه نشدند."
+  },
+  "C05": {
+    "status": "implemented",
+    "route": "/personal/messages/{conversationId}",
+    "source": "src/features/personal/messaging/conversation-room.tsx",
+    "verification": "local-browser",
+    "gap": "Direct دوطرفه تست شد؛ گروه/کانال/فایل در مرورگر این دور تست یکپارچه نشدند."
+  },
+  "C06": {
+    "status": "implemented",
+    "route": "/personal/messages/new?kind={groups|channels}",
+    "source": "src/features/personal/messaging/create.tsx",
+    "verification": "unit-only",
+    "gap": ""
+  },
+  "C07": {
+    "status": "implemented",
+    "route": "/personal/messages/new?kind={groups|channels}",
+    "source": "src/features/personal/messaging/create.tsx",
+    "verification": "unit-only",
+    "gap": ""
+  },
+  "C08": {
+    "status": "partial",
+    "route": "conversation info dialog",
+    "source": "src/features/personal/messaging/conversation-room.tsx",
+    "verification": "unit-only",
+    "gap": "اطلاعات و اعضا فقط خواندنی؛ مدیریت دسترسی کامل ندارد."
+  },
+  "C09": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C10": {
+    "status": "partial",
+    "route": "conversation info dialog",
+    "source": "src/features/personal/messaging/conversation-room.tsx",
+    "verification": "unit-only",
+    "gap": "اطلاعات و اعضا فقط خواندنی؛ مدیریت دسترسی کامل ندارد."
+  },
+  "C11": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C12": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C13": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C14": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C15": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C16": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C17": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C18": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C19": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C20": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C21": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C22": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C23": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C24": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C25": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C26": {
+    "status": "partial",
+    "route": "/personal/messages/{conversationId}",
+    "source": "src/features/personal/messaging/media.tsx",
+    "verification": "unit-only",
+    "gap": "رسانهٔ پیام/آپلود موجود؛ آرشیو مستقل رسانهٔ گروه ندارد. BFF فایل unit دارد؛ camera/device/live Safety این مرحله تست نشده."
+  },
+  "C27": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C28": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "C29": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "U01": {
+    "status": "implemented",
+    "route": "/personal/profile; /personal/profile/edit",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "U02": {
+    "status": "implemented",
+    "route": "/personal/profile; /personal/profile/edit",
+    "source": "src/features/personal/profile-edit.tsx",
+    "verification": "local-browser",
+    "gap": ""
+  },
+  "U03": {
+    "status": "implemented",
+    "route": "/personal/profile/edit",
+    "source": "src/features/personal/profile-photo.tsx",
+    "verification": "unit-only",
+    "gap": "مدیریت تصویر در صفحهٔ ویرایش؛ آزمون فایل BFF واحد است."
+  },
+  "U04": {
+    "status": "implemented",
+    "route": "/personal/settings/privacy",
+    "source": "src/features/personal/messaging/privacy.tsx",
+    "verification": "unit-only",
+    "gap": ""
+  },
+  "U05": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "U06": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "U07": {
+    "status": "partial",
+    "route": "/personal/contacts?view={contacts|new|search}",
+    "source": "src/features/personal/messaging/contacts.tsx",
+    "verification": "unit-only",
+    "gap": "جستجو/افزودن/ویرایش/پروفایل امن موجود؛ همه URL مستقل نیستند و مرورگر این دور پوشش کامل ندارد."
+  },
+  "U08": {
+    "status": "partial",
+    "route": "/personal/contacts?view={contacts|new|search}",
+    "source": "src/features/personal/messaging/contacts.tsx",
+    "verification": "unit-only",
+    "gap": "جستجو/افزودن/ویرایش/پروفایل امن موجود؛ همه URL مستقل نیستند و مرورگر این دور پوشش کامل ندارد."
+  },
+  "U09": {
+    "status": "partial",
+    "route": "/personal/contacts?view={contacts|new|search}",
+    "source": "src/features/personal/messaging/contacts.tsx",
+    "verification": "unit-only",
+    "gap": "جستجو/افزودن/ویرایش/پروفایل امن موجود؛ همه URL مستقل نیستند و مرورگر این دور پوشش کامل ندارد."
+  },
+  "U10": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "U11": {
+    "status": "partial",
+    "route": "/personal/contacts?view={contacts|new|search}",
+    "source": "src/features/personal/messaging/contacts.tsx",
+    "verification": "unit-only",
+    "gap": "جستجو/افزودن/ویرایش/پروفایل امن موجود؛ همه URL مستقل نیستند و مرورگر این دور پوشش کامل ندارد."
+  },
+  "W01": {
+    "status": "implemented",
+    "route": "/welcome",
+    "source": "src/features/auth/welcome.tsx",
+    "verification": "local-browser-static",
+    "gap": "Static introduction with no invented metrics; entry remains /enter and existing root redirect is preserved."
+  },
+  "W02": {
+    "status": "not-implemented",
+    "route": null,
+    "source": null,
+    "verification": "not-tested",
+    "gap": "صفحهٔ مستقل در کلاینت موجود نیست؛ supported در مرجع فقط ادعای قرارداد است و تأیید اجرای بک‌اند نیست."
+  },
+  "W03": {
+    "status": "unavailable",
+    "route": "/personal/subscription",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "unit-only",
+    "gap": "صفحه وضعیت عدم دسترسی؛ فرایند سفارش/پرداخت عملیاتی ساخته نشده و موفقیت ساختگی ندارد."
+  },
+  "W04": {
+    "status": "unavailable",
+    "route": "/personal/subscription",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "unit-only",
+    "gap": "صفحه وضعیت عدم دسترسی؛ فرایند سفارش/پرداخت عملیاتی ساخته نشده و موفقیت ساختگی ندارد."
+  },
+  "W05": {
+    "status": "unavailable",
+    "route": "/personal/subscription",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "unit-only",
+    "gap": "صفحه وضعیت عدم دسترسی؛ فرایند سفارش/پرداخت عملیاتی ساخته نشده و موفقیت ساختگی ندارد."
+  },
+  "W06": {
+    "status": "unavailable",
+    "route": "/personal/subscription",
+    "source": "src/features/personal/pages.tsx",
+    "verification": "unit-only",
+    "gap": "صفحه وضعیت عدم دسترسی؛ فرایند سفارش/پرداخت عملیاتی ساخته نشده و موفقیت ساختگی ندارد."
+  },
+  "B01": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B02": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B03": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B04": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B05": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B06": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B07": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B08": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B09": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B10": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "B11": {
+    "status": "excluded-owner",
+    "route": null,
+    "source": null,
+    "verification": "out-of-scope",
+    "gap": "پنل مالک بنا به تصمیم قطعی کاربر مستقل است؛ فقط در مرجع آفلاین حفظ شده است."
+  },
+  "E01": {
+    "status": "implemented",
+    "route": "shared states",
+    "source": "src/components/ui/states.tsx",
+    "verification": "local-browser",
+    "gap": "خطای ذخیره/تعارض/عدم دسترسی؛ ادعای ممیزی امنیت سرور نیست."
+  },
+  "E02": {
+    "status": "implemented",
+    "route": "shared states",
+    "source": "src/components/ui/states.tsx",
+    "verification": "local-browser",
+    "gap": "خطای ذخیره/تعارض/عدم دسترسی؛ ادعای ممیزی امنیت سرور نیست."
+  },
+  "E03": {
+    "status": "partial",
+    "route": "/personal/education/exams/{examId}",
+    "source": "src/features/personal/school/exam-taking.tsx",
+    "verification": "unit-only",
+    "gap": "کنترل lease موجود؛ انتقال دو دستگاه در این مرحله یکپارچه تست نشده است."
+  },
+  "E04": {
+    "status": "unavailable",
+    "route": "/personal/assistant",
+    "source": "src/features/personal/assistant.tsx",
+    "verification": "unit-only",
+    "gap": "طراحی و وضعیت عدم دسترسی؛ AI واقعی فعال اعلام نمی‌شود."
+  },
+  "E05": {
+    "status": "implemented",
+    "route": "/personal/messages",
+    "source": "src/features/personal/messaging/messenger.tsx",
+    "verification": "unit-only",
+    "gap": ""
+  },
+  "E06": {
+    "status": "implemented",
+    "route": "shared states",
+    "source": "src/components/ui/states.tsx",
+    "verification": "local-browser",
+    "gap": "خطای ذخیره/تعارض/عدم دسترسی؛ ادعای ممیزی امنیت سرور نیست."
+  }
+}

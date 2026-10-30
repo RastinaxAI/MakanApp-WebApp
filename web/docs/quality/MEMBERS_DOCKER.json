@@ -1,0 +1,101 @@
+{
+  "checkedAtUtc": "2026-10-30T11:59:41.131761+00:00",
+  "quality": {
+    "command": "npm run quality",
+    "passed": true,
+    "unit": {
+      "files": 41,
+      "passed": 214,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "passed": 79,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    "lintModuleBoundaries": 174,
+    "generatedOperations": 200,
+    "generatedSchemas": 377
+  },
+  "preview": {
+    "origin": "http://127.0.0.1:3130",
+    "entryStatus": 200,
+    "sessionsPreserved": true
+  },
+  "docker": {
+    "engine": "29.8.0",
+    "compose": "5.5.1",
+    "image": "makan-client:local",
+    "imageId": "sha256:e48f22ce573ad5d5543391036ea8e959d67705ce0cb8cbde6828f31f41530d3b",
+    "imageBytes": 405518968,
+    "origin": "http://127.0.0.1:8080",
+    "container": "makan-client-web-1",
+    "health": "healthy",
+    "uid": 1000,
+    "readOnlyRoot": true,
+    "sessionWritable": true,
+    "privateEnvPresent": false,
+    "previewSessionsPresent": false,
+    "backendReadOnlyOpenapi": {
+      "status": 200,
+      "paths": 322
+    },
+    "httpChecks": [
+      {
+        "name": "entry",
+        "status": 200,
+        "expected": 200,
+        "nextAssets": true
+      },
+      {
+        "name": "anonymous session",
+        "status": 401,
+        "expected": 401
+      },
+      {
+        "name": "cross-origin rejection",
+        "status": 403,
+        "expected": 403
+      },
+      {
+        "name": "anonymous logout",
+        "status": 204,
+        "expected": 204,
+        "cookieName": "makan_client_session_8080"
+      },
+      {
+        "name": "worker",
+        "status": 200,
+        "expected": 200,
+        "currentWorker": true,
+        "cacheControl": "no-cache, no-store, must-revalidate"
+      }
+    ],
+    "buildCommand": "docker compose --progress plain build web",
+    "runCommand": "docker compose up -d --no-build --wait --wait-timeout 180",
+    "initialBuildFailure": "design/tokens.json missing from Docker context; corrected allowlist and rebuilt successfully",
+    "restartAuthorized": true,
+    "volumesDeleted": false
+  },
+  "legacy": {
+    "sourceRemovedFromActiveRoot": true,
+    "archiveManifest": "LEGACY_RETIREMENT_MANIFEST.json",
+    "rawBackupOutsideWorkspace": true,
+    "containerRemoved": "568dcc68217d",
+    "imageRemoved": "sha256:83618194fd349abf038c4f1f9dd1642a88b6cdcef3086c114e26eb8d6bff1ca0",
+    "otherImagesOrVolumesPruned": false,
+    "ownerContainer": "makan-management-web-1",
+    "ownerHealth": "healthy"
+  },
+  "notVerified": [
+    "authenticated Docker account flows on live backend",
+    "live backend writes",
+    "hosted CI",
+    "public deployment",
+    "mobile devices/Expo"
+  ],
+  "screenshots": "output/review/member-directory",
+  "browserFixturesOnly": true
+}

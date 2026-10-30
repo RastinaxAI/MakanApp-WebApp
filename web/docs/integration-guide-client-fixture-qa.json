@@ -1,0 +1,62 @@
+{
+  "outcome": "PASSED",
+  "mode": "CLIENT QA ONLY — isolated local fixture backend; not actual service integration or security verification.",
+  "guide": "20261028-final-6f274767",
+  "checkedAt": "2026-10-29T05:45:02.959Z",
+  "checks": [
+    {
+      "name": "DOB persisted through actual UI and GET me",
+      "passed": true,
+      "fixtureDate": "2000-01-01",
+      "previouslyEmpty": true
+    },
+    {
+      "name": "DOB omission/null preserve; future rejected",
+      "passed": true,
+      "status": 400,
+      "code": "PROFILE_VALIDATION_FAILED"
+    },
+    {
+      "name": "Pending upload does not claim success; retry uses metadata without a duplicate upload",
+      "passed": true
+    },
+    {
+      "name": "profile photo set image/png",
+      "status": 200
+    },
+    {
+      "name": "authenticated profile image bytes image/png",
+      "status": 200,
+      "bytes": 2105
+    },
+    {
+      "name": "profile photo set image/jpeg",
+      "status": 200
+    },
+    {
+      "name": "authenticated profile image bytes image/jpeg",
+      "status": 200,
+      "bytes": 1937
+    },
+    {
+      "name": "WebP rejected in UI before upload",
+      "passed": true
+    },
+    {
+      "name": "DELETE profile-photo 204 and GET me null",
+      "passed": true
+    },
+    {
+      "name": "Manager controlled account-ID flow, invalid identity cannot submit",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "cleanup": [
+    {
+      "profilePhotoRestored": true,
+      "dateOfBirth": "temporary local fixture; discarded when fixture server stops"
+    }
+  ]
+}
