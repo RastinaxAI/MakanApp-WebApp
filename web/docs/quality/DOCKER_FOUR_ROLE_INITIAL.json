@@ -1,0 +1,247 @@
+{
+  "environment": "http://127.0.0.1:8080",
+  "backend": "user-approved remote test service behind the Docker BFF",
+  "scope": "UI login, own workspace/session actions, invitation reads and navigation; no invitation acceptance/decline or domain writes",
+  "roles": [
+    {
+      "role": "Manager",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 1024,
+          "height": 900,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        }
+      ],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": true,
+      "logoutStatus": 204
+    },
+    {
+      "role": "Teacher",
+      "login": false,
+      "checks": [],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": false,
+      "failure": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('main').getByRole('button').filter({ hasText: 'Makan Development Test School' }).filter({ hasText: 'معلم' }).first()\u001b[22m\n",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Student",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 1024,
+          "height": 900,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        }
+      ],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": true,
+      "logoutStatus": 204
+    },
+    {
+      "role": "Parent",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 1,
+          "detailsAvailable": true,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "invitations": 1,
+          "detailsAvailable": true,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 1024,
+          "height": 900,
+          "invitations": 1,
+          "detailsAvailable": true,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "invitations": 1,
+          "detailsAvailable": true,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 1,
+          "detailsAvailable": true,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        }
+      ],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": true,
+      "logoutStatus": 204
+    }
+  ],
+  "finishedAtUtc": "2026-10-30T18:54:28.491Z"
+}

@@ -1,0 +1,12 @@
+{
+  "checks": [
+    {
+      "case": "missing opt-in",
+      "blocked": true
+    },
+    {
+      "case": "CI even with opt-in",
+      "blocked": true
+    }
+  ]
+}
