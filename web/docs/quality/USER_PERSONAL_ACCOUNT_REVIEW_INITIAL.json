@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-01",
+  "account": "User",
+  "backend": "http://94.184.32.84:8090",
+  "scope": "Own test login, personal workspace, read-only navigation; no messages or domain mutations",
+  "checks": [
+    {
+      "width": 390,
+      "height": 844,
+      "tabs": [
+        "آموزشگاه",
+        "دستیار ماکان",
+        "پیام‌ها",
+        "پروفایل"
+      ],
+      "reloadPreserved": true
+    },
+    {
+      "width": 834,
+      "height": 1194,
+      "tabs": [
+        "آموزشگاه",
+        "دستیار ماکان",
+        "پیام‌ها",
+        "پروفایل"
+      ],
+      "reloadPreserved": true
+    },
+    {
+      "width": 1440,
+      "height": 1000,
+      "tabs": [
+        "آموزشگاه",
+        "دستیار ماکان",
+        "پیام‌ها",
+        "پروفایل"
+      ],
+      "reloadPreserved": true
+    }
+  ],
+  "pageErrors": [],
+  "serviceErrors": [
+    {
+      "status": 401,
+      "path": "/api/client/backend/api/v1/workspaces/snapshot"
+    },
+    {
+      "status": 401,
+      "path": "/api/client/backend/api/v1/me/messaging-status"
+    }
+  ],
+  "blockedMutations": [],
+  "personalWorkspaceVisible": true,
+  "context": {
+    "workspaceType": "Personal",
+    "activeRole": null,
+    "organizationId": null,
+    "membershipId": null
+  },
+  "login": true,
+  "messaging": {
+    "status": 200,
+    "nextAction": "ProfileCompletionRequired",
+    "allowedActions": [
+      "ReadExistingConversations"
+    ]
+  },
+  "schoolAccessStatus": 403,
+  "passed": true,
+  "logoutStatus": 204
+}
