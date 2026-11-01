@@ -203,5 +203,9 @@
   "GET /api/v1/organization/official-spaces",
   "GET /api/v1/organization/classes/{classId}/official-spaces",
   "GET /api/v1/organization/classes/{classId}/official-spaces/activities/{eventId}",
-  "GET /api/v1/organization/classes/{classId}/official-spaces/activities"
+  "GET /api/v1/organization/classes/{classId}/official-spaces/activities",
+  "PATCH /api/v1/conversations/{conversationId}/info",
+  "POST /api/v1/conversations/{conversationId}/members",
+  "DELETE /api/v1/conversations/{conversationId}/members/{targetUserId}",
+  "PATCH /api/v1/conversations/{conversationId}/members/{targetUserId}/role"
 ]

@@ -1,0 +1,207 @@
+{
+  "environment": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84:8090",
+  "accounts": [
+    {
+      "role": "Student",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 2
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Teacher",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 2
+        },
+        {
+          "scope": "Organization",
+          "count": 1
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "undocumentedAllProbe": {
+        "status": 400
+      },
+      "logoutStatus": 204
+    },
+    {
+      "role": "Parent",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 0
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Manager",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 0
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    }
+  ],
+  "artifacts": [],
+  "checks": [
+    {
+      "name": "Student-direct-message-updates-Teacher-inbox-without-reload",
+      "passed": true
+    },
+    {
+      "name": "Teacher-direct-reply-reaches-open-Student-room",
+      "passed": true
+    },
+    {
+      "name": "existing-group-information-renders-from-live-API",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    {
+      "message": "Student messaging-status does not permit group creation; prepare authorized test account communication verification before mutation review.",
+      "code": "QA_ACCOUNT_NOT_READY"
+    }
+  ],
+  "cleanup": [],
+  "existingDirectMessages": {
+    "testMessagesRetained": 2,
+    "conversationId": "68f10dcc-d3f6-4c67-95b2-adb87576ab9e",
+    "recipients": "only the two explicitly authorized test accounts"
+  },
+  "skippedDomainChecks": [
+    "create group/channel",
+    "edit information",
+    "member add/remove",
+    "administrator role changes",
+    "two-way group messaging"
+  ]
+}

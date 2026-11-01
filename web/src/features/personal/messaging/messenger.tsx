@@ -5,11 +5,10 @@ import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states'
 import type { components } from '@/generated/api/schema';
 import { number } from '@/lib/formatting';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import {
   Building2,
   ChevronLeft,
-  ChevronRight,
   MessageCircle,
   SquarePen,
   BellOff,
@@ -24,9 +23,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ProfileAvatar } from '../profile-photo';
-import { usePersonal, usePersonalApi } from '../provider';
+import { usePersonal } from '../provider';
+import { mergeInboxPages } from './inbox-model';
 import { ConversationRoom } from './conversation-room';
 import { useMessagingLive } from './live';
 import { useConversationSelection } from './selection';
@@ -61,45 +61,89 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
   const { last, remember } = useConversationSelection();
   const wide = useMediaQuery('(min-width:768px)');
   const live = useMessagingLive();
-  const { session } = usePersonal(),
-    cache = useQueryClient(),
+  const { session, call } = usePersonal(),
     router = useRouter(),
     pathname = usePathname(),
     search = useSearchParams();
   const requested = search.get('filter') ?? 'All';
-  const organizationView =
-    search.get('view') === 'organization' && session.context.workspaceType === 'Organization';
   const filter = requested in filterLabels ? (requested as keyof typeof filterLabels) : 'All';
-  const requestedPage = Number(search.get('page'));
   const q = search.get('q') ?? '',
-    page = Number.isSafeInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1,
     pageSize = 30;
+  const [requestedPages, setRequestedPages] = useState(1);
+  useEffect(() => setRequestedPages(1), [filter, q]);
   const [draft, setDraft] = useState(q),
     [hidden, setHidden] = useState<Set<string>>(() => new Set());
   useEffect(() => setDraft(q), [q]);
-  const params = new URLSearchParams({ filter, page: String(page), pageSize: String(pageSize) });
-  if (q) params.set('q', q);
-  const routeParams = new URLSearchParams(params);
-  if (organizationView) routeParams.set('view', 'organization');
-  const inboxParams = new URLSearchParams(params);
-  if (!organizationView) inboxParams.set('scope', 'Personal');
-  const inbox = usePersonalApi<Summary[]>('/api/v1/conversations?' + inboxParams, { poll: 5000 });
-  const unavailable = useCallback(
-    (id: string) => {
-      setHidden((previous) => (previous.has(id) ? previous : new Set([...previous, id])));
-      cache.setQueriesData<Summary[]>(
-        {
-          queryKey: ['personal', session.user.id, session.revision],
-          predicate: (query) =>
-            query.queryKey.some(
-              (key) => typeof key === 'string' && key.startsWith('/api/v1/conversations?'),
-            ),
+  const routeParams = new URLSearchParams({ filter });
+  if (q) routeParams.set('q', q);
+  const inbox = useInfiniteQuery({
+    queryKey: [
+      'personal',
+      session.user.id,
+      session.revision,
+      '/api/v1/conversations?unified=1',
+      filter,
+      q,
+    ],
+    initialPageParam: { personal: 1 as number | null, organization: 1 as number | null },
+    queryFn: async ({ pageParam, signal }) => {
+      const read = async (scope: 'Personal' | 'Organization', page: number | null) => {
+        if (
+          page === null ||
+          (scope === 'Organization' && session.context.workspaceType !== 'Organization')
+        )
+          return [];
+        const params = new URLSearchParams({
+          filter,
+          page: String(page),
+          pageSize: String(pageSize),
+          scope,
+        });
+        if (q) params.set('q', q);
+        return call<Summary[]>('/api/v1/conversations?' + params, { signal });
+      };
+      const [personal, organization] = await Promise.all([
+        read('Personal', pageParam.personal),
+        read('Organization', pageParam.organization),
+      ]);
+      return {
+        items: [...personal, ...organization],
+        next: {
+          personal:
+            personal.length === pageSize && pageParam.personal !== null
+              ? pageParam.personal + 1
+              : null,
+          organization:
+            organization.length === pageSize && pageParam.organization !== null
+              ? pageParam.organization + 1
+              : null,
         },
-        (previous) => previous?.filter((row) => row.conversationId !== id),
-      );
+      };
     },
-    [cache, session.user.id, session.revision],
+    getNextPageParam: (last) =>
+      last.next.personal !== null || last.next.organization !== null ? last.next : undefined,
+    refetchInterval: 5000,
+    retry: false,
+  });
+  // A live invalidation may cancel fetchNextPage. Preserve the user's load intent
+  // until that page is actually cached; never cancel an active refresh to append it.
+  useEffect(() => {
+    if (
+      !inbox.isFetching &&
+      !inbox.isError &&
+      inbox.hasNextPage &&
+      inbox.data &&
+      inbox.data.pages.length < requestedPages
+    )
+      void inbox.fetchNextPage({ cancelRefetch: false });
+  }, [inbox, requestedPages]);
+  const allRows = useMemo(
+    () => mergeInboxPages(inbox.data?.pages.map((p) => p.items) ?? []),
+    [inbox.data],
   );
+  const unavailable = useCallback((id: string) => {
+    setHidden((previous) => (previous.has(id) ? previous : new Set([...previous, id])));
+  }, []);
   const available = useCallback(
     (id: string) =>
       setHidden((previous) => {
@@ -110,20 +154,19 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
       }),
     [],
   );
-  function update(nextFilter: typeof filter, nextQuery = q, nextPage = 1) {
-    const next = new URLSearchParams({ filter: nextFilter, page: String(nextPage) });
-    if (organizationView) next.set('view', 'organization');
+  function update(nextFilter: typeof filter, nextQuery = q) {
+    const next = new URLSearchParams({ filter: nextFilter });
     if (nextQuery) next.set('q', nextQuery);
     router.push(pathname + '?' + next, { scroll: false });
   }
-  const rows = inbox.data?.filter((row) => !hidden.has(row.conversationId));
+  const rows = allRows.filter((row) => !hidden.has(row.conversationId));
   const displayId =
     conversationId ?? (wide && rows?.some((row) => row.conversationId === last) ? last : undefined);
-  const selected = inbox.data?.find((row) => row.conversationId === displayId);
+  const selected = allRows.find((row) => row.conversationId === displayId);
   useEffect(() => {
-    if (conversationId && inbox.data?.some((row) => row.conversationId === conversationId))
+    if (conversationId && allRows.some((row) => row.conversationId === conversationId))
       remember(conversationId);
-  }, [conversationId, inbox.data, remember]);
+  }, [conversationId, allRows, remember]);
   return (
     <div className={`${t.theme} ${s.messenger} ${displayId ? s.activeChat : ''}`} data-messenger>
       <section className={s.sidebar} aria-label="فهرست گفتگوها">
@@ -175,19 +218,6 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
             </Menu.Portal>
           </Menu.Root>
         </header>
-        {session.context.workspaceType === 'Organization' && (
-          <nav className={s.scopeSwitch} aria-label="فضای گفتگوها">
-            <Link href="/personal/messages" aria-current={!organizationView ? 'page' : undefined}>
-              شخصی
-            </Link>
-            <Link
-              href="/personal/messages?view=organization"
-              aria-current={organizationView ? 'page' : undefined}
-            >
-              آموزشگاه
-            </Link>
-          </nav>
-        )}
         <form
           className={s.search}
           role="search"
@@ -212,7 +242,7 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
         <nav className={s.filter} aria-label="نوع گفتگوها">
           {(['All', 'Direct', 'Group', 'Channel'] as const).map((value) => (
             <button key={value} onClick={() => update(value)} aria-pressed={filter === value}>
-              {value === 'Direct' && !organizationView ? 'شخصی' : filterLabels[value]}
+              {filterLabels[value]}
             </button>
           ))}
         </nav>
@@ -233,9 +263,7 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
               description={
                 q
                   ? 'عبارت جستجو یا نوع گفتگو را تغییر دهید.'
-                  : organizationView
-                    ? 'گروه و کانال رسمی را از صفحهٔ آموزشگاه یا کلاس باز کنید.'
-                    : 'از دکمهٔ نوشتن بالای فهرست، گفت‌وگویی شروع کنید.'
+                  : 'از دکمهٔ نوشتن بالای فهرست، گفت‌وگویی شروع کنید.'
               }
             />
           ) : (
@@ -291,26 +319,14 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
               </Link>
             ))
           )}
-          {(page > 1 || inbox.data?.length === pageSize) && (
+          {inbox.hasNextPage && (
             <div className={s.paging}>
               <Button
-                size="icon"
                 variant="ghost"
-                aria-label="صفحهٔ قبلی گفتگوها"
-                disabled={page <= 1 || inbox.isFetching}
-                onClick={() => update(filter, q, page - 1)}
+                disabled={inbox.isFetching}
+                onClick={() => setRequestedPages((inbox.data?.pages.length ?? 1) + 1)}
               >
-                <ChevronRight size={18} />
-              </Button>
-              <span>صفحهٔ {number(page)}</span>
-              <Button
-                size="icon"
-                variant="ghost"
-                aria-label="صفحهٔ بعدی گفتگوها"
-                disabled={!inbox.data || inbox.data.length < pageSize || inbox.isFetching}
-                onClick={() => update(filter, q, page + 1)}
-              >
-                <ChevronLeft size={18} />
+                {inbox.isFetchingNextPage ? 'در حال دریافت…' : 'گفتگوهای بیشتر'}
               </Button>
             </div>
           )}

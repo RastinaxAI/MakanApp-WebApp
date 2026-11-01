@@ -121,6 +121,10 @@ export function fixtureBackend(port = 3457) {
         state.faults.push(body);
         return send({ configured: true });
       }
+      if (url.pathname === '/__test__/inbox-pages') {
+        state.inboxPages = body;
+        return send({ configured: true });
+      }
       if (url.pathname === '/__test__/workspace-visibility') {
         state.workspaceVisibility = body.unresolved ? 'unresolved' : undefined;
         return send({ configured: true });

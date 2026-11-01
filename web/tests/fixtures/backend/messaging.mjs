@@ -56,7 +56,14 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
       paged(
         'UserContactPageResult',
         [...state.users.values()]
-          .filter((u) => u.id !== auth.user.id)
+          .filter(
+            (u) =>
+              u.id !== auth.user.id &&
+              (!url.searchParams.get('q') ||
+                (u.displayName + ' ' + u.username)
+                  .toLowerCase()
+                  .includes(url.searchParams.get('q').toLowerCase())),
+          )
           .map((u) =>
             make('UserContactResult', {
               contactUserId: u.id,
@@ -99,6 +106,26 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
     return allowed ? send(summary()) : send({ code: 'CONVERSATION_NOT_FOUND' }, 404);
   }
   if (p === '/api/v1/conversations') {
+    if (state.inboxPages) {
+      const scope = url.searchParams.get('scope'),
+        size = Number(url.searchParams.get('pageSize') ?? 30),
+        page = Number(url.searchParams.get('page') ?? 1);
+      const count =
+        scope === 'Personal' ? state.inboxPages.personal : state.inboxPages.organization;
+      const rows = Array.from({ length: count ?? 0 }, (_, i) =>
+        make('ConversationSummaryResult', {
+          conversationId: id((scope === 'Personal' ? 2000 : 3000) + i),
+          type: scope === 'Personal' ? 'Direct' : 'Group',
+          scope,
+          organizationId: scope === 'Personal' ? null : ids.org,
+          title: (scope === 'Personal' ? 'گفتگوی حساب ' : 'گفتگوی رسمی ') + (i + 1),
+          otherParticipant: null,
+          lastMessageAtUtc: new Date(Date.UTC(2026, 10, 1, 12, 0, -i)).toISOString(),
+          isPinned: false,
+        }),
+      );
+      return send(rows.slice((page - 1) * size, page * size));
+    }
     const filter = url.searchParams.get('filter') ?? 'All';
     const rows =
       allowed &&

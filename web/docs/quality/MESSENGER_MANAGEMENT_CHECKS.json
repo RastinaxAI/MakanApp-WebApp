@@ -1,0 +1,100 @@
+{
+  "initialFullBrowser": {
+    "stats": {
+      "startTime": "2026-11-01T16:16:49.744Z",
+      "duration": 554046.625,
+      "expected": 116,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "failure": "live invalidation canceled next page; corrected by retained pagination intent"
+  },
+  "unit": {
+    "passed": 266,
+    "failed": 0,
+    "files": 49
+  },
+  "targetedInitialBrowser": {
+    "passed": 22,
+    "failed": 0
+  },
+  "finalBrowser": {
+    "command": "npm run test:browser -- messenger-management.spec.ts conversation-pages.spec.ts",
+    "stats": {
+      "startTime": "2026-11-01T16:59:16.329Z",
+      "duration": 73922.958,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "environment": "isolated local fixture; no external domain writes"
+  },
+  "build": "passed; npm run build -- --webpack after pagination and desktop-width fixes",
+  "lint": "passed; 194 source modules, no cycles",
+  "contract": "209 operations, 395 schemas; generated check passed",
+  "operatorGuardChecks": "missing opt-in and CI rejected before login",
+  "targetedFinalBrowser": {
+    "command": "npm run test:browser -- messenger-management.spec.ts conversation-pages.spec.ts",
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0
+  },
+  "typecheck": "passed; standalone tsc --noEmit and production build",
+  "formatting": {
+    "changedSource": "passed",
+    "repository": "passed; old client-auth.test.ts formatting corrected without behavior changes"
+  },
+  "diffCheck": "passed",
+  "fullBeforeLiveConsentFix": {
+    "command": "npm run test:browser",
+    "stats": {
+      "startTime": "2026-11-01T16:28:53.044Z",
+      "duration": 530560.623,
+      "expected": 117,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "environment": "isolated local fixture; no external domain writes"
+  },
+  "liveReview": {
+    "report": "MESSENGER_MANAGEMENT_LIVE.json",
+    "roles": 4,
+    "viewportStages": 12,
+    "pageErrors": 0,
+    "domainVerification": "new group/channel creation and membership/admin writes blocked by missing creation eligibility; direct messaging verified independently",
+    "initialDeniedRequest": "MESSENGER_MANAGEMENT_LIVE_INITIAL.json",
+    "newAutomaticCIWrites": false,
+    "directMessaging": "Student message appeared in Teacher inbox without reload; Teacher reply reached open Student room",
+    "existingGroupInfo": "rendered from live API",
+    "testMessagesRetained": 4,
+    "messageAccounting": "Two successful direct-exchange reviews, two labelled test messages per run; latest raw report records two for its own run.",
+    "loadedGroupInfo": "Header and managed information heading awaited before screenshot; final live report passed."
+  },
+  "consentRecoveryFix": "definitive 409 CONVERSATION_INVITATION_REQUIRED releases frozen operation while retaining draft; unknown failures retain operation ID",
+  "fullAfterConsentFix": {
+    "stats": {
+      "startTime": "2026-11-01T16:48:49.678Z",
+      "duration": 534534.146,
+      "expected": 117,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "failure": "test selector matched both form alert and Next route announcer; scoped to main without weakening assertions; final targeted run follows"
+  },
+  "distinctBrowserScenariosVerified": 118,
+  "browserAccounting": "Latest complete run:117 passed/1 test-only ambiguous alert selector; selector scoped to main. All 14 affected tests passed after correction; application unchanged between these two runs. Previous complete 117-scenario run passed before adding consent recovery.",
+  "docker": {
+    "image": "sha256:5b65b406d18d4792cb11485cf0954f97b37cb56c36abc5aaefe2c2ad324c2d9d",
+    "origin": "http://127.0.0.1:8080",
+    "health": "healthy",
+    "backend": "http://94.184.32.84:8090",
+    "sessionVolume": "makan-client_sessions",
+    "otherPanels": "healthy, unchanged",
+    "receipt": "MESSENGER_MANAGEMENT_DOCKER.json"
+  },
+  "privacy": "Operator exception reports redact request logs, headers, credentials and test phones; dedicated offline test passed. All own QA sessions logged out with204."
+}

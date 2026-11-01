@@ -1,0 +1,26 @@
+{
+  "image": "sha256:5b65b406d18d4792cb11485cf0954f97b37cb56c36abc5aaefe2c2ad324c2d9d",
+  "health": "healthy",
+  "origin": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84:8090",
+  "sessionVolume": [
+    {
+      "name": "makan-client_sessions",
+      "destination": "/app/.makan-sessions"
+    }
+  ],
+  "containers": [
+    {
+      "name": "makan-client-web-1",
+      "status": "Up 7 minutes (healthy)"
+    },
+    {
+      "name": "makan-management-panel-web-1",
+      "status": "Up 12 hours (healthy)"
+    },
+    {
+      "name": "makan-management-web-1",
+      "status": "Up 13 hours (healthy)"
+    }
+  ]
+}

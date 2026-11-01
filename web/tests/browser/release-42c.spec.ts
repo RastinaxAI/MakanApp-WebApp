@@ -49,11 +49,10 @@ for (const role of ['Student', 'Teacher', 'Parent', 'Manager'])
       page.getByRole('button', { name: 'انتخاب فضا از پروفایل', exact: true }),
     ).toHaveCount(0);
     await page.goto('/personal/messages');
-    await expect(
-      page
-        .getByRole('navigation', { name: 'فضای گفتگوها', exact: true })
-        .getByRole('link', { name: 'شخصی', exact: true }),
-    ).toHaveAttribute('aria-current', 'page');
+    await expect(page.getByRole('navigation', { name: 'فضای گفتگوها', exact: true })).toHaveCount(
+      0,
+    );
+    await expect(page.getByRole('navigation', { name: 'نوع گفتگوها', exact: true })).toBeVisible();
     const after = await (await context.request.get(origin + '/api/client/session')).json();
     expect(after.context).toEqual(before.context);
     expect(after.revision).toBe(before.revision);
@@ -246,11 +245,8 @@ test('revocation removes open official content while personal messaging remains 
   await expect(page.getByRole('main').getByRole('alert')).toBeVisible();
   await expect(page.getByRole('region', { name: 'اعلان رسمی تکلیف', exact: true })).toHaveCount(0);
   await page.goto('/personal/messages');
-  await expect(
-    page
-      .getByRole('navigation', { name: 'فضای گفتگوها', exact: true })
-      .getByRole('link', { name: 'شخصی', exact: true }),
-  ).toHaveAttribute('aria-current', 'page');
+  await expect(page.getByRole('navigation', { name: 'فضای گفتگوها', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('navigation', { name: 'نوع گفتگوها', exact: true })).toBeVisible();
   const after = await (await context.request.get(origin + '/api/client/session')).json();
   expect(after.context).toEqual(original.context);
 });

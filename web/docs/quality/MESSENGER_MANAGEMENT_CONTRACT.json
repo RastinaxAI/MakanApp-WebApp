@@ -1,0 +1,72 @@
+{
+  "backend": "http://94.184.32.84:8090",
+  "paths": 327,
+  "operations": [
+    {
+      "method": "PATCH",
+      "path": "/api/v1/conversations/{conversationId}/info",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/{conversationId}/members",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/conversations/{conversationId}/members/{targetUserId}",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/conversations/{conversationId}/members/{targetUserId}/role",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/groups",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/channels",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    }
+  ],
+  "schemas": [
+    {
+      "name": "UpdateConversationInfoCommand",
+      "matchesSnapshot": true
+    },
+    {
+      "name": "ConversationInfoResult",
+      "matchesSnapshot": true
+    },
+    {
+      "name": "AddConversationMemberCommand",
+      "matchesSnapshot": true
+    },
+    {
+      "name": "ChangeConversationMemberRoleCommand",
+      "matchesSnapshot": true
+    },
+    {
+      "name": "CreateManagedConversationCommand",
+      "matchesSnapshot": true
+    },
+    {
+      "name": "ManagedConversationResult",
+      "matchesSnapshot": true
+    },
+    {
+      "name": "ConversationParticipantResult",
+      "matchesSnapshot": true
+    }
+  ]
+}

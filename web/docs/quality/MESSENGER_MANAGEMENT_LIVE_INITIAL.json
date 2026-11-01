@@ -1,0 +1,184 @@
+{
+  "environment": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84:8090",
+  "accounts": [
+    {
+      "role": "Student",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 2
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Teacher",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 2
+        },
+        {
+          "scope": "Organization",
+          "count": 1
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "undocumentedAllProbe": {
+        "status": 400
+      },
+      "logoutStatus": 204
+    },
+    {
+      "role": "Parent",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 0
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Manager",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 0
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    }
+  ],
+  "artifacts": [],
+  "checks": [],
+  "limitations": [
+    {
+      "message": "POST /api/v1/conversations/groups returned 409 CONVERSATION_INVITATION_REQUIRED",
+      "status": 409,
+      "code": "CONVERSATION_INVITATION_REQUIRED",
+      "traceId": "00-b2017ee0ba6cdba53893d4a8b685a3d0-ef4222cf8019e131-00"
+    }
+  ],
+  "cleanup": []
+}

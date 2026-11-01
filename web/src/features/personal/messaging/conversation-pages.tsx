@@ -4,7 +4,18 @@ import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Files, Users, Settings2, MessageCircle, type LucideIcon } from 'lucide-react';
+import {
+  Files,
+  Users,
+  Settings2,
+  MessageCircle,
+  Pencil,
+  ChevronLeft,
+  Shield,
+  Lock,
+  History,
+  type LucideIcon,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ConfirmAction } from '@/components/ui/confirm-action';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -19,10 +30,12 @@ import { MessageAttachment } from './media';
 import { useMessagingLive } from './live';
 import { OfficialBadge, useOfficialConversationAccess } from './official';
 import c from './conversation-pages.module.css';
+import { canManageMembers } from './management-policy';
 import { MessagingSurface } from './messaging-surface';
 import { ProfileAvatar } from '../profile-photo';
+import { ConversationInfoEditor, AddConversationMember, MemberManagement } from './management';
 type S = components['schemas'];
-export type ConversationSection = 'info' | 'members' | 'media' | 'settings';
+export type ConversationSection = 'info' | 'members' | 'media' | 'settings' | 'edit';
 const route = (id: string) => '/personal/messages/' + id;
 export function ConversationPage({ id, section }: { id: string; section: ConversationSection }) {
   const { session, call } = usePersonal();
@@ -70,21 +83,20 @@ function ResolvedConversationPage({
           className={c.heroAvatar}
         />
         <div>
-          <span>
-            {summary.scope === 'Personal'
-              ? 'گفت‌وگوی شخصی'
-              : (summary.organization?.organizationName ?? 'گفت‌وگوی آموزشگاه')}
-          </span>
           <h1>{conversationTitle(summary)}</h1>
-          <OfficialBadge summary={summary} />
+          <div>
+            <OfficialBadge summary={summary} />
+          </div>
         </div>
-        <PageBack href={route(id)} />
+        <PageBack href={section === 'edit' ? route(id) + '/settings' : route(id)} />
       </header>
       <nav className={c.tabs} aria-label="جزئیات گفتگو">
         {tabs.map(([key, title, Icon]) => (
           <Link
             href={route(id) + '/' + key}
-            aria-current={section === key ? 'page' : undefined}
+            aria-current={
+              section === key || (section === 'edit' && key === 'settings') ? 'page' : undefined
+            }
             key={key}
           >
             <Icon size={19} />
@@ -95,7 +107,7 @@ function ResolvedConversationPage({
       {section === 'media' ? (
         <ConversationMedia id={id} />
       ) : isManagedConversation(summary.type) ? (
-        section === 'settings' && !access.canManage ? (
+        (section === 'settings' || section === 'edit') && !access.canManage ? (
           <EmptyState title="امکان مدیریت این گفتگو برای شما فعال نیست" />
         ) : (
           <ManagedPage id={id} section={section} />
@@ -139,7 +151,9 @@ function ManagedPage({ id, section }: { id: string; section: ConversationSection
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
   if (q.data.conversationId !== id) return <ErrorState error={new ApiError(502)} />;
   return section === 'members' ? (
-    <ConversationMembers id={id} />
+    <ConversationMembers id={id} value={q.data} />
+  ) : section === 'edit' ? (
+    <ConversationInfoEditor value={q.data} />
   ) : section === 'settings' ? (
     <ConversationSettings value={q.data} />
   ) : (
@@ -150,6 +164,7 @@ function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
   const { call, session } = usePersonal(),
     router = useRouter();
   const cache = useQueryClient();
+  const owner = canManageMembers(value, session.user.id);
   return (
     <section className={c.panel}>
       <h2>{value.type === 'Channel' ? 'اطلاعات کانال' : 'اطلاعات گروه'}</h2>
@@ -158,18 +173,46 @@ function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
       </p>
       <dl className={c.details}>
         <div>
-          <dt>وابستگی گفتگو</dt>
-          <dd>{value.scope === 'Personal' ? 'شخصی' : 'آموزشگاه'}</dd>
+          <Lock size={19} />
+          <div>
+            <dt>{value.type === 'Channel' ? 'نوع کانال' : 'نوع گروه'}</dt>
+            <dd>{value.visibility === 'Public' ? 'عمومی' : 'خصوصی'}</dd>
+          </div>
         </div>
         <div>
-          <dt>نمایان‌بودن</dt>
-          <dd>{value.visibility === 'Public' ? 'عمومی' : 'خصوصی'}</dd>
-        </div>
-        <div>
-          <dt>تاریخچه برای عضو جدید</dt>
-          <dd>{value.groupHistoryPolicy === 'FromJoin' ? 'از زمان عضویت' : 'تاریخچهٔ کامل'}</dd>
+          <History size={19} />
+          <div>
+            <dt>تاریخچه برای عضو جدید</dt>
+            <dd>{value.groupHistoryPolicy === 'FromJoin' ? 'از زمان عضویت' : 'تاریخچهٔ کامل'}</dd>
+          </div>
         </div>
       </dl>
+      <div className={c.settingRows}>
+        {owner && (
+          <Link href={route(value.conversationId) + '/edit'}>
+            <Pencil size={21} />
+            <span>ویرایش اطلاعات</span>
+            <ChevronLeft size={18} />
+          </Link>
+        )}
+        <Link href={route(value.conversationId) + '/members'}>
+          <Users size={21} />
+          <span>اعضای {value.type === 'Channel' ? 'کانال' : 'گروه'}</span>
+          <ChevronLeft size={18} />
+        </Link>
+        <Link href={route(value.conversationId) + '/media'}>
+          <Files size={21} />
+          <span>عکس، ویدئو و فایل</span>
+          <ChevronLeft size={18} />
+        </Link>
+        {owner && (
+          <Link href={route(value.conversationId) + '/settings'}>
+            <Shield size={21} />
+            <span>مدیریت گفتگو</span>
+            <ChevronLeft size={18} />
+          </Link>
+        )}
+      </div>
       {value.managementPolicy === 'SystemManagedAcademic' ? (
         <p className={c.note}>عضویت و مدیریت این فضای رسمی تابع دسترسی آموزشی معتبر است.</p>
       ) : (
@@ -196,7 +239,9 @@ function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
     </section>
   );
 }
-function ConversationMembers({ id }: { id: string }) {
+function ConversationMembers({ id, value }: { id: string; value: S['ManagedConversationResult'] }) {
+  const { session } = usePersonal();
+  const owner = canManageMembers(value, session.user.id);
   const [page, setPage] = useState(1);
   const q = usePersonalApi<S['ConversationParticipantPageResult']>(
     `/api/v1/conversations/${id}/members?page=${page}&pageSize=30`,
@@ -204,7 +249,10 @@ function ConversationMembers({ id }: { id: string }) {
   );
   return (
     <section className={c.panel}>
-      <h2>اعضای گفتگو</h2>
+      <div className={c.filters}>
+        <h2>اعضای گفتگو</h2>
+        {owner && <AddConversationMember value={value} />}
+      </div>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -224,10 +272,17 @@ function ConversationMembers({ id }: { id: string }) {
                       </small>
                     )}
                     <small>
-                      {m.status === 'Active' ? 'عضو فعال' : 'عضویت پایان‌یافته'} ·{' '}
-                      {conversationRoleLabels[m.role]}
+                      {m.status === 'Active'
+                        ? 'عضو فعال'
+                        : m.status === 'Removed'
+                          ? 'حذف‌شده'
+                          : 'خارج‌شده'}{' '}
+                      · {conversationRoleLabels[m.role]}
                     </small>
                   </div>
+                  {owner && m.role !== 'Owner' && m.status === 'Active' && (
+                    <MemberManagement id={id} member={m} />
+                  )}
                 </article>
               ))
             ) : (
@@ -359,14 +414,26 @@ function ConversationSettings({ value }: { value: S['ManagedConversationResult']
       <section className={c.panel}>
         <h2>تنظیمات گفتگو</h2>
         <p className={c.note}>
-          تغییر این تنظیمات در این نما برای مالک فعالِ گروه یا کانال شخصی در دسترس است. مدیریت فضای
-          رسمی از دسترسی آموزشی جداست.
+          تغییر این تنظیمات در این نما برای مالک فعالِ گروه یا کانال در دسترس است. مدیریت فضای رسمی
+          از دسترسی آموزشی جداست.
         </p>
       </section>
     );
   return (
     <section className={c.panel}>
-      <h2>تنظیمات گروه یا کانال</h2>
+      <h2>مدیریت {value.type === 'Channel' ? 'کانال' : 'گروه'}</h2>
+      <div className={c.settingRows}>
+        <Link href={route(value.conversationId) + '/edit'}>
+          <Pencil size={21} />
+          <span>ویرایش نام و توضیحات</span>
+          <ChevronLeft size={18} />
+        </Link>
+        <Link href={route(value.conversationId) + '/members'}>
+          <Shield size={21} />
+          <span>اعضا و مدیران</span>
+          <ChevronLeft size={18} />
+        </Link>
+      </div>
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();

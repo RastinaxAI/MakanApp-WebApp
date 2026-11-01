@@ -3247,6 +3247,51 @@ export interface paths {
         };
         trace?: never;
     };
+    "/api/v1/conversations/{conversationId}/info": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateConversationInfoCommand"];
+                    "text/json": components["schemas"]["UpdateConversationInfoCommand"];
+                    "application/*+json": components["schemas"]["UpdateConversationInfoCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationInfoResult"];
+                        "application/json": components["schemas"]["ConversationInfoResult"];
+                        "text/json": components["schemas"]["ConversationInfoResult"];
+                    };
+                };
+            };
+        };
+        trace?: never;
+    };
     "/api/v1/conversations/{conversationId}/me/restriction": {
         parameters: {
             query?: never;
@@ -3870,8 +3915,77 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["AddConversationMemberCommand"];
+                    "text/json": components["schemas"]["AddConversationMemberCommand"];
+                    "application/*+json": components["schemas"]["AddConversationMemberCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ManagedConversationResult"];
+                        "application/json": components["schemas"]["ManagedConversationResult"];
+                        "text/json": components["schemas"]["ManagedConversationResult"];
+                    };
+                };
+            };
+        };
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/members/{targetUserId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                    targetUserId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ManagedConversationResult"];
+                        "application/json": components["schemas"]["ManagedConversationResult"];
+                        "text/json": components["schemas"]["ManagedConversationResult"];
+                    };
+                };
+            };
+        };
         options?: never;
         head?: never;
         patch?: never;
@@ -3914,6 +4028,52 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/members/{targetUserId}/role": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                    targetUserId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ChangeConversationMemberRoleCommand"];
+                    "text/json": components["schemas"]["ChangeConversationMemberRoleCommand"];
+                    "application/*+json": components["schemas"]["ChangeConversationMemberRoleCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ManagedConversationResult"];
+                        "application/json": components["schemas"]["ManagedConversationResult"];
+                        "text/json": components["schemas"]["ManagedConversationResult"];
+                    };
+                };
+            };
+        };
         trace?: never;
     };
     "/api/v1/conversations/{conversationId}/settings": {
@@ -11591,6 +11751,18 @@ export interface components {
             isFavorite: boolean;
             expectedVersion: string;
         };
+        UpdateConversationInfoCommand: {
+            title: string;
+            description: string | null;
+            expectedVersion: string;
+        };
+        ConversationInfoResult: {
+            /** Format: uuid */
+            conversationId: string;
+            title: string;
+            description: string | null;
+            version: string;
+        };
         MemberRestrictionResult: {
             /** Format: uuid */
             conversationId: string;
@@ -11978,6 +12150,16 @@ export interface components {
             pageSize: number;
             hasMore: boolean;
         };
+        AddConversationMemberCommand: {
+            /** Format: uuid */
+            userId: string;
+        };
+        ChangeConversationMemberRoleCommand: {
+            role: components["schemas"]["ConversationParticipantRole"];
+            adminPermissions?: components["schemas"]["ConversationAdminPermission2"];
+        };
+        /** @default None */
+        ConversationAdminPermission2: string;
         UpdateConversationSettingsCommand: {
             visibility: components["schemas"]["ConversationVisibility"];
             groupHistoryPolicy: components["schemas"]["GroupHistoryPolicy"];

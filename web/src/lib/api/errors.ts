@@ -37,6 +37,8 @@ const serviceMessages: Record<string, string> = {
   NETWORK_ERROR: 'ارتباط مرورگر با پنل قطع شده است. اتصال را بررسی و دوباره تلاش کنید.',
 };
 const actionMessages: Record<string, string> = {
+  CONVERSATION_INVITATION_REQUIRED:
+    'عضویت این مخاطب به دعوت و پذیرش او نیاز دارد؛ افزودن مستقیم انجام نشد. این مخاطب را از اعضای اولیه بردارید.',
   FILE_EMPTY: 'فایل خالی است؛ فایل دیگری انتخاب کنید.',
   DIRECT_RECIPIENT_NOT_AVAILABLE:
     'این مخاطب در حال حاضر برای شروع گفت‌وگو در دسترس نیست. مخاطب دیگری را انتخاب کنید یا وضعیت ارتباطی حساب‌ها را از پشتیبانی پیگیری کنید.',

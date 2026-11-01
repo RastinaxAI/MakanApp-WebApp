@@ -209,3 +209,7 @@
 | `GET /api/v1/organization/classes/{classId}/official-spaces` | — | OfficialSpacesPairResult |
 | `GET /api/v1/organization/classes/{classId}/official-spaces/activities/{eventId}` | — | array |
 | `GET /api/v1/organization/classes/{classId}/official-spaces/activities` | — | array |
+| `PATCH /api/v1/conversations/{conversationId}/info` | UpdateConversationInfoCommand | ConversationInfoResult |
+| `POST /api/v1/conversations/{conversationId}/members` | AddConversationMemberCommand | ManagedConversationResult |
+| `DELETE /api/v1/conversations/{conversationId}/members/{targetUserId}` | — | ManagedConversationResult |
+| `PATCH /api/v1/conversations/{conversationId}/members/{targetUserId}/role` | ChangeConversationMemberRoleCommand | ManagedConversationResult |

@@ -1,0 +1,43 @@
+{
+  "backend": "http://94.184.32.84:8090",
+  "role": "Teacher",
+  "reads": [
+    {
+      "scope": "omitted",
+      "status": 200,
+      "count": 1,
+      "returnedScopes": [
+        "Organization"
+      ],
+      "returnedTypes": [
+        "Group"
+      ]
+    },
+    {
+      "scope": "Personal",
+      "status": 200,
+      "count": 2,
+      "returnedScopes": [
+        "Personal"
+      ],
+      "returnedTypes": [
+        "Direct",
+        "Group"
+      ]
+    },
+    {
+      "scope": "Organization",
+      "status": 200,
+      "count": 1,
+      "returnedScopes": [
+        "Organization"
+      ],
+      "returnedTypes": [
+        "Group"
+      ]
+    }
+  ],
+  "omittedIncludesPersonal": false,
+  "omittedIncludesOrganization": true,
+  "logoutStatus": 204
+}
