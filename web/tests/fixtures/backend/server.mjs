@@ -80,6 +80,7 @@ export function fixtureBackend(port = 3457) {
       }
       if (url.pathname === '/__test__/chat-kind') {
         state.chatKind = body.kind === 'Saved' ? 'Saved' : 'Direct';
+        state.chatDisplayName = body.displayName;
         return send({ configured: true });
       }
       if (url.pathname === '/__test__/conversation-details') {

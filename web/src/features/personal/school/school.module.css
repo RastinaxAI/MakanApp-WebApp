@@ -18,7 +18,16 @@
 }
 .portal {
   max-width: 1280px;
+  min-width: 0;
   margin: auto;
+}
+.portal .heading h1 {
+  font-size: 26px;
+  line-height: 1.6;
+}
+.portal .heading p {
+  font-size: 13px;
+  line-height: 1.9;
 }
 .context {
   display: flex;
@@ -520,6 +529,9 @@
   min-height: 52px;
 }
 @media (max-width: 767px) {
+  .portal .heading h1 {
+    font-size: 22px;
+  }
   .heading h1 {
     font-size: 25px;
   }

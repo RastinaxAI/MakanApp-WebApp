@@ -258,15 +258,13 @@
 .messageMain,
 .assistantMain {
   display: flex;
+  /* Keep the reserved bottom-navigation space; flex: 1 would consume it again. */
+  flex: 0 0 auto;
   max-width: none;
   padding: 0;
   height: calc(100dvh - var(--personal-header) - var(--personal-bottom));
   min-height: 0;
   overflow: hidden;
-}
-.assistantMain {
-  /* Its explicit viewport height reserves the fixed bottom navigation. */
-  flex: 0 0 auto;
 }
 .mobileNav {
   display: none;
@@ -452,7 +450,7 @@
   background: #f7f7f8;
 }
 :global(:root[data-theme='dark']) .shell[data-messaging-page] .header {
-  background: #1c1c1d;
+  background: #1d2935;
 }
 @media (max-width: 1023px) {
   .shell[data-messaging] {
@@ -486,10 +484,10 @@
     background: transparent;
   }
   :global(:root[data-theme='dark']) .shell[data-messaging] .mobileNav {
-    background: #1c1c1d;
-    border-color: #303032;
+    background: #1d2935;
+    border-color: #304150;
   }
   :global(:root[data-theme='dark']) .shell[data-messaging] .mobileNav .nav a[aria-current] {
-    color: #65b3ff;
+    color: #72b9f2;
   }
 }

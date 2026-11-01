@@ -1,6 +1,6 @@
 'use client';
 import * as Menu from '@radix-ui/react-dropdown-menu';
-import { Files, Info, MoreHorizontal, Settings } from 'lucide-react';
+import { Files, Info, MoreVertical, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import t from './messaging-theme.module.css';
@@ -10,7 +10,7 @@ export function ConversationActions({ id, managed }: { id: string; managed: bool
     <Menu.Root dir="rtl">
       <Menu.Trigger asChild>
         <Button size="icon" variant="ghost" aria-label="گزینه‌های گفتگو">
-          <MoreHorizontal size={24} />
+          <MoreVertical size={22} />
         </Button>
       </Menu.Trigger>
       <Menu.Portal>

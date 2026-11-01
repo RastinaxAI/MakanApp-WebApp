@@ -88,13 +88,15 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
           ? null
           : make('SafeMessagingIdentityResult2', {
               userId: auth.user.id === id(101) ? id(102) : id(101),
-              displayName: state.design
-                ? auth.user.id === id(101)
-                  ? 'مریم رضایی'
-                  : 'سارا احمدی'
-                : auth.user.id === id(101)
-                  ? 'استاد آزمایشی'
-                  : 'دانشجوی آزمایشی',
+              displayName:
+                state.chatDisplayName ??
+                (state.design
+                  ? auth.user.id === id(101)
+                    ? 'مریم رضایی'
+                    : 'سارا احمدی'
+                  : auth.user.id === id(101)
+                    ? 'استاد آزمایشی'
+                    : 'دانشجوی آزمایشی'),
               username: auth.user.id === id(101) ? 'test.Teacher' : 'test.Student',
             }),
       lastMessagePreview: state.messages.at(-1)?.text ?? null,

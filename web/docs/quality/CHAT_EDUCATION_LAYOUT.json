@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-02",
+  "scope": "Chat identity header, Telegram-like Slate inbox and compact school weekly agenda",
+  "commands": [
+    {
+      "command": "npm test -- --reporter=dot",
+      "passed": 281,
+      "failed": 0,
+      "files": 51
+    },
+    {
+      "command": "npm run build -- --webpack",
+      "status": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "status": "passed",
+      "sourceModules": 201,
+      "initialAttempt": "TS6053 while next build regenerated .next/types; sequential rerun passed"
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "npm run generated:check",
+      "status": "passed",
+      "operations": 221,
+      "schemas": 413,
+      "historicalDesignScreens": 130
+    },
+    {
+      "command": "npm run format:check",
+      "status": "passed"
+    },
+    {
+      "command": "npm run test:browser -- chat-education-layout.spec.ts chat-school-polish.spec.ts telegram-messenger.spec.ts messenger-management.spec.ts school-redesign.spec.ts",
+      "status": "passed",
+      "stats": {
+        "startTime": "2026-11-01T21:00:20.959Z",
+        "duration": 151764.006,
+        "expected": 41,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "widths": [
+    320,
+    390,
+    700,
+    701,
+    834,
+    1024,
+    1440
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "newCases": [
+    "Long Persian/Latin chat names: avatar and title stay together, back/menu do not overlap; both themes and five sizes; information link and menu focus work",
+    "Slate inbox: actual body/unread badge contrast >=4.5, pill filters, compose button pointer hit-testing and clearance above bottom navigation, search and filter URL state",
+    "Student/Teacher agenda: populated session, compact date height, 44px controls, server range change, empty next week and current-week reset",
+    "Existing tests cover all five account types, chat send/receipt/history, failure and access revocation, photo/video/file bytes, conversation creation/management, invitations and class navigation"
+  ],
+  "regressionProof": "CHAT_EDUCATION_REGRESSION.json",
+  "visualDirectory": "output/review/chat-education-layout",
+  "visuallyInspected": [
+    "inbox-dark-390.png",
+    "header-dark-en-390.png",
+    "header-light-fa-390.png",
+    "school-Student-390.png",
+    "school-Teacher-834.png",
+    "../chat-school-polish/school-Manager-390.png",
+    "../chat-school-polish/school-Parent-390.png",
+    "header-dark-en-1440.png"
+  ],
+  "runtimeInputs": {
+    "files": 263,
+    "sha256": "9753fb0db87b952ea086b6546c160b38132a3910718e847def6008de75e08d2b",
+    "algorithm": "SHA-256 over sorted path + NUL + file SHA-256 + LF; application Docker build inputs only, no environment files"
+  },
+  "limits": [
+    "All browser writes targeted the isolated local fixture, not the remote server.",
+    "No backend authorization or age policy changed.",
+    "Remote deployment and physical-device OS chrome were not verified.",
+    "No new endpoint, dependency, fabricated membership or presence was introduced."
+  ]
+}

@@ -20,17 +20,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 10px;
-  min-height: 56px;
+  padding: 10px 16px 4px;
+  min-height: 64px;
   flex-shrink: 0;
   background: var(--chat-header);
 }
 .listHeader h1 {
-  font-size: 17px;
+  font-size: 23px;
   font-weight: 700;
 }
-.listHeader > a,
-.floating {
+.listHeader > a {
   width: 44px;
   height: 44px;
   display: grid;
@@ -40,16 +39,37 @@
   color: var(--primary);
   background: transparent;
 }
-.listHeader > a:hover,
-.floating:hover {
+.listHeader > a:hover {
   background: var(--soft);
+}
+.floating {
+  position: absolute;
+  inset-inline-end: 20px;
+  bottom: 48px;
+  z-index: 5;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--primary-button);
+  box-shadow: 0 5px 18px #0003;
+}
+.floating:hover {
+  background: var(--primary-hover);
+}
+.floating:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
 }
 .search {
   display: flex;
   align-items: center;
   gap: 8px;
   margin: 0;
-  padding: 0 10px 10px;
+  padding: 6px 12px 12px;
   color: var(--muted);
   background: var(--chat-header);
   flex-shrink: 0;
@@ -58,11 +78,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  border-radius: 10px;
+  border-radius: 24px;
   background: var(--soft);
   flex: 1;
   min-width: 0;
-  padding: 0 10px;
+  padding: 0 12px 0 2px;
+}
+.searchField:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 .search input {
   border: 0;
@@ -84,15 +108,16 @@
   width: 44px;
   min-width: 44px;
   height: 44px;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 .filter {
   display: flex;
-  gap: 4px;
+  gap: 2px;
   flex-shrink: 0;
-  padding: 0 10px;
-  background: var(--chat-header);
-  border-bottom: 1px solid var(--border);
+  padding: 4px;
+  margin: 0 12px 8px;
+  border-radius: 24px;
+  background: var(--soft);
 }
 .filter button {
   position: relative;
@@ -101,22 +126,15 @@
   border: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
   min-height: 44px;
   padding: 8px 2px;
+  border-radius: 20px;
 }
 .filter button[aria-pressed='true'] {
   color: var(--primary);
   font-weight: 700;
-}
-.filter button[aria-pressed='true']:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  inset-inline: 14px;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
-  background: var(--primary);
+  background: var(--primary-soft);
 }
 .filterTitle {
   display: flex;
@@ -139,7 +157,7 @@
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0;
+  padding: 0 0 88px;
 }
 .chatItem {
   position: relative;
@@ -147,8 +165,8 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 8px 12px;
-  min-height: 78px;
+  padding: 12px 14px;
+  min-height: 84px;
 }
 .chatItem:after {
   content: '';
@@ -157,10 +175,13 @@
   inset-inline-start: 84px;
   inset-inline-end: 0;
   height: 1px;
-  background: var(--border);
+  background: color-mix(in srgb, var(--border) 45%, transparent);
 }
 .chatItem:hover {
   background: var(--bg);
+}
+:global(:root[data-theme='dark']) .chatItem:after {
+  display: none;
 }
 .selected {
   background: var(--chat-selected) !important;
@@ -203,12 +224,13 @@
   gap: 8px;
 }
 .chatSummary strong {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 24px;
   font-weight: 650;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: right;
 }
 .chatSummary time {
   font-size: 11px;
@@ -223,7 +245,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 23px;
 }
 .unread {
@@ -234,7 +256,7 @@
   height: 21px;
   border-radius: 12px;
   background: var(--primary);
-  color: #fff;
+  color: var(--chat-badge-text);
   font-size: 11px;
   line-height: 1;
   padding: 0 6px;
@@ -288,9 +310,9 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-height: 64px;
-  padding: 6px 16px;
+  padding: 6px 12px;
   background: var(--chat-header);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
@@ -300,13 +322,28 @@
   height: 42px;
   font-size: 17px;
 }
+.roomHeader > :global(.button) {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+}
 .roomHeader :global(.button) {
   color: var(--primary);
   border-radius: 8px;
 }
 .identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   flex: 1;
   min-width: 0;
+  min-height: 48px;
+  padding-block: 2px;
+  border-radius: 10px;
+}
+.identityText {
+  min-width: 0;
+  flex: 1;
 }
 .identity h2 {
   font-size: 16px;
@@ -315,11 +352,16 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: right;
 }
-.identity p {
-  font-size: 11px;
+.identitySubtitle {
+  display: block;
+  font-size: 12px;
   line-height: 18px;
   color: var(--muted);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .back {
   display: none !important;
@@ -702,26 +744,18 @@
     display: inline-flex !important;
   }
   .roomHeader {
-    min-height: 56px;
+    min-height: 64px;
     padding: 4px 8px;
     gap: 6px;
   }
   .roomHeader .avatar {
-    order: 3;
-    width: 36px;
-    height: 36px;
-    font-size: 15px;
-  }
-  .identity {
-    text-align: center;
+    width: 40px;
+    height: 40px;
+    font-size: 17px;
   }
   .identity h2 {
     font-size: 15px;
   }
-  .identity p {
-    font-size: 10px;
-  }
-
   .history {
     padding: 10px 10px 14px;
   }

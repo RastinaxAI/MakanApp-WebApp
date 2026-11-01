@@ -51,7 +51,7 @@ for (const theme of ['light', 'dark']) {
         peerBox = await incoming.boundingBox();
       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.
       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(
-        theme === 'light' ? 'rgb(225, 255, 199)' : 'rgb(51, 51, 51)',
+        theme === 'light' ? 'rgb(225, 255, 199)' : 'rgb(43, 76, 104)',
       );
       const room = page.locator('[data-message-room]');
       expect(await room.evaluate((el) => getComputedStyle(el).backgroundImage)).toContain(

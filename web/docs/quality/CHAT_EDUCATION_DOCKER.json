@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-02",
+  "container": "makan-client-web-1",
+  "image": "sha256:a144b6d823435959b793fc797aed296834bb1147b537cead39f757c9cf8f13a3",
+  "health": "healthy",
+  "sessionVolume": [
+    "makan-client_sessions"
+  ],
+  "origin": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84:8090",
+  "smoke": {
+    "path": "/enter",
+    "status": 200
+  },
+  "runtimeInputs": {
+    "files": 263,
+    "sha256": "9753fb0db87b952ea086b6546c160b38132a3910718e847def6008de75e08d2b",
+    "algorithm": "SHA-256 over sorted path + NUL + file SHA-256 + LF; application Docker build inputs only, no environment files"
+  },
+  "runtimeInputsUnchangedAfterBuild": true,
+  "buildCommand": "docker compose --project-name makan-client --file compose.yaml --progress plain build web",
+  "deploymentCommand": "docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml up -d --no-deps --no-build --wait --wait-timeout 180 web",
+  "buildPassed": true,
+  "deploymentPassed": true,
+  "otherPanels": "Both management containers remained healthy and were not recreated.",
+  "limits": [
+    "UI regressions were tested with isolated fixtures.",
+    "Remote server deployment was not performed.",
+    "The local Docker build was slow; no build error occurred."
+  ]
+}

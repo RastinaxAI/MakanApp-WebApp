@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  margin: 0 0 28px;
+  margin: 0 0 20px;
   padding: 6px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -147,16 +147,16 @@
     grid-template-rows: 22px minmax(38px, auto);
     align-content: center;
     justify-items: center;
-    min-height: 88px;
-    gap: 7px;
+    min-height: 78px;
+    gap: 4px;
     font-size: 11px;
     line-height: 1.7;
-    padding: 10px 4px;
+    padding: 7px 4px;
   }
   .navigation {
     gap: 3px;
     border-radius: 16px;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
   .classHeading {
     padding: 20px;

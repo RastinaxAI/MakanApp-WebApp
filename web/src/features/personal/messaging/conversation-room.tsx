@@ -444,7 +444,7 @@ function ResolvedConversationRoom({
         data-scope={conversation.scope}
         aria-label={'گفتگو با ' + name}
       >
-        <header className={s.roomHeader}>
+        <header className={s.roomHeader} data-chat-header>
           <Button asChild className={s.back} size="icon" variant="ghost">
             <Link
               href={
@@ -457,34 +457,35 @@ function ResolvedConversationRoom({
               <ArrowRight size={21} />
             </Link>
           </Button>
-          <ProfileAvatar
-            photo={
-              conversation.type === 'Direct'
-                ? summary.otherParticipant?.profilePhoto
-                : conversation.type === 'Saved'
-                  ? session.user.profilePhoto
-                  : undefined
-            }
-            name={name}
-            className={s.avatar}
-          />
           <Link
             className={s.identity}
             href={`/personal/messages/${id}/info`}
             aria-label="اطلاعات گفتگو"
           >
-            <h2>{name}</h2>
-            <OfficialBadge summary={summary} />
-            <p>
-              {conversation.type === 'Direct'
-                ? 'گفت‌وگوی مستقیم'
-                : conversation.type === 'Saved'
-                  ? 'یادداشت‌های شخصی'
-                  : conversation.type === 'Channel'
-                    ? 'کانال'
-                    : 'گروه'}{' '}
-              · {conversation.scope === 'Personal' ? 'شخصی' : 'آموزشگاه'}
-            </p>
+            <ProfileAvatar
+              photo={
+                conversation.type === 'Direct'
+                  ? summary.otherParticipant?.profilePhoto
+                  : conversation.type === 'Saved'
+                    ? session.user.profilePhoto
+                    : undefined
+              }
+              name={name}
+              className={s.avatar}
+            />
+            <div className={s.identityText}>
+              <h2 dir="auto">{name}</h2>
+              <OfficialBadge summary={summary} />
+              <span className={s.identitySubtitle}>
+                {conversation.type === 'Direct'
+                  ? 'گفت‌وگوی مستقیم'
+                  : conversation.type === 'Saved'
+                    ? 'یادداشت‌های شخصی'
+                    : conversation.type === 'Channel'
+                      ? 'کانال'
+                      : 'گروه'}
+              </span>
+            </div>
           </Link>
           <ConversationActions id={id} managed={isManagedConversation(conversation.type)} />
         </header>

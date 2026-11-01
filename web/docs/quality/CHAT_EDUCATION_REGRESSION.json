@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-02",
+  "purpose": "Regression proof against the earlier build before the messageMain flex fix",
+  "command": "npm run test:browser -- chat-education-layout.spec.ts -g dark.inbox",
+  "stats": {
+    "startTime": "2026-11-01T20:58:57.316Z",
+    "duration": 6789.345,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "result": "One intended failure: document.elementFromPoint proved the compose button was covered by bottom navigation. The assertion is retained in the final suite.",
+  "invalidInvocation": "An earlier -g argument with a space was split by the Windows npm command shim; no tests ran. Replaced it with dark.inbox."
+}

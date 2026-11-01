@@ -8,7 +8,6 @@ import * as Menu from '@radix-ui/react-dropdown-menu';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import {
   Building2,
-  ChevronLeft,
   MessageCircle,
   SquarePen,
   BellOff,
@@ -171,10 +170,10 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
     <div className={`${t.theme} ${s.messenger} ${displayId ? s.activeChat : ''}`} data-messenger>
       <section className={s.sidebar} aria-label="فهرست گفتگوها">
         <header className={s.listHeader}>
+          <h1>پیام‌ها</h1>
           <Link href="/personal/settings" aria-label="تنظیمات پیام‌رسان">
             <Settings size={22} />
           </Link>
-          <h1>پیام‌ها</h1>
           <Menu.Root dir="rtl">
             <Menu.Trigger asChild>
               <button className={s.floating} aria-label="ایجاد گفت‌وگو یا مخاطب">
@@ -184,8 +183,8 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
             <Menu.Portal>
               <Menu.Content
                 className={`dropdown ${t.theme} ${t.menu}`}
-                side="bottom"
-                align="start"
+                side="top"
+                align="end"
                 sideOffset={8}
               >
                 <Menu.Item asChild>
@@ -227,17 +226,16 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
           }}
         >
           <div className={s.searchField}>
-            <Search size={18} />
             <input
               aria-label="جستجوی گفتگوها"
               placeholder="جستجو در پیام‌ها"
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
             />
+            <button type="submit" aria-label="انجام جستجوی گفتگو" className={s.searchSubmit}>
+              <Search size={20} />
+            </button>
           </div>
-          <button type="submit" aria-label="انجام جستجوی گفتگو" className={s.searchSubmit}>
-            <ChevronLeft size={19} />
-          </button>
         </form>
         <nav className={s.filter} aria-label="نوع گفتگوها">
           {(['All', 'Direct', 'Group', 'Channel'] as const).map((value) => (
@@ -287,7 +285,7 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
                 )}
                 <span className={s.chatSummary}>
                   <span className={s.row}>
-                    <strong>
+                    <strong dir="auto">
                       {conversationTitle(row)}{' '}
                       {row.isMuted && <BellOff size={12} aria-label="بی‌صدا" />}
                     </strong>

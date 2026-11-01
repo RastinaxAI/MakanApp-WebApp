@@ -33,6 +33,24 @@ export function schoolDayLabel(value: string) {
     .map((type) => parts.find((p) => p.type === type)?.value)
     .join(' ');
 }
+function compactWeekLabel(first: string, last: string) {
+  const parts = (value: string) => {
+    const formatted = new Intl.DateTimeFormat('fa-IR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    }).formatToParts(calendarDate(value));
+    const read = (type: Intl.DateTimeFormatPartTypes) =>
+      formatted.find((part) => part.type === type)!.value;
+    return { day: read('day'), month: read('month'), year: read('year') };
+  };
+  const from = parts(first),
+    to = parts(last);
+  if (from.year !== to.year) return `${schoolDayLabel(first)} تا ${schoolDayLabel(last)}`;
+  const start = from.month === to.month ? from.day : `${from.day} ${from.month}`;
+  return `${start} تا ${to.day} ${to.month} ${to.year}`;
+}
 export function schoolWeekRange(anchor: string) {
   const first = weekStart(anchor),
     last = addDays(first, 6),
@@ -46,6 +64,7 @@ export function schoolWeekRange(anchor: string) {
     toUtc: end.toISOString(),
     firstLabel: schoolDayLabel(first),
     lastLabel: schoolDayLabel(last),
+    label: compactWeekLabel(first, last),
     days: Array.from({ length: 7 }, (_, index) => {
       const day = addDays(first, index);
       return {

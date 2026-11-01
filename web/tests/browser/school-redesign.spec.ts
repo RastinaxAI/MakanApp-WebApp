@@ -76,12 +76,7 @@ test('school has four destinations, three nearest items and a separate class pag
   });
   await page.goto('/personal/education');
   const nav = page.getByRole('navigation', { name: 'بخش‌های آموزشگاه', exact: true });
-  await expect(nav.getByRole('link')).toHaveText([
-    'نمای آموزشگاه',
-    'کلاس‌ها',
-    'برنامه‌های کلاسی',
-    'دعوت‌ها',
-  ]);
+  await expect(nav.getByRole('link')).toHaveText(['نمای کلی', 'کلاس‌ها', 'برنامه‌ها', 'دعوت‌ها']);
   for (const [name, title] of [
     ['نزدیک‌ترین جلسه', 'جلسهٔ نزدیک'],
     ['نزدیک‌ترین تکلیف', 'تکلیف نزدیک'],
@@ -179,7 +174,9 @@ test('weekly schedule changes the server range and can return to the same week w
     page.getByRole('heading', { name: 'برنامهٔ هفتگی کلاس‌ها', exact: true }),
   ).toBeVisible();
   await expect(page.getByLabel('جلسه‌ها از تاریخ', { exact: true })).toHaveCount(0);
-  const weekHeading = page.getByRole('heading', { level: 2 }).filter({ hasText: /۱۴/ }).last();
+  const weekHeading = page
+    .getByRole('navigation', { name: 'جابه‌جایی هفته' })
+    .locator('[aria-live]');
   const first = await weekHeading.textContent();
   const response = page.waitForResponse(
     (r) => r.url().includes('/api/v1/academic/schedule?') && r.request().method() === 'GET',

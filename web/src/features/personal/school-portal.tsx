@@ -231,9 +231,12 @@ export function PersonalEducation({ section = [] }: { section?: string[] }) {
           key={key}
           href={key === 'overview' ? base : base + '/' + key}
           aria-current={navigationPage === key ? 'page' : undefined}
+          aria-label={title}
         >
           <Icon size={20} />
-          <span>{title}</span>
+          <span>
+            {key === 'schedule' ? 'برنامه‌ها' : key === 'overview' && !manager ? 'نمای کلی' : title}
+          </span>
         </Link>
       ))}
     </nav>

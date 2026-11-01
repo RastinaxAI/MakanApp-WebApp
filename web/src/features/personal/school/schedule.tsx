@@ -17,7 +17,8 @@ import {
 import s from './schedule.module.css';
 type S = components['schemas'];
 export function Schedule({ classId, teach }: { classId?: string; teach: boolean }) {
-  const [week, setWeek] = useState(() => currentSchoolWeek()),
+  const thisWeek = currentSchoolWeek();
+  const [week, setWeek] = useState(() => thisWeek),
     range = schoolWeekRange(week),
     { session } = usePersonal();
   const q = usePersonalApi<S['SessionResult'][]>(
@@ -47,6 +48,7 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
   return (
     <Card
       title="برنامهٔ هفتگی کلاس‌ها"
+      className={s.schedule}
       action={
         teach &&
         classId && (
@@ -59,28 +61,34 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
       <nav className={s.weekNavigation} aria-label="جابه‌جایی هفته">
         <Button
           variant="outline"
-          className={s.navigationButton}
+          className={`${s.navigationButton} ${s.previous}`}
           aria-label="هفتهٔ قبل"
           onClick={() => setWeek((v) => shiftSchoolWeek(v, -1))}
         >
           <ChevronRight size={18} />
-          <span>قبل</span>
+          <span>هفتهٔ قبل</span>
         </Button>
         <div className={s.range}>
+          <p className={s.weekLabel} aria-live="polite" aria-atomic="true">
+            {range.label}
+          </p>
           <span>شنبه تا جمعه</span>
-          <h2 aria-live="polite" aria-atomic="true">
-            <time dateTime={range.first}>{range.firstLabel}</time>
-            <span>تا</span>
-            <time dateTime={range.last}>{range.lastLabel}</time>
-          </h2>
         </div>
         <Button
+          variant="ghost"
+          className={`${s.navigationButton} ${s.current}`}
+          disabled={week === thisWeek}
+          onClick={() => setWeek(thisWeek)}
+        >
+          هفتهٔ جاری
+        </Button>
+        <Button
           variant="outline"
-          className={s.navigationButton}
+          className={`${s.navigationButton} ${s.next}`}
           aria-label="هفتهٔ بعد"
           onClick={() => setWeek((v) => shiftSchoolWeek(v, 1))}
         >
-          <span>بعد</span>
+          <span>هفتهٔ بعد</span>
           <ChevronLeft size={18} />
         </Button>
       </nav>
@@ -147,7 +155,7 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
         <div className={s.empty}>
           <EmptyState
             title="برای این هفته جلسه‌ای ثبت نشده است"
-            description="با دکمه‌های قبل و بعد، برنامهٔ هفته‌های دیگر را ببینید."
+            description="با دکمه‌های هفتهٔ قبل و هفتهٔ بعد، جلسه‌های دیگر را ببینید."
           />
         </div>
       )}

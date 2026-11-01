@@ -18,30 +18,32 @@
   --chat-outgoing: #e1ffc7;
   --chat-outgoing-meta: #527b3e;
   --chat-selected: #e8f3ff;
+  --chat-badge-text: #fff;
   color: var(--text);
   background: var(--bg);
   color-scheme: light;
 }
 :global(:root[data-theme='dark']) .theme {
-  --primary: #65b3ff;
-  --primary-button: #0a84ff;
-  --primary-hover: #0072e5;
+  --primary: #72b9f2;
+  --primary-button: #187ab6;
+  --primary-hover: #1d7bbb;
   --danger-button: #d83b32;
-  --primary-soft: #152c40;
-  --primary-border: #294a65;
-  --surface: #000;
-  --bg: #111;
-  --soft: #252525;
-  --text: #f5f5f5;
-  --muted: #a0a0a6;
-  --border: #303032;
+  --primary-soft: #2c4358;
+  --primary-border: #3e5d76;
+  --surface: #1d2935;
+  --bg: #17232e;
+  --soft: #253544;
+  --text: #f3f5f7;
+  --muted: #9aabba;
+  --border: #304150;
   --danger: #ff6259;
-  --chat-header: #1c1c1d;
-  --chat-background: #1b1b1b;
+  --chat-header: #1d2935;
+  --chat-background: #17232e;
   --chat-wallpaper: url('/messaging/night-wallpaper.png');
-  --chat-outgoing: #333;
-  --chat-outgoing-meta: #c0c0c5;
-  --chat-selected: #192b3c;
+  --chat-outgoing: #2b4c68;
+  --chat-outgoing-meta: #abcce5;
+  --chat-selected: #2a4054;
+  --chat-badge-text: #17232e;
   color-scheme: dark;
 }
 .page {

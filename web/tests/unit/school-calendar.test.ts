@@ -28,8 +28,15 @@ describe('weekly school agenda', () => {
     expect(week.firstLabel).toContain('۱۴۰۳');
     expect(week.lastLabel).toContain('فروردین');
     expect(week.lastLabel).toContain('۱۴۰۴');
+    expect(week.label).toBe('۲۵ اسفند ۱۴۰۳ تا ۱ فروردین ۱۴۰۴');
     expect(shiftSchoolWeek(week.first, 1)).toBe('2025-03-22');
     expect(shiftSchoolWeek(shiftSchoolWeek(week.first, 1), -1)).toBe(week.first);
+  });
+  it('shows one month and year for a compact same-month range', () => {
+    expect(schoolWeekRange('2026-09-05').label).toBe('۱۴ تا ۲۰ شهریور ۱۴۰۵');
+  });
+  it('keeps both months when the week crosses a month boundary', () => {
+    expect(schoolWeekRange('2026-09-19').label).toBe('۲۸ شهریور تا ۳ مهر ۱۴۰۵');
   });
   it('covers all seven calendar days through leap day with adjacent UTC query bounds', () => {
     const week = schoolWeekRange('2024-02-29'),
