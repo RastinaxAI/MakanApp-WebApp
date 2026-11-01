@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-const base = process.env.BACKEND_BASE_URL ?? 'http://94.184.32.84:8090';
+const base = process.env.BACKEND_BASE_URL ?? 'http://94.184.32.84';
 const r = await fetch(new URL('/openapi/v1.json', base), { signal: AbortSignal.timeout(30000) });
 if (!r.ok) throw new Error(`OpenAPI HTTP ${r.status}`);
 const schema = await r.json();

@@ -134,6 +134,39 @@ describe('general-account authentication isolated from the owner session', () =>
     expect(response.status).toBe(403);
     expect(mocks.upstream).not.toHaveBeenCalled();
   });
+  it('accepts the public HTTPS origin forwarded by Nginx to the internal HTTP server', async () => {
+    vi.stubEnv('APP_ORIGIN', 'https://app.makanapp.org');
+    const request = new Request('http://web:3000/api/client/auth/verify', {
+      method: 'POST',
+      headers: {
+        Origin: 'https://app.makanapp.org',
+        Host: 'app.makanapp.org',
+        'X-Forwarded-Proto': 'https',
+        'Content-Type': 'application/json',
+      },
+      body: await req('verify').text(),
+    });
+    const response = await POST(request, { params: Promise.resolve({ action: 'verify' }) });
+    expect(response.status).toBe(200);
+    expect(mocks.upstream.mock.calls[0][0]).toBe('/api/v1/auth/otp/verify');
+  });
+  it('rejects a different origin even if it supplies the public host and forwarded headers', async () => {
+    vi.stubEnv('APP_ORIGIN', 'https://app.makanapp.org');
+    const request = new Request('http://web:3000/api/client/auth/verify', {
+      method: 'POST',
+      headers: {
+        Origin: 'https://malicious.invalid',
+        Host: 'app.makanapp.org',
+        'X-Forwarded-Host': 'app.makanapp.org',
+        'X-Forwarded-Proto': 'https',
+        'Content-Type': 'application/json',
+      },
+      body: await req('verify').text(),
+    });
+    const response = await POST(request, { params: Promise.resolve({ action: 'verify' }) });
+    expect(response.status).toBe(403);
+    expect(mocks.upstream).not.toHaveBeenCalled();
+  });
   it('logs out and clears only the personal session cookie', async () => {
     mocks.clientId.mockResolvedValue('00000000-0000-4000-8000-000000000003');
     mocks.read.mockResolvedValue({ accessToken: 'fixture-access' });

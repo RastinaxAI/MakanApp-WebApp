@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises';
 if (process.env.MAKAN_TEST_READ_SMOKE !== '1')
   throw Error('Set MAKAN_TEST_READ_SMOKE=1 explicitly.');
-const base = 'http://94.184.32.84:8090';
+const base = 'http://94.184.32.84';
 const rows = [];
 const authPosts = new Set([
   '/api/v1/auth/otp/challenges',

@@ -9,6 +9,10 @@ services:
       - .env.docker
     environment:
       NODE_ENV: production
+      # Deployment values take precedence over stale entries in .env.docker.
+      BACKEND_BASE_URL: http://94.184.32.84
+      APP_ORIGIN: https://app.makanapp.org
+      COOKIE_SECURE: 'true'
       HOSTNAME: 0.0.0.0
       PORT: '3000'
       SESSION_DIRECTORY: /app/.makan-sessions

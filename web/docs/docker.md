@@ -1,5 +1,9 @@
 # Docker کلاینت ماکان
 
+## استقرار فعلی روی دامنه اصلی — ۱ نوامبر ۲۰۲۶
+
+Compose اکنون بک‌اند `http://94.184.32.84`، نشانی عمومی `https://app.makanapp.org` و کوکی امن را در environment سرویس تعیین می‌کند و بر مقادیر قدیمی این گزینه‌ها در `.env.docker` اولویت دارد. صفحه Swagger در `/swagger/index.html` و قرارداد در `/openapi/v1.json` همین بک‌اند هستند؛ Swagger مقصد درخواست ورود نیست. پس از دریافت تغییرات، `docker compose up -d --build --wait --wait-timeout 180` را اجرا و ورود را از دامنه HTTPS بررسی کنید. مقادیر localhost و پورت8090 در گزارش‌های پایین، سوابق بررسی‌های قبلی هستند.
+
 تحویل جاری دعوت/ورود/واکنش‌گرایی: image `8ace1d457915` ساخته و با `up --no-build --wait` اجرا شد؛ کانتینر healthy و image مطابق tag است. /enter و /sw.js روی8080=200، نشست ناشناس401 و شمارهٔ کوتاه/OTPپنج‌رقمی400 هستند. volume نشست و پنل جداگانهٔ مالک محفوظ‌اند. [رسید](quality/RESPONSIVE_SIGNIN_DOCKER.json)، [بررسی HTTP](quality/RESPONSIVE_SIGNIN_DOCKER_HTTP.json)، [گزارش و حدود نتیجه](quality/RESPONSIVE_SIGNIN_HANDOFF.md).
 
 نسخهٔ بهینه‌سازی سرعت: image `255844d284d1` ساخته و اجرا شد؛ کانتینر healthy، image مطابق tag و /enter=200 روی8080 است. نشست ناشناس401، volume نشست حفظ و مالک جداگانه سالم است. [رسید جاری](quality/PERFORMANCE_DOCKER.json)، [ساخت](quality/PERFORMANCE_DOCKER_BUILD.log) و [اجرا](quality/PERFORMANCE_DOCKER_UP.log).
@@ -12,7 +16,7 @@
 
 ## نصب و اجرا
 
-تنظیمات در `web/.env.docker` است؛ فایل موجود را بازنویسی نکنید. فقط برای نصب تازه، `.env.docker.example` را به `.env.docker` کپی و SESSION_SECRET را با کلید تصادفی۶۴کاراکتری hex پر کنید. MAKAN_PORT نمونه8080 و BACKEND_BASE_URL سرویس آزمایشی8090 است. APP_ORIGIN باید دقیقاً با آدرس مرورگر تطبیق داشته باشد. برای HTTPS، COOKIE_SECURE=true باشد. مقادیر محرمانه را منتشر نکنید.
+تنظیمات محرمانه در `web/.env.docker` است؛ فایل موجود را بازنویسی نکنید. فقط برای نصب تازه، `.env.docker.example` را به `.env.docker` کپی و SESSION_SECRET را با کلید تصادفی۶۴کاراکتری hex پر کنید. MAKAN_PORT نمونه8080 است. Compose فعلی برای دامنه HTTPS اصلی تنظیم شده است؛ بررسی محلی UI را با launcher توسعه یا fixtureهای ایزوله انجام دهید. مقادیر محرمانه را منتشر نکنید.
 
 از ریشهٔ `Makan Application`:
 

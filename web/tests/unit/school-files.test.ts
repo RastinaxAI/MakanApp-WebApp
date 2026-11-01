@@ -91,7 +91,7 @@ describe('school file binding and current authorization', () => {
     expect(r.status).toBe(200);
     expect(await r.text()).toBe('abc');
     expect(String(fetch.mock.calls[0][0])).toBe(
-      'http://94.184.32.84:8090/api/v1/files/' + fileId + '/content',
+      'http://94.184.32.84/api/v1/files/' + fileId + '/content',
     );
   });
   it('preserves a backend Parent denial without requesting file bytes', async () => {

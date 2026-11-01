@@ -1,7 +1,7 @@
 import 'server-only';
 import path from 'node:path';
 export function serverConfig() {
-  const backend = new URL(process.env.BACKEND_BASE_URL ?? 'http://94.184.32.84:8090');
+  const backend = new URL(process.env.BACKEND_BASE_URL ?? 'http://94.184.32.84');
   if (
     process.env.MAKAN_TEST_MODE === 'fixture' &&
     !['127.0.0.1', 'localhost', '[::1]'].includes(backend.hostname)
@@ -19,7 +19,12 @@ export function serverConfig() {
   const secret = process.env.SESSION_SECRET;
   if (!secret || !/^[a-f0-9]{64}$/i.test(secret))
     throw new Error('Set SESSION_SECRET to a random 32-byte hex value');
-  const origin = new URL(process.env.APP_ORIGIN ?? 'http://127.0.0.1:3000');
+  const origin = new URL(
+    process.env.APP_ORIGIN ??
+      (process.env.NODE_ENV === 'production'
+        ? 'https://app.makanapp.org'
+        : 'http://127.0.0.1:3000'),
+  );
   return {
     backend: backend.origin,
     origin: origin.origin,
