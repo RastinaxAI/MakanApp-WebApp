@@ -1,0 +1,125 @@
+.theme {
+  --primary: #007aff;
+  --primary-button: #007aff;
+  --primary-hover: #0068da;
+  --danger-button: #e32636;
+  --primary-soft: #e6f2ff;
+  --primary-border: #bedcff;
+  --surface: #fff;
+  --bg: #efeff4;
+  --soft: #e9e9ee;
+  --text: #111;
+  --muted: #737378;
+  --border: #dcdce0;
+  --danger: #e32636;
+  --chat-header: #f7f7f8;
+  --chat-background: #d4e0e8;
+  --chat-wallpaper: url('/messaging/classic-wallpaper.png');
+  --chat-outgoing: #e1ffc7;
+  --chat-outgoing-meta: #527b3e;
+  --chat-selected: #e8f3ff;
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: light;
+}
+:global(:root[data-theme='dark']) .theme {
+  --primary: #65b3ff;
+  --primary-button: #0a84ff;
+  --primary-hover: #0072e5;
+  --danger-button: #d83b32;
+  --primary-soft: #152c40;
+  --primary-border: #294a65;
+  --surface: #000;
+  --bg: #111;
+  --soft: #252525;
+  --text: #f5f5f5;
+  --muted: #a0a0a6;
+  --border: #303032;
+  --danger: #ff6259;
+  --chat-header: #1c1c1d;
+  --chat-background: #1b1b1b;
+  --chat-wallpaper: url('/messaging/night-wallpaper.png');
+  --chat-outgoing: #333;
+  --chat-outgoing-meta: #c0c0c5;
+  --chat-selected: #192b3c;
+  color-scheme: dark;
+}
+.page {
+  width: 100%;
+  min-height: 100%;
+  padding: 24px max(16px, calc((100% - 760px) / 2));
+}
+.page > :first-child h1 {
+  font-size: 20px;
+}
+.page > :first-child > div > span {
+  display: none;
+}
+.page > :first-child p {
+  font-size: 13px;
+}
+.page input:not([type='checkbox']),
+.page textarea,
+.page select {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+  border-radius: 8px;
+}
+.page :global(.button) {
+  border-radius: 9px;
+}
+.page :global(.button-ghost),
+.page :global(.button-outline) {
+  color: var(--primary);
+}
+.page :global(.button-primary) {
+  color: #fff;
+}
+.page :global(.button-danger) {
+  color: #fff;
+}
+/* Portals inherit neither the room nor the page: apply this class explicitly. */
+.menu {
+  min-width: 230px;
+  border-radius: 14px;
+  background: var(--chat-header);
+  padding: 4px;
+  box-shadow: 0 12px 40px #0003;
+}
+.menu [role='menuitem'] {
+  min-height: 48px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  outline: none;
+  border-radius: 9px;
+  cursor: pointer;
+}
+.menu [role='menuitem'][data-highlighted] {
+  background: var(--soft);
+}
+.menu [role='menuitem'] svg {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+}
+.dialog {
+  background: var(--bg);
+  border-radius: 16px;
+  padding: 20px;
+}
+@media (max-width: 767px) {
+  .page {
+    padding: 18px 12px 30px;
+  }
+  .page > :first-child {
+    margin-bottom: 16px;
+  }
+  .dialog {
+    width: calc(100% - 16px);
+    max-height: 88dvh;
+  }
+}

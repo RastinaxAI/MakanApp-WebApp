@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-01",
+  "environment": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84",
+  "role": "Student",
+  "challengeStatus": 202,
+  "verifyStatus": 400,
+  "problem": {
+    "code": "OTP_INVALID",
+    "status": 400,
+    "traceId": "00-4111dc11f6dc6404a1cf5659ac3ad861-3319508fbe9d8a13-00",
+    "errors": {}
+  }
+}

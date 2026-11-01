@@ -8,6 +8,10 @@
   background: var(--bg);
   color: var(--text);
 }
+.messagingPageMain {
+  padding: 0;
+  max-width: none;
+}
 .sidebar {
   position: fixed;
   inset-block: 0;
@@ -430,5 +434,62 @@
   .mobileNav .navGlyph {
     min-width: 46px;
     height: 31px;
+  }
+}
+
+/* Messenger owns its toolbar: avoid a second app header above the chat. */
+.shell[data-messaging] {
+  --personal-header: 0px;
+}
+.shell[data-messaging] .header {
+  display: none;
+}
+.shell[data-messaging-page] .messagingPageMain {
+  padding: 0 0 calc(var(--personal-bottom) + 24px);
+  max-width: none;
+}
+.shell[data-messaging-page] .header {
+  background: #f7f7f8;
+}
+:global(:root[data-theme='dark']) .shell[data-messaging-page] .header {
+  background: #1c1c1d;
+}
+@media (max-width: 1023px) {
+  .shell[data-messaging] {
+    --personal-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+  .shell[data-messaging][data-focused] {
+    --personal-bottom: 0px;
+  }
+  .shell[data-messaging] .mobileNav {
+    inset-inline: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: none;
+    height: calc(70px + env(safe-area-inset-bottom));
+    border-radius: 0;
+    padding: 4px 10px max(6px, env(safe-area-inset-bottom));
+    box-shadow: none;
+    background: #f7f7f8;
+    border: 0;
+    border-top: 1px solid #dcdce0;
+  }
+  .shell[data-messaging] .mobileNav .nav a {
+    min-height: 58px;
+    height: 58px;
+    gap: 0;
+  }
+  .shell[data-messaging] .mobileNav .nav a[aria-current] {
+    color: #007aff;
+  }
+  .shell[data-messaging] .mobileNav .navGlyph {
+    background: transparent;
+  }
+  :global(:root[data-theme='dark']) .shell[data-messaging] .mobileNav {
+    background: #1c1c1d;
+    border-color: #303032;
+  }
+  :global(:root[data-theme='dark']) .shell[data-messaging] .mobileNav .nav a[aria-current] {
+    color: #65b3ff;
   }
 }

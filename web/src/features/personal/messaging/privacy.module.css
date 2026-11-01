@@ -4,12 +4,12 @@
 }
 .form {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border: 0;
+  border-radius: 10px;
   overflow: hidden;
 }
 .intro {
-  padding: 24px;
+  padding: 18px;
   display: flex;
   gap: 14px;
   align-items: center;
@@ -54,7 +54,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(160px, 210px);
   align-items: center;
   gap: 20px;
-  padding: 18px 0;
+  padding: 14px 0;
   border-bottom: 1px solid var(--border);
 }
 .field label {

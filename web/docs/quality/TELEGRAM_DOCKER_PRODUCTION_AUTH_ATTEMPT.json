@@ -1,0 +1,52 @@
+{
+  "environment": "http://127.0.0.1:8080",
+  "backend": "user-approved remote test service behind the Docker BFF",
+  "scope": "UI login, own workspace/session actions, invitation reads and navigation; no invitation acceptance/decline or domain writes",
+  "roles": [
+    {
+      "role": "Manager",
+      "login": false,
+      "checks": [],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": false,
+      "failure": "expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/personal\\/workspaces$/\nReceived string:  \"http://127.0.0.1:8080/enter\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"to.have.url\" with timeout 5000ms\n    9 × unexpected value \"http://127.0.0.1:8080/enter\"\n",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Teacher",
+      "login": false,
+      "checks": [],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": false,
+      "failure": "expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/personal\\/workspaces$/\nReceived string:  \"http://127.0.0.1:8080/enter\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"to.have.url\" with timeout 5000ms\n    9 × unexpected value \"http://127.0.0.1:8080/enter\"\n",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Student",
+      "login": false,
+      "checks": [],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": false,
+      "failure": "expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/personal\\/workspaces$/\nReceived string:  \"http://127.0.0.1:8080/enter\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"to.have.url\" with timeout 5000ms\n    9 × unexpected value \"http://127.0.0.1:8080/enter\"\n",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Parent",
+      "login": false,
+      "checks": [],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "passed": false,
+      "failure": "expect(page).toHaveURL(expected) failed\n\nExpected pattern: /\\/personal\\/workspaces$/\nReceived string:  \"http://127.0.0.1:8080/enter\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"to.have.url\" with timeout 5000ms\n    9 × unexpected value \"http://127.0.0.1:8080/enter\"\n",
+      "logoutStatus": 204
+    }
+  ],
+  "finishedAtUtc": "2026-11-01T14:58:44.857Z"
+}

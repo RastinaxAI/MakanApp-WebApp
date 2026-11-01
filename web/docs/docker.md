@@ -1,5 +1,18 @@
 # Docker کلاینت ماکان
 
+## بازطراحی پیام‌رسان و اجرای محلی — ۱ نوامبر۲۰۲۶
+
+نسخهٔ محلی Docker با ظاهر مرجع PDF تلگرام روی `http://127.0.0.1:8080/personal/messages` بررسی می‌شود. برای حفظ محیط تست قبلی، `compose.local.yaml` اضافه شد: backend پورت۸۰۹۰، origin محلی و cookie متناسب با HTTP. Compose اصلی برای انتشار HTTPS و backend بدون پورت دست‌نخورده است. override محلی را در استقرار عمومی استفاده نکنید. ردشدن کد ثابت تست با `OTP_INVALID` در آدرس بدون پورت به‌صورت مستقل ثبت شد؛ این خطا با موفقیت نمایشی پوشانده نشد.
+
+از پوشهٔ `web/` و با همان فایل خصوصی `.env.docker` موجود:
+
+```powershell
+docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml build web
+docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml up -d --no-deps --no-build --wait --wait-timeout 180 web
+```
+
+volume `makan-client_sessions` حفظ می‌شود؛ `down -v` لازم نیست. دریافت اسناد و نتیجهٔ بررسی‌ها: [پیاده‌سازی مرجع](quality/TELEGRAM_PDF_IMPLEMENTATION.md)، [تست‌های مستقل](quality/TELEGRAM_REDESIGN_BROWSER.json)، [چهار حساب واقعی تست](quality/TELEGRAM_DOCKER_ROLE_REVIEW.json) و [رسید نسخهٔ Docker](quality/TELEGRAM_DOCKER_DEPLOYMENT.json). بررسی چهار حساب فقط ورود، انتخاب فضای مجاز و خواندن/ناوبری بود؛ ارسال رسانهٔ دوطرفه در تست fixture بررسی شد. وضعیت‌های پایین تاریخی‌اند و رسید جدید، مرجع نسخهٔ محلی این تحویل است.
+
 ## استقرار فعلی روی دامنه اصلی — ۱ نوامبر ۲۰۲۶
 
 Compose اکنون بک‌اند `http://94.184.32.84`، نشانی عمومی `https://app.makanapp.org` و کوکی امن را در environment سرویس تعیین می‌کند و بر مقادیر قدیمی این گزینه‌ها در `.env.docker` اولویت دارد. صفحه Swagger در `/swagger/index.html` و قرارداد در `/openapi/v1.json` همین بک‌اند هستند؛ Swagger مقصد درخواست ورود نیست. پس از دریافت تغییرات، `docker compose up -d --build --wait --wait-timeout 180` را اجرا و ورود را از دامنه HTTPS بررسی کنید. مقادیر localhost و پورت8090 در گزارش‌های پایین، سوابق بررسی‌های قبلی هستند.

@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-01",
+  "phase": "second review before final focus correction",
+  "stats": {
+    "startTime": "2026-11-01T14:40:14.262Z",
+    "duration": 114865.144,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "errors": [
+    {
+      "test": "message context menu replies to the selected message and returns focus to the composer",
+      "status": "failed",
+      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('textbox', { name: 'متن پیام', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('textbox', { name: 'متن پیام', exact: true })\u001b[22m\n\u001b[2m    18 × locator resolved to <textarea rows=\"1\" aria-label=\"متن پیام\" placeholder=\"پیامی بنویسید…\"></textarea>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n"
+    },
+    {
+      "test": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+      "status": "failed",
+      "message": "Error: page.evaluate: SecurityError: Failed to read the 'localStorage' property from 'Window': Access is denied for this document.\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+    }
+  ]
+}

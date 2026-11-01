@@ -1,0 +1,778 @@
+{
+  "date": "2026-11-01",
+  "environment": "isolated local fixture; external backend not used",
+  "command": "npx playwright test",
+  "stats": {
+    "startTime": "2026-11-01T14:48:21.349Z",
+    "duration": 502145.173,
+    "expected": 109,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "assignment evaluation retains failed drafts, previews audience feedback and releases only after confirmation",
+      "status": "passed",
+      "durationMs": 11346,
+      "retry": 0
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "exam manual grading separates saving, completion and publication, and supports a correction revision",
+      "status": "passed",
+      "durationMs": 8084,
+      "retry": 0
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "student and parent cannot open author data; unpublished results and unrelated attachments do not masquerade as success",
+      "status": "passed",
+      "durationMs": 6131,
+      "retry": 0
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "new assessment pages remain readable without overflow at three viewports",
+      "status": "passed",
+      "durationMs": 20577,
+      "retry": 0
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "editing and publishing a homework draft uses versioned review and retains a failed save",
+      "status": "passed",
+      "durationMs": 4485,
+      "retry": 0
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "a server version change preserves the local evaluation draft until explicit replacement",
+      "status": "passed",
+      "durationMs": 2482,
+      "retry": 0
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "parent result uses the selected child relation and guardian feedback without author notes",
+      "status": "passed",
+      "durationMs": 3421,
+      "retry": 0
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "assignment answer sheet has context, stages and in-flow actions at all supported widths",
+      "status": "passed",
+      "durationMs": 3834,
+      "retry": 0
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "exam answer map preserves edits on failed refresh, reviews only saved answers and adapts to each width",
+      "status": "passed",
+      "durationMs": 3566,
+      "retry": 0
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "exam countdown expires from server time, locks writing and never fabricates final submission",
+      "status": "passed",
+      "durationMs": 2355,
+      "retry": 0
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "privacy save stays inside its form, retains failed edits and uses returned versions for later saves",
+      "status": "passed",
+      "durationMs": 4588,
+      "retry": 0
+    },
+    {
+      "file": "assistant-theme.spec.ts",
+      "title": "dark theme stays coherent across panels and the assistant gives the answer most of the height",
+      "status": "passed",
+      "durationMs": 23711,
+      "retry": 0
+    },
+    {
+      "file": "client-scope.spec.ts",
+      "title": "client entry, install targets and former platform surfaces",
+      "status": "passed",
+      "durationMs": 3387,
+      "retry": 0
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "conversation members and media follow server pagination and a media filter restarts its cursor",
+      "status": "passed",
+      "durationMs": 9046,
+      "retry": 0
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "conversation settings retain failed selections and leave confirmation retains failure until accepted",
+      "status": "passed",
+      "durationMs": 2441,
+      "retry": 0
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "education roles do not grant group ownership and system managed conversation does not expose manual management",
+      "status": "passed",
+      "durationMs": 2410,
+      "retry": 0
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "direct conversation info is reached from chat and archive uses confirmed user state",
+      "status": "passed",
+      "durationMs": 2611,
+      "retry": 0
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "conversation detail pages preserve RTL and layout at mobile tablet and desktop",
+      "status": "passed",
+      "durationMs": 6494,
+      "retry": 0
+    },
+    {
+      "file": "design-reference.spec.ts",
+      "title": "standalone V2 reference renders all 130 screens at three sizes with valid route targets",
+      "status": "passed",
+      "durationMs": 2621,
+      "retry": 0
+    },
+    {
+      "file": "header-back.spec.ts",
+      "title": "class entry is a filled navigation button and lesson direct entry has one contextual back arrow in the header",
+      "status": "passed",
+      "durationMs": 7582,
+      "retry": 0
+    },
+    {
+      "file": "header-back.spec.ts",
+      "title": "the header arrow respects unsaved edits and each settings page keeps its own parent destination",
+      "status": "passed",
+      "durationMs": 2482,
+      "retry": 0
+    },
+    {
+      "file": "invitations-design.spec.ts",
+      "title": "invitation filters, readable cards and recoverable empty states fit phone, tablet and desktop",
+      "status": "passed",
+      "durationMs": 5617,
+      "retry": 0
+    },
+    {
+      "file": "learning.spec.ts",
+      "title": "Teacher uses independent lesson create, edit and review pages; Student reads only Published",
+      "status": "passed",
+      "durationMs": 2490,
+      "retry": 0
+    },
+    {
+      "file": "learning.spec.ts",
+      "title": "exam saves an answer and shows a receipt only after accepted finalization",
+      "status": "passed",
+      "durationMs": 2461,
+      "retry": 0
+    },
+    {
+      "file": "manager-navigation.spec.ts",
+      "title": "members and records retain the same selected school destination and navigation position",
+      "status": "passed",
+      "durationMs": 5640,
+      "retry": 0
+    },
+    {
+      "file": "manager-navigation.spec.ts",
+      "title": "manager actions and report choices remain clear, reachable and responsive",
+      "status": "passed",
+      "durationMs": 9223,
+      "retry": 0
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "multi-selection preserves successful members and retries only unresolved additions",
+      "status": "passed",
+      "durationMs": 1807,
+      "retry": 0
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+      "status": "passed",
+      "durationMs": 9015,
+      "retry": 0
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+      "status": "passed",
+      "durationMs": 7136,
+      "retry": 0
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+      "status": "passed",
+      "durationMs": 7164,
+      "retry": 0
+    },
+    {
+      "file": "member-directory.spec.ts",
+      "title": "member directory uses server filters, clear record actions and responsive cards",
+      "status": "passed",
+      "durationMs": 3529,
+      "retry": 0
+    },
+    {
+      "file": "member-directory.spec.ts",
+      "title": "read-only person flags remain authoritative and a failed member read can be retried",
+      "status": "passed",
+      "durationMs": 4556,
+      "retry": 0
+    },
+    {
+      "file": "member-directory.spec.ts",
+      "title": "person list and editor stay readable on all layouts and preserve a failed draft",
+      "status": "passed",
+      "durationMs": 4450,
+      "retry": 0
+    },
+    {
+      "file": "messaging.spec.ts",
+      "title": "two isolated accounts exchange messages and update recipient inbox without reload",
+      "status": "passed",
+      "durationMs": 14382,
+      "retry": 0
+    },
+    {
+      "file": "messaging.spec.ts",
+      "title": "Parent cannot read a Student private conversation through the BFF",
+      "status": "passed",
+      "durationMs": 1120,
+      "retry": 0
+    },
+    {
+      "file": "messaging.spec.ts",
+      "title": "Manager cannot read a Student private conversation through the BFF",
+      "status": "passed",
+      "durationMs": 869,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Student keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 3712,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Teacher keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 4538,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Parent keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 6281,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Manager keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 4214,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "assistant uses the full viewport and readable sample outputs without the extra header",
+      "status": "passed",
+      "durationMs": 6761,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "PWA install offer has a persistent close control and manual installation help",
+      "status": "passed",
+      "durationMs": 2887,
+      "retry": 0
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "PWA installation calls the browser prompt only after a click and does not reload the app",
+      "status": "passed",
+      "durationMs": 1232,
+      "retry": 0
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "records cold entry and school payloads plus a controlled concurrent read benchmark",
+      "status": "passed",
+      "durationMs": 2619,
+      "retry": 0
+    },
+    {
+      "file": "preferences-weekly.spec.ts",
+      "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+      "status": "passed",
+      "durationMs": 3515,
+      "retry": 0
+    },
+    {
+      "file": "preferences-weekly.spec.ts",
+      "title": "weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read",
+      "status": "passed",
+      "durationMs": 3835,
+      "retry": 0
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "profile exposes identity and age below spaces and moves preference menus to their own page",
+      "status": "passed",
+      "durationMs": 3656,
+      "retry": 0
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "school header searches authorized classes, assignments and published exams without contact navigation",
+      "status": "passed",
+      "durationMs": 1949,
+      "retry": 0
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "Student attaches a PDF and photo, retries an attachment failure without reuploading and submits a file-only answer",
+      "status": "passed",
+      "durationMs": 2916,
+      "retry": 0
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "pending file never enables final review and a Parent cannot use the Student file proxy",
+      "status": "passed",
+      "durationMs": 2004,
+      "retry": 0
+    },
+    {
+      "file": "profile.spec.ts",
+      "title": "profile form retains user input after a failed save and persists theme through settings",
+      "status": "passed",
+      "durationMs": 2823,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion-visual.spec.ts",
+      "title": "expanded workflow and account pages preserve RTL, visible controls and responsive bounds",
+      "status": "passed",
+      "durationMs": 14093,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Manager creates a class only after review; catalog search, failed submit and reload keep the draft",
+      "status": "passed",
+      "durationMs": 5199,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Teacher creates and edits a session on independent pages and cancellation stays pending after a failed service",
+      "status": "passed",
+      "durationMs": 3839,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Teacher and Student cannot enter Manager creation pages and deep-link review cannot bypass validation",
+      "status": "passed",
+      "durationMs": 3242,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Manager person create/edit uses stable operations, server versions and authoritative details",
+      "status": "passed",
+      "durationMs": 2457,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "exam author uses independent creation/question/review and a confirmation before publication",
+      "status": "passed",
+      "durationMs": 3108,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "notification preferences preserve failed edits, mandatory flags and scope while center reads server notifications",
+      "status": "passed",
+      "durationMs": 2959,
+      "retry": 0
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "device revocation requires confirmation, preserves failure and is bound to account, origin and context",
+      "status": "passed",
+      "durationMs": 2597,
+      "retry": 0
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "responsive reference details and updated overview at 390, 834 and 1440",
+      "status": "passed",
+      "durationMs": 14476,
+      "retry": 0
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "workspace selection is explicit and a Student cannot author a class assignment",
+      "status": "passed",
+      "durationMs": 2839,
+      "retry": 0
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+      "status": "passed",
+      "durationMs": 3872,
+      "retry": 0
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "exam question navigation retains answers and exposes final review separately",
+      "status": "passed",
+      "durationMs": 3462,
+      "retry": 0
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+      "status": "passed",
+      "durationMs": 2719,
+      "retry": 0
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+      "status": "passed",
+      "durationMs": 2450,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Manager opens the organization official group through its own binding",
+      "status": "passed",
+      "durationMs": 7087,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Student retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2159,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Teacher retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2713,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Parent retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2548,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Manager retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2529,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "a roleless user has a personal card; unresolved visibility is not guessed",
+      "status": "passed",
+      "durationMs": 2050,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Teacher sends a personal message and uploads a personal file without switching educational context",
+      "status": "passed",
+      "durationMs": 2304,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "official pair keeps a healthy group available, shows a structured card and reauthorizes its source",
+      "status": "passed",
+      "durationMs": 3734,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Ready without read permission and parent relationship never grant official access",
+      "status": "passed",
+      "durationMs": 2593,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "revocation removes open official content while personal messaging remains available",
+      "status": "passed",
+      "durationMs": 7947,
+      "retry": 0
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "superseded cards disable the old CTA and refresh current activity and source without republishing",
+      "status": "passed",
+      "durationMs": 1456,
+      "retry": 0
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "background session checks do not cancel a foreground child selection",
+      "status": "passed",
+      "durationMs": 3202,
+      "retry": 0
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "account replay refreshes a school snapshot without navigation or a page polling timer",
+      "status": "passed",
+      "durationMs": 4330,
+      "retry": 0
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "exam file-only answer waits for Ready, enforces policy, handles conflict and downloads private bytes",
+      "status": "passed",
+      "durationMs": 4403,
+      "retry": 0
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "personal commerce shows unknown usage honestly and an order never activates subscription",
+      "status": "passed",
+      "durationMs": 1903,
+      "retry": 0
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "personal class invitation needs recipient acceptance and grants no organization role",
+      "status": "passed",
+      "durationMs": 3894,
+      "retry": 0
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "small desktop layout remains a sidebar across manager pages and client-side tab changes",
+      "status": "passed",
+      "durationMs": 7357,
+      "retry": 0
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+      "status": "passed",
+      "durationMs": 3765,
+      "retry": 0
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "focused chat and independent form reserve their own footer without the tablet dock",
+      "status": "passed",
+      "durationMs": 1312,
+      "retry": 0
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "workspace dialog restores focus and an external context change clears prior role data",
+      "status": "passed",
+      "durationMs": 2602,
+      "retry": 0
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "profile edit has grouped readable fields and a footer after the form at all screen sizes",
+      "status": "passed",
+      "durationMs": 2098,
+      "retry": 0
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "school has four destinations, three nearest items and a separate class page with URL-backed sections",
+      "status": "passed",
+      "durationMs": 3571,
+      "retry": 0
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "Teacher opens class members alongside activities without gaining management actions",
+      "status": "passed",
+      "durationMs": 3943,
+      "retry": 0
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "weekly schedule changes the server range and can return to the same week without date fields",
+      "status": "passed",
+      "durationMs": 1521,
+      "retry": 0
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "invitation details, consent, failed acceptance and decline retain truthful server state",
+      "status": "passed",
+      "durationMs": 2570,
+      "retry": 0
+    },
+    {
+      "file": "sign-in-layout.spec.ts",
+      "title": "phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste",
+      "status": "passed",
+      "durationMs": 1724,
+      "retry": 0
+    },
+    {
+      "file": "sign-in-layout.spec.ts",
+      "title": "all invitation entry points converge on one inbox",
+      "status": "passed",
+      "durationMs": 2786,
+      "retry": 0
+    },
+    {
+      "file": "sign-in-layout.spec.ts",
+      "title": "entry actions follow viewport size without retaining a mobile layout on desktop",
+      "status": "passed",
+      "durationMs": 1120,
+      "retry": 0
+    },
+    {
+      "file": "submission.spec.ts",
+      "title": "S09 → S17 → S10 persists drafts, retains text on save failure and submits once",
+      "status": "passed",
+      "durationMs": 4846,
+      "retry": 0
+    },
+    {
+      "file": "submission.spec.ts",
+      "title": "a receipt deep link cannot announce success before actual submission",
+      "status": "passed",
+      "durationMs": 2170,
+      "retry": 0
+    },
+    {
+      "file": "submission.spec.ts",
+      "title": "unsaved draft survives reload and cancelled link navigation",
+      "status": "passed",
+      "durationMs": 2625,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram messenger light 390: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 2178,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram messenger light 834: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 2661,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram messenger light 1440: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 3102,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram messenger dark 390: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 2485,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram messenger dark 834: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 2360,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram messenger dark 1440: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 2507,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "chat survives live resizing and attachment failure retains both file and caption",
+      "status": "passed",
+      "durationMs": 2338,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "message context menu replies to the selected message and returns focus to the composer",
+      "status": "passed",
+      "durationMs": 2426,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+      "status": "passed",
+      "durationMs": 12879,
+      "retry": 0
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "photo video and file reach the other fixture account and download with identical bytes",
+      "status": "passed",
+      "durationMs": 7372,
+      "retry": 0
+    },
+    {
+      "file": "workspace-child-attachments.spec.ts",
+      "title": "one workspace click enters it once; a failed switch never claims entry",
+      "status": "passed",
+      "durationMs": 2537,
+      "retry": 0
+    },
+    {
+      "file": "workspace-child-attachments.spec.ts",
+      "title": "Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child",
+      "status": "passed",
+      "durationMs": 5153,
+      "retry": 0
+    },
+    {
+      "file": "workspace-child-attachments.spec.ts",
+      "title": "Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files",
+      "status": "passed",
+      "durationMs": 3376,
+      "retry": 0
+    }
+  ]
+}

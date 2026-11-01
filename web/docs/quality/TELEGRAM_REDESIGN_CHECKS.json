@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-01",
+  "reference": {
+    "pdfPages": 35,
+    "productFrames": 34,
+    "sha256": "f18b4c1c600aacca804067b87c4ae830d2170b4a56820bf79373dad61923cdb4"
+  },
+  "unit": {
+    "command": "npm test",
+    "passed": 252,
+    "files": 47,
+    "failed": 0
+  },
+  "browserFull": {
+    "command": "npx playwright test",
+    "passed": 109,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "report": "TELEGRAM_REDESIGN_BROWSER.json"
+  },
+  "browserAfterFinalButtonPaletteCorrection": {
+    "command": "npx playwright test telegram-messenger.spec.ts",
+    "stats": {
+      "startTime": "2026-11-01T15:03:32.403Z",
+      "duration": 72291.38900000001,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "passed": 10,
+    "failed": 0
+  },
+  "checks": {
+    "productionBuild": "passed; next build --webpack",
+    "typecheck": "passed",
+    "lint": "passed; 190 source boundaries, no cycles",
+    "generated": "passed; 205 operations, 390 schemas",
+    "changedFileFormatting": "passed",
+    "fullRepositoryFormatting": {
+      "status": "pre-existing failures in 8 unchanged files",
+      "files": [
+        "src/lib/server/config.ts",
+        "tests/unit/client-auth.test.ts",
+        "tests/unit/fixture-network.test.ts",
+        "tests/unit/school-files.test.ts",
+        "tests/unit/server-config.test.ts",
+        "scripts/design-review.mjs",
+        "scripts/fetch-contract.mjs",
+        "scripts/verify-test-release-read-models.mjs"
+      ]
+    }
+  },
+  "screenshots": 49,
+  "liveTestRoleReview": {
+    "backend": "http://94.184.32.84:8090",
+    "roles": [
+      "Manager",
+      "Teacher",
+      "Student",
+      "Parent"
+    ],
+    "viewportStages": 12,
+    "tabTransitions": 48,
+    "domainWrites": false,
+    "report": "TELEGRAM_DOCKER_ROLE_REVIEW.json"
+  },
+  "limitations": [
+    "Fixture message and media tests do not prove live server delivery",
+    "No live message/file/domain mutations during Docker role review",
+    "Calls, stickers, data usage settings and E2EE not implemented by this redesign",
+    "Physical devices and virtual keyboards not tested",
+    "Remote production deployment not performed",
+    "Main application navigation, Persian RTL and brand retained; desktop is an adaptation of the supplied mobile frames"
+  ]
+}

@@ -55,6 +55,10 @@ function PersonalShellContent({ children }: { children: ReactNode }) {
   const router = useRouter();
   useThemePreference();
   const messageLayout = pathname === '/personal/messages' || isMessageRoom(pathname);
+  const messagingPage =
+    pathname.startsWith('/personal/messages/') ||
+    pathname === '/personal/contacts' ||
+    ['/personal/settings/privacy', '/personal/settings/blocked'].includes(pathname);
   const educationLayout = pathname.startsWith('/personal/education') || pathname === '/personal';
   const [picker, setPicker] = useState(false),
     [error, setError] = useState<unknown>();
@@ -143,6 +147,7 @@ function PersonalShellContent({ children }: { children: ReactNode }) {
       data-reference-shell
       data-focused={isFocusedPage(pathname) || undefined}
       data-messaging={messageLayout || undefined}
+      data-messaging-page={messagingPage || undefined}
     >
       <a className="skip-link" href="#personal-content">
         رفتن به محتوای اصلی
@@ -299,7 +304,7 @@ function PersonalShellContent({ children }: { children: ReactNode }) {
           </div>
         </header>
         <main
-          className={`${s.main} ${messageLayout ? s.messageMain : ''} ${pathname.startsWith('/personal/assistant') || pathname === '/personal/ai' ? s.assistantMain : ''}`}
+          className={`${s.main} ${messageLayout ? s.messageMain : ''} ${messagingPage && !messageLayout ? s.messagingPageMain : ''} ${pathname.startsWith('/personal/assistant') || pathname === '/personal/ai' ? s.assistantMain : ''}`}
           id="personal-content"
         >
           {!!error && <ErrorState error={error} />}

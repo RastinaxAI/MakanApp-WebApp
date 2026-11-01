@@ -1,4 +1,6 @@
 'use client';
+import { MessagingSurface } from './messaging-surface';
+import d from './directory.module.css';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -120,7 +122,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
     }
   }
   return (
-    <>
+    <MessagingSurface className={d.create}>
       <div className={s.headingRow}>
         <div className={s.heading}>
           <span>پیام‌رسان / فضای شخصی</span>
@@ -298,6 +300,6 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
           </Button>
         </form>
       )}
-    </>
+    </MessagingSurface>
   );
 }

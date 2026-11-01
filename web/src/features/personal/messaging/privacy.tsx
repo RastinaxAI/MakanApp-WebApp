@@ -1,4 +1,5 @@
 'use client';
+import { MessagingSurface } from './messaging-surface';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -18,7 +19,7 @@ export function MessagingPrivacyPage() {
     '/api/v1/messaging/privacy',
   );
   return (
-    <div className={f.page}>
+    <MessagingSurface className={f.page}>
       <div className={s.headingRow}>
         <div className={s.heading}>
           <span>تنظیمات / پیام‌رسان</span>
@@ -41,7 +42,7 @@ export function MessagingPrivacyPage() {
           }}
         />
       )}
-    </div>
+    </MessagingSurface>
   );
 }
 const privacyFields = [
@@ -211,7 +212,7 @@ function PrivacyForm({
 }
 export function BlockedAccountsPage() {
   return (
-    <>
+    <MessagingSurface>
       <div className={s.headingRow}>
         <div className={s.heading}>
           <span>تنظیمات / پیام‌رسان</span>
@@ -221,7 +222,7 @@ export function BlockedAccountsPage() {
         <PageBack href="/personal/settings" />
       </div>
       <BlockedPeople />
-    </>
+    </MessagingSurface>
   );
 }
 function BlockedPeople() {

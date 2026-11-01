@@ -21,7 +21,7 @@ for name in ['README.md', 'AGENTS.md', '.nvmrc', '.gitignore', '.prettierignore'
              'package.json', 'package-lock.json', 'tsconfig.json', 'next.config.ts',
              'next-env.d.ts', 'postcss.config.mjs', 'vitest.config.mts',
              'playwright.config.ts', 'playwright.personal.config.ts', 'playwright.guide.config.ts', 'Dockerfile',
-             'compose.yaml', 'docker-compose.yml']:
+             'compose.yaml', 'compose.local.yaml', 'docker-compose.yml']:
     if (root / name).is_file(): files.append(root / name)
 guide_pdf = root / 'output/pdf/MakanApp_Panel_User_Guide_FA.pdf'
 if guide_pdf.is_file(): files.append(guide_pdf)

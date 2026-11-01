@@ -15,7 +15,6 @@ import {
   Image as ImageIcon,
   LoaderCircle,
   Paperclip,
-  Plus,
   Play,
   RefreshCw,
   Send,
@@ -32,6 +31,7 @@ import {
   type FileAsset,
 } from './media-model';
 import s from './media.module.css';
+import t from './messaging-theme.module.css';
 type DraftFile = {
   key: string;
   file: globalThis.File;
@@ -228,13 +228,13 @@ export function AttachmentPicker({
             aria-label="افزودن پیوست"
             disabled={disabled || busy}
           >
-            <Plus size={20} />
+            <Paperclip size={23} />
             {items.length > 0 && <b>{new Intl.NumberFormat('fa-IR').format(items.length)}</b>}
           </button>
         </Menu.Trigger>
         <Menu.Portal>
           <Menu.Content
-            className={`dropdown ${s.attachMenu}`}
+            className={`dropdown ${t.theme} ${t.menu} ${s.attachMenu}`}
             side="top"
             align="start"
             sideOffset={12}
@@ -307,6 +307,7 @@ export function AttachmentPicker({
         }}
       >
         <DialogContent
+          className={`${t.theme} ${t.dialog}`}
           title="ارسال پیوست"
           description="پیش‌نمایش فایل‌ها را ببینید و در صورت نیاز توضیح اضافه کنید."
           onCloseAutoFocus={(event) => {

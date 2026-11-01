@@ -1,0 +1,129 @@
+.directory {
+  max-width: none;
+}
+.directory > div:first-child > div {
+  margin: 0;
+}
+.directory > nav {
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+  background: var(--soft);
+  border-radius: 9px;
+  margin-bottom: 20px;
+}
+.directory > nav button {
+  flex: 1;
+  justify-content: center;
+  padding: 8px 4px;
+  min-height: 44px;
+  background: none;
+  border: 0;
+  font-size: 12px;
+  border-radius: 7px;
+  gap: 5px;
+}
+.directory > nav button[aria-pressed='true'] {
+  color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 1px 4px #0001;
+}
+.directory > section {
+  border: 0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.directory > section form[role='search'] {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  margin-bottom: 12px;
+  flex-direction: row;
+}
+.directory > section form[role='search'] label {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+}
+.directory > section form[role='search'] input {
+  background: var(--soft);
+  border: 0;
+  min-height: 44px;
+}
+.directory > section form[role='search'] button {
+  padding: 8px 10px;
+  width: 44px;
+  flex-shrink: 0;
+  border: 0;
+}
+.directory .contact {
+  gap: 10px;
+  padding: 10px 0;
+  min-height: 70px;
+  flex-wrap: nowrap;
+}
+.directory .contact > span:first-child {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 19px;
+  background: linear-gradient(140deg, #65c8ff, #258ce0);
+  color: #fff;
+  flex-shrink: 0;
+}
+.contact > div {
+  flex: 1;
+  min-width: 0;
+}
+.contact strong {
+  display: block;
+  font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.contact small {
+  color: var(--primary);
+  font-size: 12px;
+}
+.contact button {
+  min-width: 44px;
+  min-height: 44px;
+  border: 0;
+  padding: 6px;
+  color: var(--primary);
+  background: transparent;
+}
+.create form > section {
+  border: 0;
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+.create form > section > label {
+  margin-bottom: 16px;
+}
+.create form > section h2 {
+  font-size: 15px;
+}
+.create form > button[type='submit'] {
+  min-height: 48px;
+  width: 100%;
+}
+.create form label input[type='checkbox'] {
+  accent-color: var(--primary);
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 767px) {
+  .directory > section {
+    padding: 12px;
+  }
+  .contact {
+    gap: 7px;
+  }
+  .directory input {
+    font-size: 16px;
+  }
+}

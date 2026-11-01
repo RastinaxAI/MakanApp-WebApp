@@ -1,0 +1,8 @@
+# Local HTTP review on the original test backend. Do not use for public deployment.
+# docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml up -d --no-build --wait web
+services:
+  web:
+    environment:
+      APP_ORIGIN: http://127.0.0.1:${MAKAN_PORT:-8080}
+      BACKEND_BASE_URL: http://94.184.32.84:8090
+      COOKIE_SECURE: 'false'

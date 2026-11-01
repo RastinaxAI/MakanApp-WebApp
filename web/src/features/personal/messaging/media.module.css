@@ -379,3 +379,46 @@
   min-height: 52px;
   font-size: 14px;
 }
+
+/* File cards sit inside a message bubble, with native transfer feedback retained. */
+.attachment {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  margin-block: 4px;
+}
+.fileIntro,
+.fileReady {
+  padding: 6px;
+  gap: 10px;
+}
+.fileIntro strong,
+.fileReady strong {
+  font-size: 13px;
+  color: var(--primary);
+}
+.fileIntro small,
+.fileReady small {
+  font-size: 11px;
+}
+.fileIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+}
+.attachButton {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+.attachMenu > [role='menuitem'] {
+  font-size: 14px;
+  border-radius: 8px;
+}
+.draftCard {
+  border-radius: 10px;
+  background: var(--surface);
+}

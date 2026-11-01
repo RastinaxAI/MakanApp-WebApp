@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-01",
+  "image": "sha256:b872c3d564d989045cfba873a16036ad47f701c12401099506c02fe9cbfa208b",
+  "health": "healthy",
+  "sessionVolume": "makan-client_sessions",
+  "environment": [
+    "COOKIE_SECURE=false",
+    "APP_ORIGIN=http://127.0.0.1:8080",
+    "BACKEND_BASE_URL=http://94.184.32.84:8090"
+  ],
+  "localOverride": "compose.local.yaml",
+  "note": "Local HTTP and previous test backend preserved. Production Compose and secret files unchanged."
+}

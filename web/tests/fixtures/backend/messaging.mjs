@@ -164,6 +164,16 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
           (m) => m.clientMessageId === body.clientMessageId && m.senderUserId === auth.user.id,
         );
         if (old) return send(make('MessageReceiptResult', { ...old }));
+        const files = (body.attachmentIds ?? []).map((fileId) => state.files.get(fileId));
+        if (
+          files.some(
+            (file) =>
+              !file ||
+              file.asset.uploadedByUserId !== auth.user.id ||
+              file.asset.status !== 'Ready',
+          )
+        )
+          return send({ code: 'FILE_NOT_AVAILABLE' }, 403);
         const m = make('ConversationMessageResult', {
           messageId: id(10000 + state.messages.length),
           conversationId: ids.chat,
@@ -174,11 +184,25 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
             displayName: auth.user.displayName,
             username: auth.user.username,
           }),
-          kind: 'Text',
+          kind: body.kind ?? 'Text',
           text: body.text,
           sequence: state.messages.length + 1,
           createdAtUtc: new Date().toISOString(),
-          attachments: [],
+          sentAtUtc: new Date().toISOString(),
+          attachments: files.map(({ asset }) =>
+            make('MessageAttachmentResult', {
+              fileAssetId: asset.id,
+              fileName: asset.originalFileName,
+              contentType: asset.contentType,
+              sizeBytes: asset.sizeBytes,
+              createdAtUtc: asset.createdAtUtc,
+              kind: asset.contentType.startsWith('image/')
+                ? 'Image'
+                : asset.contentType.startsWith('video/')
+                  ? 'Video'
+                  : 'File',
+            }),
+          ),
         });
         state.messages.push(m);
         return send(make('MessageReceiptResult', { ...m }));

@@ -1,4 +1,7 @@
 'use client';
+import { MessagingSurface } from './messaging-surface';
+import d from './directory.module.css';
+import t from './messaging-theme.module.css';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -15,7 +18,7 @@ import {
   Plus,
   Search,
   Trash2,
-  UserRound,
+  MoreHorizontal,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -151,12 +154,10 @@ export function ContactsPage() {
           contact: undefined,
         }));
   return (
-    <>
+    <MessagingSurface className={d.directory}>
       <div className={s.headingRow}>
         <div className={s.heading}>
-          <span>پیام‌رسان / دفترچهٔ مخاطبین</span>
-          <h1>مخاطبین شما</h1>
-          <p>یک حساب قابل مشاهده را پیدا کنید، ذخیره کنید و گفت‌وگو را شروع کنید.</p>
+          <h1 className="sr-only">مخاطبین شما</h1>
         </div>
         <PageBack href="/personal/messages" />
       </div>
@@ -348,7 +349,9 @@ export function ContactsPage() {
             }}
           >
             <label>
-              {tab === 'contacts' ? 'جستجو در دفترچهٔ مخاطبین' : 'جستجوی حساب‌های قابل مشاهده'}
+              <span className="sr-only">
+                {tab === 'contacts' ? 'جستجو در دفترچهٔ مخاطبین' : 'جستجوی حساب‌های قابل مشاهده'}
+              </span>
               <input
                 aria-label="عبارت جستجوی مخاطب"
                 value={draft}
@@ -360,7 +363,7 @@ export function ContactsPage() {
             </label>
             <Button type="submit" variant="outline">
               <Search size={17} />
-              جستجو
+              <span className="sr-only">جستجو</span>
             </Button>
           </form>
           {tab === 'search' && !query ? (
@@ -386,7 +389,7 @@ export function ContactsPage() {
           ) : (
             <div className={s.contactRows}>
               {rows.map((row) => (
-                <article key={row.profile.userId} className={s.contactRow}>
+                <article key={row.profile.userId} className={`${s.contactRow} ${d.contact}`}>
                   <ProfileAvatar
                     photo={row.profile.profilePhoto}
                     name={row.name}
@@ -456,7 +459,7 @@ export function ContactsPage() {
           )}
         </section>
       )}
-    </>
+    </MessagingSurface>
   );
 }
 function ContactActions({
@@ -491,10 +494,11 @@ function ContactActions({
           variant="ghost"
           aria-label={'مدیریت ' + (contact.savedName || contact.profile.displayName)}
         >
-          <UserRound size={18} />
+          <MoreHorizontal size={20} />
         </Button>
       </DialogTrigger>
       <DialogContent
+        className={`${t.theme} ${t.dialog}`}
         title="مدیریت مخاطب"
         description={contact.savedName || contact.profile.displayName}
       >

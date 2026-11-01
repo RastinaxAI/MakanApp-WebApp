@@ -19,6 +19,8 @@ import { MessageAttachment } from './media';
 import { useMessagingLive } from './live';
 import { OfficialBadge, useOfficialConversationAccess } from './official';
 import c from './conversation-pages.module.css';
+import { MessagingSurface } from './messaging-surface';
+import { ProfileAvatar } from '../profile-photo';
 type S = components['schemas'];
 export type ConversationSection = 'info' | 'members' | 'media' | 'settings';
 const route = (id: string) => '/personal/messages/' + id;
@@ -59,9 +61,14 @@ function ResolvedConversationPage({
   if (isManagedConversation(summary.type))
     tabs.push(['members', 'اعضا', Users], ['settings', 'تنظیمات', Settings2]);
   return (
-    <div className={c.page}>
+    <MessagingSurface className={c.page}>
       <ConversationSubscription id={id} />
       <header className={c.header}>
+        <ProfileAvatar
+          photo={summary.otherParticipant?.profilePhoto}
+          name={conversationTitle(summary)}
+          className={c.heroAvatar}
+        />
         <div>
           <span>
             {summary.scope === 'Personal'
@@ -98,7 +105,7 @@ function ResolvedConversationPage({
       ) : (
         <ErrorState error={new ApiError(404)} />
       )}
-    </div>
+    </MessagingSurface>
   );
 }
 function ConversationSubscription({ id }: { id: string }) {

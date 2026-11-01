@@ -1,0 +1,45 @@
+{
+  "environment": "http://127.0.0.1:8080",
+  "backend": "user-approved remote test service behind the Docker BFF",
+  "scope": "UI login, own workspace/session actions, invitation reads and navigation; no invitation acceptance/decline or domain writes",
+  "roles": [
+    {
+      "role": "Student",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "height": 844,
+          "invitations": 0,
+          "detailsAvailable": false,
+          "tabs": [
+            "پیام‌ها",
+            "پروفایل",
+            "دستیار ماکان",
+            "آموزشگاه"
+          ],
+          "reloadPreserved": true
+        }
+      ],
+      "serviceErrors": [],
+      "pageErrors": [],
+      "blockedMutations": [],
+      "primaryButtonToken": "#007aff",
+      "wallpapers": [
+        {
+          "name": "classic-wallpaper.png",
+          "status": 200,
+          "bytes": 252889
+        },
+        {
+          "name": "night-wallpaper.png",
+          "status": 200,
+          "bytes": 405974
+        }
+      ],
+      "passed": true,
+      "logoutStatus": 204
+    }
+  ],
+  "finishedAtUtc": "2026-11-01T15:07:15.650Z"
+}

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { make, ids } from './state.mjs';
+import { make, ids, id as fixtureId } from './state.mjs';
 export async function filesRoute({ state, req, res, url, bytes, auth, send }) {
   if (!url.pathname.startsWith('/api/v1/files')) return false;
   const personal = url.searchParams.get('workspaceScope') === 'Personal';
@@ -47,7 +47,19 @@ export async function filesRoute({ state, req, res, url, bytes, auth, send }) {
           (a) => a.fileAssetId === id && a.fileStatus === 'Ready' && a.canDownload,
         ),
       ));
-  if (!file || (file.asset.uploadedByUserId !== auth.user.id && !evaluationAttachment))
+  // Only the two actual fixture participants may receive a file referenced by their chat.
+  // Upload ownership alone never grants another role access to private media.
+  const directAttachment =
+    [fixtureId(101), fixtureId(102)].includes(auth.user.id) &&
+    state.messages.some(
+      (message) =>
+        message.conversationId === ids.chat &&
+        message.attachments.some((attachment) => attachment.fileAssetId === id),
+    );
+  if (
+    !file ||
+    (file.asset.uploadedByUserId !== auth.user.id && !evaluationAttachment && !directAttachment)
+  )
     return send({ code: 'FILE_NOT_FOUND' }, 404);
   if (url.pathname.endsWith('/content')) {
     if (file.asset.status !== 'Ready') return send({ code: 'FILE_NOT_READY' }, 409);

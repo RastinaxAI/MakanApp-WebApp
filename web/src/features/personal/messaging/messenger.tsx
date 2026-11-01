@@ -11,7 +11,10 @@ import {
   ChevronLeft,
   ChevronRight,
   MessageCircle,
-  Plus,
+  SquarePen,
+  BellOff,
+  Pin,
+  Megaphone,
   Search,
   Settings,
   Users,
@@ -28,6 +31,7 @@ import { ConversationRoom } from './conversation-room';
 import { useMessagingLive } from './live';
 import { useConversationSelection } from './selection';
 import s from './messenger.module.css';
+import t from './messaging-theme.module.css';
 import { conversationTitle } from './model';
 import { OfficialBadge } from './official';
 type Summary = components['schemas']['ConversationSummaryResult'];
@@ -121,9 +125,56 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
       remember(conversationId);
   }, [conversationId, inbox.data, remember]);
   return (
-    <div className={`${s.messenger} ${displayId ? s.activeChat : ''}`}>
+    <div className={`${t.theme} ${s.messenger} ${displayId ? s.activeChat : ''}`} data-messenger>
       <section className={s.sidebar} aria-label="فهرست گفتگوها">
-        <h1 className="sr-only">پیام‌ها</h1>
+        <header className={s.listHeader}>
+          <Link href="/personal/settings" aria-label="تنظیمات پیام‌رسان">
+            <Settings size={22} />
+          </Link>
+          <h1>پیام‌ها</h1>
+          <Menu.Root dir="rtl">
+            <Menu.Trigger asChild>
+              <button className={s.floating} aria-label="ایجاد گفت‌وگو یا مخاطب">
+                <SquarePen size={23} />
+              </button>
+            </Menu.Trigger>
+            <Menu.Portal>
+              <Menu.Content
+                className={`dropdown ${t.theme} ${t.menu}`}
+                side="bottom"
+                align="start"
+                sideOffset={8}
+              >
+                <Menu.Item asChild>
+                  <Link href="/personal/messages/new?kind=groups">
+                    <Users size={17} />
+                    ایجاد گروه
+                  </Link>
+                </Menu.Item>
+                <Menu.Item asChild>
+                  <Link href="/personal/messages/new?kind=channels">
+                    <Megaphone size={17} />
+                    ایجاد کانال
+                  </Link>
+                </Menu.Item>
+                <Menu.Item asChild>
+                  <Link href="/personal/contacts">
+                    <ContactRound size={17} />
+                    مخاطبین
+                  </Link>
+                </Menu.Item>
+                <Menu.Item onSelect={() => update('Archived')}>
+                  <Archive size={17} />
+                  آرشیو
+                </Menu.Item>
+                <Menu.Item onSelect={() => update('Saved')}>
+                  <Bookmark size={17} />
+                  پیام‌های ذخیره‌شده
+                </Menu.Item>
+              </Menu.Content>
+            </Menu.Portal>
+          </Menu.Root>
+        </header>
         {session.context.workspaceType === 'Organization' && (
           <nav className={s.scopeSwitch} aria-label="فضای گفتگوها">
             <Link href="/personal/messages" aria-current={!organizationView ? 'page' : undefined}>
@@ -145,13 +196,15 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
             update(filter, draft.trim());
           }}
         >
-          <Search size={18} />
-          <input
-            aria-label="جستجوی گفتگوها"
-            placeholder="جستجو در پیام‌ها"
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-          />
+          <div className={s.searchField}>
+            <Search size={18} />
+            <input
+              aria-label="جستجوی گفتگوها"
+              placeholder="جستجو در پیام‌ها"
+              value={draft}
+              onChange={(event) => setDraft(event.target.value)}
+            />
+          </div>
           <button type="submit" aria-label="انجام جستجوی گفتگو" className={s.searchSubmit}>
             <ChevronLeft size={19} />
           </button>
@@ -163,6 +216,12 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
             </button>
           ))}
         </nav>
+        {!['All', 'Direct', 'Group', 'Channel'].includes(filter) && (
+          <div className={s.filterTitle}>
+            <strong>{filterLabels[filter]}</strong>
+            <button onClick={() => update('All')}>همهٔ گفتگوها</button>
+          </div>
+        )}
         <div className={s.list}>
           {inbox.isPending ? (
             <LoadingSkeleton />
@@ -176,7 +235,7 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
                   ? 'عبارت جستجو یا نوع گفتگو را تغییر دهید.'
                   : organizationView
                     ? 'گروه و کانال رسمی را از صفحهٔ آموزشگاه یا کلاس باز کنید.'
-                    : 'از دکمهٔ پایین برای شروع ارتباط استفاده کنید.'
+                    : 'از دکمهٔ نوشتن بالای فهرست، گفت‌وگویی شروع کنید.'
               }
             />
           ) : (
@@ -187,14 +246,23 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
                 className={`${s.chatItem} ${row.conversationId === displayId ? s.selected : ''}`}
                 aria-current={row.conversationId === displayId ? 'page' : undefined}
               >
-                <ProfileAvatar
-                  photo={row.type === 'Direct' ? row.otherParticipant?.profilePhoto : undefined}
-                  name={conversationTitle(row)}
-                  className={`${s.avatar} ${row.scope === 'Organization' ? s.organizationAvatar : ''}`}
-                />
+                {row.type === 'Saved' ? (
+                  <span className={s.avatar} aria-label="پیام‌های ذخیره‌شده">
+                    <Bookmark size={28} fill="currentColor" />
+                  </span>
+                ) : (
+                  <ProfileAvatar
+                    photo={row.type === 'Direct' ? row.otherParticipant?.profilePhoto : undefined}
+                    name={conversationTitle(row)}
+                    className={`${s.avatar} ${row.scope === 'Organization' ? s.organizationAvatar : ''}`}
+                  />
+                )}
                 <span className={s.chatSummary}>
                   <span className={s.row}>
-                    <strong>{conversationTitle(row)}</strong>
+                    <strong>
+                      {conversationTitle(row)}{' '}
+                      {row.isMuted && <BellOff size={12} aria-label="بی‌صدا" />}
+                    </strong>
                     <time>{shortTime(row.lastMessageAtUtc)}</time>
                   </span>
                   {row.scope === 'Organization' && (
@@ -208,7 +276,16 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
                     <span className={s.preview}>
                       {row.lastMessagePreview ?? 'هنوز پیامی ثبت نشده'}
                     </span>
-                    {row.unreadCount > 0 && <b className={s.unread}>{number(row.unreadCount)}</b>}
+                    {row.unreadCount > 0 ? (
+                      <b
+                        className={s.unread}
+                        aria-label={number(row.unreadCount) + ' پیام خوانده‌نشده'}
+                      >
+                        {number(row.unreadCount)}
+                      </b>
+                    ) : row.isPinned ? (
+                      <Pin size={14} aria-label="سنجاق‌شده" />
+                    ) : null}
                   </span>
                 </span>
               </Link>
@@ -255,43 +332,6 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
                     : 'به‌روزرسانی دوره‌ای فعال'}
           </span>
         </footer>
-        <Menu.Root dir="rtl">
-          <Menu.Trigger asChild>
-            <button className={s.floating} aria-label="ایجاد گفت‌وگو یا مخاطب">
-              <Plus size={22} />
-            </button>
-          </Menu.Trigger>
-          <Menu.Portal>
-            <Menu.Content className="dropdown" side="top" align="start" sideOffset={8}>
-              <Menu.Item asChild>
-                <Link href="/personal/messages/new?kind=groups">
-                  <Users size={17} />
-                  ایجاد گروه
-                </Link>
-              </Menu.Item>
-              <Menu.Item asChild>
-                <Link href="/personal/messages/new?kind=channels">
-                  <MessageCircle size={17} />
-                  ایجاد کانال
-                </Link>
-              </Menu.Item>
-              <Menu.Item asChild>
-                <Link href="/personal/contacts">
-                  <ContactRound size={17} />
-                  مخاطبین
-                </Link>
-              </Menu.Item>
-              <Menu.Item onSelect={() => update('Archived')}>
-                <Archive size={17} />
-                آرشیو
-              </Menu.Item>
-              <Menu.Item onSelect={() => update('Saved')}>
-                <Bookmark size={17} />
-                پیام‌های ذخیره‌شده
-              </Menu.Item>
-            </Menu.Content>
-          </Menu.Portal>
-        </Menu.Root>
       </section>
       {displayId ? (
         <ConversationRoom

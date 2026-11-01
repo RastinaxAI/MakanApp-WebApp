@@ -14,7 +14,6 @@ import {
   Building2,
   Check,
   CheckCheck,
-  Info,
   Send,
   Settings,
   X,
@@ -44,6 +43,8 @@ import { personalMessageQueue, type QueuedMessage } from './outbox';
 import { findConversationSummary, isManagedConversation } from './summary';
 import { OfficialBadge, useOfficialConversationAccess } from './official';
 import { AcademicActivity } from './academic-activity';
+import { ConversationActions } from './conversation-actions';
+import { MessageBubble } from './message-bubble';
 type Summary = components['schemas']['ConversationSummaryResult'];
 type Message = components['schemas']['ConversationMessageResult'];
 
@@ -191,7 +192,7 @@ function ResolvedConversationRoom({
   useEffect(() => {
     const node = composer.current;
     if (node) {
-      node.style.height = '44px';
+      node.style.height = '42px';
       node.style.height = Math.min(120, node.scrollHeight) + 'px';
     }
   }, [draft]);
@@ -472,7 +473,11 @@ function ResolvedConversationRoom({
             name={name}
             className={s.avatar}
           />
-          <div className={s.identity}>
+          <Link
+            className={s.identity}
+            href={`/personal/messages/${id}/info`}
+            aria-label="اطلاعات گفتگو"
+          >
             <h2>{name}</h2>
             <OfficialBadge summary={summary} />
             <p>
@@ -485,12 +490,8 @@ function ResolvedConversationRoom({
                     : 'گروه'}{' '}
               · {conversation.scope === 'Personal' ? 'شخصی' : 'آموزشگاه'}
             </p>
-          </div>
-          <Button size="icon" variant="ghost" asChild>
-            <Link href={`/personal/messages/${id}/info`} aria-label="اطلاعات گفتگو">
-              <Info size={21} />
-            </Link>
-          </Button>
+          </Link>
+          <ConversationActions id={id} managed={isManagedConversation(conversation.type)} />
         </header>
         <div className={s.scope}>
           <Building2 size={14} />
@@ -545,7 +546,19 @@ function ResolvedConversationRoom({
                           : date(message.sentAtUtc)}
                       </p>
                     )}
-                    <article key={message.messageId} className={`${s.bubble} ${own ? s.own : ''}`}>
+                    <MessageBubble
+                      own={own}
+                      sequence={message.sequence}
+                      text={message.isDeleted ? null : message.text}
+                      onReply={
+                        !message.isDeleted && writable
+                          ? () => {
+                              setReply(message);
+                              composer.current?.focus();
+                            }
+                          : undefined
+                      }
+                    >
                       {conversation.type === 'Group' && !own && (
                         <span className={s.messageSender}>{message.sender.displayName}</span>
                       )}
@@ -608,16 +621,8 @@ function ResolvedConversationRoom({
                           ) : (
                             <Check size={15} aria-label="ارسال در سرور ثبت شده" />
                           ))}
-                        {!message.isDeleted && writable && (
-                          <button
-                            aria-label={'پاسخ به پیام ' + message.sequence}
-                            onClick={() => setReply(message)}
-                          >
-                            <ArrowUpLeft size={17} />
-                          </button>
-                        )}
                       </div>
-                    </article>
+                    </MessageBubble>
                   </Fragment>
                 );
               })}
