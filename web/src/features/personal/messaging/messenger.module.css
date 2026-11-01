@@ -1,4 +1,4 @@
-/* Telegram reference, PDF pages 3/6 and 8/11. RTL mirrors the reading direction. */
+/* Account inbox and Direct-style conversation, adapted to Makan RTL navigation. */
 .messenger {
   display: grid;
   grid-template-columns: 350px minmax(0, 1fr);
@@ -20,12 +20,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px 4px;
-  min-height: 64px;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 4px;
+  min-height: calc(64px + env(safe-area-inset-top));
   flex-shrink: 0;
+  gap: 8px;
   background: var(--chat-header);
 }
 .listHeader h1 {
+  flex: 1;
+  min-width: 0;
   font-size: 23px;
   font-weight: 700;
 }
@@ -36,29 +39,24 @@
   place-items: center;
   border: 0;
   border-radius: 8px;
-  color: var(--primary);
+  color: var(--text);
   background: transparent;
 }
 .listHeader > a:hover {
   background: var(--soft);
 }
 .floating {
-  position: absolute;
-  inset-inline-end: 20px;
-  bottom: 48px;
-  z-index: 5;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 50%;
-  color: #fff;
-  background: var(--primary-button);
-  box-shadow: 0 5px 18px #0003;
+  border-radius: 8px;
+  color: var(--text);
+  background: transparent;
 }
 .floating:hover {
-  background: var(--primary-hover);
+  background: var(--soft);
 }
 .floating:focus-visible {
   outline: 3px solid var(--primary);
@@ -114,10 +112,9 @@
   display: flex;
   gap: 2px;
   flex-shrink: 0;
-  padding: 4px;
+  padding: 0;
   margin: 0 12px 8px;
-  border-radius: 24px;
-  background: var(--soft);
+  border-bottom: 1px solid var(--border);
 }
 .filter button {
   position: relative;
@@ -129,12 +126,13 @@
   font-size: 13px;
   min-height: 44px;
   padding: 8px 2px;
-  border-radius: 20px;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
 }
 .filter button[aria-pressed='true'] {
-  color: var(--primary);
+  color: var(--text);
   font-weight: 700;
-  background: var(--primary-soft);
+  border-bottom-color: var(--text);
 }
 .filterTitle {
   display: flex;
@@ -157,7 +155,7 @@
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: 0 0 88px;
+  padding: 0 0 16px;
 }
 .chatItem {
   position: relative;
@@ -194,20 +192,21 @@
   justify-content: center;
   flex-shrink: 0;
   border-radius: 50%;
-  background: linear-gradient(155deg, #69c8ff, #2289dd);
-  color: #fff;
+  background: var(--soft);
+  color: var(--text);
+  border: 1px solid var(--border);
   font-size: 23px;
   font-weight: 600;
   overflow: hidden;
 }
 .chatItem:nth-of-type(3n + 2) .avatar {
-  background: linear-gradient(155deg, #ffbc69, #e98737);
+  background: var(--soft);
 }
 .chatItem:nth-of-type(3n) .avatar {
-  background: linear-gradient(155deg, #8c99f5, #7863d9);
+  background: var(--soft);
 }
 .organizationAvatar {
-  background: linear-gradient(155deg, #64d6bd, #23a58e) !important;
+  background: var(--soft);
 }
 .avatar svg {
   width: 28px;
@@ -255,7 +254,7 @@
   min-width: 21px;
   height: 21px;
   border-radius: 12px;
-  background: var(--primary);
+  background: var(--primary-button);
   color: var(--chat-badge-text);
   font-size: 11px;
   line-height: 1;
@@ -280,15 +279,11 @@
   font-size: 12px;
 }
 .sidebarFoot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 30px;
-  padding: 4px 8px;
-  border-top: 1px solid var(--border);
-  font-size: 10px;
-  color: var(--muted);
-  background: var(--chat-header);
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .sidebarFoot > a {
   display: none;
@@ -311,8 +306,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 64px;
-  padding: 6px 12px;
+  min-height: calc(64px + env(safe-area-inset-top));
+  padding: calc(6px + env(safe-area-inset-top)) 12px 6px;
   background: var(--chat-header);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
@@ -401,6 +396,31 @@
 .history > div:last-child {
   flex-shrink: 0;
 }
+.startConversation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  max-width: 360px;
+  align-self: center;
+  padding: 40px 16px;
+}
+.startConversation .avatar {
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
+}
+.startConversation h2 {
+  font-size: 20px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.startConversation p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
 .older {
   align-self: center;
   margin: 4px 0 12px;
@@ -409,9 +429,8 @@
 }
 .dayDivider {
   align-self: center;
-  background: #50657988;
-  color: #fff;
-  font-size: 11px;
+  color: var(--muted);
+  font-size: 12px;
   line-height: 24px;
   padding: 1px 12px;
   border-radius: 14px;
@@ -420,20 +439,27 @@
 .bubble {
   position: relative;
   align-self: flex-start;
-  background: var(--surface);
+  background: var(--incoming-message);
   border: 0;
-  border-radius: 15px 15px 5px 15px;
-  padding: 6px 11px 3px;
+  border-radius: 18px;
+  padding: 8px 12px 5px;
   max-width: min(84%, 540px);
   min-width: 80px;
-  box-shadow: 0 1px 1px #00000012;
+  box-shadow: none;
   font-size: 15px;
   overflow-wrap: anywhere;
 }
 .own {
   align-self: flex-end;
   background: var(--chat-outgoing);
-  border-radius: 15px 15px 15px 5px;
+  color: var(--on-primary);
+  border-radius: 18px;
+}
+.own .localStatus {
+  color: var(--chat-outgoing-meta);
+}
+.own .pendingActions :global(.button) {
+  color: var(--on-primary);
 }
 .bubble p {
   white-space: pre-wrap;
@@ -564,7 +590,7 @@
   display: flex;
   align-items: center;
   padding: 0 12px;
-  background: var(--surface);
+  background: var(--soft);
 }
 .composer textarea {
   width: 100%;
@@ -589,8 +615,8 @@
   height: 44px;
   flex-shrink: 0;
   border: 0;
-  background: var(--primary);
-  color: #fff;
+  background: var(--primary-button);
+  color: var(--on-primary);
   border-radius: 50%;
   margin-bottom: 0;
 }
@@ -744,8 +770,8 @@
     display: inline-flex !important;
   }
   .roomHeader {
-    min-height: 64px;
-    padding: 4px 8px;
+    min-height: calc(64px + env(safe-area-inset-top));
+    padding: calc(4px + env(safe-area-inset-top)) 8px 4px;
     gap: 6px;
   }
   .roomHeader .avatar {

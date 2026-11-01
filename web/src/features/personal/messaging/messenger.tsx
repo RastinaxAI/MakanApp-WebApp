@@ -4,6 +4,7 @@ import { useMediaQuery } from '@/components/hooks/use-media-query';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
 import { number } from '@/lib/formatting';
+import { ApiError } from '@/lib/api/errors';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import {
@@ -159,6 +160,9 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
     router.push(pathname + '?' + next, { scroll: false });
   }
   const rows = allRows.filter((row) => !hidden.has(row.conversationId));
+  const keepCachedInbox =
+    !!inbox.data &&
+    !(inbox.error instanceof ApiError && [401, 403, 404].includes(inbox.error.status));
   const displayId =
     conversationId ?? (wide && rows?.some((row) => row.conversationId === last) ? last : undefined);
   const selected = allRows.find((row) => row.conversationId === displayId);
@@ -251,9 +255,12 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
           </div>
         )}
         <div className={s.list}>
+          {inbox.isError && keepCachedInbox && (
+            <ErrorState error={inbox.error} onRetry={() => void inbox.refetch()} />
+          )}
           {inbox.isPending ? (
             <LoadingSkeleton />
-          ) : inbox.isError ? (
+          ) : inbox.isError && !keepCachedInbox ? (
             <ErrorState error={inbox.error} onRetry={() => void inbox.refetch()} />
           ) : !rows?.length ? (
             <EmptyState

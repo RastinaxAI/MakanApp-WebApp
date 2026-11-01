@@ -20,7 +20,7 @@ import {
   ChevronRight,
   MessageCircle,
   Settings,
-  Sparkles,
+  Bot,
   UserRound,
 } from 'lucide-react';
 import Link from 'next/link';
@@ -35,7 +35,7 @@ import { useThemePreference } from './theme';
 import { PageBackProvider, usePageBackTarget } from '@/components/navigation/page-back';
 const icons = {
   education: House,
-  assistant: Sparkles,
+  assistant: Bot,
   messages: MessageCircle,
   profile: UserRound,
 };
@@ -133,7 +133,15 @@ function PersonalShellContent({ children }: { children: ReactNode }) {
           aria-current={activeNavigation(pathname) === item.href ? 'page' : undefined}
         >
           <span className={s.navGlyph}>
-            <item.icon size={22} />
+            {item.icon === UserRound ? (
+              <ProfileAvatar
+                photo={session.user.profilePhoto}
+                name={name}
+                className={s.navAvatar}
+              />
+            ) : (
+              <item.icon size={22} />
+            )}
           </span>
           <span>{item.name}</span>
         </Link>

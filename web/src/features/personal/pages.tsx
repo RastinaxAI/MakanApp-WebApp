@@ -19,7 +19,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import s from './personal.module.css';
 import p from './profile-reference.module.css';
-import { ReferenceColumns } from './reference-layout';
 import { displayDateOnly } from './profile-model';
 import { ProfileAvatar } from './profile-photo';
 import { usePersonal, usePersonalApi } from './provider';
@@ -130,7 +129,7 @@ export function PersonalProfile() {
   );
   const user = session.user;
   return (
-    <ReferenceColumns>
+    <div className={p.page} data-profile-overview>
       <div className={p.profile}>
         <section className={p.profileCard}>
           <div className={p.identity}>
@@ -153,9 +152,17 @@ export function PersonalProfile() {
             </div>
           </div>
         </section>
-        <Button asChild variant="outline" className={p.edit}>
-          <Link href="/personal/profile/edit">ویرایش پروفایل</Link>
-        </Button>
+        <div className={p.actions}>
+          <Button asChild variant="outline" className={p.edit}>
+            <Link href="/personal/profile/edit">ویرایش پروفایل</Link>
+          </Button>
+          <Button asChild variant="outline" className={p.edit}>
+            <Link href="/personal/profile/preferences">
+              <Settings size={18} />
+              حساب و ترجیحات
+            </Link>
+          </Button>
+        </div>
         <ProfileSpaces />
         <section className={p.infoCard} aria-label="مشخصات فردی">
           <h2>مشخصات فردی</h2>
@@ -208,18 +215,12 @@ export function PersonalProfile() {
             </dl>
           )}
         </section>
-        <Button asChild variant="outline">
-          <Link href="/personal/profile/preferences">
-            <Settings size={19} />
-            حساب و ترجیحات
-          </Link>
-        </Button>
         <Button variant="destructive" onClick={() => void logout()}>
           <LogOut size={17} />
           خروج از حساب
         </Button>
       </div>
-    </ReferenceColumns>
+    </div>
   );
 }
 function ProfileSpaces() {

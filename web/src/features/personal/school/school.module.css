@@ -586,7 +586,7 @@
 .card,
 .classCard {
   border-radius: 16px;
-  box-shadow: 0 3px 14px #24283e03;
+  box-shadow: none;
 }
 .flowPage {
   max-width: 720px;

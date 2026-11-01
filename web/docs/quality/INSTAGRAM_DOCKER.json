@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-02",
+  "buildCommand": "docker compose --project-name makan-client --file compose.yaml --progress plain build web",
+  "buildExitCode": 0,
+  "buildStepSeconds": 892,
+  "deployCommand": "docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml up -d --no-deps --no-build --wait --wait-timeout 180 web",
+  "deployExitCode": 0,
+  "runtimeInputSha256": "f184cba87016c301b963cd0848633c8f572c18e0f2ab8bf64aeeee2c8e562108",
+  "runtimeFileCount": 263,
+  "inputsUnchangedAfterBuild": true,
+  "runtimeProbe": {
+    "entryStatus": 200,
+    "themeBootstrap": true,
+    "brandFocus": true,
+    "fixtureMode": false,
+    "origin": "http://127.0.0.1:8080",
+    "backend": "http://94.184.32.84:8090",
+    "cookieSecure": "false"
+  },
+  "containers": [
+    {
+      "name": "makan-client-web-1",
+      "id": "4426dda88e28d4058d27a2b3b747d997a0e38a9d5a16adb1ebbd63f8a46a39a4",
+      "image": "sha256:229c671a62a7c9dfbc09f43bf5f5bc6169b1df5972a3a4c20f1434b78b73ab14",
+      "health": "healthy",
+      "volume": "makan-client_sessions",
+      "sameContainer": false,
+      "sameVolume": true,
+      "previousHealth": "healthy"
+    },
+    {
+      "name": "makan-management-panel-web-1",
+      "id": "6065421a06c5213797feadd820f67463a4c77a765a0c69334235f6cc09f31e07",
+      "image": "sha256:b0a75b6ddd5c1aef89a4afa7e468d818372fd10fe80f2ac34cfd995fa5e172f4",
+      "health": "healthy",
+      "volume": "makan-management-panel_management_sessions",
+      "sameContainer": true,
+      "sameVolume": true,
+      "previousHealth": "unhealthy"
+    },
+    {
+      "name": "makan-management-web-1",
+      "id": "3c9f4c2cb203d46791acd9c5173cdfd4c7bbe410456265ce19ccb557be2a217a",
+      "image": "sha256:817cc42e687a1635d315b6d2f9d35c2c00b0a739f63c0e26c3f800285d4c53ce",
+      "health": "healthy",
+      "volume": "makan-management_sessions",
+      "sameContainer": true,
+      "sameVolume": true,
+      "previousHealth": "unhealthy"
+    }
+  ],
+  "notes": [
+    "Only the client service was recreated. Named session volumes were preserved.",
+    "During the build, a WSL read and local entry health request timed out. HTTP recovered after browser tests finished and before deployment. Docker Desktop was not restarted.",
+    "Management panels were not recreated; health before snapshot was taken during the heavy build.",
+    "No remote server deployment or external CI run was executed."
+  ]
+}

@@ -58,7 +58,12 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
         )
       }
     >
-      <nav className={s.weekNavigation} aria-label="جابه‌جایی هفته">
+      <nav
+        className={s.weekNavigation}
+        aria-label="جابه‌جایی هفته"
+        data-week-start={range.first}
+        data-week-end={range.last}
+      >
         <Button
           variant="outline"
           className={`${s.navigationButton} ${s.previous}`}

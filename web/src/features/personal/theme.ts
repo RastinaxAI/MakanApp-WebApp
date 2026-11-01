@@ -1,6 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
+import tokens from '../../../design/tokens.json';
 export type PersonalTheme = 'light' | 'dark';
+function applyTheme(value: PersonalTheme) {
+  document.documentElement.dataset.theme = value;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', tokens[value].bg);
+}
 export function useThemePreference() {
   const [theme, setTheme] = useState<PersonalTheme>('light');
   const [error, setError] = useState('');
@@ -10,7 +15,7 @@ export function useThemePreference() {
       try {
         value = localStorage.getItem('makan-theme') === 'dark' ? 'dark' : 'light';
       } catch {}
-      document.documentElement.dataset.theme = value;
+      applyTheme(value);
       setTheme(value);
     };
     sync();
@@ -23,7 +28,7 @@ export function useThemePreference() {
   }, []);
   function changeTheme(value: PersonalTheme) {
     setError('');
-    document.documentElement.dataset.theme = value;
+    applyTheme(value);
     setTheme(value);
     try {
       localStorage.setItem('makan-theme', value);

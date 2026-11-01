@@ -17,12 +17,20 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: tokens.light.primary,
+  themeColor: tokens.light.bg,
   viewportFit: 'cover',
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fa" dir="rtl">
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <head>
+        <script
+          id="makan-theme-bootstrap"
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem('makan-theme')==='dark'?'dark':'light';document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute('content',${JSON.stringify({ light: tokens.light.bg, dark: tokens.dark.bg })}[t]);}catch{document.documentElement.dataset.theme='light';}`,
+          }}
+        />
+      </head>
       <body>
         <RootProviders>{children}</RootProviders>
         {process.env.MAKAN_TEST_MODE === 'fixture' && (

@@ -6,18 +6,7 @@
   align-content: start;
   gap: 20px;
   padding: 24px max(16px, calc((100% - 720px) / 2)) 40px;
-  --detail-action: #e2eaf3;
-}
-:global(:root[data-theme='dark']) .page.page {
-  --bg: #17212b;
-  --surface: #202d39;
-  --soft: #283947;
-  --text: #f3f6f9;
-  --muted: #9baebb;
-  --border: #172531;
-  --primary: #85c5f2;
-  --primary-soft: #30495e;
-  --detail-action: #293c4b;
+  --detail-action: var(--soft);
 }
 .header {
   display: flex;
@@ -46,8 +35,9 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  color: #fff;
-  background: linear-gradient(145deg, #5fcbef, #2689d9);
+  color: var(--text);
+  background: var(--soft);
+  border: 1px solid var(--border);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -597,17 +587,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-}
-
-:global(:root[data-theme='dark']) .detailDialog.detailDialog {
-  --bg: #17212b;
-  --surface: #202d39;
-  --soft: #283947;
-  --text: #f3f6f9;
-  --muted: #9baebb;
-  --border: #344755;
-  --primary: #85c5f2;
-  --primary-soft: #30495e;
 }
 
 /* Edit screens retain context without repeating the profile hero. */

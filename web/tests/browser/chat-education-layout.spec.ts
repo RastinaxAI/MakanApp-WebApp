@@ -72,7 +72,7 @@ for (const theme of ['light', 'dark']) {
   }
 }
 
-test('dark inbox uses slate surfaces, readable previews, pill filters and an accessible compose button', async ({
+test('dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button', async ({
   page,
   context,
   request,
@@ -83,9 +83,7 @@ test('dark inbox uses slate surfaces, readable previews, pill filters and an acc
   await page.goto('/personal/messages');
   const inbox = page.getByLabel('فهرست گفتگوها', { exact: true });
   await expect(inbox.getByText('مریم رضایی', { exact: true })).toBeVisible();
-  expect(await inbox.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(
-    'rgb(29, 41, 53)',
-  );
+  expect(await inbox.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(0, 0, 0)');
   const contrast = await inbox.evaluate((el) => {
     const luminance = (rgb: string) => {
       const [r, g, b] = rgb
@@ -113,9 +111,7 @@ test('dark inbox uses slate surfaces, readable previews, pill filters and an acc
   expect(contrast.preview).toBeGreaterThanOrEqual(4.5);
   expect(contrast.badge).toBeGreaterThanOrEqual(4.5);
   const filters = inbox.getByRole('navigation', { name: 'نوع گفتگوها', exact: true });
-  expect(
-    await filters.evaluate((el) => parseFloat(getComputedStyle(el).borderRadius)),
-  ).toBeGreaterThanOrEqual(20);
+  expect(await filters.evaluate((el) => parseFloat(getComputedStyle(el).borderRadius))).toBe(0);
   await expect(filters.getByRole('button', { name: 'همه', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',

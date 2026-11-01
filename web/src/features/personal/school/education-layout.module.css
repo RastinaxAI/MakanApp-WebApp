@@ -3,10 +3,9 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin: 0 0 20px;
-  padding: 6px;
+  padding: 0;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  border-bottom: 1px solid var(--border);
 }
 .managerNavigation {
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -24,7 +23,8 @@
   gap: 9px;
   min-height: 52px;
   padding: 12px 8px;
-  border-radius: 12px;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
   font-size: 13px;
   color: var(--muted);
   text-decoration: none;
@@ -43,8 +43,8 @@
 }
 .navigation a[aria-current='page'],
 .classTabs a[aria-current='page'] {
-  background: var(--primary-soft);
-  color: var(--primary);
+  border-bottom-color: var(--text);
+  color: var(--text);
   font-weight: 700;
 }
 .classPage {
@@ -68,8 +68,7 @@
   gap: 18px;
   padding: 24px;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 22px;
+  border-bottom: 1px solid var(--border);
 }
 .classHeading h1 {
   font-size: 26px;
@@ -87,9 +86,9 @@
   height: 64px;
   display: grid;
   place-items: center;
-  border-radius: 20px;
-  background: var(--primary-soft);
-  color: var(--primary);
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--text);
   font-size: 30px;
   flex-shrink: 0;
 }
@@ -97,9 +96,8 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px;
-  padding: 6px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  padding: 0;
+  border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
 .classContent {
@@ -155,7 +153,7 @@
   }
   .navigation {
     gap: 3px;
-    border-radius: 16px;
+    border-radius: 0;
     margin-bottom: 18px;
   }
   .classHeading {

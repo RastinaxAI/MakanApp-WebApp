@@ -13,15 +13,16 @@
   min-height: 0;
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr) 240px;
-  gap: 12px;
-  padding: 16px;
+  gap: 0;
+  padding: 0;
 }
 .workbench > section {
   min-width: 0;
   min-height: 0;
-  border: 1px solid var(--border);
+  border: 0;
+  border-inline-end: 1px solid var(--border);
   background: var(--surface);
-  border-radius: 20px;
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -43,7 +44,7 @@
   font-size: 14px;
 }
 .paneHeader > span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .paneHeader h2 svg {
@@ -59,8 +60,8 @@
   min-height: 46px;
   background: var(--primary-soft);
   color: var(--primary);
-  border: 1px dashed var(--primary);
-  border-radius: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 600;
 }
@@ -73,7 +74,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px 18px 16px;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .assistant input[type='checkbox'] {
@@ -95,6 +96,11 @@
   border-bottom: 1px solid var(--border);
 }
 .sourceList article > label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 8px 0;
   margin: 0;
 }
@@ -115,12 +121,12 @@
   flex-shrink: 0;
 }
 .sourceList strong {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 650;
   display: block;
 }
 .sourceList small {
-  font-size: 9px;
+  font-size: 12px;
   display: block;
   color: var(--muted);
   margin-top: 5px;
@@ -132,12 +138,12 @@
   padding: 14px;
   border-radius: 12px;
   background: var(--bg);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .sourceTip svg {
   flex-shrink: 0;
-  color: var(--teal);
+  color: var(--text);
 }
 .sourceEmpty {
   text-align: center;
@@ -153,13 +159,13 @@
   background: var(--bg);
   color: var(--primary);
   margin: 0 auto 20px;
-  transform: rotate(-6deg);
+  transform: none;
 }
 .sourceEmpty h3 {
   font-size: 13px;
 }
 .sourceEmpty p {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
   line-height: 2;
   margin-top: 10px;
@@ -173,13 +179,13 @@
   border: 0;
   background: none;
   color: var(--primary);
-  font-size: 11px;
+  font-size: 12px;
 }
 .sourceFooter {
   margin-top: auto;
   padding: 16px;
   border-top: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .chatBody {
@@ -203,9 +209,9 @@
   width: 100px;
   height: 100px;
   border-radius: 30px;
-  background: radial-gradient(circle at 30% 20%, var(--surface), var(--primary-soft));
+  background: var(--soft);
   color: var(--primary);
-  display: grid;
+  display: none;
   place-items: center;
   margin-bottom: 4px;
 }
@@ -230,19 +236,19 @@
   opacity: 0.6;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.2px;
-  color: var(--teal);
+  color: var(--muted);
 }
 .welcome h2 {
-  font-size: 38px;
+  font-size: 28px;
   line-height: 1.4;
-  letter-spacing: -1.4px;
+  letter-spacing: 0;
   font-weight: 750;
 }
 .welcome h2 em {
   font-style: normal;
-  color: var(--primary);
+  color: var(--text);
 }
 .welcome > p {
   font-size: 12px;
@@ -269,7 +275,7 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--bg);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text);
 }
 .promptGrid button:hover {
@@ -310,6 +316,13 @@
 .composer input:disabled {
   opacity: 0.65;
 }
+.composer:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.composer input:focus-visible {
+  outline: none;
+}
 .composer button {
   display: grid;
   place-items: center;
@@ -322,7 +335,7 @@
   border-radius: 12px;
 }
 .composerWrap > p {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
   color: var(--muted);
   margin: 5px 6px 0;
@@ -359,7 +372,7 @@
 }
 .answerBrand small {
   font-weight: 400;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   margin-inline-start: auto;
 }
@@ -373,7 +386,7 @@
   border-radius: 8px;
   min-width: 32px;
   min-height: 32px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .saveNote {
   display: flex;
@@ -382,7 +395,7 @@
   border: 0;
   background: none;
   color: var(--teal);
-  font-size: 10px;
+  font-size: 12px;
   min-height: 44px;
   margin-top: 12px;
 }
@@ -393,7 +406,7 @@
   display: none;
 }
 .studioIntro {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   padding: 16px 18px 0;
 }
@@ -427,10 +440,10 @@
   color: var(--primary);
 }
 .toolGrid strong {
-  font-size: 11px;
+  font-size: 12px;
 }
 .toolGrid small {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .notesHeading {
@@ -444,7 +457,7 @@
   font-size: 12px;
 }
 .notesHeading > span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .noteEmpty {
@@ -455,7 +468,7 @@
   gap: 14px;
   padding: 26px 24px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   line-height: 2;
 }
 .notes {
@@ -473,7 +486,7 @@
   border-radius: 12px;
   background: var(--bg);
   color: var(--text);
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 8px;
 }
 .notes > button > span {
@@ -497,7 +510,7 @@
   color: var(--primary);
   padding: 5px 10px;
   border-radius: 8px;
-  font-size: 11px;
+  font-size: 12px;
   margin-bottom: 20px;
 }
 .excerpt {
@@ -559,7 +572,7 @@
   color: var(--primary);
 }
 .flashcards > button:first-of-type span {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
 }
 .flashcards > button:last-of-type {
@@ -644,12 +657,11 @@
 @media (max-width: 1023px) {
   .tabs {
     display: flex;
-    gap: 8px;
+    gap: 0;
     flex-shrink: 0;
     margin: 12px 16px;
-    padding: 5px;
-    border: 1px solid var(--border);
-    border-radius: 14px;
+    padding: 0;
+    border-bottom: 1px solid var(--border);
     background: var(--surface);
   }
   .tabs > button {
@@ -661,14 +673,14 @@
     min-height: 44px;
     padding: 8px;
     border: 0;
-    border-radius: 10px;
+    border-radius: 0;
     background: transparent;
     color: var(--muted);
     font-size: 12px;
   }
   .tabs > button[aria-selected='true'] {
-    background: var(--primary-soft);
-    color: var(--primary);
+    border-bottom: 2px solid var(--text);
+    color: var(--text);
     font-weight: 700;
   }
   .workbench {
@@ -678,6 +690,7 @@
   }
   .workbench > section {
     width: 100%;
+    border-inline-end: 0;
     display: none;
   }
   .workbench > .paneActive {
@@ -691,7 +704,7 @@
     padding: 24px;
   }
   .welcome h2 {
-    font-size: 32px;
+    font-size: 26px;
   }
   .orb {
     width: 76px;
@@ -705,7 +718,7 @@
     font-size: 13px;
   }
   .sourceList small {
-    font-size: 11px;
+    font-size: 12px;
   }
   .toolGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -716,7 +729,7 @@
     font-size: 13px;
   }
   .toolGrid small {
-    font-size: 11px;
+    font-size: 12px;
   }
   .studioIntro {
     font-size: 12px;
@@ -769,22 +782,22 @@
     gap: 12px;
   }
   .welcome h2 {
-    font-size: 30px;
+    font-size: 24px;
   }
   .welcome > p {
-    font-size: 11px;
+    font-size: 12px;
   }
   .welcome .orb {
     margin-top: 8px;
   }
   .promptGrid button {
-    font-size: 11px;
+    font-size: 12px;
   }
   .composerWrap {
     padding: 10px;
   }
   .composerWrap > p {
-    font-size: 11px;
+    font-size: 12px;
   }
   .composer input {
     min-height: 44px;
@@ -808,14 +821,14 @@
     font-size: 16px;
   }
   .saveNote {
-    font-size: 11px;
+    font-size: 12px;
   }
   .paneHeader h2 {
     font-size: 13px;
   }
 } /* Match shared reference geometry; disabled/live/demo behavior stays explicit. */
 .workbench > section {
-  border-radius: 12px;
+  border-radius: 0;
 }
 .toolGrid button {
   border-radius: 8px;
@@ -827,7 +840,7 @@
   font-size: 12px;
 }
 .composer {
-  border-radius: 12px;
+  border-radius: 24px;
   box-shadow: none;
 }
 .composer button {

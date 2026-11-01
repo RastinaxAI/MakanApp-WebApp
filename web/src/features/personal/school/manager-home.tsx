@@ -43,7 +43,6 @@ export function ManagerHome() {
         }
       />
 
-      <OfficialSpaces />
       <section className={s.stack} aria-label="کلاس‌های آموزشگاه">
         <header className={s.sectionHeading}>
           <h2>کلاس‌های آموزشگاه</h2>
@@ -141,6 +140,7 @@ export function ManagerHome() {
         </Card>
       )}
       <p className={s.updated}>اطلاعات آموزشگاه: {date(d.dataAsOfUtc, true)}</p>
+      <OfficialSpaces />
     </div>
   );
 }

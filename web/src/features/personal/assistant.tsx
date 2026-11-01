@@ -15,7 +15,7 @@ import {
   MessageCircle,
   Network,
   Plus,
-  Sparkles,
+  Bot,
   StickyNote,
 } from 'lucide-react';
 import { useRef, useState, type ReactNode } from 'react';
@@ -89,7 +89,7 @@ export function MakanAssistant() {
       show(
         title,
         <div className={s.activation}>
-          <Sparkles size={32} />
+          <Bot size={32} />
           <h3>استودیوی شما اینجا شکل می‌گیرد</h3>
           <p>
             ساخت خروجی واقعی پس از فعال‌شدن سرویس دستیار و مشخص‌شدن منابع و اعتبار مصرفی در دسترس
@@ -163,7 +163,7 @@ export function MakanAssistant() {
         {[
           { id: 'sources', title: 'منابع', icon: BookOpen },
           { id: 'chat', title: 'گفتگو', icon: MessageCircle },
-          { id: 'studio', title: 'استودیو', icon: Sparkles },
+          { id: 'studio', title: 'استودیو', icon: Bot },
         ].map((item) => (
           <button
             key={item.id}
@@ -317,7 +317,7 @@ export function MakanAssistant() {
             {!conversation.length || !demo ? (
               <div className={s.welcome}>
                 <div className={s.orb}>
-                  <Sparkles size={42} />
+                  <Bot size={42} />
                   <i />
                   <i />
                 </div>
@@ -355,7 +355,7 @@ export function MakanAssistant() {
                     <p className={s.question}>{item.question}</p>
                     <article className={s.answer} data-assistant-response>
                       <span className={s.answerBrand}>
-                        <Sparkles size={18} />
+                        <Bot size={18} />
                         ماکان <small>پاسخ نمایشی</small>
                       </span>
                       <p>
@@ -438,7 +438,7 @@ export function MakanAssistant() {
         >
           <div className={s.paneHeader}>
             <h2>
-              <Sparkles size={18} />
+              <Bot size={18} />
               استودیو
             </h2>
             <span className={s.studioBadge}>از دانستن، به ساختن</span>

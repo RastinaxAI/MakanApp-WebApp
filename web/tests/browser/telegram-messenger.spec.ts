@@ -7,7 +7,7 @@ for (const theme of ['light', 'dark']) {
     [834, 1194],
     [1440, 1000],
   ]) {
-    test(`Telegram messenger ${theme} ${width}: usable list, chat and menus`, async ({
+    test(`Instagram-style messenger ${theme} ${width}: usable list, chat and menus`, async ({
       page,
       context,
       request,
@@ -51,12 +51,10 @@ for (const theme of ['light', 'dark']) {
         peerBox = await incoming.boundingBox();
       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.
       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(
-        theme === 'light' ? 'rgb(225, 255, 199)' : 'rgb(43, 76, 104)',
+        'rgb(80, 88, 217)',
       );
       const room = page.locator('[data-message-room]');
-      expect(await room.evaluate((el) => getComputedStyle(el).backgroundImage)).toContain(
-        theme === 'light' ? 'classic-wallpaper.png' : 'night-wallpaper.png',
-      );
+      expect(await room.evaluate((el) => getComputedStyle(el).backgroundImage)).toBe('none');
       const send = page.getByRole('button', { name: 'ارسال پیام', exact: true });
       const sendBox = await send.boundingBox();
       expect(sendBox!.y + sendBox!.height).toBeLessThanOrEqual(height);
@@ -125,7 +123,7 @@ test('chat survives live resizing and attachment failure retains both file and c
     await dialog
       .getByRole('button', { name: 'ارسال ۱ پیوست', exact: true })
       .evaluate((el) => getComputedStyle(el).backgroundColor),
-  ).toBe('rgb(0, 122, 255)');
+  ).toBe('rgb(80, 88, 217)');
   await request.post(fixture + '/__test__/fault', {
     data: { path: '/api/v1/files', method: 'POST', status: 503 },
   });

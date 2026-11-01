@@ -8,6 +8,7 @@
 }
 :root {
   color-scheme: light;
+  --focus-ring: var(--primary);
 }
 :root[data-theme='dark'] {
   color-scheme: dark;
@@ -66,7 +67,7 @@ button:disabled {
   opacity: 0.5;
 }
 :focus-visible {
-  outline: 3px solid #4b83f5;
+  outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
 }
 h1,

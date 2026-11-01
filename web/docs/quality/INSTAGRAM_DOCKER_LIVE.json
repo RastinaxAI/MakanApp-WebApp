@@ -1,0 +1,608 @@
+{
+  "origin": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84:8090",
+  "scope": "User-authorized login, own workspace selection, page reads and logout only; domain mutations blocked",
+  "roles": [
+    {
+      "role": "Student",
+      "theme": "light",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        }
+      ],
+      "pageErrors": [],
+      "serviceErrors": [],
+      "blockedMutations": [],
+      "navigationPassed": true,
+      "logoutStatus": 204
+    },
+    {
+      "role": "Teacher",
+      "theme": "dark",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        }
+      ],
+      "pageErrors": [],
+      "serviceErrors": [],
+      "blockedMutations": [],
+      "navigationPassed": true,
+      "logoutStatus": 204
+    },
+    {
+      "role": "Parent",
+      "theme": "dark",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        }
+      ],
+      "pageErrors": [],
+      "serviceErrors": [],
+      "blockedMutations": [],
+      "navigationPassed": true,
+      "logoutStatus": 204
+    },
+    {
+      "role": "Manager",
+      "theme": "light",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        }
+      ],
+      "pageErrors": [],
+      "serviceErrors": [],
+      "blockedMutations": [],
+      "navigationPassed": true,
+      "logoutStatus": 204
+    },
+    {
+      "role": "User",
+      "theme": "light",
+      "login": true,
+      "checks": [
+        {
+          "width": 390,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 390,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 834,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "education",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "assistant",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "messages",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        },
+        {
+          "width": 1440,
+          "area": "profile",
+          "contextPreserved": true,
+          "noHorizontalOverflow": true,
+          "correctNavigation": true,
+          "loadingFinished": true,
+          "noVisibleServiceError": true
+        }
+      ],
+      "pageErrors": [],
+      "serviceErrors": [],
+      "blockedMutations": [],
+      "navigationPassed": true,
+      "logoutStatus": 204
+    }
+  ],
+  "finishedAtUtc": "2026-11-01T22:18:52.961Z"
+}

@@ -1,50 +1,14 @@
 .theme {
-  --primary: #007aff;
-  --primary-button: #007aff;
-  --primary-hover: #0068da;
-  --danger-button: #e32636;
-  --primary-soft: #e6f2ff;
-  --primary-border: #bedcff;
-  --surface: #fff;
-  --bg: #efeff4;
-  --soft: #e9e9ee;
-  --text: #111;
-  --muted: #737378;
-  --border: #dcdce0;
-  --danger: #e32636;
-  --chat-header: #f7f7f8;
-  --chat-background: #d4e0e8;
-  --chat-wallpaper: url('/messaging/classic-wallpaper.png');
-  --chat-outgoing: #e1ffc7;
-  --chat-outgoing-meta: #527b3e;
-  --chat-selected: #e8f3ff;
-  --chat-badge-text: #fff;
+  --chat-header: var(--surface);
+  --chat-background: var(--bg);
+  --chat-wallpaper: none;
+  --chat-outgoing: var(--primary-button);
+  --chat-outgoing-meta: #eeefff;
+  --chat-selected: var(--soft);
+  --chat-badge-text: var(--on-primary);
   color: var(--text);
   background: var(--bg);
-  color-scheme: light;
-}
-:global(:root[data-theme='dark']) .theme {
-  --primary: #72b9f2;
-  --primary-button: #187ab6;
-  --primary-hover: #1d7bbb;
-  --danger-button: #d83b32;
-  --primary-soft: #2c4358;
-  --primary-border: #3e5d76;
-  --surface: #1d2935;
-  --bg: #17232e;
-  --soft: #253544;
-  --text: #f3f5f7;
-  --muted: #9aabba;
-  --border: #304150;
-  --danger: #ff6259;
-  --chat-header: #1d2935;
-  --chat-background: #17232e;
-  --chat-wallpaper: url('/messaging/night-wallpaper.png');
-  --chat-outgoing: #2b4c68;
-  --chat-outgoing-meta: #abcce5;
-  --chat-selected: #2a4054;
-  --chat-badge-text: #17232e;
-  color-scheme: dark;
+  color-scheme: inherit;
 }
 .page {
   width: 100%;

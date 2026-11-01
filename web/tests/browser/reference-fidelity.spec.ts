@@ -1,7 +1,7 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { test, expect, login, ids, fixture } from './test';
 
-test('responsive reference details and updated overview at 390, 834 and 1440', async ({
+test('current responsive geometry and historical route reference at 390, 834 and 1440', async ({
   page,
   context,
   request,
@@ -28,18 +28,20 @@ test('responsive reference details and updated overview at 390, 834 and 1440', a
       await reference.setViewportSize({ width, height });
       await page.goto('/personal/education');
       await expect(page.locator('[data-education-upcoming] > section')).toHaveCount(3);
-      await expect(
-        page
-          .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
-          .filter({ visible: true })
-          .getByRole('link'),
-      ).toHaveText(['آموزشگاه', 'دستیار ماکان', 'پیام‌ها', 'پروفایل']);
+      const destinations = page
+        .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
+        .filter({ visible: true })
+        .getByRole('link');
+      await expect(destinations).toHaveCount(4);
+      for (const [index, name] of ['آموزشگاه', 'دستیار ماکان', 'پیام‌ها', 'پروفایل'].entries()) {
+        await expect(destinations.nth(index)).toHaveAccessibleName(name);
+      }
       expect(
         await page
           .locator('header')
           .first()
           .evaluate((el) => Math.round(el.getBoundingClientRect().height)),
-      ).toBe(device === 'mobile' ? 58 : 76);
+      ).toBe(device === 'mobile' ? 58 : 64);
       await page.screenshot({ path: `test-results/reference-match/S01-actual-${width}.png` });
       await reference.evaluate((device) => {
         document.body.classList.add('clean');

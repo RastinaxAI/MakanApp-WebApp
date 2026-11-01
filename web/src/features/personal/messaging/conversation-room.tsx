@@ -2,7 +2,7 @@
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
+import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
 import { ApiError } from '@/lib/api/errors';
 import { contextSignature } from '@/lib/client-surface';
@@ -530,10 +530,26 @@ function ResolvedConversationRoom({
               {!messages.length &&
                 !localMessages.acknowledged.length &&
                 !localMessages.pending.length && (
-                  <EmptyState
-                    title="هنوز پیامی ثبت نشده است"
-                    description="اگر ارسال با حساب فعلی مجاز باشد، گفتگو را از پایین صفحه شروع کنید."
-                  />
+                  <section className={s.startConversation} aria-label="شروع گفتگو">
+                    <ProfileAvatar
+                      name={name}
+                      photo={
+                        conversation.type === 'Direct'
+                          ? summary.otherParticipant?.profilePhoto
+                          : undefined
+                      }
+                      className={s.avatar}
+                    />
+                    <h2>{name}</h2>
+                    <p>
+                      {conversation.type === 'Saved'
+                        ? 'پیام‌ها و فایل‌های خود را اینجا نگه دارید.'
+                        : 'پیام‌ها و فایل‌های این گفتگو اینجا نمایش داده می‌شوند.'}
+                    </p>
+                    <Button asChild variant="ghost">
+                      <Link href={`/personal/messages/${id}/info`}>مشاهدهٔ اطلاعات</Link>
+                    </Button>
+                  </section>
                 )}
               {messages.map((message, index) => {
                 const own = message.senderUserId === session.user.id;

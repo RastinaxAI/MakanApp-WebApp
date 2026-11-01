@@ -68,8 +68,9 @@
   height: 46px;
   border-radius: 50%;
   font-size: 19px;
-  background: linear-gradient(140deg, #65c8ff, #258ce0);
-  color: #fff;
+  background: var(--soft);
+  color: var(--text);
+  border: 1px solid var(--border);
   flex-shrink: 0;
 }
 .contact > div {
@@ -171,8 +172,9 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #64c5f6, #268cdd);
-  color: #fff;
+  background: var(--soft);
+  color: var(--text);
+  border: 1px solid var(--border);
   flex-shrink: 0;
 }
 .createAvatar {

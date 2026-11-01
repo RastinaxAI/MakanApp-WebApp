@@ -68,11 +68,11 @@ test('weekly agenda groups real session DTOs, keeps navigation clear and handles
   await mkdir('test-results/preferences-weekly', { recursive: true });
   await page.goto(`/personal/education/classes/${ids.class}?tab=sessions`);
   const nav = page.getByRole('navigation', { name: 'جابه‌جایی هفته', exact: true }),
-    range = nav.getByRole('heading', { level: 2 });
-  await expect(nav.getByRole('button')).toHaveCount(2);
-  await expect(nav.locator('time')).toHaveCount(2);
-  const first = await nav.locator('time').first().getAttribute('dateTime'),
-    last = await nav.locator('time').last().getAttribute('dateTime');
+    range = nav.locator('[aria-live]');
+  await expect(nav.getByRole('button')).toHaveCount(3);
+  await expect(nav.getByRole('button', { name: 'هفتهٔ جاری', exact: true })).toBeDisabled();
+  const first = await nav.getAttribute('data-week-start'),
+    last = await nav.getAttribute('data-week-end');
   expect(new Date(first + 'T12:00:00Z').getUTCDay()).toBe(6);
   expect(new Date(last + 'T12:00:00Z').getUTCDay()).toBe(5);
   const when = (days: number) =>
@@ -161,7 +161,7 @@ test('weekly agenda groups real session DTOs, keeps navigation clear and handles
     }
     const overlap = await nav.evaluate((node) => {
       const buttons = node.querySelectorAll('button'),
-        title = node.querySelector('h2')!.getBoundingClientRect();
+        title = node.querySelector('[aria-live]')!.getBoundingClientRect();
       return [...buttons].some((button) => {
         const r = button.getBoundingClientRect();
         return (

@@ -65,9 +65,17 @@ test('V2 navigation stays labeled and clear at mobile, tablet, intermediate and 
       for (const link of await nav.getByRole('link').all()) {
         const r = await link.boundingBox();
         expect(r!.height).toBeGreaterThanOrEqual(44);
-        expect(await link.locator('svg').evaluate((el) => el.getBoundingClientRect().width)).toBe(
-          22,
-        );
+        if ((await link.getAttribute('aria-label')) === 'پروفایل') {
+          expect(
+            await link
+              .locator('[class*="navAvatar"]')
+              .evaluate((el) => el.getBoundingClientRect().width),
+          ).toBe(26);
+        } else {
+          expect(await link.locator('svg').evaluate((el) => el.getBoundingClientRect().width)).toBe(
+            22,
+          );
+        }
       }
     } else {
       const sidebar = page.getByRole('complementary').filter({ has: nav });

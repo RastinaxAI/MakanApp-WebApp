@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-02",
+  "scope": "Four-section Instagram-inspired Makan web redesign; no new backend operations",
+  "newBrowserCases": 15,
+  "dependenciesAdded": 0,
+  "externalCiExecuted": false,
+  "remoteDeploymentExecuted": false,
+  "runtimeInputSha256": "f184cba87016c301b963cd0848633c8f572c18e0f2ab8bf64aeeee2c8e562108",
+  "commands": [
+    {
+      "command": "npm test -- --reporter=dot",
+      "exitCode": 0,
+      "files": 51,
+      "passed": 281,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm run build -- --webpack",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "modules": 201
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run generated:check",
+      "exitCode": 0,
+      "clientOperations": 221,
+      "schemas": 413,
+      "historicalReferenceScreens": 130
+    },
+    {
+      "command": "npm run test:browser",
+      "exitCode": 0,
+      "stats": {
+        "startTime": "2026-11-01T21:59:32.348Z",
+        "duration": 702592.2000000001,
+        "expected": 155,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "accountTypes": [
+    "Personal",
+    "Student",
+    "Teacher",
+    "Parent",
+    "Manager"
+  ],
+  "newShellWidths": [
+    320,
+    390,
+    834,
+    1024,
+    1440
+  ],
+  "themes": [
+    "light",
+    "dark"
+  ],
+  "coverage": [
+    "All four destinations preserve active context across navigation and resizing",
+    "44px minimum navigation targets; no horizontal document overflow",
+    "Theme is established while application JavaScript is held before hydration",
+    "Temporary inbox failure preserves known data; access denial hides it",
+    "Reduced motion uses zero navigation transition",
+    "Keyboard focus returns after menus/dialogs and shares brand accent",
+    "Assistant composer has a single surrounding focus ring",
+    "Existing isolated two-account message/media flows, manager classes, guardian consent, drafts and assessment review all remain covered"
+  ],
+  "visualEvidence": "output/review/instagram-experience",
+  "limits": [
+    "Browser tests use an isolated local fixture and never mutate the external test server.",
+    "Current backend policies, real AI availability and server security are not proven by fixture success.",
+    "No native Expo app, iOS/Android simulator, real soft keyboard, physical-device gestures or measured 60fps release pass.",
+    "Appllama MCP and attachment reference files were unavailable. No current Instagram pixel-by-pixel parity is claimed."
+  ],
+  "initialResults": "docs/quality/INSTAGRAM_INITIAL_CHECKS.json"
+}

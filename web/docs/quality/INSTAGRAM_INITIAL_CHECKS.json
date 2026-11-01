@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-02",
+  "initialBrowserStats": {
+    "startTime": "2026-11-01T21:36:34.040Z",
+    "duration": 103148.00700000001,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "initialBrowserFinding": "Reduced-motion navigation inherited the global 0.01ms transition; added a scoped transition:none rule and kept the exact zero-duration assertion.",
+  "initialBuildFindings": [
+    "Renamed assistant icon fallback still referenced Sparkles; corrected to Bot.",
+    "Playwright reducedMotion belongs in contextOptions; corrected."
+  ],
+  "runnerConfigurationFinding": "Worker-scoped video moved from describe to its own test file.",
+  "visualFindings": [
+    "Education cards shrank to intrinsic width with auto margins; explicit width:100% added plus mobile width regression.",
+    "Removed the assistant pane divider on mobile/tablet."
+  ],
+  "limits": [
+    "Initial failures are retained; final results are reported separately."
+  ],
+  "educationWidthRegression": {
+    "command": "npm run test:browser -- instagram-experience.spec.ts -g Student.light",
+    "stats": {
+      "startTime": "2026-11-01T21:38:50.196Z",
+      "duration": 6602.7,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "expectedMinimumAt320": 272,
+    "actualBeforeFix": 200.21875
+  },
+  "firstFullBrowserRun": {
+    "command": "npm run test:browser",
+    "stats": {
+      "startTime": "2026-11-01T21:43:23.661Z",
+      "duration": 738156.892,
+      "expected": 153,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "findings": [
+      "Weekly navigation already has three controls, but old test expected two. Updated test retains week boundary and failed-read assertions.",
+      "Profile tab now contains an avatar initial, so its raw text includes that initial. Updated test asserts four ordered accessible names."
+    ]
+  },
+  "intentionalDockerCancellations": [
+    {
+      "reason": "Build input preceded final brand focus-ring correction. Only the temporary build process was terminated; running application unchanged.",
+      "exitCode": 143
+    },
+    {
+      "reason": "New contact placeholders and explicit schedule range metadata were added after the build began. Only the temporary build process was terminated; running application unchanged.",
+      "exitCode": 143
+    }
+  ],
+  "intermediateTargetedRun": {
+    "command": "npm run test:browser -- instagram-motion.spec.ts preferences-weekly.spec.ts reference-fidelity.spec.ts",
+    "stats": {
+      "startTime": "2026-11-01T21:58:05.980Z",
+      "duration": 59121.44899999999,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finding": "A second old h2 selector inside the weekly overlap assertion was changed to the same aria-live date range. Geometry and overlap assertions remain."
+  },
+  "liveReportValidationCorrection": "An inspection assertion initially expected logout 200. The BFF route explicitly returns 204; corrected to exact 204 and verified all five accounts. No runtime failure."
+}
