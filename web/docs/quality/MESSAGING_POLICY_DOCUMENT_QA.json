@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-01",
+  "pages": 11,
+  "renderer": "Microsoft Word native PDF export",
+  "packagedRenderer": "attempted; LibreOffice soffice.exe missing, diagnosed before native fallback",
+  "rtl": true,
+  "latinTraceExact": true,
+  "fiveAccountTypes": true,
+  "acceptanceScenarios": 18,
+  "changeRequests": "B01 through B10",
+  "changedPagesAfterCodeLanguageFix": [
+    6
+  ],
+  "outputs": [
+    {
+      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\output\\docx\\MakanApp_Backend_Messaging_Policy_FA_20261101.docx",
+      "bytes": 55159,
+      "sha256": "1837cd3a411b7bb42107f2ac7c3f9178ec5c3be50959f928f9ea19cb307b0ba7"
+    },
+    {
+      "path": "C:\\Users\\OmidrezaBagheriyan\\Desktop\\Makan Application\\web\\output\\pdf\\MakanApp_Backend_Messaging_Policy_FA_20261101.pdf",
+      "bytes": 288549,
+      "sha256": "b4b51c4fb71f8810e96da9801fbad372fbb6f278abc915ea646307067a359468"
+    }
+  ],
+  "visualReview": "passed: all11 pages reviewed; final language fix page6 re-reviewed; final content refinements pages1 and7 re-reviewed; all other bitmaps identical to their reviewed versions",
+  "visualPagesReviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "layoutCorrections": [
+    "removed inherited blue title border",
+    "kept all18 acceptance rows on one page with readable type",
+    "forced English language and font for exact copyable trace"
+  ],
+  "finalContentRefinementChangedPages": [
+    1,
+    7
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Asia/Tehran",
+  "server": "http://94.184.32.84:8090",
+  "openApi": {
+    "status": 200,
+    "paths": 327,
+    "sha256": "1cf63f2ff6829f0963d198dce37ae0f14d23cd38fd6e9cdb029b8edef3e987bb"
+  },
+  "currentTurnScope": "document authoring and public schema read only; no runtime or backend policy changes",
+  "historicalEvidence": [
+    "MESSENGER_MANAGEMENT_LIVE.json",
+    "MESSENGER_MANAGEMENT_LIVE_INITIAL.json",
+    "MESSENGER_ROLE_CONTEXT_READS.json",
+    "API_GAPS G19"
+  ],
+  "decisions": {
+    "ageUses": [
+      "copilot answer personalization",
+      "student plan rules only"
+    ],
+    "ageGateOtherFeatures": false,
+    "personalGroupAndChannelCreation": "all five account types including no educational role",
+    "classOfficialPair": "one group and one channel for each class",
+    "officialAdmins": "active class teachers and authorized managers of that organization"
+  },
+  "openDecisions": [
+    "student plan age threshold and proof rules",
+    "parent audience in class conversation",
+    "invitation expiry policy",
+    "official data retention policy"
+  ],
+  "verification": "new policy has not been executed or live-tested"
+}
