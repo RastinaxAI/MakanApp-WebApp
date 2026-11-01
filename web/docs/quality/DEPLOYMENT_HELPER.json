@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-01",
+  "scope": "Existing Linux server update helper; no deployment to the remote server was performed.",
+  "commands": [
+    {
+      "command": "bash -n setup.sh (inside isolated Linux container)",
+      "status": "passed"
+    },
+    {
+      "command": "python3 web/tests/deployment/test_setup.py",
+      "status": "passed",
+      "tests": 12,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 18.771
+    }
+  ],
+  "isolation": {
+    "testImage": "node:22-bookworm-slim",
+    "network": "none",
+    "filesystem": "read-only with disposable /tmp and /run/lock",
+    "dockerSocketMounted": false,
+    "privateConfigMounted": false,
+    "dockerCommands": "Mocked and recorded; not forwarded to host Docker."
+  },
+  "verified": [
+    "Successful build before replacement and health check before success",
+    "Fixed project name and only web service",
+    "Paths containing spaces and script directory discovery",
+    "Environment bytes remain unchanged",
+    "Build/configuration failures do not replace current service",
+    "Health check failure is not success",
+    "Missing environment or incomplete source stops preflight",
+    "Concurrent update lock stops another build",
+    "Environment change during build blocks replacement",
+    "Non-root caller is rejected",
+    "Help and no arguments do not provision",
+    "Invalid install options fail before provisioning",
+    "Shell file contains no CRLF"
+  ],
+  "limitations": [
+    "Actual initial Nginx/TLS installation was not executed.",
+    "Actual remote-server update and hosted CI were not executed.",
+    "No automatic image rollback on health failure.",
+    "Frontend/runtime source is unchanged; application build and UI suites were not repeated for this script/documentation change."
+  ]
+}

@@ -1,3 +1,65 @@
+# آپدیت نسخهٔ نصب‌شدهٔ ماکان روی سرور
+
+مسیر نصب فعلی `/var/www/makanapp/app` است. برای اعمال تغییرات رابط و برنامه، ابتدا بستهٔ سورس جدید شامل `setup.sh` و پوشهٔ `web/` را روی سرور منتقل کنید. اجرای حالت آپدیت به نصب مجدد سیستم، Nginx یا گواهی نیاز ندارد.
+
+## روش اصلی: انتقال بستهٔ سورس و آپدیت
+
+بستهٔ آمادهٔ پروژه در `web/output/delivery/makan-client-source.zip` است. این بسته تنظیمات محرمانه، نشست‌ها، `node_modules` و خروجی build را ندارد؛ `setup.sh` و راهنمای جدید را هم همراه دارد.
+
+۱. فایل ZIP جدید را روی سرور در `/tmp/makan-client-source.zip` آپلود کنید.
+۲. روی سرور اجرا کنید:
+
+```bash
+cd /var/www/makanapp/app
+sudo unzip -o /tmp/makan-client-source.zip -d .
+sudo bash setup.sh --update
+```
+
+اگر فایل‌های جدید را قبلاً با SFTP یا روش خودتان در مسیر نصب جایگزین کرده‌اید، فقط دستور زیر لازم است:
+
+```bash
+cd /var/www/makanapp/app
+sudo bash setup.sh --update
+```
+
+برای اجرای اسکریپت از مسیری دیگر:
+
+```bash
+sudo bash /var/www/makanapp/app/setup.sh --update --app-dir /var/www/makanapp/app
+```
+
+در نصب مبتنی بر Git، دریافت سورس را پیش از اجرای `--update` با روند معمول مخزن انجام دهید. اسکریپت خودش Git را pull/reset نمی‌کند و تغییرات سورس شما را بازنویسی نمی‌کند.
+
+## رفتار آپدیت
+
+- وجود سورس، فایل `web/.env.docker`، Docker و Compose بررسی می‌شود.
+- فقط image برنامهٔ `web` ساخته می‌شود؛ هنگام build کانتینر قبلی اجرا می‌ماند. شکست build باعث توقف نسخهٔ قبلی نمی‌شود.
+- پس از build، فقط سرویس `web` با نام پروژهٔ ثابت `makan-client` جایگزین می‌شود و اسکریپت تا موفقیت healthcheck منتظر می‌ماند.
+- فایل تنظیمات و `SESSION_SECRET` تغییر نمی‌کنند؛ volume فعلی `makan-client_sessions` حفظ می‌شود. اگر فایل تنظیمات هنگام build تغییر کند، استقرار متوقف می‌شود تا تنظیمات بررسی شوند.
+- بسته‌های سیستم، فایروال، تنظیمات Nginx و گواهی TLS در حالت آپدیت تغییر نمی‌کنند. کانتینرهای پنل مالک و سرویس‌های دیگر هم دست‌نخورده می‌مانند.
+- دو آپدیت هم‌زمان اجرا نمی‌شوند. پیام موفقیت فقط پس از پایان موفق healthcheck نمایش داده می‌شود؛ این بررسی سلامت به معنی آزمون همهٔ عملیات بک‌اند نیست.
+
+بعد از پیام موفقیت، `https://app.makanapp.org/enter` را باز و صفحه را تازه‌سازی کنید. Compose اصلی فعلاً به بک‌اند تست `http://94.184.32.84:8090` وصل است؛ `APP_ORIGIN=https://app.makanapp.org` و کوکی امن در همان فایل Compose تعریف شده‌اند. تنظیم محلی `compose.local.yaml` در این روش بارگذاری نمی‌شود.
+
+## مشاهدهٔ وضعیت و خطا
+
+از ریشهٔ پروژه روی سرور:
+
+```bash
+sudo docker compose --env-file web/.env.docker -p makan-client -f web/compose.yaml ps web
+sudo docker compose --env-file web/.env.docker -p makan-client -f web/compose.yaml logs --tail=100 web
+```
+
+اگر healthcheck ناموفق شد، اسکریپت خطا می‌دهد و پیام موفقیت نشان نمی‌دهد؛ لاگ را بررسی و پس از رفع علت دوباره `--update` را اجرا کنید. بازگشت خودکار به image قبلی در این نسخه پیاده نشده است. برای آپدیت، حذف volume یا تولید دوبارهٔ کلید نشست لازم نیست.
+
+اجرای `bash setup.sh --help` یا اجرای بدون آرگومان، فقط راهنما را نمایش می‌دهد.
+
+---
+
+# نصب اولیهٔ سرور جدید
+
+بخش زیر برای آماده‌سازی یک سرور جدید است. سروری که همین حالا برنامه را اجرا می‌کند از جریان `--update` بالا استفاده می‌کند. حالت `--install` در صورت وجود تنظیمات فعلی Nginx ماکان، از بازنویسی آن‌ها جلوگیری می‌کند.
+
 # راه‌اندازی سرور وب‌اپلیکیشن ماکان
 
 پروژه با Next.js و Docker اجرا می‌شود. Nginx درخواست‌ها را به کانتینر روی `127.0.0.1:8080` هدایت می‌کند و پیش از آماده‌شدن کانتینر صفحه آزمایشی نشان می‌دهد.
@@ -24,7 +86,7 @@ nano setup.sh
 
 ```bash
 chmod +x setup.sh
-sudo ./setup.sh
+sudo bash setup.sh --install
 ```
 
 در صورت موفقیت، صفحه آزمایشی در `https://app.makanapp.org` در دسترس است. Docker و افزونه Docker Compose باید جداگانه روی سرور نصب باشند.
@@ -82,8 +144,7 @@ PYCODE
 سپس برنامه را بسازید و اجرا کنید:
 
 ```bash
-sudo docker compose up -d --build --wait --wait-timeout 180
-sudo docker compose ps
+sudo bash setup.sh --update
 ```
 
 برای بررسی خطاها:
@@ -92,6 +153,6 @@ sudo docker compose ps
 sudo docker compose logs --tail=100 web
 ```
 
-برای به‌روزرسانی، فایل‌های پروژه را در همان مسیر جایگزین و دستور `sudo docker compose up -d --build --wait --wait-timeout 180` را دوباره اجرا کنید. فایل تنظیمات و volume نشست Docker را حفظ کنید.
+برای به‌روزرسانی‌های بعدی از دستور `sudo bash setup.sh --update` مطابق ابتدای این راهنما استفاده کنید. فایل تنظیمات و volume نشست Docker حفظ می‌شوند.
 
 پس از به‌روزرسانی، صفحه ورود را با نشانی `https://app.makanapp.org/enter` باز کنید. استفاده از HTTP، IP سرور یا localhost با تنظیمات امن دامنه اصلی سازگار نیست. کنترل تطابق مبدأ درخواست برای حفاظت از ورود و عملیات حساب فعال است.

@@ -1,3 +1,11 @@
+# آپدیت سرور نصب‌شده
+
+سورس جدید را در `/var/www/makanapp/app` جایگزین و `sudo bash setup.sh --update` را از ریشه اجرا کنید. حالت آپدیت فایل محیط، حجم نشست، Nginx و TLS را حفظ می‌کند. بستهٔ سورس شامل `setup.sh` است. مراحل انتقال ZIP و عیب‌یابی در [راهنمای سرور](../readme.md) قرار دارند.
+
+بررسی مستقل اسکریپت از ریشه: `python3 web/tests/deployment/test_setup.py`؛ Docker و image موجود `node:22-bookworm-slim` لازم‌اند.۱۲تست داخل کانتینر لینوکس ایزوله با Docker/سرویس‌های شبیه‌سازی‌شده اجرا می‌شوند؛ شبکه، Docker socket، تنظیمات محرمانه و سرویس واقعی در اختیار تست نیستند. workflow مستقل deployment-helper این بررسی و `bash -n setup.sh` را در CI تعریف می‌کند؛ اجرای CI میزبانی‌شده جدا از نتیجهٔ محلی است.
+
+---
+
 # کلاینت پنج‌نقشی ماکان
 
 راهنمای راه‌اندازی جاری در [README ریشه](../readme.md) است. برای استفاده‌کنندهٔ پنل، [راهنمای تصویری PDF](output/pdf/MakanApp_Panel_User_Guide_FA.pdf) و [نسخهٔ مرورگر](docs/user-guide/index.html) ساخته شده‌اند. [روش بازتولید](docs/user-guide/BUILD.md) از سورس واحد، تصاویر نمونه و فونت برند استفاده می‌کند.

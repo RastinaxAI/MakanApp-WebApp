@@ -43,8 +43,9 @@ with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as archive:
         archive.writestr(name, data)
         manifest.append({'path': name, 'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)})
     # The root contains only launchers; include them so the documented root commands work.
-    for name in ['.github/workflows/makan-client-quality.yml', 'compose.yaml',
-                 'package.json', 'readme.md', 'AGENTS.md', '.env.example',
+    for name in ['.github/workflows/makan-client-quality.yml',
+                 '.github/workflows/makan-deployment-helper.yml', 'compose.yaml',
+                 'package.json', 'README.md', 'readme.md', 'setup.sh', 'AGENTS.md', '.env.example',
                  '.gitignore', '.gitattributes']:
         launcher = root.parent / name
         if not launcher.is_file(): continue

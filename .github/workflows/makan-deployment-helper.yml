@@ -1,0 +1,17 @@
+name: Makan server update helper
+on:
+  push:
+    paths: ['setup.sh', '.gitattributes', 'readme.md', 'README.md', 'web/tests/deployment/**', '.github/workflows/makan-deployment-helper.yml']
+  pull_request:
+    paths: ['setup.sh', '.gitattributes', 'readme.md', 'README.md', 'web/tests/deployment/**', '.github/workflows/makan-deployment-helper.yml']
+permissions:
+  contents: read
+jobs:
+  update-helper:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash -n setup.sh
+      - run: docker pull node:22-bookworm-slim
+      - run: python3 web/tests/deployment/test_setup.py
