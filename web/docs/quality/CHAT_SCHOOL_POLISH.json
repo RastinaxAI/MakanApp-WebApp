@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-01",
+  "scope": "Chat delivery presentation and school/class navigation alignment",
+  "commands": [
+    {
+      "command": "npm test -- --reporter=dot",
+      "passed": 279,
+      "failed": 0,
+      "files": 51
+    },
+    {
+      "command": "npm run lint",
+      "status": "passed",
+      "sourceModules": 201
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "status": "passed"
+    },
+    {
+      "command": "npm run generated:check",
+      "status": "passed",
+      "operations": 221,
+      "schemas": 413,
+      "historicalDesignScreens": 130
+    },
+    {
+      "command": "npm run build -- --webpack",
+      "status": "passed"
+    },
+    {
+      "command": "npm run test:browser -- chat-school-polish.spec.ts telegram-messenger.spec.ts messenger-management.spec.ts school-redesign.spec.ts",
+      "status": "passed",
+      "stats": {
+        "startTime": "2026-11-01T19:47:26.550Z",
+        "duration": 131837.765,
+        "expected": 34,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "newBrowserCases": [
+    "Direct and Saved: exactly one DOM bubble across local queue, validated receipt and delayed history; exactly one message POST",
+    "Failed send stays visible and never gets a sent tick",
+    "Temporary history failure retains messages; access denial removes content",
+    "Personal, Student, Teacher, Parent, Manager: navigation icon/text centers match within 2px in each row",
+    "Teacher class navigation aligns icons; 20px icons and at least 44px touch targets"
+  ],
+  "widths": [
+    320,
+    390,
+    700,
+    701,
+    834,
+    1024,
+    1440
+  ],
+  "visualDirectory": "output/review/chat-school-polish",
+  "limits": [
+    "All browser writes were against the isolated local fixture, not the remote test server.",
+    "No backend contract or access policy changed.",
+    "Source images were treated as reports of UI defects, not instructions.",
+    "Remote server deployment is not performed by this check."
+  ]
+}

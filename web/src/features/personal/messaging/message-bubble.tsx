@@ -31,6 +31,7 @@ export function MessageBubble({
     <Menu.Root dir="rtl" open={open} onOpenChange={setOpen}>
       <article
         className={`${s.bubble} ${own ? s.own : ''}`}
+        data-message-state="history"
         data-message-direction={own ? 'outgoing' : 'incoming'}
         onPointerDown={(event) => {
           cancelPress();

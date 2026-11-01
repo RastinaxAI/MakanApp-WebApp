@@ -14,6 +14,7 @@ import {
   Building2,
   Check,
   CheckCheck,
+  Clock,
   Send,
   Settings,
   X,
@@ -24,12 +25,7 @@ import { ProfileAvatar } from '../profile-photo';
 import { usePersonal, usePersonalApi } from '../provider';
 import { useMessagingLive } from './live';
 import { AttachmentPicker, AttachmentSummary, MessageAttachment } from './media';
-import {
-  attachmentMessageKind,
-  attachmentMetadata,
-  type Attachment,
-  type FileAsset,
-} from './media-model';
+import { attachmentMessageKind, attachmentMetadata, type FileAsset } from './media-model';
 import s from './messenger.module.css';
 import {
   canAttachConversation,
@@ -45,6 +41,7 @@ import { OfficialBadge, useOfficialConversationAccess } from './official';
 import { AcademicActivity } from './academic-activity';
 import { ConversationActions } from './conversation-actions';
 import { MessageBubble } from './message-bubble';
+import { visibleLocalMessages, type AcknowledgedMessage } from './message-reconciliation';
 type Summary = components['schemas']['ConversationSummaryResult'];
 type Message = components['schemas']['ConversationMessageResult'];
 
@@ -170,13 +167,7 @@ function ResolvedConversationRoom({
     [error, setError] = useState<unknown>(),
     [readError, setReadError] = useState<unknown>(),
     [atBottom, setAtBottom] = useState(false),
-    [acknowledged, setAcknowledged] = useState<
-      {
-        receipt: components['schemas']['MessageReceiptResult'];
-        text: string;
-        attachments?: Attachment[];
-      }[]
-    >([]),
+    [acknowledged, setAcknowledged] = useState<AcknowledgedMessage[]>([]),
     [now, setNow] = useState(Date.now());
   const bottom = useRef<HTMLDivElement>(null),
     composer = useRef<HTMLTextAreaElement>(null),
@@ -199,6 +190,10 @@ function ResolvedConversationRoom({
   const scopeKey =
     conversation?.scope === 'Personal' ? 'Personal' : contextSignature(session.context);
   const owner = { userId: session.user.id, conversationId: id, scopeKey };
+  const localMessages = useMemo(
+    () => visibleLocalMessages(messages, acknowledged, pending, session.user.id, id),
+    [messages, acknowledged, pending, session.user.id, id],
+  );
   const matchingOrganization =
     !conversation ||
     conversation.scope === 'Personal' ||
@@ -514,10 +509,13 @@ function ResolvedConversationRoom({
         >
           {history.isPending ? (
             <LoadingSkeleton />
-          ) : history.isError ? (
+          ) : history.isError && !history.data ? (
             <ErrorState error={history.error} onRetry={() => void history.refetch()} />
           ) : (
             <>
+              {history.isError && (
+                <ErrorState error={history.error} onRetry={() => void history.refetch()} />
+              )}
               {history.hasNextPage && (
                 <Button
                   className={s.older}
@@ -528,12 +526,14 @@ function ResolvedConversationRoom({
                   {history.isFetchingNextPage ? 'در حال دریافت…' : 'پیام‌های قدیمی‌تر'}
                 </Button>
               )}
-              {!messages.length && !acknowledged.length && !pending.length && (
-                <EmptyState
-                  title="هنوز پیامی ثبت نشده است"
-                  description="اگر ارسال با حساب فعلی مجاز باشد، گفتگو را از پایین صفحه شروع کنید."
-                />
-              )}
+              {!messages.length &&
+                !localMessages.acknowledged.length &&
+                !localMessages.pending.length && (
+                  <EmptyState
+                    title="هنوز پیامی ثبت نشده است"
+                    description="اگر ارسال با حساب فعلی مجاز باشد، گفتگو را از پایین صفحه شروع کنید."
+                  />
+                )}
               {messages.map((message, index) => {
                 const own = message.senderUserId === session.user.id;
                 return (
@@ -619,32 +619,47 @@ function ResolvedConversationRoom({
                               aria-label="خوانده‌شدن مطابق وضعیت مجاز سرور"
                             />
                           ) : (
-                            <Check size={15} aria-label="ارسال در سرور ثبت شده" />
+                            <Check size={15} aria-label="ارسال‌شده" />
                           ))}
                       </div>
                     </MessageBubble>
                   </Fragment>
                 );
               })}
-              {acknowledged.map((item) => (
-                <article key={item.receipt.clientMessageId} className={`${s.bubble} ${s.own}`}>
+              {localMessages.acknowledged.map((item) => (
+                <article
+                  key={item.receipt.clientMessageId}
+                  className={`${s.bubble} ${s.own}`}
+                  data-message-state="confirmed"
+                >
                   <p dir="auto">{item.text}</p>
                   <AttachmentSummary attachments={item.attachments} />
-                  <small className={s.localStatus}>
-                    <Check size={14} />
-                    در سرور ثبت شد · در حال دریافت سابقه
-                  </small>
+                  <div className={s.messageMeta}>
+                    <time title={date(item.receipt.sentAtUtc, true)}>
+                      {shortTime(item.receipt.sentAtUtc)}
+                    </time>
+                    <Check size={15} aria-label="ارسال‌شده" />
+                  </div>
                 </article>
               ))}
-              {pending.map((message) => (
-                <article key={message.id} className={`${s.bubble} ${s.own} ${s.pending}`}>
+              {localMessages.pending.map((message) => (
+                <article
+                  key={message.id}
+                  className={`${s.bubble} ${s.own} ${sending === message.id ? '' : s.pending}`}
+                  data-message-state={sending === message.id ? 'sending' : 'unconfirmed'}
+                >
                   <p dir="auto">{message.command.text}</p>
                   <AttachmentSummary attachments={message.attachments} />
-                  <small className={s.localStatus}>
-                    {sending === message.id
-                      ? 'در حال ارسال…'
-                      : (message.error ?? 'نتیجهٔ ارسال هنوز تأیید نشده است.')}
-                  </small>
+                  {sending === message.id ? (
+                    <div className={s.messageMeta}>
+                      <time>{shortTime(message.createdAt)}</time>
+                      <Clock size={14} aria-label="در حال ارسال" />
+                    </div>
+                  ) : (
+                    <small className={s.localStatus}>
+                      {message.error ?? 'نتیجهٔ ارسال هنوز تأیید نشده است.'}
+                    </small>
+                  )}
                   {sending !== message.id && (
                     <div className={s.pendingActions}>
                       <Button

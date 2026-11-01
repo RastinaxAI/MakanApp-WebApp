@@ -78,6 +78,10 @@ export function fixtureBackend(port = 3457) {
         seedAssignmentDraft(state);
         return send({ seeded: true });
       }
+      if (url.pathname === '/__test__/chat-kind') {
+        state.chatKind = body.kind === 'Saved' ? 'Saved' : 'Direct';
+        return send({ configured: true });
+      }
       if (url.pathname === '/__test__/conversation-details') {
         seedConversationDetails(state, body);
         return send({ seeded: true });

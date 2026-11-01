@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-01",
+  "container": "makan-client-web-1",
+  "image": "sha256:2502887777625f007df0681b3c6e3ce88afaa37044f0075ad35eecd643cefa2c",
+  "health": "healthy",
+  "sessionVolume": [
+    "makan-client_sessions"
+  ],
+  "backend": "http://94.184.32.84:8090",
+  "origin": "http://127.0.0.1:8080",
+  "smoke": {
+    "path": "/enter",
+    "status": 200
+  },
+  "runtimeInputs": {
+    "files": 262,
+    "sha256": "321e8ba44907b802ccc8b769f2abfed787efecf7d2f5cebd2b2879d07fc539c4"
+  },
+  "buildCommand": "docker compose --project-name makan-client --file compose.yaml --progress plain build web",
+  "deploymentCommand": "docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml up -d --no-deps --no-build --wait --wait-timeout 180 web",
+  "buildPassed": true,
+  "deploymentPassed": true,
+  "otherPanels": "Both management containers remained healthy and were not recreated.",
+  "limits": [
+    "Browser regression tests used local fixtures.",
+    "Remote server deployment was not performed."
+  ]
+}

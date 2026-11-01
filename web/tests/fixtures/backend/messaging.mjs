@@ -79,21 +79,24 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
   const summary = () =>
     make('ConversationSummaryResult', {
       conversationId: ids.chat,
-      type: 'Direct',
+      type: state.chatKind ?? 'Direct',
       scope: 'Personal',
       organizationId: null,
-      title: null,
-      otherParticipant: make('SafeMessagingIdentityResult2', {
-        userId: auth.user.id === id(101) ? id(102) : id(101),
-        displayName: state.design
-          ? auth.user.id === id(101)
-            ? 'مریم رضایی'
-            : 'سارا احمدی'
-          : auth.user.id === id(101)
-            ? 'استاد آزمایشی'
-            : 'دانشجوی آزمایشی',
-        username: auth.user.id === id(101) ? 'test.Teacher' : 'test.Student',
-      }),
+      title: state.chatKind === 'Saved' ? 'پیام‌های ذخیره‌شده' : null,
+      otherParticipant:
+        state.chatKind === 'Saved'
+          ? null
+          : make('SafeMessagingIdentityResult2', {
+              userId: auth.user.id === id(101) ? id(102) : id(101),
+              displayName: state.design
+                ? auth.user.id === id(101)
+                  ? 'مریم رضایی'
+                  : 'سارا احمدی'
+                : auth.user.id === id(101)
+                  ? 'استاد آزمایشی'
+                  : 'دانشجوی آزمایشی',
+              username: auth.user.id === id(101) ? 'test.Teacher' : 'test.Student',
+            }),
       lastMessagePreview: state.messages.at(-1)?.text ?? null,
       lastMessageAtUtc: state.messages.at(-1)?.createdAtUtc ?? null,
       lastMessageSequence: state.messages.length,
