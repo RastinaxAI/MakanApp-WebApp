@@ -323,8 +323,13 @@ function ContextMessenger({ conversationId }: { conversationId?: string }) {
             <div className={s.paging}>
               <Button
                 variant="ghost"
-                disabled={inbox.isFetching}
-                onClick={() => setRequestedPages((inbox.data?.pages.length ?? 1) + 1)}
+                disabled={inbox.isFetchingNextPage}
+                onClick={() => {
+                  // A background refresh must not disable the button between pointer down/up.
+                  // Queue the user's intent and append after that refresh has finished.
+                  setRequestedPages((inbox.data?.pages.length ?? 1) + 1);
+                  if (inbox.isError) void inbox.fetchNextPage({ cancelRefetch: false });
+                }}
               >
                 {inbox.isFetchingNextPage ? 'در حال دریافت…' : 'گفتگوهای بیشتر'}
               </Button>

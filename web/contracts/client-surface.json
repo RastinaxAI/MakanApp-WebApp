@@ -207,5 +207,17 @@
   "PATCH /api/v1/conversations/{conversationId}/info",
   "POST /api/v1/conversations/{conversationId}/members",
   "DELETE /api/v1/conversations/{conversationId}/members/{targetUserId}",
-  "PATCH /api/v1/conversations/{conversationId}/members/{targetUserId}/role"
+  "PATCH /api/v1/conversations/{conversationId}/members/{targetUserId}/role",
+  "PUT /api/v1/conversations/{conversationId}/mute",
+  "DELETE /api/v1/conversations/{conversationId}/mute",
+  "GET /api/v1/conversations/{conversationId}/invite-links",
+  "POST /api/v1/conversations/{conversationId}/invite-links",
+  "POST /api/v1/conversations/{conversationId}/invite-links/{linkId}/revoke",
+  "GET /api/v1/conversations/{conversationId}/topics",
+  "POST /api/v1/conversations/{conversationId}/topics",
+  "PUT /api/v1/conversations/{conversationId}/topics/{topicId}",
+  "POST /api/v1/messaging/invite-links/redeem",
+  "GET /api/v1/conversations/{conversationId}/join-requests",
+  "POST /api/v1/messaging/join-requests/{requestId}/approve",
+  "POST /api/v1/messaging/join-requests/{requestId}/reject"
 ]

@@ -1,0 +1,511 @@
+{
+  "environment": "http://127.0.0.1:8080",
+  "backend": "http://94.184.32.84:8090",
+  "accounts": [
+    {
+      "role": "Student",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 2
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Teacher",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 2
+        },
+        {
+          "scope": "Organization",
+          "count": 1
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "undocumentedAllProbe": {
+        "status": 400
+      },
+      "logoutStatus": 204
+    },
+    {
+      "role": "Parent",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 0
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    },
+    {
+      "role": "Manager",
+      "login": true,
+      "scopes": [
+        {
+          "scope": "Personal",
+          "count": 0
+        },
+        {
+          "scope": "Organization",
+          "count": 0
+        }
+      ],
+      "views": [
+        {
+          "width": 390,
+          "height": 844,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 834,
+          "height": 1194,
+          "overflow": false,
+          "contextRetained": true
+        },
+        {
+          "width": 1440,
+          "height": 1000,
+          "overflow": false,
+          "contextRetained": true
+        }
+      ],
+      "pageErrors": [],
+      "messagingActions": [
+        "ReadExistingConversations",
+        "DiscoverRelatedUsers"
+      ],
+      "nextAction": "VerificationRequired",
+      "logoutStatus": 204
+    }
+  ],
+  "artifacts": [],
+  "checks": [
+    {
+      "name": "existing-group-information-renders-from-live-API",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    {
+      "message": "Read-only review completed; group/channel/message mutations intentionally skipped.",
+      "code": "READ_ONLY_REVIEW"
+    }
+  ],
+  "cleanup": [],
+  "directMessagingSkipped": "Read-only review: message exchange intentionally skipped.",
+  "detailReads": [
+    {
+      "path": "/invite-links?page=1&pageSize=30",
+      "status": 200,
+      "count": 0,
+      "hasMore": false
+    },
+    {
+      "path": "/join-requests?page=1&pageSize=30",
+      "status": 200,
+      "count": 0,
+      "hasMore": false
+    },
+    {
+      "path": "/topics?page=1&pageSize=30",
+      "status": 200,
+      "count": 0,
+      "hasMore": false
+    }
+  ],
+  "detailViews": [
+    {
+      "section": "info",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "info",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "info",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "edit",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "edit",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "edit",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "settings",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "settings",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "settings",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "members",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "members",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "members",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "media",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "media",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "media",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "invites",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "invites",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "invites",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "topics",
+      "theme": "light",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "topics",
+      "theme": "light",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "topics",
+      "theme": "light",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "info",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "info",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "info",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "edit",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "edit",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "edit",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "settings",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "settings",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "settings",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "members",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "members",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "members",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "media",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "media",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "media",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "invites",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "invites",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "invites",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "topics",
+      "theme": "dark",
+      "width": 390,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "topics",
+      "theme": "dark",
+      "width": 834,
+      "overflow": false,
+      "alertCount": 0
+    },
+    {
+      "section": "topics",
+      "theme": "dark",
+      "width": 1440,
+      "overflow": false,
+      "alertCount": 0
+    }
+  ],
+  "skippedDomainChecks": [
+    "create group/channel",
+    "edit information",
+    "member add/remove",
+    "administrator role changes",
+    "two-way group messaging"
+  ]
+}

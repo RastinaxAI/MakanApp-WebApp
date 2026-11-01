@@ -3331,6 +3331,298 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/conversations/{conversationId}/invite-links": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                };
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["InviteLinkPageResult"];
+                        "application/json": components["schemas"]["InviteLinkPageResult"];
+                        "text/json": components["schemas"]["InviteLinkPageResult"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateInviteLinkCommand"];
+                    "text/json": components["schemas"]["CreateInviteLinkCommand"];
+                    "application/*+json": components["schemas"]["CreateInviteLinkCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["CreatedInviteLinkResult"];
+                        "application/json": components["schemas"]["CreatedInviteLinkResult"];
+                        "text/json": components["schemas"]["CreatedInviteLinkResult"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/invite-links/{linkId}/revoke": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                    linkId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RevokeInviteLinkCommand"];
+                    "text/json": components["schemas"]["RevokeInviteLinkCommand"];
+                    "application/*+json": components["schemas"]["RevokeInviteLinkCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["InviteLinkResult"];
+                        "application/json": components["schemas"]["InviteLinkResult"];
+                        "text/json": components["schemas"]["InviteLinkResult"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/messaging/invite-links/redeem": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["RedeemInviteLinkCommand"];
+                    "text/json": components["schemas"]["RedeemInviteLinkCommand"];
+                    "application/*+json": components["schemas"]["RedeemInviteLinkCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["InviteLinkRedemptionResult"];
+                        "application/json": components["schemas"]["InviteLinkRedemptionResult"];
+                        "text/json": components["schemas"]["InviteLinkRedemptionResult"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/join-requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                };
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationJoinRequestPageResult"];
+                        "application/json": components["schemas"]["ConversationJoinRequestPageResult"];
+                        "text/json": components["schemas"]["ConversationJoinRequestPageResult"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/messaging/join-requests/{requestId}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    requestId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CompleteJoinRequestCommand"];
+                    "text/json": components["schemas"]["CompleteJoinRequestCommand"];
+                    "application/*+json": components["schemas"]["CompleteJoinRequestCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationJoinRequestResult2"];
+                        "application/json": components["schemas"]["ConversationJoinRequestResult2"];
+                        "text/json": components["schemas"]["ConversationJoinRequestResult2"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/messaging/join-requests/{requestId}/reject": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    requestId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CompleteJoinRequestCommand"];
+                    "text/json": components["schemas"]["CompleteJoinRequestCommand"];
+                    "application/*+json": components["schemas"]["CompleteJoinRequestCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationJoinRequestResult2"];
+                        "application/json": components["schemas"]["ConversationJoinRequestResult2"];
+                        "text/json": components["schemas"]["ConversationJoinRequestResult2"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/conversations/{conversationId}/read-states": {
         parameters: {
             query?: never;
@@ -4178,6 +4470,191 @@ export interface paths {
                 };
             };
         };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/mute": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["SetConversationMuteCommand"];
+                    "text/json": components["schemas"]["SetConversationMuteCommand"];
+                    "application/*+json": components["schemas"]["SetConversationMuteCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationUserStateResult"];
+                        "application/json": components["schemas"]["ConversationUserStateResult"];
+                        "text/json": components["schemas"]["ConversationUserStateResult"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationUserStateResult"];
+                        "application/json": components["schemas"]["ConversationUserStateResult"];
+                        "text/json": components["schemas"]["ConversationUserStateResult"];
+                    };
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/topics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                };
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationTopicPageResult"];
+                        "application/json": components["schemas"]["ConversationTopicPageResult"];
+                        "text/json": components["schemas"]["ConversationTopicPageResult"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["CreateConversationTopicCommand"];
+                    "text/json": components["schemas"]["CreateConversationTopicCommand"];
+                    "application/*+json": components["schemas"]["CreateConversationTopicCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationTopicResult"];
+                        "application/json": components["schemas"]["ConversationTopicResult"];
+                        "text/json": components["schemas"]["ConversationTopicResult"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/conversations/{conversationId}/topics/{topicId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    conversationId: string;
+                    topicId: string;
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["UpdateConversationTopicCommand"];
+                    "text/json": components["schemas"]["UpdateConversationTopicCommand"];
+                    "application/*+json": components["schemas"]["UpdateConversationTopicCommand"];
+                };
+            };
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "text/plain": components["schemas"]["ConversationTopicResult"];
+                        "application/json": components["schemas"]["ConversationTopicResult"];
+                        "text/json": components["schemas"]["ConversationTopicResult"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -11776,6 +12253,93 @@ export interface components {
             version: string | null;
         };
         GroupMemberCapability: string;
+        InviteLinkPageResult: {
+            items: components["schemas"]["InviteLinkResult"][];
+            hasMore: boolean;
+        };
+        InviteLinkResult: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            conversationId: string;
+            /** Format: uuid */
+            createdByUserId: string;
+            /** Format: date-time */
+            createdAtUtc: string;
+            /** Format: date-time */
+            expiresAtUtc: string;
+            /** Format: int32 */
+            maximumUses: number;
+            /** Format: int32 */
+            usedCount: number;
+            requiresApproval: boolean;
+            /** Format: date-time */
+            revokedAtUtc: string | null;
+            version: string;
+        };
+        CreateInviteLinkCommand: {
+            /** Format: uuid */
+            clientLinkId: string;
+            /** Format: date-time */
+            expiresAtUtc: string;
+            /** Format: int32 */
+            maximumUses: number;
+            requiresApproval: boolean;
+        };
+        CreatedInviteLinkResult: {
+            link: components["schemas"]["InviteLinkResult"];
+            token: string | null;
+            alreadyExisted: boolean;
+        };
+        RevokeInviteLinkCommand: {
+            expectedVersion: string;
+        };
+        RedeemInviteLinkCommand: {
+            token: string;
+        };
+        InviteLinkRedemptionResult: {
+            /** Format: uuid */
+            conversationId: string;
+            alreadyMember: boolean;
+            joinRequest: components["schemas"]["ConversationJoinRequestResult"];
+        };
+        ConversationJoinRequestResult: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            conversationId: string;
+            /** Format: uuid */
+            userId: string;
+            status: components["schemas"]["ConversationJoinRequestStatus"];
+            /** Format: date-time */
+            createdAtUtc: string;
+            /** Format: date-time */
+            expiresAtUtc: string;
+            version: string;
+        } | null;
+        /** @enum {string} */
+        ConversationJoinRequestStatus: "Pending" | "Approved" | "Rejected" | "Cancelled" | "Expired";
+        ConversationJoinRequestPageResult: {
+            items: components["schemas"]["ConversationJoinRequestResult2"][];
+            hasMore: boolean;
+        };
+        ConversationJoinRequestResult2: {
+            /** Format: uuid */
+            id: string;
+            /** Format: uuid */
+            conversationId: string;
+            /** Format: uuid */
+            userId: string;
+            status: components["schemas"]["ConversationJoinRequestStatus"];
+            /** Format: date-time */
+            createdAtUtc: string;
+            /** Format: date-time */
+            expiresAtUtc: string;
+            version: string;
+        };
+        CompleteJoinRequestCommand: {
+            expectedVersion: string;
+        };
         ConversationPeerReadStateResult: {
             /** Format: uuid */
             conversationId: string;
@@ -12181,6 +12745,43 @@ export interface components {
             /** Format: date-time */
             updatedAtUtc: string;
             version: string;
+        };
+        SetConversationMuteCommand: {
+            mode: components["schemas"]["ConversationMuteMode"];
+            /** Format: date-time */
+            mutedUntilUtc: string | null;
+        };
+        ConversationTopicPageResult: {
+            items: components["schemas"]["ConversationTopicResult"][];
+            hasMore: boolean;
+            canManage: boolean;
+        };
+        ConversationTopicResult: {
+            /** Format: uuid */
+            topicId: string;
+            /** Format: uuid */
+            conversationId: string;
+            title: string;
+            /** Format: uuid */
+            createdByUserId: string;
+            status: components["schemas"]["ConversationTopicStatus"];
+            /** Format: date-time */
+            createdAtUtc: string;
+            version: string;
+            /** @default false */
+            alreadyExisted: boolean;
+        };
+        /** @enum {string} */
+        ConversationTopicStatus: "Open" | "Closed";
+        CreateConversationTopicCommand: {
+            /** Format: uuid */
+            clientTopicId: string;
+            title: string;
+        };
+        UpdateConversationTopicCommand: {
+            title: string;
+            status: components["schemas"]["ConversationTopicStatus"];
+            expectedVersion: string;
         };
         CreateCourseCommand: {
             title: string;

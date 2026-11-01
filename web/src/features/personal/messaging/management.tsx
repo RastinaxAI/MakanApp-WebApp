@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { Shield, UserMinus, UserPlus, MoreVertical, Search } from 'lucide-react';
+import { Shield, UserMinus, UserPlus, MoreVertical, Search, Check, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ConfirmAction } from '@/components/ui/confirm-action';
@@ -13,6 +13,7 @@ import { usePersonal, usePersonalApi } from '../provider';
 import c from './conversation-pages.module.css';
 import t from './messaging-theme.module.css';
 import { canManageMembers } from './management-policy';
+import { ProfileAvatar } from '../profile-photo';
 type S = components['schemas'];
 export function ConversationInfoEditor({ value }: { value: S['ManagedConversationResult'] }) {
   const { session, call } = usePersonal(),
@@ -39,8 +40,21 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
     );
   return (
     <section className={c.panel}>
-      <h2>{value.type === 'Channel' ? 'ویرایش کانال' : 'ویرایش گروه'}</h2>
+      <div className={c.editorHeading}>
+        <h2>{value.type === 'Channel' ? 'ویرایش کانال' : 'ویرایش گروه'}</h2>
+        <Button
+          type="submit"
+          form="conversation-info-form"
+          variant="ghost"
+          size="icon"
+          aria-label="ذخیرهٔ اطلاعات"
+          disabled={busy || stale || !dirty || !title.trim()}
+        >
+          <Check size={27} />
+        </Button>
+      </div>
       <form
+        id="conversation-info-form"
         onSubmit={async (ev) => {
           ev.preventDefault();
           if (lock.current || stale || !dirty || !title.trim()) return;
@@ -94,21 +108,39 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
         }}
       >
         <fieldset disabled={busy || stale} className={c.form}>
-          <label>
-            نام {value.type === 'Channel' ? 'کانال' : 'گروه'}
-            <input
-              required
-              value={title}
-              onChange={(ev) => {
-                setTitle(ev.target.value);
-                setSuccess(false);
-              }}
-            />
-          </label>
+          <div className={c.identityEditor}>
+            <ProfileAvatar name={title || value.title} className={c.editorAvatar} />
+            <label>
+              نام {value.type === 'Channel' ? 'کانال' : 'گروه'}
+              <input
+                required
+                value={title}
+                onChange={(ev) => {
+                  setTitle(ev.target.value);
+                  setSuccess(false);
+                }}
+              />
+            </label>
+          </div>
+          <Dialog>
+            <DialogTrigger asChild>
+              <button type="button" className={c.photoAction}>
+                <Camera size={23} />
+                انتخاب تصویر جدید
+              </button>
+            </DialogTrigger>
+            <DialogContent
+              className={`${t.theme} ${t.dialog} ${c.detailDialog}`}
+              title="تصویر گفتگو"
+              description="تغییر تصویر گروه و کانال هنوز در دسترس نیست؛ نام و توضیحات را می‌توانید ویرایش کنید."
+            >
+              <p className={c.note}>تصویر جدیدی ذخیره نمی‌شود.</p>
+            </DialogContent>
+          </Dialog>
           <label>
             توضیحات (اختیاری)
             <textarea
-              rows={4}
+              rows={3}
               value={description}
               onChange={(ev) => {
                 setDescription(ev.target.value);
@@ -116,9 +148,7 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
               }}
             />
           </label>
-          <Button type="submit" disabled={!dirty || !title.trim()}>
-            {busy ? 'در حال ثبت…' : 'ذخیرهٔ اطلاعات'}
-          </Button>
+          {busy && <p role="status">در حال ذخیره…</p>}
         </fieldset>
       </form>
       {stale && (
@@ -181,7 +211,7 @@ export function AddConversationMember({ value }: { value: S['ManagedConversation
         </Button>
       </DialogTrigger>
       <DialogContent
-        className={`${t.theme} ${t.dialog}`}
+        className={`${t.theme} ${t.dialog} ${c.detailDialog}`}
         title="افزودن عضو"
         description="یک مخاطب را به گفتگو اضافه کنید. حریم خصوصی و اجازهٔ عضویت توسط سرویس بررسی می‌شود."
       >
@@ -302,7 +332,7 @@ export function MemberManagement({
         </Button>
       </DialogTrigger>
       <DialogContent
-        className={`${t.theme} ${t.dialog}`}
+        className={`${t.theme} ${t.dialog} ${c.detailDialog}`}
         title={'مدیریت ' + member.user.displayName}
         description="نقش و عضویت فرد را در همین گفتگو مدیریت کنید."
       >

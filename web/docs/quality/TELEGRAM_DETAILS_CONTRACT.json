@@ -1,0 +1,80 @@
+{
+  "checkedAt": "2026-11-01",
+  "backend": "http://94.184.32.84:8090",
+  "livePathCount": 327,
+  "operations": [
+    {
+      "method": "PUT",
+      "path": "/api/v1/conversations/{conversationId}/mute",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/conversations/{conversationId}/mute",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/conversations/{conversationId}/invite-links",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/{conversationId}/invite-links",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/{conversationId}/invite-links/{linkId}/revoke",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/conversations/{conversationId}/topics",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/{conversationId}/topics",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/conversations/{conversationId}/topics/{topicId}",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/messaging/invite-links/redeem",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/conversations/{conversationId}/join-requests",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/messaging/join-requests/{requestId}/approve",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/messaging/join-requests/{requestId}/reject",
+      "inLiveOpenApi": true,
+      "operationMatchesSnapshot": true
+    }
+  ],
+  "scope": "Public contract comparison only; no assertion of runtime authorization or mutation success."
+}

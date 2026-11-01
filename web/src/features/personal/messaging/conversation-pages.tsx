@@ -10,10 +10,17 @@ import {
   Settings2,
   MessageCircle,
   Pencil,
-  ChevronLeft,
   Shield,
   Lock,
   History,
+  Link2,
+  List,
+  Heart,
+  Hand,
+  KeyRound,
+  Camera,
+  MessagesSquare,
+  Video,
   type LucideIcon,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -30,12 +37,22 @@ import { MessageAttachment } from './media';
 import { useMessagingLive } from './live';
 import { OfficialBadge, useOfficialConversationAccess } from './official';
 import c from './conversation-pages.module.css';
+import { ConversationInviteLinks } from './invite-links';
+import { ConversationTopics } from './topics';
 import { canManageMembers } from './management-policy';
 import { MessagingSurface } from './messaging-surface';
 import { ProfileAvatar } from '../profile-photo';
 import { ConversationInfoEditor, AddConversationMember, MemberManagement } from './management';
+import { SettingRow, UnavailableSetting, MuteAction } from './conversation-controls';
 type S = components['schemas'];
-export type ConversationSection = 'info' | 'members' | 'media' | 'settings' | 'edit';
+export type ConversationSection =
+  | 'info'
+  | 'members'
+  | 'media'
+  | 'settings'
+  | 'edit'
+  | 'invites'
+  | 'topics';
 const route = (id: string) => '/personal/messages/' + id;
 export function ConversationPage({ id, section }: { id: string; section: ConversationSection }) {
   const { session, call } = usePersonal();
@@ -76,7 +93,7 @@ function ResolvedConversationPage({
   return (
     <MessagingSurface className={c.page}>
       <ConversationSubscription id={id} />
-      <header className={c.header}>
+      <header className={`${c.header} ${section !== 'info' ? c.compactHeader : ''}`}>
         <ProfileAvatar
           photo={summary.otherParticipant?.profilePhoto}
           name={conversationTitle(summary)}
@@ -88,12 +105,33 @@ function ResolvedConversationPage({
             <OfficialBadge summary={summary} />
           </div>
         </div>
-        <PageBack href={section === 'edit' ? route(id) + '/settings' : route(id)} />
+        <PageBack
+          href={
+            section === 'info'
+              ? route(id)
+              : section === 'edit' || section === 'members' || section === 'media'
+                ? route(id) + '/info'
+                : route(id) + '/edit'
+          }
+        />
       </header>
+      {isManagedConversation(summary.type) && section === 'info' && (
+        <div className={c.quickActions}>
+          <Link href={route(id)}>
+            <MessageCircle size={23} />
+            <span>{summary.type === 'Channel' ? 'مشاهدهٔ کانال' : 'پیام'}</span>
+          </Link>
+          <MuteAction summary={summary} />
+          <Link href={route(id) + '/media'}>
+            <Files size={23} />
+            <span>رسانه‌ها</span>
+          </Link>
+        </div>
+      )}
       <nav className={c.tabs} aria-label="جزئیات گفتگو">
         {tabs.map(([key, title, Icon]) => (
           <Link
-            href={route(id) + '/' + key}
+            href={route(id) + '/' + (key === 'settings' ? 'edit' : key)}
             aria-current={
               section === key || (section === 'edit' && key === 'settings') ? 'page' : undefined
             }
@@ -107,7 +145,7 @@ function ResolvedConversationPage({
       {section === 'media' ? (
         <ConversationMedia id={id} />
       ) : isManagedConversation(summary.type) ? (
-        (section === 'settings' || section === 'edit') && !access.canManage ? (
+        ['settings', 'edit', 'invites', 'topics'].includes(section) && !access.canManage ? (
           <EmptyState title="امکان مدیریت این گفتگو برای شما فعال نیست" />
         ) : (
           <ManagedPage id={id} section={section} />
@@ -153,11 +191,21 @@ function ManagedPage({ id, section }: { id: string; section: ConversationSection
   return section === 'members' ? (
     <ConversationMembers id={id} value={q.data} />
   ) : section === 'edit' ? (
-    <ConversationInfoEditor value={q.data} />
+    <>
+      <ConversationInfoEditor value={q.data} />
+      <ManagementRows value={q.data} />
+    </>
+  ) : section === 'invites' ? (
+    <ConversationInviteLinks value={q.data} />
+  ) : section === 'topics' ? (
+    <ConversationTopics value={q.data} />
   ) : section === 'settings' ? (
     <ConversationSettings value={q.data} />
   ) : (
-    <ManagedInfo value={q.data} />
+    <>
+      <ManagedInfo value={q.data} />
+      <ConversationMedia id={id} />
+    </>
   );
 }
 function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
@@ -167,6 +215,15 @@ function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
   const owner = canManageMembers(value, session.user.id);
   return (
     <section className={c.panel}>
+      {owner && (
+        <Link
+          className={c.heroEdit}
+          href={route(value.conversationId) + '/edit'}
+          aria-label="ویرایش گفتگو"
+        >
+          <Pencil size={23} />
+        </Link>
+      )}
       <h2>{value.type === 'Channel' ? 'اطلاعات کانال' : 'اطلاعات گروه'}</h2>
       <p className={c.body} dir="auto">
         {value.description || 'توضیحی ثبت نشده است.'}
@@ -188,31 +245,48 @@ function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
         </div>
       </dl>
       <div className={c.settingRows}>
+        <SettingRow
+          icon={Users}
+          title={value.type === 'Channel' ? 'مشترکان کانال' : 'اعضای گروه'}
+          href={route(value.conversationId) + '/members'}
+        />
+        <SettingRow
+          icon={Shield}
+          title="اعضا و مدیران"
+          href={route(value.conversationId) + '/members'}
+        />
         {owner && (
-          <Link href={route(value.conversationId) + '/edit'}>
-            <Pencil size={21} />
-            <span>ویرایش اطلاعات</span>
-            <ChevronLeft size={18} />
-          </Link>
-        )}
-        <Link href={route(value.conversationId) + '/members'}>
-          <Users size={21} />
-          <span>اعضای {value.type === 'Channel' ? 'کانال' : 'گروه'}</span>
-          <ChevronLeft size={18} />
-        </Link>
-        <Link href={route(value.conversationId) + '/media'}>
-          <Files size={21} />
-          <span>عکس، ویدئو و فایل</span>
-          <ChevronLeft size={18} />
-        </Link>
-        {owner && (
-          <Link href={route(value.conversationId) + '/settings'}>
-            <Shield size={21} />
-            <span>مدیریت گفتگو</span>
-            <ChevronLeft size={18} />
-          </Link>
+          <SettingRow
+            icon={Settings2}
+            title={value.type === 'Channel' ? 'تنظیمات کانال' : 'تنظیمات گروه'}
+            href={route(value.conversationId) + '/edit'}
+          />
         )}
       </div>
+      {value.type === 'Group' && (
+        <div className={c.rosterPreview}>
+          {owner && <AddConversationMember value={value} />}
+          {value.participants
+            .filter((m) => m.status === 'Active')
+            .slice(0, 4)
+            .map((m) => (
+              <div className={c.rosterPerson} key={m.participantId}>
+                <ProfileAvatar
+                  photo={m.user.profilePhoto}
+                  name={m.user.displayName}
+                  className={c.avatar}
+                />
+                <div>
+                  <strong dir="auto">{m.user.displayName}</strong>
+                  <small>{m.user.username ? '@' + m.user.username : 'عضو گفتگو'}</small>
+                </div>
+                {m.role !== 'Member' && (
+                  <span className={c.roleBadge}>{conversationRoleLabels[m.role]}</span>
+                )}
+              </div>
+            ))}
+        </div>
+      )}
       {value.managementPolicy === 'SystemManagedAcademic' ? (
         <p className={c.note}>عضویت و مدیریت این فضای رسمی تابع دسترسی آموزشی معتبر است.</p>
       ) : (
@@ -236,6 +310,71 @@ function ManagedInfo({ value }: { value: S['ManagedConversationResult'] }) {
           />
         </div>
       )}
+    </section>
+  );
+}
+function ManagementRows({ value }: { value: S['ManagedConversationResult'] }) {
+  const { session } = usePersonal();
+  if (!canManageMembers(value, session.user.id)) return null;
+  const base = route(value.conversationId),
+    channel = value.type === 'Channel';
+  return (
+    <section className={c.managementCards} aria-label="گزینه‌های مدیریت گفتگو">
+      <div className={c.rowCard}>
+        <SettingRow
+          icon={channel ? MessagesSquare : Users}
+          title={channel ? 'نوع کانال' : 'نوع گروه'}
+          value={value.visibility === 'Public' ? 'عمومی' : 'خصوصی'}
+          href={base + '/settings'}
+        />
+        {!channel && (
+          <SettingRow
+            icon={History}
+            title="تاریخچهٔ گفتگو"
+            value={value.groupHistoryPolicy === 'FromJoin' ? 'از زمان عضویت' : 'کامل'}
+            href={base + '/settings'}
+          />
+        )}
+        {!channel && <SettingRow icon={List} title="موضوعات" href={base + '/topics'} />}
+        {channel && (
+          <UnavailableSetting
+            icon={MessageCircle}
+            title="گروه گفتگو"
+            description="اتصال یک گروه گفتگو به این کانال هنوز در دسترس نیست."
+          />
+        )}
+      </div>
+      <div className={c.rowCard}>
+        <SettingRow icon={Link2} title="لینک‌های دعوت" href={base + '/invites'} />
+        <SettingRow icon={Shield} title="اعضا و مدیران" href={base + '/members'} />
+        <UnavailableSetting
+          icon={KeyRound}
+          title="مجوزهای اعضا"
+          description="تنظیم جزئی مجوزهای ارسال و مدیریت هنوز در این نسخه در دسترس نیست. دسترسی فعلی اعضا حفظ می‌شود."
+        />
+      </div>
+      <div className={c.rowCard}>
+        <UnavailableSetting
+          icon={Heart}
+          title="واکنش‌های مجاز"
+          description="انتخاب واکنش‌های مجاز برای کل گفتگو هنوز در دسترس نیست. واکنش به پیام با این تنظیم متفاوت است."
+        />
+        <UnavailableSetting
+          icon={Hand}
+          title="پیام خوشامد"
+          description="تنظیم پیام خودکار برای اعضای جدید هنوز در دسترس نیست."
+        />
+        <UnavailableSetting
+          icon={Camera}
+          title="تصویر گفتگو"
+          description="تغییر تصویر گروه و کانال هنوز در دسترس نیست."
+        />
+        <UnavailableSetting
+          icon={Video}
+          title={channel ? 'پخش زنده' : 'گفتگوی تصویری'}
+          description="تماس و پخش زنده هنوز در این نسخه در دسترس نیست."
+        />
+      </div>
     </section>
   );
 }
@@ -422,18 +561,6 @@ function ConversationSettings({ value }: { value: S['ManagedConversationResult']
   return (
     <section className={c.panel}>
       <h2>مدیریت {value.type === 'Channel' ? 'کانال' : 'گروه'}</h2>
-      <div className={c.settingRows}>
-        <Link href={route(value.conversationId) + '/edit'}>
-          <Pencil size={21} />
-          <span>ویرایش نام و توضیحات</span>
-          <ChevronLeft size={18} />
-        </Link>
-        <Link href={route(value.conversationId) + '/members'}>
-          <Shield size={21} />
-          <span>اعضا و مدیران</span>
-          <ChevronLeft size={18} />
-        </Link>
-      </div>
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();
@@ -455,6 +582,8 @@ function ConversationSettings({ value }: { value: S['ManagedConversationResult']
                 }),
               },
             );
+            if (updated.conversationId !== value.conversationId)
+              throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
             const key = [
               'personal',
               session.user.id,
@@ -480,28 +609,48 @@ function ConversationSettings({ value }: { value: S['ManagedConversationResult']
         }}
       >
         <fieldset disabled={busy || stale} className={c.form}>
-          <div>
-            <label htmlFor={visibilityId}>نمایان‌بودن</label>
-            <select
-              id={visibilityId}
-              value={visibility}
-              onChange={(ev) => setVisibility(ev.target.value as S['ConversationVisibility'])}
-            >
-              <option value="Private">خصوصی</option>
-              <option value="Public">عمومی</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor={historyId}>تاریخچه برای عضو جدید</label>
-            <select
-              id={historyId}
-              value={history}
-              onChange={(ev) => setHistory(ev.target.value as S['GroupHistoryPolicy'])}
-            >
-              <option value="FromJoin">از زمان عضویت</option>
-              <option value="FullHistory">تاریخچهٔ کامل</option>
-            </select>
-          </div>
+          <fieldset className={c.choiceCard} aria-labelledby={visibilityId}>
+            <legend id={visibilityId}>نمایان‌بودن</legend>
+            {(['Private', 'Public'] as const).map((option) => (
+              <label className={c.radioChoice} key={option}>
+                <input
+                  type="radio"
+                  name="visibility"
+                  checked={visibility === option}
+                  onChange={() => setVisibility(option)}
+                />
+                <span>
+                  <strong>{option === 'Private' ? 'خصوصی' : 'عمومی'}</strong>
+                  <small>
+                    {option === 'Private'
+                      ? 'عضویت با دعوت یا لینک معتبر انجام می‌شود.'
+                      : 'این گفتگو طبق مجوزهای سرویس قابل پیدا کردن و پیوستن است.'}
+                  </small>
+                </span>
+              </label>
+            ))}
+          </fieldset>
+          <fieldset className={c.choiceCard} aria-labelledby={historyId}>
+            <legend id={historyId}>تاریخچه برای عضو جدید</legend>
+            {(['FromJoin', 'FullHistory'] as const).map((option) => (
+              <label className={c.radioChoice} key={option}>
+                <input
+                  type="radio"
+                  name="history"
+                  checked={history === option}
+                  onChange={() => setHistory(option)}
+                />
+                <span>
+                  <strong>{option === 'FromJoin' ? 'از زمان عضویت' : 'تاریخچهٔ کامل'}</strong>
+                  <small>
+                    {option === 'FromJoin'
+                      ? 'عضو جدید پیام‌های پس از پیوستن را می‌بیند.'
+                      : 'پیام‌های قبلی نیز مطابق دسترسی سرویس نمایش داده می‌شوند.'}
+                  </small>
+                </span>
+              </label>
+            ))}
+          </fieldset>
           <div className={c.actions}>
             <Button disabled={!dirty} type="submit">
               {busy ? 'در حال ثبت…' : 'ثبت تنظیمات گفتگو'}

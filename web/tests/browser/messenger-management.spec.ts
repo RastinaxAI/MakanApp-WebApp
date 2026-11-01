@@ -318,3 +318,57 @@ test('a definitive invitation-required rejection preserves the draft and reopens
     ),
   ).toHaveLength(1);
 });
+
+test('loading more remains clickable during a background inbox refresh and the intent survives it', async ({
+  page,
+  context,
+  request,
+}) => {
+  await request.post(fixture + '/__test__/inbox-pages', {
+    data: { personal: 31, organization: 1 },
+  });
+  await login(context, 'Teacher');
+  await page.goto('/personal/messages');
+  const list = page.getByLabel('فهرست گفتگوها', { exact: true });
+  await expect(list.getByText('گفتگوی حساب 1', { exact: true })).toBeVisible();
+  let release!: () => void;
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let holding = false;
+  const nextRefresh = page.waitForRequest(
+    (r) => {
+      const u = new URL(r.url());
+      return (
+        u.pathname.endsWith('/api/v1/conversations') &&
+        u.searchParams.get('scope') === 'Personal' &&
+        u.searchParams.get('page') === '1'
+      );
+    },
+    { timeout: 15000 },
+  );
+  await page.route('**/api/client/backend/api/v1/conversations?**', async (route) => {
+    const u = new URL(route.request().url());
+    if (
+      !holding &&
+      u.searchParams.get('scope') === 'Personal' &&
+      u.searchParams.get('page') === '1'
+    ) {
+      holding = true;
+      const response = await route.fetch();
+      await held;
+      await route.fulfill({ response });
+    } else await route.continue();
+  });
+  try {
+    await nextRefresh;
+    await expect.poll(() => holding).toBe(true);
+    const more = list.getByRole('button', { name: 'گفتگوهای بیشتر', exact: true });
+    await expect(more).toBeEnabled();
+    await more.click();
+  } finally {
+    release();
+  }
+  await expect(list.getByText('گفتگوی حساب 31', { exact: true })).toBeAttached();
+  await expect(list.getByText('گفتگوی حساب 1', { exact: true })).toBeAttached();
+});

@@ -11,7 +11,7 @@ export default async function Page({
   const { id, section } = await params;
   if (
     !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id) ||
-    !['info', 'members', 'media', 'settings', 'edit'].includes(section)
+    !['info', 'members', 'media', 'settings', 'edit', 'invites', 'topics'].includes(section)
   )
     notFound();
   return <ConversationPage id={id} section={section as ConversationSection} />;

@@ -1,0 +1,253 @@
+{
+  "checkedAt": "2026-11-01",
+  "runtimeInputs": {
+    "files": 261,
+    "sha256": "006089a0255014ee45d7c8596aca974983bcc17bdbb61818f4dd15158c8a18d4"
+  },
+  "commands": [
+    {
+      "command": "npm test -- --reporter=dot",
+      "status": "passed",
+      "files": 50,
+      "passed": 271,
+      "failed": 0
+    },
+    {
+      "command": "npm run build -- --webpack",
+      "status": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "status": "passed",
+      "sourceModules": 200
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "npm run generated:check",
+      "status": "passed",
+      "operations": 221,
+      "schemas": 413,
+      "historicalDesignScreens": 130
+    },
+    {
+      "command": "npm run format:check",
+      "status": "passed"
+    },
+    {
+      "command": "npm run test:browser -- telegram-details.spec.ts conversation-pages.spec.ts messenger-management.spec.ts telegram-messenger.spec.ts",
+      "status": "passed",
+      "stats": {
+        "startTime": "2026-11-01T18:43:19.442Z",
+        "duration": 178240.83399999997,
+        "expected": 30,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "browserTests": [
+    {
+      "title": "conversation members and media follow server pagination and a media filter restarts its cursor",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "conversation settings retain failed selections and leave confirmation retains failure until accepted",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "education roles do not grant group ownership and system managed conversation does not expose manual management",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "direct conversation info is reached from chat and archive uses confirmed user state",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "conversation detail pages preserve RTL and layout at mobile tablet and desktop",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "groups: two-step creation persists information and invited contacts, then creates once",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "channels: two-step creation persists information and invited contacts, then creates once",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "unknown creation failure retries the identical operation after reload, without creating in the information step",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "owner edits information, adds a contact, changes administrator role and removes membership with confirmed server responses",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "school Teacher cannot mutate another conversation owner data, including through direct API requests",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "unified inbox includes direct and official conversations without a personal-school switch in three layouts",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "unified inbox exhausts scope pagination independently and retains earlier conversations",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "creation and member management remain usable in both themes across mobile tablet desktop",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "a definitive invitation-required rejection preserves the draft and reopens contacts without replaying the denied operation",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "loading more remains clickable during a background inbox refresh and the intent survives it",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "mute is confirmed by the service and a failed change never shows false success",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "invite link creation retries with one command, requires approval, then can be revoked",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "topic draft survives errors and status changes only after server confirmation",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "non owners never see invite management and the service rejects a direct mutation",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "Telegram messenger light 390: usable list, chat and menus",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "Telegram messenger light 834: usable list, chat and menus",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "Telegram messenger light 1440: usable list, chat and menus",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "Telegram messenger dark 390: usable list, chat and menus",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "Telegram messenger dark 834: usable list, chat and menus",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "Telegram messenger dark 1440: usable list, chat and menus",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "chat survives live resizing and attachment failure retains both file and caption",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "message context menu replies to the selected message and returns focus to the composer",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+      "results": [
+        "passed"
+      ]
+    },
+    {
+      "title": "photo video and file reach the other fixture account and download with identical bytes",
+      "results": [
+        "passed"
+      ]
+    }
+  ],
+  "visuals": {
+    "widths": [
+      390,
+      834,
+      1440
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "detailReferenceScreenshots": 78,
+    "directory": "output/review/telegram-details"
+  },
+  "limits": [
+    "Automated tests use the isolated local fixture, not the remote test backend.",
+    "No claim of server security or live mutation success from fixture tests.",
+    "Full unrelated educational suite was not repeated; messenger-related suites were run.",
+    "One earlier pagination failure is preserved in TELEGRAM_DETAILS_INITIAL_BROWSER.json; it was fixed and covered by a deterministic background-refresh test."
+  ]
+}

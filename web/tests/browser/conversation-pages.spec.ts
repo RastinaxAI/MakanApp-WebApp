@@ -43,14 +43,24 @@ test('conversation settings retain failed selections and leave confirmation reta
   await request.post(fixture + '/__test__/conversation-details', { data: {} });
   await login(context, 'Student', false);
   await page.goto(base + '/settings');
-  await page.getByLabel('نمایان‌بودن', { exact: true }).selectOption('Public');
-  await page.getByLabel('تاریخچه برای عضو جدید', { exact: true }).selectOption('FullHistory');
+  await page
+    .getByRole('group', { name: 'نمایان‌بودن', exact: true })
+    .getByRole('radio', { name: 'عمومی', exact: false })
+    .check();
+  await page
+    .getByRole('group', { name: 'تاریخچه برای عضو جدید', exact: true })
+    .getByRole('radio', { name: 'تاریخچهٔ کامل', exact: false })
+    .check();
   await request.post(fixture + '/__test__/fault', {
     data: { path: '/settings', method: 'PATCH', status: 409 },
   });
   await page.getByRole('button', { name: 'ثبت تنظیمات گفتگو' }).click();
   await expect(page.getByRole('main').getByRole('alert')).toBeVisible();
-  await expect(page.getByLabel('نمایان‌بودن', { exact: true })).toHaveValue('Public');
+  await expect(
+    page
+      .getByRole('group', { name: 'نمایان‌بودن', exact: true })
+      .getByRole('radio', { name: 'عمومی', exact: false }),
+  ).toBeChecked();
   await page.getByRole('button', { name: 'ثبت تنظیمات گفتگو' }).click();
   await expect(page.getByText('تنظیمات گفتگو ثبت شد.', { exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'اطلاعات', exact: true }).click();
@@ -129,6 +139,7 @@ test('conversation detail pages preserve RTL and layout at mobile tablet and des
           name: section === 'info' ? 'ترک گروه' : 'ثبت تنظیمات گفتگو',
           exact: true,
         });
+        await action.scrollIntoViewIfNeeded();
         await expect(action).toBeInViewport();
         const actionBox = await action.boundingBox();
         const dock = await page

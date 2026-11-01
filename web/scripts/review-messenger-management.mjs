@@ -10,6 +10,8 @@ if (process.env.MAKAN_ALLOW_MESSENGER_QA !== '1' || process.env.CI)
   throw Error('Manual test-server review requires explicit opt-in outside CI.');
 const origin = 'http://127.0.0.1:8080';
 const readOnly = process.env.MAKAN_MESSENGER_READ_ONLY === '1';
+const detailReview = process.env.MAKAN_TELEGRAM_DETAILS_REVIEW === '1';
+if (detailReview && !readOnly) throw Error('Detail review is strictly read-only.');
 const report = {
   environment: origin,
   backend: 'http://94.184.32.84:8090',
@@ -25,9 +27,11 @@ await mkdir('output/review/messenger-management-live', { recursive: true });
 const clean = scrubReviewError;
 const save = () =>
   writeFile(
-    readOnly
-      ? 'docs/quality/MESSENGER_MANAGEMENT_READ_ONLY.json'
-      : 'docs/quality/MESSENGER_MANAGEMENT_LIVE.json',
+    detailReview
+      ? 'docs/quality/TELEGRAM_DETAILS_LIVE.json'
+      : readOnly
+        ? 'docs/quality/MESSENGER_MANAGEMENT_READ_ONLY.json'
+        : 'docs/quality/MESSENGER_MANAGEMENT_LIVE.json',
     JSON.stringify(report, null, 2) + '\n',
   );
 async function client(role, phone) {
@@ -238,6 +242,84 @@ try {
       path: 'output/review/messenger-management-live/existing-group-info.png',
     });
     report.checks.push({ name: 'existing-group-information-renders-from-live-API', passed: true });
+    if (detailReview) {
+      report.detailReads = [];
+      report.detailViews = [];
+      const base = '/api/v1/conversations/' + value.conversationId;
+      for (const tail of [
+        '/invite-links?page=1&pageSize=30',
+        '/join-requests?page=1&pageSize=30',
+        '/topics?page=1&pageSize=30',
+      ]) {
+        try {
+          const result = await api(teacher, base + tail);
+          report.detailReads.push({
+            path: tail,
+            status: 200,
+            count: result.items.length,
+            hasMore: result.hasMore,
+          });
+        } catch (error) {
+          report.detailReads.push({
+            path: tail,
+            status: error.status,
+            code: error.code,
+            traceId: error.traceId,
+          });
+        }
+      }
+      for (const theme of ['light', 'dark']) {
+        await teacher.page.evaluate((v) => {
+          localStorage.setItem('makan-theme', v);
+          document.documentElement.dataset.theme = v;
+          window.dispatchEvent(new Event('makan-theme-changed'));
+        }, theme);
+        for (const section of [
+          'info',
+          'edit',
+          'settings',
+          'members',
+          'media',
+          'invites',
+          'topics',
+        ]) {
+          await teacher.page.goto('/personal/messages/' + value.conversationId + '/' + section);
+          const heading = {
+            info: 'اطلاعات گروه',
+            edit: 'ویرایش گروه',
+            settings: 'مدیریت گروه',
+            members: 'اعضای گفتگو',
+            media: 'رسانه‌ها و فایل‌ها',
+            invites: 'لینک‌های دعوت',
+            topics: 'موضوعات گروه',
+          }[section];
+          await expect(
+            teacher.page.getByRole('heading', { name: heading, exact: true }),
+          ).toBeVisible();
+          await expect(
+            teacher.page
+              .getByRole('main')
+              .getByRole('status', { name: 'در حال دریافت اطلاعات', exact: true }),
+          ).toHaveCount(0);
+          for (const [width, height] of [
+            [390, 844],
+            [834, 1194],
+            [1440, 1000],
+          ]) {
+            await teacher.page.setViewportSize({ width, height });
+            await teacher.page.evaluate(() => document.fonts.ready);
+            const overflow = await teacher.page.evaluate(
+              () => document.documentElement.scrollWidth > innerWidth,
+            );
+            const alertCount = await teacher.page.getByRole('main').getByRole('alert').count();
+            report.detailViews.push({ section, theme, width, overflow, alertCount });
+            await teacher.page.screenshot({
+              path: `output/review/messenger-management-live/details-${section}-${theme}-${width}.png`,
+            });
+          }
+        }
+      }
+    }
   }
   if (
     readOnly ||
@@ -253,9 +335,11 @@ try {
       'two-way group messaging',
     ];
     const error = new Error(
-      'Student messaging-status does not permit group creation; prepare authorized test account communication verification before mutation review.',
+      readOnly
+        ? 'Read-only review completed; group/channel/message mutations intentionally skipped.'
+        : 'Student messaging-status does not permit group creation; prepare authorized test account communication verification before mutation review.',
     );
-    error.code = 'QA_ACCOUNT_NOT_READY';
+    error.code = readOnly ? 'READ_ONLY_REVIEW' : 'QA_ACCOUNT_NOT_READY';
     throw error;
   }
   const label = 'QA پیام‌رسان ماکان ' + new Date().toISOString();
@@ -370,7 +454,7 @@ try {
     code: error.code,
     traceId: error.traceId,
   });
-  process.exitCode = 1;
+  if (error.code !== 'READ_ONLY_REVIEW') process.exitCode = 1;
 } finally {
   for (const c of clients)
     if (c.page) {

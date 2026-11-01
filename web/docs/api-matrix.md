@@ -213,3 +213,15 @@
 | `POST /api/v1/conversations/{conversationId}/members` | AddConversationMemberCommand | ManagedConversationResult |
 | `DELETE /api/v1/conversations/{conversationId}/members/{targetUserId}` | — | ManagedConversationResult |
 | `PATCH /api/v1/conversations/{conversationId}/members/{targetUserId}/role` | ChangeConversationMemberRoleCommand | ManagedConversationResult |
+| `PUT /api/v1/conversations/{conversationId}/mute` | SetConversationMuteCommand | ConversationUserStateResult |
+| `DELETE /api/v1/conversations/{conversationId}/mute` | — | ConversationUserStateResult |
+| `GET /api/v1/conversations/{conversationId}/invite-links` | — | InviteLinkPageResult |
+| `POST /api/v1/conversations/{conversationId}/invite-links` | CreateInviteLinkCommand | CreatedInviteLinkResult |
+| `POST /api/v1/conversations/{conversationId}/invite-links/{linkId}/revoke` | RevokeInviteLinkCommand | InviteLinkResult |
+| `GET /api/v1/conversations/{conversationId}/topics` | — | ConversationTopicPageResult |
+| `POST /api/v1/conversations/{conversationId}/topics` | CreateConversationTopicCommand | ConversationTopicResult |
+| `PUT /api/v1/conversations/{conversationId}/topics/{topicId}` | UpdateConversationTopicCommand | ConversationTopicResult |
+| `POST /api/v1/messaging/invite-links/redeem` | RedeemInviteLinkCommand | InviteLinkRedemptionResult |
+| `GET /api/v1/conversations/{conversationId}/join-requests` | — | ConversationJoinRequestPageResult |
+| `POST /api/v1/messaging/join-requests/{requestId}/approve` | CompleteJoinRequestCommand | ConversationJoinRequestResult2 |
+| `POST /api/v1/messaging/join-requests/{requestId}/reject` | CompleteJoinRequestCommand | ConversationJoinRequestResult2 |

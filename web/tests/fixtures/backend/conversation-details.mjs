@@ -1,6 +1,11 @@
+import { conversationToolsRoute } from './conversation-tools.mjs';
 import { randomUUID } from 'node:crypto';
 import { make, id } from './state.mjs';
 export function seedConversationDetails(state, body) {
+  state.qaInviteLinks = [];
+  state.qaTopics = [];
+  state.qaJoinRequests = [];
+  state.qaMuted = new Map();
   state.conversationMediaTitle = body.mediaTitle ?? 'جزوه';
   state.conversationDetail = make('ManagedConversationResult', {
     conversationId: id(950),
@@ -83,6 +88,8 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
   }
   const v = state.conversationDetail;
   if (!v) return false;
+  const tools = conversationToolsRoute({ state, auth, url, req, body, send });
+  if (tools !== false) return tools;
   if (p === '/api/v1/conversations') {
     const member = v.participants.some(
       (m) => m.user.userId === auth.user.id && m.status === 'Active',
@@ -97,6 +104,7 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
               scope: v.scope,
               organizationId: v.organizationId,
               title: v.title,
+              isMuted: state.qaMuted?.get(auth.user.id) ?? false,
               isArchived: false,
               unreadCount: 0,
             }),
@@ -117,6 +125,7 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
         scope: v.scope,
         organizationId: v.organizationId,
         title: v.title,
+        isMuted: state.qaMuted?.get(auth.user.id) ?? false,
         isArchived: false,
         unreadCount: 0,
       }),

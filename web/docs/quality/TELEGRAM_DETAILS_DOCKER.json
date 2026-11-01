@@ -1,0 +1,19 @@
+{
+  "container": "makan-client-web-1",
+  "image": "sha256:044ec80c9c2637d6e5a89f762fb767fdc7fe8cab6a90f44e6fbdcb9846ef1d06",
+  "health": "healthy",
+  "sessionVolume": [
+    "makan-client_sessions"
+  ],
+  "backend": "http://94.184.32.84:8090",
+  "origin": "http://127.0.0.1:8080",
+  "runtimeInputs": {
+    "files": 261,
+    "sha256": "006089a0255014ee45d7c8596aca974983bcc17bdbb61818f4dd15158c8a18d4"
+  },
+  "buildCommand": "docker compose --project-name makan-client --file compose.yaml --progress plain build web",
+  "deployment": "docker compose --env-file .env.docker -p makan-client -f compose.yaml -f compose.local.yaml up -d --no-deps --no-build --wait --wait-timeout 180 web",
+  "buildPassed": true,
+  "deploymentPassed": true,
+  "otherPanels": "Both existing management containers remained healthy; neither was recreated."
+}

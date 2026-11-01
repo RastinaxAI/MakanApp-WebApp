@@ -1,0 +1,12 @@
+{
+  "stats": {
+    "startTime": "2026-11-01T18:37:42.735Z",
+    "duration": 178939.036,
+    "expected": 28,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "failure": "unified inbox pagination: background refresh could disable More between pointer down/up; trace showed successful page-1 reads and no page-2 request. Fixed in messenger.tsx and covered by a held-background-request regression test.",
+  "traceContainsCredentials": "Full Playwright traces remain ignored; only this diagnosis is exported."
+}
