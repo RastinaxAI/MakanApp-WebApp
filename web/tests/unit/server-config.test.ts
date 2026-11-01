@@ -11,7 +11,7 @@ afterEach(() => vi.unstubAllEnvs());
 it('uses the current backend and public app origin in production', () => {
   vi.stubEnv('NODE_ENV', 'production');
   expect(serverConfig()).toMatchObject({
-    backend: 'http://94.184.32.84',
+    backend: 'http://94.184.32.84:8090',
     origin: 'https://app.makanapp.org',
   });
 });
@@ -24,4 +24,11 @@ it('keeps local fixture servers isolated through explicit settings', () => {
     backend: 'http://127.0.0.1:3457',
     origin: 'http://127.0.0.1:3132',
   });
+});
+
+it('uses the approved test backend in development without changing explicit environment settings', () => {
+  vi.stubEnv('NODE_ENV', 'development');
+  expect(serverConfig().backend).toBe('http://94.184.32.84:8090');
+  vi.stubEnv('BACKEND_BASE_URL', 'http://127.0.0.1:3457');
+  expect(serverConfig().backend).toBe('http://127.0.0.1:3457');
 });

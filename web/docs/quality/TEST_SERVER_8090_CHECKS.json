@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-01",
+  "backend": "http://94.184.32.84:8090",
+  "unit": {
+    "passed": 253,
+    "files": 47,
+    "failed": 0
+  },
+  "browser": {
+    "command": "npx playwright test sign-in-layout.spec.ts messaging.spec.ts",
+    "stats": {
+      "startTime": "2026-11-01T15:31:13.798Z",
+      "duration": 32599.627999999997,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "environment": "isolated fixture; no live domain writes"
+  },
+  "typecheck": "passed",
+  "lint": "passed; 190 source boundaries, no cycles",
+  "productionBuild": "passed; next build --webpack",
+  "otpHandling": "verified by backend; no client bypass added",
+  "privateEnvFiles": "already point to 8090; unchanged",
+  "initialUnitMismatch": "school-files.test.ts expected obsolete portless URL; assertion updated to approved port, then full suite passed",
+  "liveRoleReview": {
+    "roles": [
+      "Manager",
+      "Teacher",
+      "Student",
+      "Parent"
+    ],
+    "viewportStages": 20,
+    "tabTransitions": 80,
+    "domainWrites": false,
+    "report": "TEST_SERVER_8090_ROLE_REVIEW.json"
+  },
+  "formatting": {
+    "changedFiles": "passed",
+    "repository": "existing issue in unchanged tests/unit/client-auth.test.ts"
+  }
+}

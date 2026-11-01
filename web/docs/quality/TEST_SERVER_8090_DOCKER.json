@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-01",
+  "image": "sha256:345b4d64680512e8f1aa9be8483d1acd20b508122503d87be38affdbabbe635e",
+  "health": "healthy",
+  "sessionVolume": "makan-client_sessions",
+  "environment": [
+    "BACKEND_BASE_URL=http://94.184.32.84:8090",
+    "COOKIE_SECURE=false",
+    "APP_ORIGIN=http://127.0.0.1:8080"
+  ],
+  "note": "User-confirmed test server; private environment files and session volume preserved."
+}

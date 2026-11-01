@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-01",
+  "base": "http://94.184.32.84:8090",
+  "openapiStatus": 200,
+  "paths": 327,
+  "authSchemas": {
+    "RequestOtpCommand": {
+      "matchesSnapshot": true,
+      "required": [
+        "phoneNumber"
+      ]
+    },
+    "RequestOtpResult": {
+      "matchesSnapshot": true,
+      "required": [
+        "challengeId",
+        "expiresAtUtc",
+        "resendAvailableAtUtc"
+      ]
+    },
+    "VerifyOtpCommand": {
+      "matchesSnapshot": true,
+      "required": [
+        "challengeId",
+        "phoneNumber",
+        "code"
+      ]
+    },
+    "VerifyOtpResult": {
+      "matchesSnapshot": true,
+      "required": [
+        "accessToken",
+        "tokenType",
+        "expiresAtUtc",
+        "refreshToken",
+        "refreshExpiresAtUtc",
+        "user"
+      ]
+    }
+  },
+  "clientOtpBypassAdded": false
+}

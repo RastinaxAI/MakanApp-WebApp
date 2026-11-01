@@ -2,7 +2,7 @@
 
 ## بازطراحی پیام‌رسان و اجرای محلی — ۱ نوامبر۲۰۲۶
 
-نسخهٔ محلی Docker با ظاهر مرجع PDF تلگرام روی `http://127.0.0.1:8080/personal/messages` بررسی می‌شود. برای حفظ محیط تست قبلی، `compose.local.yaml` اضافه شد: backend پورت۸۰۹۰، origin محلی و cookie متناسب با HTTP. Compose اصلی برای انتشار HTTPS و backend بدون پورت دست‌نخورده است. override محلی را در استقرار عمومی استفاده نکنید. ردشدن کد ثابت تست با `OTP_INVALID` در آدرس بدون پورت به‌صورت مستقل ثبت شد؛ این خطا با موفقیت نمایشی پوشانده نشد.
+نسخهٔ محلی Docker با ظاهر مرجع PDF تلگرام روی `http://127.0.0.1:8080/personal/messages` بررسی می‌شود. برای حفظ محیط تست قبلی، `compose.local.yaml` اضافه شد: backend پورت۸۰۹۰، origin محلی و cookie متناسب با HTTP. طبق تأیید تازهٔ کاربر، Compose اصلی و پیش‌فرض کد و ابزارها هم از همین backend پورت۸۰۹۰ استفاده می‌کنند؛ تنظیم HTTPS کلاینت مستقل است. override محلی را در استقرار عمومی استفاده نکنید. ردشدن کد ثابت تست با `OTP_INVALID` در آدرس بدون پورت مربوط به تلاش پیش از این اصلاح است و در شواهد تاریخی حفظ شد.
 
 از پوشهٔ `web/` و با همان فایل خصوصی `.env.docker` موجود:
 
@@ -15,7 +15,7 @@ volume `makan-client_sessions` حفظ می‌شود؛ `down -v` لازم نیس�
 
 ## استقرار فعلی روی دامنه اصلی — ۱ نوامبر ۲۰۲۶
 
-Compose اکنون بک‌اند `http://94.184.32.84`، نشانی عمومی `https://app.makanapp.org` و کوکی امن را در environment سرویس تعیین می‌کند و بر مقادیر قدیمی این گزینه‌ها در `.env.docker` اولویت دارد. صفحه Swagger در `/swagger/index.html` و قرارداد در `/openapi/v1.json` همین بک‌اند هستند؛ Swagger مقصد درخواست ورود نیست. پس از دریافت تغییرات، `docker compose up -d --build --wait --wait-timeout 180` را اجرا و ورود را از دامنه HTTPS بررسی کنید. مقادیر localhost و پورت8090 در گزارش‌های پایین، سوابق بررسی‌های قبلی هستند.
+Compose اکنون طبق تأیید کاربر بک‌اند تست `http://94.184.32.84:8090`، نشانی عمومی `https://app.makanapp.org` و کوکی امن را در environment سرویس تعیین می‌کند و بر مقادیر قدیمی این گزینه‌ها در `.env.docker` اولویت دارد. صفحه Swagger در `/swagger/index.html` و قرارداد در `/openapi/v1.json` همین بک‌اند هستند؛ Swagger مقصد درخواست ورود نیست. پس از دریافت تغییرات، `docker compose up -d --build --wait --wait-timeout 180` را اجرا و ورود را از دامنه HTTPS بررسی کنید. پورت۸۰۹۰ مرجع فعال بک‌اند تست است؛ APP_ORIGIN نشانی خود کلاینت است و با آدرس سرویس تفاوت دارد.
 
 تحویل جاری دعوت/ورود/واکنش‌گرایی: image `8ace1d457915` ساخته و با `up --no-build --wait` اجرا شد؛ کانتینر healthy و image مطابق tag است. /enter و /sw.js روی8080=200، نشست ناشناس401 و شمارهٔ کوتاه/OTPپنج‌رقمی400 هستند. volume نشست و پنل جداگانهٔ مالک محفوظ‌اند. [رسید](quality/RESPONSIVE_SIGNIN_DOCKER.json)، [بررسی HTTP](quality/RESPONSIVE_SIGNIN_DOCKER_HTTP.json)، [گزارش و حدود نتیجه](quality/RESPONSIVE_SIGNIN_HANDOFF.md).
 

@@ -1,7 +1,7 @@
 import 'server-only';
 import path from 'node:path';
 export function serverConfig() {
-  const backend = new URL(process.env.BACKEND_BASE_URL ?? 'http://94.184.32.84');
+  const backend = new URL(process.env.BACKEND_BASE_URL ?? 'http://94.184.32.84:8090');
   if (
     process.env.MAKAN_TEST_MODE === 'fixture' &&
     !['127.0.0.1', 'localhost', '[::1]'].includes(backend.hostname)
