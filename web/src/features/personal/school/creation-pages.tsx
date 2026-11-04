@@ -1,4 +1,6 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import { Button } from '@/components/ui/button';
 import { JalaliDateInput } from '@/components/ui/jalali-date-input';
 import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -14,20 +16,22 @@ import { ClassMembersOverview } from './class-members';
 import { ClassMemberAssignment } from './member-assignment';
 import { GuardianInvitationForm } from './onboarding';
 import { AddQuestion } from './exams';
-import { base, Field, toUtc, useSchoolAction } from './shared';
+import { Field, toUtc, useSchoolAction } from './shared';
 import { WorkflowForm, WorkflowPage, useWorkflowDraft } from './workflow';
 import s from './school.module.css';
 import managerStyle from './manager-workspace.module.css';
 type S = components['schemas'];
 const authors = ['Manager', 'Teacher'];
 export function ClassCreatePage() {
+  const { base } = useAcademicScope();
   return (
-    <WorkflowPage title="ایجاد کلاس" back={base + '/classes'}>
+    <WorkflowPage title={uiText.text_34aeac5f09b4} back={base + '/classes'}>
       <ClassCreator />
     </WorkflowPage>
   );
 }
 function ClassCreator() {
+  const { base } = useAcademicScope();
   const d = useWorkflowDraft('class:new', {
       title: '',
       course: '',
@@ -46,24 +50,28 @@ function ClassCreator() {
   if (created)
     return (
       <section className={s.receipt}>
-        <h2>کلاس ایجاد شد</h2>
+        <h2>{uiText.text_946c6e906859}</h2>
         <p>{created.title}</p>
         <div className={managerStyle.steps}>
           <div>
-            <span>۱. کلاس ثبت شد؛ معلمان را مشخص کنید.</span>
+            <span>{uiText.text_f911d7c42a09}</span>
             <Button asChild>
-              <Link href={`${base}/classes/${created.id}/teachers/new`}>انتخاب معلمان کلاس</Link>
+              <Link href={`${base}/classes/${created.id}/teachers/new`}>
+                {uiText.text_78535b54c92b}
+              </Link>
             </Button>
           </div>
           <div>
-            <span>۲. دانش‌آموزان را به کلاس اضافه کنید.</span>
+            <span>{uiText.text_29f48210ac93}</span>
             <Button asChild>
-              <Link href={`${base}/classes/${created.id}/enrollments/new`}>افزودن دانش‌آموزان</Link>
+              <Link href={`${base}/classes/${created.id}/enrollments/new`}>
+                {uiText.text_cc708e53902b}
+              </Link>
             </Button>
           </div>
         </div>
         <Button asChild>
-          <Link href={`${base}/classes/${created.id}`}>ورود به کلاس</Link>
+          <Link href={`${base}/classes/${created.id}`}>{uiText.text_e0c1b3a8ec7a}</Link>
         </Button>
       </section>
     );
@@ -89,21 +97,24 @@ function ClassCreator() {
       error={
         <>
           {a.feedback}
-          {!valid && <p className={s.hint}>نام کلاس، درس، دوره و ظرفیت معتبر را وارد کنید.</p>}
+          {!valid && <p className={s.hint}>{uiText.text_5fb4677a90df}</p>}
         </>
       }
       rows={[
-        ['نام کلاس', d.values.title],
-        ['ظرفیت', d.values.capacity],
-        ['وضعیت آغاز', d.values.active ? 'فعال' : 'غیرفعال'],
+        [uiText.text_e5199f5b6d80, d.values.title],
+        [uiText.text_57400196e6de, d.values.capacity],
+        [
+          uiText.text_eabfbd7982f4,
+          d.values.active ? uiText.text_a3fa2a3ffcb9 : uiText.text_4e67bd8e3482,
+        ],
       ]}
-      notice="پس از ساخت کلاس، دانش‌آموزان و معلمان را جداگانه به آن اضافه کنید."
+      notice={uiText.text_1227743339e4}
     >
       <div className={s.two}>
-        <Field label="نام کلاس">
+        <Field label={uiText.text_e5199f5b6d80}>
           <input required value={d.values.title} onChange={(e) => d.set('title', e.target.value)} />
         </Field>
-        <Field label="ظرفیت کلاس">
+        <Field label={uiText.text_23c14d587863}>
           <input
             required
             min={1}
@@ -116,22 +127,22 @@ function ClassCreator() {
       </div>
       <div className={s.two}>
         <section className={s.workflowGroup}>
-          <h2>درس کلاس</h2>
+          <h2>{uiText.text_f742001e0e88}</h2>
           <CatalogPicker
             kind="courses"
             value={d.values.course}
             onChange={(v) => d.set('course', v)}
           />
-          <Link href={base + '/courses/new'}>ایجاد درس جدید</Link>
+          <Link href={base + '/courses/new'}>{uiText.text_9f30c2048bc7}</Link>
         </section>
         <section className={s.workflowGroup}>
-          <h2>دورهٔ آموزشی</h2>
+          <h2>{uiText.text_4abb03b122f4}</h2>
           <CatalogPicker
             kind="periods"
             value={d.values.period}
             onChange={(v) => d.set('period', v)}
           />
-          <Link href={base + '/periods/new'}>ایجاد دورهٔ جدید</Link>
+          <Link href={base + '/periods/new'}>{uiText.text_51add6a204d5}</Link>
         </section>
       </div>
       <label className={s.check}>
@@ -140,15 +151,16 @@ function ClassCreator() {
           checked={d.values.active}
           onChange={(e) => d.set('active', e.target.checked)}
         />
-        کلاس پس از ایجاد فعال باشد
+        {uiText.text_65b84c86f2b8}
       </label>
     </WorkflowForm>
   );
 }
 export function CatalogCreatePage({ kind }: { kind: 'courses' | 'periods' }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
-      title={kind === 'courses' ? 'ایجاد درس' : 'ایجاد دورهٔ آموزشی'}
+      title={kind === 'courses' ? uiText.text_bc7837ca0bbb : uiText.text_c19ede0cddae}
       back={base + '/classes/new'}
     >
       <CatalogCreator kind={kind} />
@@ -156,6 +168,7 @@ export function CatalogCreatePage({ kind }: { kind: 'courses' | 'periods' }) {
   );
 }
 function CatalogCreator({ kind }: { kind: 'courses' | 'periods' }) {
+  const { base } = useAcademicScope();
   const d = useWorkflowDraft('catalog:' + kind, { title: '', start: '', end: '' }),
     a = useSchoolAction();
   const [saved, setSaved] = useState(false);
@@ -165,9 +178,9 @@ function CatalogCreator({ kind }: { kind: 'courses' | 'periods' }) {
   if (saved)
     return (
       <section className={s.receipt}>
-        <h2>{kind === 'courses' ? 'درس ثبت شد' : 'دوره ثبت شد'}</h2>
+        <h2>{kind === 'courses' ? uiText.text_a8e9400f558e : uiText.text_55dd273e4ada}</h2>
         <Button asChild>
-          <Link href={base + '/classes/new'}>ادامهٔ ساخت کلاس</Link>
+          <Link href={base + '/classes/new'}>{uiText.text_75454f626ebf}</Link>
         </Button>
       </section>
     );
@@ -177,18 +190,18 @@ function CatalogCreator({ kind }: { kind: 'courses' | 'periods' }) {
       ready={d.ready}
       canCommit={valid}
       rows={[
-        ['عنوان', d.values.title],
+        [uiText.text_74190f4bb095, d.values.title],
         ...(kind === 'periods'
           ? ([
-              ['شروع', date(d.values.start, true)],
-              ['پایان', date(d.values.end, true)],
+              [uiText.text_103613fd03b5, date(d.values.start, true)],
+              [uiText.text_3f05817a3011, date(d.values.end, true)],
             ] as [string, string][])
           : []),
       ]}
       error={
         <>
           {a.feedback}
-          {!valid && <p className={s.hint}>عنوان و بازهٔ معتبر را کامل کنید.</p>}
+          {!valid && <p className={s.hint}>{uiText.text_e847e6618d02}</p>}
         </>
       }
       onSave={async () => {
@@ -203,19 +216,19 @@ function CatalogCreator({ kind }: { kind: 'courses' | 'periods' }) {
         }
       }}
     >
-      <Field label={kind === 'courses' ? 'عنوان درس' : 'عنوان دوره'}>
+      <Field label={kind === 'courses' ? uiText.text_9398dccd15ef : uiText.text_8ce15ef5c0a9}>
         <input required value={d.values.title} onChange={(e) => d.set('title', e.target.value)} />
       </Field>
       {kind === 'periods' && (
         <>
-          <Field label="شروع دوره">
+          <Field label={uiText.text_c2e6c9ca70e0}>
             <JalaliDateInput
               required
               value={d.values.start}
               onValueChange={(v) => d.set('start', v)}
             />
           </Field>
-          <Field label="پایان دوره">
+          <Field label={uiText.text_07659e16252d}>
             <JalaliDateInput
               min={d.values.start}
               required
@@ -230,11 +243,12 @@ function CatalogCreator({ kind }: { kind: 'courses' | 'periods' }) {
 }
 export { PersonFormPage, PersonDetailPage } from './person-records';
 export function SessionCreatePage({ classId }: { classId: string }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
       roles={authors}
       classId={classId}
-      title="ایجاد جلسه"
+      title={uiText.text_8a8bca7672c8}
       back={`${base}/classes/${classId}?tab=sessions`}
     >
       <SessionCreator classId={classId} />
@@ -242,6 +256,7 @@ export function SessionCreatePage({ classId }: { classId: string }) {
   );
 }
 function SessionCreator({ classId }: { classId: string }) {
+  const { base } = useAcademicScope();
   const d = useWorkflowDraft('session:new:' + classId, { title: '', start: '', end: '', link: '' }),
     a = useSchoolAction(),
     router = useRouter();
@@ -255,19 +270,15 @@ function SessionCreator({ classId }: { classId: string }) {
       canCommit={valid}
       busy={a.busy}
       rows={[
-        ['جلسه', d.values.title],
-        ['شروع', date(d.values.start, true)],
-        ['پایان', date(d.values.end, true)],
-        ['پیوند', d.values.link],
+        [uiText.text_69450aad3cb7, d.values.title],
+        [uiText.text_103613fd03b5, date(d.values.start, true)],
+        [uiText.text_3f05817a3011, date(d.values.end, true)],
+        [uiText.text_ea3eced42f9c, d.values.link],
       ]}
       error={
         <>
           {a.feedback}
-          {!valid && (
-            <p className={s.hint}>
-              عنوان و بازهٔ معتبر جلسه را وارد کنید؛ پایان باید پس از شروع باشد.
-            </p>
-          )}
+          {!valid && <p className={s.hint}>{uiText.text_73b7befc5afa}</p>}
         </>
       }
       onSave={async () => {
@@ -288,10 +299,10 @@ function SessionCreator({ classId }: { classId: string }) {
         }
       }}
     >
-      <Field label="عنوان جلسه">
+      <Field label={uiText.text_70786012eed4}>
         <input required value={d.values.title} onChange={(e) => d.set('title', e.target.value)} />
       </Field>
-      <Field label="شروع جلسه">
+      <Field label={uiText.text_0d5f82b11e8c}>
         <JalaliDateInput
           withTime
           required
@@ -299,7 +310,7 @@ function SessionCreator({ classId }: { classId: string }) {
           onValueChange={(v) => d.set('start', v)}
         />
       </Field>
-      <Field label="پایان جلسه">
+      <Field label={uiText.text_0559b65628ea}>
         <JalaliDateInput
           withTime
           required
@@ -307,7 +318,7 @@ function SessionCreator({ classId }: { classId: string }) {
           onValueChange={(v) => d.set('end', v)}
         />
       </Field>
-      <Field label="پیوند کلاس آنلاین (اختیاری)">
+      <Field label={uiText.text_9d6b7140edeb}>
         <input
           type="url"
           dir="ltr"
@@ -319,18 +330,21 @@ function SessionCreator({ classId }: { classId: string }) {
   );
 }
 export function ExamCreatePage({ classId }: { classId: string }) {
+  const { classPath } = useAcademicScope();
   return (
     <WorkflowPage
       roles={authors}
       classId={classId}
-      title="ایجاد آزمون"
-      back={`${base}/classes/${classId}?tab=exams`}
+      title={uiText.text_00f6d8e48e00}
+      back={classPath(classId) + '/exams'}
     >
       <ExamCreator classId={classId} />
     </WorkflowPage>
   );
 }
 function ExamCreator({ classId }: { classId: string }) {
+  const { classApi } = useAcademicScope();
+  const { base } = useAcademicScope();
   const d = useWorkflowDraft('exam:new:' + classId, {
       title: '',
       description: '',
@@ -351,59 +365,56 @@ function ExamCreator({ classId }: { classId: string }) {
     Number(d.values.attempts) > 0 &&
     Number.isInteger(Number(d.values.attempts)) &&
     d.values.score !== '' &&
-    Number(d.values.score) >= 0;
+    Number(d.values.score) > 0;
   return (
     <WorkflowForm
       ready={d.ready}
       canCommit={valid}
       busy={a.busy}
       rows={[
-        ['عنوان', d.values.title],
-        ['آغاز دسترسی', date(d.values.start, true)],
-        ['پایان دسترسی', date(d.values.end, true)],
-        ['مدت (دقیقه)', d.values.duration],
-        ['دفعات شرکت', d.values.attempts],
-        ['نمرهٔ کل', d.values.score],
+        [uiText.text_74190f4bb095, d.values.title],
+        [uiText.text_8ea5a5c720cd, date(d.values.start, true)],
+        [uiText.text_5cff509ed1c9, date(d.values.end, true)],
+        [uiText.text_3a48c2c3e3b8, d.values.duration],
+        [uiText.text_0fe100cdea24, d.values.attempts],
+        [uiText.text_25823dfdfd3f, d.values.score],
       ]}
-      button="ایجاد پیش‌نویس آزمون"
-      notice="پس از ساخت پیش‌نویس، سؤال‌ها را اضافه و پیش از انتشار بازبینی کنید."
+      button={uiText.text_938008426aca}
+      notice={uiText.text_a748d1afb9b2}
       error={
         <>
           {a.feedback}
-          {!valid && <p className={s.hint}>عنوان، بازه و مقادیر معتبر آزمون را کامل کنید.</p>}
+          {!valid && <p className={s.hint}>{uiText.text_8476a4fa8850}</p>}
         </>
       }
       onSave={async () => {
         if (!valid) return;
-        const result = await a.run<S['ExamEditorDto']>(
-          `/api/v1/academic/classes/${classId}/exams`,
-          {
-            title: d.values.title.trim(),
-            description: d.values.description.trim() || null,
-            availableFromUtc: toUtc(d.values.start),
-            availableUntilUtc: toUtc(d.values.end),
-            durationMinutes: Number(d.values.duration),
-            maxAttempts: Number(d.values.attempts),
-            maxScore: Number(d.values.score),
-            randomizationPolicy: d.values.random ? 'QuestionOrder' : 'None',
-          },
-        );
+        const result = await a.run<S['ExamEditorDto']>(classApi(classId) + '/exams', {
+          title: d.values.title.trim(),
+          description: d.values.description.trim() || null,
+          availableFromUtc: toUtc(d.values.start),
+          availableUntilUtc: toUtc(d.values.end),
+          durationMinutes: Number(d.values.duration),
+          maxAttempts: Number(d.values.attempts),
+          maxScore: Number(d.values.score),
+          randomizationPolicy: d.values.random ? 'QuestionOrder' : 'None',
+        });
         if (result) {
           d.reset();
           router.replace(`${base}/exams/${result.id}/edit`);
         }
       }}
     >
-      <Field label="عنوان آزمون">
+      <Field label={uiText.text_981230e1e35e}>
         <input required value={d.values.title} onChange={(e) => d.set('title', e.target.value)} />
       </Field>
-      <Field label="توضیحات آزمون">
+      <Field label={uiText.text_4a72e6b798a7}>
         <textarea
           value={d.values.description}
           onChange={(e) => d.set('description', e.target.value)}
         />
       </Field>
-      <Field label="آغاز دسترسی">
+      <Field label={uiText.text_8ea5a5c720cd}>
         <JalaliDateInput
           withTime
           required
@@ -411,7 +422,7 @@ function ExamCreator({ classId }: { classId: string }) {
           onValueChange={(v) => d.set('start', v)}
         />
       </Field>
-      <Field label="پایان دسترسی">
+      <Field label={uiText.text_5cff509ed1c9}>
         <JalaliDateInput
           withTime
           required
@@ -421,9 +432,9 @@ function ExamCreator({ classId }: { classId: string }) {
       </Field>
       {(
         [
-          ['duration', 'مدت آزمون (دقیقه)'],
-          ['attempts', 'دفعات مجاز شرکت'],
-          ['score', 'نمرهٔ کل'],
+          ['duration', uiText.text_2cced62fbe37],
+          ['attempts', uiText.text_6c1546f241c8],
+          ['score', uiText.text_25823dfdfd3f],
         ] as const
       ).map(([key, title]) => (
         <Field key={key} label={title}>
@@ -443,14 +454,15 @@ function ExamCreator({ classId }: { classId: string }) {
           checked={d.values.random}
           onChange={(e) => d.set('random', e.target.checked)}
         />
-        ترتیب پرسش‌ها تصادفی باشد
+        {uiText.text_61f1cd67e9a3}
       </label>
     </WorkflowForm>
   );
 }
 export function GuardianCreatePage() {
+  const { base } = useAcademicScope();
   return (
-    <WorkflowPage title="دعوت والد برای فرزند" back={base + '/guardians'}>
+    <WorkflowPage title={uiText.text_c82d6822d030} back={base + '/guardians'}>
       <section className={s.card}>
         <GuardianInvitationForm />
       </section>
@@ -464,12 +476,17 @@ export function ClassMembersPage({
   classId: string;
   kind: 'learners' | 'teachers' | 'all';
 }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
       classId={classId}
       roles={kind === 'all' ? authors : ['Manager']}
       title={
-        kind === 'all' ? 'اعضای کلاس' : kind === 'learners' ? 'ثبت‌نام دانش‌آموز' : 'انتساب معلم'
+        kind === 'all'
+          ? uiText.text_29c02fa4bd09
+          : kind === 'learners'
+            ? uiText.text_e82efffd7b2d
+            : uiText.text_0766ac45d984
       }
       back={`${base}/classes/${classId}`}
     >
@@ -484,13 +501,19 @@ export function ClassMembersPage({
   );
 }
 export function QuestionCreatePage({ id }: { id: string }) {
+  const { base } = useAcademicScope();
   return (
-    <WorkflowPage roles={authors} title="افزودن پرسش آزمون" back={`${base}/exams/${id}/edit`}>
+    <WorkflowPage
+      roles={authors}
+      title={uiText.text_78bf2b9b9225}
+      back={`${base}/exams/${id}/edit`}
+    >
       <QuestionCreator id={id} />
     </WorkflowPage>
   );
 }
 function QuestionCreator({ id }: { id: string }) {
+  const { base } = useAcademicScope();
   const q = usePersonalApi<S['ExamEditorDto']>(`/api/v1/academic/exams/${id}/editor`),
     router = useRouter();
   if (q.isPending) return <LoadingSkeleton />;

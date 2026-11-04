@@ -24,6 +24,7 @@ export async function filesRoute({ state, req, res, url, bytes, auth, send }) {
       sizeBytes: data.length,
       status: state.nextFileStatus ?? 'Ready',
       rowVersion: 'file-1',
+      personalClassId: form.get('PersonalClassId') || null,
     });
     state.nextFileStatus = undefined;
     state.files.set(id, { asset, data });
@@ -56,9 +57,17 @@ export async function filesRoute({ state, req, res, url, bytes, auth, send }) {
         message.conversationId === ids.chat &&
         message.attachments.some((attachment) => attachment.fileAssetId === id),
     );
+  const conversationPhoto =
+    state.conversationDetail?.photo?.fileAssetId === id &&
+    state.conversationDetail.participants.some(
+      (member) => member.status === 'Active' && member.user.userId === auth.user.id,
+    );
   if (
     !file ||
-    (file.asset.uploadedByUserId !== auth.user.id && !evaluationAttachment && !directAttachment)
+    (file.asset.uploadedByUserId !== auth.user.id &&
+      !evaluationAttachment &&
+      !directAttachment &&
+      !conversationPhoto)
   )
     return send({ code: 'FILE_NOT_FOUND' }, 404);
   if (url.pathname.endsWith('/content')) {

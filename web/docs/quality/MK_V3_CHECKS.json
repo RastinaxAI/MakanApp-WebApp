@@ -1,0 +1,507 @@
+{
+  "checkedAt": "2026-11-03T15:20:16.697Z",
+  "application": "web/ Next.js client only",
+  "reference": {
+    "version": "3.0-blue",
+    "directory": "design/reference-v3",
+    "sourcePdf": "MakanApp_Frontend_UI_UX_Design_FA_v3_Blue.pdf",
+    "sourcePdfSha256": "27f42e76ad44c192e4b2075c0c513f733e0f76a0babd39cebad71ed700e7f373",
+    "pages": 37,
+    "screens": 82,
+    "verifiedPdfHash": true,
+    "sourceStyles": [
+      "design/reference-v3/ui.css",
+      "design/reference-v3/education.css",
+      "design/reference-v3/blue-theme.css"
+    ],
+    "sourceClaimsNotTreatedAsInstructions": true
+  },
+  "checks": {
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed; 332 modules without cycles",
+    "generated": "passed; 239 client operations, 447 schemas, no owner operations",
+    "format": "passed",
+    "diffWhitespace": "passed",
+    "unit": {
+      "passed": 423,
+      "failed": 0,
+      "files": 61
+    }
+  },
+  "browser": {
+    "uniqueCases": 62,
+    "latestPassed": 62,
+    "latestFailed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "runs": [
+      {
+        "file": "docs/quality/MK_V3_BROWSER_INITIAL.json",
+        "startTime": "2026-11-03T14:59:54.821Z",
+        "duration": 274868.143,
+        "expected": 59,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      {
+        "file": "docs/quality/MK_V3_BROWSER_FOLLOWUP.json",
+        "startTime": "2026-11-03T15:10:08.186Z",
+        "duration": 57808.496,
+        "expected": 22,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    ],
+    "scope": "Related theme, responsive layout, authentication, security boundary, messenger and reference scenarios; the full historical 194-case suite was not rerun.",
+    "latest": [
+      {
+        "file": "assistant-theme.spec.ts",
+        "title": "dark theme stays coherent across panels and the assistant gives the answer most of the height",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "phone and code reject typed letters and normalize Persian and Arabic numerals",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "logo stays in both login steps and the action follows its field instead of sticking to the viewport",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "assistant studio goes back to the assistant and the retired class destination redirects",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "restored profile logout ends the current session after confirmation",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "forged or missing origins never forward an authentication mutation",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "injection and malformed authentication payloads are rejected before the upstream service",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "an oversized authentication body is rejected before upstream processing",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "proxy rejects owner namespaces, encoded traversal and arbitrary destinations",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "context spoofing and unauthorized membership selection cannot change the current role",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "session responses expose no tokens and carry private no-store headers",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "profile renders a stored HTML payload as text without executing it",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "security headers prevent framing and restrict external connections",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "a slow OTP service releases the form within its deadline without silently retrying",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header light fa: avatar stays beside the title and controls never overlap",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header light en: avatar stays beside the title and controls never overlap",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header dark fa: avatar stays beside the title and controls never overlap",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header dark en: avatar stays beside the title and controls never overlap",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "school weekly agenda Student: compact dates, usable controls, real range requests and current-week reset",
+        "status": "expected"
+      },
+      {
+        "file": "chat-education-layout.spec.ts",
+        "title": "school weekly agenda Teacher: compact dates, usable controls, real range requests and current-week reset",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Student light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Teacher light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Parent light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Manager light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Personal light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "theme light is applied before the application JavaScript can hydrate",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Student dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Teacher dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Parent dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Manager dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Personal dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "theme dark is applied before the application JavaScript can hydrate",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "temporary inbox failure retains known conversations; permission denial removes them",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-motion.spec.ts",
+        "title": "recorded light: chat, profile, assistant, dialogs and back remain coherent",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-motion.spec.ts",
+        "title": "recorded dark: chat, profile, assistant, dialogs and back remain coherent",
+        "status": "expected"
+      },
+      {
+        "file": "preferences-weekly.spec.ts",
+        "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+        "status": "expected"
+      },
+      {
+        "file": "preferences-weekly.spec.ts",
+        "title": "weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "current responsive geometry and historical route reference at 390, 834 and 1440",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "workspace selection is explicit and a Student cannot author a class assignment",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "exam question navigation retains answers and exposes final review separately",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "desktop entry puts product information on the right and both login steps on the left",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "education sections keep the same responsive header, navigation and content edges",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "settings uses the content width and theme selection remains functional",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "profile switches only authorized workspaces in place and reloads the authoritative context",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "a rejected profile role switch preserves the previous server context",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 390: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 834: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 1440: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 390: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 834: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 1440: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "chat survives live resizing and attachment failure retains both file and caption",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "message context menu replies to the selected message and returns focus to the composer",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "photo video and file reach the other fixture account and download with identical bytes",
+        "status": "expected"
+      },
+      {
+        "file": "sign-in-layout.spec.ts",
+        "title": "phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste",
+        "status": "expected"
+      },
+      {
+        "file": "sign-in-layout.spec.ts",
+        "title": "all invitation entry points converge on one inbox",
+        "status": "expected"
+      },
+      {
+        "file": "sign-in-layout.spec.ts",
+        "title": "entry actions follow viewport size without retaining a mobile layout on desktop",
+        "status": "expected"
+      }
+    ]
+  },
+  "visual": {
+    "native": {
+      "count": 82,
+      "file": "output/review/mk-v3/native/capture.json",
+      "errors": 0,
+      "overflow": 0,
+      "unlabelled": 0
+    },
+    "comparison": {
+      "file": "output/review/mk-v3/native/comparison.json",
+      "meanMae255": 1.226,
+      "maxMae255": 4.2176,
+      "interpretation": "Mean absolute RGB channel error; not a UX correctness or API readiness percentage"
+    },
+    "connected": {
+      "count": 96,
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "widths": [
+        320,
+        390,
+        834,
+        1024,
+        1440,
+        1920
+      ],
+      "file": "output/review/mk-v3/connected/results.json",
+      "errors": 0,
+      "overflow": 0
+    },
+    "publicEntry": {
+      "count": 36,
+      "file": "output/review/mk-v3/auth/capture.json",
+      "steps": [
+        "welcome",
+        "phone",
+        "otp"
+      ],
+      "themesVerified": true,
+      "logoVerified": true,
+      "otpCompletionEnablesSubmit": true,
+      "errors": 0,
+      "overflow": 0
+    },
+    "responsive": {
+      "cases": 32,
+      "failures": 0,
+      "file": "output/review/mk-v3/responsive/results.json"
+    },
+    "manualReview": [
+      "MK-14 source and native",
+      "MK-50 dark source and native",
+      "Native comparison contact sheet 5",
+      "Final welcome and completed OTP at 390 light",
+      "Tablet/desktop connected views retained from V2 explicit responsive requirements",
+      "Final OTP 834 dark",
+      "Connected profile 1440 dark"
+    ]
+  },
+  "educationFlows": {
+    "passed": 8,
+    "failed": 0,
+    "synthetic": true,
+    "realBackendWrites": 0,
+    "file": "output/review/mk-v3/flows/results.json"
+  },
+  "performance": {
+    "environment": "local production entry only; no OTP request or domain write",
+    "entryStatus": 200,
+    "previewStatus": 404,
+    "bytes": 806191,
+    "scripts": 13,
+    "ttfb": 249.90000000037253,
+    "paint": [
+      {
+        "name": "first-paint",
+        "entryType": "paint",
+        "startTime": 368,
+        "duration": 0,
+        "navigationId": 301,
+        "paintTime": 360.5,
+        "presentationTime": 368
+      },
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 368,
+        "duration": 0,
+        "navigationId": 301,
+        "paintTime": 360.5,
+        "presentationTime": 368
+      }
+    ]
+  },
+  "implementation": {
+    "canonicalTokens": "design/tokens.json",
+    "canonicalCopy": "src/content/fa.ts",
+    "canonicalNetwork": "config/network.json",
+    "currentTraceability": "design/mk-reference.json",
+    "gallery": "output/review/mk-v3/index.html",
+    "guide": "docs/MK_V3_ALIGNMENT_FA.md",
+    "nativeReact": true,
+    "embeddedPdfOrFrame": false
+  },
+  "preservedRequirements": [
+    "Supplied Makan image logo in both entry steps at all breakpoints",
+    "Receive-code action follows the form rather than a fixed viewport edge",
+    "Digits-only input, paste validation, server validation, one-time-code autofill and duplicate-submit protection",
+    "Assistant studio back returns to the assistant",
+    "Retired personal classes redirect to extracurricular",
+    "Real session logout and authorized inline role switching",
+    "Independent owner app and retired root Vite are untouched",
+    "Session volumes and private configuration files are preserved"
+  ],
+  "runtime": {
+    "connected": "http://127.0.0.1:3145/enter",
+    "isolatedReference": "http://127.0.0.1:3144/preview/reference",
+    "connectedEntryStatus": 200,
+    "connectedPreviewStatus": 404,
+    "remoteDeployment": false,
+    "liveOtpSent": false,
+    "liveDomainWrites": 0
+  },
+  "limitations": [
+    "Real product data and permissions replace static PDF sample values.",
+    "Native controls, touch targets, live timing and explicit preview badges differ intentionally from static crops.",
+    "Missing backend contracts remain pending/isolated preview; no success or endpoint was invented.",
+    "Fixture tests do not establish backend security, TLS or SMS delivery performance."
+  ],
+  "galleryVerification": {
+    "referencedImages": 176,
+    "missingImages": 0
+  }
+}

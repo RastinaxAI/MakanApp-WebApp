@@ -1,27 +1,9 @@
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 export type Conversation = components['schemas']['ManagedConversationResult'];
-// Compatibility with src/live/messenger-v3.ts in the existing client.
-// This controls the composer only; server authorization remains authoritative.
-function hasMessagingFlag(value: string, flag: 'SendMessages' | 'PublishMessages' | 'SendMedia') {
-  const names = value.split(',').map((item) => item.trim());
-  return (
-    names.includes(flag) ||
-    names.includes('All') ||
-    ((flag === 'SendMessages' || flag === 'SendMedia') && names.includes('LegacyMemberDefault')) ||
-    (flag === 'PublishMessages' && names.includes('LegacyAdminDefault'))
-  );
-}
+// Server capabilities are authoritative. Profile age and school role do not grant access.
 export function canAttachConversation(conversation: Conversation, userId: string) {
-  if (!canWriteConversation(conversation, userId)) return false;
-  const member = conversation.participants.find(
-    (item) => item.user.userId === userId && item.status === 'Active',
-  );
-  return (
-    conversation.type !== 'Group' ||
-    member?.role === 'Owner' ||
-    member?.role === 'Admin' ||
-    hasMessagingFlag(conversation.memberCapabilities, 'SendMedia')
-  );
+  return canWriteConversation(conversation, userId);
 }
 export function mediaRestricted(restriction: {
   isEffective: boolean;
@@ -39,22 +21,11 @@ export function mediaRestricted(restriction: {
 }
 export function canWriteConversation(conversation: Conversation, userId: string) {
   if (conversation.status !== 'Active') return false;
-  const member = conversation.participants.find(
-    (item) => item.user.userId === userId && item.status === 'Active',
+  if (conversation.type === 'Group' || conversation.type === 'Channel')
+    return conversation.effectiveCapabilities?.canPublish === true;
+  return conversation.participants.some(
+    (member) => member.user.userId === userId && member.status === 'Active',
   );
-  if (!member) return false;
-  if (conversation.type === 'Channel')
-    return (
-      member.role === 'Owner' ||
-      (member.role === 'Admin' && hasMessagingFlag(member.adminPermissions, 'PublishMessages'))
-    );
-  if (conversation.type === 'Group')
-    return (
-      member.role === 'Owner' ||
-      member.role === 'Admin' ||
-      hasMessagingFlag(conversation.memberCapabilities, 'SendMessages')
-    );
-  return conversation.type === 'Direct' || conversation.type === 'Saved';
 }
 export function conversationTitle(
   conversation: components['schemas']['ConversationSummaryResult'],
@@ -63,20 +34,20 @@ export function conversationTitle(
     conversation.title ||
     conversation.otherParticipant?.displayName ||
     conversation.otherParticipant?.username ||
-    'گفت‌وگو'
+    uiText.text_99c891fdab48
   );
 }
 export function visibleReply(reply: components['schemas']['MessageReplySummaryResult']) {
   return !reply
     ? null
     : reply.isUnavailable
-      ? 'پیام در دسترس نیست'
+      ? uiText.text_1ca12aac9cb5
       : reply.isDeleted
-        ? 'پیام حذف شده است'
-        : reply.text || 'پیوست';
+        ? uiText.text_c130dae89f48
+        : reply.text || uiText.text_9b48d3d38fcb;
 }
 export const conversationRoleLabels = {
-  Owner: 'مالک گفت‌وگو',
-  Admin: 'مدیر گفت‌وگو',
-  Member: 'عضو',
+  Owner: uiText.text_ebe0eef2c257,
+  Admin: uiText.text_c420e4b83a1f,
+  Member: uiText.text_171874b82f6c,
 } as const;

@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { clientSessionId, getClientState } from '@/lib/server/client-session';
 import { readSession, withSessionLock } from '@/lib/server/session';
 import { authenticatedFetch, checkOrigin, problem, safeResponse } from '@/lib/server/backend';
+import { conversationCapability } from '@/features/personal/messaging/management-policy';
 import { serverConfig } from '@/lib/server/config';
 import { clientValidator } from '@/lib/api/client-contract';
 import { ApiError, parseProblem } from '@/lib/api/errors';
@@ -47,8 +48,9 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
   if (request.method === 'POST' && !checkOrigin(request)) return problem(403, 'ORIGIN_REJECTED');
   const segments = (await params).path ?? [],
     url = new URL(request.url),
-    conversationId = url.searchParams.get('conversationId');
-  if (!conversationId || !guid.test(conversationId) || url.searchParams.size !== 1)
+    conversationId = url.searchParams.get('conversationId'),
+    photo = url.searchParams.get('purpose') === 'photo';
+  if (!conversationId || !guid.test(conversationId) || url.searchParams.size !== (photo ? 2 : 1))
     return problem(400, 'INVALID_PATH_PARAMETER');
   const upload = request.method === 'POST' && segments.length === 0,
     content = request.method === 'GET' && segments.length === 2 && segments[1] === 'content';
@@ -92,7 +94,7 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
           'OfficialSpacesPairResult',
         );
         const caps = officialConversationCapabilities(summary, pair);
-        if (!caps?.canRead || (upload && !caps.canSend)) throw new ApiError(403);
+        if (!caps?.canRead || (upload && !photo && !caps.canSend)) throw new ApiError(403);
       }
       const conversation = managed
         ? await read<components['schemas']['ManagedConversationResult']>(
@@ -110,12 +112,9 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
           conversation.organizationId !== summary.organizationId)
       )
         throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
-      const member = conversation?.participants.find((item) => item.user.userId === state.user.id);
-      if (
-        conversation &&
-        (!member || (conversation.scope === 'Organization' && member.status !== 'Active'))
-      )
-        throw new ApiError(403);
+      if (photo && !conversation) throw new ApiError(400);
+      if (photo && content && conversation?.photo?.fileAssetId !== segments[0])
+        throw new ApiError(404);
       if (
         summary.scope === 'Organization' &&
         (state.context.workspaceType !== 'Organization' ||
@@ -123,9 +122,14 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
       )
         throw new ApiError(409, { code: 'CONTEXT_CHANGED' });
       if (upload) {
-        if (conversation && !canAttachConversation(conversation, state.user.id))
+        if (
+          conversation &&
+          !(photo
+            ? conversationCapability(conversation, 'canEditInfo')
+            : canAttachConversation(conversation, state.user.id))
+        )
           throw new ApiError(403);
-        if (conversation) {
+        if (conversation && !photo) {
           const restriction = await read<components['schemas']['MemberRestrictionResult']>(
             '/api/v1/conversations/' + conversationId + '/me/restriction',
             'MemberRestrictionResult',
@@ -202,6 +206,9 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
           result.organizationId !== prepared.organizationId)
       )
         throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
+      if (photo && !['image/jpeg', 'image/png'].includes(result.contentType.toLowerCase()))
+        throw new ApiError(415);
+      if (photo && !upload && result.uploadedByUserId !== prepared.userId) throw new ApiError(403);
       if (!upload && result.id !== segments[0])
         throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
       return NextResponse.json(result, { status: upstream.status, headers: responseHeaders });

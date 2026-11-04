@@ -1,0 +1,328 @@
+{
+  "checkedAtUtc": "2026-11-02T07:40:41.796Z",
+  "batch": 3,
+  "environment": "isolated local fixture; no external domain writes",
+  "files": [
+    "assistant-theme.spec.ts",
+    "client-scope.spec.ts",
+    "header-back.spec.ts",
+    "invitations-design.spec.ts",
+    "manager-workspace.spec.ts",
+    "messenger-management.spec.ts",
+    "preferences-weekly.spec.ts",
+    "project-expansion-visual.spec.ts",
+    "release-154c437.spec.ts",
+    "responsive.spec.ts",
+    "submission.spec.ts",
+    "telegram-reference.spec.ts"
+  ],
+  "exitCode": 0,
+  "counts": {
+    "passed": 43,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tests": [
+    {
+      "file": "assistant-theme.spec.ts",
+      "title": "dark theme stays coherent across panels and the assistant gives the answer most of the height",
+      "status": "passed",
+      "durationMs": 21358,
+      "attempts": 1
+    },
+    {
+      "file": "client-scope.spec.ts",
+      "title": "client entry, install targets and former platform surfaces",
+      "status": "passed",
+      "durationMs": 1795,
+      "attempts": 1
+    },
+    {
+      "file": "header-back.spec.ts",
+      "title": "class entry is a filled navigation button and lesson direct entry has one contextual back arrow in the header",
+      "status": "passed",
+      "durationMs": 8473,
+      "attempts": 1
+    },
+    {
+      "file": "header-back.spec.ts",
+      "title": "the header arrow respects unsaved edits and each settings page keeps its own parent destination",
+      "status": "passed",
+      "durationMs": 2787,
+      "attempts": 1
+    },
+    {
+      "file": "invitations-design.spec.ts",
+      "title": "invitation filters, readable cards and recoverable empty states fit phone, tablet and desktop",
+      "status": "passed",
+      "durationMs": 6813,
+      "attempts": 1
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "multi-selection preserves successful members and retries only unresolved additions",
+      "status": "passed",
+      "durationMs": 2388,
+      "attempts": 1
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+      "status": "passed",
+      "durationMs": 9925,
+      "attempts": 1
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+      "status": "passed",
+      "durationMs": 9939,
+      "attempts": 1
+    },
+    {
+      "file": "manager-workspace.spec.ts",
+      "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+      "status": "passed",
+      "durationMs": 8466,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "groups: two-step creation persists information and invited contacts, then creates once",
+      "status": "passed",
+      "durationMs": 3804,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "channels: two-step creation persists information and invited contacts, then creates once",
+      "status": "passed",
+      "durationMs": 3987,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "unknown creation failure retries the identical operation after reload, without creating in the information step",
+      "status": "passed",
+      "durationMs": 3420,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "owner edits information, adds a contact, changes administrator role and removes membership with confirmed server responses",
+      "status": "passed",
+      "durationMs": 5894,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "school Teacher cannot mutate another conversation owner data, including through direct API requests",
+      "status": "passed",
+      "durationMs": 2565,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "unified inbox includes direct and official conversations without a personal-school switch in three layouts",
+      "status": "passed",
+      "durationMs": 2294,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "unified inbox follows the server cursor and retains earlier conversations",
+      "status": "passed",
+      "durationMs": 2356,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "creation and member management remain usable in both themes across mobile tablet desktop",
+      "status": "passed",
+      "durationMs": 16123,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "a definitive invitation-required rejection preserves the draft and reopens contacts without replaying the denied operation",
+      "status": "passed",
+      "durationMs": 2343,
+      "attempts": 1
+    },
+    {
+      "file": "messenger-management.spec.ts",
+      "title": "loading more remains clickable during a background inbox refresh and the intent survives it",
+      "status": "passed",
+      "durationMs": 2312,
+      "attempts": 1
+    },
+    {
+      "file": "preferences-weekly.spec.ts",
+      "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+      "status": "passed",
+      "durationMs": 4192,
+      "attempts": 1
+    },
+    {
+      "file": "preferences-weekly.spec.ts",
+      "title": "weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read",
+      "status": "passed",
+      "durationMs": 4874,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion-visual.spec.ts",
+      "title": "expanded workflow and account pages preserve RTL, visible controls and responsive bounds",
+      "status": "passed",
+      "durationMs": 16495,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source upload waits for Ready, then retries one frozen create operation after reload",
+      "status": "passed",
+      "durationMs": 3137,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source edit preserves text across opaque version conflict and explicitly adopts the refreshed version",
+      "status": "passed",
+      "durationMs": 2743,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Library stays metadata-only and forged binary transfer is denied",
+      "status": "passed",
+      "durationMs": 1756,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "assistant preflight preserves real source selection when retrieval is unavailable",
+      "status": "passed",
+      "durationMs": 1589,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "independent edit permission does not grant settings, members or invitations",
+      "status": "passed",
+      "durationMs": 2082,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "conversation photo uses Ready file and opaque version; retry preserves one upload",
+      "status": "passed",
+      "durationMs": 2890,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "initial invitations are pending rather than active membership and use server expiry",
+      "status": "passed",
+      "durationMs": 3037,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Student sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "durationMs": 1847,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Teacher sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "durationMs": 1797,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Manager sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "durationMs": 2460,
+      "attempts": 1
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "small desktop layout remains a sidebar across manager pages and client-side tab changes",
+      "status": "passed",
+      "durationMs": 9334,
+      "attempts": 1
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+      "status": "passed",
+      "durationMs": 5814,
+      "attempts": 1
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "focused chat and independent form reserve their own footer without the tablet dock",
+      "status": "passed",
+      "durationMs": 1655,
+      "attempts": 1
+    },
+    {
+      "file": "responsive.spec.ts",
+      "title": "workspace dialog restores focus and an external context change clears prior role data",
+      "status": "passed",
+      "durationMs": 2482,
+      "attempts": 1
+    },
+    {
+      "file": "submission.spec.ts",
+      "title": "S09 → S17 → S10 persists drafts, retains text on save failure and submits once",
+      "status": "passed",
+      "durationMs": 5542,
+      "attempts": 1
+    },
+    {
+      "file": "submission.spec.ts",
+      "title": "a receipt deep link cannot announce success before actual submission",
+      "status": "passed",
+      "durationMs": 2947,
+      "attempts": 1
+    },
+    {
+      "file": "submission.spec.ts",
+      "title": "unsaved draft survives reload and cancelled link navigation",
+      "status": "passed",
+      "durationMs": 3312,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-reference.spec.ts",
+      "title": "Group light: reference message rows retain identity, reply focus and draft through resizing",
+      "status": "passed",
+      "durationMs": 4844,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-reference.spec.ts",
+      "title": "Channel light: reference message rows retain identity, reply focus and draft through resizing",
+      "status": "passed",
+      "durationMs": 3813,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-reference.spec.ts",
+      "title": "Group dark: reference message rows retain identity, reply focus and draft through resizing",
+      "status": "passed",
+      "durationMs": 4405,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-reference.spec.ts",
+      "title": "Channel dark: reference message rows retain identity, reply focus and draft through resizing",
+      "status": "passed",
+      "durationMs": 3605,
+      "attempts": 1
+    }
+  ]
+}

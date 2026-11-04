@@ -1,7 +1,8 @@
 'use client';
-import { useRef, useState } from 'react';
+import * as uiText from '@/content/fa';
+import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { Shield, UserMinus, UserPlus, MoreVertical, Search, Check, Camera } from 'lucide-react';
+import { Shield, UserMinus, UserPlus, MoreVertical, Search, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ConfirmAction } from '@/components/ui/confirm-action';
@@ -12,8 +13,8 @@ import type { components } from '@/generated/api/schema';
 import { usePersonal, usePersonalApi } from '../provider';
 import c from './conversation-pages.module.css';
 import t from './messaging-theme.module.css';
-import { canManageMembers } from './management-policy';
-import { ProfileAvatar } from '../profile-photo';
+import { conversationCapability } from './management-policy';
+import { ConversationPhotoEditor } from './conversation-photo';
 type S = components['schemas'];
 export function ConversationInfoEditor({ value }: { value: S['ManagedConversationResult'] }) {
   const { session, call } = usePersonal(),
@@ -32,22 +33,33 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
     dirty = title !== baseline.title || description !== baseline.description,
     stale = baseline.version !== value.version;
   useUnsavedChanges(dirty);
-  if (!canManageMembers(value, session.user.id))
+  useEffect(() => {
+    if (!dirty && baseline.version !== value.version) {
+      setTitle(value.title);
+      setDescription(value.description ?? '');
+      setBaseline({
+        title: value.title,
+        description: value.description ?? '',
+        version: value.version,
+      });
+    }
+  }, [value, dirty, baseline.version]);
+  if (!conversationCapability(value, 'canEditInfo'))
     return (
       <section className={c.panel}>
-        <EmptyState title="امکان ویرایش اطلاعات این گفتگو برای شما فعال نیست" />
+        <EmptyState title={uiText.text_db45e600c458} />
       </section>
     );
   return (
-    <section className={c.panel}>
+    <section className={`${c.panel} ${c.editorPanel}`}>
       <div className={c.editorHeading}>
-        <h2>{value.type === 'Channel' ? 'ویرایش کانال' : 'ویرایش گروه'}</h2>
+        <h2>{value.type === 'Channel' ? uiText.text_692d5f61506b : uiText.text_b3fb229e6d10}</h2>
         <Button
           type="submit"
           form="conversation-info-form"
           variant="ghost"
           size="icon"
-          aria-label="ذخیرهٔ اطلاعات"
+          aria-label={uiText.text_6fa623053bf9}
           disabled={busy || stale || !dirty || !title.trim()}
         >
           <Check size={27} />
@@ -99,7 +111,7 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
             });
           } catch (err) {
             setError(err);
-            if (err instanceof ApiError && err.status === 409)
+            if (err instanceof ApiError && [409, 412].includes(err.status))
               void cache.invalidateQueries({ queryKey: key });
           } finally {
             lock.current = false;
@@ -108,10 +120,11 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
         }}
       >
         <fieldset disabled={busy || stale} className={c.form}>
+          <ConversationPhotoEditor value={value} />
           <div className={c.identityEditor}>
-            <ProfileAvatar name={title || value.title} className={c.editorAvatar} />
             <label>
-              نام {value.type === 'Channel' ? 'کانال' : 'گروه'}
+              {uiText.text_b135dd6203d6}
+              {value.type === 'Channel' ? uiText.text_2db356b462dd : uiText.text_774668d4acc7}
               <input
                 required
                 value={title}
@@ -122,23 +135,8 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
               />
             </label>
           </div>
-          <Dialog>
-            <DialogTrigger asChild>
-              <button type="button" className={c.photoAction}>
-                <Camera size={23} />
-                انتخاب تصویر جدید
-              </button>
-            </DialogTrigger>
-            <DialogContent
-              className={`${t.theme} ${t.dialog} ${c.detailDialog}`}
-              title="تصویر گفتگو"
-              description="تغییر تصویر گروه و کانال هنوز در دسترس نیست؛ نام و توضیحات را می‌توانید ویرایش کنید."
-            >
-              <p className={c.note}>تصویر جدیدی ذخیره نمی‌شود.</p>
-            </DialogContent>
-          </Dialog>
           <label>
-            توضیحات (اختیاری)
+            {uiText.text_75e45482aebb}
             <textarea
               rows={3}
               value={description}
@@ -148,16 +146,16 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
               }}
             />
           </label>
-          {busy && <p role="status">در حال ذخیره…</p>}
+          {busy && <p role="status">{uiText.text_a143258455bb}</p>}
         </fieldset>
       </form>
       {stale && (
         <div role="alert">
-          <p>اطلاعات گفتگو تغییر کرده است؛ پیش‌نویس شما حفظ شد.</p>
+          <p>{uiText.text_cb06ae591439}</p>
           <ConfirmAction
-            title="دریافت اطلاعات تازه"
-            trigger="دریافت نسخهٔ تازه"
-            description="تغییرات ثبت‌نشده با اطلاعات تازه جایگزین شود؟"
+            title={uiText.text_acbe68adf3ef}
+            trigger={uiText.text_aae95f355460}
+            description={uiText.text_186123082d3d}
             onConfirm={async () => {
               setTitle(value.title);
               setDescription(value.description ?? '');
@@ -173,7 +171,7 @@ export function ConversationInfoEditor({ value }: { value: S['ManagedConversatio
         </div>
       )}
       {!!error && <ErrorState error={error} />}
-      {success && <p role="status">اطلاعات گفتگو ذخیره شد.</p>}
+      {success && <p role="status">{uiText.text_197e7ea6aea8}</p>}
     </section>
   );
 }
@@ -207,13 +205,13 @@ export function AddConversationMember({ value }: { value: S['ManagedConversation
       <DialogTrigger asChild>
         <Button>
           <UserPlus size={18} />
-          افزودن عضو
+          {uiText.text_5a817834209d}
         </Button>
       </DialogTrigger>
       <DialogContent
         className={`${t.theme} ${t.dialog} ${c.detailDialog}`}
-        title="افزودن عضو"
-        description="یک مخاطب را به گفتگو اضافه کنید. حریم خصوصی و اجازهٔ عضویت توسط سرویس بررسی می‌شود."
+        title={uiText.text_5a817834209d}
+        description={uiText.text_1ac1bbc54827}
       >
         <form
           className={c.search}
@@ -225,13 +223,13 @@ export function AddConversationMember({ value }: { value: S['ManagedConversation
         >
           <Search size={18} />
           <input
-            aria-label="جستجوی عضو جدید"
-            placeholder="نام مخاطب"
+            aria-label={uiText.text_a6c3837b1064}
+            placeholder={uiText.text_d14da946f17b}
             value={draft}
             onChange={(ev) => setDraft(ev.target.value)}
           />
           <Button type="submit" variant="ghost">
-            جستجو
+            {uiText.text_2a93eb7f06ce}
           </Button>
         </form>
         {contacts.isPending ? (
@@ -273,11 +271,13 @@ export function AddConversationMember({ value }: { value: S['ManagedConversation
                       }
                     }}
                   >
-                    {existing.has(m.contactUserId) ? 'عضو است' : 'افزودن'}
+                    {existing.has(m.contactUserId)
+                      ? uiText.text_35167823835d
+                      : uiText.text_50c8d65df6bb}
                   </Button>
                 </article>
               ))}
-            {!contacts.data.items.length && <EmptyState title="مخاطبی پیدا نشد" />}
+            {!contacts.data.items.length && <EmptyState title={uiText.text_fc5b13da691b} />}
           </div>
         )}
         {!!error && <ErrorState error={error} />}
@@ -287,14 +287,14 @@ export function AddConversationMember({ value }: { value: S['ManagedConversation
             disabled={busy || page === 1 || contacts.isFetching}
             onClick={() => setPage(page - 1)}
           >
-            صفحهٔ قبل
+            {uiText.text_88e65319d694}
           </Button>
           <Button
             variant="ghost"
             disabled={busy || !contacts.data?.hasMore || contacts.isFetching}
             onClick={() => setPage(page + 1)}
           >
-            صفحهٔ بعد
+            {uiText.text_12ca1a58c6ca}
           </Button>
         </div>
       </DialogContent>
@@ -304,9 +304,13 @@ export function AddConversationMember({ value }: { value: S['ManagedConversation
 export function MemberManagement({
   id,
   member,
+  canManageAdmins = false,
+  canManageMembers = false,
 }: {
   id: string;
   member: S['ConversationParticipantResult'];
+  canManageAdmins?: boolean;
+  canManageMembers?: boolean;
 }) {
   const { session, call } = usePersonal(),
     cache = useQueryClient();
@@ -327,37 +331,45 @@ export function MemberManagement({
       }}
     >
       <DialogTrigger asChild>
-        <Button size="icon" variant="ghost" aria-label={'مدیریت ' + member.user.displayName}>
+        <Button
+          size="icon"
+          variant="ghost"
+          aria-label={uiText.text_aa46bc41d37e + member.user.displayName}
+        >
           <MoreVertical size={20} />
         </Button>
       </DialogTrigger>
       <DialogContent
         className={`${t.theme} ${t.dialog} ${c.detailDialog}`}
-        title={'مدیریت ' + member.user.displayName}
-        description="نقش و عضویت فرد را در همین گفتگو مدیریت کنید."
+        title={uiText.text_aa46bc41d37e + member.user.displayName}
+        description={uiText.text_eb33997cc70e}
       >
         {!action ? (
           <div className={c.memberActions}>
-            <Button
-              variant="ghost"
-              onClick={() => setAction(member.role === 'Admin' ? 'Member' : 'Admin')}
-            >
-              <Shield size={20} />
-              {member.role === 'Admin' ? 'حذف دسترسی مدیریت' : 'ارتقا به مدیر'}
-            </Button>
-            <Button variant="ghost" className={c.danger} onClick={() => setAction('Remove')}>
-              <UserMinus size={20} />
-              حذف از گفتگو
-            </Button>
+            {canManageAdmins && (
+              <Button
+                variant="ghost"
+                onClick={() => setAction(member.role === 'Admin' ? 'Member' : 'Admin')}
+              >
+                <Shield size={20} />
+                {member.role === 'Admin' ? uiText.text_9d2a510784b3 : uiText.text_8c33d1a8641b}
+              </Button>
+            )}
+            {canManageMembers && (
+              <Button variant="ghost" className={c.danger} onClick={() => setAction('Remove')}>
+                <UserMinus size={20} />
+                {uiText.text_464460abd037}
+              </Button>
+            )}
           </div>
         ) : (
           <>
             <p>
               {action === 'Remove'
-                ? 'عضویت این فرد در گفتگو پایان یابد؟'
+                ? uiText.text_6b845561eedd
                 : action === 'Admin'
-                  ? 'این فرد به مدیر گفتگو ارتقا یابد؟'
-                  : 'دسترسی مدیریت حذف و عضویت عادی حفظ شود؟'}
+                  ? uiText.text_a849795e6bcd
+                  : uiText.text_12513980880d}
             </p>
             <div className={c.pager}>
               <Button
@@ -368,7 +380,7 @@ export function MemberManagement({
                   setError(undefined);
                 }}
               >
-                بازگشت
+                {uiText.common_back}
               </Button>
               <Button
                 variant={action === 'Remove' ? 'destructive' : 'default'}
@@ -404,7 +416,7 @@ export function MemberManagement({
                   }
                 }}
               >
-                {busy ? 'در حال ثبت…' : 'تأیید تغییر'}
+                {busy ? uiText.text_b5ef00b1806f : uiText.text_21cd4c9cfde3}
               </Button>
             </div>
           </>

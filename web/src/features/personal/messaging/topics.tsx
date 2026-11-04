@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { ApiError } from '@/lib/api/errors';
 import type { components } from '@/generated/api/schema';
 import { usePersonal, usePersonalApi } from '../provider';
 import c from './conversation-pages.module.css';
+import { conversationCapability } from './management-policy';
 import { List, Plus } from 'lucide-react';
 type S = components['schemas'];
 export function ConversationTopics({ value }: { value: S['ManagedConversationResult'] }) {
@@ -25,14 +27,14 @@ export function ConversationTopics({ value }: { value: S['ManagedConversationRes
   });
   return (
     <section className={c.panel}>
-      <h2>موضوعات گروه</h2>
+      <h2>{uiText.text_0de00f83cacf}</h2>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
         <ErrorState error={q.error} onRetry={() => void q.refetch()} />
       ) : (
         <>
-          {q.data.canManage && (
+          {q.data.canManage && conversationCapability(value, 'canManageTopics') && (
             <form
               className={c.form}
               onSubmit={async (ev) => {
@@ -65,7 +67,7 @@ export function ConversationTopics({ value }: { value: S['ManagedConversationRes
               }}
             >
               <label>
-                نام موضوع
+                {uiText.text_05a7e9536fa3}
                 <input
                   required
                   disabled={busy || !!command.current}
@@ -75,7 +77,7 @@ export function ConversationTopics({ value }: { value: S['ManagedConversationRes
               </label>
               <Button disabled={busy} type="submit">
                 <Plus size={18} />
-                {command.current ? 'تلاش مجدد' : 'ایجاد موضوع'}
+                {command.current ? uiText.text_8ea79cd585d1 : uiText.text_67a5065f267b}
               </Button>
             </form>
           )}
@@ -87,13 +89,25 @@ export function ConversationTopics({ value }: { value: S['ManagedConversationRes
                   <List size={22} />
                   <div>
                     <strong dir="auto">{topic.title}</strong>
-                    <small>{topic.status === 'Open' ? 'باز' : 'بسته'}</small>
+                    <small>
+                      {topic.status === 'Open'
+                        ? uiText.text_424a8f82124a
+                        : uiText.text_eac5a12c8992}
+                    </small>
                   </div>
-                  {q.data.canManage && (
+                  {q.data.canManage && conversationCapability(value, 'canManageTopics') && (
                     <ConfirmAction
-                      title={topic.status === 'Open' ? 'بستن موضوع' : 'بازکردن موضوع'}
-                      trigger={topic.status === 'Open' ? 'بستن' : 'بازکردن'}
-                      description="وضعیت این موضوع تغییر کند؟"
+                      title={
+                        topic.status === 'Open'
+                          ? uiText.text_65693f7108d5
+                          : uiText.text_faf0783a4cef
+                      }
+                      trigger={
+                        topic.status === 'Open'
+                          ? uiText.text_313cbecb4dd3
+                          : uiText.text_592c8cbd7fc9
+                      }
+                      description={uiText.text_070e012967e4}
                       onConfirm={async () => {
                         const result = await call<S['ConversationTopicResult']>(
                           `${base}/${topic.topicId}`,
@@ -120,16 +134,19 @@ export function ConversationTopics({ value }: { value: S['ManagedConversationRes
                 </article>
               ))
             ) : (
-              <EmptyState title="هنوز موضوعی ایجاد نشده است" />
+              <EmptyState title={uiText.text_5d148496581b} />
             )}
           </div>
           <div className={c.pager}>
             <Button variant="outline" disabled={page <= 1} onClick={() => setPage(page - 1)}>
-              قبلی
+              {uiText.text_28d94a2716a9}
             </Button>
-            <span>صفحهٔ {page}</span>
+            <span>
+              {uiText.text_2714496eef16}
+              {page}
+            </span>
             <Button variant="outline" disabled={!q.data.hasMore} onClick={() => setPage(page + 1)}>
-              بعدی
+              {uiText.text_a381bb5c90e2}
             </Button>
           </div>
         </>

@@ -6,6 +6,14 @@ export function isClientOperation(method: string, template: string) {
   return clientOperations.has(`${method} ${template}`);
 }
 export function requiresSchoolContext(path: string) {
+  // Shared assessment resources authorize their real class on the backend.
+  // PersonalClass is an independent domain, with no organization membership.
+  if (
+    /^\/api\/v1\/academic\/(personal-classes|assignments|submission-attempts|exams|exam-attempts|evaluations)(\/|$)/.test(
+      path,
+    )
+  )
+    return false;
   return /^\/api\/v1\/(academic|organization|reports)\//.test(path);
 }
 export function contextSignature(context: {

@@ -1,0 +1,497 @@
+{
+  "config": {
+    "configFile": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/playwright.config.ts",
+    "rootDir": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node scripts/test-server.mjs",
+      "url": "http://127.0.0.1:3132/enter",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "release-80c.spec.ts",
+      "file": "release-80c.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "formation survives a lost acknowledgement and submits the same server draft once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5256,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:08.989Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-7e15d9f4d250d6c4ddea",
+          "file": "release-80c.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "formation list uses server pages and resets the page on status change",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1370,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:14.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-9e1e8b8942b6b5a17ca4",
+          "file": "release-80c.spec.ts",
+          "line": 64,
+          "column": 5
+        },
+        {
+          "title": "settings preserve edits after a real stale-version conflict and require review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1488,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:16.174Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-8c8f73c9603a23f7de49",
+          "file": "release-80c.spec.ts",
+          "line": 85,
+          "column": 5
+        },
+        {
+          "title": "a personal invitation is pending until explicitly accepted, and can be declined",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1207,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:17.685Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-d51f9ff1d5944d349539",
+          "file": "release-80c.spec.ts",
+          "line": 116,
+          "column": 5
+        },
+        {
+          "title": "space repair accepts an empty 202 and keeps provisioning separate from success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1233,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:18.914Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-752e1c389afd36efb6c4",
+          "file": "release-80c.spec.ts",
+          "line": 135,
+          "column": 5
+        },
+        {
+          "title": "educational grants send both versions and do not derive permission from a teacher role",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1314,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:20.169Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-47de45db65b1c423c551",
+          "file": "release-80c.spec.ts",
+          "line": 148,
+          "column": 5
+        },
+        {
+          "title": "organization Teacher does not gain independent authoring without the returned capability",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1586,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:21.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-e73f93ba6f2dd463f6d4",
+          "file": "release-80c.spec.ts",
+          "line": 171,
+          "column": 5
+        },
+        {
+          "title": "personal learner saves and submits an independent assignment without school context",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1807,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:23.120Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-ade0c3e11d5e635a6043",
+          "file": "release-80c.spec.ts",
+          "line": 186,
+          "column": 5
+        },
+        {
+          "title": "personal learner starts and resumes an exam with a server deadline",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16160,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('timer')\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('timer')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('timer')\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('timer')\u001b[22m\n\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/release-80c.spec.ts:225:41",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/release-80c.spec.ts",
+                      "column": 41,
+                      "line": 225
+                    },
+                    "snippet": "  223 |   await page.goto(base + '/exams/' + eid);\n  224 |   await page.getByRole('button', { name: copy.text_974bdfc23e33, exact: true }).click();\n> 225 |   await expect(page.getByRole('timer')).toBeVisible();\n      |                                         ^\n  226 |   await expect(page.getByText('پاسخ کوتاه بنویسید', { exact: true })).toBeVisible();\n  227 |   await page.reload();\n  228 |   await expect(page.getByRole('timer')).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/release-80c.spec.ts",
+                        "column": 41,
+                        "line": 225
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('timer')\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('timer')\u001b[22m\n\n\n  223 |   await page.goto(base + '/exams/' + eid);\n  224 |   await page.getByRole('button', { name: copy.text_974bdfc23e33, exact: true }).click();\n> 225 |   await expect(page.getByRole('timer')).toBeVisible();\n      |                                         ^\n  226 |   await expect(page.getByText('پاسخ کوتاه بنویسید', { exact: true })).toBeVisible();\n  227 |   await page.reload();\n  228 |   await expect(page.getByRole('timer')).toBeVisible();\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/release-80c.spec.ts:225:41"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:24.951Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/release-80c-personal-learn-95959-exam-with-a-server-deadline/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/release-80c-personal-learn-95959-exam-with-a-server-deadline/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/release-80c-personal-learn-95959-exam-with-a-server-deadline/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/release-80c.spec.ts",
+                    "column": 41,
+                    "line": 225
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-62ec0b23ad37c4e82671",
+          "file": "release-80c.spec.ts",
+          "line": 214,
+          "column": 5
+        },
+        {
+          "title": "revoked independent membership removes the previously loaded content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1564,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:42.076Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-290a7f2a2eee064a33ba",
+          "file": "release-80c.spec.ts",
+          "line": 237,
+          "column": 5
+        },
+        {
+          "title": "new connected views keep mobile tablet desktop bounds and actual theme",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5422,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-04T10:32:43.834Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5aaba1096b128386d625-53eb3bc08edbd5c799ea",
+          "file": "release-80c.spec.ts",
+          "line": 251,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-04T10:32:05.720Z",
+    "duration": 43686.428,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

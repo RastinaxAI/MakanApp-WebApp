@@ -42,9 +42,9 @@ test('Manager has a dedicated workspace and reports; other roles cannot enter ma
   await request.post(fixture + '/__test__/manager-case');
   await login(context, 'Manager');
   await page.goto(base);
-  await expect(page.getByRole('heading', { name: 'مدیریت آموزشگاه', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'آموزشگاه', exact: true })).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'بخش‌های آموزشگاه' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'ایجاد کلاس', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'افزودن کلاس آموزشگاه', exact: true })).toBeVisible();
   await mkdir('test-results/manager-workspace', { recursive: true });
   for (const width of [390, 834, 1440]) {
     await page.setViewportSize({ width, height: 1000 });

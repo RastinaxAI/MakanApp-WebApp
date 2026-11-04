@@ -12,7 +12,7 @@ test('phone and OTP enforce exact lengths, normalize Persian digits and reject o
   await expect(phone).toHaveAttribute('maxlength', '11');
   for (const value of ['0912000010', '08120000101']) {
     await phone.fill(value);
-    await page.getByRole('button', { name: 'دریافت کد ورود', exact: true }).click();
+    await page.getByRole('button', { name: 'دریافت کد تأیید', exact: true }).click();
     await expect(phone).toHaveAttribute('aria-invalid', 'true');
   }
   await phone.fill('');
@@ -26,12 +26,12 @@ test('phone and OTP enforce exact lengths, normalize Persian digits and reject o
   await expect(phone).toHaveValue('');
   expect(calls).toHaveLength(0);
   await phone.fill('۰۹۱۲۰۰۰۰۱۰۱');
-  await page.getByRole('button', { name: 'دریافت کد ورود', exact: true }).click();
+  await page.getByRole('button', { name: 'دریافت کد تأیید', exact: true }).click();
   const otp = page.getByRole('textbox', { name: 'کد ورود', exact: true });
   await expect(otp).toBeVisible();
   await expect(otp).toHaveAttribute('maxlength', '6');
   await otp.fill('12345');
-  await page.getByRole('button', { name: 'تأیید و ورود', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'تأیید و ورود', exact: true })).toBeDisabled();
   await expect(otp).toHaveAttribute('aria-invalid', 'true');
   await otp.fill('');
   await otp.evaluate((node) => {
@@ -72,11 +72,21 @@ test('entry actions follow viewport size without retaining a mobile layout on de
   await page.goto('/enter');
   for (const width of [390, 834, 1024, 1440, 1920, 390]) {
     await page.setViewportSize({ width, height: 900 });
-    const action = page.getByRole('button', { name: 'دریافت کد ورود', exact: true });
+    const action = page.getByRole('button', { name: 'دریافت کد تأیید', exact: true });
     await expect(action).toBeInViewport();
-    expect(await action.locator('..').evaluate((node) => getComputedStyle(node).position)).toBe(
-      width < 768 ? 'fixed' : 'static',
-    );
+    const box = (await action.boundingBox())!;
+    expect(box.y + box.height).toBeLessThanOrEqual(900);
+    if (width < 768) {
+      const field = (await page.getByLabel('شماره همراه', { exact: true }).boundingBox())!;
+      expect(box.y - field.y - field.height).toBeGreaterThan(20);
+      expect(box.y - field.y - field.height).toBeLessThan(120);
+      expect(box.y + box.height).toBeLessThan(880);
+    } else {
+      const information = (await page
+        .getByRole('complementary', { name: 'دربارهٔ ماکان' })
+        .boundingBox())!;
+      expect(box.x + box.width).toBeLessThan(information.x);
+    }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );

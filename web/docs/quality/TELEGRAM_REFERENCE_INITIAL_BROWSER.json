@@ -1,0 +1,1067 @@
+{
+  "stage": "main browser run",
+  "termination": "SIGTERM before the last eight tests completed; no final JSON reporter file was written",
+  "totalInventory": 159,
+  "observed": 151,
+  "passed": 147,
+  "failed": 4,
+  "results": [
+    {
+      "title": "assignment evaluation retains failed drafts, previews audience feedback and releases only after confirmation",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 9,
+      "status": "passed",
+      "durationMs": 7900
+    },
+    {
+      "title": "exam manual grading separates saving, completion and publication, and supports a correction revision",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 79,
+      "status": "passed",
+      "durationMs": 7300
+    },
+    {
+      "title": "student and parent cannot open author data; unpublished results and unrelated attachments do not masquerade as success",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 133,
+      "status": "passed",
+      "durationMs": 5300
+    },
+    {
+      "title": "new assessment pages remain readable without overflow at three viewports",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 178,
+      "status": "passed",
+      "durationMs": 16100
+    },
+    {
+      "title": "editing and publishing a homework draft uses versioned review and retains a failed save",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 304,
+      "status": "passed",
+      "durationMs": 4500
+    },
+    {
+      "title": "a server version change preserves the local evaluation draft until explicit replacement",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 346,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "parent result uses the selected child relation and guardian feedback without author notes",
+      "file": "tests/browser/assessment-evaluation.spec.ts",
+      "line": 403,
+      "status": "passed",
+      "durationMs": 3700
+    },
+    {
+      "title": "assignment answer sheet has context, stages and in-flow actions at all supported widths",
+      "file": "tests/browser/assessment-settings.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 4000
+    },
+    {
+      "title": "exam answer map preserves edits on failed refresh, reviews only saved answers and adapts to each width",
+      "file": "tests/browser/assessment-settings.spec.ts",
+      "line": 36,
+      "status": "passed",
+      "durationMs": 3700
+    },
+    {
+      "title": "exam countdown expires from server time, locks writing and never fabricates final submission",
+      "file": "tests/browser/assessment-settings.spec.ts",
+      "line": 93,
+      "status": "passed",
+      "durationMs": 2200
+    },
+    {
+      "title": "privacy save stays inside its form, retains failed edits and uses returned versions for later saves",
+      "file": "tests/browser/assessment-settings.spec.ts",
+      "line": 141,
+      "status": "passed",
+      "durationMs": 5000
+    },
+    {
+      "title": "dark theme stays coherent across panels and the assistant gives the answer most of the height",
+      "file": "tests/browser/assistant-theme.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 25900
+    },
+    {
+      "title": "chat header light fa: avatar stays beside the title and controls never overlap",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 18,
+      "status": "passed",
+      "durationMs": 4300
+    },
+    {
+      "title": "chat header light en: avatar stays beside the title and controls never overlap",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 18,
+      "status": "passed",
+      "durationMs": 3700
+    },
+    {
+      "title": "chat header dark fa: avatar stays beside the title and controls never overlap",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 18,
+      "status": "passed",
+      "durationMs": 3700
+    },
+    {
+      "title": "chat header dark en: avatar stays beside the title and controls never overlap",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 18,
+      "status": "passed",
+      "durationMs": 3300
+    },
+    {
+      "title": "dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 75,
+      "status": "failed",
+      "durationMs": 1800
+    },
+    {
+      "title": "school weekly agenda Student: compact dates, usable controls, real range requests and current-week reset",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 162,
+      "status": "passed",
+      "durationMs": 4400
+    },
+    {
+      "title": "school weekly agenda Teacher: compact dates, usable controls, real range requests and current-week reset",
+      "file": "tests/browser/chat-education-layout.spec.ts",
+      "line": 162,
+      "status": "passed",
+      "durationMs": 5300
+    },
+    {
+      "title": "Direct: one bubble from sending through delayed receipt history without server-status text",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 7400
+    },
+    {
+      "title": "Saved: one bubble from sending through delayed receipt history without server-status text",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 7300
+    },
+    {
+      "title": "failed send remains visible and is never rendered as confirmed",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 76,
+      "status": "passed",
+      "durationMs": 1800
+    },
+    {
+      "title": "a history refresh failure retains displayed messages while a real access denial hides them",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 101,
+      "status": "passed",
+      "durationMs": 13700
+    },
+    {
+      "title": "school Personal: icon and text rows stay aligned in mobile tablet desktop",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 128,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "school Student: icon and text rows stay aligned in mobile tablet desktop",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 128,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "school Teacher: icon and text rows stay aligned in mobile tablet desktop",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 128,
+      "status": "passed",
+      "durationMs": 2900
+    },
+    {
+      "title": "school Parent: icon and text rows stay aligned in mobile tablet desktop",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 128,
+      "status": "passed",
+      "durationMs": 2000
+    },
+    {
+      "title": "school Manager: icon and text rows stay aligned in mobile tablet desktop",
+      "file": "tests/browser/chat-school-polish.spec.ts",
+      "line": 128,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "client entry, install targets and former platform surfaces",
+      "file": "tests/browser/client-scope.spec.ts",
+      "line": 3,
+      "status": "passed",
+      "durationMs": 1500
+    },
+    {
+      "title": "conversation members and media follow server pagination and a media filter restarts its cursor",
+      "file": "tests/browser/conversation-pages.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 8400
+    },
+    {
+      "title": "conversation settings retain failed selections and leave confirmation retains failure until accepted",
+      "file": "tests/browser/conversation-pages.spec.ts",
+      "line": 38,
+      "status": "passed",
+      "durationMs": 3700
+    },
+    {
+      "title": "education roles do not grant group ownership and system managed conversation does not expose manual management",
+      "file": "tests/browser/conversation-pages.spec.ts",
+      "line": 79,
+      "status": "passed",
+      "durationMs": 2300
+    },
+    {
+      "title": "direct conversation info is reached from chat and archive uses confirmed user state",
+      "file": "tests/browser/conversation-pages.spec.ts",
+      "line": 98,
+      "status": "passed",
+      "durationMs": 2500
+    },
+    {
+      "title": "conversation detail pages preserve RTL and layout at mobile tablet and desktop",
+      "file": "tests/browser/conversation-pages.spec.ts",
+      "line": 112,
+      "status": "passed",
+      "durationMs": 6000
+    },
+    {
+      "title": "standalone V2 reference renders all 130 screens at three sizes with valid route targets",
+      "file": "tests/browser/design-reference.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 4100
+    },
+    {
+      "title": "class entry is a filled navigation button and lesson direct entry has one contextual back arrow in the header",
+      "file": "tests/browser/header-back.spec.ts",
+      "line": 3,
+      "status": "passed",
+      "durationMs": 7600
+    },
+    {
+      "title": "the header arrow respects unsaved edits and each settings page keeps its own parent destination",
+      "file": "tests/browser/header-back.spec.ts",
+      "line": 48,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Student light",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 13200
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Teacher light",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 12500
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Parent light",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 11400
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Manager light",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 12100
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Personal light",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 11800
+    },
+    {
+      "title": "theme light is applied before the application JavaScript can hydrate",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 69,
+      "status": "passed",
+      "durationMs": 660
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Student dark",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 13900
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Teacher dark",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 11000
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Parent dark",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 11800
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Manager dark",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 14400
+    },
+    {
+      "title": "Telegram-reference four-tab shell: Personal dark",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 7,
+      "status": "passed",
+      "durationMs": 12800
+    },
+    {
+      "title": "theme dark is applied before the application JavaScript can hydrate",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 69,
+      "status": "passed",
+      "durationMs": 1100
+    },
+    {
+      "title": "temporary inbox failure retains known conversations; permission denial removes them",
+      "file": "tests/browser/instagram-experience.spec.ts",
+      "line": 96,
+      "status": "passed",
+      "durationMs": 1600
+    },
+    {
+      "title": "invitation filters, readable cards and recoverable empty states fit phone, tablet and desktop",
+      "file": "tests/browser/invitations-design.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 7000
+    },
+    {
+      "title": "Teacher uses independent lesson create, edit and review pages; Student reads only Published",
+      "file": "tests/browser/learning.spec.ts",
+      "line": 2,
+      "status": "passed",
+      "durationMs": 3700
+    },
+    {
+      "title": "exam saves an answer and shows a receipt only after accepted finalization",
+      "file": "tests/browser/learning.spec.ts",
+      "line": 51,
+      "status": "passed",
+      "durationMs": 2500
+    },
+    {
+      "title": "members and records retain the same selected school destination and navigation position",
+      "file": "tests/browser/manager-navigation.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 7500
+    },
+    {
+      "title": "manager actions and report choices remain clear, reachable and responsive",
+      "file": "tests/browser/manager-navigation.spec.ts",
+      "line": 43,
+      "status": "passed",
+      "durationMs": 10900
+    },
+    {
+      "title": "multi-selection preserves successful members and retries only unresolved additions",
+      "file": "tests/browser/manager-workspace.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+      "file": "tests/browser/manager-workspace.spec.ts",
+      "line": 36,
+      "status": "passed",
+      "durationMs": 9600
+    },
+    {
+      "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+      "file": "tests/browser/manager-workspace.spec.ts",
+      "line": 113,
+      "status": "passed",
+      "durationMs": 7500
+    },
+    {
+      "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+      "file": "tests/browser/manager-workspace.spec.ts",
+      "line": 217,
+      "status": "passed",
+      "durationMs": 5800
+    },
+    {
+      "title": "member directory uses server filters, clear record actions and responsive cards",
+      "file": "tests/browser/member-directory.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 3100
+    },
+    {
+      "title": "read-only person flags remain authoritative and a failed member read can be retried",
+      "file": "tests/browser/member-directory.spec.ts",
+      "line": 78,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "person list and editor stay readable on all layouts and preserve a failed draft",
+      "file": "tests/browser/member-directory.spec.ts",
+      "line": 122,
+      "status": "passed",
+      "durationMs": 2900
+    },
+    {
+      "title": "two isolated accounts exchange messages and update recipient inbox without reload",
+      "file": "tests/browser/messaging.spec.ts",
+      "line": 2,
+      "status": "passed",
+      "durationMs": 12200
+    },
+    {
+      "title": "Parent cannot read a Student private conversation through the BFF",
+      "file": "tests/browser/messaging.spec.ts",
+      "line": 35,
+      "status": "passed",
+      "durationMs": 940
+    },
+    {
+      "title": "Manager cannot read a Student private conversation through the BFF",
+      "file": "tests/browser/messaging.spec.ts",
+      "line": 35,
+      "status": "passed",
+      "durationMs": 901
+    },
+    {
+      "title": "groups: two-step creation persists information and invited contacts, then creates once",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 6,
+      "status": "passed",
+      "durationMs": 2400
+    },
+    {
+      "title": "channels: two-step creation persists information and invited contacts, then creates once",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 6,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "unknown creation failure retries the identical operation after reload, without creating in the information step",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 52,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "owner edits information, adds a contact, changes administrator role and removes membership with confirmed server responses",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 82,
+      "status": "failed",
+      "durationMs": 60000
+    },
+    {
+      "title": "school Teacher cannot mutate another conversation owner data, including through direct API requests",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 127,
+      "status": "passed",
+      "durationMs": 1700
+    },
+    {
+      "title": "unified inbox includes direct and official conversations without a personal-school switch in three layouts",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 148,
+      "status": "passed",
+      "durationMs": 1600
+    },
+    {
+      "title": "unified inbox exhausts scope pagination independently and retains earlier conversations",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 181,
+      "status": "passed",
+      "durationMs": 1400
+    },
+    {
+      "title": "creation and member management remain usable in both themes across mobile tablet desktop",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 214,
+      "status": "passed",
+      "durationMs": 9100
+    },
+    {
+      "title": "a definitive invitation-required rejection preserves the draft and reopens contacts without replaying the denied operation",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 284,
+      "status": "passed",
+      "durationMs": 1600
+    },
+    {
+      "title": "loading more remains clickable during a background inbox refresh and the intent survives it",
+      "file": "tests/browser/messenger-management.spec.ts",
+      "line": 322,
+      "status": "passed",
+      "durationMs": 1400
+    },
+    {
+      "title": "Student keeps the selected role across tabs, reload and another browser tab",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 2900
+    },
+    {
+      "title": "Teacher keeps the selected role across tabs, reload and another browser tab",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "Parent keeps the selected role across tabs, reload and another browser tab",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 2900
+    },
+    {
+      "title": "Manager keeps the selected role across tabs, reload and another browser tab",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 3200
+    },
+    {
+      "title": "assistant uses the full viewport and readable sample outputs without the extra header",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 43,
+      "status": "passed",
+      "durationMs": 4700
+    },
+    {
+      "title": "PWA install offer has a persistent close control and manual installation help",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 118,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "PWA installation calls the browser prompt only after a click and does not reload the app",
+      "file": "tests/browser/navigation-experience.spec.ts",
+      "line": 150,
+      "status": "passed",
+      "durationMs": 1000
+    },
+    {
+      "title": "records cold entry and school payloads plus a controlled concurrent read benchmark",
+      "file": "tests/browser/performance.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 2300
+    },
+    {
+      "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+      "file": "tests/browser/preferences-weekly.spec.ts",
+      "line": 3,
+      "status": "failed",
+      "durationMs": 996
+    },
+    {
+      "title": "weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read",
+      "file": "tests/browser/preferences-weekly.spec.ts",
+      "line": 62,
+      "status": "passed",
+      "durationMs": 3800
+    },
+    {
+      "title": "profile exposes identity and age below spaces and moves preference menus to their own page",
+      "file": "tests/browser/profile-school-files.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 2800
+    },
+    {
+      "title": "school header searches authorized classes, assignments and published exams without contact navigation",
+      "file": "tests/browser/profile-school-files.spec.ts",
+      "line": 64,
+      "status": "passed",
+      "durationMs": 1500
+    },
+    {
+      "title": "Student attaches a PDF and photo, retries an attachment failure without reuploading and submits a file-only answer",
+      "file": "tests/browser/profile-school-files.spec.ts",
+      "line": 89,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "pending file never enables final review and a Parent cannot use the Student file proxy",
+      "file": "tests/browser/profile-school-files.spec.ts",
+      "line": 144,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "profile form retains user input after a failed save and persists theme through settings",
+      "file": "tests/browser/profile.spec.ts",
+      "line": 2,
+      "status": "passed",
+      "durationMs": 2400
+    },
+    {
+      "title": "expanded workflow and account pages preserve RTL, visible controls and responsive bounds",
+      "file": "tests/browser/project-expansion-visual.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 9500
+    },
+    {
+      "title": "Manager creates a class only after review; catalog search, failed submit and reload keep the draft",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 6,
+      "status": "passed",
+      "durationMs": 3200
+    },
+    {
+      "title": "Teacher creates and edits a session on independent pages and cancellation stays pending after a failed service",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 55,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "Teacher and Student cannot enter Manager creation pages and deep-link review cannot bypass validation",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 88,
+      "status": "passed",
+      "durationMs": 2500
+    },
+    {
+      "title": "Manager person create/edit uses stable operations, server versions and authoritative details",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 113,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "exam author uses independent creation/question/review and a confirmation before publication",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 146,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "notification preferences preserve failed edits, mandatory flags and scope while center reads server notifications",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 192,
+      "status": "passed",
+      "durationMs": 3100
+    },
+    {
+      "title": "device revocation requires confirmation, preserves failure and is bound to account, origin and context",
+      "file": "tests/browser/project-expansion.spec.ts",
+      "line": 230,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "current responsive geometry and historical route reference at 390, 834 and 1440",
+      "file": "tests/browser/reference-fidelity.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 10100
+    },
+    {
+      "title": "workspace selection is explicit and a Student cannot author a class assignment",
+      "file": "tests/browser/reference-fidelity.spec.ts",
+      "line": 147,
+      "status": "passed",
+      "durationMs": 1700
+    },
+    {
+      "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+      "file": "tests/browser/reference-fidelity.spec.ts",
+      "line": 172,
+      "status": "passed",
+      "durationMs": 3200
+    },
+    {
+      "title": "exam question navigation retains answers and exposes final review separately",
+      "file": "tests/browser/reference-fidelity.spec.ts",
+      "line": 211,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+      "file": "tests/browser/reference-fidelity.spec.ts",
+      "line": 241,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+      "file": "tests/browser/reference-fidelity.spec.ts",
+      "line": 262,
+      "status": "passed",
+      "durationMs": 2000
+    },
+    {
+      "title": "Manager opens the organization official group through its own binding",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 6500
+    },
+    {
+      "title": "Student retains the educational context while using personal capabilities",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 32,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "Teacher retains the educational context while using personal capabilities",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 32,
+      "status": "passed",
+      "durationMs": 1800
+    },
+    {
+      "title": "Parent retains the educational context while using personal capabilities",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 32,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "Manager retains the educational context while using personal capabilities",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 32,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "a roleless user has a personal card; unresolved visibility is not guessed",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 84,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "Teacher sends a personal message and uploads a personal file without switching educational context",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 101,
+      "status": "passed",
+      "durationMs": 1800
+    },
+    {
+      "title": "official pair keeps a healthy group available, shows a structured card and reauthorizes its source",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 160,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "Ready without read permission and parent relationship never grant official access",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 207,
+      "status": "passed",
+      "durationMs": 1700
+    },
+    {
+      "title": "revocation removes open official content while personal messaging remains available",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 235,
+      "status": "passed",
+      "durationMs": 6700
+    },
+    {
+      "title": "superseded cards disable the old CTA and refresh current activity and source without republishing",
+      "file": "tests/browser/release-42c.spec.ts",
+      "line": 254,
+      "status": "passed",
+      "durationMs": 1400
+    },
+    {
+      "title": "background session checks do not cancel a foreground child selection",
+      "file": "tests/browser/release-e11.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "account replay refreshes a school snapshot without navigation or a page polling timer",
+      "file": "tests/browser/release-e11.spec.ts",
+      "line": 43,
+      "status": "passed",
+      "durationMs": 4200
+    },
+    {
+      "title": "exam file-only answer waits for Ready, enforces policy, handles conflict and downloads private bytes",
+      "file": "tests/browser/release-e11.spec.ts",
+      "line": 74,
+      "status": "passed",
+      "durationMs": 3500
+    },
+    {
+      "title": "personal commerce shows unknown usage honestly and an order never activates subscription",
+      "file": "tests/browser/release-e11.spec.ts",
+      "line": 181,
+      "status": "passed",
+      "durationMs": 1700
+    },
+    {
+      "title": "personal class invitation needs recipient acceptance and grants no organization role",
+      "file": "tests/browser/release-e11.spec.ts",
+      "line": 203,
+      "status": "passed",
+      "durationMs": 3500
+    },
+    {
+      "title": "small desktop layout remains a sidebar across manager pages and client-side tab changes",
+      "file": "tests/browser/responsive.spec.ts",
+      "line": 3,
+      "status": "passed",
+      "durationMs": 5700
+    },
+    {
+      "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+      "file": "tests/browser/responsive.spec.ts",
+      "line": 42,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "focused chat and independent form reserve their own footer without the tablet dock",
+      "file": "tests/browser/responsive.spec.ts",
+      "line": 90,
+      "status": "passed",
+      "durationMs": 1400
+    },
+    {
+      "title": "workspace dialog restores focus and an external context change clears prior role data",
+      "file": "tests/browser/responsive.spec.ts",
+      "line": 105,
+      "status": "passed",
+      "durationMs": 1600
+    },
+    {
+      "title": "profile edit has grouped readable fields and a footer after the form at all screen sizes",
+      "file": "tests/browser/school-redesign.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 1500
+    },
+    {
+      "title": "school has four destinations, three nearest items and a separate class page with URL-backed sections",
+      "file": "tests/browser/school-redesign.spec.ts",
+      "line": 36,
+      "status": "passed",
+      "durationMs": 3000
+    },
+    {
+      "title": "Teacher opens class members alongside activities without gaining management actions",
+      "file": "tests/browser/school-redesign.spec.ts",
+      "line": 124,
+      "status": "passed",
+      "durationMs": 2600
+    },
+    {
+      "title": "weekly schedule changes the server range and can return to the same week without date fields",
+      "file": "tests/browser/school-redesign.spec.ts",
+      "line": 166,
+      "status": "passed",
+      "durationMs": 1200
+    },
+    {
+      "title": "invitation details, consent, failed acceptance and decline retain truthful server state",
+      "file": "tests/browser/school-redesign.spec.ts",
+      "line": 198,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste",
+      "file": "tests/browser/sign-in-layout.spec.ts",
+      "line": 3,
+      "status": "passed",
+      "durationMs": 1300
+    },
+    {
+      "title": "all invitation entry points converge on one inbox",
+      "file": "tests/browser/sign-in-layout.spec.ts",
+      "line": 56,
+      "status": "passed",
+      "durationMs": 2200
+    },
+    {
+      "title": "entry actions follow viewport size without retaining a mobile layout on desktop",
+      "file": "tests/browser/sign-in-layout.spec.ts",
+      "line": 69,
+      "status": "passed",
+      "durationMs": 881
+    },
+    {
+      "title": "S09 → S17 → S10 persists drafts, retains text on save failure and submits once",
+      "file": "tests/browser/submission.spec.ts",
+      "line": 2,
+      "status": "passed",
+      "durationMs": 3400
+    },
+    {
+      "title": "a receipt deep link cannot announce success before actual submission",
+      "file": "tests/browser/submission.spec.ts",
+      "line": 61,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "unsaved draft survives reload and cancelled link navigation",
+      "file": "tests/browser/submission.spec.ts",
+      "line": 77,
+      "status": "passed",
+      "durationMs": 2000
+    },
+    {
+      "title": "mute is confirmed by the service and a failed change never shows false success",
+      "file": "tests/browser/telegram-details.spec.ts",
+      "line": 5,
+      "status": "passed",
+      "durationMs": 2300
+    },
+    {
+      "title": "invite link creation retries with one command, requires approval, then can be revoked",
+      "file": "tests/browser/telegram-details.spec.ts",
+      "line": 26,
+      "status": "passed",
+      "durationMs": 4400
+    },
+    {
+      "title": "topic draft survives errors and status changes only after server confirmation",
+      "file": "tests/browser/telegram-details.spec.ts",
+      "line": 83,
+      "status": "passed",
+      "durationMs": 1800
+    },
+    {
+      "title": "non owners never see invite management and the service rejects a direct mutation",
+      "file": "tests/browser/telegram-details.spec.ts",
+      "line": 110,
+      "status": "passed",
+      "durationMs": 854
+    },
+    {
+      "title": "reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes",
+      "file": "tests/browser/telegram-details.spec.ts",
+      "line": 133,
+      "status": "failed",
+      "durationMs": 5100
+    },
+    {
+      "title": "Telegram-reference messenger light 390: usable list, chat and menus",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "Telegram-reference messenger light 834: usable list, chat and menus",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 2100
+    },
+    {
+      "title": "Telegram-reference messenger light 1440: usable list, chat and menus",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 2200
+    },
+    {
+      "title": "Telegram-reference messenger dark 390: usable list, chat and menus",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 1800
+    },
+    {
+      "title": "Telegram-reference messenger dark 834: usable list, chat and menus",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "Telegram-reference messenger dark 1440: usable list, chat and menus",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 2300
+    },
+    {
+      "title": "chat survives live resizing and attachment failure retains both file and caption",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 90,
+      "status": "passed",
+      "durationMs": 1900
+    },
+    {
+      "title": "message context menu replies to the selected message and returns focus to the composer",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 140,
+      "status": "passed",
+      "durationMs": 2300
+    },
+    {
+      "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 163,
+      "status": "passed",
+      "durationMs": 8900
+    },
+    {
+      "title": "photo video and file reach the other fixture account and download with identical bytes",
+      "file": "tests/browser/telegram-messenger.spec.ts",
+      "line": 219,
+      "status": "passed",
+      "durationMs": 7000
+    },
+    {
+      "title": "one workspace click enters it once; a failed switch never claims entry",
+      "file": "tests/browser/workspace-child-attachments.spec.ts",
+      "line": 4,
+      "status": "passed",
+      "durationMs": 2400
+    }
+  ]
+}

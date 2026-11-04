@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { CalendarDays, ClipboardList, FileQuestion, ChevronLeft } from 'lucide-react';
 import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -24,20 +25,20 @@ export function UpcomingSummary({
 }) {
   const cards = [
     {
-      name: 'نزدیک‌ترین جلسه',
-      empty: 'جلسهٔ نزدیکی در برنامه نیست',
+      name: uiText.text_d35bc9b4b25d,
+      empty: uiText.text_611356e361a9,
       item: session,
       Icon: CalendarDays,
     },
     {
-      name: 'نزدیک‌ترین تکلیف',
-      empty: 'تکلیف نزدیکی در برنامه نیست',
+      name: uiText.text_d82ca42d9c0d,
+      empty: uiText.text_291b5a9c5116,
       item: assignment,
       Icon: ClipboardList,
     },
     {
-      name: 'نزدیک‌ترین آزمون',
-      empty: 'آزمون نزدیکی در برنامه نیست',
+      name: uiText.text_5699366d499f,
+      empty: uiText.text_f8f7ac073471,
       item: exam,
       Icon: FileQuestion,
     },
@@ -62,7 +63,7 @@ export function UpcomingSummary({
               <p>{item.classTitle}</p>
               <time>{date(item.time, true)}</time>
               <Link href={item.href}>
-                مشاهده
+                {uiText.text_d2c8a80d171e}
                 <ChevronLeft size={17} />
               </Link>
             </>

@@ -1,4 +1,4 @@
-import { PersonalProfile } from '@/features/personal/pages';
+import { ReferenceProfile } from '@/features/reference/connected-profile';
 export default function Page() {
-  return <PersonalProfile />;
+  return <ReferenceProfile />;
 }

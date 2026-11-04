@@ -168,7 +168,9 @@ test('reference group and channel surfaces keep RTL, focus and touch targets in 
           invites: 'لینک‌های دعوت',
           topics: 'موضوعات گروه',
         }[section];
-        await expect(page.getByRole('heading', { name: heading, exact: true })).toBeVisible();
+        await expect(
+          page.getByRole('main').getByRole('heading', { name: heading, exact: true }),
+        ).toBeVisible();
         for (const [width, height] of [
           [390, 844],
           [834, 1194],
@@ -199,12 +201,10 @@ test('reference group and channel surfaces keep RTL, focus and touch targets in 
           });
         }
         if (section === 'edit') {
-          const action = page.getByRole('button', { name: 'انتخاب تصویر جدید', exact: true });
-          await action.click();
-          await expect(page.getByRole('dialog')).toContainText('هنوز در دسترس نیست');
-          await page.keyboard.press('Escape');
+          const action = page.getByLabel('انتخاب تصویر جدید', { exact: true });
+          await action.focus();
           await expect(action).toBeFocused();
-          const box = await action.boundingBox();
+          const box = await action.locator('..').boundingBox();
           expect(box!.height).toBeGreaterThanOrEqual(44);
         }
       }

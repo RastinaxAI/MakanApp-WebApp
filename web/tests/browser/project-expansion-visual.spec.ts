@@ -39,6 +39,10 @@ test('expanded workflow and account pages preserve RTL, visible controls and res
     for (const [name, url, field] of group.pages) {
       await page.goto(url);
       if (field) await expect(page.getByLabel(field, { exact: true })).toBeVisible();
+      else if (name === 'devices')
+        await expect(
+          page.getByRole('banner').getByRole('heading', { name: 'امنیت حساب', exact: true }),
+        ).toBeVisible();
       else await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toBeVisible();
       await page.evaluate(() => document.fonts.ready);
       for (const [width, height] of [
@@ -47,7 +51,7 @@ test('expanded workflow and account pages preserve RTL, visible controls and res
         [1440, 1000],
       ]) {
         await page.setViewportSize({ width, height });
-        await page.locator('main').evaluate((el) => {
+        await page.getByRole('main').evaluate((el) => {
           el.scrollTop = 0;
         });
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

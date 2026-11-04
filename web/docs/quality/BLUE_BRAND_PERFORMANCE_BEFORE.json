@@ -1,0 +1,137 @@
+{
+  "elapsedMs": 925,
+  "scripts": [
+    {
+      "name": "/_next/static/chunks/webpack-8d711c4a33b1d22b.js",
+      "bytes": 5775
+    },
+    {
+      "name": "/_next/static/chunks/app/error-7e45cdfb11e3c32c.js",
+      "bytes": 1189
+    },
+    {
+      "name": "/_next/static/chunks/main-app-0be85bc9e205b244.js",
+      "bytes": 529
+    },
+    {
+      "name": "/_next/static/chunks/3242-5dbc88266a44bb65.js",
+      "bytes": 27281
+    },
+    {
+      "name": "/_next/static/chunks/app/layout-f61a2364444d119c.js",
+      "bytes": 14899
+    },
+    {
+      "name": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "bytes": 203727
+    },
+    {
+      "name": "/_next/static/chunks/3794-04350b0fcecd82e5.js",
+      "bytes": 243176
+    },
+    {
+      "name": "/_next/static/chunks/8500-63a4afbeacab3b52.js",
+      "bytes": 7674
+    },
+    {
+      "name": "/_next/static/chunks/app/not-found-91da064ab0aa0065.js",
+      "bytes": 329
+    },
+    {
+      "name": "/_next/static/chunks/8495-a5dcedd1f22dbd99.js",
+      "bytes": 30780
+    },
+    {
+      "name": "/_next/static/chunks/8923-0b2321dd7a21f8f0.js",
+      "bytes": 14018
+    },
+    {
+      "name": "/_next/static/chunks/9641-4e92a12d5e63538d.js",
+      "bytes": 24986
+    },
+    {
+      "name": "/_next/static/chunks/app/enter/page-a264aded8f236dad.js",
+      "bytes": 10100
+    },
+    {
+      "name": "/_next/static/chunks/6254-10cb1410ba6da816.js",
+      "bytes": 1027802
+    }
+  ],
+  "totalScriptBytes": 1612265,
+  "metrics": {
+    "navigation": {
+      "name": "http://127.0.0.1:3145/enter",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 339.79999999701977,
+      "navigationId": 8828,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.1",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "gzip",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 0.7999999970197678,
+      "domainLookupStart": 0.7999999970197678,
+      "domainLookupEnd": 0.7999999970197678,
+      "connectStart": 0.7999999970197678,
+      "secureConnectionStart": 0,
+      "connectEnd": 0.7999999970197678,
+      "requestStart": 2.2000000029802322,
+      "responseStart": 40.70000000298023,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 40.70000000298023,
+      "responseEnd": 42.20000000298023,
+      "transferSize": 5447,
+      "encodedBodySize": 5147,
+      "decodedBodySize": 14425,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 146.29999999701977,
+      "domContentLoadedEventStart": 146.29999999701977,
+      "domContentLoadedEventEnd": 146.40000000596046,
+      "domComplete": 339.79999999701977,
+      "loadEventStart": 339.79999999701977,
+      "loadEventEnd": 339.79999999701977,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "low"
+      }
+    },
+    "paint": [
+      {
+        "name": "first-paint",
+        "entryType": "paint",
+        "startTime": 160,
+        "duration": 0,
+        "navigationId": 8828,
+        "paintTime": 145.20000000298023,
+        "presentationTime": 160
+      },
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 160,
+        "duration": 0,
+        "navigationId": 8828,
+        "paintTime": 145.20000000298023,
+        "presentationTime": 160
+      }
+    ]
+  }
+}

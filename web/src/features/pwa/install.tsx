@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Download } from 'lucide-react';
 import { useState } from 'react';
@@ -12,27 +13,20 @@ export function InstallPanel({ compact = false }: { compact?: boolean }) {
     return compact ? null : (
       <p className="pwa-status">
         <CheckCircle2 size={19} />
-        پنل به‌صورت برنامه روی این دستگاه باز شده است.
+        {uiText.text_a26d8fb684dc}
       </p>
     );
   return (
     <div className={compact ? 'pwa-install-compact' : 'pwa-install'}>
-      {!compact && (
-        <p>پنل ماکان را روی دستگاه نصب کنید تا از آیکون آن و در پنجره مستقل وارد شوید.</p>
-      )}
+      {!compact && <p>{uiText.text_59e64a5b7f77}</p>}
       <Button variant="outline" onClick={() => (installPrompt ? void install() : setHelp(true))}>
         <Download size={18} />
-        نصب پنل روی دستگاه
+        {uiText.text_25b10b0d03ba}
       </Button>
-      {!compact && !secure && (
-        <p className="field-help">
-          برای نصب، نشانی امن HTTPS پنل را باز کنید. نشانی محلی فقط روی همین رایانه قابل استفاده
-          است.
-        </p>
-      )}
+      {!compact && !secure && <p className="field-help">{uiText.text_637e02c8cc87}</p>}
       {!compact && error && (
         <p role="alert" className="field-help">
-          آماده‌سازی نصب کامل نشد. اتصال را بررسی و صفحه را تازه کنید.
+          {uiText.text_49a81da8ae60}
         </p>
       )}
       <InstallHelp open={help} onOpenChange={setHelp} />

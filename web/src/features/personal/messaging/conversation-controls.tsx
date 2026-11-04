@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { Bell, BellOff, ChevronLeft, type LucideIcon } from 'lucide-react';
@@ -46,7 +47,7 @@ export function UnavailableSetting({
         <button type="button" className={c.settingRow}>
           <Icon size={22} />
           <span>{title}</span>
-          <small>غیرفعال</small>
+          <small>{uiText.text_4e67bd8e3482}</small>
           <ChevronLeft size={17} />
         </button>
       </DialogTrigger>
@@ -55,9 +56,7 @@ export function UnavailableSetting({
         title={title}
         description={description}
       >
-        <p className={c.note}>
-          این گزینه هنوز فعال نشده است و تغییری در تنظیمات شما ایجاد نمی‌کند.
-        </p>
+        <p className={c.note}>{uiText.text_fadd8b25529b}</p>
       </DialogContent>
     </Dialog>
   );
@@ -120,7 +119,13 @@ export function MuteAction({ summary }: { summary: S['ConversationSummaryResult'
         }}
       >
         {summary.isMuted ? <BellOff size={23} /> : <Bell size={23} />}
-        <span>{busy ? 'در حال ثبت…' : summary.isMuted ? 'فعال‌کردن صدا' : 'بی‌صدا'}</span>
+        <span>
+          {busy
+            ? uiText.text_b5ef00b1806f
+            : summary.isMuted
+              ? uiText.text_db8eb8579dae
+              : uiText.text_16be3d3db4fc}
+        </span>
       </button>
       {!!error && <ErrorState error={error} />}
     </div>

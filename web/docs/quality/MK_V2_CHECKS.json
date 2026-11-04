@@ -1,0 +1,323 @@
+{
+  "checkedAt": "2026-11-02T21:28:43.844Z",
+  "buildId": "MiMBZKiLNZU7UYqh_8v7W",
+  "checks": {
+    "productionBuild": "passed: NEXT_STANDALONE=true npm run build -- --webpack",
+    "typecheck": "passed",
+    "lint": "passed",
+    "generated": "passed: 239 client operations, 447 schemas, no platform owner",
+    "format": "passed",
+    "unit": {
+      "files": 58,
+      "passed": 362
+    }
+  },
+  "browser": {
+    "uniqueCases": 33,
+    "latestPassed": 33,
+    "runs": [
+      {
+        "name": "INITIAL",
+        "startTime": "2026-11-02T20:58:11.440Z",
+        "duration": 131933.665,
+        "expected": 20,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      {
+        "name": "FOLLOWUP",
+        "startTime": "2026-11-02T21:06:22.363Z",
+        "duration": 131828.531,
+        "expected": 18,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      },
+      {
+        "name": "FINAL",
+        "startTime": "2026-11-02T21:17:00.333Z",
+        "duration": 162619.77399999998,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    ],
+    "cases": [
+      {
+        "file": "header-back.spec.ts",
+        "title": "class entry is a filled navigation button and lesson direct entry has one contextual back arrow in the header",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "header-back.spec.ts",
+        "title": "the header arrow respects unsaved edits and each settings page keeps its own parent destination",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "manager-workspace.spec.ts",
+        "title": "multi-selection preserves successful members and retries only unresolved additions",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "manager-workspace.spec.ts",
+        "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "manager-workspace.spec.ts",
+        "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "manager-workspace.spec.ts",
+        "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "mk-boundaries.spec.ts",
+        "title": "uncontracted linked class space cannot render a sample conversation in connected mode",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "mk-boundaries.spec.ts",
+        "title": "catalog preserves the query and scroll position after Back",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "mk-boundaries.spec.ts",
+        "title": "native lesson and answer routes keep authorization and school context",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "profile-school-files.spec.ts",
+        "title": "profile exposes identity and age below spaces and moves preference menus to their own page",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "profile-school-files.spec.ts",
+        "title": "school header searches authorized classes, assignments and published exams without contact navigation",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "profile-school-files.spec.ts",
+        "title": "Student attaches a PDF and photo, retries an attachment failure without reuploading and submits a file-only answer",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "profile-school-files.spec.ts",
+        "title": "pending file never enables final review and a Parent cannot use the Student file proxy",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "desktop entry puts product information on the right and both login steps on the left",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "education sections keep the same responsive header, navigation and content edges",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "settings uses the content width and theme selection remains functional",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "profile switches only authorized workspaces in place and reloads the authoritative context",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "a rejected profile role switch preserves the previous server context",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "sign-in-layout.spec.ts",
+        "title": "phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "sign-in-layout.spec.ts",
+        "title": "all invitation entry points converge on one inbox",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "sign-in-layout.spec.ts",
+        "title": "entry actions follow viewport size without retaining a mobile layout on desktop",
+        "status": "passed",
+        "run": "INITIAL"
+      },
+      {
+        "file": "responsive.spec.ts",
+        "title": "small desktop layout remains a sidebar across manager pages and client-side tab changes",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "responsive.spec.ts",
+        "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "responsive.spec.ts",
+        "title": "focused chat and independent form reserve their own footer without the tablet dock",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "responsive.spec.ts",
+        "title": "workspace dialog restores focus and an external context change clears prior role data",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "school-redesign.spec.ts",
+        "title": "profile edit has grouped readable fields and a footer after the form at all screen sizes",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "school-redesign.spec.ts",
+        "title": "school has four destinations, three nearest items and a separate class page with URL-backed sections",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "school-redesign.spec.ts",
+        "title": "Teacher opens class members alongside activities without gaining management actions",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "school-redesign.spec.ts",
+        "title": "weekly schedule changes the server range and can return to the same week without date fields",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "school-redesign.spec.ts",
+        "title": "invitation details, consent, failed acceptance and decline retain truthful server state",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "workspace-child-attachments.spec.ts",
+        "title": "one workspace click enters it once; a failed switch never claims entry",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "workspace-child-attachments.spec.ts",
+        "title": "Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child",
+        "status": "passed",
+        "run": "FINAL"
+      },
+      {
+        "file": "workspace-child-attachments.spec.ts",
+        "title": "Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files",
+        "status": "passed",
+        "run": "FINAL"
+      }
+    ]
+  },
+  "visual": {
+    "nativeViews": 82,
+    "referencePdfPages": 37,
+    "updatedDesignViews": 23,
+    "lightDarkLayoutCases": 96,
+    "authCaptures": 24,
+    "responsiveBaseCases": 211,
+    "responsiveFollowupCases": 16,
+    "failures": 0,
+    "meanRgbDifference255": 1.2708,
+    "maxRgbDifference255": 4.3525,
+    "interpretation": "RGB difference is not a UX correctness percentage. Runtime timer/progress, explicit preview label and required unchecked review controls intentionally differ from static reference."
+  },
+  "educationFlows": {
+    "synthetic": true,
+    "realBackendWrites": 0,
+    "results": [
+      {
+        "name": "assignment review, publication, response and local receipt",
+        "passed": true
+      },
+      {
+        "name": "grade save is private until publication; private notes are excluded",
+        "passed": true
+      },
+      {
+        "name": "exam authoring, member preview, timer, offline queue and final receipt",
+        "passed": true
+      },
+      {
+        "name": "published correction retains the previous result",
+        "passed": true
+      },
+      {
+        "name": "manager without education capability and revoked membership cannot author",
+        "passed": true
+      },
+      {
+        "name": "desktop question selection and member preview",
+        "passed": true
+      },
+      {
+        "name": "desktop assignment row opens its submission queue",
+        "passed": true
+      },
+      {
+        "name": "a new desktop question remains selectable and editable",
+        "passed": true
+      }
+    ]
+  },
+  "contractRead": {
+    "checkedAt": "2026-11-02T21:20:56.551Z",
+    "url": "http://94.184.32.84:8090/openapi/v1.json",
+    "status": 200,
+    "method": "GET",
+    "domainMutations": 0,
+    "paths": 342,
+    "operations": 388,
+    "schemas": 651,
+    "normalizedSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+    "matchesInstalledContract": true
+  },
+  "previewPubliclyEnabled": false,
+  "independentEducationPubliclyEnabled": false,
+  "connectedRuntime": {
+    "origin": "http://127.0.0.1:3145",
+    "entry": 200,
+    "privatePreview": 404
+  },
+  "limitations": [
+    "Independent-class education and formation require validated backend contracts; no guessed endpoint or production success.",
+    "Education preview is a local simulator, not server authorization, receipt, grading or timer proof.",
+    "Browser integration uses isolated fixtures; no live domain mutations performed."
+  ]
+}

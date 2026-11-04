@@ -96,7 +96,7 @@ test('owner edits information, adds a contact, changes administrator role and re
   await expect(page.getByLabel('نام گروه', { exact: true })).toHaveValue('نام تازهٔ گفتگو');
   await page.getByRole('button', { name: 'ذخیرهٔ اطلاعات', exact: true }).click();
   await expect(page.getByRole('status')).toContainText('اطلاعات گفتگو ذخیره شد.');
-  await page.getByRole('link', { name: 'اعضا', exact: true }).click();
+  await page.getByRole('link', { name: 'اعضا و مدیران', exact: true }).click();
   await page.getByRole('button', { name: 'افزودن عضو', exact: true }).click();
   let dialog = page.getByRole('dialog');
   await dialog.getByLabel('جستجوی عضو جدید').fill('Parent');
@@ -171,14 +171,18 @@ test('unified inbox includes direct and official conversations without a persona
     await page.screenshot({ path: `output/review/messenger-management/inbox-${width}.png` });
   }
   const state = await (await request.get(fixture + '/__test__/state')).json();
-  const scopes = state.requests
-    .filter((r: { path: string }) => r.path === '/api/v1/conversations')
-    .map((r: { query: { scope: string } }) => r.query.scope);
-  expect(scopes).toContain('Personal');
-  expect(scopes).toContain('Organization');
+  const reads = state.requests.filter(
+    (r: { path: string }) => r.path === '/api/v1/conversations/account',
+  );
+  expect(reads.length).toBeGreaterThan(0);
+  expect(
+    reads.every(
+      (r: { query: Record<string, string> }) => r.query.Limit === '30' && !('scope' in r.query),
+    ),
+  ).toBe(true);
 });
 
-test('unified inbox exhausts scope pagination independently and retains earlier conversations', async ({
+test('unified inbox follows the server cursor and retains earlier conversations', async ({
   page,
   context,
   request,
@@ -196,19 +200,13 @@ test('unified inbox exhausts scope pagination independently and retains earlier 
   await expect(list.getByText('گفتگوی حساب 1', { exact: true })).toBeAttached();
   await expect(list.getByRole('button', { name: 'گفتگوهای بیشتر', exact: true })).toHaveCount(0);
   const state = await (await request.get(fixture + '/__test__/state')).json();
-  const reads = state.requests.filter((r: { path: string }) => r.path === '/api/v1/conversations');
+  const reads = state.requests.filter(
+    (r: { path: string }) => r.path === '/api/v1/conversations/account',
+  );
+  expect(reads.some((r: { query: { Cursor?: string } }) => !!r.query.Cursor)).toBe(true);
   expect(
-    reads.some(
-      (r: { query: { scope: string; page: string } }) =>
-        r.query.scope === 'Personal' && r.query.page === '2',
-    ),
-  ).toBe(true);
-  expect(
-    reads.some(
-      (r: { query: { scope: string; page: string } }) =>
-        r.query.scope === 'Organization' && r.query.page === '2',
-    ),
-  ).toBe(false);
+    state.requests.filter((r: { path: string }) => r.path === '/api/v1/conversations'),
+  ).toHaveLength(0);
 });
 
 test('creation and member management remain usable in both themes across mobile tablet desktop', async ({
@@ -339,21 +337,13 @@ test('loading more remains clickable during a background inbox refresh and the i
   const nextRefresh = page.waitForRequest(
     (r) => {
       const u = new URL(r.url());
-      return (
-        u.pathname.endsWith('/api/v1/conversations') &&
-        u.searchParams.get('scope') === 'Personal' &&
-        u.searchParams.get('page') === '1'
-      );
+      return u.pathname.endsWith('/api/v1/conversations/account') && !u.searchParams.has('Cursor');
     },
     { timeout: 15000 },
   );
-  await page.route('**/api/client/backend/api/v1/conversations?**', async (route) => {
+  await page.route('**/api/client/backend/api/v1/conversations/account?**', async (route) => {
     const u = new URL(route.request().url());
-    if (
-      !holding &&
-      u.searchParams.get('scope') === 'Personal' &&
-      u.searchParams.get('page') === '1'
-    ) {
+    if (!holding && !u.searchParams.has('Cursor')) {
       holding = true;
       const response = await route.fetch();
       await held;

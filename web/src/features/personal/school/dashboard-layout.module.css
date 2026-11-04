@@ -1,0 +1,57 @@
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.heading h1 {
+  font-size: 24px;
+  line-height: 1.7;
+  font-weight: 800;
+}
+.heading p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+  margin-top: 4px;
+}
+.heading :global(.btn) {
+  flex: none;
+  width: auto;
+  padding-inline: 20px;
+}
+.grid {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+.followup,
+.classes {
+  min-width: 0;
+  display: grid;
+  gap: 16px;
+}
+.classes :global(.section-title) h2 {
+  font: inherit;
+  margin: 0;
+}
+.classes > div:last-child {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 820px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .heading h1 {
+    font-size: 21px;
+  }
+  .heading :global(.btn) {
+    width: 100%;
+  }
+  .grid {
+    gap: 20px;
+  }
+}

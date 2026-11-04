@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Users, Megaphone, ArrowLeft, Check, Search } from 'lucide-react';
 import { readCreationDraft, creationWasRejected } from './creation-draft';
 import { MessagingSurface } from './messaging-surface';
@@ -79,9 +80,9 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
         const parsed = clientValidator({
           $ref: '#/components/schemas/CreateManagedConversationCommand',
         }).safeParse(JSON.parse(raw));
-        if (!parsed.success) throw new Error('اطلاعات درخواست ذخیره‌شده قابل بررسی نیست.');
+        if (!parsed.success) throw new Error(uiText.text_07379c3f080e);
         const value = parsed.data as Command;
-        if (value.scope !== 'Personal') throw new Error('این درخواست به فضای شخصی تعلق ندارد.');
+        if (value.scope !== 'Personal') throw new Error(uiText.text_f00bc0f210dc);
         setFrozen(value);
         router.replace(stepUrl + '&step=members');
         setTitle(value.title);
@@ -104,7 +105,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
       );
     } catch {
       setStorageReady(false);
-      setError(new Error('امکان نگهداری پیش‌نویس وجود ندارد. ذخیره‌سازی مرورگر را بررسی کنید.'));
+      setError(new Error(uiText.text_f43b73d65e75));
     }
   }, [storageReady, draftKey, title, description, visibility, history, selected]);
   useEffect(() => {
@@ -137,6 +138,10 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
       );
       if (result.scope !== 'Personal' || result.type !== (group ? 'Group' : 'Channel'))
         throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
+      cache.setQueryData(
+        ['personal', session.user.id, session.revision, 'creation-receipt', result.conversationId],
+        result.initialTargets ?? [],
+      );
       sessionStorage.removeItem(key);
       sessionStorage.removeItem(draftKey);
       setStorageReady(false);
@@ -163,13 +168,13 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
     <MessagingSurface className={d.create}>
       <div className={s.headingRow}>
         <div className={s.heading}>
-          <span>مرحلهٔ {members ? '۲' : '۱'} از ۲</span>
-          <h1>{group ? 'ایجاد گروه' : 'ایجاد کانال'}</h1>
-          <p>
-            {members
-              ? 'مخاطبین مورد نظر را برای عضویت اولیه انتخاب کنید.'
-              : 'نام و توضیحات را وارد کنید؛ در مرحلهٔ بعد اعضا را انتخاب می‌کنید.'}
-          </p>
+          <span>
+            {uiText.text_a62512b0c13b}
+            {members ? uiText.text_bc9c03bb975e : uiText.text_62b67013987e}
+            {uiText.text_f4f45f3f86f8}
+          </span>
+          <h1>{group ? uiText.text_70c53f6a4727 : uiText.text_21579cd85bef}</h1>
+          <p>{members ? uiText.text_043cba85cfbc : uiText.text_ccfdb4dc6298}</p>
         </div>
         <PageBack href={members ? stepUrl : '/personal/messages'} />
       </div>
@@ -180,11 +185,11 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
       ) : !allowed ? (
         <section className={s.profileCard}>
           <EmptyState
-            title="ساخت این فضا فعلاً مجاز نیست"
+            title={uiText.text_3bd2ff842bd4}
             description={messagingNextLabels[status.data.nextAction]}
           />
           <Button asChild variant="outline">
-            <Link href="/personal/profile">بررسی وضعیت حساب</Link>
+            <Link href="/personal/profile">{uiText.text_e0318aee0f47}</Link>
           </Button>
         </section>
       ) : (
@@ -197,12 +202,15 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
               router.push(stepUrl + '&step=members');
           }}
         >
-          <ol className={d.steps} aria-label="مراحل ایجاد گفتگو">
+          <ol className={d.steps} aria-label={uiText.text_e5abd525ad78}>
             <li aria-current={!members ? 'step' : undefined}>
-              <span>{members ? <Check size={16} /> : '۱'}</span>اطلاعات {group ? 'گروه' : 'کانال'}
+              <span>{members ? <Check size={16} /> : uiText.text_62b67013987e}</span>
+              {uiText.text_5b40aa409c80}
+              {group ? uiText.text_774668d4acc7 : uiText.text_2db356b462dd}
             </li>
             <li aria-current={members ? 'step' : undefined}>
-              <span>۲</span>انتخاب مخاطبین
+              <span>{uiText.text_bc9c03bb975e}</span>
+              {uiText.text_c476c232b8e6}
             </li>
           </ol>
           {!members && (
@@ -211,7 +219,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                 {group ? <Users size={32} /> : <Megaphone size={32} />}
               </div>
               <label className={s.singleField}>
-                {group ? 'نام گروه' : 'نام کانال'}
+                {group ? uiText.text_0e1567f71aa6 : uiText.text_e282736ca3cc}
                 <input
                   required
                   value={title}
@@ -220,7 +228,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                 />
               </label>
               <label className={s.singleField}>
-                توضیحات (اختیاری)
+                {uiText.text_75e45482aebb}
                 <textarea
                   rows={3}
                   value={description}
@@ -229,7 +237,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                 />
               </label>
               <label className={s.singleField}>
-                دسترسی
+                {uiText.text_d09e4c6a2b5a}
                 <select
                   required
                   value={chosenVisibility}
@@ -237,26 +245,24 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                   onChange={(e) => setVisibility(e.target.value as typeof visibility)}
                 >
                   <option value="" disabled>
-                    نوع دسترسی را انتخاب کنید
+                    {uiText.text_398ac1b17cdd}
                   </option>
-                  <option value="Private">خصوصی</option>
-                  <option value="Public">عمومی</option>
+                  <option value="Private">{uiText.text_e205d3a7a33e}</option>
+                  <option value="Public">{uiText.text_526e310df41f}</option>
                 </select>
               </label>
-              {privateOnly && (
-                <p className={s.muted}>این حساب در حال حاضر اجازهٔ ساخت گروه خصوصی دارد.</p>
-              )}
+              {privateOnly && <p className={s.muted}>{uiText.text_20acc600bc80}</p>}
               {group && (
                 <label className={s.singleField}>
-                  تاریخچه برای عضو جدید (اختیاری)
+                  {uiText.text_d30d3aa840fa}
                   <select
                     value={history}
                     disabled={busy || !!frozen}
                     onChange={(e) => setHistory(e.target.value as typeof history)}
                   >
-                    <option value="">تنظیم پیش‌فرض سرویس</option>
-                    <option value="FullHistory">تاریخچهٔ مجاز کامل</option>
-                    <option value="FromJoin">از زمان عضویت</option>
+                    <option value="">{uiText.text_99f51b9ca3db}</option>
+                    <option value="FullHistory">{uiText.text_079e2f4cd4d2}</option>
+                    <option value="FromJoin">{uiText.text_c693180e811e}</option>
                   </select>
                 </label>
               )}
@@ -271,8 +277,11 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                 <div>
                   <strong dir="auto">{title}</strong>
                   <small>
-                    {chosenVisibility === 'Private' ? 'خصوصی' : 'عمومی'} · {number(selected.size)}{' '}
-                    مخاطب انتخاب شده
+                    {chosenVisibility === 'Private'
+                      ? uiText.text_e205d3a7a33e
+                      : uiText.text_526e310df41f}
+                    {uiText.text_588da4105320}
+                    {number(selected.size)} {uiText.text_4339e868ff4c}
                   </small>
                 </div>
                 <Button
@@ -281,15 +290,15 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                   disabled={busy || !!frozen}
                   onClick={() => router.push(stepUrl)}
                 >
-                  ویرایش
+                  {uiText.text_d6aa12d559e9}
                 </Button>
               </div>
-              <h2>اعضای اولیه از مخاطبین</h2>
+              <h2>{uiText.text_b462d2f2ea47}</h2>
               <div className={d.contactSearch}>
                 <Search size={18} />
                 <input
-                  aria-label="جستجوی مخاطبین برای دعوت"
-                  placeholder="جستجوی مخاطبین"
+                  aria-label={uiText.text_78c43fe4c4d4}
+                  placeholder={uiText.text_671a1dcda1c2}
                   value={queryDraft}
                   onChange={(ev) => setQueryDraft(ev.target.value)}
                   onKeyDown={(ev) => {
@@ -308,12 +317,12 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                     setPage(1);
                   }}
                 >
-                  جستجو
+                  {uiText.text_2a93eb7f06ce}
                 </Button>
               </div>
               <p className={s.muted}>
-                {number(selected.size)} مخاطب انتخاب شده است. دعوت اعضا همچنان تابع حریم خصوصی
-                آن‌هاست.
+                {number(selected.size)}
+                {uiText.text_903259a26e2b}
               </p>
               {contacts.isPending ? (
                 <LoadingSkeleton />
@@ -321,8 +330,8 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                 <ErrorState error={contacts.error} onRetry={() => void contacts.refetch()} />
               ) : !contacts.data.items.length ? (
                 <EmptyState
-                  title="مخاطبی برای انتخاب در این صفحه نیست"
-                  description="می‌توانید بعداً اعضای مجاز را اضافه کنید."
+                  title={uiText.text_185fb1725ae8}
+                  description={uiText.text_93792447ba47}
                 />
               ) : (
                 <div className={s.spaceList}>
@@ -346,7 +355,10 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                         <span>
                           {contact.savedName || contact.profile.displayName}
                           <small>
-                            <bdi dir="ltr">@{contact.profile.username}</bdi>
+                            <bdi dir="ltr">
+                              {uiText.text_c3641f8544d7}
+                              {contact.profile.username}
+                            </bdi>
                           </small>
                         </span>
                       </label>
@@ -360,7 +372,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                   disabled={page <= 1 || contacts.isFetching}
                   onClick={() => setPage(page - 1)}
                 >
-                  صفحهٔ قبل
+                  {uiText.text_88e65319d694}
                 </Button>
                 <Button
                   type="button"
@@ -368,7 +380,7 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
                   disabled={!contacts.data?.hasMore || contacts.isFetching}
                   onClick={() => setPage(page + 1)}
                 >
-                  صفحهٔ بعد
+                  {uiText.text_12ca1a58c6ca}
                 </Button>
               </div>
             </section>
@@ -378,31 +390,27 @@ function CreateConversation({ kind }: { kind: 'groups' | 'channels' }) {
               <ErrorState error={error} />
             ) : (
               <p className="field-error" role="alert">
-                {error instanceof Error ? error.message : 'عملیات انجام نشد.'}
+                {error instanceof Error ? error.message : uiText.text_ee786ae11865}
               </p>
             ))}
-          {frozen && (
-            <p className={s.muted}>
-              نتیجهٔ این درخواست هنوز نهایی نشده است. برای پیگیری، همان مشخصات ذخیره‌شده دوباره
-              ارسال می‌شود.
-            </p>
-          )}
+          {frozen && <p className={s.muted}>{uiText.text_ca7549e86e0e}</p>}
           <Button
             type="submit"
             disabled={busy || !storageReady || !title.trim() || !chosenVisibility}
           >
             {busy ? (
-              'در حال بررسی…'
+              uiText.text_25384e522776
             ) : !members ? (
               <>
-                انتخاب مخاطبین <ArrowLeft size={18} />
+                {uiText.text_9e8be562d436}
+                <ArrowLeft size={18} />
               </>
             ) : frozen ? (
-              'پیگیری همین درخواست'
+              uiText.text_6f96c570c24b
             ) : group ? (
-              'ساخت گروه'
+              uiText.text_9c8e4fa37d9f
             ) : (
-              'ساخت کانال'
+              uiText.text_67f771b12e76
             )}
           </Button>
         </form>

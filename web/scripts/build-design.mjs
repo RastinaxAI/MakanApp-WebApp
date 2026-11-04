@@ -41,6 +41,22 @@ const tokenCss =
         '\n}',
     )
     .join('\n') +
+  '\n' +
+  ":root[data-theme='dark'] .mk-ui.mk-screen,\n:root[data-theme='dark'] .mk-ui.mk-desktop,\n.mk-ui.mk-screen.dark {\n" +
+  Object.entries({
+    ...tokens.dark,
+    accent: tokens.dark.primary,
+    action: tokens.dark['primary-button'],
+    'on-action': tokens.dark['on-primary'],
+    soft: tokens.dark['primary-soft'],
+    surface2: tokens.dark.soft,
+    line: tokens.dark.border,
+    warnbg: tokens.dark['warning-soft'],
+    badbg: tokens.dark['danger-soft'],
+  })
+    .map(([k, v]) => `  --${k}: ${v};`)
+    .join('\n') +
+  '\n}' +
   '\n';
 const template = await fs.readFile('design/prototype/template.html', 'utf8');
 const app = (await fs.readFile('design/prototype/app.js', 'utf8')).replace(

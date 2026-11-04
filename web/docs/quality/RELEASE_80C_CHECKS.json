@@ -1,0 +1,426 @@
+{
+  "checkedAtUtc": "2026-11-04T11:18:48.355Z",
+  "referenceRelease": "80c2e61296ca1b7ed855dc1e1183c4e8c19ad848",
+  "deployedBinaryCommitVerified": false,
+  "contract": {
+    "origin": "http://94.184.32.84:8090",
+    "operations": 433,
+    "previousOperations": 388,
+    "addedOperations": 45,
+    "removedOperations": 0,
+    "clientOperations": 277,
+    "schemas": 492,
+    "ownerOperations": 0,
+    "sha256": "1c72597b3aa88a9f41a28aafb6cceb0844d1aacad9b3a8e4e309eba7a527230f"
+  },
+  "unit": {
+    "passed": 447,
+    "failed": 0,
+    "files": 63,
+    "newTests": 24,
+    "initialContentScanTimeoutUnderConcurrentLoad": true,
+    "teacherLookupFixtureNormalizedIranianPhone": true,
+    "rerunAtNormalLoadPassed": true
+  },
+  "browser": {
+    "runs": [
+      {
+        "file": "RELEASE_80C_BROWSER_FULL.json",
+        "stats": {
+          "startTime": "2026-11-04T10:39:16.358Z",
+          "duration": 843996.143,
+          "expected": 202,
+          "skipped": 0,
+          "unexpected": 7,
+          "flaky": 0
+        },
+        "errors": []
+      },
+      {
+        "file": "RELEASE_80C_BROWSER_FOLLOWUP.json",
+        "stats": {
+          "startTime": "2026-11-04T10:55:43.676Z",
+          "duration": 14818.405999999999,
+          "expected": 7,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "errors": []
+      },
+      {
+        "file": "RELEASE_80C_BROWSER_COMPLETION.json",
+        "stats": {
+          "startTime": "2026-11-04T10:55:59.749Z",
+          "duration": 49583.395,
+          "expected": 17,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "errors": []
+      },
+      {
+        "file": "RELEASE_80C_BROWSER_TEACHER.json",
+        "stats": {
+          "startTime": "2026-11-04T11:04:22.315Z",
+          "duration": 48391.209,
+          "expected": 11,
+          "skipped": 0,
+          "unexpected": 1,
+          "flaky": 0
+        },
+        "errors": []
+      },
+      {
+        "file": "RELEASE_80C_BROWSER_TEACHER_FOLLOWUP.json",
+        "stats": {
+          "startTime": "2026-11-04T11:07:16.874Z",
+          "duration": 4835.5470000000005,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "errors": []
+      }
+    ],
+    "unique": 209,
+    "latestPassed": 209,
+    "latestFailed": 0,
+    "latestSkipped": 0,
+    "newScenarios": 12,
+    "automaticFlakyRetries": 0,
+    "driver": "Chrome 156 on Ubuntu 26.04; the unavailable bundled Chromium attempt is separately retained"
+  },
+  "live": {
+    "domainWrites": true,
+    "writeScope": "one own Test formation draft; cancelled and never submitted for review",
+    "ownDraft": {
+      "checkedAtUtc": "2026-11-04T11:14:54.389Z",
+      "backend": "http://94.184.32.84:8090",
+      "steps": [
+        {
+          "method": "POST",
+          "path": "/api/v1/personal-class-requests",
+          "status": 201
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/personal-class-requests",
+          "status": 201
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/personal-class-requests/{id}",
+          "status": 200
+        },
+        {
+          "method": "PUT",
+          "path": "/api/v1/personal-class-requests/{id}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/personal-class-requests/{id}/cancel",
+          "status": 200
+        }
+      ],
+      "passed": true,
+      "submittedForReview": false,
+      "createdClasses": 0,
+      "createdMessages": 0,
+      "retainedAuditDraft": true,
+      "idempotentCreate": true,
+      "opaqueVersionChanged": true,
+      "cancelled": true,
+      "ownedDraftCount": 1,
+      "cleanupConfirmed": true
+    },
+    "directRoles": [
+      {
+        "role": "Student",
+        "passed": true
+      },
+      {
+        "role": "Teacher",
+        "passed": true
+      },
+      {
+        "role": "Parent",
+        "passed": true
+      },
+      {
+        "role": "Manager",
+        "passed": true
+      },
+      {
+        "role": "Personal",
+        "passed": true
+      }
+    ],
+    "bffRoles": [
+      {
+        "role": "Student",
+        "passed": true,
+        "contextPreserved": true,
+        "unexpectedWrites": 0
+      },
+      {
+        "role": "Teacher",
+        "passed": true,
+        "contextPreserved": true,
+        "unexpectedWrites": 0
+      },
+      {
+        "role": "Parent",
+        "passed": true,
+        "contextPreserved": true,
+        "unexpectedWrites": 0
+      },
+      {
+        "role": "Manager",
+        "passed": true,
+        "contextPreserved": true,
+        "unexpectedWrites": 0
+      },
+      {
+        "role": "Personal",
+        "passed": true,
+        "contextPreserved": true,
+        "unexpectedWrites": 0
+      }
+    ],
+    "initialUiLocatorFailure": "Previous resource-page title changed; all recorded API reads succeeded. The review now uses the actual resource search field."
+  },
+  "build": {
+    "mode": "production-webpack",
+    "buildId": "dzHqsUEKm3SCk6wDwKKBt",
+    "entry": [
+      {
+        "name": "entry",
+        "status": 200
+      },
+      {
+        "name": "preview",
+        "status": 404
+      },
+      {
+        "name": "swagger",
+        "status": 200
+      }
+    ]
+  },
+  "visuals": {
+    "screenshots": [
+      {
+        "file": "light-requests-320.png",
+        "theme": "light",
+        "view": "requests",
+        "width": 320,
+        "height": 1000,
+        "sha256": "8c82a5f41f5c10879e376dfdf2f64308f137dfee8685155812757fe0c720a49b"
+      },
+      {
+        "file": "light-requests-390.png",
+        "theme": "light",
+        "view": "requests",
+        "width": 390,
+        "height": 1000,
+        "sha256": "6a3a51a7d94480b68eb86e77ccaaafd537cdbcd277bf43de8b6ea9ce1271d243"
+      },
+      {
+        "file": "light-requests-834.png",
+        "theme": "light",
+        "view": "requests",
+        "width": 834,
+        "height": 1000,
+        "sha256": "e772fde754751710b08dba6282ff7249659735ff14aec034a0228abcc3fdfc7f"
+      },
+      {
+        "file": "light-requests-1440.png",
+        "theme": "light",
+        "view": "requests",
+        "width": 1440,
+        "height": 1000,
+        "sha256": "bbd1b6d7a1613b76c6b8d0e84c7baf622b9167d788459332ebf545df68fb6a40"
+      },
+      {
+        "file": "light-members-320.png",
+        "theme": "light",
+        "view": "members",
+        "width": 320,
+        "height": 1000,
+        "sha256": "2147cae22419c01904f215ca0e78b237dcde142337d4414fd08aa49bd0d8e292"
+      },
+      {
+        "file": "light-members-390.png",
+        "theme": "light",
+        "view": "members",
+        "width": 390,
+        "height": 1000,
+        "sha256": "815ac971088c60346ea2e7e035ec5cf40d925a238e2f26e74cc029a2063a23e3"
+      },
+      {
+        "file": "light-members-834.png",
+        "theme": "light",
+        "view": "members",
+        "width": 834,
+        "height": 1000,
+        "sha256": "7cd84f739524e6dc68a3d4c80f6bf86b658a35f0ba0f596373030c9306f2ceb4"
+      },
+      {
+        "file": "light-members-1440.png",
+        "theme": "light",
+        "view": "members",
+        "width": 1440,
+        "height": 1000,
+        "sha256": "89bc2fc9ccf2b1e2a083f5d95720320f4cdf6a97515fbba1c75d7dfbc281da2e"
+      },
+      {
+        "file": "light-learning-320.png",
+        "theme": "light",
+        "view": "learning",
+        "width": 320,
+        "height": 1000,
+        "sha256": "ed6a63ddfbd45d04104ed66cdd1dc3fae9cdca1f94e540b54683ee2308f565cd"
+      },
+      {
+        "file": "light-learning-390.png",
+        "theme": "light",
+        "view": "learning",
+        "width": 390,
+        "height": 1000,
+        "sha256": "a8ded82410baab7db5f83d00dfed600c07f1aef04899ea1ba53e9c1cbc6f8015"
+      },
+      {
+        "file": "light-learning-834.png",
+        "theme": "light",
+        "view": "learning",
+        "width": 834,
+        "height": 1000,
+        "sha256": "5ff3cfaf9302341d6877a924624a5c05865c2358e8c099dd9a1317778415898b"
+      },
+      {
+        "file": "light-learning-1440.png",
+        "theme": "light",
+        "view": "learning",
+        "width": 1440,
+        "height": 1000,
+        "sha256": "5dc6d5702302ca9a52833b62d24bc184c6143c61eb51bb1934245eb3051aa2c6"
+      },
+      {
+        "file": "dark-requests-320.png",
+        "theme": "dark",
+        "view": "requests",
+        "width": 320,
+        "height": 1000,
+        "sha256": "00b8ca22be5325acdff40421e3c66c683a14229a0d51ca0cbea8474f3de0ac65"
+      },
+      {
+        "file": "dark-requests-390.png",
+        "theme": "dark",
+        "view": "requests",
+        "width": 390,
+        "height": 1000,
+        "sha256": "107f1f8a0710b37032ff58846ed65d0ab5b1640ae3383759d0d0b758907c2f56"
+      },
+      {
+        "file": "dark-requests-834.png",
+        "theme": "dark",
+        "view": "requests",
+        "width": 834,
+        "height": 1000,
+        "sha256": "9599c03e633c0734a1982ff7c7349a52963ca24f0d749727459100418cdd8fec"
+      },
+      {
+        "file": "dark-requests-1440.png",
+        "theme": "dark",
+        "view": "requests",
+        "width": 1440,
+        "height": 1000,
+        "sha256": "ea1352f0af691f2e7159a26a9e2f569c1f2becd5ae9575d6fcdbbb1dc4a4b6af"
+      },
+      {
+        "file": "dark-members-320.png",
+        "theme": "dark",
+        "view": "members",
+        "width": 320,
+        "height": 1000,
+        "sha256": "c4188be84feca604cbbd50cfa7dd6f1b0ea8b8a2074531a11f0f1cd4b581c0fa"
+      },
+      {
+        "file": "dark-members-390.png",
+        "theme": "dark",
+        "view": "members",
+        "width": 390,
+        "height": 1000,
+        "sha256": "5f7542a5da5efbb44234e89256269e332abffb8eb0bccdfa0001332f7975a103"
+      },
+      {
+        "file": "dark-members-834.png",
+        "theme": "dark",
+        "view": "members",
+        "width": 834,
+        "height": 1000,
+        "sha256": "a940ffb2718b51eb27e8299492f3f67d717e28131a5886eb98e212b25054d42c"
+      },
+      {
+        "file": "dark-members-1440.png",
+        "theme": "dark",
+        "view": "members",
+        "width": 1440,
+        "height": 1000,
+        "sha256": "5f0d367c31aaeec5346dd91d8eda91688cc44ae728e8321b81203c6b2e275010"
+      },
+      {
+        "file": "dark-learning-320.png",
+        "theme": "dark",
+        "view": "learning",
+        "width": 320,
+        "height": 1000,
+        "sha256": "f7a885abccf73613401ced4f4e2516699249df017ef6b75a85ade5eaf1e58991"
+      },
+      {
+        "file": "dark-learning-390.png",
+        "theme": "dark",
+        "view": "learning",
+        "width": 390,
+        "height": 1000,
+        "sha256": "467b019a7bf911721922905bfad6b54a43cc9fb398e82cbafe234488be8b191a"
+      },
+      {
+        "file": "dark-learning-834.png",
+        "theme": "dark",
+        "view": "learning",
+        "width": 834,
+        "height": 1000,
+        "sha256": "ab3cbf127cd5b7eeb4d8e19e0427a58ae3d15eb5f38a21ec01c4ab9336958263"
+      },
+      {
+        "file": "dark-learning-1440.png",
+        "theme": "dark",
+        "view": "learning",
+        "width": 1440,
+        "height": 1000,
+        "sha256": "b10f99a0f2022ae4fdeebbe1a370fa5865a1a99201ace95066d66bb923437fb7"
+      }
+    ],
+    "manuallyReviewed": [
+      "contact-light.jpg",
+      "contact-dark.jpg"
+    ],
+    "horizontalOverflowFailures": 0
+  },
+  "limits": {
+    "liveDomainMutationsVerified": [
+      "own formation draft create/replay/read/edit/cancel"
+    ],
+    "otherLiveDomainMutationsVerified": false,
+    "backendDatabaseAclCertified": false,
+    "aiRuntimeEnabled": false,
+    "productionDeploymentPerformed": false,
+    "dockerVolumesChanged": false,
+    "privateEnvironmentFilesChanged": false
+  }
+}

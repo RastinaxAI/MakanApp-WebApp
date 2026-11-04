@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useEffect, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
@@ -131,10 +132,10 @@ export function ClassMemberAssignment({
   return (
     <div className={s.layout}>
       <section className={s.selection}>
-        <h2>{teacher ? 'انتخاب معلمان' : 'انتخاب دانش‌آموزان'}</h2>
-        <p>چند نفر را انتخاب کنید؛ انتخاب‌های شما هنگام جستجو و تغییر صفحه باقی می‌مانند.</p>
+        <h2>{teacher ? uiText.text_988a9f3a30f5 : uiText.text_e66b1190c86c}</h2>
+        <p>{uiText.text_e00915ec36cf}</p>
         {!teacher && (
-          <Field label="روش انتخاب دانش‌آموز">
+          <Field label={uiText.text_b4adb9469c50}>
             <select
               disabled={busy}
               value={source}
@@ -144,14 +145,14 @@ export function ClassMemberAssignment({
                 setSearch('');
               }}
             >
-              <option value="members">دانش‌آموزان عضو آموزشگاه</option>
-              <option value="records">از پرونده‌های آموزشی</option>
+              <option value="members">{uiText.text_e896842afe7b}</option>
+              <option value="records">{uiText.text_e40bbfa529e7}</option>
             </select>
           </Field>
         )}
         <SchoolSearch
           key={source}
-          label={teacher ? 'جستجوی معلمان برای افزودن' : 'جستجوی دانش‌آموزان برای افزودن'}
+          label={teacher ? uiText.text_120de68a4876 : uiText.text_65ede2372929}
           disabled={busy}
           onSearch={(v) => {
             setSearch(v);
@@ -171,7 +172,7 @@ export function ClassMemberAssignment({
                     <label>
                       <input
                         type="checkbox"
-                        aria-label={'انتخاب ' + p.name}
+                        aria-label={uiText.text_89e9053371c8 + p.name}
                         disabled={
                           busy || p.disabled || !!(p.id && selected[p.id]?.state === 'done')
                         }
@@ -190,16 +191,14 @@ export function ClassMemberAssignment({
                       />
                       <span>
                         <strong>{p.name}</strong>
-                        {p.disabled && (
-                          <small>پرونده یا عضویت فعال برای این انتخاب موجود نیست</small>
-                        )}
+                        {p.disabled && <small>{uiText.text_b3d6c9493f41}</small>}
                       </span>
                     </label>
                   </li>
                 ))}
               </ul>
             ) : (
-              <EmptyState title="فردی با این شرایط پیدا نشد" />
+              <EmptyState title={uiText.text_a7752b98a99b} />
             )}
             <Pager
               page={page}
@@ -212,30 +211,35 @@ export function ClassMemberAssignment({
           </>
         )}
       </section>
-      <aside className={s.summary} aria-label="انتخاب‌ها و نتیجهٔ افزودن">
-        <h2>{choices.length.toLocaleString('fa-IR')} نفر انتخاب‌شده</h2>
-        <p>افزودن هر نفر جدا انجام می‌شود؛ خطای یک نفر، موفقیت دیگران را برنمی‌گرداند.</p>
+      <aside className={s.summary} aria-label={uiText.text_e6abca191b09}>
+        <h2>
+          {choices.length.toLocaleString('fa-IR')}
+          {uiText.text_cd049afa6984}
+        </h2>
+        <p>{uiText.text_2747228563a9}</p>
         {choices.map((p) => (
           <div className={s.result} key={p.id}>
             <strong>{p.name}</strong>
             <span role="status">
               {p.state === 'done'
-                ? 'به کلاس اضافه شد'
+                ? uiText.text_26906f613c15
                 : p.state === 'sending'
-                  ? 'در حال ثبت…'
+                  ? uiText.text_b5ef00b1806f
                   : p.state === 'error'
-                    ? 'ثبت تأیید نشد؛ وضعیت را بررسی کنید'
-                    : 'آمادهٔ افزودن'}
+                    ? uiText.text_a9562ef9a9c5
+                    : uiText.text_d8d6fdf5ca72}
             </span>
             {p.state === 'error' && <ErrorState error={p.error} />}
           </div>
         ))}
         <Button disabled={busy || !pending.length} onClick={() => void submit()}>
           {busy
-            ? 'در حال افزودن…'
+            ? uiText.text_b48606a1eeac
             : pending.some((p) => p.state === 'error')
-              ? 'بررسی و تلاش دوباره'
-              : 'افزودن ' + pending.length.toLocaleString('fa-IR') + ' نفر به کلاس'}
+              ? uiText.text_895f00b2273b
+              : uiText.text_dc08253feac0 +
+                pending.length.toLocaleString('fa-IR') +
+                uiText.text_a91a0317a5d6}
         </Button>
       </aside>
     </div>

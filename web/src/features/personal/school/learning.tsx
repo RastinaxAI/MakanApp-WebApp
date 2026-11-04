@@ -1,10 +1,11 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import { PageBack } from '@/components/navigation/page-back';
 import { ActivityDeliveryStatus } from './activity-delivery';
 import { Button } from '@/components/ui/button';
 import { JalaliDateInput } from '@/components/ui/jalali-date-input';
 import { EmptyState, ErrorState, label, LoadingSkeleton } from '@/components/ui/states';
-import { schoolRoutes } from '@/config/navigation';
 import type { components } from '@/generated/api/schema';
 import { date } from '@/lib/formatting';
 import Link from 'next/link';
@@ -15,9 +16,10 @@ import { ReferenceColumns } from '../reference-layout';
 import { ApiError } from '@/lib/api/errors';
 import f from './reference-form.module.css';
 import s from './school.module.css';
-import { base, Card, Field, Pager, SchoolHeading, Status, toUtc, useSchoolAction } from './shared';
+import { Card, Field, Pager, SchoolHeading, Status, toUtc, useSchoolAction } from './shared';
 type S = components['schemas'];
 export function Assignments({ classId, teach }: { classId?: string; teach: boolean }) {
+  const { base } = useAcademicScope();
   const [chosen, setChosen] = useState(classId ?? '');
   const classes = usePersonalApi<S['ClassResult'][]>('/api/v1/academic/classes', {
     enabled: !classId,
@@ -29,26 +31,24 @@ export function Assignments({ classId, teach }: { classId?: string; teach: boole
   return (
     <>
       <SchoolHeading
-        title="تکلیف‌ها"
-        description={
-          teach
-            ? 'تکلیف هر کلاس را آماده و منتشر کنید؛ پاسخ‌های دانش‌آموزان را از داخل تکلیف بررسی کنید.'
-            : 'تکلیف را بخوانید، پاسخ را ذخیره کنید و در پایان تحویل دهید.'
-        }
+        title={uiText.text_e8fed4d47d62}
+        description={teach ? uiText.text_1e4beb165475 : uiText.text_12930efb22f3}
         action={
           teach &&
           chosen && (
             <Button asChild>
-              <Link href={`${base}/classes/${chosen}/assignments/new`}>ایجاد تکلیف</Link>
+              <Link href={`${base}/classes/${chosen}/assignments/new`}>
+                {uiText.text_66eea532efc0}
+              </Link>
             </Button>
           )
         }
       />
       {!classId && (
         <Card>
-          <Field label="کلاس تکلیف">
+          <Field label={uiText.text_c476f4996767}>
             <select value={chosen} onChange={(e) => setChosen(e.target.value)}>
-              <option value="">یک کلاس انتخاب کنید…</option>
+              <option value="">{uiText.text_64a80eb6ce5b}</option>
               {classes.data?.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.title}
@@ -73,15 +73,16 @@ export function Assignments({ classId, teach }: { classId?: string; teach: boole
                 <p>
                   {a.classTitle}
                   <br />
-                  مهلت: {date(a.dueAtUtc, true)}
+                  {uiText.text_fbb3425cdeea}
+                  {date(a.dueAtUtc, true)}
                 </p>
                 <footer className={s.cardActions}>
                   <Button asChild>
                     <Link
                       href={base + '/assignments/' + a.id}
-                      aria-label={'مشاهدهٔ تکلیف و پاسخ‌ها ' + a.title}
+                      aria-label={uiText.text_3a93670cd3c7 + a.title}
                     >
-                      مشاهدهٔ تکلیف و پاسخ‌ها
+                      {uiText.text_5588a43e9669}
                     </Link>
                   </Button>
                 </footer>
@@ -90,7 +91,7 @@ export function Assignments({ classId, teach }: { classId?: string; teach: boole
           </div>
         ) : (
           <Card>
-            <EmptyState title="تکلیفی در این کلاس موجود نیست" />
+            <EmptyState title={uiText.text_5cb8d6841586} />
           </Card>
         ))}
     </>
@@ -98,19 +99,26 @@ export function Assignments({ classId, teach }: { classId?: string; teach: boole
 }
 export function AssignmentFormPage({ classId }: { classId: string }) {
   const { session } = usePersonal();
-  if (!['Teacher', 'Manager'].includes(session.context.activeRole ?? ''))
+  const scope = useAcademicScope();
+  if (
+    scope.personal
+      ? !scope.personal.assignments
+      : !['Teacher', 'Manager'].includes(session.context.activeRole ?? '')
+  )
     return <ErrorState error={new ApiError(403)} />;
   return (
     <div data-school-form>
-      <h1 className="sr-only">افزودن تکلیف</h1>
+      <h1 className="sr-only">{uiText.text_6ddab36198ac}</h1>
       <ReferenceColumns form>
-        <p className={f.intro}>تمرین را با هدف و مهلت مشخص بسازید.</p>
+        <p className={f.intro}>{uiText.text_f71501099cc4}</p>
         <CreateAssignment classId={classId} />
       </ReferenceColumns>
     </div>
   );
 }
 function CreateAssignment({ classId }: { classId: string }) {
+  const { base } = useAcademicScope();
+  const { classApi, classPath } = useAcademicScope();
   const a = useSchoolAction(),
     router = useRouter();
   return (
@@ -119,106 +127,117 @@ function CreateAssignment({ classId }: { classId: string }) {
       onSubmit={async (e) => {
         e.preventDefault();
         const f = new FormData(e.currentTarget);
-        const result = await a.run<S['AssignmentResult']>(
-          '/api/v1/academic/classes/' + classId + '/assignments',
-          {
-            title: f.get('title'),
-            description: f.get('description'),
-            dueAtUtc: toUtc(String(f.get('due'))),
-            allowLateSubmission: f.get('late') === 'on',
-            maxAttempts: Number(f.get('attempts')),
-            maxScore: Number(f.get('score')),
-          },
-        );
+        const result = await a.run<S['AssignmentResult']>(classApi(classId) + '/assignments', {
+          title: f.get('title'),
+          description: f.get('description'),
+          dueAtUtc: toUtc(String(f.get('due'))),
+          allowLateSubmission: f.get('late') === 'on',
+          maxAttempts: Number(f.get('attempts')),
+          maxScore: Number(f.get('score')),
+        });
         if (result) router.push(base + '/assignments/' + result.id);
       }}
     >
-      <Field label="عنوان تکلیف">
+      <Field label={uiText.text_c864088e1061}>
         <input required name="title" />
       </Field>
-      <Field label="شرح تکلیف">
+      <Field label={uiText.text_1d3c268468ff}>
         <textarea required name="description" />
       </Field>
-      <h2 className={f.sectionLabel}>تنظیمات تحویل</h2>
-      <Field label="مهلت تحویل">
+      <h2 className={f.sectionLabel}>{uiText.text_8dfc669046e4}</h2>
+      <Field label={uiText.text_2b26e703adf2}>
         <JalaliDateInput required withTime name="due" />
       </Field>
       <div className={s.two}>
-        <Field label="حداکثر دفعات تحویل">
+        <Field label={uiText.text_0e469bc1ffab}>
           <input name="attempts" type="number" required min={1} step={1} />
         </Field>
-        <Field label="نمرهٔ کل">
-          <input name="score" type="number" required min={0} step="any" />
+        <Field label={uiText.text_25823dfdfd3f}>
+          <input name="score" type="number" required min={0.01} step="0.01" />
         </Field>
       </div>
       <label className={s.check}>
         <input name="late" type="checkbox" />
-        تحویل با تأخیر مجاز باشد
+        {uiText.text_8dd151936022}
       </label>
       <div className={f.actions}>
         <Button type="submit" disabled={a.busy}>
-          ذخیرهٔ پیش‌نویس تکلیف
+          {uiText.text_6cac361a9d88}
         </Button>
-        <PageBack href={`${base}/classes/${classId}`} />
+        <PageBack href={classPath(classId)} />
       </div>
       {a.feedback}
     </form>
   );
 }
 export function AssignmentDetail({ id, teach }: { id: string; teach: boolean }) {
+  const scope = useAcademicScope();
+  const { base, routes: schoolRoutes } = useAcademicScope();
   const q = usePersonalApi<S['AssignmentResult']>('/api/v1/academic/assignments/' + id);
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
   const item = q.data;
+  if (!scope.matches(item)) return <ErrorState error={new ApiError(404)} />;
   return (
     <>
       <SchoolHeading title={item.title} description={item.classTitle} back />
       <Card>
         <div className={s.row}>
           <Status>{label(item.status)}</Status>
-          <span>مهلت: {date(item.dueAtUtc, true)}</span>
-          <span>نمرهٔ کل: {item.maxScore}</span>
+          <span>
+            {uiText.text_fbb3425cdeea}
+            {date(item.dueAtUtc, true)}
+          </span>
+          <span>
+            {uiText.text_895fe6a2fd56}
+            {item.maxScore}
+          </span>
         </div>
         <p className={s.bodyText}>{item.description}</p>
-        {teach && item.status === 'Draft' && (
+        {teach && (!scope.personal || scope.personal.assignments) && item.status === 'Draft' && (
           <div className={s.row}>
             <Button asChild variant="outline">
-              <Link href={`${base}/assignments/${id}/edit`}>ویرایش پیش‌نویس تکلیف</Link>
+              <Link href={`${base}/assignments/${id}/edit`}>{uiText.text_1d3577cf9675}</Link>
             </Button>
             <Button asChild>
-              <Link href={`${base}/assignments/${id}/publish-review`}>بازبینی و انتشار تکلیف</Link>
+              <Link href={`${base}/assignments/${id}/publish-review`}>
+                {uiText.text_4d420238b323}
+              </Link>
             </Button>
           </div>
         )}
       </Card>
-      {teach && item.status === 'Published' && (
+      {teach && !scope.personal && item.status === 'Published' && (
         <ActivityDeliveryStatus
           classId={item.classId}
           kind="Assignment"
           sourceVersionId={item.versionId}
         />
       )}
-      {teach ? (
-        <Card title="ارزیابی پاسخ‌ها">
+      {teach && (!scope.personal || scope.personal.grade) ? (
+        <Card title={uiText.text_3b74a41eb771}>
           <Button asChild>
-            <Link href={`${base}/assignments/${id}/evaluations`}>پاسخ‌های دریافتی و ارزیابی</Link>
+            <Link href={`${base}/assignments/${id}/evaluations`}>{uiText.text_6475ed5d6ade}</Link>
           </Button>
         </Card>
       ) : (
-        <Card title="پاسخ من">
-          <Button asChild>
-            <Link href={schoolRoutes.answer(id)}>مشاهده و پاسخ به تکلیف</Link>
-          </Button>
-          <Button asChild variant="outline">
-            <Link href={`${base}/assignments/${id}/history`}>پاسخ‌های قبلی و نتایج</Link>
-          </Button>
-        </Card>
+        (!scope.personal || scope.personal.ownResults) && (
+          <Card title={uiText.text_185168f80806}>
+            <Button asChild>
+              <Link href={schoolRoutes.answer(id)}>{uiText.text_2ea16ced02c4}</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href={`${base}/assignments/${id}/history`}>{uiText.text_73b4dad6356e}</Link>
+            </Button>
+          </Card>
+        )
       )}
     </>
   );
 }
 export { Schedule } from './schedule';
 export function TeacherLearners({ classId }: { classId: string }) {
+  const { base } = useAcademicScope();
   const dashboard = usePersonalApi<S['TeacherDashboardDto']>('/api/v1/dashboards/teacher');
   const assigned = dashboard.data?.assignedClasses.find((item) => item.classId === classId);
   const [page, setPage] = useState(1);
@@ -226,17 +245,15 @@ export function TeacherLearners({ classId }: { classId: string }) {
     `/api/v1/reports/teacher/classes/${classId}/assignments?PageNumber=${page}&PageSize=30`,
   );
   return (
-    <Card title="پیگیری دانش‌آموزان">
+    <Card title={uiText.text_e443a9f2c748}>
       {assigned && (
         <p className={s.notice}>
-          دانش‌آموزان فعال کلاس:{' '}
-          {new Intl.NumberFormat('fa-IR').format(assigned.activeLearnerCount)} نفر
+          {uiText.text_5e21cda4898b}{' '}
+          {new Intl.NumberFormat('fa-IR').format(assigned.activeLearnerCount)}
+          {uiText.text_56bfaedd15bf}
         </p>
       )}
-      <p className={s.hint}>
-        این فهرست، گزارش تکلیف‌های دانش‌آموزان است؛ دانش‌آموزی که هنوز تکلیفی برایش منتشر نشده ممکن
-        است در گزارش نباشد.
-      </p>
+      <p className={s.hint}>{uiText.text_1cab39a10925}</p>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -248,10 +265,10 @@ export function TeacherLearners({ classId }: { classId: string }) {
               <table className={s.table}>
                 <thead>
                   <tr>
-                    <th>دانش‌آموز</th>
-                    <th>تکلیف</th>
-                    <th>تحویل</th>
-                    <th>نمرهٔ جاری</th>
+                    <th>{uiText.text_fbd179d162db}</th>
+                    <th>{uiText.text_b9bdf50e5da3}</th>
+                    <th>{uiText.text_87479d632cb0}</th>
+                    <th>{uiText.text_2b9d6b6b7916}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -261,15 +278,19 @@ export function TeacherLearners({ classId }: { classId: string }) {
                       <td>
                         <Link href={base + '/assignments/' + row.assignmentId}>{row.title}</Link>
                       </td>
-                      <td>{row.submissionStatus ? label(row.submissionStatus) : 'تحویل نداده'}</td>
-                      <td>{row.currentScore ?? 'هنوز نمره ندارد'}</td>
+                      <td>
+                        {row.submissionStatus
+                          ? label(row.submissionStatus)
+                          : uiText.text_2675dd46965d}
+                      </td>
+                      <td>{row.currentScore ?? uiText.text_ad09745dadec}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
           ) : (
-            <EmptyState title="فعالیتی در گزارش موجود نیست" />
+            <EmptyState title={uiText.text_0f71dc23b496} />
           )}
           <Pager page={page} total={q.data.totalCount} onChange={setPage} />
         </>

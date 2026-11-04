@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { components } from '@/generated/api/schema';
-import { mergeInboxPages } from '@/features/personal/messaging/inbox-model';
+import { flattenAccountInbox } from '@/features/personal/messaging/inbox-model';
 import {
   readCreationDraft,
   creationWasRejected,
@@ -13,20 +13,24 @@ const row = (id: string, time: string | null, pinned = false) =>
     lastMessageAtUtc: time,
     isPinned: pinned,
   }) as S['ConversationSummaryResult'];
-describe('account inbox page merge', () => {
-  it('keeps latest first-page copy when pagination shifts and orders pins before activity', () => {
-    const current = row('a', '2026-11-01T12:00:00Z');
-    expect(
-      mergeInboxPages([
-        [current, row('b', '2026-10-01T12:00:00Z', true)],
-        [row('a', null), row('c', '2026-11-01T13:00:00Z')],
-      ]),
-    ).toEqual([row('b', '2026-10-01T12:00:00Z', true), row('c', '2026-11-01T13:00:00Z'), current]);
+describe('server paginated account inbox', () => {
+  const page = (items: S['ConversationSummaryResult'][]): S['AccountInboxPageResult'] => ({
+    items,
+    nextCursor: null,
+    hasMore: false,
   });
-  it('uses stable ids for conversations without messages without mutating source pages', () => {
-    const page = [row('z', null), row('a', null)];
-    expect(mergeInboxPages([page]).map((r) => r.conversationId)).toEqual(['a', 'z']);
-    expect(page[0].conversationId).toBe('z');
+  it('preserves server ordering even when pins and dates suggest a different client sort', () => {
+    const first = row('z', null),
+      second = row('a', '2026-11-01T12:00:00Z', true);
+    expect(flattenAccountInbox([page([first, second])])).toEqual([first, second]);
+  });
+  it('keeps the first authoritative copy when cursor pages overlap without mutating input', () => {
+    const current = row('a', null),
+      items = [row('z', null), current];
+    expect(
+      flattenAccountInbox([page(items), page([row('a', '2026-11-02T12:00:00Z'), row('b', null)])]),
+    ).toEqual([...items, row('b', null)]);
+    expect(items.map((item) => item.conversationId)).toEqual(['z', 'a']);
   });
 });
 describe('creation draft recovery', () => {
@@ -51,22 +55,28 @@ describe('creation draft recovery', () => {
     expect(readCreationDraft(raw)).toBeNull();
   });
 });
-describe('conversation management policy', () => {
-  const value = (role: string, status = 'Active', policy = 'UserManaged') =>
+describe('server effective conversation capabilities', () => {
+  const value = (role: string, caps?: Partial<S['ConversationEffectiveCapabilities']>) =>
     ({
-      managementPolicy: policy,
-      participants: [{ role, status, user: { userId: 'me' } }],
+      participants: [{ role, status: 'Active', user: { userId: 'me' } }],
+      effectiveCapabilities: caps,
     }) as S['ManagedConversationResult'];
-  it('requires active conversation ownership; education role is never inferred', () => {
-    expect(canManageMembers(value('Owner'), 'me')).toBe(true);
-    expect(canManageMembers(value('Member'), 'me')).toBe(false);
-    expect(canManageMembers(value('Admin'), 'me')).toBe(false);
-    expect(canManageMembers(value('Owner'), 'other')).toBe(false);
+  it('never grants management by Owner, Admin or school role when the server flag is missing or false', () => {
+    for (const role of ['Owner', 'Admin', 'Teacher', 'Manager'])
+      expect(canManageMembers(value(role), 'me')).toBe(false);
+    expect(canManageMembers(value('Owner', { canManageMembers: false }), 'me')).toBe(false);
   });
-  it('revokes controls when membership ends or the group is system managed', () => {
-    expect(canManageMembers(value('Owner', 'Left'), 'me')).toBe(false);
-    expect(canManageMembers(value('Owner', 'Removed'), 'me')).toBe(false);
-    expect(canManageMembers(value('Owner', 'Active', 'SystemManagedAcademic'), 'me')).toBe(false);
+  it('honors effective management independently of the displayed roster role', () => {
+    expect(canManageMembers(value('Member', { canManageMembers: true }), 'me')).toBe(true);
+    expect(
+      canManageMembers(
+        {
+          ...value('Member', { canManageMembers: true }),
+          managementPolicy: 'SystemManagedAcademic',
+        },
+        'me',
+      ),
+    ).toBe(true);
   });
 });
 

@@ -1,0 +1,60 @@
+.mk-ui .edu-q-item {
+  width: 100%;
+  text-align: start;
+  color: var(--text);
+}
+.mk-ui .question-nos button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  flex: 0 0 44px;
+  font-size: 0.75rem;
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text);
+}
+.mk-ui .question-nos button.current {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--accent);
+}
+.mk-ui .edu-editor-option {
+  text-align: start;
+}
+.mk-ui .edu-exam-layout > * {
+  min-width: 0;
+}
+@media (max-width: 1100px) {
+  .mk-ui .edu-exam-layout {
+    grid-template-columns: 150px minmax(0, 1fr);
+  }
+  .mk-ui .edu-exam-layout > .stack {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .mk-ui .edu-exam-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mk-ui .edu-exam-layout > .stack {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mk-ui .edu-questions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mk-ui .edu-q-item {
+    width: auto;
+    flex: 1;
+    margin: 0;
+  }
+  .mk-ui .edu-questions > .between {
+    width: 100%;
+  }
+}

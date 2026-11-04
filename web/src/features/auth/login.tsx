@@ -1,6 +1,5 @@
 'use client';
-import { ReferenceBrand } from '@/components/ui/brand';
-import { Button } from '@/components/ui/button';
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 import { request } from '@/lib/api/client';
 import { ApiError } from '@/lib/api/errors';
@@ -12,15 +11,21 @@ import {
   phoneInputMessage,
   otpInputMessage,
 } from '@/lib/auth-identifiers';
-import { latinDigits, number } from '@/lib/formatting';
-import { ArrowRight } from 'lucide-react';
-import s from './login-reference.module.css';
+import { latinDigits } from '@/lib/formatting';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, type ClipboardEvent } from 'react';
 import { useForm } from 'react-hook-form';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { takeBrowserAuthReturn, safeAuthReturnPath } from '@/lib/auth-return';
+import { AuthLayout } from './auth-layout';
+import { BrandMark } from '@/components/ui/brand';
+import { Button } from '@/components/ui/button';
+import { ChevronRight, Ellipsis, LoaderCircle, ShieldCheck } from 'lucide-react';
+import s from './login.module.css';
+import { network } from '@/config/network';
 type LoginValues = { phoneNumber: string; code: string };
-export function LoginForm() {
-  const authBase = '/api/client/auth';
+export function LoginForm({ returnPath = null }: { returnPath?: string | null } = {}) {
+  const authBase = network.clientApiPrefix + '/auth';
   const router = useRouter();
   const [challenge, setChallenge] = useState<components['schemas']['RequestOtpResult'] | null>(
       null,
@@ -30,6 +35,7 @@ export function LoginForm() {
     [rateUntil, setRateUntil] = useState(0),
     [busy, setBusy] = useState(false);
   const operation = useRef(false);
+  const [help, setHelp] = useState(false);
   const form = useForm<LoginValues>({
     defaultValues: { phoneNumber: '', code: '' },
   });
@@ -48,7 +54,7 @@ export function LoginForm() {
     limit: number,
   ) {
     const input = event.currentTarget;
-    const pasted = normalizeAuthDigits(event.clipboardData.getData('text'));
+    const pasted = normalizeAuthDigits(event.clipboardData.getData('text')).replace(/[^0-9]/g, '');
     const candidate =
       input.value.slice(0, input.selectionStart ?? 0) +
       pasted +
@@ -97,7 +103,9 @@ export function LoginForm() {
         const channel = new BroadcastChannel('makan-client-session');
         channel.postMessage('changed');
         channel.close();
-        router.replace('/personal/workspaces');
+        router.replace(
+          takeBrowserAuthReturn() ?? safeAuthReturnPath(returnPath) ?? '/personal/workspaces',
+        );
       }
     } catch (e) {
       const err = e instanceof ApiError ? e : new ApiError(503);
@@ -132,153 +140,187 @@ export function LoginForm() {
       setBusy(false);
     }
   }
+  const phone = form.watch('phoneNumber'),
+    code = form.watch('code');
+  const activeField = challenge ? 'code' : 'phoneNumber';
+  const phoneRegistration = form.register('phoneNumber', {
+    validate: (value) => validLoginPhone(value) || phoneInputMessage,
+  });
+  const codeRegistration = form.register('code', {
+    validate: (value) => !challenge || validLoginOtp(value) || otpInputMessage,
+  });
+  const registration = challenge ? codeRegistration : phoneRegistration;
+  const issue = form.formState.errors[activeField]?.message;
+  const unavailable =
+    busy ||
+    form.formState.isSubmitting ||
+    now < rateUntil ||
+    (!!challenge && (remaining <= 0 || !validLoginOtp(code)));
+  function back() {
+    if (challenge) {
+      setChallenge(null);
+      setError(null);
+      form.setValue('code', '');
+    } else router.push('/welcome');
+  }
+  function identifierInput(value: string) {
+    form.setValue(activeField, normalizeAuthDigits(value).replace(/[^0-9]/g, ''), {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  }
   return (
-    <div className={s.page} data-reference-public>
-      <header className={s.header}>ماکان</header>
-      <main className={s.main}>
-        <div className={s.card}>
-          <div className={s.brand}>
-            <ReferenceBrand />
+    <>
+      <AuthLayout>
+        <form
+          className={s.form}
+          onSubmit={form.handleSubmit(submit)}
+          noValidate
+          aria-label={challenge ? uiText.text_7f02906d0bda : uiText.text_a307da4d1ec4}
+        >
+          <header className={s.header}>
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={back}
+              disabled={busy}
+              aria-label={uiText.common_back}
+            >
+              <ChevronRight size={22} />
+            </Button>
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              onClick={() => setHelp(true)}
+              aria-label={uiText.text_a0f446ea0a11}
+            >
+              <Ellipsis size={22} />
+            </Button>
+          </header>
+          <div className={s.identity}>
+            <BrandMark />
+            <h1>{challenge ? uiText.auth_codeTitle : uiText.auth_phoneTitle}</h1>
+            <p>
+              {challenge
+                ? uiText.text_43de2faf100b + phone + uiText.text_bdb15bbda1e3
+                : uiText.text_5d9c3b2dee3e}
+            </p>
           </div>
-          <h1>{challenge ? 'کد تأیید را وارد کنید' : 'به ماکان خوش آمدید'}</h1>
-          <p className={s.intro}>
-            {challenge ? (
-              <>
-                کد ارسال‌شده به <bdi dir="ltr">{form.getValues('phoneNumber')}</bdi> را وارد کنید.
-              </>
-            ) : (
-              'یادگیری و ارتباط، در کنار هم.'
-            )}
-          </p>
-          <form className={s.form} onSubmit={form.handleSubmit(submit)} noValidate>
-            {!challenge ? (
-              <label htmlFor="phone-number">
-                شماره همراه
-                <input
-                  id="phone-number"
-                  aria-label="شماره همراه"
-                  dir="ltr"
-                  type="tel"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  placeholder="09123456789"
-                  minLength={11}
-                  maxLength={11}
-                  pattern="09[0-9]{9}"
-                  onPaste={(e) => pasteIdentifier(e, 'phoneNumber', 11)}
-                  autoFocus
-                  disabled={busy}
-                  aria-invalid={!!form.formState.errors.phoneNumber}
-                  aria-describedby={
-                    form.formState.errors.phoneNumber ? 'phone-error phone-help' : 'phone-help'
-                  }
-                  {...form.register('phoneNumber', {
-                    setValueAs: normalizeAuthDigits,
-                    validate: (value) => validLoginPhone(value) || phoneInputMessage,
-                  })}
-                />
-                {form.formState.errors.phoneNumber && (
-                  <span id="phone-error" className="field-error">
-                    {form.formState.errors.phoneNumber.message}
-                  </span>
-                )}
-                <span id="phone-help" className="field-help">
-                  شماره همراه ۱۱ رقمی، مانند 09100000000، وارد کنید.
-                </span>
-              </label>
-            ) : (
-              <>
-                <label htmlFor="otp-code">
-                  کد ورود
-                  <input
-                    id="otp-code"
-                    aria-label="کد ورود"
-                    className="otp-input"
-                    dir="ltr"
-                    autoComplete="one-time-code"
-                    inputMode="numeric"
-                    minLength={6}
-                    maxLength={6}
-                    pattern="[0-9]{6}"
-                    onPaste={(e) => pasteIdentifier(e, 'code', 6)}
-                    disabled={busy}
-                    aria-invalid={!!form.formState.errors.code}
-                    aria-describedby={form.formState.errors.code ? 'otp-error' : undefined}
-                    {...form.register('code', {
-                      setValueAs: normalizeAuthDigits,
-                      validate: (value) => !challenge || validLoginOtp(value) || otpInputMessage,
-                    })}
-                  />
-                  {form.formState.errors.code && (
-                    <span id="otp-error" className="field-error">
-                      {form.formState.errors.code.message}
-                    </span>
-                  )}
-                </label>
-                <div className="timer">
-                  <span>
-                    {remaining > 0
-                      ? 'اعتبار کد: ' +
-                        number(Math.floor(remaining / 60)) +
-                        ':' +
-                        String(remaining % 60).padStart(2, '0')
-                      : 'اعتبار کد تمام شده است'}
-                  </span>
-                  <button
-                    type="button"
-                    className="button button-ghost button-sm"
-                    disabled={busy || now < resendAt}
-                    onClick={() => void resend()}
-                  >
-                    {now < resendAt
-                      ? number(Math.ceil((resendAt - now) / 1000)) + ' ثانیه تا ارسال مجدد'
-                      : 'ارسال دوباره کد'}
-                  </button>
-                </div>
-              </>
-            )}
-            {error && (
-              <div className="form-message error" role="alert">
-                {loginFailureMessage(error, !!challenge)}
-                {error.problem.traceId && (
-                  <small className="block mt-2">
-                    کد پیگیری: <bdi dir="ltr">{error.problem.traceId}</bdi>
-                  </small>
-                )}
-              </div>
-            )}
-            <div className={s.actions}>
-              <Button
-                type="submit"
-                disabled={
-                  busy ||
-                  form.formState.isSubmitting ||
-                  now < rateUntil ||
-                  (!!challenge && remaining <= 0)
-                }
-              >
-                {busy ? 'لطفاً صبر کنید…' : challenge ? 'تأیید و ورود' : 'دریافت کد ورود'}
-              </Button>
-            </div>
-            {challenge && (
-              <Button
-                variant="ghost"
-                type="button"
+          <div className={s.field}>
+            <label htmlFor={challenge ? 'otp-code' : 'phone-number'}>
+              {challenge ? uiText.auth_codeLabel : uiText.auth_phoneLabel}
+            </label>
+            <div className={challenge ? s.otp : undefined}>
+              <input
+                {...registration}
+                id={challenge ? 'otp-code' : 'phone-number'}
+                type={challenge ? 'text' : 'tel'}
+                dir="ltr"
+                inputMode="numeric"
+                autoComplete={challenge ? 'one-time-code' : 'tel'}
+                value={challenge ? code : phone}
+                maxLength={challenge ? 6 : 11}
+                minLength={challenge ? 6 : 11}
+                pattern={challenge ? '[0-9]{6}' : '09[0-9]{9}'}
+                autoFocus
+                key={activeField}
                 disabled={busy}
-                onClick={() => {
-                  setChallenge(null);
-                  setError(null);
-                  form.setValue('code', '');
+                aria-invalid={!!issue}
+                aria-describedby={issue ? 'identifier-error' : 'identifier-hint'}
+                onKeyDown={(event) => {
+                  if (
+                    event.key.length === 1 &&
+                    !event.ctrlKey &&
+                    !event.metaKey &&
+                    !event.altKey &&
+                    !/^[0-9۰-۹٠-٩]$/.test(event.key)
+                  )
+                    event.preventDefault();
                 }}
-              >
-                <ArrowRight size={16} />
-                تغییر شماره همراه
-              </Button>
+                onChange={(event) => identifierInput(event.target.value)}
+                onPaste={(event) => pasteIdentifier(event, activeField, challenge ? 6 : 11)}
+              />
+              {challenge && (
+                <div className={s.digits} aria-hidden="true">
+                  {Array.from({ length: 6 }, (_, index) => (
+                    <span
+                      key={index}
+                      data-active={index === Math.min(code?.length ?? 0, 5)}
+                      data-invalid={!!issue}
+                    >
+                      {code?.[index] === undefined
+                        ? ''
+                        : Number(code[index]).toLocaleString('fa-IR')}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+            {issue ? (
+              <p id="identifier-error" role="alert" className={s.error}>
+                {issue}
+              </p>
+            ) : (
+              <p id="identifier-hint" className={s.hint}>
+                {challenge ? uiText.text_c7b877a28050 : uiText.text_0ec3b647b2d7}
+              </p>
             )}
-          </form>
-          <p className={s.terms}>ادامه به معنی پذیرش شرایط استفاده است.</p>
-        </div>
-      </main>
-    </div>
+          </div>
+          {challenge && (
+            <>
+              <div className={s.codeActions}>
+                <button type="button" className={s.edit} disabled={busy} onClick={back}>
+                  {uiText.text_8ec609305663}
+                </button>
+                <button
+                  type="button"
+                  className={s.edit}
+                  disabled={busy || now < resendAt}
+                  onClick={() => void resend()}
+                >
+                  {now < resendAt
+                    ? Number(Math.ceil((resendAt - now) / 1000)).toLocaleString('fa-IR') +
+                      uiText.text_f0868fd5d933
+                    : uiText.text_cbe0e1ea7c4c}
+                </button>
+              </div>
+              <aside className={s.security}>
+                <ShieldCheck size={21} />
+                <p>{uiText.text_edf1c5e3751f}</p>
+              </aside>
+            </>
+          )}
+          <div className={s.actions}>
+            <Button type="submit" disabled={unavailable} aria-busy={busy}>
+              {busy && <LoaderCircle className={s.spinner} size={18} />}{' '}
+              {busy
+                ? uiText.text_ee2ee0a2117a
+                : challenge
+                  ? uiText.auth_verify
+                  : uiText.auth_requestCode}
+            </Button>
+          </div>
+          <p className={s.policy}>{uiText.text_7982e7b03d4c}</p>
+        </form>
+        {error && (
+          <div className="mk-auth-error" role="alert">
+            {loginFailureMessage(error, !!challenge)}
+            {error.problem.traceId && (
+              <small>
+                {uiText.text_324357b2beef}
+                <bdi dir="ltr">{error.problem.traceId}</bdi>
+              </small>
+            )}
+          </div>
+        )}
+      </AuthLayout>
+      <Dialog open={help} onOpenChange={setHelp}>
+        <DialogContent title={uiText.text_b55a7e83c439}>
+          <p>{uiText.text_a55bf6a5c36c}</p>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

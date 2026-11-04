@@ -45,6 +45,7 @@ export async function request<T>(
     throw new ApiError(response.status, p);
   }
   if (response.status === 204) return undefined as T;
+  if (response.status === 202 && !response.headers.get('Content-Type')) return undefined as T;
   let result: unknown;
   try {
     result = response.headers.get('Content-Type')?.includes('octet-stream')

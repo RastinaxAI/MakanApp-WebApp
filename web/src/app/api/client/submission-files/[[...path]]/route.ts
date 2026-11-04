@@ -1,3 +1,4 @@
+import { academicFileScope, independentUploadForm } from '@/lib/server/academic-file-scope';
 import { assertBinaryContent } from '@/lib/api/binary-response';
 import { NextResponse } from 'next/server';
 import { clientSessionId, getClientState } from '@/lib/server/client-session';
@@ -37,7 +38,12 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
     const upload = request.method === 'POST' && parts.length === 0,
       content = request.method === 'GET' && parts.length === 2 && parts[1] === 'content',
       metadata = request.method === 'GET' && parts.length === 1;
-    if (!attemptId || !guid.test(attemptId) || url.searchParams.size !== 1) throw new ApiError(400);
+    if (
+      !attemptId ||
+      !guid.test(attemptId) ||
+      url.searchParams.size !== (url.searchParams.has('audience') ? 2 : 1)
+    )
+      throw new ApiError(400);
     if (!upload && (!(content || metadata) || !guid.test(parts[0]))) throw new ApiError(404);
     const type = request.headers.get('Content-Type') ?? '';
     if (upload && (!/^multipart\/form-data;\s*boundary=/i.test(type) || !request.body))
@@ -49,10 +55,15 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
       if (!state) throw new ApiError(401);
       if (request.headers.get('X-Makan-Context') !== state.revision)
         throw new ApiError(409, { code: 'CONTEXT_CHANGED' });
-      const evaluator = ['Teacher', 'Manager'].includes(state.context.activeRole ?? '');
+      const audience = url.searchParams.get('audience');
+      if (audience && !['learner', 'evaluator'].includes(audience)) throw new ApiError(400);
+      const evaluator = audience
+        ? audience === 'evaluator'
+        : ['Teacher', 'Manager'].includes(state.context.activeRole ?? '');
       if (
-        state.context.workspaceType !== 'Organization' ||
-        (!evaluator && state.context.activeRole !== 'Student')
+        !audience &&
+        (state.context.workspaceType !== 'Organization' ||
+          (!evaluator && state.context.activeRole !== 'Student'))
       )
         throw new ApiError(403);
       // Evaluators can only download a Ready attachment proved by the authorized
@@ -66,11 +77,26 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
         session = upstream.session;
         return decode<T>(upstream.response, schema);
       };
+      let fileScope: { organizationId: string | null; personalClassId: string | undefined } = {
+        organizationId: state.context.organizationId,
+        personalClassId: undefined,
+      };
       if (evaluator) {
         const submission = await read<S['SubmissionForEvaluationResult']>(
           '/api/v1/academic/submission-attempts/' + attemptId + '/evaluation/submission',
           { $ref: '#/components/schemas/SubmissionForEvaluationResult' },
         );
+        if (audience) {
+          const memberClass = await read<S['PersonalClassDto']>(
+            '/api/v1/personal-classes/' + submission.classId,
+            { $ref: '#/components/schemas/PersonalClassDto' },
+          );
+          if (!memberClass.capabilities?.canGrade) throw new ApiError(403);
+          fileScope = academicFileScope(
+            { kind: 'PersonalClass', classId: submission.classId },
+            null,
+          );
+        }
         if (
           submission.submissionAttemptId !== attemptId ||
           !submission.attachments.some(
@@ -86,9 +112,11 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
           '/api/v1/academic/submission-attempts/' + attemptId,
           { $ref: '#/components/schemas/SubmissionAttemptResult' },
         );
+        fileScope = academicFileScope(attempt.classRef, state.context.organizationId);
+        if (audience && !fileScope.personalClassId) throw new ApiError(404);
         if (
           attempt.id !== attemptId ||
-          attempt.organizationId !== state.context.organizationId ||
+          attempt.organizationId !== fileScope.organizationId ||
           !attempt.contentVisible
         )
           throw new ApiError(404);
@@ -101,7 +129,7 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
             (a) =>
               a.id === attemptId &&
               a.assignmentId === attempt.assignmentId &&
-              a.organizationId === state.context.organizationId &&
+              a.organizationId === fileScope.organizationId &&
               a.contentVisible,
           )
         )
@@ -125,7 +153,9 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
         });
         if (
           file.id !== parts[0] ||
-          file.organizationId !== state.context.organizationId ||
+          file.organizationId !== fileScope.organizationId ||
+          (fileScope.personalClassId !== undefined &&
+            file.personalClassId !== fileScope.personalClassId) ||
           (!evaluator && file.uploadedByUserId !== state.user.id) ||
           !submissionMimeTypes.has(file.contentType)
         )
@@ -135,7 +165,7 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
       return {
         revision: state.revision,
         userId: state.user.id,
-        organizationId: state.context.organizationId,
+        ...fileScope,
         token: session.accessToken,
       };
     });
@@ -146,19 +176,26 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
         throw new ApiError(409, { code: 'CONTEXT_CHANGED' });
       request.signal.throwIfAborted();
     }
+    const independentForm =
+      upload && prepared.personalClassId
+        ? await independentUploadForm(request, prepared.personalClassId)
+        : undefined;
     const body = upload
-      ? request.body!.pipeThrough(
+      ? (independentForm ??
+        request.body!.pipeThrough(
           new TransformStream<Uint8Array, Uint8Array>({
             async transform(chunk, controller) {
               await current();
               controller.enqueue(chunk);
             },
           }),
-        )
+        ))
       : undefined;
     const response = await fetch(
       new URL(
-        upload ? '/api/v1/files' : '/api/v1/files/' + parts[0] + (content ? '/content' : ''),
+        upload
+          ? '/api/v1/files' + (prepared.personalClassId ? '?workspaceScope=Personal' : '')
+          : '/api/v1/files/' + parts[0] + (content ? '/content' : ''),
         serverConfig().backend,
       ),
       {
@@ -166,7 +203,7 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
         headers: {
           Authorization: 'Bearer ' + prepared.token,
           'Accept-Encoding': 'identity',
-          ...(upload ? { 'Content-Type': type } : {}),
+          ...(upload && !independentForm ? { 'Content-Type': type } : {}),
         },
         body,
         duplex: 'half',
@@ -184,6 +221,8 @@ async function handler(request: Request, { params }: { params: Promise<{ path?: 
       if (
         asset.uploadedByUserId !== prepared.userId ||
         asset.organizationId !== prepared.organizationId ||
+        (prepared.personalClassId !== undefined &&
+          asset.personalClassId !== prepared.personalClassId) ||
         (!upload && asset.id !== parts[0])
       )
         throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });

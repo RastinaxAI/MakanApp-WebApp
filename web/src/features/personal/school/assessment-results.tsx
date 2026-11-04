@@ -1,21 +1,24 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
 import { ApiError } from '@/lib/api/errors';
 import { date } from '@/lib/formatting';
-import { usePersonal, usePersonalApi } from '../provider';
-import { base, Status } from './shared';
+import { usePersonalApi } from '../provider';
+import { Status } from './shared';
 import { WorkflowPage } from './workflow';
 import { evaluationLabel } from './evaluation-model';
 import e from './evaluation.module.css';
 import s from './school.module.css';
 type S = components['schemas'];
 export function AssessmentHistory({ id, exam = false }: { id: string; exam?: boolean }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
-      title={exam ? 'تلاش‌های من در آزمون' : 'پاسخ‌های قبلی من'}
+      title={exam ? uiText.text_47d0719f27c1 : uiText.text_5592e226d3dc}
       back={`${base}/${exam ? 'exams' : 'assignments'}/${id}`}
       roles={['Student']}
     >
@@ -24,15 +27,14 @@ export function AssessmentHistory({ id, exam = false }: { id: string; exam?: boo
   );
 }
 function AssignmentHistory({ id }: { id: string }) {
-  const { session } = usePersonal();
+  const scope = useAcademicScope();
+  const { base } = useAcademicScope();
   const q = usePersonalApi<S['SubmissionAttemptResult'][]>(
     `/api/v1/academic/assignments/${id}/attempts/me`,
   );
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
-  if (
-    q.data.some((x) => x.assignmentId !== id || x.organizationId !== session.context.organizationId)
-  )
+  if (q.data.some((x) => x.assignmentId !== id || !scope.matches(x)))
     return <ErrorState error={new ApiError(502)} />;
   return (
     <section className={e.panel}>
@@ -41,10 +43,13 @@ function AssignmentHistory({ id }: { id: string }) {
           {q.data.map((row) => (
             <article className={e.row} key={row.id}>
               <div>
-                <h2>پاسخ شمارهٔ {row.attemptNumber.toLocaleString('fa-IR')}</h2>
+                <h2>
+                  {uiText.text_6fd4ea2ac138}
+                  {row.attemptNumber.toLocaleString('fa-IR')}
+                </h2>
                 <small>
-                  {row.status === 'Draft' ? 'پیش‌نویس' : 'تحویل‌شده'} ·{' '}
-                  {date(row.submittedAtUtc, true)}
+                  {row.status === 'Draft' ? uiText.text_410c47c7f8b7 : uiText.text_5b81f53beda1}
+                  {uiText.text_78887da22764} {date(row.submittedAtUtc, true)}
                 </small>
               </div>
               <Button asChild variant="outline">
@@ -55,19 +60,20 @@ function AssignmentHistory({ id }: { id: string }) {
                       : `${base}/submissions/${row.id}/result`
                   }
                 >
-                  {row.status === 'Draft' ? 'ادامهٔ پاسخ' : 'نتیجهٔ منتشرشده'}
+                  {row.status === 'Draft' ? uiText.text_24e566f7905f : uiText.text_9ea506c7898d}
                 </Link>
               </Button>
             </article>
           ))}
         </div>
       ) : (
-        <EmptyState title="هنوز پاسخی ثبت نکرده‌اید" />
+        <EmptyState title={uiText.text_28a910fd0f3f} />
       )}
     </section>
   );
 }
 function ExamHistory({ id }: { id: string }) {
+  const { base } = useAcademicScope();
   const q = usePersonalApi<S['StudentExamAttemptSummaryDto'][]>(
     `/api/v1/academic/exams/${id}/attempts/me`,
   );
@@ -80,7 +86,10 @@ function ExamHistory({ id }: { id: string }) {
           {q.data.map((row) => (
             <article key={row.examAttemptId} className={e.row}>
               <div>
-                <h2>تلاش {row.attemptNumber.toLocaleString('fa-IR')}</h2>
+                <h2>
+                  {uiText.text_1447bc999cc2}
+                  {row.attemptNumber.toLocaleString('fa-IR')}
+                </h2>
                 <small>{date(row.startedAtUtc, true)}</small>
               </div>
               <Button variant="outline" asChild>
@@ -91,35 +100,35 @@ function ExamHistory({ id }: { id: string }) {
                       : `${base}/exam-submissions/${row.examAttemptId}/result`
                   }
                 >
-                  {row.status === 'InProgress' ? 'ادامهٔ آزمون' : 'وضعیت نتیجه'}
+                  {row.status === 'InProgress'
+                    ? uiText.text_cb86a53fa7a6
+                    : uiText.text_e82ba27cb37f}
                 </Link>
               </Button>
             </article>
           ))}
         </div>
       ) : (
-        <EmptyState title="هنوز در این آزمون شرکت نکرده‌اید" />
+        <EmptyState title={uiText.text_7dee19807d8f} />
       )}
     </section>
   );
 }
 export function AssessmentResult({ id, exam = false }: { id: string; exam?: boolean }) {
-  const { session } = usePersonal();
+  const { base } = useAcademicScope();
+  const scope = useAcademicScope();
   return (
     <WorkflowPage
-      title={exam ? 'نتیجهٔ آزمون' : 'نتیجهٔ تکلیف'}
+      title={exam ? uiText.text_e53e2ee5f402 : uiText.text_321d09514a3f}
       back={base}
       roles={['Student', 'Parent']}
     >
-      {session.context.activeRole === 'Parent' && !session.context.subjectOrganizationPersonId ? (
-        <EmptyState
-          title="ابتدا فرزند را انتخاب کنید"
-          description="نتیجه در رابطهٔ معتبر همان فرزند قابل مشاهده است."
-        />
+      {scope.parent && !scope.hasChild ? (
+        <EmptyState title={uiText.text_f3bcbf2e028e} description={uiText.text_8dc330a401b6} />
       ) : exam ? (
-        <ExamResult id={id} parent={session.context.activeRole === 'Parent'} />
+        <ExamResult id={id} parent={scope.parent} />
       ) : (
-        <AssignmentResult id={id} parent={session.context.activeRole === 'Parent'} />
+        <AssignmentResult id={id} parent={scope.parent} />
       )}
     </WorkflowPage>
   );
@@ -159,8 +168,8 @@ function ExamResult({ id, parent }: { id: string; parent: boolean }) {
     return (
       <section className={e.panel}>
         <Status>{evaluationLabel(value.releaseStatus)}</Status>
-        <h2>نتیجه هنوز منتشر نشده است</h2>
-        <p className={s.hint}>پس از انتشار معتبر، نمره و بازخورد مجاز همین‌جا نمایش داده می‌شود.</p>
+        <h2>{uiText.text_993184c04686}</h2>
+        <p className={s.hint}>{uiText.text_06cb849dea5b}</p>
       </section>
     );
   const feedback = parent
@@ -191,21 +200,23 @@ function ResultCard({
 }) {
   return (
     <section className={e.panel}>
-      <Status>منتشرشده</Status>
-      <h2>ارزیابی منتشرشده</h2>
+      <Status>{uiText.text_e4f1cf0d1e04}</Status>
+      <h2>{uiText.text_4be8404a5b20}</h2>
       <div className={e.score}>
-        <strong>{score === null ? 'نامشخص' : score.toLocaleString('fa-IR')}</strong>
+        <strong>{score === null ? uiText.text_f07a81a06253 : score.toLocaleString('fa-IR')}</strong>
         <span>
-          {maximum === null ? 'سقف نمره مشخص نیست' : 'از ' + maximum.toLocaleString('fa-IR')}
+          {maximum === null
+            ? uiText.text_de1696e646ee
+            : uiText.text_928bdfd562d1 + maximum.toLocaleString('fa-IR')}
         </span>
       </div>
-      <h3>بازخورد</h3>
+      <h3>{uiText.text_6310111c0383}</h3>
       <p className={e.answer} dir="auto">
-        {feedback || 'بازخورد متنی ثبت نشده است.'}
+        {feedback || uiText.text_a592243bf557}
       </p>
       <p className={s.hint}>
         {date(released, true)}
-        {revision !== null ? ` · نسخهٔ ${revision.toLocaleString('fa-IR')}` : ''}
+        {revision !== null ? uiText.format_838449e97408(revision.toLocaleString('fa-IR')) : ''}
       </p>
     </section>
   );

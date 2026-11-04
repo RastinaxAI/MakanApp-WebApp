@@ -32,6 +32,10 @@ function worker() {
   };
   const context = vm.createContext({
     self,
+    importScripts: (url: string) => {
+      if (url !== '/ui-copy.js') throw Error('Unexpected worker dependency');
+      vm.runInContext(fs.readFileSync('public' + url, 'utf8'), context);
+    },
     caches,
     URL,
     Response,
@@ -47,6 +51,8 @@ describe('PWA cache and notification boundaries', () => {
       'makan-012345abcdef',
       'makan-admin-public-v4',
       'makan-client-public-v5',
+      'makan-client-public-blue-v6',
+      'makan-client-public-blue-v7',
       'unrelated-cache',
       'makan-personal-outbox',
     ]);
@@ -59,6 +65,8 @@ describe('PWA cache and notification boundaries', () => {
     expect(w.caches.delete.mock.calls.map(([key]) => key)).toEqual([
       'makan-012345abcdef',
       'makan-admin-public-v4',
+      'makan-client-public-v5',
+      'makan-client-public-blue-v6',
     ]);
     expect(w.navigate).not.toHaveBeenCalled();
     expect(w.self.clients.claim).toHaveBeenCalledTimes(1);
@@ -78,7 +86,10 @@ describe('PWA cache and notification boundaries', () => {
     const assets = w.cache.addAll.mock.calls[0][0];
     expect(assets).toContain('/offline.html');
     expect(
-      assets.every((path: string) => path === '/offline.html' || path.startsWith('/icons/')),
+      assets.every(
+        (path: string) =>
+          path === '/offline.html' || path === '/ui-copy.js' || path.startsWith('/icons/'),
+      ),
     ).toBe(true);
     for (const path of [
       '/api/client/session',

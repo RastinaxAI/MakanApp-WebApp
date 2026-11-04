@@ -13,7 +13,7 @@ test('preference links and dialog buttons share one aligned responsive layout an
     'حریم خصوصی',
     'اعلان‌ها',
     'اشتراک و مصرف',
-    'کلاس‌های شخصی',
+    'فوق‌برنامه',
     'امنیت و دستگاه‌ها',
     'مخاطبین',
     'تنظیمات',
@@ -34,7 +34,7 @@ test('preference links and dialog buttons share one aligned responsive layout an
     );
     expect(boxes).toHaveLength(7);
     for (const box of boxes) {
-      expect(box.row.height).toBeGreaterThanOrEqual(72);
+      expect(box.row.height).toBeGreaterThanOrEqual(44);
       expect(Math.abs(box.row.width - boxes[0].row.width)).toBeLessThan(1);
       expect(Math.abs(box.icon.x - boxes[0].icon.x)).toBeLessThan(1);
       expect(Math.abs(box.chevron.x - boxes[0].chevron.x)).toBeLessThan(1);

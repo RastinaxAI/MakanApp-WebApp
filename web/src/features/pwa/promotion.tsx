@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { Download, X } from 'lucide-react';
 import { useState } from 'react';
@@ -20,10 +21,10 @@ export function InstallPromotion({
     [failed, setFailed] = useState(false);
   return (
     <>
-      <aside className="pwa-promotion" aria-label="پیشنهاد نصب ماکان">
+      <aside className="pwa-promotion" aria-label={uiText.text_c2f894f9b8af}>
         <button
           className="pwa-promotion-close"
-          aria-label="بستن پیشنهاد نصب ماکان"
+          aria-label={uiText.text_09772f118ff8}
           onClick={onDismiss}
         >
           <X size={20} />
@@ -32,9 +33,9 @@ export function InstallPromotion({
           <Download size={24} />
         </span>
         <div>
-          <strong>ماکان همیشه در دسترس شما</strong>
-          <p>برنامه را نصب کنید و از آیکون آن روی دستگاه وارد شوید.</p>
-          {failed && <p role="alert">نصب آغاز نشد. دوباره تلاش کنید یا راهنمای نصب را ببینید.</p>}
+          <strong>{uiText.text_45f7a9ae6e18}</strong>
+          <p>{uiText.text_63fb724daa3f}</p>
+          {failed && <p role="alert">{uiText.text_1cc6e6f2da23}</p>}
         </div>
         <Button
           size="sm"
@@ -53,7 +54,7 @@ export function InstallPromotion({
             }
           }}
         >
-          {busy ? 'در حال آماده‌سازی…' : 'نصب ماکان'}
+          {busy ? uiText.text_069a6fab0822 : uiText.text_79e2c5a64efc}
         </Button>
       </aside>
       <InstallHelp open={help} onOpenChange={setHelp} />

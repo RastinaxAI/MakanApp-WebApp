@@ -63,7 +63,9 @@ test('conversation settings retain failed selections and leave confirmation reta
   ).toBeChecked();
   await page.getByRole('button', { name: 'ثبت تنظیمات گفتگو' }).click();
   await expect(page.getByText('تنظیمات گفتگو ثبت شد.', { exact: true })).toBeVisible();
-  await page.getByRole('link', { name: 'اطلاعات', exact: true }).click();
+  await page.getByRole('banner').getByRole('link', { name: 'بازگشت', exact: true }).click();
+  await expect(page).toHaveURL(/\/edit$/);
+  await page.getByRole('banner').getByRole('link', { name: 'بازگشت', exact: true }).click();
   await expect(page.getByText('عمومی', { exact: true })).toBeVisible();
   await request.post(fixture + '/__test__/fault', {
     data: { path: '/leave', method: 'POST', status: 503 },
@@ -131,7 +133,7 @@ test('conversation detail pages preserve RTL and layout at mobile tablet and des
         true,
       );
       await page.screenshot({ path: `output/review/conversation-pages/${section}-${width}.png` });
-      if (width < 1024 && ['info', 'settings'].includes(section)) {
+      if (width < 768 && ['info', 'settings'].includes(section)) {
         await page.getByRole('main').evaluate((el) => {
           el.scrollTop = el.scrollHeight;
         });

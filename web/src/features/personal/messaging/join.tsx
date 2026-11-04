@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Link2 } from 'lucide-react';
@@ -27,28 +28,30 @@ export function JoinConversation() {
       <PageBack href="/personal/messages" />
       <header className={c.header}>
         <Link2 size={36} />
-        <h1>پیوستن با لینک دعوت</h1>
+        <h1>{uiText.text_769f4b226ba8}</h1>
       </header>
       <section className={c.panel}>
         {result ? (
           <div role="status">
             {redemptionState(result) === 'denied' ? (
               <>
-                <h2>عضویت انجام نشد</h2>
-                <p>
-                  این درخواست رد، لغو یا منقضی شده است. برای دعوت تازه با مدیر گفتگو هماهنگ کنید.
-                </p>
+                <h2>{uiText.text_7eb3656e5a7f}</h2>
+                <p>{uiText.text_359af05980d7}</p>
               </>
             ) : redemptionState(result) === 'pending' ? (
               <>
-                <h2>درخواست عضویت ارسال شد</h2>
-                <p>پس از تأیید مدیر، گفتگو در دسترس خواهد بود.</p>
+                <h2>{uiText.text_69e404d12a5d}</h2>
+                <p>{uiText.text_e22edc26122a}</p>
               </>
             ) : (
               <>
-                <h2>{result.alreadyMember ? 'شما عضو این گفتگو هستید' : 'عضویت شما تأیید شد'}</h2>
+                <h2>
+                  {result.alreadyMember ? uiText.text_0f4cdfe13480 : uiText.text_b1e513632610}
+                </h2>
                 <Button asChild>
-                  <Link href={'/personal/messages/' + result.conversationId}>ورود به گفتگو</Link>
+                  <Link href={'/personal/messages/' + result.conversationId}>
+                    {uiText.text_f0e20f906599}
+                  </Link>
                 </Button>
               </>
             )}
@@ -82,7 +85,7 @@ export function JoinConversation() {
             }}
           >
             <label>
-              کد دعوت
+              {uiText.text_1be42c39e984}
               <input
                 autoComplete="off"
                 spellCheck={false}
@@ -93,11 +96,9 @@ export function JoinConversation() {
                 disabled={busy}
               />
             </label>
-            <p className={c.note}>
-              با تأیید، درخواست پیوستن شما طبق تنظیمات دعوت برای سرویس ارسال می‌شود.
-            </p>
+            <p className={c.note}>{uiText.text_2f53ed20dec0}</p>
             <Button disabled={busy || !token.trim()} type="submit">
-              {busy ? 'در حال بررسی…' : 'پیوستن به گفتگو'}
+              {busy ? uiText.text_25384e522776 : uiText.text_ab3d1db5c4aa}
             </Button>
             {!!error && <ErrorState error={error} />}
           </form>

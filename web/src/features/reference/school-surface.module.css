@@ -1,0 +1,23 @@
+.surface {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+  width: 100%;
+}
+.surface :global(.section-title) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.surface :global(.seg) {
+  margin: 0;
+}
+
+.surface > nav {
+  margin-bottom: 0;
+}
+
+.surface :global(a.button-primary) {
+  color: var(--on-primary);
+}

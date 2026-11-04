@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { clientValidator } from '@/lib/api/client-contract';
@@ -42,7 +43,7 @@ type DraftFile = {
   error?: string;
 };
 function errorText(error: unknown) {
-  return error instanceof Error ? error.message : 'انتقال فایل انجام نشد.';
+  return error instanceof Error ? error.message : uiText.text_c9d95977a264;
 }
 function TransferMeter({ progress, label }: { progress?: TransferProgress; label: string }) {
   const percent =
@@ -53,13 +54,15 @@ function TransferMeter({ progress, label }: { progress?: TransferProgress; label
     <div className={s.meter}>
       <span>
         {label}
-        {percent !== null ? ' · ' + new Intl.NumberFormat('fa-IR').format(percent) + '٪' : ''}
+        {percent !== null
+          ? ' · ' + new Intl.NumberFormat('fa-IR').format(percent) + uiText.text_a489ae36a167
+          : ''}
       </span>
       <progress max={100} value={percent ?? undefined} aria-label={label} />
       {progress && progress.loaded > 0 && (
         <small>
           {formatFileSize(progress.loaded)}
-          {progress.total ? ' از ' + formatFileSize(progress.total) : ''}
+          {progress.total ? uiText.text_a624a1e41ffd + formatFileSize(progress.total) : ''}
         </small>
       )}
     </div>
@@ -179,9 +182,7 @@ export function AttachmentPicker({
         }
         if (asset.status !== 'Ready')
           throw new Error(
-            asset.status === 'Pending'
-              ? 'فایل در سرور در حال آماده‌شدن است؛ برای بررسی دوباره، دکمهٔ ارسال را بزنید.'
-              : 'این فایل برای ارسال در دسترس نیست. آن را از انتخاب‌ها بردارید.',
+            asset.status === 'Pending' ? uiText.text_89f52370cb8d : uiText.text_417503843545,
           );
         if (asset.uploadedByUserId !== session.user.id || asset.sizeBytes !== item.file.size)
           throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
@@ -192,7 +193,7 @@ export function AttachmentPicker({
       activeKey = undefined;
       setPhase('sending');
       const queued = await onSend(assets, text.trim());
-      if (!queued) throw new Error('پیام هنوز در صف ارسال ثبت نشده است. دوباره تلاش کنید.');
+      if (!queued) throw new Error(uiText.text_facb92f52d74);
       if (alive.current) {
         for (const item of items)
           if (item.preview) {
@@ -206,9 +207,7 @@ export function AttachmentPicker({
     } catch (error) {
       if (alive.current) {
         const canceled = error instanceof Error && error.name === 'AbortError';
-        const message = canceled
-          ? 'انتقال متوقف شد؛ می‌توانید دوباره ادامهٔ کار را بررسی کنید.'
-          : errorText(error);
+        const message = canceled ? uiText.text_fbc1848b434f : errorText(error);
         if (activeKey) patch(activeKey, { phase: canceled ? 'paused' : 'error', error: message });
         setError(message);
       }
@@ -225,7 +224,7 @@ export function AttachmentPicker({
             type="button"
             ref={trigger}
             className={s.attachButton}
-            aria-label="افزودن پیوست"
+            aria-label={uiText.text_01eac8227680}
             disabled={disabled || busy}
           >
             <Paperclip size={23} />
@@ -242,24 +241,25 @@ export function AttachmentPicker({
             {items.length > 0 && (
               <Menu.Item onSelect={() => setOpen(true)}>
                 <Paperclip size={19} />
-                پیوست‌های انتخاب‌شده <ChevronLeft size={16} />
+                {uiText.text_00cd0fea581c}
+                <ChevronLeft size={16} />
               </Menu.Item>
             )}
             <Menu.Item onSelect={() => camera.current?.click()}>
               <Camera size={20} />
-              دوربین
+              {uiText.text_4cab0b40565e}
             </Menu.Item>
             <Menu.Item onSelect={() => photo.current?.click()}>
               <ImageIcon size={20} />
-              عکس از گالری
+              {uiText.text_5c661ce3aa5f}
             </Menu.Item>
             <Menu.Item onSelect={() => video.current?.click()}>
               <Video size={20} />
-              ویدئو از گالری
+              {uiText.text_de0372679118}
             </Menu.Item>
             <Menu.Item onSelect={() => file.current?.click()}>
               <File size={20} />
-              فایل از دستگاه
+              {uiText.text_9974dd3a9f4a}
             </Menu.Item>
           </Menu.Content>
         </Menu.Portal>
@@ -270,7 +270,7 @@ export function AttachmentPicker({
         accept="image/*"
         capture="environment"
         hidden
-        aria-label="عکاسی با دوربین"
+        aria-label={uiText.text_15e11a432ae3}
         onChange={(event) => choose(event.currentTarget)}
       />
       <input
@@ -279,7 +279,7 @@ export function AttachmentPicker({
         accept="image/*"
         multiple
         hidden
-        aria-label="انتخاب عکس از گالری"
+        aria-label={uiText.text_9105d8bdec0d}
         onChange={(event) => choose(event.currentTarget)}
       />
       <input
@@ -288,7 +288,7 @@ export function AttachmentPicker({
         accept="video/*"
         multiple
         hidden
-        aria-label="انتخاب ویدئو از گالری"
+        aria-label={uiText.text_8815ba986d1a}
         onChange={(event) => choose(event.currentTarget)}
       />
       <input
@@ -296,7 +296,7 @@ export function AttachmentPicker({
         type="file"
         multiple
         hidden
-        aria-label="انتخاب فایل از دستگاه"
+        aria-label={uiText.text_02cc50e960a7}
         onChange={(event) => choose(event.currentTarget)}
       />
       <Dialog
@@ -308,8 +308,8 @@ export function AttachmentPicker({
       >
         <DialogContent
           className={`${t.theme} ${t.dialog}`}
-          title="ارسال پیوست"
-          description="پیش‌نمایش فایل‌ها را ببینید و در صورت نیاز توضیح اضافه کنید."
+          title={uiText.text_4314e718c6d3}
+          description={uiText.text_43428a0f7e51}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
             trigger.current?.focus();
@@ -344,24 +344,26 @@ export function AttachmentPicker({
                       <TransferMeter
                         progress={item.progress}
                         label={
-                          item.phase === 'processing' ? 'در حال بررسی در سرور' : 'در حال بارگذاری'
+                          item.phase === 'processing'
+                            ? uiText.text_066f81d641f6
+                            : uiText.text_c16dbde9ad0a
                         }
                       />
                     ) : item.phase === 'ready' ? (
                       <span className={s.ready}>
                         <Check size={14} />
-                        آمادهٔ ارسال
+                        {uiText.text_69791a3b81bf}
                       </span>
                     ) : item.error ? (
                       <span className={s.itemError}>{item.error}</span>
                     ) : (
-                      <span className={s.selected}>برای ارسال انتخاب شده</span>
+                      <span className={s.selected}>{uiText.text_e14b064baee8}</span>
                     )}
                   </div>
                   <button
                     type="button"
                     className={s.remove}
-                    aria-label={'حذف از انتخاب‌ها: ' + item.file.name}
+                    aria-label={uiText.text_6f5fc5cfc9f9 + item.file.name}
                     disabled={busy}
                     onClick={() => remove(item)}
                   >
@@ -371,13 +373,13 @@ export function AttachmentPicker({
               ))}
             </div>
             <label className={s.caption}>
-              توضیح پیوست (اختیاری)
+              {uiText.text_eaca3b73fa59}
               <textarea
                 rows={2}
                 value={text}
                 disabled={busy}
                 onChange={(event) => setText(event.target.value)}
-                placeholder="چیزی دربارهٔ فایل بنویسید…"
+                placeholder={uiText.text_9c09cbe3bb04}
               />
             </label>
             {error && (
@@ -388,7 +390,7 @@ export function AttachmentPicker({
             <div className={s.sheetActions}>
               {busy && phase === 'upload' ? (
                 <Button type="button" variant="outline" onClick={() => abort.current?.abort()}>
-                  توقف انتقال
+                  {uiText.text_a72404308ae9}
                 </Button>
               ) : (
                 <Button
@@ -397,16 +399,18 @@ export function AttachmentPicker({
                   disabled={busy}
                   onClick={() => setOpen(false)}
                 >
-                  بازگشت به گفتگو
+                  {uiText.text_fe8b0330df51}
                 </Button>
               )}
               <Button type="submit" disabled={busy || !items.length || disabled}>
                 {busy ? <LoaderCircle className={s.spin} size={18} /> : <Send size={18} />}{' '}
                 {busy
                   ? phase === 'sending'
-                    ? 'در حال ثبت پیام…'
-                    : 'در حال انتقال…'
-                  : 'ارسال ' + new Intl.NumberFormat('fa-IR').format(items.length) + ' پیوست'}
+                    ? uiText.text_e735f9d9a2a5
+                    : uiText.text_2096f4c8f035
+                  : uiText.text_85983403b43f +
+                    new Intl.NumberFormat('fa-IR').format(items.length) +
+                    uiText.text_46b99be686ec}
               </Button>
             </div>
           </form>
@@ -481,7 +485,7 @@ export function MessageAttachment({
       if (alive.current) {
         const canceled = error instanceof Error && error.name === 'AbortError';
         setPhase(canceled ? 'idle' : 'error');
-        setError(canceled ? 'دریافت متوقف شد.' : errorText(error));
+        setError(canceled ? uiText.text_876c53967879 : errorText(error));
       }
     } finally {
       busy.current = false;
@@ -512,7 +516,7 @@ export function MessageAttachment({
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={'نمایش عکس ' + asset.fileName}
+              aria-label={uiText.text_d7a06d9eaca7 + asset.fileName}
             >
               <img
                 src={url}
@@ -538,15 +542,15 @@ export function MessageAttachment({
               <strong dir="auto">{asset.fileName}</strong>
               <small>{formatFileSize(asset.sizeBytes)}</small>
             </span>
-            <a href={url} download={asset.fileName} aria-label={'ذخیرهٔ ' + asset.fileName}>
+            <a
+              href={url}
+              download={asset.fileName}
+              aria-label={uiText.text_6e159b54bc47 + asset.fileName}
+            >
               <Download size={19} />
             </a>
           </div>
-          {playbackError && (
-            <small className={s.itemError}>
-              نمایش این قالب در مرورگر ممکن نیست؛ می‌توانید فایل را ذخیره کنید.
-            </small>
-          )}
+          {playbackError && <small className={s.itemError}>{uiText.text_5f11ce92fa61}</small>}
         </>
       ) : (
         <>
@@ -569,7 +573,9 @@ export function MessageAttachment({
             <button
               type="button"
               aria-label={
-                phase === 'loading' ? 'توقف دریافت ' + asset.fileName : 'دریافت ' + asset.fileName
+                phase === 'loading'
+                  ? uiText.text_5aea7c460498 + asset.fileName
+                  : uiText.text_1e229eb338a6 + asset.fileName
               }
               onClick={() => (phase === 'loading' ? abort.current?.abort() : void load())}
             >
@@ -582,7 +588,9 @@ export function MessageAttachment({
               )}
             </button>
           </div>
-          {phase === 'loading' && <TransferMeter progress={progress} label="در حال دریافت" />}
+          {phase === 'loading' && (
+            <TransferMeter progress={progress} label={uiText.text_3ebc8cefd354} />
+          )}
           {error && (
             <p role={phase === 'error' ? 'alert' : 'status'} className={s.transferError}>
               {error}

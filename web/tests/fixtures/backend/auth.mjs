@@ -81,6 +81,13 @@ export function authRoute(ctx) {
           ]
         : []),
     ];
+    if (state.profileRoles && a.role === 'Manager')
+      rows.push({
+        ...rows[1],
+        membershipId: '00000000-0000-4000-8000-000000000505',
+        role: 'Teacher',
+        displayName: 'نقش مدرس مجاز',
+      });
     return send(
       p.endsWith('/snapshot')
         ? {
@@ -101,7 +108,13 @@ export function authRoute(ctx) {
   if (p === '/api/v1/workspaces/select') {
     if (
       body.workspaceType === 'Organization' &&
-      (body.membershipId !== a.membershipId || body.role !== a.role)
+      !(
+        (body.membershipId === a.membershipId && body.role === a.role) ||
+        (state.profileRoles &&
+          a.role === 'Manager' &&
+          body.membershipId === '00000000-0000-4000-8000-000000000505' &&
+          body.role === 'Teacher')
+      )
     )
       return send({ code: 'WORKSPACE_NOT_ALLOWED' }, 403);
     Object.assign(a.context, {

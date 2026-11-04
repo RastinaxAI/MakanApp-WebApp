@@ -5,6 +5,8 @@ import { serverConfig } from './config';
 import { writeSession, removeSession, type Session } from './session';
 import { parseProblem } from '@/lib/api/errors';
 import { validator } from '@/lib/api/contract';
+import { network } from '@/config/network';
+import { upstreamUrl } from './upstream-url';
 export function problem(status: number, code?: string) {
   return NextResponse.json({ status, code }, { status, headers: { 'Cache-Control': 'no-store' } });
 }
@@ -19,14 +21,14 @@ export async function backendFetch(path: string, init: RequestInit = {}, token?:
   const headers = new Headers(init.headers);
   headers.set('Accept', 'application/json');
   if (token) headers.set('Authorization', `Bearer ${token}`);
-  return fetch(new URL(path, serverConfig().backend), {
+  return fetch(upstreamUrl(path, serverConfig().backend), {
     ...init,
     headers,
     cache: 'no-store',
     redirect: 'error',
     signal: init.signal
-      ? AbortSignal.any([AbortSignal.timeout(25000), init.signal])
-      : AbortSignal.timeout(25000),
+      ? AbortSignal.any([AbortSignal.timeout(network.timeouts.upstream), init.signal])
+      : AbortSignal.timeout(network.timeouts.upstream),
   });
 }
 export async function authenticatedFetch(
@@ -97,6 +99,8 @@ export async function safeResponse(
     return NextResponse.json(p, { status: response.status, headers });
   }
   if (response.status === 204) return new NextResponse(null, { status: 204, headers });
+  if (response.status === 202 && !schema && !response.headers.get('content-type'))
+    return new NextResponse(null, { status: 202, headers });
   const content = response.headers.get('content-type') ?? '';
   if (content.includes('json') || schema) {
     let body: unknown;

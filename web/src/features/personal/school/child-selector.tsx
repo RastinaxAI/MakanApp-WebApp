@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useId } from 'react';
 import { UsersRound, LoaderCircle, Check } from 'lucide-react';
 import type { components } from '@/generated/api/schema';
@@ -27,25 +28,25 @@ export function ChildSelector({
   const id = useId(),
     description = useId();
   return (
-    <section className={s.card} aria-label="فرزندان من" aria-busy={busy || loading}>
+    <section className={s.card} aria-label={uiText.text_14130edb2ced} aria-busy={busy || loading}>
       <div className={s.heading}>
         <span className={s.icon}>
           <UsersRound size={23} />
         </span>
         <div>
-          <h2>فرزند من</h2>
+          <h2>{uiText.text_c5dc986b8129}</h2>
           <p id={description}>
             {busy
-              ? 'در حال دریافت اطلاعات فرزند…'
+              ? uiText.text_7c4ad9f5aae7
               : active
                 ? active.organizationName
-                : 'فرزند موردنظر را برای مشاهدهٔ اطلاعاتش انتخاب کنید.'}
+                : uiText.text_86937d1bb9f1}
           </p>
         </div>
         {active && !busy && (
           <span className={s.selected}>
             <Check size={16} />
-            انتخاب‌شده
+            {uiText.text_3958c9bcedb4}
           </span>
         )}
       </div>
@@ -56,10 +57,10 @@ export function ChildSelector({
           <span className={s.avatar}>
             {(
               children.find((c) => c.learnerOrganizationPersonId === pendingId) ?? active
-            )?.displayName.slice(0, 1) ?? '؟'}
+            )?.displayName.slice(0, 1) ?? uiText.text_7d06b69aad65}
           </span>
           <div>
-            <label htmlFor={id}>انتخاب فرزند</label>
+            <label htmlFor={id}>{uiText.text_91082bc0cbdc}</label>
             <select
               id={id}
               aria-describedby={description}
@@ -70,7 +71,7 @@ export function ChildSelector({
               }}
             >
               <option value="" disabled>
-                یک فرزند انتخاب کنید
+                {uiText.text_665daedc1ba7}
               </option>
               {children.map((child) => (
                 <option
@@ -79,7 +80,7 @@ export function ChildSelector({
                   disabled={child.relationStatus !== 'Active'}
                 >
                   {child.displayName}
-                  {child.relationStatus !== 'Active' ? ' · رابطه غیرفعال' : ''}
+                  {child.relationStatus !== 'Active' ? uiText.text_503b02cb8da5 : ''}
                 </option>
               ))}
             </select>
@@ -88,10 +89,7 @@ export function ChildSelector({
         </div>
       ) : (
         !error && (
-          <EmptyState
-            title="رابطهٔ فعالی برای نمایش موجود نیست"
-            description="پس از تأیید رابطه با فرزند، اطلاعات مجاز او اینجا نمایش داده می‌شود."
-          />
+          <EmptyState title={uiText.text_a27cb9baf762} description={uiText.text_c02cc9f23833} />
         )
       )}
       {!!error && <ErrorState error={error} onRetry={onRetry} />}

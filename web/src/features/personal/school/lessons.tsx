@@ -1,5 +1,9 @@
 'use client';
+import '@/features/reference/bundles/features-personal-school-lessons';
+
+import * as uiText from '@/content/fa';
 import { PageBack } from '@/components/navigation/page-back';
+import { ReferenceFrame } from '@/features/reference/frame';
 import { ActivityDeliveryStatus } from './activity-delivery';
 import { Button } from '@/components/ui/button';
 import { useUnsavedChanges } from '@/components/hooks/use-unsaved-changes';
@@ -28,31 +32,30 @@ export function ResourcesClasses() {
   const q = usePersonalApi<S['ClassResult'][]>('/api/v1/academic/classes');
   return (
     <>
-      <SchoolHeading
-        title="درس و جزوه"
-        description="کلاس را انتخاب کنید تا محتوای آموزشی مجاز آن را ببینید."
-      />
+      <SchoolHeading title={uiText.text_596683be71f8} description={uiText.text_2aea2dc372bf} />
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
         <ErrorState error={q.error} onRetry={() => void q.refetch()} />
       ) : !q.data.length ? (
-        <EmptyState title="کلاسی برای نمایش محتوا ندارید" />
+        <EmptyState title={uiText.text_b3d98309e169} />
       ) : (
         <div className={s.grid}>
           {q.data.map((c) => (
             <article className={s.classCard} key={c.id}>
               <h2>{c.title}</h2>
               <p>
-                {c.courseTitle} · {c.academicPeriodTitle}
+                {c.courseTitle}
+                {uiText.text_588da4105320}
+                {c.academicPeriodTitle}
               </p>
               <footer className={s.cardActions}>
                 <Button asChild>
                   <Link
                     href={`${base}/classes/${c.id}?tab=lessons`}
-                    aria-label={'درس‌ها و جزوه‌های کلاس ' + c.title}
+                    aria-label={uiText.text_cd953dadaced + c.title}
                   >
-                    درس‌ها و جزوه‌های کلاس
+                    {uiText.text_4f96bdc2ea91}
                   </Link>
                 </Button>
               </footer>
@@ -72,17 +75,17 @@ export function ClassLessons({ classId, teach }: { classId: string; teach: boole
   );
   return (
     <Card
-      title="درس‌ها و جزوه‌های کلاس"
+      title={uiText.text_4f96bdc2ea91}
       action={
         teach && (
           <Button asChild>
-            <Link href={schoolRoutes.lessonNew(classId)}>ایجاد درس و جزوه</Link>
+            <Link href={schoolRoutes.lessonNew(classId)}>{uiText.text_1fe9a8f47a21}</Link>
           </Button>
         )
       }
     >
       <SchoolSearch
-        label="جستجوی درس و جزوه"
+        label={uiText.text_ab0182186a14}
         onSearch={(v) => {
           setSearch(v);
           setPage(1);
@@ -96,12 +99,8 @@ export function ClassLessons({ classId, teach }: { classId: string; teach: boole
         <>
           {!q.data.items.length ? (
             <EmptyState
-              title="محتوایی برای نمایش نیست"
-              description={
-                teach
-                  ? 'درس را آماده کنید و پس از بازبینی منتشر کنید.'
-                  : 'محتوای منتشرشدهٔ این کلاس اینجا نمایش داده می‌شود.'
-              }
+              title={uiText.text_b2bae9b56399}
+              description={teach ? uiText.text_4038de890cd2 : uiText.text_b2e65fbf129d}
             />
           ) : (
             <div className={s.editorList}>
@@ -109,12 +108,18 @@ export function ClassLessons({ classId, teach }: { classId: string; teach: boole
                 <article key={l.id} className={s.classCard}>
                   <h3>{l.title}</h3>
                   <p>
-                    {label(l.status)} · {l.attachments.length} پیوست
+                    {label(l.status)}
+                    {uiText.text_588da4105320}
+                    {l.attachments.length}
+                    {uiText.text_46b99be686ec}
                   </p>
                   <footer className={s.cardActions}>
                     <Button asChild>
-                      <Link href={base + '/lessons/' + l.id} aria-label={'مشاهدهٔ درس ' + l.title}>
-                        مشاهدهٔ درس
+                      <Link
+                        href={base + '/lessons/' + l.id}
+                        aria-label={uiText.text_0f5761aef3d3 + l.title}
+                      >
+                        {uiText.text_9b8c98558df1}
                       </Link>
                     </Button>
                   </footer>
@@ -146,48 +151,66 @@ export function LessonDetail({
     poll: 5000,
   });
   const a = useSchoolAction();
-  if (q.isPending) return <LoadingSkeleton />;
-  if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
+  if (q.isPending)
+    return (
+      <ReferenceFrame id="MK-05" title={uiText.text_d14bfeb0a316}>
+        <LoadingSkeleton />
+      </ReferenceFrame>
+    );
+  if (q.isError)
+    return (
+      <ReferenceFrame id="MK-05" title={uiText.text_d14bfeb0a316}>
+        <ErrorState error={q.error} onRetry={() => void q.refetch()} />
+      </ReferenceFrame>
+    );
   const lesson = q.data;
   return (
-    <>
-      <SchoolHeading title={lesson.title} description={label(lesson.status)} />
+    <ReferenceFrame
+      id="MK-05"
+      title={lesson.title}
+      subtitle={label(lesson.status)}
+      back={`${base}/classes/${lesson.classId}?tab=lessons`}
+    >
+      <div className="between">
+        <span className="tiny muted">{label(lesson.status)}</span>
+        <span className="badge neutral">{uiText.text_d14bfeb0a316}</span>
+      </div>
       <PageBack href={`${base}/classes/${lesson.classId}?tab=lessons`} />
-      <Card>
+      <div className="card mk-lesson-reading">
         <p style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', lineHeight: 2 }} dir="auto">
           {lesson.body}
         </p>
-        <div className={s.editorList}>
-          {lesson.attachments.map((asset) => (
-            <LessonDownload key={asset.fileAssetId} lessonId={id} asset={asset} />
-          ))}
-        </div>
-      </Card>
+      </div>
+      <h3 className="section-title">{uiText.text_2c00c0223035}</h3>
+      <div className="list">
+        {lesson.attachments.map((asset) => (
+          <LessonDownload key={asset.fileAssetId} lessonId={id} asset={asset} />
+        ))}
+      </div>
+      <div className="alert">
+        <span>{uiText.text_bc7a8f5bd5c0}</span>
+      </div>
       {teach && lesson.status === 'Draft' && (
         <>
           <Button asChild variant="outline">
-            <Link href={schoolRoutes.lessonEdit(id)}>ویرایش پیش‌نویس</Link>
+            <Link href={schoolRoutes.lessonEdit(id)}>{uiText.text_a842a0ba8b1d}</Link>
           </Button>
           {!review && (
             <Button asChild>
-              <Link href={schoolRoutes.lessonReview(id)}>بازبینی و انتشار درس</Link>
+              <Link href={schoolRoutes.lessonReview(id)}>{uiText.text_631a55a22187}</Link>
             </Button>
           )}
           {review && (
             <Button
               disabled={a.busy}
               onClick={() => {
-                if (
-                  window.confirm(
-                    'این درس برای دانش‌آموزان کلاس منتشر شود؟ پس از انتشار قابل ویرایش نیست.',
-                  )
-                )
+                if (window.confirm(uiText.text_b360b6e6f8c4))
                   void a.run(`/api/v1/academic/lessons/${id}/publish`, {
                     expectedVersion: lesson.version,
                   });
               }}
             >
-              انتشار درس
+              {uiText.text_b49a025b4de1}
             </Button>
           )}
           {a.feedback}
@@ -195,11 +218,11 @@ export function LessonDetail({
       )}
       {teach && lesson.status === 'Published' && (
         <>
-          <p className={s.hint}>این درس منتشر شده است و ویرایش آن در این نسخه امکان‌پذیر نیست.</p>
+          <p className={s.hint}>{uiText.text_3dd42711b07e}</p>
           <ActivityDeliveryStatus classId={lesson.classId} kind="Lesson" />
         </>
       )}
-    </>
+    </ReferenceFrame>
   );
 }
 export function LessonFormPage({ classId, id }: { classId?: string; id?: string }) {
@@ -220,9 +243,9 @@ export function LessonFormPage({ classId, id }: { classId?: string; id?: string 
     return <ErrorState error={new ApiError(403)} />;
   return (
     <div className={s.flowPage} data-school-form>
-      <h1 className="sr-only">{id ? 'ویرایش پیش‌نویس' : 'ایجاد درس و جزوه'}</h1>
+      <h1 className="sr-only">{id ? uiText.text_a842a0ba8b1d : uiText.text_1fe9a8f47a21}</h1>
       <ReferenceColumns form>
-        <p className={f.intro}>{id ? 'پیش‌نویس را کامل کنید.' : 'یک موضوع روشن، یک درس تازه.'}</p>
+        <p className={f.intro}>{id ? uiText.text_83834a388c5e : uiText.text_42a510e18e57}</p>
         <LessonEditor
           key={id ?? classId}
           classId={classId ?? q.data!.classId}
@@ -297,17 +320,17 @@ function LessonDownload({
       >
         <Download size={16} />
         {busy
-          ? 'در حال دریافت…'
+          ? uiText.text_80516c4adbbe
           : asset.isAvailable && asset.status === 'Ready'
-            ? 'دریافت فایل'
-            : 'فایل هنوز آمادهٔ دریافت نیست'}
+            ? uiText.text_6a835b3d71f3
+            : uiText.text_d26be2999a35}
       </Button>
       {busy && (
         <>
           <progress
             max={progress?.total ?? undefined}
             value={progress?.total ? progress.loaded : undefined}
-            aria-label="پیشرفت دریافت جزوه"
+            aria-label={uiText.text_854cc29ee49a}
           />
           <Button
             variant="ghost"
@@ -316,7 +339,7 @@ function LessonDownload({
               setBusy(false);
             }}
           >
-            لغو دریافت
+            {uiText.text_6373daa09bbc}
           </Button>
         </>
       )}
@@ -431,9 +454,9 @@ function LessonEditor({
   if (created)
     return (
       <div className={s.receipt}>
-        <h2>پیش‌نویس ذخیره شد</h2>
+        <h2>{uiText.text_083a698e8bdd}</h2>
         <Button asChild>
-          <Link href={base + '/lessons/' + created.id}>بازبینی و انتشار درس</Link>
+          <Link href={base + '/lessons/' + created.id}>{uiText.text_631a55a22187}</Link>
         </Button>
       </div>
     );
@@ -465,13 +488,13 @@ function LessonEditor({
       }}
     >
       <fieldset disabled={a.busy || uploading || !!frozen}>
-        <Field label="عنوان درس و جزوه">
+        <Field label={uiText.text_d01b8295b853}>
           <input required value={title} onChange={(e) => setTitle(e.target.value)} />
         </Field>
-        <Field label="متن درس">
+        <Field label={uiText.text_101a6f1eac3a}>
           <textarea rows={8} value={body} onChange={(e) => setBody(e.target.value)} />
         </Field>
-        <Field label="ترتیب نمایش">
+        <Field label={uiText.text_f22a34db35c9}>
           <input
             type="number"
             required
@@ -496,7 +519,7 @@ function LessonEditor({
       />
       <div className={f.actions}>
         <Button type="submit" disabled={a.busy || uploading || !!pending || !title.trim()}>
-          {frozen ? 'بررسی دوبارهٔ همان پیش‌نویس' : 'ذخیرهٔ پیش‌نویس'}
+          {frozen ? uiText.text_31929c77bbbc : uiText.text_c7be60663550}
         </Button>
         <PageBack href={`${base}/classes/${classId}?tab=lessons`} />
       </div>
@@ -509,7 +532,7 @@ function LessonEditor({
             setError(undefined);
           }}
         >
-          ویرایش اطلاعات پیش‌نویس
+          {uiText.text_d1e71009180d}
         </Button>
       )}
 

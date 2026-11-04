@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { ShieldCheck, ChevronLeft } from 'lucide-react';
 import { ErrorState, LoadingSkeleton, EmptyState } from '@/components/ui/states';
@@ -30,7 +31,7 @@ export function ParentDaily({ child }: { child: S['AuthorizedChildResult'] }) {
     nextExam = nearestUpcoming(d.exams, (x) => x.availableFromUtc);
   return (
     <ReferenceColumns sessions={d.upcomingSessions}>
-      <p className={s.intro}>همراه رشد او، با اطلاعات آموزشی روشن.</p>
+      <p className={s.intro}>{uiText.text_2cb4c38e97eb}</p>
       <div className={s.identity}>
         <span className={s.avatar}>{child.displayName[0]}</span>
         <div>
@@ -41,20 +42,24 @@ export function ParentDaily({ child }: { child: S['AuthorizedChildResult'] }) {
       <div className={s.metrics}>
         <div>
           <strong>{d.attendanceSummary.recordedCount.toLocaleString('fa-IR')}</strong>
-          <span>حضور ثبت‌شده</span>
+          <span>{uiText.text_ecd9b2fba4d5}</span>
         </div>
         <div>
           <strong>{d.assignments.length.toLocaleString('fa-IR')}</strong>
-          <span>تکلیف در این نما</span>
+          <span>{uiText.text_265cc9015b07}</span>
         </div>
         <div>
           <strong>{d.attendanceSummary.notRecordedCount.toLocaleString('fa-IR')}</strong>
-          <span>ثبت‌نشده</span>
+          <span>{uiText.text_cbf88cdc3070}</span>
         </div>
       </div>
       <div className={s.notice}>
         <ShieldCheck size={20} />
-        <span>اطلاعات آموزشیِ منتشرشدهٔ {child.displayName} را اینجا دنبال کنید.</span>
+        <span>
+          {uiText.text_4d9be597887f}
+          {child.displayName}
+          {uiText.text_47d16fe93a66}
+        </span>
       </div>
       <UpcomingSummary
         session={
@@ -89,26 +94,26 @@ export function ParentDaily({ child }: { child: S['AuthorizedChildResult'] }) {
         }
       />
       <section className={s.activities}>
-        <h2>آخرین فعالیت‌ها</h2>
+        <h2>{uiText.text_3952b94c82be}</h2>
         {d.releasedAssignmentResults.map((item) => (
           <Link
             href={`/personal/education/submissions/${item.submissionAttemptId}/result`}
             className={s.row}
             key={item.submissionAttemptId}
           >
-            <span className={s.icon}>ت</span>
+            <span className={s.icon}>{uiText.text_6a9b00bf691b}</span>
             <span>
               <strong>{item.assignmentTitle}</strong>
               <small>
                 {item.guardianVisibleFeedback ??
-                  `نمرهٔ منتشرشده: ${item.score} از ${item.maximumScore}`}
+                  uiText.format_056cee574f72(item.score, item.maximumScore)}
               </small>
             </span>
           </Link>
         ))}
         {d.assignments.map((item) => (
           <Link key={item.assignmentId} href="/personal/education/assignments" className={s.row}>
-            <span className={s.icon}>ت</span>
+            <span className={s.icon}>{uiText.text_6a9b00bf691b}</span>
             <span>
               <strong>{item.title}</strong>
               <small>{date(item.dueAtUtc, true)}</small>
@@ -117,14 +122,14 @@ export function ParentDaily({ child }: { child: S['AuthorizedChildResult'] }) {
           </Link>
         ))}
         {!d.assignments.length && !d.releasedAssignmentResults.length && (
-          <EmptyState title="هنوز فعالیتی منتشر نشده است" />
+          <EmptyState title={uiText.text_a94260ec452b} />
         )}
       </section>
       <Link href="/personal/education/assignments" className="button button-primary">
-        دیدن گزارش پیشرفت
+        {uiText.text_50cde0908b00}
       </Link>
       <Link href="/personal/education/exams" className="button button-ghost">
-        آزمون‌ها و نتایج فرزند
+        {uiText.text_2808abe7f9bc}
       </Link>
     </ReferenceColumns>
   );

@@ -81,7 +81,7 @@ test('unsaved draft survives reload and cancelled link navigation', async ({ pag
   const answer = page.getByLabel('پاسخ تکلیف', { exact: true });
   await answer.fill('پیش‌نویس خصوصی من');
   page.once('dialog', (d) => d.dismiss());
-  await page.locator('aside').getByRole('link', { name: 'حساب من', exact: true }).first().click();
+  await page.getByRole('banner').getByRole('button', { name: 'بازگشت', exact: true }).click();
   await expect(answer).toHaveValue('پیش‌نویس خصوصی من');
   page.once('dialog', (d) => d.accept());
   await page.reload();

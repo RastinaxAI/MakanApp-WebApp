@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 type S = components['schemas'];
 export function examAttachmentsValid(
@@ -34,15 +35,15 @@ export function examFileIssue(
   file: { type: string; size: number },
   existing: S['AcademicAnswerAttachmentDto'][],
 ) {
-  if (!policy?.attachmentsAllowed) return 'ارسال پیوست برای این سؤال مجاز نیست.';
-  if (!file.size) return 'فایل خالی است.';
-  if (!policy.allowedContentTypes.includes(file.type)) return 'این نوع فایل برای سؤال مجاز نیست.';
+  if (!policy?.attachmentsAllowed) return uiText.text_58959f75f51a;
+  if (!file.size) return uiText.text_cc3962f50c27;
+  if (!policy.allowedContentTypes.includes(file.type)) return uiText.text_cc55eba1583f;
   if (policy.maximumCount !== null && existing.length >= policy.maximumCount)
-    return 'تعداد پیوست‌ها به سقف سؤال رسیده است.';
+    return uiText.text_3526235fe98e;
   if (
     policy.maximumTotalBytes !== null &&
     existing.reduce((n, f) => n + f.sizeBytes, 0) + file.size > policy.maximumTotalBytes
   )
-    return 'حجم پیوست‌ها از سقف این سؤال بیشتر است.';
+    return uiText.text_1212e6c5e2b8;
   return null;
 }

@@ -85,13 +85,43 @@ describe('general-account authentication isolated from the owner session', () =>
       expect(mocks.write).not.toHaveBeenCalled();
     },
   );
-  it('admits a matching ordinary identity without an educational role, keeps tokens server-side and sets only its own HttpOnly cookie', async () => {
+  it('strips privilege and prototype-injection fields before forwarding a login challenge', async () => {
+    mocks.upstream.mockResolvedValueOnce(
+      Response.json(
+        {
+          challengeId: '00000000-0000-4000-8000-000000000002',
+          expiresAtUtc: '2099-01-01T00:00:00Z',
+          resendAvailableAtUtc: '2099-01-01T00:00:00Z',
+        },
+        { status: 202 },
+      ),
+    );
+    const attack = new Request('http://127.0.0.1:3000/api/client/auth/challenge', {
+      method: 'POST',
+      headers: {
+        Origin: 'http://127.0.0.1:3000',
+        Host: '127.0.0.1:3000',
+        'Content-Type': 'application/json',
+      },
+      body: '{"phoneNumber":"09120000199","__proto__":{"isAdmin":true},"isPlatformOwner":true,"role":"Owner"}',
+    });
+    const response = await POST(attack, { params: Promise.resolve({ action: 'challenge' }) });
+    expect(response.status).toBe(202);
+    expect(JSON.parse(mocks.upstream.mock.calls[0][1].body)).toEqual({
+      phoneNumber: '09120000199',
+    });
+    expect(Object.hasOwn(Object.prototype, 'isAdmin')).toBe(false);
+    expect(mocks.write).not.toHaveBeenCalled();
+  });
+  it('admits an ordinary identity, keeps tokens server-side and clears the temporary return cookie', async () => {
     const response = await POST(req('verify'), { params: Promise.resolve({ action: 'verify' }) });
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ authenticated: true });
     expect(response.cookies.getAll().map((cookie) => cookie.name)).toEqual([
       'makan_client_session',
+      'makan_auth_return',
     ]);
+    expect(response.cookies.get('makan_auth_return')?.maxAge).toBe(0);
     expect(response.headers.get('set-cookie')).toContain('HttpOnly');
     expect(response.headers.get('set-cookie')).not.toContain('fixture-access');
     expect(mocks.upstream.mock.calls.map((call) => call[0])).toEqual([
@@ -123,7 +153,7 @@ describe('general-account authentication isolated from the owner session', () =>
     expect(mocks.write).not.toHaveBeenCalled();
     expect(mocks.upstream).toHaveBeenLastCalledWith(
       '/api/v1/auth/logout',
-      { method: 'POST' },
+      expect.objectContaining({ method: 'POST', signal: expect.any(AbortSignal) }),
       'fixture-access',
     );
   });
@@ -167,7 +197,7 @@ describe('general-account authentication isolated from the owner session', () =>
     expect(response.status).toBe(403);
     expect(mocks.upstream).not.toHaveBeenCalled();
   });
-  it('logs out and clears only the personal session cookie', async () => {
+  it('logs out and clears the personal session and temporary return cookies', async () => {
     mocks.clientId.mockResolvedValue('00000000-0000-4000-8000-000000000003');
     mocks.read.mockResolvedValue({ accessToken: 'fixture-access' });
     mocks.authenticated.mockResolvedValue({ response: new Response(null, { status: 204 }) });
@@ -175,7 +205,9 @@ describe('general-account authentication isolated from the owner session', () =>
     expect(response.status).toBe(204);
     expect(response.cookies.getAll().map((cookie) => cookie.name)).toEqual([
       'makan_client_session',
+      'makan_auth_return',
     ]);
+    expect(response.cookies.get('makan_auth_return')?.maxAge).toBe(0);
     expect(mocks.remove).toHaveBeenCalledWith('00000000-0000-4000-8000-000000000003');
   });
   it('preserves the backend verification failure and its trace without creating a session or reading a profile', async () => {

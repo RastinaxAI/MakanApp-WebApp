@@ -1,45 +1,44 @@
+'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
-import { ChevronLeft } from 'lucide-react';
-import { CourseCover } from '@/components/ui/course-cover';
+import { CalendarDays, MessagesSquare, UsersRound } from 'lucide-react';
+import { BrandMark } from '@/components/ui/brand';
+import { Button } from '@/components/ui/button';
 import s from './welcome.module.css';
 export function WelcomePage() {
   return (
-    <div className={s.page} data-reference-public>
-      <header>
-        <strong>ماکان</strong>
-        <Link href="/enter">ورود</Link>
-      </header>
-      <main>
-        <span className={s.badge}>برای آموزشگاه، برای هر روز</span>
+    <main className={s.page}>
+      <div className={s.content}>
+        <BrandMark />
         <h1>
-          یادگیری،
+          {uiText.text_f1f1352e3a44}
           <br />
-          کنار هم.
+          {uiText.text_f51cf6c76e5a}
         </h1>
-        <p>کلاس‌ها، تمرین‌ها و گفتگوها را در یک فضای ساده و منظم کنار هم داشته باشید.</p>
-        <CourseCover title="آموزش را نزدیک‌تر کنیم." caption="یک حساب · مسیرهای متفاوت" />
-        <h2>همهٔ نقش‌ها، در یک فضا</h2>
-        {[
-          ['دانشجو', 'یادگیری و تمرین، قدم‌به‌قدم'],
-          ['استاد', 'تدریس، ارزیابی و بازخورد'],
-          ['والد', 'همراهی با مسیر رشد'],
-          ['مدیر آموزشگاه', 'مدیریت منظم آموزشگاه'],
-        ].map(([title, description]) => (
-          <Link key={title} href="/enter" className={s.role}>
-            <span>{title[0]}</span>
-            <div>
-              <strong>{title}</strong>
-              <small>{description}</small>
-            </div>
-            <ChevronLeft size={16} />
-          </Link>
-        ))}
-      </main>
-      <footer>
-        <Link href="/enter" className="button button-primary">
-          شروع با شماره همراه
-        </Link>
-      </footer>
-    </div>
+        <p>{uiText.text_e4edd014da62}</p>
+        <div className={s.features}>
+          {[
+            [CalendarDays, uiText.text_3b85559794f7, uiText.text_9561aa5b11b0],
+            [UsersRound, uiText.text_973a4cd40e8c, uiText.text_87721ba89db6],
+            [MessagesSquare, uiText.text_2f8fb5d35b1a, uiText.text_b76881edda77],
+          ].map(([Icon, title, description]) => {
+            const Glyph = Icon as typeof CalendarDays;
+            return (
+              <article key={String(title)}>
+                <Glyph size={24} />
+                <div>
+                  <h2>{String(title)}</h2>
+                  <p>{String(description)}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <p>{uiText.text_ce6a15857208}</p>
+        <Button asChild>
+          <Link href="/enter">{uiText.text_b788f2ef91e8}</Link>
+        </Button>
+      </div>
+    </main>
   );
 }

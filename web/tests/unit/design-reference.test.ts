@@ -9,9 +9,10 @@ describe('version two reference integrity', () => {
     expect(spec.designDirection.tablet).toContain('No side rail');
   });
   it('keeps independent icon size and touch target tokens', () => {
-    expect(tokens.layout.navIcon).toBe(22);
+    expect(tokens.layout.navIcon).toBe(24);
     expect(tokens.layout.icon).toBe(20);
     expect(tokens.layout.touchTarget).toBeGreaterThanOrEqual(44);
-    expect(tokens.light.primary).toBe('#5058d9');
+    expect(tokens.light.brand).toBe('#156fee');
+    expect(tokens.light['primary-button']).toBe(tokens.light.brand);
   });
 });

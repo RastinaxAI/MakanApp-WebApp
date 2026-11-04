@@ -1,0 +1,137 @@
+{
+  "checkedAt": "2026-11-03T07:51:56.197Z",
+  "environment": "localhost production build; public entry only; no OTP request",
+  "method": "wait for network idle and working numeric input; actually loaded Next.js resources from Resource Timing; decoded response bytes; nomodule compatibility scripts not fetched by Chrome are excluded",
+  "status": 200,
+  "elapsedMs": 830,
+  "scripts": [
+    {
+      "name": "/_next/static/chunks/webpack-2520a7f701666072.js",
+      "bytes": 5885
+    },
+    {
+      "name": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+      "bytes": 203727
+    },
+    {
+      "name": "/_next/static/chunks/3794-04350b0fcecd82e5.js",
+      "bytes": 243176
+    },
+    {
+      "name": "/_next/static/chunks/main-app-0be85bc9e205b244.js",
+      "bytes": 529
+    },
+    {
+      "name": "/_next/static/chunks/9832-ecef3ec3e9749337.js",
+      "bytes": 231376
+    },
+    {
+      "name": "/_next/static/chunks/app/layout-9ad183a72dc72458.js",
+      "bytes": 14821
+    },
+    {
+      "name": "/_next/static/chunks/3242-5dbc88266a44bb65.js",
+      "bytes": 27281
+    },
+    {
+      "name": "/_next/static/chunks/app/error-b3f038107790234e.js",
+      "bytes": 1046
+    },
+    {
+      "name": "/_next/static/chunks/8500-63a4afbeacab3b52.js",
+      "bytes": 7674
+    },
+    {
+      "name": "/_next/static/chunks/app/not-found-91da064ab0aa0065.js",
+      "bytes": 329
+    },
+    {
+      "name": "/_next/static/chunks/8495-a5dcedd1f22dbd99.js",
+      "bytes": 30780
+    },
+    {
+      "name": "/_next/static/chunks/2136-196c750ec9c34570.js",
+      "bytes": 25177
+    },
+    {
+      "name": "/_next/static/chunks/app/enter/page-e742c379c0f9c26b.js",
+      "bytes": 13557
+    }
+  ],
+  "totalScriptBytes": 805358,
+  "metrics": {
+    "navigation": {
+      "name": "http://127.0.0.1:3145/enter",
+      "entryType": "navigation",
+      "startTime": 0,
+      "duration": 260.5,
+      "navigationId": 931,
+      "initiatorType": "navigation",
+      "deliveryType": "",
+      "nextHopProtocol": "http/1.1",
+      "renderBlockingStatus": "non-blocking",
+      "contentType": "text/html",
+      "contentEncoding": "gzip",
+      "workerStart": 0,
+      "workerRouterEvaluationStart": 0,
+      "workerCacheLookupStart": 0,
+      "workerMatchedSourceType": "",
+      "workerFinalSourceType": "",
+      "redirectStart": 0,
+      "redirectEnd": 0,
+      "fetchStart": 0.800000011920929,
+      "domainLookupStart": 0.800000011920929,
+      "domainLookupEnd": 0.800000011920929,
+      "connectStart": 0.800000011920929,
+      "secureConnectionStart": 0,
+      "connectEnd": 0.800000011920929,
+      "requestStart": 2.300000011920929,
+      "responseStart": 15.400000005960464,
+      "firstInterimResponseStart": 0,
+      "finalResponseHeadersStart": 15.400000005960464,
+      "responseEnd": 18.100000008940697,
+      "transferSize": 5302,
+      "encodedBodySize": 5002,
+      "decodedBodySize": 13858,
+      "responseStatus": 200,
+      "serverTiming": [],
+      "unloadEventStart": 0,
+      "unloadEventEnd": 0,
+      "domInteractive": 135.30000001192093,
+      "domContentLoadedEventStart": 135.30000001192093,
+      "domContentLoadedEventEnd": 135.40000000596046,
+      "domComplete": 260.5,
+      "loadEventStart": 260.5,
+      "loadEventEnd": 260.5,
+      "type": "navigate",
+      "redirectCount": 0,
+      "activationStart": 0,
+      "criticalCHRestart": 0,
+      "notRestoredReasons": null,
+      "confidence": {
+        "randomizedTriggerRate": 0.4994798,
+        "value": "low"
+      }
+    },
+    "paint": [
+      {
+        "name": "first-paint",
+        "entryType": "paint",
+        "startTime": 148,
+        "duration": 0,
+        "navigationId": 931,
+        "paintTime": 133.70000000298023,
+        "presentationTime": 148
+      },
+      {
+        "name": "first-contentful-paint",
+        "entryType": "paint",
+        "startTime": 148,
+        "duration": 0,
+        "navigationId": 931,
+        "paintTime": 133.70000000298023,
+        "presentationTime": 148
+      }
+    ]
+  }
+}

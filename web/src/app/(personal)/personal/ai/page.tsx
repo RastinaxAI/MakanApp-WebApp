@@ -1,4 +1,4 @@
-import { MakanAssistant } from '@/features/personal/assistant';
+import { redirect } from 'next/navigation';
 export default function Page() {
-  return <MakanAssistant />;
+  redirect('/personal/assistant');
 }

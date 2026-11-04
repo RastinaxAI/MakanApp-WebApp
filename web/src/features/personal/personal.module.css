@@ -683,7 +683,7 @@
 .editForm .actions {
   position: sticky;
   bottom: 0;
-  padding: 16px 0;
+  padding: 16px 0 calc(var(--action-edge-gap) + env(safe-area-inset-bottom, 0px));
   background: var(--surface);
   border-top: 1px solid var(--border);
   z-index: 2;
@@ -889,4 +889,25 @@
     padding: 20px;
     border-radius: 18px;
   }
+}
+
+/* Shared grouped-list treatment from the Telegram reference. */
+.settingsList {
+  max-width: 760px;
+  margin-inline: auto;
+  background: var(--surface);
+  border: 0;
+  border-radius: 12px;
+  padding-inline: 16px;
+}
+.settingsList > a {
+  min-height: 68px;
+  padding: 12px 0;
+}
+.settingsList .settingIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--primary-soft);
+  color: var(--primary);
 }

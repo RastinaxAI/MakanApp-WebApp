@@ -14,9 +14,7 @@ test('client entry, install targets and former platform surfaces', async ({ brow
   try {
     await page.goto('/');
     await expect(page).toHaveURL(/\/enter$/);
-    await expect(
-      page.getByRole('heading', { name: 'به ماکان خوش آمدید', exact: true }),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'شماره همراه شما', exact: true })).toBeVisible();
     await expect(page.locator('body')).not.toContainText('مالک پلتفرم');
     expect(
       await page.locator('a[href^="/admin"],a[href^="/login"],a[href^="/organization"]').count(),

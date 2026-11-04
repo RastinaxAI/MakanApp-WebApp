@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, FolderOpen } from 'lucide-react';
@@ -18,11 +19,11 @@ import { base, Field, Pager } from './shared';
 import { DirectoryHeader, RecordIdentity } from './directory-view';
 import s from './people.module.css';
 const roles = [
-  ['', 'همهٔ اعضا'],
-  ['Student', 'دانش‌آموزان'],
-  ['Teacher', 'معلمان'],
-  ['Parent', 'والدین'],
-  ['Manager', 'مدیران'],
+  ['', uiText.text_b765b14a3118],
+  ['Student', uiText.text_35e85a88a0fa],
+  ['Teacher', uiText.text_46b599145ed6],
+  ['Parent', uiText.text_2d821b70695a],
+  ['Manager', uiText.text_8b30165d42c3],
 ] as const;
 export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) {
   const [page, setPage] = useState(1),
@@ -39,8 +40,8 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
   return (
     <div className={s.page}>
       <DirectoryHeader />
-      <section className={s.panel} aria-label="جستجو و فیلتر اعضا">
-        <div className={s.roles} role="group" aria-label="نقش اعضا">
+      <section className={s.panel} aria-label={uiText.text_894f57ecc265}>
+        <div className={s.roles} role="group" aria-label={uiText.text_40fbc1ab0d10}>
           {roles.map(([value, title]) => (
             <button
               key={value}
@@ -57,13 +58,13 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
         </div>
         <div className={s.filters}>
           <SchoolSearch
-            label="جستجوی اعضای آموزشگاه"
+            label={uiText.text_a144dcd7df31}
             onSearch={(value) => {
               setSearch(value);
               setPage(1);
             }}
           />
-          <Field label="وضعیت عضویت">
+          <Field label={uiText.text_c8756c7737fc}>
             <select
               value={status}
               onChange={(e) => {
@@ -71,7 +72,7 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
                 setPage(1);
               }}
             >
-              <option value="">همهٔ وضعیت‌ها</option>
+              <option value="">{uiText.text_fa55e47f28bc}</option>
               {['Active', 'Suspended', 'Ended'].map((v) => (
                 <option key={v} value={v}>
                   {label(v)}
@@ -81,12 +82,18 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
           </Field>
         </div>
       </section>
-      <section className={s.panel} aria-label="فهرست اعضا">
+      <section className={s.panel} aria-label={uiText.text_77db9fa6328b}>
         <header className={s.resultHeading}>
-          <h2>{role ? roles.find(([v]) => v === role)?.[1] : 'فهرست اعضا'}</h2>
-          {q.data && <span>{number(q.data.totalCount)} نتیجه</span>}
+          <h2>{role ? roles.find(([v]) => v === role)?.[1] : uiText.text_77db9fa6328b}</h2>
+          {q.data && (
+            <span>
+              {number(q.data.totalCount)}
+              {uiText.text_028c8faf7935}
+            </span>
+          )}
           <Link href={base + '/guardians'}>
-            والد و فرزند <ArrowLeft size={15} />
+            {uiText.text_c48516c2d4d1}
+            <ArrowLeft size={15} />
           </Link>
         </header>
         {q.isPending ? (
@@ -100,10 +107,10 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
                 <table role="table" className={s.table}>
                   <thead role="rowgroup">
                     <tr role="row">
-                      <th role="columnheader">عضو آموزشگاه</th>
-                      <th role="columnheader">نقش‌های فعال</th>
-                      <th role="columnheader">وضعیت</th>
-                      <th role="columnheader">پروندهٔ آموزشی</th>
+                      <th role="columnheader">{uiText.text_4108dae42908}</th>
+                      <th role="columnheader">{uiText.text_fde889f86d84}</th>
+                      <th role="columnheader">{uiText.text_68d7eb08efbc}</th>
+                      <th role="columnheader">{uiText.text_5d33f6812cd4}</th>
                     </tr>
                   </thead>
                   <tbody role="rowgroup">
@@ -112,7 +119,7 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
                         <td role="cell">
                           <RecordIdentity name={m.displayName} username={m.username} />
                         </td>
-                        <td role="cell" data-label="نقش">
+                        <td role="cell" data-label={uiText.text_628d512903fe}>
                           {m.activeRoles.length ? (
                             <div className={s.badges}>
                               {m.activeRoles.map((r) => (
@@ -122,10 +129,10 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
                               ))}
                             </div>
                           ) : (
-                            <span className={s.muted}>نقش فعالی ندارد</span>
+                            <span className={s.muted}>{uiText.text_18f6e427c723}</span>
                           )}
                         </td>
-                        <td role="cell" data-label="عضویت">
+                        <td role="cell" data-label={uiText.text_e5e36e24f2b7}>
                           <StatusBadge value={m.membershipStatus} />
                         </td>
                         <td role="cell" className={s.actionCell}>
@@ -133,14 +140,14 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
                             <Button asChild size="sm">
                               <Link
                                 href={`${base}/people/${m.organizationPersonId}`}
-                                aria-label={'مشاهدهٔ پروندهٔ ' + m.displayName}
+                                aria-label={uiText.text_cefa283cd307 + m.displayName}
                               >
                                 <FolderOpen size={16} />
-                                مشاهدهٔ پرونده
+                                {uiText.text_895400e35aa6}
                               </Link>
                             </Button>
                           ) : (
-                            <span className={s.unlinked}>پرونده متصل نیست</span>
+                            <span className={s.unlinked}>{uiText.text_0ca10d7c79f2}</span>
                           )}
                         </td>
                       </tr>
@@ -149,10 +156,7 @@ export function MemberDirectory({ initialRole = '' }: { initialRole?: string }) 
                 </table>
               </div>
             ) : (
-              <EmptyState
-                title="عضوی با این شرایط پیدا نشد"
-                description="نام یا فیلتر نقش و وضعیت را تغییر دهید."
-              />
+              <EmptyState title={uiText.text_5e616c8620d1} description={uiText.text_3c1e3421fa35} />
             )}
             <Pager
               page={q.data.page}

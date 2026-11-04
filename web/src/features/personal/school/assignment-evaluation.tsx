@@ -1,4 +1,6 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -12,7 +14,7 @@ import type { TransferProgress } from '@/lib/api/file-transfer';
 import { formatFileSize } from '../messaging/media-model';
 import { date } from '@/lib/formatting';
 import { usePersonal, usePersonalApi } from '../provider';
-import { base, Field, Status } from './shared';
+import { Field, Status } from './shared';
 import { useAssessmentAction } from './use-assessment-action';
 import { WorkflowPage, WorkflowDraftConflict, useWorkflowDraft } from './workflow';
 import { evaluationLabel, validScore } from './evaluation-model';
@@ -21,12 +23,13 @@ import e from './evaluation.module.css';
 type S = components['schemas'];
 const roles = ['Teacher', 'Manager'];
 const attemptBase = (id: string) => '/api/v1/academic/submission-attempts/' + id;
-const attemptRoute = (id: string) => base + '/submissions/' + id;
+const attemptRoute = (base: string, id: string) => base + '/submissions/' + id;
 
 export function AssignmentEvaluationQueue({ assignmentId }: { assignmentId?: string }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
-      title="ارزیابی تکلیف‌ها"
+      title={uiText.text_b718bc161b9e}
       back={assignmentId ? base + '/assignments/' + assignmentId : base}
       roles={roles}
     >
@@ -35,9 +38,15 @@ export function AssignmentEvaluationQueue({ assignmentId }: { assignmentId?: str
   );
 }
 function Queue({ assignmentId }: { assignmentId?: string }) {
+  const { base } = useAcademicScope();
   const [status, setStatus] = useState(''),
     [late, setLate] = useState(false);
+  const scope = useAcademicScope();
   const params = new URLSearchParams();
+  if (scope.personal) {
+    params.set('classKind', 'PersonalClass');
+    params.set('classId', scope.personal.classId);
+  }
   if (assignmentId) params.set('assignmentId', assignmentId);
   if (status) params.set('reviewStatus', status);
   if (late) params.set('isLate', 'true');
@@ -48,9 +57,9 @@ function Queue({ assignmentId }: { assignmentId?: string }) {
   return (
     <section className={e.panel}>
       <div className={e.filters}>
-        <Field label="وضعیت ارزیابی">
+        <Field label={uiText.text_0731f9491612}>
           <select value={status} onChange={(ev) => setStatus(ev.target.value)}>
-            <option value="">همهٔ وضعیت‌ها</option>
+            <option value="">{uiText.text_fa55e47f28bc}</option>
             {(['AwaitingEvaluation', 'Draft', 'Released', 'CorrectionDraft'] as const).map((v) => (
               <option key={v} value={v}>
                 {evaluationLabel(v)}
@@ -60,7 +69,7 @@ function Queue({ assignmentId }: { assignmentId?: string }) {
         </Field>
         <label className={s.check}>
           <input type="checkbox" checked={late} onChange={(ev) => setLate(ev.target.checked)} />
-          فقط تحویل با تأخیر
+          {uiText.text_f125a09fb052}
         </label>
       </div>
       {q.isPending ? (
@@ -73,15 +82,16 @@ function Queue({ assignmentId }: { assignmentId?: string }) {
             <Link
               className={e.row}
               key={row.submissionAttemptId}
-              href={attemptRoute(row.submissionAttemptId) + '/evaluate'}
+              href={attemptRoute(base, row.submissionAttemptId) + '/evaluate'}
             >
               <div>
                 <h2>{row.studentDisplayName}</h2>
                 <p>{row.assignmentTitle}</p>
                 <small>
-                  تلاش {row.attemptNumber.toLocaleString('fa-IR')} ·{' '}
-                  {date(row.submittedAtUtc, true)}
-                  {row.isLate ? ' · با تأخیر' : ''}
+                  {uiText.text_1447bc999cc2}
+                  {row.attemptNumber.toLocaleString('fa-IR')}
+                  {uiText.text_78887da22764} {date(row.submittedAtUtc, true)}
+                  {row.isLate ? uiText.text_96408ba3e64d : ''}
                 </small>
               </div>
               <Status>{evaluationLabel(row.reviewStatus)}</Status>
@@ -89,15 +99,16 @@ function Queue({ assignmentId }: { assignmentId?: string }) {
           ))}
         </div>
       ) : (
-        <EmptyState title="پاسخی در این وضعیت نیست" />
+        <EmptyState title={uiText.text_d3da6e382b7b} />
       )}
     </section>
   );
 }
 export function AssignmentEvaluationPage({ id, review = false }: { id: string; review?: boolean }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
-      title={review ? 'بازبینی و انتشار ارزیابی' : 'ارزیابی پاسخ تکلیف'}
+      title={review ? uiText.text_c4becb06f465 : uiText.text_64ff9fb09fcd}
       back={base + '/evaluations'}
       roles={roles}
     >
@@ -106,12 +117,16 @@ export function AssignmentEvaluationPage({ id, review = false }: { id: string; r
   );
 }
 function EvaluationLoader({ id, review }: { id: string; review: boolean }) {
+  const scope = useAcademicScope();
   const q = usePersonalApi<S['SubmissionForEvaluationResult']>(
     attemptBase(id) + '/evaluation/submission',
   );
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
-  if (q.data.submissionAttemptId !== id)
+  if (
+    q.data.submissionAttemptId !== id ||
+    (scope.personal && q.data.classId !== scope.personal.classId)
+  )
     return <ErrorState error={new ApiError(502, { code: 'CONTRACT_MISMATCH' })} />;
   return <EvaluationState id={id} submission={q.data} review={review} />;
 }
@@ -124,8 +139,11 @@ function EvaluationState({
   submission: S['SubmissionForEvaluationResult'];
   review: boolean;
 }) {
+  const scope = useAcademicScope();
   const queue = usePersonalApi<S['EvaluationQueueItemResult'][]>(
-    '/api/v1/academic/evaluations/queue?assignmentId=' + submission.assignmentId,
+    '/api/v1/academic/evaluations/queue?assignmentId=' +
+      submission.assignmentId +
+      (scope.personal ? '&classKind=PersonalClass&classId=' + scope.personal.classId : ''),
   );
   const row = queue.data?.find((x) => x.submissionAttemptId === id);
   const q = usePersonalApi<S['EvaluatorEvaluationResult']>(attemptBase(id) + '/evaluation', {
@@ -160,13 +178,16 @@ function SubmissionRead({ value }: { value: S['SubmissionForEvaluationResult'] }
       <h2>{value.assignmentTitle}</h2>
       <div className={e.meta}>
         <span>{value.studentDisplayName}</span>
-        <span>تلاش {value.attemptNumber.toLocaleString('fa-IR')}</span>
+        <span>
+          {uiText.text_1447bc999cc2}
+          {value.attemptNumber.toLocaleString('fa-IR')}
+        </span>
         <span>{date(value.submittedAtUtc, true)}</span>
       </div>
       <p className={e.answer} dir="auto">
-        {value.answerText || 'پاسخ متنی ثبت نشده است.'}
+        {value.answerText || uiText.text_699df53d9134}
       </p>
-      <h2>پیوست‌های پاسخ</h2>
+      <h2>{uiText.text_b7504f07794e}</h2>
       {value.attachments.length ? (
         <div className={e.rows}>
           {value.attachments.map((file) => (
@@ -178,7 +199,7 @@ function SubmissionRead({ value }: { value: S['SubmissionForEvaluationResult'] }
           ))}
         </div>
       ) : (
-        <p className={s.hint}>این پاسخ پیوست ندارد.</p>
+        <p className={s.hint}>{uiText.text_b07222592c31}</p>
       )}
     </section>
   );
@@ -190,6 +211,7 @@ function EvaluationFile({
   attempt: string;
   file: S['SubmissionAttachmentResult'];
 }) {
+  const scope = useAcademicScope();
   const { transfer } = usePersonal();
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<unknown>(),
@@ -205,8 +227,9 @@ function EvaluationFile({
         <div>
           <strong dir="auto">{file.originalFileName}</strong>
           <small>
-            {formatFileSize(file.sizeBytes)} ·{' '}
-            {file.fileStatus === 'Ready' ? 'آمادهٔ دریافت' : 'هنوز آماده نیست'}
+            {formatFileSize(file.sizeBytes)}
+            {uiText.text_78887da22764}{' '}
+            {file.fileStatus === 'Ready' ? uiText.text_685509581d12 : uiText.text_ab55214d3f76}
           </small>
         </div>
       </div>
@@ -221,7 +244,7 @@ function EvaluationFile({
           controller.current = activeController;
           try {
             const blob = await transfer<Blob>(
-              `/api/client/submission-files/${file.fileAssetId}/content?attemptId=${attempt}`,
+              `/api/client/submission-files/${file.fileAssetId}/content?attemptId=${attempt}${scope.personal ? '&audience=evaluator' : ''}`,
               {
                 binary: true,
                 signal: activeController.signal,
@@ -244,17 +267,21 @@ function EvaluationFile({
         }}
       >
         <Download size={18} />
-        {busy ? 'در حال دریافت…' : file.fileStatus === 'Ready' ? 'دریافت فایل' : 'فایل آماده نیست'}
+        {busy
+          ? uiText.text_80516c4adbbe
+          : file.fileStatus === 'Ready'
+            ? uiText.text_6a835b3d71f3
+            : uiText.text_fddd72f44b1a}
       </Button>
       {busy && (
         <div className={e.fileProgress} role="status">
           <progress
-            aria-label={'پیشرفت دریافت ' + file.originalFileName}
+            aria-label={uiText.text_6f83baa49c64 + file.originalFileName}
             max={progress?.total ?? undefined}
             value={progress?.total ? progress.loaded : undefined}
           />
           <Button type="button" variant="ghost" onClick={() => controller.current?.abort()}>
-            لغو دریافت
+            {uiText.text_6373daa09bbc}
           </Button>
         </div>
       )}
@@ -271,6 +298,7 @@ function EvaluationForm({
   submission: S['SubmissionForEvaluationResult'];
   value?: S['EvaluatorEvaluationResult'];
 }) {
+  const { base } = useAcademicScope();
   const router = useRouter(),
     params = useSearchParams(),
     correction = value?.status === 'Released' && params.get('correction') === '1';
@@ -290,14 +318,18 @@ function EvaluationForm({
     return (
       <section className={e.panel}>
         <h2>{evaluationLabel(value.status)}</h2>
-        <p>این نسخه در این صفحه قابل ویرایش نیست.</p>
+        <p>{uiText.text_0a907e4db7e6}</p>
         <div className={e.actions}>
           <Button asChild>
-            <Link href={attemptRoute(id) + '/evaluation-review'}>مشاهدهٔ ارزیابی</Link>
+            <Link href={attemptRoute(base, id) + '/evaluation-review'}>
+              {uiText.text_f74b92f4e375}
+            </Link>
           </Button>
           {value.status === 'Released' && (
             <Button variant="outline" asChild>
-              <Link href={attemptRoute(id) + '/evaluate?correction=1'}>ایجاد اصلاحیه</Link>
+              <Link href={attemptRoute(base, id) + '/evaluate?correction=1'}>
+                {uiText.text_b6efac56c22b}
+              </Link>
             </Button>
           )}
         </div>
@@ -307,7 +339,7 @@ function EvaluationForm({
     validScore(d.values.score, submission.maxScore) && (!correction || !!d.values.reason.trim());
   return (
     <section className={e.panel}>
-      <h2>{correction ? 'اصلاح ارزیابی منتشرشده' : 'ثبت پیش‌نویس ارزیابی'}</h2>
+      <h2>{correction ? uiText.text_93d697d4f295 : uiText.text_b258bdb17ed3}</h2>
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();
@@ -331,12 +363,12 @@ function EvaluationForm({
           );
           if (result) {
             d.reset();
-            router.push(attemptRoute(id) + '/evaluation-review');
+            router.push(attemptRoute(base, id) + '/evaluation-review');
           }
         }}
       >
         <fieldset className={s.form} disabled={a.busy || !d.ready || d.stale}>
-          <Field label={`نمره از ${submission.maxScore.toLocaleString('fa-IR')}`}>
+          <Field label={uiText.format_afd74191ca72(submission.maxScore.toLocaleString('fa-IR'))}>
             <input
               type="number"
               min={0}
@@ -347,13 +379,13 @@ function EvaluationForm({
               onChange={(ev) => d.set('score', ev.target.value)}
             />
           </Field>
-          <Field label="بازخورد دانش‌آموز">
+          <Field label={uiText.text_3adafc73e1d2}>
             <textarea
               value={d.values.learner}
               onChange={(ev) => d.set('learner', ev.target.value)}
             />
           </Field>
-          <Field label="بازخورد قابل نمایش به والد">
+          <Field label={uiText.text_29b4c343a306}>
             <textarea
               value={d.values.guardian}
               onChange={(ev) => d.set('guardian', ev.target.value)}
@@ -361,10 +393,11 @@ function EvaluationForm({
           </Field>
           <div className={e.private}>
             <h3>
-              <LockKeyhole size={18} /> یادداشت خصوصی ارزیاب
+              <LockKeyhole size={18} />
+              {uiText.text_bae472294345}
             </h3>
-            <p>این یادداشت جزو بازخورد دانش‌آموز و والد نیست.</p>
-            <Field label="یادداشت خصوصی">
+            <p>{uiText.text_65815ac74e0f}</p>
+            <Field label={uiText.text_941348bfcf12}>
               <textarea
                 value={d.values.private}
                 onChange={(ev) => d.set('private', ev.target.value)}
@@ -372,7 +405,7 @@ function EvaluationForm({
             </Field>
           </div>
           {correction && (
-            <Field label="دلیل اصلاح">
+            <Field label={uiText.text_5a351482a930}>
               <textarea
                 required
                 value={d.values.reason}
@@ -382,7 +415,7 @@ function EvaluationForm({
           )}
           <div className={e.actions}>
             <Button type="submit" disabled={!valid}>
-              {a.busy ? 'در حال ذخیره…' : 'ذخیره و بازبینی'}
+              {a.busy ? uiText.text_a143258455bb : uiText.text_443deeea74b8}
             </Button>
           </div>
         </fieldset>
@@ -401,49 +434,52 @@ function EvaluationReview({
   value?: S['EvaluatorEvaluationResult'];
   onRefresh: () => Promise<unknown>;
 }) {
+  const { base } = useAcademicScope();
   const { call } = usePersonal();
   if (!value)
     return (
       <section className={e.panel}>
-        <EmptyState title="ارزیابی هنوز ذخیره نشده است" />
+        <EmptyState title={uiText.text_ae21f41e1594} />
         <Button asChild>
-          <Link href={attemptRoute(id) + '/evaluate'}>شروع ارزیابی</Link>
+          <Link href={attemptRoute(base, id) + '/evaluate'}>{uiText.text_0d12062fab6e}</Link>
         </Button>
       </section>
     );
   return (
     <section className={e.panel}>
-      <h2>بازخورد قابل انتشار</h2>
+      <h2>{uiText.text_e66b52706c41}</h2>
       <Status>{evaluationLabel(value.status)}</Status>
       <div className={e.score}>
         <strong>{value.score.toLocaleString('fa-IR')}</strong>
-        <span>از {value.maxScore.toLocaleString('fa-IR')}</span>
+        <span>
+          {uiText.text_928bdfd562d1}
+          {value.maxScore.toLocaleString('fa-IR')}
+        </span>
       </div>
       <dl className={e.summary}>
         <div>
-          <dt>دانش‌آموز می‌بیند</dt>
-          <dd>{value.learnerFeedback || 'بازخوردی ثبت نشده است.'}</dd>
+          <dt>{uiText.text_0a1a85c1271a}</dt>
+          <dd>{value.learnerFeedback || uiText.text_7b9c695e1e57}</dd>
         </div>
         <div>
-          <dt>والد مجاز می‌بیند</dt>
-          <dd>{value.guardianVisibleFeedback || 'بازخوردی ثبت نشده است.'}</dd>
+          <dt>{uiText.text_32a672994436}</dt>
+          <dd>{value.guardianVisibleFeedback || uiText.text_7b9c695e1e57}</dd>
         </div>
       </dl>
       <p className={s.hint}>
-        یادداشت خصوصی در بازخورد منتشرشده قرار نمی‌گیرد. نسخهٔ{' '}
-        {value.revisionNumber.toLocaleString('fa-IR')}
+        {uiText.text_5ea656f46842} {value.revisionNumber.toLocaleString('fa-IR')}
       </p>
       <div className={e.actions}>
         {value.status === 'Draft' ? (
           <>
             <Button asChild variant="outline">
-              <Link href={attemptRoute(id) + '/evaluate'}>بازگشت و ویرایش</Link>
+              <Link href={attemptRoute(base, id) + '/evaluate'}>{uiText.text_250a7c7f7fe9}</Link>
             </Button>
             <ConfirmAction
-              title="انتشار ارزیابی"
-              description="نمره و بازخوردهای مشخص‌شده برای دانش‌آموز و والد مجاز منتشر شوند؟"
-              trigger="انتشار ارزیابی"
-              confirm="انتشار نتیجه"
+              title={uiText.text_9f5a7c3ec8cf}
+              description={uiText.text_192eea1785f1}
+              trigger={uiText.text_9f5a7c3ec8cf}
+              confirm={uiText.text_9bd14215e24e}
               onConfirm={async () => {
                 await call(attemptBase(id) + '/evaluation/release', {
                   method: 'POST',
@@ -457,7 +493,9 @@ function EvaluationReview({
         ) : (
           value.status === 'Released' && (
             <Button asChild variant="outline">
-              <Link href={attemptRoute(id) + '/evaluate?correction=1'}>ایجاد اصلاحیه</Link>
+              <Link href={attemptRoute(base, id) + '/evaluate?correction=1'}>
+                {uiText.text_b6efac56c22b}
+              </Link>
             </Button>
           )
         )}

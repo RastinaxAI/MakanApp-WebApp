@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 export type SchoolSearchItem = {
   id: string;
   type: 'classes' | 'assignments' | 'exams';
@@ -8,8 +9,8 @@ export type SchoolSearchItem = {
 export function normalizeSchoolSearch(value: string) {
   return value
     .normalize('NFKC')
-    .replace(/[يى]/g, 'ی')
-    .replace(/ك/g, 'ک')
+    .replace(/[يى]/g, uiText.text_65fe35f47116)
+    .replace(/ك/g, uiText.text_ffa8517fa9b7)
     .replace(/[\u064b-\u065f\u0670]/g, '')
     .replace(/[\u200c\s]+/g, ' ')
     .trim()

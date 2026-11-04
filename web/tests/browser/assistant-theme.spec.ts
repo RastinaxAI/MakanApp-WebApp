@@ -26,13 +26,18 @@ test('dark theme stays coherent across panels and the assistant gives the answer
       await page.goto(url);
       await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
       if (name === 'education') {
-        await expect(page.locator('[data-education-upcoming] > section')).toHaveCount(3);
+        await expect(page.locator('[data-mk-view="MK-04"]')).toBeVisible();
         expect(
-          await page
-            .locator('[data-education-upcoming] > section')
-            .first()
-            .evaluate((el) => getComputedStyle(el).backgroundColor),
-        ).not.toBe('rgb(255, 255, 255)');
+          await page.locator('[data-mk-view]').evaluate((el) => {
+            let node: Element | null = el;
+            while (node) {
+              const color = getComputedStyle(node).backgroundColor;
+              if (color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent') return color;
+              node = node.parentElement;
+            }
+            return 'transparent';
+          }),
+        ).toBe('rgb(16, 26, 43)');
       }
       if (name === 'profile')
         await expect(page.getByRole('heading', { name: 'سارا احمدی', exact: true })).toBeVisible();
@@ -41,7 +46,7 @@ test('dark theme stays coherent across panels and the assistant gives the answer
       );
       await page.screenshot({ path: `test-results/assistant-theme/${name}-dark-${width}.png` });
     }
-    await page.goto('/personal/assistant');
+    await page.goto('/personal/assistant/studio');
     const pane = page.getByLabel('گفتگو با دستیار', { exact: true });
     const field = page.getByRole('textbox', { name: 'پرسش از دستیار' });
     await expect(field).toBeDisabled();
@@ -70,7 +75,7 @@ test('dark theme stays coherent across panels and the assistant gives the answer
     await page.goto('/personal/messages/' + ids.chat);
     await expect(page.getByRole('textbox', { name: 'متن پیام', exact: true })).toBeVisible();
     await page.screenshot({ path: `test-results/assistant-theme/chat-dark-${width}.png` });
-    await page.goto('/personal/profile');
+    await page.goto('/personal/profile/details');
     await page
       .getByRole('region', { name: 'فضاهای من', exact: true })
       .getByRole('button', { name: /آموزشگاه آفتاب/ })

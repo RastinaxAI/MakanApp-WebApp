@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useRef, useState } from 'react';
 import { Button } from './button';
 import { Dialog, DialogContent, DialogTrigger } from './dialog';
@@ -9,7 +10,7 @@ export function ConfirmAction({
   title,
   description,
   trigger,
-  confirm = 'تأیید',
+  confirm = uiText.text_df535a7ee41d,
   onConfirm,
   disabled = false,
   destructive = false,
@@ -37,14 +38,14 @@ export function ConfirmAction({
       }}
     >
       <DialogTrigger asChild>
-        <Button variant={destructive ? 'destructive' : 'outline'} disabled={disabled}>
+        <Button type="button" variant={destructive ? 'destructive' : 'outline'} disabled={disabled}>
           {trigger}
         </Button>
       </DialogTrigger>
       <DialogContent title={title} description={description}>
         <div className="confirm-actions">
           <Button variant="outline" disabled={busy} onClick={() => setOpen(false)}>
-            انصراف
+            {uiText.text_fa7af603d430}
           </Button>
           <Button
             variant={destructive ? 'destructive' : 'default'}
@@ -64,7 +65,7 @@ export function ConfirmAction({
               }
             }}
           >
-            {busy ? 'در حال انجام…' : confirm}
+            {busy ? uiText.text_fc2867f048ea : confirm}
           </Button>
         </div>
         {!!error && <ErrorState error={error} />}

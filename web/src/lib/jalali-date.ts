@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import { latinDigits } from './formatting';
 const dayMs = 86400000;
 const calendar = new Intl.DateTimeFormat('en-US-u-ca-persian-nu-latn', {
@@ -67,8 +68,8 @@ export function parseJalaliInput(value: string, withTime = false): string | null
 export function dateRangeError(value: string, min?: string, max?: string) {
   if (!value) return '';
   if (min && (min.includes('T') ? value : value.slice(0, 10)) < min)
-    return 'تاریخ انتخاب‌شده پیش از شروع بازهٔ مجاز است.';
+    return uiText.text_c1680ce3f338;
   if (max && (max.includes('T') ? value : value.slice(0, 10)) > max)
-    return 'تاریخ انتخاب‌شده پس از پایان بازهٔ مجاز است.';
+    return uiText.text_4ad57c605a1b;
   return '';
 }

@@ -1,0 +1,38 @@
+.body {
+  min-width: 0;
+}
+.body :global(.button-primary) {
+  color: var(--on-action);
+  background: var(--action);
+}
+.body :global(.button-primary:hover) {
+  background: var(--primary-hover);
+}
+.body :global(.button-danger) {
+  color: var(--on-danger);
+}
+.body :global(fieldset) {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.body :global(legend) {
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.body :global(.card) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.body :global(.member-choice) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+}
+.body :global(.member-choice input) {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}

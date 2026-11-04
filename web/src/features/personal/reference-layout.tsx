@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { ChevronLeft, ShieldCheck } from 'lucide-react';
 import { label } from '@/components/ui/states';
@@ -25,32 +26,34 @@ export function ReferenceColumns({
   const active = spaces.data?.workspaces.find(
     (w) => w.membershipId === session.context.membershipId && w.role === session.context.activeRole,
   );
-  const name = session.user.displayName || session.user.firstName || 'حساب من';
+  const name = session.user.displayName || session.user.firstName || uiText.text_8b4cb595cd35;
   return (
     <div className={s.columns} data-reference-columns>
       <div className={`${s.content} ${form ? s.formContent : ''}`}>{children}</div>
-      <aside className={s.context} aria-label="اطلاعات فضای کار">
+      <aside className={s.context} aria-label={uiText.text_3d52727b693c}>
         <div className={s.workspace}>
           <ProfileAvatar photo={session.user.profilePhoto} name={name} className={s.avatar} />
           <div>
             <strong>{name}</strong>
             <small>
               {active?.organizationName ??
-                (session.context.workspaceType === 'Organization' ? 'آموزشگاه فعال' : 'فضای شخصی')}
+                (session.context.workspaceType === 'Organization'
+                  ? uiText.text_b05e4b9892e2
+                  : uiText.text_ab3c684df5df)}
             </small>
           </div>
           <button onClick={() => window.dispatchEvent(new Event('makan:workspace-picker'))}>
-            تغییر
+            {uiText.text_d6541f139845}
           </button>
         </div>
         <div className={s.divider} />
-        <h2>{form ? 'راهنمای این صفحه' : 'برنامهٔ پیش رو'}</h2>
+        <h2>{form ? uiText.text_7cf2f4a3317a : uiText.text_2b09f11a29d1}</h2>
         {form ? (
           <>
-            <p>اطلاعات را مرحله‌به‌مرحله وارد کنید و پیش از ثبت، آن‌ها را مرور کنید.</p>
+            <p>{uiText.text_183283ba6298}</p>
             <div className={s.notice}>
               <ShieldCheck size={20} />
-              <span>حریم خصوصی و دسترسی‌ها در هر نقش حفظ می‌شود.</span>
+              <span>{uiText.text_ce21dcffb909}</span>
             </div>
           </>
         ) : (
@@ -61,7 +64,7 @@ export function ReferenceColumns({
                 className={s.session}
                 key={item.sessionId}
               >
-                <span className={s.avatar}>{item.classTitle?.[0] || 'ک'}</span>
+                <span className={s.avatar}>{item.classTitle?.[0] || uiText.text_ffa8517fa9b7}</span>
                 <span>
                   <strong>{item.classTitle}</strong>
                   <small>{date(item.startUtc, true)}</small>
@@ -69,19 +72,19 @@ export function ReferenceColumns({
                 <ChevronLeft size={16} />
               </Link>
             ))}
-            {!sessions.length && <p>جلسهٔ پیش رویی ثبت نشده است.</p>}
+            {!sessions.length && <p>{uiText.text_3b913a3284fe}</p>}
             {session.context.workspaceType === 'Organization' && (
               <Link href="/personal/education/schedule" className={s.schedule}>
-                مشاهده برنامه
+                {uiText.text_8803dcef8c66}
               </Link>
             )}
           </>
         )}
         <div className={s.divider} />
         <p className={s.footer}>
-          راهنما · حریم خصوصی · شرایط استفاده
+          {uiText.text_0b6d7d9d8cf2}
           <br />
-          ماکان — یادگیری، کنار هم
+          {uiText.text_efaf43eff1b4}
         </p>
         <span className={s.role}>{label(session.context.activeRole ?? 'Personal')}</span>
       </aside>

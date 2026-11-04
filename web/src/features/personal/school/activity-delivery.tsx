@@ -1,4 +1,6 @@
 'use client';
+import { useAcademicScope } from './academic-scope';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -16,18 +18,20 @@ export function ActivityDeliveryStatus({
   kind: S['AcademicActivityKind'];
   sourceVersionId?: string;
 }) {
+  const scope = useAcademicScope();
+  if (scope.personal) return null;
   return (
-    <section className={s.panel} aria-label="اطلاع‌رسانی انتشار">
+    <section className={s.panel} aria-label={uiText.text_f45e2124d2b3}>
       <header className={s.heading}>
-        <h2>اطلاع‌رسانی انتشار</h2>
+        <h2>{uiText.text_f45e2124d2b3}</h2>
       </header>
       {sourceVersionId ? (
         <DeliveryLookup classId={classId} kind={kind} sourceVersionId={sourceVersionId} />
       ) : (
-        <p>اعلان انتشار را در گروه و کانال رسمی کلاس بررسی کنید.</p>
+        <p>{uiText.text_cbffec0216d9}</p>
       )}
       <Button variant="outline" asChild>
-        <Link href={`${base}/classes/${classId}`}>فضاهای رسمی کلاس</Link>
+        <Link href={`${base}/classes/${classId}`}>{uiText.text_7e774d827d0c}</Link>
       </Button>
     </section>
   );
@@ -48,24 +52,24 @@ function DeliveryLookup({
   );
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
-  if (!q.data.length) return <EmptyState title="هنوز وضعیتی برای اعلان این نسخه دریافت نشده است" />;
+  if (!q.data.length) return <EmptyState title={uiText.text_131283425e90} />;
   return (
     <dl className={s.delivery}>
       {q.data.map((row) => (
         <div key={row.eventId + ':' + row.purpose}>
           <dt>
             {row.purpose === 'Group'
-              ? 'گروه رسمی'
+              ? uiText.text_50eee55c9937
               : row.purpose === 'Channel'
-                ? 'کانال رسمی'
-                : 'مقصد اعلان'}
+                ? uiText.text_872445576c9b
+                : uiText.text_f6a1af6f6496}
           </dt>
           <dd>
             {
               {
-                Pending: 'در انتظار درج اعلان',
-                Delivered: 'اعلان درج شده است',
-                Superseded: 'با نسخهٔ جدید جایگزین شده',
+                Pending: uiText.text_41483c9e8785,
+                Delivered: uiText.text_cd8457762e8c,
+                Superseded: uiText.text_74c4a12d53da,
               }[row.state]
             }
           </dd>

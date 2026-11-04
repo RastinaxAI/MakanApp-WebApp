@@ -70,9 +70,14 @@ export function MessagingLiveProvider({
       ) as Promise<
         import('@/generated/api/schema').components['schemas']['AccountChangePageResult']
       >;
-    // Personal and selected-workspace streams own distinct opaque cursors.
+    // Account inbox and selected educational context own distinct opaque cursors.
     const replay = new AccountReplay(readReplay, invalidateScope);
-    const personalReplay = new AccountReplay(readReplay, invalidateScope, 'Personal');
+    const personalReplay = new AccountReplay(
+      readReplay,
+      invalidateScope,
+      undefined,
+      '/api/v1/realtime/account-inbox/changes',
+    );
     let replayTimer: ReturnType<typeof setTimeout> | undefined,
       replayPolling = false;
     async function catchUp() {

@@ -31,7 +31,7 @@ test('records cold entry and school payloads plus a controlled concurrent read b
   const selected = await login(context);
   const schoolStart = Date.now();
   await page.goto('/personal/education');
-  await expect(page.getByRole('heading', { name: 'نمای آموزشگاه', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'آموزشگاه', exact: true })).toBeVisible();
   metrics.schoolReadyMs = Date.now() - schoolStart;
   metrics.school = await assets();
   await page.goto('/enter'); // Stop private-page polling before measuring API concurrency.

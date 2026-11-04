@@ -6,28 +6,28 @@
   align-content: start;
   gap: 20px;
   padding: 24px max(16px, calc((100% - 720px) / 2)) 40px;
-  --detail-action: var(--soft);
+  --detail-action: var(--surface);
 }
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 12px;
-  padding: 16px 32px 0;
+  gap: 8px;
+  padding: 8px 32px 0;
 }
 .header > div {
   min-width: 0;
   max-width: 100%;
 }
 .header h1 {
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.7;
   overflow-wrap: anywhere;
   margin: 4px 0;
 }
 .page .header h1 {
-  font-size: 24px;
+  font-size: 22px;
 }
 .heroAvatar,
 .editorAvatar,
@@ -36,15 +36,16 @@
   place-items: center;
   border-radius: 50%;
   color: var(--text);
-  background: var(--soft);
-  border: 1px solid var(--border);
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
+  border: 0;
   overflow: hidden;
   flex-shrink: 0;
 }
 .heroAvatar {
-  width: 116px;
-  height: 116px;
-  font-size: 43px;
+  width: 96px;
+  height: 96px;
+  font-size: 36px;
 }
 .heroAvatar > span,
 .editorAvatar > span {
@@ -52,8 +53,8 @@
   color: inherit;
 }
 .compactHeader {
-  padding-block: 0;
-  gap: 5px;
+  padding: 0;
+  gap: 0;
 }
 .compactHeader .heroAvatar {
   width: 52px;
@@ -88,12 +89,12 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 78px;
+  min-height: 66px;
   background: var(--detail-action);
-  color: var(--text);
-  padding: 12px 6px;
+  color: var(--primary);
+  padding: 10px 6px;
   border: 0;
-  border-radius: 22px;
+  border-radius: 12px;
   font: inherit;
   font-size: 13px;
   cursor: pointer;
@@ -107,7 +108,7 @@
   gap: 4px;
   padding: 5px;
   background: var(--surface);
-  border-radius: 28px;
+  border-radius: 12px;
 }
 .tabs a {
   flex: 1;
@@ -119,21 +120,22 @@
   gap: 6px;
   padding: 8px;
   font-size: 13px;
-  border-radius: 24px;
+  border-radius: 12px;
   text-align: center;
 }
 .tabs a svg {
   flex-shrink: 0;
 }
 .tabs a[aria-current] {
-  background: var(--primary-soft);
+  background: transparent;
+  border-bottom-color: var(--primary);
   color: var(--primary);
 }
 .panel {
   background: var(--surface);
   border: 0;
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 12px;
+  padding: 18px;
   min-width: 0;
 }
 .panel h2 {
@@ -188,8 +190,8 @@
   width: 100%;
   align-items: center;
   gap: 14px;
-  min-height: 62px;
-  padding: 15px 4px;
+  min-height: 52px;
+  padding: 10px 0;
   color: var(--muted);
   background: transparent;
   border: 0;
@@ -203,6 +205,7 @@
 }
 .settingRow > svg {
   flex-shrink: 0;
+  color: var(--primary);
 }
 .settingRow > span {
   flex: 1;
@@ -211,7 +214,7 @@
   font-size: 14px;
 }
 .settingRow small {
-  color: var(--primary);
+  color: var(--muted);
   font-size: 12px;
 }
 .settingRow:hover {
@@ -223,14 +226,14 @@
 }
 .rowCard {
   background: var(--surface);
-  border-radius: 22px;
+  border-radius: 12px;
   padding: 4px 16px;
 }
 .panel .managementCards {
   margin-bottom: 24px;
 }
 .panel .rowCard {
-  background: var(--bg);
+  background: var(--soft);
 }
 .actions,
 .pager {
@@ -384,8 +387,8 @@
   padding: 14px 16px;
   margin: 0;
   min-width: 0;
-  background: var(--bg);
-  border-radius: 20px;
+  background: var(--surface);
+  border-radius: 12px;
 }
 .choiceCard legend {
   font-size: 14px;
@@ -462,7 +465,7 @@
 }
 .inviteCard {
   background: var(--bg);
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 16px;
   margin-block: 16px;
 }
@@ -534,8 +537,8 @@
     font-size: 21px;
   }
   .heroAvatar {
-    width: 104px;
-    height: 104px;
+    width: 88px;
+    height: 88px;
   }
   .heroEdit {
     top: 16px;
@@ -550,7 +553,7 @@
   }
   .panel {
     padding: 18px;
-    border-radius: 22px;
+    border-radius: 12px;
   }
   .form input,
   .form textarea,
@@ -569,12 +572,12 @@
   .quickActions > a,
   .quickButton {
     font-size: 12px;
-    border-radius: 20px;
+    border-radius: 12px;
   }
   .editorAvatar {
     width: 60px;
     height: 60px;
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
@@ -596,6 +599,92 @@
 .page .identityEditor input {
   background: transparent;
   border: 0;
-  border-bottom: 2px solid var(--primary);
+  border-bottom: 1px solid var(--border);
   border-radius: 0;
+}
+
+.heroSubtitle {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.profileFields {
+  margin: 0;
+}
+.profileFields > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.profileFields > div:last-child {
+  border-bottom: 0;
+}
+.profileFields dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.profileFields dd {
+  margin: 0;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+.editorPanel,
+.settingsPanel {
+  padding: 0;
+  background: transparent;
+}
+.editorPanel .editorAvatar {
+  width: 88px;
+  height: 88px;
+  font-size: 34px;
+  margin-inline: auto;
+}
+.editorPanel .identityEditor,
+.editorPanel .form > label {
+  padding: 14px 16px;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.editorPanel .identityEditor input,
+.editorPanel .form > label textarea {
+  border: 0;
+  background: transparent;
+  padding-inline: 0;
+}
+.editorPanel .photoAction {
+  justify-content: center;
+  border: 0;
+  margin-top: -12px;
+}
+.editorPanel .form {
+  gap: 12px;
+}
+
+.photoEditor {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.photoEditor .photoAction {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  min-height: 44px;
+}
+.photoEditor .photoAction input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.photoEditor .photoAction:focus-within {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
 }

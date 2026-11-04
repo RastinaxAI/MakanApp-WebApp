@@ -406,7 +406,7 @@
   height: 48px;
   border-radius: 50%;
   background: var(--primary);
-  color: #fff;
+  color: var(--on-primary);
 }
 .attachButton {
   width: 44px;

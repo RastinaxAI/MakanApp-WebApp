@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-11-03T15:43:26.484Z",
+  "scope": "Shared bottom form action padding; CSS only",
+  "before": {
+    "width": 500,
+    "height": 927,
+    "bottomGap": 3
+  },
+  "after": {
+    "width": 500,
+    "height": 927,
+    "bottomGap": 20
+  },
+  "minimumGap": 20,
+  "safeAreaExample": {
+    "inset": 34,
+    "gap": 54,
+    "method": "Chrome Emulation.setSafeAreaInsetsOverride"
+  },
+  "sharedNativeFooters": 50,
+  "measuredLayouts": 56,
+  "failures": [],
+  "errors": [],
+  "checks": {
+    "productionBuild": "passed",
+    "format": "passed; six edited CSS files",
+    "diffWhitespace": "passed",
+    "fullUnitOrBrowserSuiteRerun": false
+  },
+  "evidence": "output/review/action-spacing/measurements.json",
+  "screenshots": "output/review/action-spacing",
+  "runtime": "http://127.0.0.1:3145",
+  "domainWrites": 0,
+  "notes": [
+    "Input/auth/API logic unchanged.",
+    "All OTP/session calls in layout review were made against the isolated fixture.",
+    "Old PDF comparison images remain historical; this requested spacing change takes precedence."
+  ]
+}

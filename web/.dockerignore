@@ -12,7 +12,12 @@
 !contracts/client-surface.json
 !design/
 !design/tokens.json
+!design/reference-v3/
+!design/reference-v3/screens.json
+!config/
+!config/network.json
 !public/
 !public/**
 !scripts/
 !scripts/docker-start.mjs
+!scripts/build-public-brand.mjs

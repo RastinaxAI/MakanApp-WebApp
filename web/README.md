@@ -1,12 +1,53 @@
+اتصال قرارداد جدید و شواهد: [راهنمای 80c2e61](docs/RELEASE_80C_INTEGRATION_FA.md). آدرس سرور از `config/network.json` تنظیم می‌شود. بستهٔ آمادهٔ انتقال و روش نصب/آپدیت سرور در [راهنمای ریشه](../readme.md) هستند؛ نتیجهٔ بررسی راه‌اندازی در [DEPLOYMENT_80C_CHECKS.json](docs/quality/DEPLOYMENT_80C_CHECKS.json) ثبت است.
+
+# فرانت‌اند ماکان — مرجع آبی MK نسخهٔ سوم، ۳ نوامبر ۲۰۲۶
+
+مرجع جاری PDF آبی نسخهٔ سوم و منابع دقیق آن در `design/reference-v3` با ۸۲ نمای MK است؛ `design/reference.json` نسخهٔ فعال را مشخص می‌کند. رنگ، کنتراست، ورودی، دکمهٔ تاریک و اجزای مشترک با همین نسخه تطبیق داده شدند. لوگوی تصویری شما و اصلاحات صریح ورود و دسکتاپ حفظ شده‌اند. اشاره‌های تلگرام و نتایج قدیمی در ادامه، تاریخچهٔ تحویل‌های پیشین‌اند. فقط برنامهٔ Next.js داخل web فعال است؛ پنل مالک در MakanManagement جدا می‌ماند.
+
+اصلاح تازه: پیام‌ها و دستیار از چارچوب و ناوبری مشترک با آیکون‌های واحد استفاده می‌کنند؛ [مقایسهٔ دو صفحه](output/review/navigation-unify/index.html)، [گزارش تغییرات](docs/NAVIGATION_THEME_UNIFY_FA.md) و [نتیجهٔ بررسی‌ها](docs/quality/NAVIGATION_THEME_CHECKS.json). نوشته‌ها، حالت فعال، متن بزرگ، فضای امن و کاهش حرکت در نوار پایین بررسی شده‌اند.
+
+ورود سبک‌تر شده، شماره و کد فقط رقم می‌پذیرند، لوگو در هر دو مرحله و همهٔ اندازه‌ها دیده می‌شود و دکمه پس از فیلد قرار دارد. برگشت استودیو به دستیار، جایگزینی مقصد کلاس‌های شخصی با فوق‌برنامه و خروج واقعی در پروفایل/تنظیمات اجرا شده‌اند. متن ثابت رابط از `src/content/fa.ts` و آدرس اصلی سرویس از `config/network.json` مصرف می‌شوند.
+
+[راهنمای متن‌ها، سرور و امنیت](docs/BLUE_BRAND_ARCHITECTURE_SECURITY_FA.md) · [نتیجهٔ دقیق بررسی برند آبی](docs/quality/BLUE_BRAND_CHECKS.json) · [اجرای متصل محلی](http://127.0.0.1:3145/enter)
+
+[جدول ۸۲ نما و مسیرها](docs/MK_REFERENCE_TRACEABILITY_FA.md) · [تطبیق نسخهٔ سوم و محدودیت‌ها](docs/MK_V3_ALIGNMENT_FA.md) · [گالری مقایسهٔ تصاویر](output/review/mk-v3/index.html) · [نتیجهٔ آزمون‌های این نوبت](docs/quality/MK_V3_CHECKS.json) · [پیشرفت جاری](docs/PROGRESS.md)
+
+اصلاح تازه: نوار دکمه‌های پایین فرم‌ها ۲۰ پیکسل فاصله از لبه، به‌علاوهٔ فضای امن دستگاه، دارد؛ [تصویر اصلاح‌شده](output/review/action-spacing/after-500-light.png) و [نتیجهٔ بررسی فاصله‌ها](docs/quality/ACTION_SPACING_CHECKS.json). تصاویر گالری V3 شواهد مرحلهٔ پیش از این اصلاح‌اند.
+
+نصب و اجرا از همین پوشه:
+
+```bash
+npm ci
+npm run dev -- --port 3133
+```
+
+Node.js نسخهٔ ۲۲ یا جدیدتر لازم است. آدرس سرویس در `config/network.json` تنظیم می‌شود؛ `BACKEND_BASE_URL` فقط در صورت داشتن مقدار، برای استقرار آن را بازنویسی می‌کند. APP_ORIGIN، SESSION_SECRET، SESSION_DIRECTORY و COOKIE_SECURE مطابق راهنمای تنظیمات موجود تعیین شوند؛ هیچ راز یا نشست داخل مرورگر یا مخزن قرار نمی‌گیرد. متغیرهای خصوصی فعلی را حفظ کنید. دستور ساخت: `NEXT_STANDALONE=true npm run build -- --webpack`؛ راه‌اندازی تولید مطابق Docker/راهنمای فعلی پروژه است. این مرحله روی سرور مقصد مستقر نشده است.
+
+برای بررسی مستقل با دادهٔ ساختگی و نشست جدا، پس از build اجرا کنید:
+
+```bash
+node scripts/mk-reference-review.mjs --production
+```
+
+سپس http://127.0.0.1:3144/preview/reference را باز کنید. تمام MKها در گالری در دسترس‌اند؛ این حالت صریحاً آزمایشی است، به سرور عمومی چیزی نمی‌نویسد و در اجرای عادی خاموش است. MAKAN_REFERENCE_PREVIEW پیش‌فرض غیرفعال است؛ مسیرهای preview در این حالت پاسخ عدم دسترسی دارند. نقش‌های نمونه و حالت‌های تکمیلی از منوی «گزینه‌های بیشتر» پیش‌نمایش انتخاب می‌شوند؛ MK-19 فقط پیش‌نمایش بررسی مالک است.
+
+آزمون‌ها: `npm test`، `npm run typecheck`، `npm run lint`، `npm run generated:check`، `npm run format:check` و `PLAYWRIGHT_CHANNEL=chrome npx playwright test`. برای تصاویر و جریان‌های مرجع در اجرای بررسی: `node scripts/verify-mk-reference.mjs`، `node scripts/capture-mk-reference.mjs`، `python3 scripts/compare-mk-reference.py`، `node scripts/check-mk-responsive.mjs`. آزمون مرورگر سرور و دادهٔ محلی خودش را ایجاد می‌کند. بررسی خواندن زنده، اختیاری و جداست و اجرای خودکار عملیات واقعی دامنه را مجاز نمی‌کند.
+
+---
+
 # آپدیت سرور نصب‌شده
+
+اتصال جاری به سرور 8090 و تغییرات قرارداد 154c437 در [مستند تحویل و آزمون](docs/RELEASE_154C437_INTEGRATION_FA.md) ثبت است: صندوق حساب با cursor سرور، مجوز مؤثر گفتگو، عکس گروه/کانال، منابع متصل و preflight دستیار. نتایج جاری در `docs/quality/RELEASE_154C437_CHECKS.json` قرار می‌گیرند؛ گزارش‌های پایین تاریخچهٔ مرحله‌های قبل‌اند.
 
 سورس جدید را در `/var/www/makanapp/app` جایگزین و `sudo bash setup.sh --update` را از ریشه اجرا کنید. حالت آپدیت فایل محیط، حجم نشست، Nginx و TLS را حفظ می‌کند. بستهٔ سورس شامل `setup.sh` است. مراحل انتقال ZIP و عیب‌یابی در [راهنمای سرور](../readme.md) قرار دارند.
 
-بررسی مستقل اسکریپت از ریشه: `python3 web/tests/deployment/test_setup.py`؛ Docker و image موجود `node:22-bookworm-slim` لازم‌اند.۱۲تست داخل کانتینر لینوکس ایزوله با Docker/سرویس‌های شبیه‌سازی‌شده اجرا می‌شوند؛ شبکه، Docker socket، تنظیمات محرمانه و سرویس واقعی در اختیار تست نیستند. workflow مستقل deployment-helper این بررسی و `bash -n setup.sh` را در CI تعریف می‌کند؛ اجرای CI میزبانی‌شده جدا از نتیجهٔ محلی است.
+بررسی مستقل اسکریپت از ریشه: ابتدا `docker build -f web/tests/deployment/Dockerfile -t makan-deployment-test:local .` و سپس `python3 web/tests/deployment/test_setup.py`؛ این image فقط ابزار آزمون است. ۱۶ آزمون داخل لینوکس ایزوله با Docker/سرویس‌های شبیه‌سازی‌شده اجرا می‌شوند؛ شبکه، Docker socket، تنظیمات محرمانه و سرویس واقعی در اختیار تست نیستند. در لینوکس دارای Bubblewrap، جایگزین مستقل از daemon دستور `MAKAN_DEPLOY_TEST_RUNNER=bwrap python3 web/tests/deployment/test_setup.py` است. ۹ آزمون ورود واقعی runtime با ماژول سرور موقت نیز با `python3 web/tests/deployment/test_runtime.py` اجرا می‌شوند. workflow مستقل deployment-helper این بررسی‌ها و `bash -n setup.sh` را در CI تعریف می‌کند؛ اجرای CI میزبانی‌شده جدا از نتیجهٔ محلی است.
 
 ---
 
 # کلاینت پنج‌نقشی ماکان
+
+مرجع بصری جاری از ۲ نوامبر ۲۰۲۶، PDF تلگرام ارسالی کاربر است؛ پروفایل، پیام‌رسان، گروه/کانال و اجزای مشترک آموزشگاه/دستیار از آن پیروی می‌کنند. [نگاشت مرجع](design/telegram-reference.json) و [گزارش جاری، بررسی‌ها و محدودیت‌ها](docs/PROGRESS.md) وضعیت تازه را ثبت می‌کنند؛ گزارش‌های استقرار بندهای بعدی تاریخی‌اند.
 
 راهنمای راه‌اندازی جاری در [README ریشه](../readme.md) است. برای استفاده‌کنندهٔ پنل، [راهنمای تصویری PDF](output/pdf/MakanApp_Panel_User_Guide_FA.pdf) و [نسخهٔ مرورگر](docs/user-guide/index.html) ساخته شده‌اند. [روش بازتولید](docs/user-guide/BUILD.md) از سورس واحد، تصاویر نمونه و فونت برند استفاده می‌کند.
 
@@ -81,7 +122,7 @@ npm run repro:check
 ## منابع معتبر و تولید
 
 - مسیر، نقش و چهار مقصد: `src/config/navigation.ts`؛ مجوز مؤثر از نشست و قرارداد سرور می‌آید، انتخاب UI مجوز ایجاد نمی‌کند.
-- قرارداد backend: `contracts/openapi.json`؛ SDK محدود کلاینت: `src/generated/api/schema.d.ts` و `contract.json`، شامل۲۰۵ عملیات و۳۹۰ schema؛ admin تولید نمی‌شود.
+- قرارداد backend: `contracts/openapi.json`؛ SDK محدود کلاینت: `src/generated/api/schema.d.ts` و `contract.json`، شامل۲۳۶ عملیات و۴۴۱ schema؛ admin تولید نمی‌شود.
 - طراحیv2: `design/tokens.json` → `src/design/tokens.css`.
 - مرجع۱۳۰صفحه: `design/screens.json`؛ وضعیت واقعی هرکدام: `design/implementation-map.json` → `docs/quality/SCREEN_COVERAGE.json`.
 - source مستقل prototype: `design/prototype/*` → `output/design/makan-responsive-prototype.html`؛ تمام اطلاعات و تعامل‌ها نمونه و بدون سرویس واقعی‌اند. صفحه‌های مالک فقط در مرجع آفلاین حفظ شده‌اند.

@@ -1,0 +1,581 @@
+{
+  "checkedAtUtc": "2026-11-02T07:31:08.565Z",
+  "batch": 1,
+  "environment": "isolated local fixture; no external domain writes",
+  "files": [
+    "assessment-evaluation.spec.ts",
+    "chat-education-layout.spec.ts",
+    "conversation-pages.spec.ts",
+    "instagram-experience.spec.ts",
+    "learning.spec.ts",
+    "member-directory.spec.ts",
+    "navigation-experience.spec.ts",
+    "profile-school-files.spec.ts",
+    "project-expansion.spec.ts",
+    "release-42c.spec.ts",
+    "school-redesign.spec.ts",
+    "telegram-details.spec.ts",
+    "workspace-child-attachments.spec.ts"
+  ],
+  "exitCode": 1,
+  "counts": {
+    "passed": 77,
+    "failed": 2,
+    "skipped": 0
+  },
+  "tests": [
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "assignment evaluation retains failed drafts, previews audience feedback and releases only after confirmation",
+      "status": "passed",
+      "durationMs": 9688,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "exam manual grading separates saving, completion and publication, and supports a correction revision",
+      "status": "passed",
+      "durationMs": 6684,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "student and parent cannot open author data; unpublished results and unrelated attachments do not masquerade as success",
+      "status": "passed",
+      "durationMs": 5631,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "new assessment pages remain readable without overflow at three viewports",
+      "status": "passed",
+      "durationMs": 15475,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "editing and publishing a homework draft uses versioned review and retains a failed save",
+      "status": "passed",
+      "durationMs": 4419,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "a server version change preserves the local evaluation draft until explicit replacement",
+      "status": "passed",
+      "durationMs": 2855,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-evaluation.spec.ts",
+      "title": "parent result uses the selected child relation and guardian feedback without author notes",
+      "status": "passed",
+      "durationMs": 3186,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "chat header light fa: avatar stays beside the title and controls never overlap",
+      "status": "passed",
+      "durationMs": 3929,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "chat header light en: avatar stays beside the title and controls never overlap",
+      "status": "passed",
+      "durationMs": 3720,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "chat header dark fa: avatar stays beside the title and controls never overlap",
+      "status": "passed",
+      "durationMs": 3670,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "chat header dark en: avatar stays beside the title and controls never overlap",
+      "status": "passed",
+      "durationMs": 3962,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button",
+      "status": "passed",
+      "durationMs": 5003,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "school weekly agenda Student: compact dates, usable controls, real range requests and current-week reset",
+      "status": "passed",
+      "durationMs": 4750,
+      "attempts": 1
+    },
+    {
+      "file": "chat-education-layout.spec.ts",
+      "title": "school weekly agenda Teacher: compact dates, usable controls, real range requests and current-week reset",
+      "status": "passed",
+      "durationMs": 4299,
+      "attempts": 1
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "conversation members and media follow server pagination and a media filter restarts its cursor",
+      "status": "passed",
+      "durationMs": 8421,
+      "attempts": 1
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "conversation settings retain failed selections and leave confirmation retains failure until accepted",
+      "status": "passed",
+      "durationMs": 4131,
+      "attempts": 1
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "education roles do not grant group ownership and system managed conversation does not expose manual management",
+      "status": "passed",
+      "durationMs": 2267,
+      "attempts": 1
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "direct conversation info is reached from chat and archive uses confirmed user state",
+      "status": "passed",
+      "durationMs": 3276,
+      "attempts": 1
+    },
+    {
+      "file": "conversation-pages.spec.ts",
+      "title": "conversation detail pages preserve RTL and layout at mobile tablet and desktop",
+      "status": "passed",
+      "durationMs": 7031,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Student light",
+      "status": "passed",
+      "durationMs": 15270,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Teacher light",
+      "status": "passed",
+      "durationMs": 12327,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Parent light",
+      "status": "passed",
+      "durationMs": 12798,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Manager light",
+      "status": "passed",
+      "durationMs": 13417,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Personal light",
+      "status": "passed",
+      "durationMs": 12754,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "theme light is applied before the application JavaScript can hydrate",
+      "status": "passed",
+      "durationMs": 768,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Student dark",
+      "status": "passed",
+      "durationMs": 13636,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Teacher dark",
+      "status": "passed",
+      "durationMs": 10252,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Parent dark",
+      "status": "passed",
+      "durationMs": 13288,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Manager dark",
+      "status": "passed",
+      "durationMs": 12733,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "Telegram-reference four-tab shell: Personal dark",
+      "status": "passed",
+      "durationMs": 13669,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "theme dark is applied before the application JavaScript can hydrate",
+      "status": "passed",
+      "durationMs": 767,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "temporary inbox failure retains known conversations; permission denial removes them",
+      "status": "timedOut",
+      "durationMs": 60649,
+      "attempts": 1
+    },
+    {
+      "file": "learning.spec.ts",
+      "title": "Teacher uses independent lesson create, edit and review pages; Student reads only Published",
+      "status": "passed",
+      "durationMs": 8378,
+      "attempts": 1
+    },
+    {
+      "file": "learning.spec.ts",
+      "title": "exam saves an answer and shows a receipt only after accepted finalization",
+      "status": "passed",
+      "durationMs": 3723,
+      "attempts": 1
+    },
+    {
+      "file": "member-directory.spec.ts",
+      "title": "member directory uses server filters, clear record actions and responsive cards",
+      "status": "passed",
+      "durationMs": 4820,
+      "attempts": 1
+    },
+    {
+      "file": "member-directory.spec.ts",
+      "title": "read-only person flags remain authoritative and a failed member read can be retried",
+      "status": "passed",
+      "durationMs": 4088,
+      "attempts": 1
+    },
+    {
+      "file": "member-directory.spec.ts",
+      "title": "person list and editor stay readable on all layouts and preserve a failed draft",
+      "status": "passed",
+      "durationMs": 5239,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Student keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 4370,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Teacher keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 4549,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Parent keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 4666,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "Manager keeps the selected role across tabs, reload and another browser tab",
+      "status": "passed",
+      "durationMs": 4756,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "assistant uses the full viewport and readable sample outputs without the extra header",
+      "status": "passed",
+      "durationMs": 8383,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "PWA install offer has a persistent close control and manual installation help",
+      "status": "passed",
+      "durationMs": 3245,
+      "attempts": 1
+    },
+    {
+      "file": "navigation-experience.spec.ts",
+      "title": "PWA installation calls the browser prompt only after a click and does not reload the app",
+      "status": "passed",
+      "durationMs": 1743,
+      "attempts": 1
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "profile exposes identity and age below spaces and moves preference menus to their own page",
+      "status": "passed",
+      "durationMs": 4655,
+      "attempts": 1
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "school header searches authorized classes, assignments and published exams without contact navigation",
+      "status": "passed",
+      "durationMs": 2231,
+      "attempts": 1
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "Student attaches a PDF and photo, retries an attachment failure without reuploading and submits a file-only answer",
+      "status": "passed",
+      "durationMs": 4317,
+      "attempts": 1
+    },
+    {
+      "file": "profile-school-files.spec.ts",
+      "title": "pending file never enables final review and a Parent cannot use the Student file proxy",
+      "status": "passed",
+      "durationMs": 2949,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Manager creates a class only after review; catalog search, failed submit and reload keep the draft",
+      "status": "passed",
+      "durationMs": 4348,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Teacher creates and edits a session on independent pages and cancellation stays pending after a failed service",
+      "status": "passed",
+      "durationMs": 3875,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Teacher and Student cannot enter Manager creation pages and deep-link review cannot bypass validation",
+      "status": "passed",
+      "durationMs": 3567,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "Manager person create/edit uses stable operations, server versions and authoritative details",
+      "status": "passed",
+      "durationMs": 2799,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "exam author uses independent creation/question/review and a confirmation before publication",
+      "status": "passed",
+      "durationMs": 4940,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "notification preferences preserve failed edits, mandatory flags and scope while center reads server notifications",
+      "status": "passed",
+      "durationMs": 3876,
+      "attempts": 1
+    },
+    {
+      "file": "project-expansion.spec.ts",
+      "title": "device revocation requires confirmation, preserves failure and is bound to account, origin and context",
+      "status": "passed",
+      "durationMs": 3856,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Manager opens the organization official group through its own binding",
+      "status": "passed",
+      "durationMs": 7268,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Student retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2947,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Teacher retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2609,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Parent retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2693,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Manager retains the educational context while using personal capabilities",
+      "status": "passed",
+      "durationMs": 2725,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "a roleless user has a personal card; unresolved visibility is not guessed",
+      "status": "passed",
+      "durationMs": 2625,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Teacher sends a personal message and uploads a personal file without switching educational context",
+      "status": "passed",
+      "durationMs": 2674,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "official pair keeps a healthy group available, shows a structured card and reauthorizes its source",
+      "status": "passed",
+      "durationMs": 4006,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "Ready without read permission and parent relationship never grant official access",
+      "status": "passed",
+      "durationMs": 3772,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "revocation removes open official content while personal messaging remains available",
+      "status": "passed",
+      "durationMs": 9480,
+      "attempts": 1
+    },
+    {
+      "file": "release-42c.spec.ts",
+      "title": "superseded cards disable the old CTA and refresh current activity and source without republishing",
+      "status": "passed",
+      "durationMs": 3001,
+      "attempts": 1
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "profile edit has grouped readable fields and a footer after the form at all screen sizes",
+      "status": "passed",
+      "durationMs": 2950,
+      "attempts": 1
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "school has four destinations, three nearest items and a separate class page with URL-backed sections",
+      "status": "passed",
+      "durationMs": 5056,
+      "attempts": 1
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "Teacher opens class members alongside activities without gaining management actions",
+      "status": "passed",
+      "durationMs": 4091,
+      "attempts": 1
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "weekly schedule changes the server range and can return to the same week without date fields",
+      "status": "passed",
+      "durationMs": 2122,
+      "attempts": 1
+    },
+    {
+      "file": "school-redesign.spec.ts",
+      "title": "invitation details, consent, failed acceptance and decline retain truthful server state",
+      "status": "passed",
+      "durationMs": 2939,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-details.spec.ts",
+      "title": "mute is confirmed by the service and a failed change never shows false success",
+      "status": "passed",
+      "durationMs": 3355,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-details.spec.ts",
+      "title": "invite link creation retries with one command, requires approval, then can be revoked",
+      "status": "passed",
+      "durationMs": 7509,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-details.spec.ts",
+      "title": "topic draft survives errors and status changes only after server confirmation",
+      "status": "passed",
+      "durationMs": 2874,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-details.spec.ts",
+      "title": "non owners never see invite management and the service rejects a direct mutation",
+      "status": "passed",
+      "durationMs": 1329,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-details.spec.ts",
+      "title": "reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes",
+      "status": "failed",
+      "durationMs": 19982,
+      "attempts": 1
+    },
+    {
+      "file": "workspace-child-attachments.spec.ts",
+      "title": "one workspace click enters it once; a failed switch never claims entry",
+      "status": "passed",
+      "durationMs": 3149,
+      "attempts": 1
+    },
+    {
+      "file": "workspace-child-attachments.spec.ts",
+      "title": "Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child",
+      "status": "passed",
+      "durationMs": 5873,
+      "attempts": 1
+    },
+    {
+      "file": "workspace-child-attachments.spec.ts",
+      "title": "Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files",
+      "status": "passed",
+      "durationMs": 3965,
+      "attempts": 1
+    }
+  ]
+}

@@ -7,6 +7,7 @@ const target = fs.mkdtempSync(path.join(root, 'tmp', 'clean-checkout-'));
 if (path.dirname(target) !== path.join(root, 'tmp')) throw Error('Unexpected staging directory');
 const sources = [
   'src',
+  'config',
   'public',
   'contracts',
   'design',
@@ -49,7 +50,8 @@ fs.mkdirSync(evidence, { recursive: true });
 const results = [];
 for (const args of [
   ['ci', '--no-audit', '--no-fund', '--prefer-offline'],
-  ...['generated:check', 'lint', 'test', 'build'].map((s) => ['run', s]),
+  ...['generated:check', 'lint', 'test'].map((s) => ['run', s]),
+  ['run', 'build', '--', '--webpack'],
 ]) {
   const name = args[0] === 'ci' ? 'install' : args[1].replace(':', '-');
   const result = spawnSync(process.execPath, [process.env.npm_execpath, ...args], {

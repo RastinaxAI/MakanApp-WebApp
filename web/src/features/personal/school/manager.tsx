@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { ConfirmAction } from '@/components/ui/confirm-action';
 import { EmptyState, ErrorState, label, LoadingSkeleton } from '@/components/ui/states';
@@ -31,25 +32,21 @@ export function Classes({ manage }: { manage: boolean }) {
   return (
     <div className={manage ? managerStyle.stack : undefined}>
       <Heading
-        title="کلاس‌های آموزشگاه"
-        description={
-          manage
-            ? 'کلاس بسازید، دانش‌آموزان را تقسیم‌بندی کنید و معلمان کلاس را مشخص کنید.'
-            : 'کلاس‌های مجاز شما؛ برنامه، تکلیف و آزمون هر کلاس در یک جا.'
-        }
+        title={uiText.text_6d784fcb7c9a}
+        description={manage ? uiText.text_aa9247a0d79f : uiText.text_d5743b840e90}
         action={
           manage &&
           q.data && (
             <Button asChild>
               <Link href={base + '/classes/new'}>
                 <Plus size={19} />
-                ایجاد کلاس
+                {uiText.text_34aeac5f09b4}
               </Link>
             </Button>
           )
         }
       />
-      {manage && <SchoolSearch label="جستجوی کلاس، درس یا دوره" onSearch={setSearch} />}
+      {manage && <SchoolSearch label={uiText.text_3fce236a7ccd} onSearch={setSearch} />}
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -76,9 +73,11 @@ export function Classes({ manage }: { manage: boolean }) {
                 <Button asChild>
                   <Link
                     href={base + '/classes/' + item.id}
-                    aria-label={(manage ? 'مدیریت کلاس ' : 'ورود به کلاس ') + item.title}
+                    aria-label={
+                      (manage ? uiText.text_ea1397131af1 : uiText.text_535e99805ced) + item.title
+                    }
                   >
-                    {manage ? 'مدیریت کلاس' : 'ورود به کلاس'}
+                    {manage ? uiText.text_5923c5cbace6 : uiText.text_e0c1b3a8ec7a}
                   </Link>
                 </Button>
               </footer>
@@ -88,12 +87,8 @@ export function Classes({ manage }: { manage: boolean }) {
       ) : (
         <Card>
           <EmptyState
-            title="هنوز کلاسی وجود ندارد"
-            description={
-              manage
-                ? 'از «ایجاد کلاس» شروع کنید؛ سپس دانش‌آموز و معلم را به کلاس اضافه کنید.'
-                : 'کلاس‌های اختصاص‌یافته پس از ثبت آموزشگاه اینجا نمایش داده می‌شوند.'
-            }
+            title={uiText.text_aca867e37332}
+            description={manage ? uiText.text_f2f08c07a3c0 : uiText.text_bc49db330f23}
           />
         </Card>
       )}
@@ -115,17 +110,21 @@ export function Enrollments({ classId }: { classId?: string }) {
       <>
         <ClassRoster classId={classId} kind="learners" manage />
         <Button asChild>
-          <Link href={`${base}/classes/${classId}/enrollments/new`}>ثبت‌نام دانش‌آموز</Link>
+          <Link href={`${base}/classes/${classId}/enrollments/new`}>
+            {uiText.text_e82efffd7b2d}
+          </Link>
         </Button>
       </>
     );
   return (
     <Card
-      title={classId ? 'دانش‌آموزان این کلاس' : 'دانش‌آموزان ثبت‌نام‌شده'}
+      title={classId ? uiText.text_b6f6538e49df : uiText.text_2f6b3c84f920}
       action={
         classId && (
           <Button asChild>
-            <Link href={`${base}/classes/${classId}/enrollments/new`}>ثبت‌نام دانش‌آموز</Link>
+            <Link href={`${base}/classes/${classId}/enrollments/new`}>
+              {uiText.text_e82efffd7b2d}
+            </Link>
           </Button>
         )
       }
@@ -141,9 +140,9 @@ export function Enrollments({ classId }: { classId?: string }) {
               <table className={s.table}>
                 <thead>
                   <tr>
-                    <th>دانش‌آموز</th>
-                    <th>کلاس</th>
-                    <th>وضعیت</th>
+                    <th>{uiText.text_fbd179d162db}</th>
+                    <th>{uiText.text_56c43e096bb9}</th>
+                    <th>{uiText.text_68d7eb08efbc}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -160,10 +159,7 @@ export function Enrollments({ classId }: { classId?: string }) {
               </table>
             </div>
           ) : (
-            <EmptyState
-              title="ثبت‌نامی وجود ندارد"
-              description="پس از ثبت‌نام در کلاس، دانش‌آموز اینجا نمایش داده می‌شود."
-            />
+            <EmptyState title={uiText.text_763022dc000f} description={uiText.text_fb368cca5abe} />
           )}
           <Pager page={page} total={q.data.totalCount} onChange={setPage} />
         </>
@@ -179,13 +175,13 @@ export function Guardians() {
   return (
     <div className={managerStyle.stack}>
       <ManagerPageHeader
-        title="والدین و دسترسی فرزندان"
-        description="دسترسی آموزشی والد فقط برای فرزند مشخص و رابطهٔ فعال برقرار می‌شود."
+        title={uiText.text_836e8b88a455}
+        description={uiText.text_a8f7d5d341fb}
         action={
           <Button asChild>
             <Link href={base + '/guardians/new'}>
               <UserRoundPlus size={19} />
-              افزودن رابطهٔ والد و فرزند
+              {uiText.text_4984b636db1a}
             </Link>
           </Button>
         }
@@ -204,7 +200,7 @@ export function Guardians() {
                 ))}
               </div>
             ) : (
-              <EmptyState title="رابطهٔ والد و فرزندی ثبت نشده است" />
+              <EmptyState title={uiText.text_4b50b911a4a4} />
             )}
           </Card>
           <Pager page={page} total={q.data.totalCount} onChange={setPage} />
@@ -225,10 +221,11 @@ function GuardianRow({ relation: r }: { relation: S['SchoolGuardianRelationDto']
       <h3>
         {person.data?.displayName ||
           [person.data?.firstName, person.data?.lastName].filter(Boolean).join(' ') ||
-          'پروندهٔ فرزند'}
+          uiText.text_b9c23f90e92a}
       </h3>
       <p className={s.hint}>
-        حساب والد: <bdi>{r.guardianUserId}</bdi>
+        {uiText.text_c9c2548db6d8}
+        <bdi>{r.guardianUserId}</bdi>
       </p>
       <Status>{label(r.status)}</Status>
       {r.status === 'Pending' && (
@@ -237,26 +234,26 @@ function GuardianRow({ relation: r }: { relation: S['SchoolGuardianRelationDto']
           onClick={() =>
             void a.run('/api/v1/organization/guardian-relations/' + r.id + '/activate', {
               expectedRowVersion: r.rowVersion,
-              reason: 'فعال‌سازی رابطهٔ بررسی‌شده در آموزشگاه',
+              reason: uiText.text_7d11b416e34f,
             })
           }
         >
-          فعال‌سازی دسترسی والد
+          {uiText.text_50591f0957ee}
         </Button>
       )}
       {a.feedback}
       {['Active', 'Pending'].includes(r.status) && (
         <>
-          <Field label="دلیل تغییر دسترسی والد">
+          <Field label={uiText.text_94eb9f878b58}>
             <input value={reason} onChange={(e) => setReason(e.target.value)} />
           </Field>
           <ConfirmAction
             disabled={!reason.trim()}
             destructive
-            title="پایان دسترسی والد به این فرزند"
-            trigger="پایان دسترسی والد"
-            confirm="پایان رابطه"
-            description="فقط دسترسی آموزشی همین رابطه پایان می‌یابد؛ حساب والد و رابطه با فرزندان دیگر حفظ می‌شود."
+            title={uiText.text_5fc6fc050d06}
+            trigger={uiText.text_67a07cf5da0e}
+            confirm={uiText.text_e6a502d4ee2b}
+            description={uiText.text_129858da9abc}
             onConfirm={async () => {
               await command(
                 `/api/v1/organization/guardian-relations/${r.id}/${r.status === 'Active' ? 'end' : 'revoke'}`,

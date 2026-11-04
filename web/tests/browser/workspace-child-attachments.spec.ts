@@ -32,7 +32,7 @@ test('one workspace click enters it once; a failed switch never claims entry', a
     el.click();
   });
   await expect(page).toHaveURL(/\/personal$/);
-  await expect(page.getByRole('heading', { name: 'نمای آموزشگاه', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'آموزشگاه', exact: true })).toBeVisible();
   const state = await (await request.get(fixture + '/__test__/state')).json();
   expect(
     state.requests.filter(

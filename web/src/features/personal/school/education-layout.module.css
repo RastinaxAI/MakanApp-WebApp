@@ -1,19 +1,22 @@
 .navigation {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
-  margin: 0 0 20px;
-  padding: 0;
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 0 0 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  scrollbar-width: thin;
 }
-.managerNavigation {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+.navigation a {
+  flex: 1;
+  white-space: nowrap;
 }
-@media (max-width: 900px) {
-  .managerNavigation {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.navigation a[aria-current='page'] {
+  background: var(--primary-soft);
 }
 .navigation a,
 .classTabs a {
@@ -21,9 +24,9 @@
   align-items: center;
   justify-content: center;
   gap: 9px;
-  min-height: 52px;
+  min-height: 44px;
   padding: 12px 8px;
-  border-radius: 0;
+  border-radius: 10px;
   border-bottom: 2px solid transparent;
   font-size: 13px;
   color: var(--muted);
@@ -43,9 +46,9 @@
 }
 .navigation a[aria-current='page'],
 .classTabs a[aria-current='page'] {
-  border-bottom-color: var(--text);
-  color: var(--text);
-  font-weight: 700;
+  border-bottom-color: var(--primary);
+  color: var(--primary);
+  font-weight: 650;
 }
 .classPage {
   display: grid;
@@ -121,9 +124,9 @@
 .classList > a,
 .parentItems article {
   padding: 20px;
-  border: 1px solid var(--border);
+  border: 0;
   background: var(--surface);
-  border-radius: 18px;
+  border-radius: 12px;
 }
 .classList > a {
   display: flex;
@@ -141,19 +144,14 @@
 }
 @media (max-width: 700px) {
   .navigation a {
-    display: grid;
-    grid-template-rows: 22px minmax(38px, auto);
-    align-content: center;
-    justify-items: center;
-    min-height: 78px;
-    gap: 4px;
-    font-size: 11px;
-    line-height: 1.7;
-    padding: 7px 4px;
+    flex: 0 0 auto;
+    min-height: 44px;
+    gap: 6px;
+    font-size: 12px;
+    padding: 8px 12px;
   }
   .navigation {
-    gap: 3px;
-    border-radius: 0;
+    gap: 4px;
     margin-bottom: 18px;
   }
   .classHeading {
@@ -178,7 +176,6 @@
     padding: 10px 2px;
     min-height: 72px;
   }
-  .navigation a > span,
   .classTabs a > span {
     display: flex;
     align-items: center;

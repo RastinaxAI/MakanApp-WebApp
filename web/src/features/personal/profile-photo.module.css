@@ -5,6 +5,8 @@
   justify-content: center;
   overflow: hidden;
   border-radius: 50%;
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
 }
 .avatar img,
 .preview img {

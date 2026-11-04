@@ -1,4 +1,7 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
+import { ApiError } from '@/lib/api/errors';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, label, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
@@ -8,9 +11,10 @@ import { useState } from 'react';
 import { usePersonalApi } from '../provider';
 import { ActivityDeliveryStatus } from './activity-delivery';
 import s from './school.module.css';
-import { base, Card, Field, SchoolHeading, Status, useSchoolAction } from './shared';
+import { Card, Field, SchoolHeading, Status, useSchoolAction } from './shared';
 type S = components['schemas'];
 export function Exams({ classId, teach }: { classId?: string; teach: boolean }) {
+  const { base } = useAcademicScope();
   const q = usePersonalApi<S['StudentExamSummary'][]>('/api/v1/academic/exams');
   const classes = usePersonalApi<S['ClassResult'][]>('/api/v1/academic/classes', {
     enabled: teach && !classId,
@@ -20,22 +24,22 @@ export function Exams({ classId, teach }: { classId?: string; teach: boolean }) 
   return (
     <>
       <SchoolHeading
-        title="آزمون‌ها"
-        description="آزمون‌های منتشرشدهٔ کلاس‌های مجاز شما"
+        title={uiText.text_4f7293cf5780}
+        description={uiText.text_484e7e05f519}
         action={
           teach &&
           chosen && (
             <Button asChild>
-              <Link href={`${base}/classes/${chosen}/exams/new`}>ایجاد آزمون</Link>
+              <Link href={`${base}/classes/${chosen}/exams/new`}>{uiText.text_00f6d8e48e00}</Link>
             </Button>
           )
         }
       />
       {teach && !classId && (
         <Card>
-          <Field label="کلاس آزمون">
+          <Field label={uiText.text_36167d33608a}>
             <select value={chosen} onChange={(e) => setChosen(e.target.value)}>
-              <option value="">انتخاب کلاس برای ساخت آزمون…</option>
+              <option value="">{uiText.text_e4f0b64f490d}</option>
               {classes.data?.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.title}
@@ -59,18 +63,23 @@ export function Exams({ classId, teach }: { classId?: string; teach: boolean }) 
               <p>
                 {exam.classTitle}
                 <br />
-                {exam.rules.durationMinutes} دقیقه · {exam.rules.maxScore} نمره
+                {exam.rules.durationMinutes}
+                {uiText.text_1fb335d2caf7}
+                {exam.rules.maxScore}
+                {uiText.text_931d9d5a6b04}
                 <br />
-                {date(exam.rules.availableFromUtc, true)} تا{' '}
-                {date(exam.rules.availableUntilUtc, true)}
+                {date(exam.rules.availableFromUtc, true)}
+                {uiText.text_f6d897a5e343} {date(exam.rules.availableUntilUtc, true)}
               </p>
               <footer className={s.cardActions}>
                 <Button asChild>
                   <Link
                     href={base + '/exams/' + exam.id + (teach ? '/edit' : '')}
-                    aria-label={(teach ? 'مدیریت آزمون ' : 'مشاهده و شرکت در آزمون ') + exam.title}
+                    aria-label={
+                      (teach ? uiText.text_41b23f4e8fe0 : uiText.text_14ec971a7899) + exam.title
+                    }
                   >
-                    {teach ? 'مدیریت آزمون' : 'مشاهده و شرکت در آزمون'}
+                    {teach ? uiText.text_dfe5265ec744 : uiText.text_f37ccc1e3278}
                   </Link>
                 </Button>
               </footer>
@@ -80,12 +89,8 @@ export function Exams({ classId, teach }: { classId?: string; teach: boolean }) 
       ) : (
         <Card>
           <EmptyState
-            title="آزمون منتشرشده‌ای موجود نیست"
-            description={
-              teach
-                ? 'پیش‌نویس جدید پس از ایجاد، مستقیماً در ویرایشگر باز می‌شود.'
-                : 'پس از انتشار آزمون توسط معلم، آن را اینجا می‌بینید.'
-            }
+            title={uiText.text_ccb46171db2d}
+            description={teach ? uiText.text_5bdcd0107bdf : uiText.text_b4e81abb82c3}
           />
         </Card>
       )}
@@ -93,49 +98,71 @@ export function Exams({ classId, teach }: { classId?: string; teach: boolean }) 
   );
 }
 export function ExamEditor({ id }: { id: string }) {
+  const scope = useAcademicScope();
+  const { base } = useAcademicScope();
   const q = usePersonalApi<S['ExamEditorDto']>('/api/v1/academic/exams/' + id + '/editor');
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
   const item = q.data;
+  if (!scope.matches(item)) return <ErrorState error={new ApiError(404)} />;
   return (
     <>
-      <SchoolHeading title={item.title} description={item.classTitle + ' · ویرایشگر آزمون'} back />
-      {item.versionStatus === 'Published' && (
+      <SchoolHeading
+        title={item.title}
+        description={item.classTitle + uiText.text_8125ff1a95fa}
+        back
+      />
+      {!scope.personal && item.versionStatus === 'Published' && (
         <ActivityDeliveryStatus
           classId={item.classId}
           kind="Exam"
           sourceVersionId={item.versionId}
         />
       )}
-      <Button variant="outline" asChild>
-        <Link href={`${base}/exams/${id}/grading`}>پاسخ‌ها و ارزیابی آزمون</Link>
-      </Button>
+      {(!scope.personal || scope.personal.grade) && (
+        <Button variant="outline" asChild>
+          <Link href={`${base}/exams/${id}/grading`}>{uiText.text_a6fc13e9473b}</Link>
+        </Button>
+      )}
       <Card>
         <div className={s.row}>
           <Status>{label(item.versionStatus)}</Status>
-          <span>{item.durationMinutes} دقیقه</span>
-          <span>{item.maxScore} نمره</span>
-          <span>{item.questions.length} پرسش</span>
+          <span>
+            {item.durationMinutes}
+            {uiText.text_5e2c83ade19c}
+          </span>
+          <span>
+            {item.maxScore}
+            {uiText.text_931d9d5a6b04}
+          </span>
+          <span>
+            {item.questions.length}
+            {uiText.text_5c2e40bca3fb}
+          </span>
         </div>
         <p className={s.bodyText}>{item.description}</p>
         {item.versionStatus === 'Draft' && (
           <div className={s.row}>
             <Button asChild>
-              <Link href={`${base}/exams/${id}/questions/new`}>افزودن پرسش</Link>
+              <Link href={`${base}/exams/${id}/questions/new`}>{uiText.text_e109aef32077}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href={`${base}/exams/${id}/review`}>بازبینی و انتشار آزمون</Link>
+              <Link href={`${base}/exams/${id}/review`}>{uiText.text_eddf3e7e605e}</Link>
             </Button>
           </div>
         )}
       </Card>
-      <Card title="پرسش‌های آزمون">
+      <Card title={uiText.text_795a6fe29020}>
         {item.questions.length ? (
           item.questions.map((question) => (
             <div className={s.question} key={question.id}>
               <div className={s.row}>
                 <strong>
-                  پرسش {question.order} · {question.score} نمره
+                  {uiText.text_649c0357f354}
+                  {question.order}
+                  {uiText.text_588da4105320}
+                  {question.score}
+                  {uiText.text_931d9d5a6b04}
                 </strong>
                 <Status>{label(question.type)}</Status>
               </div>
@@ -143,13 +170,13 @@ export function ExamEditor({ id }: { id: string }) {
               {question.options.map((option) => (
                 <p key={option.id} className={s.option}>
                   {option.text}
-                  {option.isCorrect ? ' · پاسخ درست' : ''}
+                  {option.isCorrect ? uiText.text_46c49ce8a96c : ''}
                 </p>
               ))}
             </div>
           ))
         ) : (
-          <EmptyState title="هنوز پرسشی اضافه نشده است" />
+          <EmptyState title={uiText.text_a75c8aa4206a} />
         )}
       </Card>
     </>
@@ -200,28 +227,28 @@ export function AddQuestion({ exam, onSaved }: { exam: S['ExamEditorDto']; onSav
         }
       }}
     >
-      <Field label="نوع پرسش">
+      <Field label={uiText.text_36f2e5cc8da2}>
         <select value={type} onChange={(e) => setType(e.target.value as typeof type)}>
-          <option value="Descriptive">تشریحی</option>
-          <option value="ObjectiveSingleChoice">چهارگزینه‌ای</option>
+          <option value="Descriptive">{uiText.text_65f21708171c}</option>
+          <option value="ObjectiveSingleChoice">{uiText.text_8fc194cdb8aa}</option>
         </select>
       </Field>
-      <Field label="متن پرسش">
+      <Field label={uiText.text_59612200f820}>
         <textarea name="prompt" required />
       </Field>
-      <Field label="نمرهٔ پرسش">
+      <Field label={uiText.text_6672f1a95acb}>
         <input type="number" name="score" min={0} step="any" required />
       </Field>
       {type === 'Descriptive' && (
         <fieldset>
-          <legend>پیوست پاسخ دانش‌آموز</legend>
+          <legend>{uiText.text_ed2595d209e5}</legend>
           <label>
             <input
               type="checkbox"
               checked={filesAllowed}
               onChange={(e) => setFilesAllowed(e.target.checked)}
             />{' '}
-            اجازهٔ ارسال فایل
+            {uiText.text_703606665166}
           </label>
           {filesAllowed && (
             <>
@@ -231,15 +258,15 @@ export function AddQuestion({ exam, onSaved }: { exam: S['ExamEditorDto']; onSav
                   checked={textRequired}
                   onChange={(e) => setTextRequired(e.target.checked)}
                 />{' '}
-                پاسخ متنی همراه فایل الزامی باشد
+                {uiText.text_aacb94b9f8cb}
               </label>
               <fieldset className={s.question}>
-                <legend>نوع فایل‌های مجاز</legend>
+                <legend>{uiText.text_3a731fae4981}</legend>
                 {(
                   [
                     ['application/pdf', 'PDF'],
-                    ['image/jpeg', 'عکس JPEG'],
-                    ['image/png', 'عکس PNG'],
+                    ['image/jpeg', uiText.text_3ec90e9522ae],
+                    ['image/png', uiText.text_bf8629a7be63],
                   ] as const
                 ).map(([mime, title]) => (
                   <label className={s.option} key={mime}>
@@ -255,12 +282,12 @@ export function AddQuestion({ exam, onSaved }: { exam: S['ExamEditorDto']; onSav
                     {title}
                   </label>
                 ))}
-                {!contentTypes.length && <p role="alert">حداقل یک نوع فایل را مجاز کنید.</p>}
+                {!contentTypes.length && <p role="alert">{uiText.text_c1e5b4aacabd}</p>}
               </fieldset>
-              <Field label="حداکثر تعداد فایل (اختیاری)">
+              <Field label={uiText.text_5b0f84fa02d1}>
                 <input type="number" name="maximumCount" min={1} step={1} />
               </Field>
-              <Field label="حداکثر حجم مجموع فایل‌ها به مگابایت (اختیاری)">
+              <Field label={uiText.text_93b036d10054}>
                 <input type="number" name="maximumMegabytes" min={1} step={1} />
               </Field>
             </>
@@ -270,16 +297,17 @@ export function AddQuestion({ exam, onSaved }: { exam: S['ExamEditorDto']; onSav
       {type === 'ObjectiveSingleChoice' && (
         <>
           {[1, 2, 3, 4].map((n) => (
-            <Field label={'گزینهٔ ' + n} key={n}>
+            <Field label={uiText.text_92d381e9e27f + n} key={n}>
               <input name={'option' + n} required />
             </Field>
           ))}
-          <Field label="گزینهٔ صحیح">
+          <Field label={uiText.text_1ac128e79e40}>
             <select name="correct" required>
-              <option value="">انتخاب پاسخ صحیح…</option>
+              <option value="">{uiText.text_e974ebd76aac}</option>
               {[1, 2, 3, 4].map((n) => (
                 <option value={n} key={n}>
-                  گزینهٔ {n}
+                  {uiText.text_92d381e9e27f}
+                  {n}
                 </option>
               ))}
             </select>
@@ -287,7 +315,7 @@ export function AddQuestion({ exam, onSaved }: { exam: S['ExamEditorDto']; onSav
         </>
       )}
       <Button disabled={a.busy || (type === 'Descriptive' && filesAllowed && !contentTypes.length)}>
-        ثبت پرسش
+        {uiText.text_3366170495e9}
       </Button>
       {a.feedback}
     </form>

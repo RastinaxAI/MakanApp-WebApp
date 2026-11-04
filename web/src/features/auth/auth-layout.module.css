@@ -1,0 +1,136 @@
+.page {
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+}
+.intro {
+  display: none;
+}
+.formPane {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+  padding: 24px 20px max(32px, env(safe-area-inset-bottom));
+}
+@media (min-width: 768px) {
+  .page {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: clamp(32px, 6vw, 96px);
+    align-items: center;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 40px clamp(24px, 4vw, 56px);
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 560px;
+    padding-block: 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .intro h1 {
+    font-size: clamp(30px, 3.1vw, 44px);
+    font-weight: 800;
+    line-height: 1.6;
+    margin: 0;
+    letter-spacing: -0.5px;
+  }
+  .lead {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 2;
+    margin: 0;
+    max-width: 45ch;
+  }
+  .features {
+    display: grid;
+    gap: 24px;
+    margin-block: 8px;
+  }
+  .feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .feature > span {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--primary);
+    background: var(--primary-soft);
+  }
+  .feature h2 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.8;
+  }
+  .feature p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .privacy {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 2;
+  }
+  .privacy svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--primary);
+  }
+  .formPane {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    justify-self: end;
+    padding: 24px 32px 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    min-width: 0;
+    margin-inline: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .page {
+    gap: 28px;
+    padding: 28px 24px;
+  }
+  .formPane {
+    padding: 24px;
+  }
+  .intro {
+    gap: 20px;
+  }
+  .features {
+    gap: 20px;
+  }
+  .lead {
+    font-size: 14px;
+  }
+  .feature p {
+    font-size: 12px;
+  }
+}

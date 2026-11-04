@@ -9,7 +9,7 @@ test('assignment answer sheet has context, stages and in-flow actions at all sup
   await login(context);
   await page.goto(`/personal/education/assignments/${ids.assignment}/answer`);
   await page.getByRole('button', { name: 'شروع پاسخ جدید', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'پاسخ‌نامهٔ تکلیف', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'پاسخ تکلیف', exact: true })).toBeVisible();
   await expect(page.getByRole('list', { name: 'مراحل تحویل تکلیف' })).toContainText('نوشتن پاسخ');
   const answer = page.getByLabel('پاسخ تکلیف', { exact: true });
   await answer.fill('پاسخ مفصل من\nخط دوم پاسخ؛ متن باید در تغییر اندازه باقی بماند.');
@@ -18,9 +18,7 @@ test('assignment answer sheet has context, stages and in-flow actions at all sup
     await page.setViewportSize({ width, height: width >= 834 ? 1000 : 844 });
     await answer.scrollIntoViewIfNeeded();
     await expect(answer).toHaveValue(/خط دوم پاسخ/);
-    expect(await answer.evaluate((el) => getComputedStyle(el).minHeight)).toMatch(
-      /260px|290px|320px/,
-    );
+    expect(await answer.evaluate((el) => getComputedStyle(el).minHeight)).toMatch(/160px/);
     expect(
       await page
         .getByRole('button', { name: 'ذخیرهٔ پاسخ', exact: true })

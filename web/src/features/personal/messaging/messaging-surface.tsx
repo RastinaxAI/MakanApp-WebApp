@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import t from './messaging-theme.module.css';
 
-/** Local messenger palette; never changes the education or assistant theme. */
+/** Messenger controls use the same semantic palette as the rest of the client. */
 export function MessagingSurface({
   children,
   className = '',

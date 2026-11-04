@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { ConfirmAction } from '@/components/ui/confirm-action';
 import { ErrorState, LoadingSkeleton, label } from '@/components/ui/states';
@@ -16,7 +17,7 @@ type S = components['schemas'];
 export function SessionPage({ id, edit = false }: { id: string; edit?: boolean }) {
   return (
     <WorkflowPage
-      title={edit ? 'ویرایش جلسه' : 'جزئیات جلسه'}
+      title={edit ? uiText.text_04f471efe1c1 : uiText.text_7841d322609a}
       back={base + '/schedule'}
       roles={edit ? ['Manager', 'Teacher'] : ['Manager', 'Teacher', 'Student']}
     >
@@ -45,9 +46,9 @@ function SessionResource({ id, edit }: { id: string; edit: boolean }) {
       <p className={s.hint}>{item.classTitle}</p>
       <dl className={s.summary}>
         {[
-          ['وضعیت', label(item.status)],
-          ['شروع', date(item.startUtc, true)],
-          ['پایان', date(item.endUtc, true)],
+          [uiText.text_68d7eb08efbc, label(item.status)],
+          [uiText.text_103613fd03b5, date(item.startUtc, true)],
+          [uiText.text_3f05817a3011, date(item.endUtc, true)],
         ].map(([title, value]) => (
           <div key={title}>
             <dt>{title}</dt>
@@ -57,25 +58,25 @@ function SessionResource({ id, edit }: { id: string; edit: boolean }) {
       </dl>
       <div className={s.row}>
         <Button asChild variant="outline">
-          <Link href={`${base}/classes/${item.classId}`}>صفحهٔ کلاس</Link>
+          <Link href={`${base}/classes/${item.classId}`}>{uiText.text_e0d21ee48bbf}</Link>
         </Button>
         {item.status === 'Scheduled' && safeMeetingUrl(item.meetingUrl) && (
           <Button asChild>
             <a href={safeMeetingUrl(item.meetingUrl)!} target="_blank" rel="noopener noreferrer">
-              ورود به جلسه
+              {uiText.text_b1fa64d456bf}
             </a>
           </Button>
         )}
         {manage && item.status === 'Scheduled' && (
           <>
             <Button asChild variant="outline">
-              <Link href={`${base}/sessions/${id}/edit`}>ویرایش جلسه</Link>
+              <Link href={`${base}/sessions/${id}/edit`}>{uiText.text_04f471efe1c1}</Link>
             </Button>
             <ConfirmAction
-              trigger="لغو جلسه"
-              title="لغو این جلسه؟"
-              description={`${item.title} در ${date(item.startUtc, true)} لغو می‌شود. سوابق حذف نمی‌شوند.`}
-              confirm="تأیید لغو جلسه"
+              trigger={uiText.text_7a68b6ab2d41}
+              title={uiText.text_0435469ff2ca}
+              description={uiText.format_571b7a591c41(item.title, date(item.startUtc, true))}
+              confirm={uiText.text_98bfab836451}
               destructive
               onConfirm={async () => {
                 await call(`/api/v1/academic/sessions/${id}/cancel`, {
@@ -113,20 +114,15 @@ function SessionEditor({ original }: { original: S['SessionResult'] }) {
       canCommit={valid}
       busy={a.busy}
       rows={[
-        ['عنوان', d.values.title],
-        ['شروع', date(d.values.start, true)],
-        ['پایان', date(d.values.end, true)],
+        [uiText.text_74190f4bb095, d.values.title],
+        [uiText.text_103613fd03b5, date(d.values.start, true)],
+        [uiText.text_3f05817a3011, date(d.values.end, true)],
       ]}
       error={
         <>
           {a.feedback}
-          {d.stale && (
-            <p role="alert">
-              نسخهٔ جلسه تغییر کرده است؛ پیش از ادامه، تغییرات خود را نگه دارید و اطلاعات را
-              بازخوانی کنید.
-            </p>
-          )}
-          {!valid && <p className={s.hint}>عنوان و بازهٔ معتبر را کامل کنید.</p>}
+          {d.stale && <p role="alert">{uiText.text_b77dc949baa1}</p>}
+          {!valid && <p className={s.hint}>{uiText.text_e847e6618d02}</p>}
         </>
       }
       onSave={async () => {
@@ -149,10 +145,10 @@ function SessionEditor({ original }: { original: S['SessionResult'] }) {
         }
       }}
     >
-      <Field label="عنوان جلسه">
+      <Field label={uiText.text_70786012eed4}>
         <input required value={d.values.title} onChange={(e) => d.set('title', e.target.value)} />
       </Field>
-      <Field label="شروع جلسه">
+      <Field label={uiText.text_0d5f82b11e8c}>
         <JalaliDateInput
           withTime
           required
@@ -160,7 +156,7 @@ function SessionEditor({ original }: { original: S['SessionResult'] }) {
           onValueChange={(v) => d.set('start', v)}
         />
       </Field>
-      <Field label="پایان جلسه">
+      <Field label={uiText.text_0559b65628ea}>
         <JalaliDateInput
           withTime
           required
@@ -168,7 +164,7 @@ function SessionEditor({ original }: { original: S['SessionResult'] }) {
           onValueChange={(v) => d.set('end', v)}
         />
       </Field>
-      <Field label="پیوند کلاس آنلاین (اختیاری)">
+      <Field label={uiText.text_9d6b7140edeb}>
         <input
           type="url"
           dir="ltr"

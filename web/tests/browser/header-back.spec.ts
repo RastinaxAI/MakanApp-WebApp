@@ -30,11 +30,7 @@ test('class entry is a filled navigation button and lesson direct entry has one 
       page.getByRole('heading', { name: 'درس منتشرشدهٔ آزمایشی', exact: true }),
     ).toBeVisible();
     await expect(page.getByText('بازگشت به محتوای کلاس', { exact: true })).toHaveCount(0);
-    const back = page.getByRole('banner').getByRole('link', { name: 'بازگشت', exact: true });
-    await expect(back).toHaveAttribute(
-      'href',
-      `/personal/education/classes/${ids.class}?tab=lessons`,
-    );
+    const back = page.getByRole('banner').getByRole('button', { name: 'بازگشت', exact: true });
     await expect(back.locator('svg')).toBeVisible();
     expect((await back.innerText()).trim()).toBe('');
     await page.screenshot({ path: `output/review/header-back/lesson-${width}.png` });
@@ -66,9 +62,8 @@ test('the header arrow respects unsaved edits and each settings page keeps its o
   await expect(page.getByRole('main').getByText('بازگشت به تنظیمات', { exact: true })).toHaveCount(
     0,
   );
-  await expect(
-    page.getByRole('banner').getByRole('link', { name: 'بازگشت', exact: true }),
-  ).toHaveAttribute('href', '/personal/settings');
+  await page.getByRole('banner').getByRole('button', { name: 'بازگشت', exact: true }).click();
+  await expect(page).toHaveURL(/\/personal\/profile$/);
   await page.goto('/personal/settings/notifications/Messages');
   await expect(page.getByLabel('اعلان دستگاه', { exact: true })).toBeVisible();
   await expect(

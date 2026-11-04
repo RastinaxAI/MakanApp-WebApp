@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { Bell, MonitorSmartphone, Settings, UserRound, Wallet, BookOpen } from 'lucide-react';
 import { ArrowRight, Ban, ChevronLeft, Mail, Moon, Palette, ShieldCheck, Sun } from 'lucide-react';
@@ -7,26 +8,33 @@ import s from './personal.module.css';
 import { useThemePreference } from './theme';
 import { InstallPanel } from '@/features/pwa/install';
 import p from './preferences.module.css';
+import layout from './settings-layout.module.css';
+import { ConfirmAction } from '@/components/ui/confirm-action';
+import { usePersonal } from './provider';
 export function ProfilePreferences() {
   return (
     <div className={p.page}>
       <div className={p.heading}>
-        <h1>حساب و ترجیحات</h1>
+        <h1>{uiText.text_8aa6893911d9}</h1>
       </div>
-      <section className={p.list} aria-label="حساب و ترجیحات">
+      <section className={p.list} aria-label={uiText.text_8aa6893911d9}>
         <Link className={p.row} href="/personal/settings/privacy">
           <span className={p.icon}>
             <ShieldCheck size={21} />
           </span>
-          <strong>حریم خصوصی</strong>
+          <strong>{uiText.text_f0840638365c}</strong>
           <ChevronLeft className={p.chevron} size={18} />
         </Link>
         {[
-          { title: 'اعلان‌ها', Icon: Bell, href: '/personal/settings/notifications' },
-          { title: 'اشتراک و مصرف', Icon: Wallet, href: '/personal/subscription' },
-          { title: 'کلاس‌های شخصی', Icon: BookOpen, href: '/personal/classes' },
+          { title: uiText.text_9f2a436a61f3, Icon: Bell, href: '/personal/settings/notifications' },
+          { title: uiText.text_6b1ac4d74206, Icon: Wallet, href: '/personal/subscription' },
           {
-            title: 'امنیت و دستگاه‌ها',
+            title: uiText.navigation_extracurricular,
+            Icon: BookOpen,
+            href: '/personal/extracurricular',
+          },
+          {
+            title: uiText.text_636ff38fb559,
             Icon: MonitorSmartphone,
             href: '/personal/settings/devices',
           },
@@ -43,14 +51,14 @@ export function ProfilePreferences() {
           <span className={p.icon}>
             <UserRound size={21} />
           </span>
-          <strong>مخاطبین</strong>
+          <strong>{uiText.text_759044ca1d2d}</strong>
           <ChevronLeft className={p.chevron} size={18} />
         </Link>
         <Link className={p.row} href="/personal/settings">
           <span className={p.icon}>
             <Settings size={21} />
           </span>
-          <strong>تنظیمات</strong>
+          <strong>{uiText.navigation_settings}</strong>
           <ChevronLeft className={p.chevron} size={18} />
         </Link>
       </section>
@@ -58,74 +66,137 @@ export function ProfilePreferences() {
   );
 }
 export function PersonalSettings() {
+  const { theme, changeTheme, error } = useThemePreference();
+  const { session, logout } = usePersonal();
   return (
-    <>
+    <div className={layout.page}>
       <div className={s.headingRow}>
         <div className={s.heading}>
-          <span>حساب من</span>
-          <h1>تنظیمات</h1>
-          <p>برنامه را متناسب با خودتان تنظیم کنید.</p>
+          <span>{uiText.text_8b4cb595cd35}</span>
+          <h1>{uiText.navigation_settings}</h1>
+          <p>{uiText.text_7298116df730}</p>
         </div>
         <Button asChild variant="outline">
           <Link href="/personal/profile">
             <ArrowRight size={18} />
-            حساب من
+            {uiText.text_8b4cb595cd35}
           </Link>
         </Button>
       </div>
-      <section className={s.settingsList} aria-label="بخش‌های تنظیمات">
-        {[
-          {
-            href: '/personal/settings/notifications',
-            title: 'اعلان‌ها',
-            description: 'تنظیم دریافت اعلان و ساعت سکوت',
-            icon: Bell,
-          },
-          {
-            href: '/personal/settings/devices',
-            title: 'امنیت و دستگاه‌ها',
-            description: 'بررسی نشست‌ها و پایان دسترسی دستگاه‌های دیگر',
-            icon: MonitorSmartphone,
-          },
-          {
-            href: '/personal/education/invitations',
-            title: 'دعوت‌های من',
-            description: 'پذیرش عضویت آموزشگاه و تأیید رابطهٔ والد و فرزند',
-            icon: Mail,
-          },
-          {
-            href: '/personal/settings/appearance',
-            title: 'ظاهر برنامه',
-            description: 'انتخاب حالت روشن یا تاریک',
-            icon: Palette,
-          },
-          {
-            href: '/personal/settings/privacy',
-            title: 'حریم خصوصی',
-            description: 'پیام مستقیم، شمارهٔ همراه و آخرین بازدید',
-            icon: ShieldCheck,
-          },
-          {
-            href: '/personal/settings/blocked',
-            title: 'حساب‌های مسدودشده',
-            description: 'مشاهده و رفع مسدودی حساب‌ها',
-            icon: Ban,
-          },
-        ].map((item) => (
-          <Link href={item.href} key={item.href}>
+      <div className={layout.columns}>
+        <section className={layout.settingsList} aria-label={uiText.text_054c843eeef5}>
+          {[
+            {
+              href: '/personal/settings/notifications',
+              title: uiText.text_9f2a436a61f3,
+              description: uiText.text_6aaf2a576037,
+              icon: Bell,
+            },
+            {
+              href: '/personal/settings/devices',
+              title: uiText.text_636ff38fb559,
+              description: uiText.text_e4cf913f801a,
+              icon: MonitorSmartphone,
+            },
+            {
+              href: '/personal/education/invitations',
+              title: uiText.text_9b8c54ad174a,
+              description: uiText.text_5d3033724b66,
+              icon: Mail,
+            },
+            {
+              href: '/personal/settings/appearance',
+              title: uiText.text_11a1d93d127f,
+              description: uiText.text_1a40ca7e417f,
+              icon: Palette,
+            },
+            {
+              href: '/personal/settings/privacy',
+              title: uiText.text_f0840638365c,
+              description: uiText.text_6f68a5603b3d,
+              icon: ShieldCheck,
+            },
+            {
+              href: '/personal/settings/blocked',
+              title: uiText.text_3393e0c3cb74,
+              description: uiText.text_a636c65f53a1,
+              icon: Ban,
+            },
+          ].map((item) => (
+            <Link href={item.href} key={item.href}>
+              <span className={s.settingIcon}>
+                <item.icon size={23} />
+              </span>
+              <span>
+                <strong>{item.title}</strong>
+                <small>{item.description}</small>
+              </span>
+              <ChevronLeft size={20} />
+            </Link>
+          ))}
+        </section>
+        <aside className={layout.aside}>
+          <section className={layout.appearance} aria-labelledby="quick-appearance">
+            <h2 id="quick-appearance">{uiText.text_11a1d93d127f}</h2>
+            <p>{uiText.text_4d67086f8777}</p>
+            <fieldset>
+              <legend className="sr-only">{uiText.text_88619bd1891f}</legend>
+              {(
+                [
+                  { value: 'light', title: uiText.text_be9fd3bd1ba1, Icon: Sun },
+                  { value: 'dark', title: uiText.text_9a0be82749f7, Icon: Moon },
+                  { value: 'system', title: uiText.text_f7c6ee7ceb27, Icon: MonitorSmartphone },
+                ] as const
+              ).map(({ value, title, Icon }) => (
+                <label key={value} data-selected={theme === value}>
+                  <input
+                    type="radio"
+                    name="settings-theme"
+                    value={value}
+                    checked={theme === value}
+                    onChange={() => changeTheme(value)}
+                  />
+                  <Icon size={24} />
+                  <span>{title}</span>
+                </label>
+              ))}
+            </fieldset>
+            {error && (
+              <p role="alert" className="field-error">
+                {error}
+              </p>
+            )}
+          </section>
+          <section className={layout.account}>
             <span className={s.settingIcon}>
-              <item.icon size={23} />
+              <UserRound size={23} />
             </span>
-            <span>
-              <strong>{item.title}</strong>
-              <small>{item.description}</small>
-            </span>
-            <ChevronLeft size={20} />
-          </Link>
-        ))}
-      </section>
-      <InstallPanel compact />
-    </>
+            <div>
+              <h2>
+                {session.user.displayName || session.user.firstName || uiText.text_8b4cb595cd35}
+              </h2>
+              <p>{uiText.text_c9b857c3a6b2}</p>
+            </div>
+            <Link href="/personal/profile">
+              {uiText.text_93affbaf8fcf}
+              <ChevronLeft size={16} />
+            </Link>
+            <ConfirmAction
+              trigger={uiText.account_logout}
+              title={uiText.text_2ddbb4f12b8f}
+              description={uiText.text_f40112f83ec9}
+              confirm={uiText.account_logout}
+              destructive
+              onConfirm={async () => {
+                await logout();
+                return true;
+              }}
+            />
+          </section>
+          <InstallPanel compact />
+        </aside>
+      </div>
+    </div>
   );
 }
 export function AppearanceSettings() {
@@ -134,23 +205,24 @@ export function AppearanceSettings() {
     <>
       <div className={s.headingRow}>
         <div className={s.heading}>
-          <span>تنظیمات</span>
-          <h1>ظاهر برنامه</h1>
-          <p>انتخاب شما روی همین مرورگر ذخیره می‌شود.</p>
+          <span>{uiText.navigation_settings}</span>
+          <h1>{uiText.text_11a1d93d127f}</h1>
+          <p>{uiText.text_ceac199f616a}</p>
         </div>
         <Button asChild variant="outline">
           <Link href="/personal/settings">
             <ArrowRight size={18} />
-            تنظیمات
+            {uiText.navigation_settings}
           </Link>
         </Button>
       </div>
       <fieldset className={s.themeOptions}>
-        <legend>حالت نمایش</legend>
+        <legend>{uiText.text_88619bd1891f}</legend>
         {(
           [
-            { value: 'light', title: 'روشن', icon: Sun },
-            { value: 'dark', title: 'تاریک', icon: Moon },
+            { value: 'light', title: uiText.text_be9fd3bd1ba1, icon: Sun },
+            { value: 'dark', title: uiText.text_9a0be82749f7, icon: Moon },
+            { value: 'system', title: uiText.text_a11180341c26, icon: MonitorSmartphone },
           ] as const
         ).map((item) => (
           <label

@@ -1,0 +1,67 @@
+{
+  "checkedAtUtc": "2026-11-02T07:22:29.138Z",
+  "environment": "local isolated fixture",
+  "passed": 10,
+  "tests": [
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source upload waits for Ready, then retries one frozen create operation after reload",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source edit preserves text across opaque version conflict and explicitly adopts the refreshed version",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Library stays metadata-only and forged binary transfer is denied",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "assistant preflight preserves real source selection when retrieval is unavailable",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "independent edit permission does not grant settings, members or invitations",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "conversation photo uses Ready file and opaque version; retry preserves one upload",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "initial invitations are pending rather than active membership and use server expiry",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Student sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Teacher sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Manager sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "attempts": 1
+    }
+  ]
+}

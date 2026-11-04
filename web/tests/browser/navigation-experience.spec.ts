@@ -14,7 +14,15 @@ for (const role of ['Student', 'Teacher', 'Parent', 'Manager']) {
       if (request.method() === 'POST' && request.url().includes('/workspaces/select'))
         changes.push(request.url());
     });
-    for (const name of ['دستیار ماکان', 'پیام‌ها', 'پروفایل', 'آموزشگاه', 'پیام‌ها', 'آموزشگاه']) {
+    for (const name of [
+      'دستیار',
+      'فوق‌برنامه',
+      'پیام‌ها',
+      'پروفایل',
+      'آموزشگاه',
+      'پیام‌ها',
+      'آموزشگاه',
+    ]) {
       await page
         .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
         .filter({ visible: true })
@@ -35,8 +43,16 @@ for (const role of ['Student', 'Teacher', 'Parent', 'Manager']) {
     ).toEqual(original.context);
     expect(changes).toEqual([]);
     await second.close();
-    await page.getByRole('button', { name: 'ماکان؛ تغییر نقش و فضای کار', exact: true }).click();
-    await expect(page.getByRole('dialog', { name: 'انتخاب فضای کار' })).toBeVisible();
+    await page.goto('/personal/profile');
+    await expect(
+      page.getByRole('heading', { name: 'فضاها و نقش‌های من', exact: true }),
+    ).toBeVisible();
+    const roles = page.getByLabel('تغییر نقش و فضای کار', { exact: true });
+    await expect(roles.getByRole('button', { name: /آموزشگاه/ })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+    await expect(page).toHaveURL(/\/personal\/profile$/);
   });
 }
 
@@ -54,7 +70,7 @@ test('assistant uses the full viewport and readable sample outputs without the e
     [1440, 1000],
   ]) {
     await page.setViewportSize({ width, height });
-    await page.goto('/personal/assistant');
+    await page.goto('/personal/assistant/studio');
     await expect(page.getByText('جایی برای عمیق‌تر یاد گرفتن', { exact: true })).toHaveCount(0);
     await expect(page.getByRole('button', { name: 'گشت در نمونه', exact: true })).toHaveCount(0);
     await expect(page.getByText('فضای مطالعهٔ شما', { exact: true })).toHaveCount(0);
@@ -96,8 +112,8 @@ test('assistant uses the full viewport and readable sample outputs without the e
       .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
       .filter({ visible: true })
       .boundingBox();
-    if (width < 1024) expect(composer!.y + composer!.height).toBeLessThanOrEqual(dock!.y);
-    if (width < 1024) {
+    if (width < 768) expect(composer!.y + composer!.height).toBeLessThanOrEqual(dock!.y);
+    if (width < 768) {
       const send = await page.getByRole('button', { name: 'ارسال پرسش نمونه' }).boundingBox();
       expect(send!.y + send!.height).toBeLessThanOrEqual(dock!.y);
     }
@@ -142,7 +158,7 @@ test('PWA install offer has a persistent close control and manual installation h
   await expect(offer).toHaveCount(0);
   const second = await context.newPage();
   await second.goto('/personal/assistant');
-  await expect(second.locator('[data-assistant]')).toBeVisible();
+  await expect(second.locator('[data-mk-view="MK-38"]')).toBeVisible();
   await expect(second.getByLabel('پیشنهاد نصب ماکان', { exact: true })).toHaveCount(0);
   await second.close();
 });

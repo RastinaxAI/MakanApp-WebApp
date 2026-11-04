@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 export const submissionFileAccept = 'image/jpeg,image/png,image/webp,application/pdf';
 export const submissionMimeTypes = new Set([
   'image/jpeg',
@@ -6,12 +7,12 @@ export const submissionMimeTypes = new Set([
   'application/pdf',
 ]);
 export function submissionFileError(file: { name: string; type: string; size: number }) {
-  if (!file.size) return 'فایل خالی است.';
+  if (!file.size) return uiText.text_cc3962f50c27;
   if (
     file.type
       ? !submissionMimeTypes.has(file.type.toLowerCase())
       : !/\.(jpe?g|png|webp|pdf)$/i.test(file.name)
   )
-    return 'عکس JPG، PNG، WebP یا فایل PDF انتخاب کنید.';
+    return uiText.text_b7009556ce7f;
   return '';
 }

@@ -1,0 +1,1367 @@
+{
+  "config": {
+    "configFile": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/playwright.config.ts",
+    "rootDir": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "node scripts/test-server.mjs",
+      "url": "http://127.0.0.1:3132/enter",
+      "reuseExistingServer": false,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "header-back.spec.ts",
+      "file": "header-back.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "the header arrow respects unsaved edits and each settings page keeps its own parent destination",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4065,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:46:56.606Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6eeffc5434976b4ab883-b6a736ee81eb63c5db63",
+          "file": "header-back.spec.ts",
+          "line": 44,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "navigation-experience.spec.ts",
+      "file": "navigation-experience.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Student keeps the selected role across tabs, reload and another browser tab",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5284,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:47:00.980Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2cfe36ae9fd3e8a8cff8-68abde2dceb5d9cd9ea4",
+          "file": "navigation-experience.spec.ts",
+          "line": 5,
+          "column": 7
+        },
+        {
+          "title": "Teacher keeps the selected role across tabs, reload and another browser tab",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5751,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:47:06.299Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2cfe36ae9fd3e8a8cff8-0bc587e13cd77d85f3b9",
+          "file": "navigation-experience.spec.ts",
+          "line": 5,
+          "column": 7
+        },
+        {
+          "title": "Parent keeps the selected role across tabs, reload and another browser tab",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4572,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:47:12.085Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2cfe36ae9fd3e8a8cff8-c50cc2268ce7c92fa509",
+          "file": "navigation-experience.spec.ts",
+          "line": 5,
+          "column": 7
+        },
+        {
+          "title": "Manager keeps the selected role across tabs, reload and another browser tab",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5288,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:47:16.687Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2cfe36ae9fd3e8a8cff8-ebb5c71e4e65bfb8a688",
+          "file": "navigation-experience.spec.ts",
+          "line": 5,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "profile-school-files.spec.ts",
+      "file": "profile-school-files.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "profile exposes identity and age below spaces and moves preference menus to their own page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4005,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:47:22.023Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "19d9d423983f164ae71d-f917772e825e28af909e",
+          "file": "profile-school-files.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "project-expansion-visual.spec.ts",
+      "file": "project-expansion-visual.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "expanded workflow and account pages preserve RTL, visible controls and responsive bounds",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 120699,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/project-expansion-visual.spec.ts",
+                        "column": 36,
+                        "line": 54
+                      },
+                      "message": "Error: locator.evaluate: Test timeout of 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('main')\u001b[22m\n\n\n  52 |       ]) {\n  53 |         await page.setViewportSize({ width, height });\n> 54 |         await page.locator('main').evaluate((el) => {\n     |                                    ^\n  55 |           el.scrollTop = 0;\n  56 |         });\n  57 |         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/project-expansion-visual.spec.ts:54:36"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:47:26.068Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/project-expansion-visual-e-a35a8-trols-and-responsive-bounds/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/project-expansion-visual-e-a35a8-trols-and-responsive-bounds/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/project-expansion-visual-e-a35a8-trols-and-responsive-bounds/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "be81c0c79536c9c4dd53-555a41f74e06fdaf596d",
+          "file": "project-expansion-visual.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "reference-fidelity.spec.ts",
+      "file": "reference-fidelity.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "current responsive geometry and historical route reference at 390, 834 and 1440",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13128,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:28.818Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-d0695d2fa767be8e5389",
+          "file": "reference-fidelity.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2365,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:42.290Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "06fa7776e3ee438f3de3-d9d85d32715981274b7c",
+          "file": "reference-fidelity.spec.ts",
+          "line": 245,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "release-154c437.spec.ts",
+      "file": "release-154c437.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Teacher sees authorized class sources and only permitted upload controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1259,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:44.692Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c4795a52dba59236085f-267c63070512e740a75d",
+          "file": "release-154c437.spec.ts",
+          "line": 218,
+          "column": 7
+        },
+        {
+          "title": "Manager sees authorized class sources and only permitted upload controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1698,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:45.973Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c4795a52dba59236085f-9ab7dd998b119f66e6ea",
+          "file": "release-154c437.spec.ts",
+          "line": 218,
+          "column": 7
+        },
+        {
+          "title": "definitive source validation rejection unlocks the retained draft without uploading again",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1476,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:47.692Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c4795a52dba59236085f-5eb0c16e65d687c15caa",
+          "file": "release-154c437.spec.ts",
+          "line": 253,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "release-42c.spec.ts",
+      "file": "release-42c.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Manager opens the organization official group through its own binding",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6897,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:49.198Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "690192f6b86e4d061fc3-b99bd8ba8433c6e6e7f8",
+          "file": "release-42c.spec.ts",
+          "line": 4,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "release-e11.spec.ts",
+      "file": "release-e11.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "personal class invitation needs recipient acceptance and grants no organization role",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3296,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:56.121Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "222089e280cab7485370-a655733c2c40cdcc0cc1",
+          "file": "release-e11.spec.ts",
+          "line": 203,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "responsive.spec.ts",
+      "file": "responsive.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2464,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:49:59.449Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-75ae675e7d216c3d87ce",
+          "file": "responsive.spec.ts",
+          "line": 41,
+          "column": 5
+        },
+        {
+          "title": "focused chat and independent form reserve their own footer without the tablet dock",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1598,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:01.940Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-7b5fc4ee90e0da63e490",
+          "file": "responsive.spec.ts",
+          "line": 80,
+          "column": 5
+        },
+        {
+          "title": "workspace dialog restores focus and an external context change clears prior role data",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 16577,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'ماکان؛ انتخاب نقش و فضای کار', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'ماکان؛ انتخاب نقش و فضای کار', exact: true })\u001b[22m\n\u001b[2m    19 × locator resolved to <button class=\"shell_brand__8_tqo\" aria-label=\"ماکان؛ انتخاب نقش و فضای کار\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'ماکان؛ انتخاب نقش و فضای کار', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'ماکان؛ انتخاب نقش و فضای کار', exact: true })\u001b[22m\n\u001b[2m    19 × locator resolved to <button class=\"shell_brand__8_tqo\" aria-label=\"ماکان؛ انتخاب نقش و فضای کار\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/responsive.spec.ts:112:25",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/responsive.spec.ts",
+                      "column": 25,
+                      "line": 112
+                    },
+                    "snippet": "  110 |   await expect(page.getByRole('dialog', { name: 'انتخاب فضای کار' })).toBeVisible();\n  111 |   await page.keyboard.press('Escape');\n> 112 |   await expect(trigger).toBeFocused();\n      |                         ^\n  113 |   await trigger.click();\n  114 |   await expect(\n  115 |     page.getByRole('dialog').getByRole('button', { name: /فضای شخصی نمونه/ }),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/responsive.spec.ts",
+                        "column": 25,
+                        "line": 112
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeFocused\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('button', { name: 'ماکان؛ انتخاب نقش و فضای کار', exact: true })\nExpected: focused\nReceived: inactive\nTimeout:  15000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeFocused\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'ماکان؛ انتخاب نقش و فضای کار', exact: true })\u001b[22m\n\u001b[2m    19 × locator resolved to <button class=\"shell_brand__8_tqo\" aria-label=\"ماکان؛ انتخاب نقش و فضای کار\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"inactive\"\u001b[22m\n\n\n  110 |   await expect(page.getByRole('dialog', { name: 'انتخاب فضای کار' })).toBeVisible();\n  111 |   await page.keyboard.press('Escape');\n> 112 |   await expect(trigger).toBeFocused();\n      |                         ^\n  113 |   await trigger.click();\n  114 |   await expect(\n  115 |     page.getByRole('dialog').getByRole('button', { name: /فضای شخصی نمونه/ }),\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/responsive.spec.ts:112:25"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:03.568Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/responsive-workspace-dialo-e9624-ange-clears-prior-role-data/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/responsive-workspace-dialo-e9624-ange-clears-prior-role-data/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/responsive-workspace-dialo-e9624-ange-clears-prior-role-data/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/responsive.spec.ts",
+                    "column": 25,
+                    "line": 112
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e0223b006feb3d306446-a9ad194a65b631861f25",
+          "file": "responsive.spec.ts",
+          "line": 101,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "school-redesign.spec.ts",
+      "file": "school-redesign.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "school has four destinations, three nearest items and a separate class page with URL-backed sections",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3269,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:21.061Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0c5b7e9884af02691d51-2e5d88d663e5e2dbd320",
+          "file": "school-redesign.spec.ts",
+          "line": 36,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "submission.spec.ts",
+      "file": "submission.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unsaved draft survives reload and cancelled link navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1951,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:24.506Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "48ae8393f0a7471bc116-ba5d5c44a596c7225ca2",
+          "file": "submission.spec.ts",
+          "line": 77,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "telegram-messenger.spec.ts",
+      "file": "telegram-messenger.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Telegram-reference messenger light 390: usable list, chat and menus",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1585,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                      "column": 85,
+                      "line": 55
+                    },
+                    "snippet": "  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                        "column": 85,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m\n\n  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:26.493Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-31968--usable-list-chat-and-menus/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-31968--usable-list-chat-and-menus/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-31968--usable-list-chat-and-menus/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                    "column": 85,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-2de5dc64516440532d85",
+          "file": "telegram-messenger.spec.ts",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "title": "Telegram-reference messenger light 834: usable list, chat and menus",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1911,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                      "column": 85,
+                      "line": 55
+                    },
+                    "snippet": "  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                        "column": 85,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m\n\n  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:29.002Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-bd3d0--usable-list-chat-and-menus/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-bd3d0--usable-list-chat-and-menus/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-bd3d0--usable-list-chat-and-menus/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                    "column": 85,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-4bb2839b98c5ad208ada",
+          "file": "telegram-messenger.spec.ts",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "title": "Telegram-reference messenger light 1440: usable list, chat and menus",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2131,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                      "column": 85,
+                      "line": 55
+                    },
+                    "snippet": "  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                        "column": 85,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(22\u001b[7m6\u001b[27m, 24\u001b[7m5\u001b[27m, 2\u001b[7m11\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(22\u001b[7m7\u001b[27m, 24\u001b[7m1\u001b[27m, 2\u001b[7m35\u001b[27m)\"\u001b[39m\n\n  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:32.162Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-d96fd--usable-list-chat-and-menus/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-d96fd--usable-list-chat-and-menus/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-d96fd--usable-list-chat-and-menus/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                    "column": 85,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-07c6ee0547a69ed4f7de",
+          "file": "telegram-messenger.spec.ts",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "title": "Telegram-reference messenger dark 390: usable list, chat and menus",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1800,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                      "column": 85,
+                      "line": 55
+                    },
+                    "snippet": "  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                        "column": 85,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m\n\n  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:35.634Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-c0548--usable-list-chat-and-menus/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-c0548--usable-list-chat-and-menus/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-c0548--usable-list-chat-and-menus/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                    "column": 85,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-fc64c7c2aeccb6dfb7b7",
+          "file": "telegram-messenger.spec.ts",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "title": "Telegram-reference messenger dark 834: usable list, chat and menus",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1957,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                      "column": 85,
+                      "line": 55
+                    },
+                    "snippet": "  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                        "column": 85,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m\n\n  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:38.540Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-57a17--usable-list-chat-and-menus/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-57a17--usable-list-chat-and-menus/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-57a17--usable-list-chat-and-menus/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                    "column": 85,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-a85c558028a5ede62c29",
+          "file": "telegram-messenger.spec.ts",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "title": "Telegram-reference messenger dark 1440: usable list, chat and menus",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2058,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85",
+                    "location": {
+                      "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                      "column": 85,
+                      "line": 55
+                    },
+                    "snippet": "  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                        "column": 85,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"rgb(\u001b[7m40, 79, 112\u001b[27m)\"\u001b[39m\nReceived: \u001b[31m\"rgb(\u001b[7m32, 63, 50\u001b[27m)\"\u001b[39m\n\n  53 |         peerBox = await incoming.boundingBox();\n  54 |       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.\n> 55 |       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(\n     |                                                                                     ^\n  56 |         theme === 'dark' ? 'rgb(40, 79, 112)' : 'rgb(226, 245, 211)',\n  57 |       );\n  58 |       const room = page.locator('[data-message-room]');\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts:55:85"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:41.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-e3ff8--usable-list-chat-and-menus/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-e3ff8--usable-list-chat-and-menus/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/test-results/browser/telegram-messenger-Telegra-e3ff8--usable-list-chat-and-menus/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/telegram-messenger.spec.ts",
+                    "column": 85,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-2ceff699c7f0748a479c",
+          "file": "telegram-messenger.spec.ts",
+          "line": 10,
+          "column": 9
+        },
+        {
+          "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10095,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-02T19:50:44.948Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f4928a8b3fa501ab6cb7-6ecc8bb789c5a2e34d52",
+          "file": "telegram-messenger.spec.ts",
+          "line": 165,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-02T19:46:54.055Z",
+    "duration": 241413.93000000002,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

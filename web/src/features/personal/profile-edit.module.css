@@ -11,7 +11,7 @@
   color: var(--muted);
 }
 .heading h1 {
-  font-size: 27px;
+  font-size: 23px;
   margin: 6px 0;
   font-weight: 750;
 }
@@ -24,9 +24,9 @@
 .photoPanel,
 .section {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 24px;
+  border: 0;
+  border-radius: 12px;
+  padding: 20px;
   min-width: 0;
 }
 .photoPanel > section {
@@ -79,7 +79,7 @@
   min-height: 50px;
   font-size: 15px;
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--soft);
   border: 1px solid var(--border);
   padding: 12px 14px;
   color: var(--text);
@@ -96,7 +96,7 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   padding-inline: 14px;
-  background: var(--bg);
+  background: var(--soft);
 }
 .username > span {
   color: var(--muted);
@@ -138,7 +138,7 @@
   .photoPanel,
   .section {
     padding: 18px;
-    border-radius: 18px;
+    border-radius: 12px;
   }
   .fields {
     gap: 18px;

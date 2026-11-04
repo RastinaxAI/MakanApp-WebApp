@@ -1,0 +1,96 @@
+{
+  "reference": {
+    "filename": "Telegram UI Kit +310 Screens (Community).pdf",
+    "pages": 351,
+    "sha256": "981f15c78e0ea6c3413deff5e23c540c2c87bf5bab2c762c57becc786f6fa3df",
+    "suppliedBy": "user",
+    "date": "2026-11-02"
+  },
+  "direction": "Telegram iOS grouped surfaces, adapted to Persian RTL and responsive Next.js client",
+  "supersedes": "The Instagram visual direction at the top of the previous PROGRESS.md; historical route inventory remains historical.",
+  "surfaces": [
+    {
+      "name": "own-profile-and-edit",
+      "pages": [28, 29, 30, 32, 36, 37, 39, 40],
+      "routes": ["/personal/profile", "/personal/profile/edit", "/personal/profile/preferences"],
+      "patterns": [
+        "centered avatar and identity",
+        "inset grouped information and settings",
+        "blue actions"
+      ]
+    },
+    {
+      "name": "inbox-and-contacts",
+      "pages": [4, 5, 9, 14, 74, 90],
+      "routes": ["/personal/messages", "/personal/contacts", "/personal/messages/new"],
+      "patterns": [
+        "account identity above search",
+        "compact list rows",
+        "continuous separators",
+        "visible unread counts"
+      ]
+    },
+    {
+      "name": "peer-profile",
+      "pages": [29, 41, 46],
+      "routes": ["/personal/messages/:id/info"],
+      "patterns": [
+        "identity hero",
+        "quick message, mute and media actions",
+        "only server-permitted identity fields"
+      ]
+    },
+    {
+      "name": "group-and-channel-details",
+      "pages": [63, 69, 79, 80, 93, 95, 96, 98, 99, 103, 130, 155, 156, 161],
+      "routes": [
+        "/personal/messages/:id/info",
+        "/personal/messages/:id/edit",
+        "/personal/messages/:id/settings",
+        "/personal/messages/:id/members",
+        "/personal/messages/:id/media",
+        "/personal/messages/:id/invites",
+        "/personal/messages/:id/topics"
+      ],
+      "patterns": [
+        "compact action tiles",
+        "inset grouped settings rows",
+        "avatar/name member roster",
+        "existing mutation failure and retry states"
+      ]
+    },
+    {
+      "name": "chat-and-assistant",
+      "pages": [20, 21, 24, 25, 135, 149, 150, 152, 166, 173, 174],
+      "routes": ["/personal/messages/:id", "/personal/assistant"],
+      "patterns": [
+        "sender-led group/channel rows",
+        "shared composer and focus treatment",
+        "daily separators",
+        "direct messages retain directional bubbles"
+      ]
+    },
+    {
+      "name": "education",
+      "pages": [50, 51, 55, 63],
+      "routes": ["/personal/education", "/personal/education/classes/:id"],
+      "patterns": [
+        "shared semantic colors, separators, underline navigation and 12px grouped surfaces"
+      ]
+    },
+    {
+      "name": "dark-theme",
+      "pages": [202, 203, 204, 237, 267, 269, 272, 323, 340, 349],
+      "patterns": ["charcoal canvas", "gray grouped cards", "blue actions", "sender-led chat rows"]
+    }
+  ],
+  "adaptations": [
+    "The PDF includes iOS and Android variants. iOS grouped geometry is the default for the web client.",
+    "No simulated OS status bar, native keyboard or home indicator is drawn. Real browser safe areas are respected.",
+    "Persian type, four existing product destinations, roles, contracts and Makan identity are retained.",
+    "No individual workspace profile, presence, bio or hidden phone number is invented.",
+    "The PDF contains no Makan educational screens or full desktop specification; these share the same tokens and responsive conventions.",
+    "Existing backend gaps for conversation photos, whole-conversation reactions, live calls and other disabled settings remain explicit.",
+    "Assistant results remain a labeled local preview until its backend contract is implemented."
+  ]
+}

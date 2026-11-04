@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { MessagingSurface } from './messaging-surface';
 import d from './directory.module.css';
 import t from './messaging-theme.module.css';
@@ -124,7 +125,7 @@ export function ContactsPage() {
       });
       if (result.contactUserId !== profile.userId)
         throw new ApiError(502, { code: 'CONTRACT_MISMATCH' });
-      setNotice('مخاطب در سرور ذخیره شد.');
+      setNotice(uiText.text_c69ebbd6ae2f);
       setTab('contacts');
       setQuery('');
       setPage(1);
@@ -157,20 +158,20 @@ export function ContactsPage() {
     <MessagingSurface className={d.directory}>
       <div className={s.headingRow}>
         <div className={s.heading}>
-          <h1 className="sr-only">مخاطبین شما</h1>
+          <h1 className="sr-only">{uiText.text_8236f4ce3dac}</h1>
         </div>
         <PageBack href="/personal/messages" />
       </div>
-      <nav className={s.sectionLinks} aria-label="بخش‌های مخاطبین">
+      <nav className={s.sectionLinks} aria-label={uiText.text_1971055384f8}>
         <button aria-pressed={tab === 'contacts'} onClick={() => changeTab('contacts')}>
-          مخاطبین
+          {uiText.text_759044ca1d2d}
         </button>
         <button aria-pressed={tab === 'add'} onClick={() => changeTab('add')}>
           <Plus size={16} />
-          مخاطب جدید
+          {uiText.text_5fde423d6a3f}
         </button>
         <button aria-pressed={tab === 'search'} onClick={() => changeTab('search')}>
-          جستجوی افراد
+          {uiText.text_6c705b7f7da2}
         </button>
       </nav>
       {notice && (
@@ -179,7 +180,7 @@ export function ContactsPage() {
         </p>
       )}
       {status.isPending ? (
-        <p role="status">در حال بررسی وضعیت ارتباطی…</p>
+        <p role="status">{uiText.text_a72edc3a1bd6}</p>
       ) : status.isError ? (
         <ErrorState error={status.error} onRetry={() => void status.refetch()} />
       ) : (
@@ -187,24 +188,21 @@ export function ContactsPage() {
           <section className={s.profileCard} role="status">
             {canCreateDirect ? (
               <>
-                <p>گفت‌وگو با مخاطبانی که برای حساب شما مجاز هستند فعال است.</p>
+                <p>{uiText.text_1b9ffc2a9963}</p>
                 <details>
-                  <summary>وضعیت ارتباطی حساب</summary>
+                  <summary>{uiText.text_3dad9471da0a}</summary>
                   <p>{messagingNextLabels[status.data.nextAction]}</p>
                 </details>
               </>
             ) : (
               <>
                 <p>{messagingNextLabels[status.data.nextAction]}</p>
-                <p>
-                  این وضعیت از تنظیمات فعلی حساب دریافت شده است؛ ذخیرهٔ مخاطب به‌تنهایی مجوز ارتباط
-                  ایجاد نمی‌کند.
-                </p>
+                <p>{uiText.text_a86147563bca}</p>
               </>
             )}
             {status.data.nextAction === 'ProfileCompletionRequired' && (
               <Button asChild variant="outline">
-                <Link href="/personal/profile/edit">تکمیل پروفایل</Link>
+                <Link href="/personal/profile/edit">{uiText.text_dc1e77f52af9}</Link>
               </Button>
             )}
           </section>
@@ -227,9 +225,7 @@ export function ContactsPage() {
                 command = resolvePersonInput(target);
                 setLookupError('');
               } catch (error) {
-                setLookupError(
-                  error instanceof Error ? error.message : 'اطلاعات مخاطب معتبر نیست.',
-                );
+                setLookupError(error instanceof Error ? error.message : uiText.text_6242b7c1497d);
                 return;
               }
               setBusy(true);
@@ -251,11 +247,11 @@ export function ContactsPage() {
             }}
           >
             <label>
-              شمارهٔ همراه یا نام کاربری
+              {uiText.text_54c852331c9b}
               <input
                 dir="ltr"
-                aria-label="شماره یا نام کاربری مخاطب"
-                placeholder="@username یا 09123456789"
+                aria-label={uiText.text_30d28a3021cd}
+                placeholder={uiText.text_cff9c0e723ac}
                 value={target}
                 onChange={(e) => {
                   setTarget(e.target.value);
@@ -270,14 +266,11 @@ export function ContactsPage() {
               />
             </label>
             <Button type="submit" disabled={busy || !target.trim()}>
-              {busy ? 'در حال بررسی…' : 'پیدا کردن مخاطب'}
+              {busy ? uiText.text_25384e522776 : uiText.text_43dad0d90fdf}
             </Button>
           </form>
           {resolved && !person && (
-            <EmptyState
-              title="مخاطب قابل مشاهده‌ای پیدا نشد"
-              description="شماره یا نام کاربری را بررسی کنید. نتیجه تابع حریم خصوصی و وضعیت مجاز ارتباط حساب‌هاست."
-            />
+            <EmptyState title={uiText.text_0364864766f8} description={uiText.text_2dd3b2bb5816} />
           )}
           {person && (
             <div className={s.foundPerson}>
@@ -289,7 +282,10 @@ export function ContactsPage() {
                 />
                 <div>
                   <h2>{person.displayName}</h2>
-                  <bdi dir="ltr">@{person.username}</bdi>
+                  <bdi dir="ltr">
+                    {uiText.text_c3641f8544d7}
+                    {person.username}
+                  </bdi>
                   {person.phoneNumber && (
                     <p>
                       <bdi dir="ltr">{person.phoneNumber}</bdi>
@@ -298,11 +294,11 @@ export function ContactsPage() {
                 </div>
               </div>
               {person.userId === session.user.id ? (
-                <p className={s.muted}>این حساب خود شماست؛ مخاطب دیگری را پیدا کنید.</p>
+                <p className={s.muted}>{uiText.text_c068733f39cf}</p>
               ) : (
                 <>
                   <label className={s.singleField}>
-                    نام ذخیره‌شده (اختیاری)
+                    {uiText.text_07436f1f45ac}
                     <input value={savedName} onChange={(e) => setSavedName(e.target.value)} />
                   </label>
                   <div className={s.actions}>
@@ -310,7 +306,7 @@ export function ContactsPage() {
                       disabled={busy}
                       onClick={() => void save(person, savedName.trim() || null)}
                     >
-                      ذخیرهٔ مخاطب
+                      {uiText.text_7290148d263c}
                     </Button>
                     <Button
                       variant="outline"
@@ -323,15 +319,10 @@ export function ContactsPage() {
                       onClick={() => void start(person)}
                     >
                       <MessageCircle size={17} />
-                      شروع گفت‌وگو
+                      {uiText.text_2d995041bb4a}
                     </Button>
                   </div>
-                  {!person.canStartDirect && (
-                    <p className={s.muted}>
-                      شروع گفت‌وگو با این حساب فعلاً مجاز نیست. وضعیت حساب خود را از «حساب من» بررسی
-                      کنید.
-                    </p>
-                  )}
+                  {!person.canStartDirect && <p className={s.muted}>{uiText.text_b8440364bb81}</p>}
                 </>
               )}
             </div>
@@ -350,41 +341,32 @@ export function ContactsPage() {
           >
             <label>
               <span className="sr-only">
-                {tab === 'contacts' ? 'جستجو در دفترچهٔ مخاطبین' : 'جستجوی حساب‌های قابل مشاهده'}
+                {tab === 'contacts' ? uiText.text_88c808fdf7f4 : uiText.text_2562435815a8}
               </span>
               <input
-                aria-label="عبارت جستجوی مخاطب"
+                aria-label={uiText.text_2c54ecc60e86}
                 value={draft}
                 onChange={(e) => setDraft(e.target.value)}
                 placeholder={
-                  tab === 'contacts' ? 'نام ذخیره‌شده یا نام کاربری…' : 'نام یا نام کاربری…'
+                  tab === 'contacts' ? uiText.text_47c491561dd4 : uiText.text_39abf906c29d
                 }
               />
             </label>
             <Button type="submit" variant="outline">
               <Search size={17} />
-              <span className="sr-only">جستجو</span>
+              <span className="sr-only">{uiText.text_2a93eb7f06ce}</span>
             </Button>
           </form>
           {tab === 'search' && !query ? (
-            <EmptyState
-              title="نام یا نام کاربری را جستجو کنید"
-              description="فقط اطلاعاتی نمایش داده می‌شود که مشاهدهٔ آن برای شما مجاز است."
-            />
+            <EmptyState title={uiText.text_8e4123c40ba0} description={uiText.text_514b1fbad09d} />
           ) : data.isPending ? (
             <LoadingSkeleton />
           ) : data.isError ? (
             <ErrorState error={data.error} onRetry={() => void data.refetch()} />
           ) : !rows?.length ? (
             <EmptyState
-              title={
-                tab === 'contacts' ? 'مخاطبی در این فهرست نیست' : 'حساب قابل مشاهده‌ای پیدا نشد'
-              }
-              description={
-                tab === 'contacts'
-                  ? 'از بخش مخاطب جدید، یک حساب را پیدا و به دفترچه اضافه کنید.'
-                  : 'عبارت جستجو را تغییر دهید؛ نتیجه تابع حریم خصوصی و مجوزهای ارتباط است.'
-              }
+              title={tab === 'contacts' ? uiText.text_8d1b81ec1aa1 : uiText.text_9620a4294e2d}
+              description={tab === 'contacts' ? uiText.text_17f6af62f546 : uiText.text_dae5c09caaa2}
             />
           ) : (
             <div className={s.contactRows}>
@@ -398,7 +380,10 @@ export function ContactsPage() {
                   <div>
                     <strong>{row.name}</strong>
                     <small>
-                      <bdi dir="ltr">@{row.profile.username}</bdi>
+                      <bdi dir="ltr">
+                        {uiText.text_c3641f8544d7}
+                        {row.profile.username}
+                      </bdi>
                     </small>
                   </div>
                   <Button
@@ -413,7 +398,7 @@ export function ContactsPage() {
                     onClick={() => void start(row.profile)}
                   >
                     <MessageCircle size={16} />
-                    گفت‌وگو
+                    {uiText.text_99c891fdab48}
                   </Button>
                   {row.contact ? (
                     <ContactActions
@@ -427,7 +412,7 @@ export function ContactsPage() {
                       disabled={busy || row.profile.userId === session.user.id}
                       onClick={() => void save(row.profile)}
                     >
-                      ذخیره
+                      {uiText.text_8cfe257aece4}
                     </Button>
                   )}
                 </article>
@@ -439,17 +424,20 @@ export function ContactsPage() {
               <Button
                 size="icon"
                 variant="outline"
-                aria-label="صفحهٔ قبلی مخاطبین"
+                aria-label={uiText.text_a7009e9019ab}
                 disabled={page <= 1 || data.isFetching}
                 onClick={() => setPage(page - 1)}
               >
                 <ChevronRight size={18} />
               </Button>
-              <span>صفحهٔ {number(page)}</span>
+              <span>
+                {uiText.text_2714496eef16}
+                {number(page)}
+              </span>
               <Button
                 size="icon"
                 variant="outline"
-                aria-label="صفحهٔ بعدی مخاطبین"
+                aria-label={uiText.text_a0b6f49670b9}
                 disabled={!data.data?.hasMore || data.isFetching}
                 onClick={() => setPage(page + 1)}
               >
@@ -492,14 +480,14 @@ function ContactActions({
         <Button
           size="icon"
           variant="ghost"
-          aria-label={'مدیریت ' + (contact.savedName || contact.profile.displayName)}
+          aria-label={uiText.text_aa46bc41d37e + (contact.savedName || contact.profile.displayName)}
         >
           <MoreHorizontal size={20} />
         </Button>
       </DialogTrigger>
       <DialogContent
         className={`${t.theme} ${t.dialog}`}
-        title="مدیریت مخاطب"
+        title={uiText.text_dae770ce3334}
         description={contact.savedName || contact.profile.displayName}
       >
         <form
@@ -526,7 +514,7 @@ function ContactActions({
           }}
         >
           <label className={s.singleField}>
-            نام ذخیره‌شده
+            {uiText.text_796ebc9a8741}
             <input
               value={alias}
               disabled={busy}
@@ -540,16 +528,13 @@ function ContactActions({
               disabled={busy}
               onChange={(event) => setFavorite(event.target.checked)}
             />
-            <span>مخاطب برگزیده</span>
+            <span>{uiText.text_c4749ec2c895}</span>
           </label>
           <Button type="submit" disabled={busy}>
-            {busy ? 'در حال ثبت…' : 'ثبت تغییرات مخاطب'}
+            {busy ? uiText.text_b5ef00b1806f : uiText.text_b7d4e6239152}
           </Button>
         </form>
-        <p className={s.muted}>
-          حذف از دفترچه و مسدودکردن ارتباط دو اقدام جدا هستند. تاریخچهٔ گفتگو با حذف مخاطب پاک
-          نمی‌شود.
-        </p>
+        <p className={s.muted}>{uiText.text_d5499ef00124}</p>
         {!!error && <ErrorState error={error} />}
         {error instanceof ApiError && [409, 412].includes(error.status) && (
           <Button
@@ -560,7 +545,7 @@ function ContactActions({
               setOpen(false);
             }}
           >
-            بستن و بازخوانی مخاطب
+            {uiText.text_b41fe8563d7d}
           </Button>
         )}
         <div className={s.actions}>
@@ -582,7 +567,7 @@ function ContactActions({
             }}
           >
             <Trash2 size={17} />
-            حذف از دفترچه
+            {uiText.text_539f52498828}
           </Button>
           <Button
             variant="destructive"
@@ -609,7 +594,7 @@ function ContactActions({
             }}
           >
             <Ban size={17} />
-            مسدودکردن
+            {uiText.text_24417444e3d1}
           </Button>
         </div>
       </DialogContent>

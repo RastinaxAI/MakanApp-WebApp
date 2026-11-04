@@ -1,0 +1,112 @@
+{
+  "stats": {
+    "startTime": "2026-11-02T06:22:39.497Z",
+    "duration": 64763.299999999996,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "results": [
+    {
+      "title": "dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button",
+      "file": "chat-education-layout.spec.ts",
+      "line": 75,
+      "status": "passed",
+      "durationMs": 3079,
+      "errors": []
+    },
+    {
+      "title": "recorded light: chat, profile, assistant, dialogs and back remain coherent",
+      "file": "instagram-motion.spec.ts",
+      "line": 10,
+      "status": "failed",
+      "durationMs": 3579,
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"color\": \"rgb(0, 114, 182)\",\u001b[22m\n\u001b[32m-   \"inner\": \"0px\",\u001b[39m\n\u001b[31m+   \"inner\": \"3px\",\u001b[39m\n\u001b[2m    \"outer\": \"2px\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  72 |         color: getComputedStyle(el.closest('form')!).outlineColor,\n  73 |       })),\n> 74 |     ).toEqual({\n     |       ^\n  75 |       inner: '0px',\n  76 |       outer: '2px',\n  77 |       color: theme === 'dark' ? 'rgb(90, 181, 255)' : 'rgb(0, 114, 182)',\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/instagram-motion.spec.ts:74:7"
+      ]
+    },
+    {
+      "title": "recorded dark: chat, profile, assistant, dialogs and back remain coherent",
+      "file": "instagram-motion.spec.ts",
+      "line": 10,
+      "status": "failed",
+      "durationMs": 3333,
+      "errors": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"color\": \"rgb(90, 181, 255)\",\u001b[22m\n\u001b[32m-   \"inner\": \"0px\",\u001b[39m\n\u001b[31m+   \"inner\": \"3px\",\u001b[39m\n\u001b[2m    \"outer\": \"2px\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  72 |         color: getComputedStyle(el.closest('form')!).outlineColor,\n  73 |       })),\n> 74 |     ).toEqual({\n     |       ^\n  75 |       inner: '0px',\n  76 |       outer: '2px',\n  77 |       color: theme === 'dark' ? 'rgb(90, 181, 255)' : 'rgb(0, 114, 182)',\n    at /home/omidreza-bagheriyan/Documents/Rastinax Projects/MakanApp-WebApp/web/tests/browser/instagram-motion.spec.ts:74:7"
+      ]
+    },
+    {
+      "title": "owner edits information, adds a contact, changes administrator role and removes membership with confirmed server responses",
+      "file": "messenger-management.spec.ts",
+      "line": 82,
+      "status": "passed",
+      "durationMs": 3190,
+      "errors": []
+    },
+    {
+      "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+      "file": "preferences-weekly.spec.ts",
+      "line": 3,
+      "status": "passed",
+      "durationMs": 2702,
+      "errors": []
+    },
+    {
+      "title": "reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes",
+      "file": "telegram-details.spec.ts",
+      "line": 133,
+      "status": "passed",
+      "durationMs": 25544,
+      "errors": []
+    },
+    {
+      "title": "Group light: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2592,
+      "errors": []
+    },
+    {
+      "title": "Channel light: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2216,
+      "errors": []
+    },
+    {
+      "title": "Group dark: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2552,
+      "errors": []
+    },
+    {
+      "title": "Channel dark: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2157,
+      "errors": []
+    },
+    {
+      "title": "Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child",
+      "file": "workspace-child-attachments.spec.ts",
+      "line": 45,
+      "status": "passed",
+      "durationMs": 4757,
+      "errors": []
+    },
+    {
+      "title": "Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files",
+      "file": "workspace-child-attachments.spec.ts",
+      "line": 103,
+      "status": "passed",
+      "durationMs": 2655,
+      "errors": []
+    }
+  ]
+}

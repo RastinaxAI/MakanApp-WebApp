@@ -1,4 +1,6 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import { PageBack } from '@/components/navigation/page-back';
 import { useRef, useState } from 'react';
 import Link from 'next/link';
@@ -10,7 +12,7 @@ import type { components } from '@/generated/api/schema';
 import { ApiError } from '@/lib/api/errors';
 import { date } from '@/lib/formatting';
 import { usePersonal, usePersonalApi } from '../provider';
-import { base, Field, Status } from './shared';
+import { Field, Status } from './shared';
 import { WorkflowPage, WorkflowDraftConflict, useWorkflowDraft } from './workflow';
 import { evaluationLabel, validScore } from './evaluation-model';
 import { useAssessmentAction } from './use-assessment-action';
@@ -20,16 +22,22 @@ import { ExamFileDownload } from './exam-files';
 type S = components['schemas'];
 const roles = ['Teacher', 'Manager'];
 const endpoint = (id: string) => '/api/v1/academic/exam-attempts/' + id;
-const route = (id: string) => base + '/exam-submissions/' + id;
+const route = (base: string, id: string) => base + '/exam-submissions/' + id;
 
 export function ExamGradingQueue({ examId }: { examId: string }) {
+  const { base } = useAcademicScope();
   return (
-    <WorkflowPage title="پاسخ‌های آزمون" back={`${base}/exams/${examId}/edit`} roles={roles}>
+    <WorkflowPage
+      title={uiText.text_46ca07730cdf}
+      back={`${base}/exams/${examId}/edit`}
+      roles={roles}
+    >
       <ExamQueue examId={examId} />
     </WorkflowPage>
   );
 }
 function ExamQueue({ examId }: { examId: string }) {
+  const { base } = useAcademicScope();
   const [status, setStatus] = useState('');
   const q = usePersonalApi<S['ExamGradingQueueItemDto'][]>(
     `/api/v1/academic/exams/${examId}/grading` + (status ? '?status=' + status : ''),
@@ -38,9 +46,9 @@ function ExamQueue({ examId }: { examId: string }) {
   return (
     <section className={e.panel}>
       <div className={e.filters}>
-        <Field label="وضعیت تصحیح">
+        <Field label={uiText.text_a6312a1b83ba}>
           <select value={status} onChange={(ev) => setStatus(ev.target.value)}>
-            <option value="">همهٔ وضعیت‌ها</option>
+            <option value="">{uiText.text_fa55e47f28bc}</option>
             {(
               [
                 'AwaitingGrading',
@@ -66,15 +74,16 @@ function ExamQueue({ examId }: { examId: string }) {
           {q.data.map((row) => (
             <Link
               className={e.row}
-              href={route(row.examAttemptId) + '/grading?examId=' + examId}
+              href={route(base, row.examAttemptId) + '/grading?examId=' + examId}
               key={row.examAttemptId}
             >
               <div>
                 <h2>{row.studentDisplayName}</h2>
                 <p>{row.examTitle}</p>
                 <small>
-                  تلاش {row.attemptNumber.toLocaleString('fa-IR')} ·{' '}
-                  {date(row.finalizedAtUtc, true)}
+                  {uiText.text_1447bc999cc2}
+                  {row.attemptNumber.toLocaleString('fa-IR')}
+                  {uiText.text_78887da22764} {date(row.finalizedAtUtc, true)}
                 </small>
               </div>
               <Status>{evaluationLabel(row.status)}</Status>
@@ -82,7 +91,7 @@ function ExamQueue({ examId }: { examId: string }) {
           ))}
         </div>
       ) : (
-        <EmptyState title="پاسخی در این وضعیت نیست" />
+        <EmptyState title={uiText.text_d3da6e382b7b} />
       )}
     </section>
   );
@@ -96,14 +105,15 @@ export function ExamGradingPage({
   questionId?: string;
   review?: boolean;
 }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
       title={
         questionId
-          ? 'تصحیح پاسخ سؤال'
+          ? uiText.text_61f6dd684692
           : review
-            ? 'بازبینی و انتشار نتیجهٔ آزمون'
-            : 'ارزیابی پاسخ‌برگ آزمون'
+            ? uiText.text_9fec0601e196
+            : uiText.text_97ab3fa3cf71
       }
       back={base + '/exams'}
       roles={roles}
@@ -121,6 +131,7 @@ function GradingLoader({
   questionId?: string;
   review: boolean;
 }) {
+  const scope = useAcademicScope();
   const params = useSearchParams(),
     exam = params.get('examId');
   const validExam = !!exam && /^[0-9a-f-]{36}$/i.test(exam);
@@ -142,11 +153,13 @@ function GradingLoader({
   if (waiting && !created)
     return (
       <section className={e.panel}>
-        <h2>شروع تصحیح</h2>
+        <h2>{uiText.text_67bfb548ca56}</h2>
         <p>
-          {row.studentDisplayName} · {row.examTitle}
+          {row.studentDisplayName}
+          {uiText.text_588da4105320}
+          {row.examTitle}
         </p>
-        <p className={s.hint}>با شروع تصحیح، نسخهٔ پیش‌نویس ارزیابی در سرویس ایجاد می‌شود.</p>
+        <p className={s.hint}>{uiText.text_2f8cf11752bd}</p>
         <Button
           disabled={a.busy}
           onClick={async () => {
@@ -154,7 +167,7 @@ function GradingLoader({
             if (value) setCreated(value);
           }}
         >
-          شروع تصحیح پاسخ‌برگ
+          {uiText.text_9a3574899319}
         </Button>
         {a.feedback}
       </section>
@@ -162,7 +175,12 @@ function GradingLoader({
   if (!created && q.isPending) return <LoadingSkeleton />;
   if (!created && q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
   const value = q.data ?? created;
-  if (!value || value.examAttemptId !== id || (validExam && value.examId !== exam))
+  if (
+    !value ||
+    value.examAttemptId !== id ||
+    (validExam && value.examId !== exam) ||
+    (scope.personal && value.classId !== scope.personal.classId)
+  )
     return <ErrorState error={new ApiError(502, { code: 'CONTRACT_MISMATCH' })} />;
   if (questionId) {
     const question = value.questions.find((x) => x.examAttemptQuestionId === questionId);
@@ -179,6 +197,7 @@ function GradingLoader({
   );
 }
 function GradeOverview({ value }: { value: S['ExamGradeDto'] }) {
+  const { base } = useAcademicScope();
   const correction = useSearchParams().get('correction') === '1';
   if (correction && value.status === 'Released') return <GradeCorrection value={value} />;
   return (
@@ -187,28 +206,32 @@ function GradeOverview({ value }: { value: S['ExamGradeDto'] }) {
         <h2>{value.examTitle}</h2>
         <div className={e.meta}>
           <span>{value.studentDisplayName}</span>
-          <span>تلاش {value.attemptNumber.toLocaleString('fa-IR')}</span>
+          <span>
+            {uiText.text_1447bc999cc2}
+            {value.attemptNumber.toLocaleString('fa-IR')}
+          </span>
           <Status>{evaluationLabel(value.status)}</Status>
         </div>
       </section>
       <div className={e.layout}>
         <section className={e.panel}>
-          <h2>پاسخ‌برگ و نمرهٔ هر سؤال</h2>
+          <h2>{uiText.text_a375a0ddd14d}</h2>
           <div className={e.rows}>
             {[...value.questions]
               .sort((a, b) => a.displayOrder - b.displayOrder)
               .map((q, i) => (
                 <article className={e.panel} key={q.examAttemptQuestionId}>
                   <h3>
-                    سؤال {(i + 1).toLocaleString('fa-IR')} ·{' '}
-                    {q.awardedScore.toLocaleString('fa-IR')} از{' '}
-                    {q.maximumScore.toLocaleString('fa-IR')}
+                    {uiText.text_a2c10c627424}
+                    {(i + 1).toLocaleString('fa-IR')}
+                    {uiText.text_78887da22764} {q.awardedScore.toLocaleString('fa-IR')}
+                    {uiText.text_8d6ea6982b74} {q.maximumScore.toLocaleString('fa-IR')}
                   </h3>
                   <p className={e.answer} dir="auto">
                     {q.prompt}
                   </p>
                   <p className={e.answer} dir="auto">
-                    {q.textAnswer ?? q.selectedOptionText ?? 'بدون پاسخ'}
+                    {q.textAnswer ?? q.selectedOptionText ?? uiText.text_86657c1093a3}
                   </p>
                   {q.attachments?.map((file) => (
                     <ExamFileDownload
@@ -220,20 +243,22 @@ function GradeOverview({ value }: { value: S['ExamGradeDto'] }) {
                   ))}
                   <Status>
                     {q.gradingMode === 'Objective'
-                      ? 'تصحیح خودکار'
+                      ? uiText.text_967b4e9dca84
                       : q.isReviewed
-                        ? 'بررسی‌شده'
-                        : 'نیازمند بررسی'}
+                        ? uiText.text_54753d4394ba
+                        : uiText.text_9c641f40e0f6}
                   </Status>
                   {q.gradingMode === 'Manual' && value.status === 'Draft' && (
                     <div className={e.actions}>
                       <Button variant="outline" asChild>
                         <Link
                           href={
-                            route(value.examAttemptId) + '/questions/' + q.examAttemptQuestionId
+                            route(base, value.examAttemptId) +
+                            '/questions/' +
+                            q.examAttemptQuestionId
                           }
                         >
-                          تصحیح پاسخ
+                          {uiText.text_95612a20d459}
                         </Link>
                       </Button>
                     </div>
@@ -246,13 +271,18 @@ function GradeOverview({ value }: { value: S['ExamGradeDto'] }) {
           <CompleteGrade value={value} />
         ) : (
           <section className={e.panel}>
-            <h2>وضعیت نتیجه</h2>
+            <h2>{uiText.text_e82ba27cb37f}</h2>
             <div className={e.score}>
               <strong>{value.totalScore.toLocaleString('fa-IR')}</strong>
-              <span>از {value.maximumScore.toLocaleString('fa-IR')}</span>
+              <span>
+                {uiText.text_928bdfd562d1}
+                {value.maximumScore.toLocaleString('fa-IR')}
+              </span>
             </div>
             <Button asChild>
-              <Link href={route(value.examAttemptId) + '/grading-review'}>بازبینی نتیجه</Link>
+              <Link href={route(base, value.examAttemptId) + '/grading-review'}>
+                {uiText.text_69f2db252882}
+              </Link>
             </Button>
           </section>
         )}
@@ -267,6 +297,7 @@ function GradeQuestion({
   value: S['ExamGradeDto'];
   question: S['ExamQuestionGradeDto'];
 }) {
+  const { base } = useAcademicScope();
   const a = useAssessmentAction(endpoint(value.examAttemptId) + '/grading'),
     router = useRouter();
   const d = useWorkflowDraft(
@@ -283,16 +314,14 @@ function GradeQuestion({
   return (
     <div className={e.layout}>
       <section className={e.panel}>
-        <h2>سؤال</h2>
+        <h2>{uiText.text_75712d983c36}</h2>
         <p className={e.answer} dir="auto">
           {question.prompt}
         </p>
-        <h2>پاسخ دانش‌آموز</h2>
+        <h2>{uiText.text_f587875aa61f}</h2>
         <p className={e.answer} dir="auto">
           {question.textAnswer ||
-            (question.attachments?.length
-              ? 'پاسخ به‌صورت پیوست ثبت شده است.'
-              : 'پاسخ ثبت نشده است.')}
+            (question.attachments?.length ? uiText.text_9dbf97d6d529 : uiText.text_7e1d8f3f9e76)}
         </p>
         {question.attachments?.map((file) => (
           <ExamFileDownload
@@ -304,7 +333,7 @@ function GradeQuestion({
         ))}
       </section>
       <section className={e.panel}>
-        <h2>ارزیابی پاسخ</h2>
+        <h2>{uiText.text_7ceceddd5eb1}</h2>
         <form
           onSubmit={async (ev) => {
             ev.preventDefault();
@@ -323,12 +352,14 @@ function GradeQuestion({
             );
             if (result) {
               d.reset();
-              router.push(route(value.examAttemptId) + '/grading');
+              router.push(route(base, value.examAttemptId) + '/grading');
             }
           }}
         >
           <fieldset className={s.form} disabled={a.busy || !d.ready || d.stale}>
-            <Field label={`نمره از ${question.maximumScore.toLocaleString('fa-IR')}`}>
+            <Field
+              label={uiText.format_afd74191ca72(question.maximumScore.toLocaleString('fa-IR'))}
+            >
               <input
                 required
                 type="number"
@@ -339,14 +370,14 @@ function GradeQuestion({
                 onChange={(ev) => d.set('score', ev.target.value)}
               />
             </Field>
-            <Field label="بازخورد دانش‌آموز">
+            <Field label={uiText.text_3adafc73e1d2}>
               <textarea
                 value={d.values.feedback}
                 onChange={(ev) => d.set('feedback', ev.target.value)}
               />
             </Field>
             <div className={e.private}>
-              <Field label="یادداشت خصوصی ارزیاب">
+              <Field label={uiText.text_f5603f353dad}>
                 <textarea
                   value={d.values.private}
                   onChange={(ev) => d.set('private', ev.target.value)}
@@ -355,9 +386,9 @@ function GradeQuestion({
             </div>
             <div className={e.actions}>
               <Button type="submit" disabled={!validScore(d.values.score, question.maximumScore)}>
-                ذخیرهٔ تصحیح سؤال
+                {uiText.text_f4ebeba6baa8}
               </Button>
-              <PageBack href={route(value.examAttemptId) + '/grading'} />
+              <PageBack href={route(base, value.examAttemptId) + '/grading'} />
             </div>
           </fieldset>
         </form>
@@ -368,6 +399,7 @@ function GradeQuestion({
   );
 }
 function CompleteGrade({ value }: { value: S['ExamGradeDto'] }) {
+  const { base } = useAcademicScope();
   const router = useRouter(),
     a = useAssessmentAction(endpoint(value.examAttemptId) + '/grading');
   const d = useWorkflowDraft(
@@ -382,10 +414,13 @@ function CompleteGrade({ value }: { value: S['ExamGradeDto'] }) {
   const ready = value.questions.every((q) => q.gradingMode === 'Objective' || q.isReviewed);
   return (
     <section className={e.panel}>
-      <h2>جمع‌بندی ارزیابی</h2>
+      <h2>{uiText.text_8e1f490a8728}</h2>
       <div className={e.score}>
         <strong>{value.totalScore.toLocaleString('fa-IR')}</strong>
-        <span>از {value.maximumScore.toLocaleString('fa-IR')}</span>
+        <span>
+          {uiText.text_928bdfd562d1}
+          {value.maximumScore.toLocaleString('fa-IR')}
+        </span>
       </div>
       <form
         onSubmit={async (ev) => {
@@ -399,25 +434,25 @@ function CompleteGrade({ value }: { value: S['ExamGradeDto'] }) {
           });
           if (result) {
             d.reset();
-            router.push(route(value.examAttemptId) + '/grading-review');
+            router.push(route(base, value.examAttemptId) + '/grading-review');
           }
         }}
       >
         <fieldset className={s.form} disabled={a.busy || !d.ready || d.stale}>
-          <Field label="بازخورد دانش‌آموز">
+          <Field label={uiText.text_3adafc73e1d2}>
             <textarea
               value={d.values.learner}
               onChange={(ev) => d.set('learner', ev.target.value)}
             />
           </Field>
-          <Field label="بازخورد قابل نمایش به والد">
+          <Field label={uiText.text_29b4c343a306}>
             <textarea
               value={d.values.guardian}
               onChange={(ev) => d.set('guardian', ev.target.value)}
             />
           </Field>
           <div className={e.private}>
-            <Field label="یادداشت خصوصی ارزیاب">
+            <Field label={uiText.text_f5603f353dad}>
               <textarea
                 value={d.values.private}
                 onChange={(ev) => d.set('private', ev.target.value)}
@@ -426,12 +461,12 @@ function CompleteGrade({ value }: { value: S['ExamGradeDto'] }) {
           </div>
           <div className={e.actions}>
             <Button type="submit" disabled={!ready}>
-              تکمیل و بازبینی نتیجه
+              {uiText.text_c5b6e5e70c54}
             </Button>
           </div>
         </fieldset>
       </form>
-      {!ready && <p className={s.hint}>ابتدا همهٔ پاسخ‌های تشریحی را بررسی کنید.</p>}
+      {!ready && <p className={s.hint}>{uiText.text_d0da8aff4010}</p>}
       {a.feedback}
       <WorkflowDraftConflict stale={d.stale} onDiscard={d.acceptServerValues} />
     </section>
@@ -444,39 +479,47 @@ function GradeReview({
   value: S['ExamGradeDto'];
   refresh: () => Promise<unknown>;
 }) {
+  const { base } = useAcademicScope();
   const { call } = usePersonal();
   const operation = useRef(crypto.randomUUID());
   return (
     <section className={e.panel}>
       <h2>
-        {value.examTitle} · {value.studentDisplayName}
+        {value.examTitle}
+        {uiText.text_588da4105320}
+        {value.studentDisplayName}
       </h2>
       <Status>{evaluationLabel(value.status)}</Status>
       <div className={e.score}>
         <strong>{value.totalScore.toLocaleString('fa-IR')}</strong>
-        <span>از {value.maximumScore.toLocaleString('fa-IR')}</span>
+        <span>
+          {uiText.text_928bdfd562d1}
+          {value.maximumScore.toLocaleString('fa-IR')}
+        </span>
       </div>
       <dl className={e.summary}>
         <div>
-          <dt>بازخورد دانش‌آموز</dt>
-          <dd>{value.learnerFeedback || 'ثبت نشده است.'}</dd>
+          <dt>{uiText.text_3adafc73e1d2}</dt>
+          <dd>{value.learnerFeedback || uiText.text_7ab236ef6063}</dd>
         </div>
         <div>
-          <dt>بازخورد والد مجاز</dt>
-          <dd>{value.guardianVisibleFeedback || 'ثبت نشده است.'}</dd>
+          <dt>{uiText.text_1ea90ff0689b}</dt>
+          <dd>{value.guardianVisibleFeedback || uiText.text_7ab236ef6063}</dd>
         </div>
       </dl>
-      <p className={s.hint}>یادداشت خصوصی ارزیاب در نتیجهٔ دانش‌آموز و والد نمایش داده نمی‌شود.</p>
+      <p className={s.hint}>{uiText.text_12b87e3b4db2}</p>
       <div className={e.actions}>
         <Button asChild variant="outline">
-          <Link href={route(value.examAttemptId) + '/grading'}>پاسخ‌برگ ارزیابی</Link>
+          <Link href={route(base, value.examAttemptId) + '/grading'}>
+            {uiText.text_878e832f0570}
+          </Link>
         </Button>
         {value.status === 'ReadyForRelease' && (
           <ConfirmAction
-            title="انتشار نتیجهٔ آزمون"
-            description="نمره و بازخوردهای مشخص‌شده برای دانش‌آموز و والد مجاز منتشر شوند؟"
-            trigger="انتشار نتیجه"
-            confirm="تأیید انتشار"
+            title={uiText.text_03b0d57113ee}
+            description={uiText.text_192eea1785f1}
+            trigger={uiText.text_9bd14215e24e}
+            confirm={uiText.text_daaf8ba1096e}
             onConfirm={async () => {
               await call(endpoint(value.examAttemptId) + '/grade/release', {
                 method: 'POST',
@@ -492,7 +535,9 @@ function GradeReview({
         )}
         {value.status === 'Released' && (
           <Button asChild variant="outline">
-            <Link href={route(value.examAttemptId) + '/grading?correction=1'}>ایجاد اصلاحیه</Link>
+            <Link href={route(base, value.examAttemptId) + '/grading?correction=1'}>
+              {uiText.text_b6efac56c22b}
+            </Link>
           </Button>
         )}
       </div>
@@ -500,6 +545,7 @@ function GradeReview({
   );
 }
 function GradeCorrection({ value }: { value: S['ExamGradeDto'] }) {
+  const { base } = useAcademicScope();
   const d = useWorkflowDraft(
       'grade-correction:' + value.examAttemptId,
       { reason: '' },
@@ -509,11 +555,8 @@ function GradeCorrection({ value }: { value: S['ExamGradeDto'] }) {
     router = useRouter();
   return (
     <section className={e.panel}>
-      <h2>اصلاح نتیجهٔ منتشرشده</h2>
-      <p className={s.hint}>
-        نتیجهٔ منتشرشده با ایجاد پیش‌نویس اصلاح، بی‌صدا جایگزین نمی‌شود. اصلاحیه پس از تصحیح و
-        انتشار معتبر قابل مشاهده خواهد بود.
-      </p>
+      <h2>{uiText.text_ea8277d04c34}</h2>
+      <p className={s.hint}>{uiText.text_47fc73d1bf35}</p>
       <form
         onSubmit={async (ev) => {
           ev.preventDefault();
@@ -524,11 +567,11 @@ function GradeCorrection({ value }: { value: S['ExamGradeDto'] }) {
           });
           if (result) {
             d.reset();
-            router.replace(route(value.examAttemptId) + '/grading');
+            router.replace(route(base, value.examAttemptId) + '/grading');
           }
         }}
       >
-        <Field label="دلیل اصلاح">
+        <Field label={uiText.text_5a351482a930}>
           <textarea
             required
             value={d.values.reason}
@@ -537,7 +580,7 @@ function GradeCorrection({ value }: { value: S['ExamGradeDto'] }) {
         </Field>
         <div className={e.actions}>
           <Button disabled={a.busy || !d.ready || !d.values.reason.trim() || d.stale} type="submit">
-            ساخت پیش‌نویس اصلاحیه
+            {uiText.text_17ae215bc380}
           </Button>
         </div>
       </form>

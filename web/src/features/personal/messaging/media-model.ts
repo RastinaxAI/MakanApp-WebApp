@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 export type FileAsset = components['schemas']['FileAssetResult'];
 export type Attachment = components['schemas']['MessageAttachmentResult'];
@@ -40,8 +41,8 @@ export function formatFileSize(bytes: number) {
   const n = (value: number) =>
     new Intl.NumberFormat('fa-IR', { maximumFractionDigits: 1 }).format(value);
   return bytes >= 1024 * 1024
-    ? n(bytes / 1024 / 1024) + ' مگابایت'
+    ? n(bytes / 1024 / 1024) + uiText.text_4f65338b34d1
     : bytes >= 1024
-      ? n(bytes / 1024) + ' کیلوبایت'
-      : n(bytes) + ' بایت';
+      ? n(bytes / 1024) + uiText.text_0429192e427e
+      : n(bytes) + uiText.text_41b6f21037c8;
 }

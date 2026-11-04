@@ -1,0 +1,41 @@
+{
+  "checkedAtUtc": "2026-11-04T11:14:54.389Z",
+  "backend": "http://94.184.32.84:8090",
+  "steps": [
+    {
+      "method": "POST",
+      "path": "/api/v1/personal-class-requests",
+      "status": 201
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/personal-class-requests",
+      "status": 201
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/personal-class-requests/{id}",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/personal-class-requests/{id}",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/personal-class-requests/{id}/cancel",
+      "status": 200
+    }
+  ],
+  "passed": true,
+  "submittedForReview": false,
+  "createdClasses": 0,
+  "createdMessages": 0,
+  "retainedAuditDraft": true,
+  "idempotentCreate": true,
+  "opaqueVersionChanged": true,
+  "cancelled": true,
+  "ownedDraftCount": 1,
+  "cleanupConfirmed": true
+}

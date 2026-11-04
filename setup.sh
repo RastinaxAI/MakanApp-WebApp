@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
+umask 077
 
 STAGE='arguments'
 trap 'code=$?; printf "MakanApp: stage failed: %s (exit %s). No session volume was removed.\n" "$STAGE" "$code" >&2; exit "$code"' ERR
@@ -8,11 +9,13 @@ usage() {
   cat <<'HELP'
 Usage:
   sudo bash setup.sh --update [--app-dir /var/www/makanapp/app]
+  sudo bash setup.sh --check [--app-dir /var/www/makanapp/app]
   sudo bash setup.sh --install
 
 --update       Build and replace only the existing Makan client; preserve env, sessions, Nginx and TLS.
+--check        Validate source, Docker and deployment settings without building or replacing the app.
 --install      Provision Nginx/firewall/TLS on a new server. Does not deploy application source.
---app-dir      Application root containing web/compose.yaml (update only).
+--app-dir      Application root containing web/compose.yaml (update/check only).
 --help         Show this help. No arguments also shows help.
 
 Upload the new source before --update. This script does not pull Git or overwrite .env.docker.
@@ -26,8 +29,8 @@ MODE=''
 APP_DIR=''
 while (($#)); do
   case "$1" in
-    --update|--install)
-      [[ -z "$MODE" ]] || die 'Choose either --update or --install.'
+    --update|--check|--install)
+      [[ -z "$MODE" ]] || die 'Choose one of --update, --check or --install.'
       MODE="$1"
       shift
       ;;
@@ -48,6 +51,7 @@ update_app() {
   require_command docker
   require_command flock
   require_command sha256sum
+  require_command python3
   local script_dir
   script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
   if [[ -z "$APP_DIR" ]]; then
@@ -57,7 +61,10 @@ update_app() {
   [[ -d "$APP_DIR" ]] || die 'Application directory does not exist; use --app-dir.'
   APP_DIR="$(cd -- "$APP_DIR" && pwd -P)"
   local web_dir="$APP_DIR/web"
-  [[ -f "$web_dir/compose.yaml" && -f "$web_dir/Dockerfile" && -f "$web_dir/package-lock.json" ]] || die 'Upload the complete application source, including web/, before updating.'
+  local source_file
+  for source_file in compose.yaml Dockerfile .dockerignore package.json package-lock.json config/network.json scripts/build-public-brand.mjs scripts/validate-deployment.py src/content/fa.ts; do
+    [[ -s "$web_dir/$source_file" ]] || die "Incomplete source upload: web/$source_file is missing or empty. Upload the complete new package."
+  done
   [[ -f "$web_dir/.env.docker" ]] || die 'Existing web/.env.docker is missing. Restore the server configuration; update will not create or replace secrets.'
 
   # A fixed project name retains the existing makan-client_sessions volume.
@@ -68,12 +75,29 @@ update_app() {
   docker info >/dev/null
   docker compose version >/dev/null
 
+  STAGE='deployment configuration validation'
+  "${compose[@]}" config --format json | python3 "$web_dir/scripts/validate-deployment.py" --network "$web_dir/config/network.json"
+  if [[ "$MODE" == '--check' ]]; then
+    printf 'MakanApp: preflight passed. No image was built or service replaced.\n'
+    return
+  fi
+
   # Serialize deployments without writing lock files into the source tree.
   install -d -m 700 /run/lock/makan-client
   exec 9>>/run/lock/makan-client/update.lock
   flock -n 9 || die 'Another Makan client update is running. Wait for it to finish.'
 
-  "${compose[@]}" config --quiet
+  # This module was explicitly replaced by theme.tsx in this client release.
+  # A ZIP overlay leaves it behind; preserve a backup rather than compiling both.
+  if [[ -f "$web_dir/src/features/personal/theme.ts" && -f "$web_dir/src/features/personal/theme.tsx" ]]; then
+    STAGE='retired theme module backup'
+    local backup_dir
+    install -d -m 700 "$APP_DIR/.deployment-backups"
+    backup_dir="$(mktemp -d "$APP_DIR/.deployment-backups/update-XXXXXXXX")"
+    mv -- "$web_dir/src/features/personal/theme.ts" "$backup_dir/theme.ts.retired"
+    printf 'MakanApp: retired theme.ts preserved in %s\n' "$backup_dir"
+  fi
+
   printf 'MakanApp: building the uploaded source in %s\n' "$APP_DIR"
   STAGE='image build (existing container is kept running)'
   "${compose[@]}" build web
@@ -88,7 +112,7 @@ update_app() {
 }
 
 install_server() {
-  [[ -z "$APP_DIR" ]] || die '--app-dir is supported only with --update.'
+  [[ -z "$APP_DIR" ]] || die '--app-dir is supported only with --update or --check.'
   [[ ! -e /etc/nginx/sites-available/makanapp-app.conf ]] || die 'Makan Nginx is already configured. Use --update for application changes.'
   STAGE='initial server provisioning'
 export DEBIAN_FRONTEND=noninteractive
@@ -121,8 +145,9 @@ server {
     gzip_vary on;
     gzip_min_length 1024;
     gzip_types text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml;
+    client_max_body_size 12m;
 
-    error_page 502 503 504 = /__makan_placeholder.html;
+    error_page 502 503 504 =503 /__makan_placeholder.html;
     location = /__makan_placeholder.html {
         internal;
         alias /var/www/makanapp/app/index.html;
@@ -147,6 +172,8 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 120s;
+        proxy_buffering off;
     }
 }
 NGINX
@@ -161,5 +188,6 @@ certbot --nginx --non-interactive --agree-tos --redirect -m rastinaxoffice@gmail
 
 case "$MODE" in
   --update) update_app ;;
+  --check) update_app ;;
   --install) install_server ;;
 esac

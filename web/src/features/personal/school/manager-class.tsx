@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -15,11 +16,11 @@ import { base, SchoolHeading } from './shared';
 import { OfficialSpaces } from './official-spaces';
 import s from './manager-workspace.module.css';
 const tabs = [
-  ['members', 'معلمان و دانش‌آموزان'],
-  ['reports', 'عملکرد کلاس'],
-  ['sessions', 'جلسه‌ها'],
-  ['lessons', 'جزوه‌ها'],
-  ['assessments', 'تکلیف‌ها و آزمون‌ها'],
+  ['members', uiText.text_bbdeb1d752d0],
+  ['reports', uiText.text_8a4c6b93d372],
+  ['sessions', uiText.text_92797051c40c],
+  ['lessons', uiText.text_8a36678b886f],
+  ['assessments', uiText.text_3e76be8bc98c],
 ] as const;
 export function ManagerClass({ id }: { id: string }) {
   const { session } = usePersonal();
@@ -39,31 +40,36 @@ export function ManagerClass({ id }: { id: string }) {
       <PageBack href={base + '/classes'} />
       <SchoolHeading
         title={item.title}
-        description={`${item.courseTitle} · ${item.academicPeriodTitle} · ظرفیت ${item.capacity.toLocaleString('fa-IR')} نفر · ${label(item.status)}`}
+        description={uiText.format_3f95b308e154(
+          item.courseTitle,
+          item.academicPeriodTitle,
+          item.capacity.toLocaleString('fa-IR'),
+          label(item.status),
+        )}
       />
       <OfficialSpaces classId={id} />
-      <nav className={s.tabs} aria-label="بخش‌های مدیریت کلاس">
+      <nav className={s.tabs} aria-label={uiText.text_51a19c9825e6}>
         <Link
           href={`${base}/classes/${id}?tab=members`}
           aria-current={tab === 'members' ? 'page' : undefined}
         >
-          معلمان و دانش‌آموزان
+          {uiText.text_bbdeb1d752d0}
         </Link>
         <Link
           href={`${base}/classes/${id}?tab=sessions`}
           aria-current={['sessions', 'lessons', 'assessments'].includes(tab) ? 'page' : undefined}
         >
-          فعالیت‌های کلاس
+          {uiText.text_67d6351483d1}
         </Link>
         <Link
           href={`${base}/classes/${id}?tab=reports`}
           aria-current={tab === 'reports' ? 'page' : undefined}
         >
-          عملکرد کلاس
+          {uiText.text_8a4c6b93d372}
         </Link>
       </nav>
       {['sessions', 'lessons', 'assessments'].includes(tab) && (
-        <nav className={s.tabs} aria-label="فعالیت‌های کلاس">
+        <nav className={s.tabs} aria-label={uiText.text_67d6351483d1}>
           {tabs
             .filter(([key]) => ['sessions', 'lessons', 'assessments'].includes(key))
             .map(([key, title]) => (
@@ -79,24 +85,24 @@ export function ManagerClass({ id }: { id: string }) {
       )}
       {tab === 'members' ? (
         <>
-          <nav className={s.memberSwitch} aria-label="نوع اعضای کلاس">
+          <nav className={s.memberSwitch} aria-label={uiText.text_63c576bd7637}>
             <Link
               href={`${base}/classes/${id}?tab=members&member=learners`}
               aria-current={memberKind === 'learners' ? 'page' : undefined}
             >
-              دانش‌آموزان
+              {uiText.text_35e85a88a0fa}
             </Link>
             <Link
               href={`${base}/classes/${id}?tab=members&member=teachers`}
               aria-current={memberKind === 'teachers' ? 'page' : undefined}
             >
-              معلمان
+              {uiText.text_46b599145ed6}
             </Link>
             <Button asChild>
               <Link
                 href={`${base}/classes/${id}/${memberKind === 'teachers' ? 'teachers' : 'enrollments'}/new`}
               >
-                {memberKind === 'teachers' ? 'افزودن معلم به کلاس' : 'افزودن دانش‌آموز به کلاس'}
+                {memberKind === 'teachers' ? uiText.text_95aaae7b36b0 : uiText.text_e0b35522cbd0}
               </Link>
             </Button>
           </nav>

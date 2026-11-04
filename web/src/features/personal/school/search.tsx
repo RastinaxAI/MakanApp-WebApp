@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
@@ -13,7 +14,12 @@ import { Card, Field, SchoolHeading } from './shared';
 import { filterSchoolSearch, mapSchoolSearch, type SchoolSearchItem } from './search-model';
 import s from './school.module.css';
 type S = components['schemas'];
-const labels = { all: 'همه', classes: 'کلاس‌ها', assignments: 'تکلیف‌ها', exams: 'آزمون‌ها' };
+const labels = {
+  all: uiText.text_15270886eadd,
+  classes: uiText.text_e7b1ccd0bda3,
+  assignments: uiText.text_e8fed4d47d62,
+  exams: uiText.text_4f7293cf5780,
+};
 export function SchoolSearch() {
   const { session, call } = usePersonal(),
     router = useRouter(),
@@ -82,7 +88,7 @@ export function SchoolSearch() {
         } catch (error) {
           signal.throwIfAborted();
           if (error instanceof ApiError && [401, 403, 409].includes(error.status)) throw error;
-          issues.push('تکلیف‌های ' + c.title);
+          issues.push(uiText.text_c3f4bea9320d + c.title);
           return [];
         }
       });
@@ -112,7 +118,7 @@ export function SchoolSearch() {
       } catch (error) {
         signal.throwIfAborted();
         if (error instanceof ApiError && [401, 403, 409].includes(error.status)) throw error;
-        issues.push('آزمون‌ها');
+        issues.push(uiText.text_4f7293cf5780);
       }
       return { items, issues, parent: false };
     },
@@ -120,7 +126,7 @@ export function SchoolSearch() {
   const rows = q.data ? filterSchoolSearch(q.data.items, query, type in labels ? type : 'all') : [];
   return (
     <>
-      <SchoolHeading title="جستجو در آموزشگاه" />
+      <SchoolHeading title={uiText.text_8e87c1832a1e} />
       <Card>
         <form
           role="search"
@@ -131,7 +137,7 @@ export function SchoolSearch() {
             );
           }}
         >
-          <Field label="جستجوی کلاس، تکلیف یا آزمون">
+          <Field label={uiText.text_cd5cdd750175}>
             <input
               autoFocus
               maxLength={100}
@@ -141,11 +147,11 @@ export function SchoolSearch() {
           </Field>
           <Button type="submit" disabled={draft.trim().length < 2}>
             <Search size={18} />
-            جستجو
+            {uiText.text_2a93eb7f06ce}
           </Button>
         </form>
       </Card>
-      <nav className={s.tabs} aria-label="نوع نتیجهٔ جستجو">
+      <nav className={s.tabs} aria-label={uiText.text_042fb068891a}>
         {Object.entries(labels).map(([key, title]) => (
           <Link
             key={key}
@@ -157,20 +163,20 @@ export function SchoolSearch() {
         ))}
       </nav>
       {query.length < 2 ? (
-        <p>حداقل دو حرف وارد کنید.</p>
+        <p>{uiText.text_2b19287411ee}</p>
       ) : q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
         <ErrorState error={q.error} onRetry={() => void q.refetch()} />
       ) : (
         <>
-          {q.data.parent && (
-            <p className={s.hint}>جستجو در اطلاعات نمای فرزند انتخاب‌شده انجام می‌شود.</p>
-          )}
+          {q.data.parent && <p className={s.hint}>{uiText.text_ecf4dfe1fb25}</p>}
           {!!q.data.issues.length && (
             <p role="alert">
-              بخشی از اطلاعات دریافت نشد: {q.data.issues.join('، ')}. نتایج کامل نیستند.{' '}
-              <button onClick={() => void q.refetch()}>تلاش مجدد</button>
+              {uiText.text_408dd141549d}
+              {q.data.issues.join(uiText.text_11735aabd336)}
+              {uiText.text_a13e10143f9c}{' '}
+              <button onClick={() => void q.refetch()}>{uiText.text_8ea79cd585d1}</button>
             </p>
           )}
           {rows.length ? (
@@ -193,7 +199,7 @@ export function SchoolSearch() {
               })}
             </div>
           ) : (
-            <EmptyState title="نتیجه‌ای پیدا نشد" description="عبارت دیگری را جستجو کنید." />
+            <EmptyState title={uiText.text_b548ad60076f} description={uiText.text_e984dd22d5e3} />
           )}
         </>
       )}

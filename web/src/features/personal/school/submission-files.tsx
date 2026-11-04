@@ -1,4 +1,6 @@
 'use client';
+import { useAcademicScope } from './academic-scope';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { useUnsavedChanges } from '@/components/hooks/use-unsaved-changes';
 import { ErrorState } from '@/components/ui/states';
@@ -25,7 +27,8 @@ export function SubmissionFiles({
   onSaved?: (value: S['SubmissionAttemptResult']) => Promise<void>;
   onBusy?: (busy: boolean) => void;
 }) {
-  const { call, transfer, session } = usePersonal();
+  const { call, transfer } = usePersonal();
+  const scope = useAcademicScope();
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<unknown>(),
     [notice, setNotice] = useState(''),
@@ -45,7 +48,7 @@ export function SubmissionFiles({
     if (
       v.id !== value.id ||
       v.assignmentId !== value.assignmentId ||
-      v.organizationId !== session.context.organizationId ||
+      !scope.matches(v) ||
       !v.contentVisible
     )
       throw new ApiError(403);
@@ -87,14 +90,17 @@ export function SubmissionFiles({
         if (file) {
           const form = new FormData();
           form.append('File', file);
+          if (scope.personal) form.append('PersonalClassId', scope.personal.classId);
           asset = await transfer<S['FileAssetResult']>(
-            '/api/client/submission-files?attemptId=' + value.id,
+            '/api/client/submission-files?attemptId=' +
+              value.id +
+              (scope.personal ? '&audience=learner' : ''),
             { method: 'POST', body: form, signal: controller.signal, onProgress: setProgress },
           );
           setPending(asset);
         } else if (asset) {
           asset = await transfer<S['FileAssetResult']>(
-            `/api/client/submission-files/${asset.id}?attemptId=${value.id}`,
+            `/api/client/submission-files/${asset.id}?attemptId=${value.id}${scope.personal ? '&audience=learner' : ''}`,
             { signal: controller.signal },
           );
           setPending(asset);
@@ -102,9 +108,7 @@ export function SubmissionFiles({
         if (!asset) return;
         if (asset.status !== 'Ready') {
           setNotice(
-            asset.status === 'Pending'
-              ? 'فایل در حال بررسی است؛ پس از آماده‌شدن دوباره بررسی کنید.'
-              : 'این فایل برای پیوست قابل استفاده نیست.',
+            asset.status === 'Pending' ? uiText.text_9778ed17625c : uiText.text_e6375898a5b5,
           );
           return;
         }
@@ -139,7 +143,7 @@ export function SubmissionFiles({
       setPending(undefined);
     } catch (problem) {
       if (!(problem instanceof Error && problem.name === 'AbortError')) setError(problem);
-      else setNotice('عملیات لغو شد؛ برای بررسی آخرین وضعیت، پاسخ را دوباره دریافت کنید.');
+      else setNotice(uiText.text_f1b5427c160c);
     } finally {
       mutex.current = false;
       setBusy(false);
@@ -154,7 +158,7 @@ export function SubmissionFiles({
     abort.current = controller;
     try {
       const blob = await transfer<Blob>(
-        `/api/client/submission-files/${file.fileAssetId}/content?attemptId=${value.id}`,
+        `/api/client/submission-files/${file.fileAssetId}/content?attemptId=${value.id}${scope.personal ? '&audience=learner' : ''}`,
         {
           binary: true,
           expectedBytes: file.sizeBytes,
@@ -178,13 +182,13 @@ export function SubmissionFiles({
     }
   }
   return (
-    <Card title="پیوست پاسخ">
+    <Card title={uiText.text_802918533a64}>
       {editable && (
         <label className={s.answerFilePicker}>
           <Paperclip size={19} />
-          <span>افزودن عکس یا PDF</span>
+          <span>{uiText.text_bd9a4d172538}</span>
           <input
-            aria-label="افزودن عکس یا PDF به پاسخ"
+            aria-label={uiText.text_35cb5e51737d}
             type="file"
             accept={submissionFileAccept}
             disabled={disabled || busy || !!pending}
@@ -196,10 +200,8 @@ export function SubmissionFiles({
           />
         </label>
       )}
-      {editable && disabled && (
-        <p className={s.hint}>پیش از تغییر پیوست، پاسخ متنی را ذخیره کنید.</p>
-      )}
-      {!value.attachments.length && <p className={s.hint}>پیوستی ثبت نشده است.</p>}
+      {editable && disabled && <p className={s.hint}>{uiText.text_ac916da78819}</p>}
+      {!value.attachments.length && <p className={s.hint}>{uiText.text_4748e6b9891c}</p>}
       {value.attachments.map((file) => {
         const Icon = file.contentType === 'application/pdf' ? FileText : FileImage;
         return (
@@ -212,18 +214,19 @@ export function SubmissionFiles({
                   'fa-IR',
                   { maximumFractionDigits: 1 },
                 )}{' '}
-                {file.sizeBytes < 1024 ? 'بایت' : 'کیلوبایت'} ·{' '}
+                {file.sizeBytes < 1024 ? uiText.text_1126b74c039f : uiText.text_324fedf3e688}
+                {uiText.text_78887da22764}{' '}
                 {file.fileStatus === 'Ready'
-                  ? 'آماده'
+                  ? uiText.text_376e9c9561e2
                   : file.fileStatus === 'Pending'
-                    ? 'در حال بررسی'
-                    : 'در دسترس نیست'}
+                    ? uiText.text_f71cd91dad22
+                    : uiText.text_cf473a776359}
               </small>
             </span>
             <Button
               size="icon"
               variant="ghost"
-              aria-label={'دریافت ' + file.originalFileName}
+              aria-label={uiText.text_1e229eb338a6 + file.originalFileName}
               disabled={busy || file.fileStatus !== 'Ready'}
               onClick={() => void download(file)}
             >
@@ -233,7 +236,7 @@ export function SubmissionFiles({
               <Button
                 size="icon"
                 variant="ghost"
-                aria-label={'حذف ' + file.originalFileName}
+                aria-label={uiText.text_454d4aebcf48 + file.originalFileName}
                 disabled={disabled || busy}
                 onClick={() => void change(undefined, file.fileAssetId)}
               >
@@ -247,23 +250,27 @@ export function SubmissionFiles({
         <div>
           <p>{pending.originalFileName}</p>
           <Button variant="outline" disabled={busy || disabled} onClick={() => void change()}>
-            {pending.status === 'Ready' ? 'افزودن فایل آماده‌شده' : 'بررسی وضعیت فایل'}
+            {pending.status === 'Ready' ? uiText.text_6bbd07a24946 : uiText.text_64197e65a1c9}
           </Button>
           <Button variant="ghost" disabled={busy} onClick={() => setPending(undefined)}>
-            کنار گذاشتن فایل انتخاب‌شده
+            {uiText.text_f03f62ba4a5a}
           </Button>
         </div>
       )}
       {busy && (
         <div role="status">
-          <p>{progress?.phase === 'downloading' ? 'در حال دریافت فایل…' : 'در حال ثبت پیوست…'}</p>
+          <p>
+            {progress?.phase === 'downloading'
+              ? uiText.text_1cf79c5c02d8
+              : uiText.text_07aba39257cf}
+          </p>
           <progress
-            aria-label="پیشرفت انتقال پیوست پاسخ"
+            aria-label={uiText.text_9e8687e29590}
             max={progress?.total ?? undefined}
             value={progress?.loaded}
           />
           <Button variant="ghost" onClick={() => abort.current?.abort()}>
-            لغو انتقال
+            {uiText.text_a6419190d700}
           </Button>
         </div>
       )}

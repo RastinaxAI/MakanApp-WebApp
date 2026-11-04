@@ -1,0 +1,13 @@
+{
+  "checkedAtUtc": "2026-11-02T07:48:04.429Z",
+  "url": "http://127.0.0.1:3133/enter",
+  "backend": "http://94.184.32.84:8090",
+  "status": 200,
+  "cssStatuses": [
+    200,
+    200
+  ],
+  "fixture": false,
+  "sessionConfigurationPreserved": true,
+  "publicDeployment": false
+}

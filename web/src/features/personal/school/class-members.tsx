@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { usePersonal } from '../provider';
@@ -17,10 +18,12 @@ export function ClassMembersOverview({ classId }: { classId: string }) {
       {manage && (
         <div className={school.toolbar}>
           <Button asChild>
-            <Link href={`${base}/classes/${classId}/enrollments/new`}>ثبت‌نام دانش‌آموز</Link>
+            <Link href={`${base}/classes/${classId}/enrollments/new`}>
+              {uiText.text_e82efffd7b2d}
+            </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href={`${base}/classes/${classId}/teachers/new`}>انتساب معلم</Link>
+            <Link href={`${base}/classes/${classId}/teachers/new`}>{uiText.text_0766ac45d984}</Link>
           </Button>
         </div>
       )}

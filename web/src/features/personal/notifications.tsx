@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
@@ -24,15 +25,15 @@ export function NotificationsPage() {
     <div className={s.page}>
       <header className={s.heading}>
         <div>
-          <h1>اعلان‌های من</h1>
-          <p>خبرهای مرتبط با حساب و فعالیت‌های مجاز شما</p>
+          <h1>{uiText.text_921314c1d2ff}</h1>
+          <p>{uiText.text_d2c4b63c4bf8}</p>
         </div>
         <Button asChild variant="outline">
-          <Link href="/personal/settings/notifications">تنظیمات اعلان</Link>
+          <Link href="/personal/settings/notifications">{uiText.text_49a3bb5d02f6}</Link>
         </Button>
       </header>
       <label className={s.toggle}>
-        فقط خوانده‌نشده‌ها
+        {uiText.text_98328e62b409}
         <input
           type="checkbox"
           checked={unread}
@@ -65,21 +66,18 @@ export function NotificationsPage() {
                   <article key={item.id} className={`${s.card} ${!item.readAtUtc ? s.unread : ''}`}>
                     <h2>{item.title}</h2>
                     <small className={s.muted}>
-                      {date(item.createdAtUtc, true)} ·{' '}
-                      {item.readAtUtc ? 'خوانده‌شده' : 'خوانده‌نشده'}
+                      {date(item.createdAtUtc, true)}
+                      {uiText.text_78887da22764}{' '}
+                      {item.readAtUtc ? uiText.text_04a0052037db : uiText.text_55bbc66fe277}
                     </small>
                     <p className={s.body}>{item.body}</p>
                     <div className={s.actions}>
                       {target && sameContext && (
                         <Button asChild variant="outline">
-                          <Link href={target}>مشاهدهٔ مورد مرتبط</Link>
+                          <Link href={target}>{uiText.text_515ee981f4a0}</Link>
                         </Button>
                       )}
-                      {!sameContext && (
-                        <p className={s.muted}>
-                          برای مشاهدهٔ منبع، ابتدا آموزشگاه مرتبط را از انتخابگر فضا انتخاب کنید.
-                        </p>
-                      )}
+                      {!sameContext && <p className={s.muted}>{uiText.text_f707420decb3}</p>}
                       {!item.readAtUtc && (
                         <Button
                           disabled={!!busy}
@@ -99,7 +97,7 @@ export function NotificationsPage() {
                             }
                           }}
                         >
-                          علامت‌گذاری به‌عنوان خوانده‌شده
+                          {uiText.text_cb1e79eee77e}
                         </Button>
                       )}
                     </div>
@@ -107,7 +105,7 @@ export function NotificationsPage() {
                 );
               })
             ) : (
-              <EmptyState title="اعلانی برای نمایش نیست" />
+              <EmptyState title={uiText.text_1999b6d24abb} />
             )}
           </div>
           <Pager page={page} size={q.data.pageSize} total={q.data.totalCount} onChange={setPage} />

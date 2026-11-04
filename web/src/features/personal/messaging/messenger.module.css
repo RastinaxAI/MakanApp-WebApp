@@ -1,4 +1,4 @@
-/* Account inbox and Direct-style conversation, adapted to Makan RTL navigation. */
+/* Current Makan reference: a continuous inbox with compact, semantic controls. */
 .messenger {
   display: grid;
   grid-template-columns: 350px minmax(0, 1fr);
@@ -29,8 +29,8 @@
 .listHeader h1 {
   flex: 1;
   min-width: 0;
-  font-size: 23px;
-  font-weight: 700;
+  font-size: 21px;
+  font-weight: 650;
 }
 .listHeader > a {
   width: 44px;
@@ -39,7 +39,7 @@
   place-items: center;
   border: 0;
   border-radius: 8px;
-  color: var(--text);
+  color: var(--primary);
   background: transparent;
 }
 .listHeader > a:hover {
@@ -52,14 +52,14 @@
   place-items: center;
   border: 0;
   border-radius: 8px;
-  color: var(--text);
+  color: var(--primary);
   background: transparent;
 }
 .floating:hover {
   background: var(--soft);
 }
 .floating:focus-visible {
-  outline: 3px solid var(--primary);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
 .search {
@@ -76,14 +76,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  border-radius: 24px;
+  border-radius: 10px;
   background: var(--soft);
   flex: 1;
   min-width: 0;
   padding: 0 12px 0 2px;
 }
 .searchField:focus-within {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 .search input {
@@ -130,9 +130,9 @@
   border-bottom: 2px solid transparent;
 }
 .filter button[aria-pressed='true'] {
-  color: var(--text);
-  font-weight: 700;
-  border-bottom-color: var(--text);
+  color: var(--primary);
+  font-weight: 650;
+  border-bottom-color: var(--primary);
 }
 .filterTitle {
   display: flex;
@@ -163,8 +163,8 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 12px 14px;
-  min-height: 84px;
+  padding: 10px 14px;
+  min-height: 78px;
 }
 .chatItem:after {
   content: '';
@@ -192,21 +192,21 @@
   justify-content: center;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--soft);
-  color: var(--text);
-  border: 1px solid var(--border);
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
+  border: 0;
   font-size: 23px;
   font-weight: 600;
   overflow: hidden;
 }
 .chatItem:nth-of-type(3n + 2) .avatar {
-  background: var(--soft);
+  background: var(--avatar-bg);
 }
 .chatItem:nth-of-type(3n) .avatar {
-  background: var(--soft);
+  background: var(--avatar-bg);
 }
 .organizationAvatar {
-  background: var(--soft);
+  background: var(--avatar-bg);
 }
 .avatar svg {
   width: 28px;
@@ -430,7 +430,8 @@
 .dayDivider {
   align-self: center;
   color: var(--muted);
-  font-size: 12px;
+  background: var(--soft);
+  font-size: 11px;
   line-height: 24px;
   padding: 1px 12px;
   border-radius: 14px;
@@ -440,8 +441,8 @@
   position: relative;
   align-self: flex-start;
   background: var(--incoming-message);
-  border: 0;
-  border-radius: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px 14px 4px 14px;
   padding: 8px 12px 5px;
   max-width: min(84%, 540px);
   min-width: 80px;
@@ -452,14 +453,15 @@
 .own {
   align-self: flex-end;
   background: var(--chat-outgoing);
-  color: var(--on-primary);
-  border-radius: 18px;
+  color: var(--chat-outgoing-text);
+  border-color: transparent;
+  border-radius: 14px 14px 14px 4px;
 }
 .own .localStatus {
   color: var(--chat-outgoing-meta);
 }
 .own .pendingActions :global(.button) {
-  color: var(--on-primary);
+  color: var(--chat-outgoing-text);
 }
 .bubble p {
   white-space: pre-wrap;
@@ -531,7 +533,7 @@
   padding: 4px;
 }
 .composeInput:focus-within {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--focus);
   outline-offset: 1px;
 }
 .composeInput textarea:focus-visible {
@@ -590,7 +592,7 @@
   display: flex;
   align-items: center;
   padding: 0 12px;
-  background: var(--soft);
+  background: var(--surface);
 }
 .composer textarea {
   width: 100%;
@@ -707,13 +709,13 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  color: #fff;
-  background: #56778b77;
+  color: var(--primary);
+  background: var(--primary-soft);
 }
 .emptyRoom h2,
 .emptyRoom p {
-  background: #50657999;
-  color: #fff;
+  background: transparent;
+  color: var(--muted);
   border-radius: 16px;
   padding: 6px 16px;
   font-size: 13px;
@@ -794,5 +796,272 @@
   }
   .composerArea {
     padding-inline: 4px;
+  }
+}
+
+/* Group/channel messages in the supplied kit are sender-led rows, not bubbles. */
+.messageContent {
+  min-width: 0;
+}
+.feedMessage {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  align-self: stretch;
+  width: 100%;
+  max-width: none;
+  padding: 8px 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--text);
+  background: transparent;
+}
+.feedMessage.own {
+  color: var(--text);
+  background: transparent;
+}
+.senderAvatar {
+  width: 36px;
+  height: 36px;
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
+  font-size: 16px;
+}
+.feedMessage .messageSender {
+  margin-bottom: 2px;
+  color: var(--text);
+  font-size: 13px;
+}
+.feedMessage .messageMeta,
+.feedMessage .readTick {
+  color: var(--muted);
+}
+.feedMessage .messageMeta {
+  justify-content: flex-start;
+  padding-top: 3px;
+}
+.feedMessage .messageOptions {
+  bottom: auto;
+  top: 0;
+}
+.feedMessage .attachments {
+  max-width: 480px;
+}
+.room[data-conversation-type='Direct'] .history,
+.room[data-conversation-type='Saved'] .history {
+  background: var(--bg);
+}
+
+.listHeader .inboxAccount {
+  display: flex;
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  justify-content: flex-start;
+  gap: 10px;
+  color: var(--text);
+}
+.inboxAccount > span:last-child {
+  min-width: 0;
+}
+.inboxAccount strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.inboxAccount small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.accountAvatar {
+  width: 42px;
+  height: 42px;
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
+  font-size: 18px;
+}
+
+:global(:root[data-theme='dark']) .sidebar,
+:global(:root[data-theme='dark']) .room[data-conversation-type='Group'],
+:global(:root[data-theme='dark']) .room[data-conversation-type='Channel'] {
+  background: var(--bg);
+  --chat-background: var(--bg);
+}
+
+/* MK-35/51: preserve account cursors, replay and outbox; change presentation. */
+.sidebar {
+  background: var(--bg);
+}
+.listHeader {
+  height: 76px;
+  min-height: 76px;
+  padding: 8px 18px 12px;
+}
+.inboxHeading {
+  flex: 1;
+  min-width: 0;
+}
+.inboxHeading h1 {
+  font-size: 23px;
+  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.inboxHeading p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.floating {
+  position: static;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  flex: none;
+  background: transparent;
+  color: var(--header-icon);
+  border: 0;
+  border-radius: 12px;
+  box-shadow: none;
+}
+.listHeader .floating > svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.8;
+}
+.search {
+  padding: 2px 18px 12px;
+}
+.searchField {
+  border-radius: 12px;
+  background: var(--soft);
+}
+.searchSubmit {
+  order: -1;
+  color: var(--muted);
+  width: 44px;
+  min-width: 44px;
+}
+.filter {
+  border: 0;
+  gap: 8px;
+  justify-content: flex-start;
+  margin: 0 18px 12px;
+}
+.filter button {
+  flex: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-height: 34px;
+  padding: 5px 11px;
+  background: var(--surface);
+  font-size: 12px;
+}
+.filter button[aria-pressed='true'] {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  font-weight: 500;
+}
+.chatItem {
+  min-height: 79px;
+  padding: 13px 2px;
+  gap: 11px;
+  margin-inline: 18px;
+  width: calc(100% - 36px);
+  border-bottom: 1px solid var(--border);
+}
+.chatItem:after {
+  display: none;
+}
+.avatar {
+  width: 44px;
+  height: 44px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.avatar svg {
+  width: 22px;
+  height: 22px;
+}
+.chatSummary strong {
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+.preview {
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 5px;
+}
+.chatSummary time {
+  font-size: 10px;
+}
+.unread {
+  border-radius: 7px;
+  font-size: 10px;
+}
+.roomHeader {
+  min-height: 76px;
+  border-bottom: 0;
+  background: var(--bg);
+}
+.bubble {
+  border-radius: 16px;
+}
+
+/* MK-32: sender-labelled bubbles use the same geometry as direct messages. */
+.feedMessage {
+  display: block;
+  align-self: flex-start;
+  width: auto;
+  max-width: min(84%, 540px);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 16px 4px 16px 16px;
+  background: var(--surface);
+}
+.feedMessage.own {
+  align-self: flex-end;
+  background: var(--chat-outgoing);
+  color: var(--chat-outgoing-text);
+  border-color: transparent;
+  border-radius: 4px 16px 16px 16px;
+}
+.feedMessage .senderAvatar {
+  display: none;
+}
+.feedMessage .messageSender {
+  font-size: 11px;
+  color: var(--primary);
+  margin-bottom: 7px;
+}
+.feedMessage .messageMeta {
+  justify-content: flex-end;
+  color: var(--muted);
+}
+.messageMenuBackdrop {
+  display: none;
+}
+.messageMenuTitle {
+  padding: 8px 12px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+@media (max-width: 767px) {
+  .messageMenuBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: #19322e66;
+    z-index: 1100;
+    pointer-events: auto;
   }
 }

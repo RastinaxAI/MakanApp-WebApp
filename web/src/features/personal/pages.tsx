@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton, label } from '@/components/ui/states';
@@ -14,6 +15,8 @@ import {
   UserRound,
   Wallet,
   Settings,
+  Pencil,
+  Camera,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -38,38 +41,38 @@ export function PersonalHome() {
     : null;
   const cards = [
     {
-      title: 'پیام‌ها و مخاطبین',
-      description: 'گفت‌وگوها و دفترچهٔ مخاطبین خود را ببینید.',
+      title: uiText.text_58b634557905,
+      description: uiText.text_be6ad26a2907,
       href: '/personal/messages',
       icon: MessageCircle,
     },
     {
-      title: 'حساب و پروفایل',
-      description: 'اطلاعات فردی و وضعیت امکان ارتباط خود را بررسی کنید.',
+      title: uiText.text_2cb3fe307efb,
+      description: uiText.text_bc5dba82dc68,
       href: '/personal/profile',
       icon: UserRound,
     },
     {
-      title: 'آموزشگاه‌های من',
-      description: 'عضویت‌ها و نقش‌های مجاز خود را انتخاب کنید.',
+      title: uiText.text_8fa4122032f4,
+      description: uiText.text_38f053ad5286,
       href: '/personal/education',
       icon: GraduationCap,
     },
     {
-      title: 'منابع من',
-      description: 'فضای منابع شخصی، مستقل از آموزشگاه.',
+      title: uiText.text_3a2a401438ce,
+      description: uiText.text_cd91c90b6565,
       href: '/personal/resources',
       icon: BookOpen,
     },
     {
-      title: 'یادگیری با AI',
-      description: 'منابع و محل مصرف را پیش از شروع بشناسید.',
+      title: uiText.text_b929671ed22f,
+      description: uiText.text_7efe1b3a70de,
       href: '/personal/ai',
       icon: Sparkles,
     },
     {
-      title: 'اشتراک و مصرف',
-      description: 'حق استفاده و مصرف فردی را جدا از سازمان ببینید.',
+      title: uiText.text_6b1ac4d74206,
+      description: uiText.text_d4a1c2a050f1,
       href: '/personal/subscription',
       icon: Wallet,
     },
@@ -77,21 +80,27 @@ export function PersonalHome() {
   return (
     <>
       <div className={s.heading}>
-        <span>{session.context.workspaceType === 'Personal' ? 'فضای شخصی' : 'فضای آموزشگاه'}</span>
+        <span>
+          {session.context.workspaceType === 'Personal'
+            ? uiText.text_ab3c684df5df
+            : uiText.text_7298890ac877}
+        </span>
         <h1>
-          {session.user.firstName ? `${session.user.firstName}، خوش آمدید` : 'به ماکان خوش آمدید'}
+          {session.user.firstName
+            ? uiText.format_3d34ebe177d6(session.user.firstName)
+            : uiText.text_faa9d5e66033}
         </h1>
-        <p>گفت‌وگو و یادگیری شما، در یک فضای روشن.</p>
+        <p>{uiText.text_b9c5b60f445c}</p>
       </div>
       {!session.user.isProfileComplete && (
         <div className={s.notice}>
           <UserRound size={22} />
           <p>
-            <strong>پروفایل شما نیاز به تکمیل دارد</strong>
-            <span>اطلاعات خواسته‌شده را بررسی کنید؛ وضعیت ارتباطات جداگانه مشخص می‌شود.</span>
+            <strong>{uiText.text_338907839d78}</strong>
+            <span>{uiText.text_878db5df132b}</span>
           </p>
           <Button asChild variant="outline">
-            <Link href="/personal/profile/edit">تکمیل پروفایل</Link>
+            <Link href="/personal/profile/edit">{uiText.text_dc1e77f52af9}</Link>
           </Button>
         </div>
       )}
@@ -100,10 +109,10 @@ export function PersonalHome() {
       ) : organizationCount === 0 ? (
         <div className={s.personalNote}>
           <ShieldCheck size={20} />
-          <p>هنوز عضو آموزشگاهی نیستید. حساب و امکانات شخصی مجاز شما برقرار است.</p>
+          <p>{uiText.text_97abd9bfcbc0}</p>
         </div>
       ) : organizationCount !== null ? (
-        <p className={s.muted}>فضاهای آموزشگاهی شما از بخش «آموزشگاه» در دسترس‌اند.</p>
+        <p className={s.muted}>{uiText.text_4ee5ce4fd1a6}</p>
       ) : null}
       <div className={s.cards}>
         {cards.map((card) => (
@@ -114,7 +123,8 @@ export function PersonalHome() {
             <h2>{card.title}</h2>
             <p>{card.description}</p>
             <span className={s.cardAction}>
-              مشاهده <span aria-hidden="true">←</span>
+              {uiText.text_52fa408fc93a}
+              <span aria-hidden="true">{uiText.text_774f1d6b2910}</span>
             </span>
           </Link>
         ))}
@@ -135,56 +145,65 @@ export function PersonalProfile() {
           <div className={p.identity}>
             <ProfileAvatar
               photo={user.profilePhoto}
-              name={user.displayName || user.firstName || 'حساب من'}
+              name={user.displayName || user.firstName || uiText.text_8b4cb595cd35}
               className={p.avatar}
             />
+            <Link href="/personal/profile/edit" className={p.photoLink}>
+              <Camera size={16} />
+              {uiText.text_7b5ff0b44aec}
+            </Link>
             <div>
               <h1>
                 {user.displayName ||
                   [user.firstName, user.lastName].filter(Boolean).join(' ') ||
-                  'حساب ماکان'}
+                  uiText.text_d34d90474c92}
               </h1>
-              <p>{user.username ? <bdi dir="ltr">{user.username}</bdi> : 'نام کاربری ثبت نشده'}</p>
+              <p>
+                {user.username ? <bdi dir="ltr">{user.username}</bdi> : uiText.text_becb77371bdf}
+              </p>
               <span className={p.status}>
                 {label(session.context.activeRole ?? 'Personal')}
-                {!user.isProfileComplete ? ' · نیازمند تکمیل اطلاعات' : ''}
+                {!user.isProfileComplete ? uiText.text_109865fd7239 : ''}
               </span>
             </div>
           </div>
         </section>
         <div className={p.actions}>
           <Button asChild variant="outline" className={p.edit}>
-            <Link href="/personal/profile/edit">ویرایش پروفایل</Link>
+            <Link href="/personal/profile/edit">
+              <Pencil size={20} />
+              <span>{uiText.text_7f941e8233a2}</span>
+            </Link>
           </Button>
           <Button asChild variant="outline" className={p.edit}>
             <Link href="/personal/profile/preferences">
-              <Settings size={18} />
-              حساب و ترجیحات
+              <Settings size={20} />
+              <span>{uiText.text_8aa6893911d9}</span>
             </Link>
           </Button>
         </div>
         <ProfileSpaces />
-        <section className={p.infoCard} aria-label="مشخصات فردی">
-          <h2>مشخصات فردی</h2>
+        <section className={p.infoCard} aria-label={uiText.text_61d235c5d463}>
+          <h2>{uiText.text_61d235c5d463}</h2>
           <dl className={p.infoFields}>
             <div>
-              <dt>نام</dt>
-              <dd>{user.firstName || 'ثبت نشده'}</dd>
+              <dt>{uiText.text_69c1e5b1fe20}</dt>
+              <dd>{user.firstName || uiText.text_5749a86140fa}</dd>
             </div>
             <div>
-              <dt>نام خانوادگی</dt>
-              <dd>{user.lastName || 'ثبت نشده'}</dd>
+              <dt>{uiText.text_3fe7ba4a2131}</dt>
+              <dd>{user.lastName || uiText.text_5749a86140fa}</dd>
             </div>
             <div>
-              <dt>نام نمایشی</dt>
-              <dd>{user.displayName || 'ثبت نشده'}</dd>
+              <dt>{uiText.text_5903c1c121cb}</dt>
+              <dd>{user.displayName || uiText.text_5749a86140fa}</dd>
             </div>
             <div>
-              <dt>تاریخ تولد خوداظهاری</dt>
+              <dt>{uiText.text_2690bee9ac93}</dt>
               <dd>{displayDateOnly(user.dateOfBirth)}</dd>
             </div>
             <div>
-              <dt>شمارهٔ همراه</dt>
+              <dt>{uiText.text_d7429b08c9cf}</dt>
               <dd>
                 <bdi dir="ltr">{user.phoneNumber}</bdi>
               </dd>
@@ -192,8 +211,8 @@ export function PersonalProfile() {
           </dl>
         </section>
         <AccountIdentifier id={user.id} />
-        <section className={p.infoCard} aria-label="وضعیت سنی">
-          <h2>وضعیت سنی</h2>
+        <section className={p.infoCard} aria-label={uiText.text_7511feb9767e}>
+          <h2>{uiText.text_7511feb9767e}</h2>
           {status.isPending ? (
             <LoadingSkeleton />
           ) : status.isError ? (
@@ -201,23 +220,23 @@ export function PersonalProfile() {
           ) : (
             <dl className={p.infoFields}>
               <div>
-                <dt>بررسی سن</dt>
+                <dt>{uiText.text_f56cfcd67f9c}</dt>
                 <dd>{ageVerificationLabels[status.data.verificationStatus]}</dd>
               </div>
               <div>
-                <dt>ردهٔ سنی</dt>
+                <dt>{uiText.text_c97a6f291fe6}</dt>
                 <dd>{ageCategoryLabels[status.data.effectiveAgeCategory]}</dd>
               </div>
               <div>
-                <dt>اقدام بعدی</dt>
+                <dt>{uiText.text_96b3a0fde540}</dt>
                 <dd>{messagingNextLabels[status.data.nextAction]}</dd>
               </div>
             </dl>
           )}
         </section>
-        <Button variant="destructive" onClick={() => void logout()}>
+        <Button variant="ghost" className={p.logout} onClick={() => void logout()}>
           <LogOut size={17} />
-          خروج از حساب
+          {uiText.account_logout}
         </Button>
       </div>
     </div>
@@ -229,8 +248,8 @@ function ProfileSpaces() {
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<unknown>();
   return (
-    <section className={p.links} aria-label="فضاهای من">
-      <h2>فضاهای من</h2>
+    <section className={p.links} aria-label={uiText.text_8b5aed7deee2}>
+      <h2>{uiText.text_8b5aed7deee2}</h2>
       {spaces.isPending ? (
         <LoadingSkeleton />
       ) : spaces.isError ? (
@@ -272,15 +291,15 @@ function ProfileSpaces() {
                 )}
               </span>
               <span>
-                <strong>{space.organizationName || 'حساب شخصی'}</strong>
+                <strong>{space.organizationName || uiText.text_d034f3bcfe7f}</strong>
                 <small>
                   {space.workspaceType === 'Personal'
-                    ? 'پیام‌ها و مخاطبین شما'
+                    ? uiText.text_3b528d2db9f6
                     : label(space.role ?? '')}
                   {space.workspaceType === session.context.workspaceType &&
                   space.role === session.context.activeRole &&
                   space.membershipId === session.context.membershipId
-                    ? ' · فضای فعال'
+                    ? uiText.text_67978642ed7f
                     : ''}
                 </small>
               </span>
@@ -298,8 +317,8 @@ function AccountIdentifier({ id }: { id: string }) {
   const [copied, setCopied] = useState(false),
     [failed, setFailed] = useState(false);
   return (
-    <section className={p.infoCard} aria-label="شناسهٔ حساب">
-      <h2>شناسهٔ حساب</h2>
+    <section className={p.infoCard} aria-label={uiText.text_89b515f684ce}>
+      <h2>{uiText.text_89b515f684ce}</h2>
       <p>
         <bdi dir="ltr">{id}</bdi>
       </p>
@@ -315,36 +334,36 @@ function AccountIdentifier({ id }: { id: string }) {
           }
         }}
       >
-        کپی شناسهٔ حساب
+        {uiText.text_72c0b5c79c22}
       </Button>
-      {copied && <p role="status">شناسه کپی شد.</p>}
-      {failed && <p role="status">کپی خودکار انجام نشد؛ شناسه را انتخاب و کپی کنید.</p>}
+      {copied && <p role="status">{uiText.text_a0a416aef2e7}</p>}
+      {failed && <p role="status">{uiText.text_59a007742acf}</p>}
     </section>
   );
 }
 export function PersonalPending({ area }: { area: 'resources' | 'ai' | 'subscription' }) {
   const info = {
     resources: {
-      title: 'منابع من',
-      text: 'مدیریت منابع شخصی و آماده‌سازی آن‌ها برای یادگیری هنوز در دسترس نیست.',
+      title: uiText.text_3a2a401438ce,
+      text: uiText.text_dfa644fe2ec0,
     },
     ai: {
-      title: 'یادگیری با AI',
-      text: 'این خدمت در حال حاضر فعال نیست. انتخاب منابع، مدل و محل مصرف پیش از شروع مشخص خواهد شد.',
+      title: uiText.text_b929671ed22f,
+      text: uiText.text_bf28dfb51c5d,
     },
     subscription: {
-      title: 'اشتراک و مصرف شخصی',
-      text: 'اطلاعات اشتراک فردی و مسیر خرید آن هنوز در دسترس نیست. اشتراک آموزشگاه از حساب شخصی شما جداست.',
+      title: uiText.text_ab67aa4d93be,
+      text: uiText.text_fb5f200e68b3,
     },
   }[area];
   return (
     <>
       <div className={s.heading}>
-        <span>فضای شخصی</span>
+        <span>{uiText.text_ab3c684df5df}</span>
         <h1>{info.title}</h1>
       </div>
       <section className={s.profileCard}>
-        <EmptyState title="این بخش هنوز آمادهٔ استفاده نیست" description={info.text} />
+        <EmptyState title={uiText.text_177460222287} description={info.text} />
         <PageBack href="/personal" />
       </section>
     </>

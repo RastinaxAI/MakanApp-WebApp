@@ -1,4 +1,5 @@
-import { MakanAssistant } from '@/features/personal/assistant';
+import { ReferenceAssistant } from '@/features/reference/connected-assistant';
+export const dynamic = 'force-dynamic';
 export default function Page() {
-  return <MakanAssistant />;
+  return <ReferenceAssistant previewEnabled={process.env.MAKAN_REFERENCE_PREVIEW === 'true'} />;
 }

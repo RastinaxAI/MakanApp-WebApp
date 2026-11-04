@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useId, useRef } from 'react';
 import {
   Paperclip,
@@ -55,22 +56,25 @@ export function LessonAttachmentEditor({
     ? Math.min(100, Math.round((progress.loaded / progress.total) * 100))
     : null;
   return (
-    <section className={s.panel} aria-label="پیوست‌های درس" aria-busy={uploading}>
+    <section className={s.panel} aria-label={uiText.text_968ea718e159} aria-busy={uploading}>
       <header className={s.heading}>
         <span className={s.icon}>
           <Paperclip size={22} />
         </span>
         <div>
-          <h2>پیوست‌های درس</h2>
-          <p>فایل‌های آموزشی را انتخاب کنید؛ پس از آماده‌شدن همراه درس ذخیره می‌شوند.</p>
+          <h2>{uiText.text_968ea718e159}</h2>
+          <p>{uiText.text_35b7da5aa84f}</p>
         </div>
-        <span className={s.count}>{assets.length.toLocaleString('fa-IR')} فایل</span>
+        <span className={s.count}>
+          {assets.length.toLocaleString('fa-IR')}
+          {uiText.text_8db870221ba1}
+        </span>
       </header>
       <div className={s.picker}>
         <Upload size={27} />
         <div>
-          <strong>جزوه، تصویر یا فایل آموزشی</strong>
-          <p id={id}>هر فایل را انتخاب کنید و تا پایان بارگذاری منتظر بمانید.</p>
+          <strong>{uiText.text_42c335b87f14}</strong>
+          <p id={id}>{uiText.text_1efc73ab12b4}</p>
         </div>
         <Button
           type="button"
@@ -79,7 +83,7 @@ export function LessonAttachmentEditor({
           onClick={() => input.current?.click()}
         >
           <Upload size={18} />
-          انتخاب فایل
+          {uiText.text_eef3e6a8a691}
         </Button>
         <input
           ref={input}
@@ -87,7 +91,7 @@ export function LessonAttachmentEditor({
           className={s.fileInput}
           tabIndex={-1}
           disabled={disabled || uploading || !!pending}
-          aria-label="پیوست درس"
+          aria-label={uiText.text_ab79179420ee}
           aria-describedby={id}
           onChange={(ev) => {
             const file = ev.target.files?.[0];
@@ -110,8 +114,10 @@ export function LessonAttachmentEditor({
               <div>
                 <strong dir="auto">{asset.name}</strong>
                 <small>
-                  {asset.sizeBytes === undefined ? 'فایل پیوست' : formatFileSize(asset.sizeBytes)}
-                  {asset.status === 'Ready' ? ' · آمادهٔ ذخیره' : ''}
+                  {asset.sizeBytes === undefined
+                    ? uiText.text_fbfd46e53247
+                    : formatFileSize(asset.sizeBytes)}
+                  {asset.status === 'Ready' ? uiText.text_1bf987f717ef : ''}
                 </small>
               </div>
               {asset.status === 'Ready' && <CheckCircle2 size={18} className={s.ready} />}
@@ -120,7 +126,7 @@ export function LessonAttachmentEditor({
                 variant="ghost"
                 size="icon"
                 disabled={disabled || uploading}
-                aria-label={'حذف پیوست ' + asset.name}
+                aria-label={uiText.text_d3f1f47d3218 + asset.name}
                 onClick={() => onRemove(asset.id)}
               >
                 <Trash2 size={18} />
@@ -133,18 +139,22 @@ export function LessonAttachmentEditor({
         <div className={s.progress} role="status">
           <div>
             <strong>
-              {progress?.phase === 'processing' ? 'در حال بررسی فایل…' : 'در حال بارگذاری…'}
+              {progress?.phase === 'processing'
+                ? uiText.text_e06356df9cbf
+                : uiText.text_b4ad4b31d4f7}
             </strong>
-            <span>{percent === null ? '' : percent.toLocaleString('fa-IR') + '٪'}</span>
+            <span>
+              {percent === null ? '' : percent.toLocaleString('fa-IR') + uiText.text_a489ae36a167}
+            </span>
           </div>
           <progress
-            aria-label="پیشرفت بارگذاری جزوه"
+            aria-label={uiText.text_b5aeb593a9f9}
             max={progress?.total ?? undefined}
             value={progress?.total ? progress.loaded : undefined}
           />
           <Button type="button" variant="ghost" onClick={onCancel}>
             <X size={17} />
-            لغو بارگذاری
+            {uiText.text_f5bcc4fdc106}
           </Button>
         </div>
       )}
@@ -154,9 +164,7 @@ export function LessonAttachmentEditor({
           <div>
             <strong dir="auto">{pending.originalFileName}</strong>
             <p role="status">
-              {pending.status === 'Pending'
-                ? 'فایل در حال بررسی است؛ هنوز به پیوست‌های درس اضافه نشده.'
-                : 'این فایل برای پیوست قابل استفاده نیست؛ فایل دیگری انتخاب کنید.'}
+              {pending.status === 'Pending' ? uiText.text_ab2b2b678ccc : uiText.text_c93466e60cc4}
             </p>
             <div className={s.actions}>
               {pending.status === 'Pending' && (
@@ -166,7 +174,7 @@ export function LessonAttachmentEditor({
                   disabled={disabled || uploading}
                   onClick={onCheck}
                 >
-                  بررسی وضعیت فایل
+                  {uiText.text_64197e65a1c9}
                 </Button>
               )}
               <Button
@@ -175,7 +183,7 @@ export function LessonAttachmentEditor({
                 disabled={disabled || uploading}
                 onClick={onDismiss}
               >
-                کنار گذاشتن فایل
+                {uiText.text_0cce97418be8}
               </Button>
             </div>
           </div>

@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { PageBack } from '@/components/navigation/page-back';
 import { useSearchParams } from 'next/navigation';
@@ -25,11 +26,11 @@ import { date } from '@/lib/formatting';
 import s from './education-layout.module.css';
 type S = components['schemas'];
 const sections = [
-  ['sessions', 'جلسه‌ها', CalendarDays],
-  ['lessons', 'جزوه و کتاب‌ها', Library],
-  ['assignments', 'تکلیف‌ها', ClipboardList],
-  ['exams', 'آزمون‌ها', FileQuestion],
-  ['members', 'اعضای کلاس', Users],
+  ['sessions', uiText.text_92797051c40c, CalendarDays],
+  ['lessons', uiText.text_c75948a71a2d, Library],
+  ['assignments', uiText.text_e8fed4d47d62, ClipboardList],
+  ['exams', uiText.text_4f7293cf5780, FileQuestion],
+  ['members', uiText.text_29c02fa4bd09, Users],
 ] as const;
 export function ClassSectionNavigation({ id, members = false }: { id: string; members?: boolean }) {
   const visible = sections.filter(([key]) => key !== 'members' || members);
@@ -38,7 +39,7 @@ export function ClassSectionNavigation({ id, members = false }: { id: string; me
   return (
     <nav
       className={`${s.classTabs} ${members ? s.classTabsMembers : ''}`}
-      aria-label="بخش‌های کلاس"
+      aria-label={uiText.text_3f6941f28393}
     >
       {visible.map(([key, title, Icon]) => (
         <Link
@@ -84,7 +85,7 @@ export function ClassDetail({
       </header>
       <ClassSectionNavigation id={id} members={manager || teacher} />
       <OfficialSpaces classId={id} />
-      <section className={s.classContent} aria-label="محتوای کلاس">
+      <section className={s.classContent} aria-label={uiText.text_951b90b58d3d}>
         {tab === 'members' ? (
           manager || teacher ? (
             <ClassMembersOverview classId={id} />
@@ -128,8 +129,11 @@ export function ParentClasses({ id }: { id?: string }) {
       <div className={s.classPage}>
         <header className={s.classHeading}>
           <div>
-            <h1>کلاس‌های فرزند</h1>
-            <p>{d.selectedLearner.displayName} · کلاس‌های موجود در فعالیت‌های منتشرشده</p>
+            <h1>{uiText.text_ad3bf2c81977}</h1>
+            <p>
+              {d.selectedLearner.displayName}
+              {uiText.text_2655b36aa32c}
+            </p>
           </div>
         </header>
         {classes.size ? (
@@ -142,7 +146,7 @@ export function ParentClasses({ id }: { id?: string }) {
             ))}
           </div>
         ) : (
-          <EmptyState title="کلاسی در فعالیت‌های فرزند نمایش داده نشده است" />
+          <EmptyState title={uiText.text_48743e694ff4} />
         )}
       </div>
     );
@@ -170,7 +174,7 @@ export function ParentClasses({ id }: { id?: string }) {
       </header>
       <ClassSectionNavigation id={id} />
       {tab === 'lessons' ? (
-        <EmptyState title="نمایش جزوه‌ها برای حساب والد فعلاً در دسترس نیست" />
+        <EmptyState title={uiText.text_2a9b0d8ae50f} />
       ) : rows.length ? (
         <div className={s.parentItems}>
           {rows.map((row) => (
@@ -181,7 +185,7 @@ export function ParentClasses({ id }: { id?: string }) {
           ))}
         </div>
       ) : (
-        <EmptyState title="فعالیتی در این بخش نمایش داده نشده است" />
+        <EmptyState title={uiText.text_ca38497f0734} />
       )}
     </div>
   );

@@ -1,11 +1,14 @@
 /* Only public offline assets are cached. Authenticated pages and APIs are network-only. */
-const CACHE = 'makan-client-public-v5';
+importScripts('/ui-copy.js');
+const CACHE = 'makan-client-public-blue-v7';
 const isLegacyCache = (key) =>
+  (key.startsWith('makan-client-public-') && key !== CACHE) ||
   /^makan-[a-f0-9]{12}$/.test(key) ||
   key.startsWith('makan-public-') ||
   key.startsWith('makan-admin-public-');
 const PUBLIC_ASSETS = [
   '/offline.html',
+  '/ui-copy.js',
   '/icons/makan-192.png',
   '/icons/makan-512.png',
   '/icons/makan-maskable-512.png',
@@ -103,8 +106,8 @@ self.addEventListener('push', (event) => {
         String(payload.userId).toLowerCase() !== preferences.userId.toLowerCase()
       )
         return;
-      await self.registration.showNotification('اعلان تازه در ماکان', {
-        body: 'برای مشاهده اعلان و جزئیات آن، پنل را باز کنید.',
+      await self.registration.showNotification(self.MAKAN_PUBLIC_COPY.notificationTitle, {
+        body: self.MAKAN_PUBLIC_COPY.notificationBody,
         icon: '/icons/makan-192.png',
         badge: '/icons/makan-192.png',
         tag: 'makan-notification',

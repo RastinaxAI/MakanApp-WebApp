@@ -1,0 +1,28 @@
+{
+  "environment": "local production entry only; no OTP request or domain write",
+  "entryStatus": 200,
+  "previewStatus": 404,
+  "bytes": 806191,
+  "scripts": 13,
+  "ttfb": 249.90000000037253,
+  "paint": [
+    {
+      "name": "first-paint",
+      "entryType": "paint",
+      "startTime": 368,
+      "duration": 0,
+      "navigationId": 301,
+      "paintTime": 360.5,
+      "presentationTime": 368
+    },
+    {
+      "name": "first-contentful-paint",
+      "entryType": "paint",
+      "startTime": 368,
+      "duration": 0,
+      "navigationId": 301,
+      "paintTime": 360.5,
+      "presentationTime": 368
+    }
+  ]
+}

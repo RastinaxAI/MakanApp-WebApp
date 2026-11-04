@@ -83,7 +83,9 @@ test('dark inbox uses neutral surfaces, readable previews, underlined filters an
   await page.goto('/personal/messages');
   const inbox = page.getByLabel('فهرست گفتگوها', { exact: true });
   await expect(inbox.getByText('مریم رضایی', { exact: true })).toBeVisible();
-  expect(await inbox.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe('rgb(0, 0, 0)');
+  expect(await inbox.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(
+    'rgb(16, 26, 43)',
+  );
   const contrast = await inbox.evaluate((el) => {
     const luminance = (rgb: string) => {
       const [r, g, b] = rgb
@@ -131,7 +133,7 @@ test('dark inbox uses neutral surfaces, readable previews, underlined filters an
         );
       }),
     ).toBe(true);
-    if (width < 1024) {
+    if (width < 768) {
       const bottomNav = (await page
         .getByRole('navigation', { name: 'ناوبری حساب شخصی', exact: true })
         .boundingBox())!;

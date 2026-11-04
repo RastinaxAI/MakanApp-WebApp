@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { PageBack } from '@/components/navigation/page-back';
 import { useUnsavedChanges } from '@/components/hooks/use-unsaved-changes';
 import { Button } from '@/components/ui/button';
@@ -13,13 +14,13 @@ import { usePersonal, usePersonalApi } from './provider';
 import s from './account-services.module.css';
 type S = components['schemas'];
 export const notificationLabels: Record<S['NotificationPreferenceCategory'], string> = {
-  Messages: 'پیام‌ها',
-  Assignments: 'تکلیف‌ها',
-  Results: 'نتایج و ارزیابی',
-  Sessions: 'جلسه‌ها',
-  Reports: 'گزارش‌ها',
-  Invitations: 'دعوت‌ها',
-  AccountSecurity: 'امنیت حساب',
+  Messages: uiText.navigation_messages,
+  Assignments: uiText.text_e8fed4d47d62,
+  Results: uiText.text_aae3c4a0c257,
+  Sessions: uiText.text_92797051c40c,
+  Reports: uiText.text_5dc634b07b21,
+  Invitations: uiText.text_016c18389868,
+  AccountSecurity: uiText.text_36e2e9a2e4a1,
 };
 export function NotificationSettings({ category }: { category?: string }) {
   const { session } = usePersonal(),
@@ -43,9 +44,9 @@ export function NotificationSettings({ category }: { category?: string }) {
           <h1>
             {category
               ? notificationLabels[category as keyof typeof notificationLabels]
-              : 'تنظیمات اعلان‌ها'}
+              : uiText.text_161b7c8fcee3}
           </h1>
-          <p>دریافت اعلان را برای همین دامنه تنظیم کنید.</p>
+          <p>{uiText.text_cd1da22edb13}</p>
         </div>
         <PageBack
           href={
@@ -56,19 +57,19 @@ export function NotificationSettings({ category }: { category?: string }) {
         />
       </header>
       {!category && (
-        <nav className={s.scope} aria-label="دامنهٔ تنظیمات اعلان">
+        <nav className={s.scope} aria-label={uiText.text_327a658aba96}>
           <Link
             href="/personal/settings/notifications?scope=personal"
             aria-current={scope === 'personal' ? 'page' : undefined}
           >
-            حساب شخصی
+            {uiText.text_d034f3bcfe7f}
           </Link>
           {session.context.organizationId && (
             <Link
               href="/personal/settings/notifications?scope=organization"
               aria-current={scope === 'organization' ? 'page' : undefined}
             >
-              آموزشگاه فعال
+              {uiText.text_b05e4b9892e2}
             </Link>
           )}
         </nav>
@@ -92,7 +93,7 @@ export function NotificationSettings({ category }: { category?: string }) {
             }}
           />
         ) : (
-          <EmptyState title="تنظیمی برای این دسته گزارش نشده است" />
+          <EmptyState title={uiText.text_a1e394cdbcf2} />
         )
       ) : (
         <div className={s.list}>
@@ -110,18 +111,21 @@ export function NotificationSettings({ category }: { category?: string }) {
                   <div>
                     <strong>{notificationLabels[row.category]}</strong>
                     <small>
-                      اعلان برنامه: {row.inAppEnabled ? 'فعال' : 'غیرفعال'} · اعلان دستگاه:{' '}
-                      {row.pushEnabled ? 'فعال' : 'غیرفعال'} · پیامک:{' '}
-                      {row.smsEnabled ? 'فعال' : 'غیرفعال'}
+                      {uiText.text_b8451239c1bb}
+                      {row.inAppEnabled ? uiText.text_a3fa2a3ffcb9 : uiText.text_4e67bd8e3482}
+                      {uiText.text_de7d3b6c7249}{' '}
+                      {row.pushEnabled ? uiText.text_a3fa2a3ffcb9 : uiText.text_4e67bd8e3482}
+                      {uiText.text_86642a4557c6}{' '}
+                      {row.smsEnabled ? uiText.text_a3fa2a3ffcb9 : uiText.text_4e67bd8e3482}
                     </small>
-                    {row.isMandatory && <span className={s.badge}>دارای تنظیمات ضروری</span>}
+                    {row.isMandatory && <span className={s.badge}>{uiText.text_fd171c24dcfc}</span>}
                   </div>
                   <ChevronLeft size={18} />
                 </div>
               </Link>
             ))
           ) : (
-            <EmptyState title="تنظیمات اعلانی گزارش نشده است" />
+            <EmptyState title={uiText.text_63693d28fdf3} />
           )}
         </div>
       )}
@@ -191,7 +195,7 @@ function PreferenceForm({
     >
       <fieldset className={s.fields} disabled={busy}>
         <label className={s.toggle}>
-          اعلان دستگاه
+          {uiText.text_8c12a8350a0e}
           <input
             type="checkbox"
             checked={values.pushEnabled}
@@ -200,7 +204,7 @@ function PreferenceForm({
           />
         </label>
         <label className={s.toggle}>
-          پیامک
+          {uiText.text_c7362666bdce}
           <input
             type="checkbox"
             checked={values.smsEnabled}
@@ -208,12 +212,9 @@ function PreferenceForm({
             onChange={(e) => set('smsEnabled', e.target.checked)}
           />
         </label>
-        <p className={s.muted}>
-          گزینه‌های ضروری مطابق سیاست سرویس قابل غیرفعال‌کردن نیستند. اعلان دستگاه به فعال‌بودن
-          دریافت در همان دستگاه نیز وابسته است.
-        </p>
+        <p className={s.muted}>{uiText.text_d79df76cab90}</p>
         <label className={s.toggle}>
-          ساعت سکوت
+          {uiText.text_238a2f74addc}
           <input
             type="checkbox"
             checked={values.quietHoursEnabled}
@@ -228,7 +229,7 @@ function PreferenceForm({
           <>
             <div className={s.two}>
               <label>
-                شروع سکوت
+                {uiText.text_631f359ae660}
                 <input
                   required
                   type="time"
@@ -239,7 +240,7 @@ function PreferenceForm({
                 />
               </label>
               <label>
-                پایان سکوت
+                {uiText.text_988da0ee1c79}
                 <input
                   required
                   type="time"
@@ -251,7 +252,7 @@ function PreferenceForm({
               </label>
             </div>
             <label>
-              منطقهٔ زمانی
+              {uiText.text_9547b882b1cf}
               <input
                 required
                 type="text"
@@ -266,20 +267,19 @@ function PreferenceForm({
       {!!error && <ErrorState error={error} />}{' '}
       {saved && (
         <p role="status" className={s.badge}>
-          تنظیمات اعلان ثبت شد.
+          {uiText.text_083a0ab6b295}
         </p>
       )}
       <div className={s.actions}>
         <Button type="submit" disabled={busy || !dirty}>
-          {busy ? 'در حال ثبت…' : 'ثبت تنظیمات'}
+          {busy ? uiText.text_b5ef00b1806f : uiText.text_1d615f338733}
         </Button>
         <Button
           type="button"
           variant="outline"
           disabled={busy}
           onClick={async () => {
-            if (lock.current || (dirty && !window.confirm('تغییرات ثبت‌نشده کنار گذاشته شوند؟')))
-              return;
+            if (lock.current || (dirty && !window.confirm(uiText.text_e00522c63330))) return;
             lock.current = true;
             setBusy(true);
             try {
@@ -298,7 +298,7 @@ function PreferenceForm({
             }
           }}
         >
-          دریافت نسخهٔ تازه
+          {uiText.text_aae95f355460}
         </Button>
       </div>
     </form>

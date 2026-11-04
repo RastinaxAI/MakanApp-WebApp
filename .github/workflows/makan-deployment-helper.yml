@@ -1,9 +1,9 @@
 name: Makan server update helper
 on:
   push:
-    paths: ['setup.sh', '.gitattributes', 'readme.md', 'README.md', 'web/tests/deployment/**', '.github/workflows/makan-deployment-helper.yml']
+    paths: ['setup.sh', '.gitattributes', 'readme.md', 'README.md', 'web/tests/deployment/**', 'web/scripts/docker-start.mjs', 'web/scripts/validate-deployment.py', 'web/Dockerfile', 'web/.dockerignore', 'web/compose.yaml', 'web/config/network.json', '.github/workflows/makan-deployment-helper.yml']
   pull_request:
-    paths: ['setup.sh', '.gitattributes', 'readme.md', 'README.md', 'web/tests/deployment/**', '.github/workflows/makan-deployment-helper.yml']
+    paths: ['setup.sh', '.gitattributes', 'readme.md', 'README.md', 'web/tests/deployment/**', 'web/scripts/docker-start.mjs', 'web/scripts/validate-deployment.py', 'web/Dockerfile', 'web/.dockerignore', 'web/compose.yaml', 'web/config/network.json', '.github/workflows/makan-deployment-helper.yml']
 permissions:
   contents: read
 jobs:
@@ -12,6 +12,12 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - run: bash -n setup.sh
-      - run: docker pull node:22-bookworm-slim
+      - run: docker build -f web/tests/deployment/Dockerfile -t makan-deployment-test:local .
       - run: python3 web/tests/deployment/test_setup.py
+        env:
+          MAKAN_DEPLOY_TEST_IMAGE: makan-deployment-test:local
+      - run: python3 web/tests/deployment/test_runtime.py

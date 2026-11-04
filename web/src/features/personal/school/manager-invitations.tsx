@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { ArrowLeft, FolderSync, UserRoundPlus, UsersRound } from 'lucide-react';
 import { base, Card } from './shared';
@@ -8,32 +9,26 @@ import s from './manager-workspace.module.css';
 export function ManagerInvitations() {
   return (
     <div className={s.stack}>
-      <ManagerPageHeader
-        title="مدیریت دعوت‌های آموزشگاه"
-        description="دعوت والد را برای فرزند مشخص ارسال کنید و پرونده‌های نیازمند اتصال حساب را بررسی کنید."
-      />
-      <nav className={s.invitationActions} aria-label="اقدام‌های دعوت و عضویت">
+      <ManagerPageHeader title={uiText.text_141ab31cbb75} description={uiText.text_69a24d13a391} />
+      <nav className={s.invitationActions} aria-label={uiText.text_e61d50d522fa}>
         <Link className={s.primaryAction} href={base + '/guardians/new'}>
           <UserRoundPlus size={22} />
-          <span>دعوت والد برای دانش‌آموز</span>
+          <span>{uiText.text_afeb96c95c63}</span>
           <ArrowLeft size={17} />
         </Link>
         <Link href={base + '/people'}>
           <FolderSync size={22} />
-          <span>پرونده‌ها و اتصال حساب</span>
+          <span>{uiText.text_8987b66cfbc9}</span>
           <ArrowLeft size={17} />
         </Link>
         <Link href={base + '/members'}>
           <UsersRound size={22} />
-          <span>اعضای فعلی آموزشگاه</span>
+          <span>{uiText.text_48eb62b1b116}</span>
           <ArrowLeft size={17} />
         </Link>
       </nav>
-      <Card title="دعوت‌های ارسالی آموزشگاه">
-        <p className={s.hint}>
-          فهرست یکپارچهٔ دعوت‌های ارسالی هنوز در این بخش در دسترس نیست. پس از ارسال دعوت والد، وضعیت
-          و امکان لغو همان دعوت در رسید آن نمایش داده می‌شود.
-        </p>
+      <Card title={uiText.text_6b70a58fe33b}>
+        <p className={s.hint}>{uiText.text_a458251385ff}</p>
       </Card>
       <InvitationsPage />
     </div>

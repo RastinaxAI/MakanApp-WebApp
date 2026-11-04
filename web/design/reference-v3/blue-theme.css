@@ -1,0 +1,37 @@
+/* Brand reference: user-supplied blue mark. Geometry and typography are retained. */
+.sheet,.screen,.desktop,.tablet-inner,.component-board{
+ --brand:#156FEE;--action:#156FEE;--on-action:#FFFFFF;
+ --control-border:#8194B0;--focus:#246CE0;
+ --success:#21734D;--success-soft:#EAF7EF;
+ --danger:#AD343D;--badbg:#FCECEF;
+ --warning:#865800;--warnbg:#FFF4DF;
+}
+.screen.dark,.dark-ui{
+ --brand:#8CB7FF;--action:#8CB7FF;--on-action:#0D2345;
+ --control-border:#7288A8;--focus:#8CB7FF;
+ --success:#8ED8B0;--success-soft:#18342A;
+ --danger:#FFC1C6;--badbg:#46252F;
+ --warning:#F3CE85;--warnbg:#3D3219;
+}
+.btn:not(.secondary):not(.ghost):not(.danger):not(.disabled){
+ background:var(--action);border-color:var(--action);color:var(--on-action);
+}
+.screen.dark .btn.danger,.dark-ui .btn.danger{color:#4A1821}
+.date-cell.active,.stepper .done .dot{
+ background:var(--action);border-color:var(--action);color:var(--on-action);
+}
+.date-cell.active b{color:var(--on-action)}
+.input,.quiz-option,.edu-editor-option,.radio,.checkbox,.upload{border-color:var(--control-border)}
+.input.focused{outline-color:var(--focus)}
+.alert.good{background:var(--success-soft);color:var(--success)}
+.alert.good svg{color:var(--success)}
+.success-mark{background:var(--success-soft);color:var(--success)}
+.edu-save{color:var(--success)}
+.screen.dark .toggle::after,.dark-ui .toggle::after{background:#A2B4CE}
+.screen.dark .toggle.on::after,.dark-ui .toggle.on::after{background:var(--on-action)}
+.dest-num{color:#5B7394}
+.browserbar{color:#5B6E8B}
+.cover{background:linear-gradient(125deg,#EDF4FF 0%,#F8FBFF 55%,#E6F0FF 100%)}
+.cover .cover-kicker{color:var(--accent)}
+.cover .cover-kicker svg{color:var(--brand)}
+.cover .hero-annotation{background:#F8FBFF;border-color:#BDD2F0}

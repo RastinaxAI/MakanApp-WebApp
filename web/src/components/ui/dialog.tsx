@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { dismissJalaliPickerWithin } from '@/lib/jalali-picker-state';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
@@ -38,11 +39,11 @@ export function DialogContent({
           <div>
             <DialogPrimitive.Title>{title}</DialogPrimitive.Title>
             <DialogPrimitive.Description>
-              {description ?? 'اطلاعات را بررسی و سپس تأیید کنید.'}
+              {description ?? uiText.text_ac2d64a54b28}
             </DialogPrimitive.Description>
           </div>
           <DialogPrimitive.Close asChild>
-            <Button aria-label="بستن" size="icon" variant="ghost">
+            <Button aria-label={uiText.text_313cbecb4dd3} size="icon" variant="ghost">
               <X size={19} />
             </Button>
           </DialogPrimitive.Close>

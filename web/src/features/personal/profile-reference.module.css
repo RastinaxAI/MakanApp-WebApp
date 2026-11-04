@@ -1,57 +1,64 @@
+/* Telegram reference pp. 28-30: centered identity and inset grouped lists. */
 .page {
-  max-width: 840px;
-  margin-inline: auto;
   width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
 }
 .profile {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  display: grid;
+  gap: 20px;
   min-width: 0;
 }
-.unavailableRow {
-  display: flex;
-}
 .profileCard {
-  padding: 16px 0;
+  padding: 8px 16px 0;
 }
 .identity {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 28px;
+  text-align: center;
+  gap: 8px;
 }
 .identity > div {
   min-width: 0;
+  max-width: 100%;
 }
 .identity h1 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 23px;
+  font-weight: 650;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
 .identity p {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
-  line-height: 1.8;
+  line-height: 1.7;
 }
 .avatar {
-  width: 96px;
-  height: 96px;
-  display: grid;
-  place-items: center;
+  width: 100px;
+  height: 100px;
   flex-shrink: 0;
-  border: 1px solid var(--border);
   border-radius: 50%;
-  background: var(--soft);
-  color: var(--text);
-  font-size: 32px;
+  background: var(--avatar-bg);
+  color: var(--avatar-text);
+  font-size: 38px;
+  font-weight: 550;
   overflow: hidden;
+}
+.photoLink {
+  order: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: var(--primary);
+  font-size: 13px;
 }
 .status {
   display: block;
   font-size: 12px;
   color: var(--muted);
-  margin-top: 8px;
+  margin-top: 5px;
 }
 .actions {
   display: grid;
@@ -59,150 +66,138 @@
   gap: 8px;
 }
 .edit {
+  flex-direction: column;
   width: 100%;
-  background: var(--soft);
-  border: 1px solid transparent;
-  color: var(--text);
+  background: var(--surface);
+  border: 0;
+  color: var(--primary);
   font-size: 13px;
-  min-height: 44px;
-  border-radius: 8px;
+  font-weight: 500;
+  min-height: 70px;
+  border-radius: 12px;
+  gap: 6px;
 }
 .links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: start;
-  gap: 16px;
-  padding-block: 8px 24px;
-  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 0;
+  padding: 4px 16px;
+  background: var(--surface);
+  border-radius: 12px;
+  min-width: 0;
 }
-.links h2 {
-  flex: 0 0 100%;
-  font-size: 15px;
-  font-weight: 650;
+.links h2,
+.infoCard h2 {
+  font-size: 13px;
+  font-weight: 550;
+  color: var(--primary);
   margin: 0;
+  padding-block: 12px 8px;
 }
 .links > a,
 .links > button {
-  flex: 0 0 148px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  min-height: 112px;
-  background: none;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  background: transparent;
   border: 0;
-  text-align: center;
-  padding: 8px;
-  border-radius: 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  padding: 10px 0;
   color: var(--text);
+}
+.links > button:last-of-type,
+.links > a:last-of-type {
+  border-bottom: 0;
 }
 .links > a:hover,
 .links > button:hover {
   background: var(--soft);
 }
 .links > button > span:nth-child(2) {
+  flex: 1;
   min-width: 0;
 }
 .links strong {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
-  font-weight: 600;
+  font-weight: 550;
   overflow-wrap: anywhere;
 }
 .links small {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--muted);
-  line-height: 1.8;
+  line-height: 1.7;
 }
-.links > a > svg,
 .links > button > svg {
-  display: none;
-}
-.links > :global(.state),
-.links > :global(.skeleton-wrap) {
-  width: 100%;
+  color: var(--muted);
 }
 .settingIcon {
-  width: 56px;
-  height: 56px;
+  width: 36px;
+  height: 36px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  background: var(--soft);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 50%;
-}
-.details {
-  font-size: 13px;
-  border-top: 1px solid var(--border);
-  padding-top: 16px;
-}
-.details summary {
-  min-height: 44px;
-  cursor: pointer;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 9px;
 }
 .infoCard {
-  padding: 0 0 24px;
+  padding: 0 16px 8px;
   border: 0;
-  border-bottom: 1px solid var(--border);
+  border-radius: 12px;
   background: var(--surface);
   min-width: 0;
 }
-.infoCard h2 {
-  font-size: 16px;
-  font-weight: 650;
-  margin-bottom: 16px;
-}
 .infoCard > p {
   overflow-wrap: anywhere;
-  font-size: 14px;
-  margin-bottom: 12px;
+  font-size: 13px;
+  margin-block: 6px 10px;
 }
 .infoFields {
   margin: 0;
 }
 .infoFields > div {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
   font-size: 14px;
+}
+.infoFields > div:last-child {
+  border: 0;
 }
 .infoFields dt {
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
+  font-weight: 400;
 }
 .infoFields dd {
   margin: 0;
-  text-align: end;
   overflow-wrap: anywhere;
   min-width: 0;
+  user-select: text;
 }
-@media (max-width: 767px) {
+.logout {
+  background: var(--surface);
+  color: var(--danger);
+  border-radius: 12px;
+  min-height: 48px;
+}
+@media (max-width: 600px) {
   .profile {
-    gap: 20px;
-  }
-  .identity {
-    gap: 20px;
+    gap: 16px;
   }
   .identity h1 {
-    font-size: 21px;
+    font-size: 22px;
   }
   .avatar {
-    width: 80px;
-    height: 80px;
-    font-size: 28px;
-  }
-  .links {
-    gap: 8px;
-  }
-  .links > button,
-  .links > a {
-    flex-basis: calc((100% - 16px) / 3);
-    padding-inline: 4px;
+    width: 96px;
+    height: 96px;
+    font-size: 34px;
   }
 }

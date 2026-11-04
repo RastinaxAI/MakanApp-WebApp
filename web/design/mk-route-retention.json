@@ -1,0 +1,1693 @@
+{
+  "entries": [
+    {
+      "id": "UI-001",
+      "key": "welcome",
+      "title": "معرفی ماکان",
+      "previous": "/welcome",
+      "current": "/welcome",
+      "file": "src/app/welcome/page.tsx"
+    },
+    {
+      "id": "UI-002",
+      "key": "phone",
+      "title": "ورود با شماره همراه",
+      "previous": "/enter",
+      "current": "/enter",
+      "file": "src/app/enter/page.tsx"
+    },
+    {
+      "id": "UI-003",
+      "key": "otp",
+      "title": "تأیید کد پیامکی",
+      "previous": "/enter",
+      "current": "/enter",
+      "file": "src/app/enter/page.tsx"
+    },
+    {
+      "id": "UI-004",
+      "key": "home",
+      "title": "نمای حساب و دسترسی‌های من",
+      "previous": "/personal",
+      "current": "/personal",
+      "file": "src/app/(personal)/personal/page.tsx"
+    },
+    {
+      "id": "UI-005",
+      "key": "workspaces",
+      "title": "انتخاب نقش و فضای مجاز",
+      "previous": "/personal/workspaces",
+      "current": "/personal/workspaces",
+      "file": "src/app/(personal)/personal/workspaces/page.tsx"
+    },
+    {
+      "id": "UI-006",
+      "key": "workspace-dialog",
+      "title": "پنجرهٔ جابه‌جایی نقش و فضا",
+      "previous": "/personal/profile",
+      "current": "/personal/profile/details",
+      "file": "src/app/(personal)/personal/profile/details/page.tsx"
+    },
+    {
+      "id": "UI-007",
+      "key": "profile",
+      "title": "پروفایل من",
+      "previous": "/personal/profile",
+      "current": "/personal/profile",
+      "file": "src/app/(personal)/personal/profile/page.tsx"
+    },
+    {
+      "id": "UI-008",
+      "key": "profile-edit",
+      "title": "ویرایش پروفایل",
+      "previous": "/personal/profile/edit",
+      "current": "/personal/profile/edit",
+      "file": "src/app/(personal)/personal/profile/edit/page.tsx"
+    },
+    {
+      "id": "UI-009",
+      "key": "profile-calendar",
+      "title": "انتخاب تاریخ تولد",
+      "previous": "/personal/profile/edit",
+      "current": "/personal/profile/edit",
+      "file": "src/app/(personal)/personal/profile/edit/page.tsx"
+    },
+    {
+      "id": "UI-010",
+      "key": "profile-photo",
+      "title": "انتخاب و پیش‌نمایش عکس پروفایل",
+      "previous": "/personal/profile/edit",
+      "current": "/personal/profile/edit",
+      "file": "src/app/(personal)/personal/profile/edit/page.tsx"
+    },
+    {
+      "id": "UI-011",
+      "key": "preferences",
+      "title": "حساب و ترجیحات",
+      "previous": "/personal/profile/preferences",
+      "current": "/personal/profile/preferences",
+      "file": "src/app/(personal)/personal/profile/preferences/page.tsx"
+    },
+    {
+      "id": "UI-012",
+      "key": "settings",
+      "title": "تنظیمات حساب",
+      "previous": "/personal/settings",
+      "current": "/personal/settings",
+      "file": "src/app/(personal)/personal/settings/page.tsx"
+    },
+    {
+      "id": "UI-013",
+      "key": "appearance",
+      "title": "تنظیم ظاهر",
+      "previous": "/personal/settings/appearance",
+      "current": "/personal/settings/appearance",
+      "file": "src/app/(personal)/personal/settings/appearance/page.tsx"
+    },
+    {
+      "id": "UI-014",
+      "key": "privacy",
+      "title": "حریم خصوصی پیام‌رسان",
+      "previous": "/personal/settings/privacy",
+      "current": "/personal/settings/privacy",
+      "file": "src/app/(personal)/personal/settings/privacy/page.tsx"
+    },
+    {
+      "id": "UI-015",
+      "key": "blocked",
+      "title": "افراد مسدودشده",
+      "previous": "/personal/settings/blocked",
+      "current": "/personal/settings/blocked",
+      "file": "src/app/(personal)/personal/settings/blocked/page.tsx"
+    },
+    {
+      "id": "UI-016",
+      "key": "notification-categories",
+      "title": "دسته‌های اعلان",
+      "previous": "/personal/settings/notifications",
+      "current": "/personal/settings/notifications",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-017",
+      "key": "notification-Messages",
+      "title": "تنظیم اعلان پیام‌ها",
+      "previous": "/personal/settings/notifications/Messages",
+      "current": "/personal/settings/notifications/Messages",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-018",
+      "key": "notification-Assignments",
+      "title": "تنظیم اعلان تکلیف‌ها",
+      "previous": "/personal/settings/notifications/Assignments",
+      "current": "/personal/settings/notifications/Assignments",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-019",
+      "key": "notification-Results",
+      "title": "تنظیم اعلان نتایج",
+      "previous": "/personal/settings/notifications/Results",
+      "current": "/personal/settings/notifications/Results",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-020",
+      "key": "notification-Sessions",
+      "title": "تنظیم اعلان جلسه‌ها",
+      "previous": "/personal/settings/notifications/Sessions",
+      "current": "/personal/settings/notifications/Sessions",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-021",
+      "key": "notification-Reports",
+      "title": "تنظیم اعلان گزارش‌ها",
+      "previous": "/personal/settings/notifications/Reports",
+      "current": "/personal/settings/notifications/Reports",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-022",
+      "key": "notification-Invitations",
+      "title": "تنظیم اعلان دعوت‌ها",
+      "previous": "/personal/settings/notifications/Invitations",
+      "current": "/personal/settings/notifications/Invitations",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-023",
+      "key": "notification-AccountSecurity",
+      "title": "تنظیم اعلان امنیت حساب",
+      "previous": "/personal/settings/notifications/AccountSecurity",
+      "current": "/personal/settings/notifications/AccountSecurity",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-024",
+      "key": "notifications",
+      "title": "مرکز اعلان‌ها",
+      "previous": "/personal/notifications",
+      "current": "/personal/notifications",
+      "file": "src/app/(personal)/personal/notifications/page.tsx"
+    },
+    {
+      "id": "UI-025",
+      "key": "devices",
+      "title": "امنیت و دستگاه‌ها",
+      "previous": "/personal/settings/devices",
+      "current": "/personal/settings/devices",
+      "file": "src/app/(personal)/personal/settings/devices/[[...device]]/page.tsx"
+    },
+    {
+      "id": "UI-026",
+      "key": "device-detail",
+      "title": "جزئیات یک دستگاه",
+      "previous": "/personal/settings/devices",
+      "current": "/personal/settings/devices",
+      "file": "src/app/(personal)/personal/settings/devices/[[...device]]/page.tsx"
+    },
+    {
+      "id": "UI-027",
+      "key": "logout-dialog",
+      "title": "تأیید خروج از حساب",
+      "previous": "/personal/settings/devices",
+      "current": "/personal/settings/devices",
+      "file": "src/app/(personal)/personal/settings/devices/[[...device]]/page.tsx"
+    },
+    {
+      "id": "UI-028",
+      "key": "contact-list",
+      "title": "دفترچهٔ مخاطبین",
+      "previous": "/personal/contacts",
+      "current": "/personal/contacts",
+      "file": "src/app/(personal)/personal/contacts/page.tsx"
+    },
+    {
+      "id": "UI-029",
+      "key": "contact-add",
+      "title": "افزودن مخاطب",
+      "previous": "/personal/contacts",
+      "current": "/personal/contacts",
+      "file": "src/app/(personal)/personal/contacts/page.tsx"
+    },
+    {
+      "id": "UI-030",
+      "key": "contact-search",
+      "title": "جستجوی افراد",
+      "previous": "/personal/contacts",
+      "current": "/personal/contacts",
+      "file": "src/app/(personal)/personal/contacts/page.tsx"
+    },
+    {
+      "id": "UI-031",
+      "key": "contact-edit",
+      "title": "ویرایش و مدیریت مخاطب",
+      "previous": "/personal/contacts",
+      "current": "/personal/contacts",
+      "file": "src/app/(personal)/personal/contacts/page.tsx"
+    },
+    {
+      "id": "UI-032",
+      "key": "inbox",
+      "title": "فهرست یکپارچهٔ گفتگوهای حساب",
+      "previous": "/personal/messages",
+      "current": "/personal/messages",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-033",
+      "key": "inbox-menu",
+      "title": "منوی ایجاد گفتگو و مخاطب",
+      "previous": "/personal/messages",
+      "current": "/personal/messages",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-034",
+      "key": "inbox-Group",
+      "title": "فیلتر گروه‌ها",
+      "previous": "/personal/messages?filter=Group",
+      "current": "/personal/messages?filter=Group",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-035",
+      "key": "inbox-Channel",
+      "title": "فیلتر کانال‌ها",
+      "previous": "/personal/messages?filter=Channel",
+      "current": "/personal/messages?filter=Channel",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-036",
+      "key": "inbox-Unread",
+      "title": "فیلتر خوانده‌نشده",
+      "previous": "/personal/messages?filter=Unread",
+      "current": "/personal/messages?filter=Unread",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-037",
+      "key": "inbox-Archived",
+      "title": "فیلتر آرشیو",
+      "previous": "/personal/messages?filter=Archived",
+      "current": "/personal/messages?filter=Archived",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-038",
+      "key": "inbox-Saved",
+      "title": "فیلتر ذخیره‌شده",
+      "previous": "/personal/messages?filter=Saved",
+      "current": "/personal/messages?filter=Saved",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-039",
+      "key": "direct",
+      "title": "صفحهٔ چت مستقیم",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-040",
+      "key": "saved",
+      "title": "پیام‌های ذخیره‌شده",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-041",
+      "key": "peer-info",
+      "title": "پروفایل فرد مقابل",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009/info",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009/info",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-042",
+      "key": "peer-media",
+      "title": "رسانه‌های گفتگوی مستقیم",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009/media",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009/media",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-043",
+      "key": "message-menu",
+      "title": "گزینه‌های یک پیام",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-044",
+      "key": "message-reply",
+      "title": "پاسخ به یک پیام",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-045",
+      "key": "attachment-preview",
+      "title": "انتخاب و پیش‌نمایش پیوست پیام",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-046",
+      "key": "Group-room",
+      "title": "صفحهٔ گفتگوی گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-047",
+      "key": "Group-info",
+      "title": "اطلاعات گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/info",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/info",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-048",
+      "key": "Group-edit",
+      "title": "ویرایش گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-049",
+      "key": "Group-settings",
+      "title": "تنظیمات گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/settings",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/settings",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-050",
+      "key": "Group-members",
+      "title": "اعضا و مدیران گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-051",
+      "key": "Group-media",
+      "title": "رسانه و فایل گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/media",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/media",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-052",
+      "key": "Group-invites",
+      "title": "لینک‌ها و درخواست‌های عضویت گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-053",
+      "key": "Group-add-member",
+      "title": "افزودن عضو به گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-054",
+      "key": "Group-member-role",
+      "title": "مدیریت نقش عضو گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-055",
+      "key": "Group-photo",
+      "title": "پیش‌نمایش عکس گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-056",
+      "key": "Group-invite-new",
+      "title": "ساخت لینک دعوت گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-057",
+      "key": "Group-create-1",
+      "title": "ساخت گروه - مرحلهٔ 1",
+      "previous": "/personal/messages/new?kind=groups",
+      "current": "/personal/messages/new?kind=groups",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-058",
+      "key": "Group-create-2",
+      "title": "ساخت گروه - مرحلهٔ 2",
+      "previous": "/personal/messages/new?kind=groups",
+      "current": "/personal/messages/new?kind=groups",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-059",
+      "key": "Channel-room",
+      "title": "صفحهٔ گفتگوی کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-060",
+      "key": "Channel-info",
+      "title": "اطلاعات کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/info",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/info",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-061",
+      "key": "Channel-edit",
+      "title": "ویرایش کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-062",
+      "key": "Channel-settings",
+      "title": "تنظیمات کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/settings",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/settings",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-063",
+      "key": "Channel-members",
+      "title": "اعضا و مدیران کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-064",
+      "key": "Channel-media",
+      "title": "رسانه و فایل کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/media",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/media",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-065",
+      "key": "Channel-invites",
+      "title": "لینک‌ها و درخواست‌های عضویت کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-066",
+      "key": "Channel-add-member",
+      "title": "افزودن عضو به کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-067",
+      "key": "Channel-member-role",
+      "title": "مدیریت نقش عضو کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/members",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-068",
+      "key": "Channel-photo",
+      "title": "پیش‌نمایش عکس کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/edit",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-069",
+      "key": "Channel-invite-new",
+      "title": "ساخت لینک دعوت کانال",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/invites",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-070",
+      "key": "Channel-create-1",
+      "title": "ساخت کانال - مرحلهٔ 1",
+      "previous": "/personal/messages/new?kind=channels",
+      "current": "/personal/messages/new?kind=channels",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-071",
+      "key": "Channel-create-2",
+      "title": "ساخت کانال - مرحلهٔ 2",
+      "previous": "/personal/messages/new?kind=channels",
+      "current": "/personal/messages/new?kind=channels",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-072",
+      "key": "topics",
+      "title": "موضوع‌های گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/topics",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/topics",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-073",
+      "key": "topic-close",
+      "title": "تأیید تغییر وضعیت موضوع",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/topics",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/topics",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-074",
+      "key": "join-preview",
+      "title": "ورود کد دعوت گفتگو",
+      "previous": "/personal/messages/join",
+      "current": "/personal/messages/join",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-075",
+      "key": "join-pending",
+      "title": "رسید درخواست عضویت",
+      "previous": "/personal/messages/join",
+      "current": "/personal/messages/join",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-076",
+      "key": "initial-pending",
+      "title": "نتیجهٔ دعوت اعضای اولیه",
+      "previous": "/personal/messages/new?kind=groups",
+      "current": "/personal/messages/new?kind=groups",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-077",
+      "key": "overview-Student",
+      "title": "نمای آموزشگاه - دانشجو",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-078",
+      "key": "overview-Teacher",
+      "title": "نمای آموزشگاه - استاد",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-079",
+      "key": "overview-Manager",
+      "title": "نمای آموزشگاه - مدیر",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-080",
+      "key": "overview-Parent",
+      "title": "نمای آموزشگاه - والد",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-081",
+      "key": "no-school",
+      "title": "انتخاب آموزشگاه از حساب شخصی",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-082",
+      "key": "parent-child",
+      "title": "انتخاب فرزند مجاز",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-083",
+      "key": "classes",
+      "title": "کلاس‌های دانشجو",
+      "previous": "/personal/education/classes",
+      "current": "/personal/education/classes",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-084",
+      "key": "classes-teacher",
+      "title": "کلاس‌های استاد",
+      "previous": "/personal/education/classes",
+      "current": "/personal/education/classes",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-085",
+      "key": "class-sessions",
+      "title": "جلسه‌ها و برنامهٔ هفتگی در کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=sessions",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=sessions",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-086",
+      "key": "class-lessons",
+      "title": "درس و جزوه در کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=lessons",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=lessons",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-087",
+      "key": "class-assignments",
+      "title": "تکلیف‌ها در کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=assignments",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=assignments",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-088",
+      "key": "class-exams",
+      "title": "آزمون‌ها در کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=exams",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=exams",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-089",
+      "key": "class-members",
+      "title": "اعضای کلاس در کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=members",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=members",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-090",
+      "key": "schedule",
+      "title": "برنامهٔ هفتگی آموزشگاه",
+      "previous": "/personal/education/schedule",
+      "current": "/personal/education/schedule",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-091",
+      "key": "school-search",
+      "title": "جستجوی یکپارچهٔ آموزشی",
+      "previous": "/personal/education/search",
+      "current": "/personal/education/search",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-092",
+      "key": "school-invitations",
+      "title": "دعوت‌های عضویت و رضایت",
+      "previous": "/personal/education/invitations",
+      "current": "/personal/education/invitations",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-093",
+      "key": "official-activity",
+      "title": "کارت فعالیت در گروه رسمی",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000970",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000970",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-094",
+      "key": "session-detail",
+      "title": "جزئیات جلسه",
+      "previous": "/personal/education/sessions/00000000-0000-4000-8000-000000000300",
+      "current": "/personal/education/sessions/00000000-0000-4000-8000-000000000300",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-095",
+      "key": "session-new",
+      "title": "ایجاد جلسهٔ کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/sessions/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/sessions/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-096",
+      "key": "session-review",
+      "title": "بازبینی جلسهٔ جدید",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/sessions/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/sessions/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-097",
+      "key": "session-edit",
+      "title": "ویرایش جلسه",
+      "previous": "/personal/education/sessions/00000000-0000-4000-8000-000000000300/edit",
+      "current": "/personal/education/sessions/00000000-0000-4000-8000-000000000300/edit",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-098",
+      "key": "session-cancel",
+      "title": "تأیید لغو جلسه",
+      "previous": "/personal/education/sessions/00000000-0000-4000-8000-000000000300",
+      "current": "/personal/education/sessions/00000000-0000-4000-8000-000000000300",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-099",
+      "key": "lesson-list",
+      "title": "درس‌ها و جزوه‌های کلاس",
+      "previous": "/personal/education/resources",
+      "current": "/personal/education/resources",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-100",
+      "key": "lesson-read",
+      "title": "مطالعهٔ درس منتشرشده",
+      "previous": "/personal/education/lessons/00000000-0000-4000-8000-000000000005",
+      "current": "/personal/education/lessons/00000000-0000-4000-8000-000000000005",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-101",
+      "key": "lesson-new",
+      "title": "ایجاد درس و جزوه",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-102",
+      "key": "lesson-edit",
+      "title": "ویرایش پیش‌نویس درس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-103",
+      "key": "lesson-review",
+      "title": "بازبینی و انتشار درس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/lessons/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-104",
+      "key": "assignments",
+      "title": "فهرست تکلیف‌ها",
+      "previous": "/personal/education/assignments",
+      "current": "/personal/education/assignments",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-105",
+      "key": "assignment-detail",
+      "title": "جزئیات تکلیف برای دانشجو",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-106",
+      "key": "assignment-new",
+      "title": "ایجاد تکلیف کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/assignments/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/assignments/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-107",
+      "key": "assignment-edit",
+      "title": "ویرایش پیش‌نویس تکلیف",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/edit",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/edit",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-108",
+      "key": "assignment-review",
+      "title": "بازبینی و انتشار تکلیف",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/publish-review",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/publish-review",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-109",
+      "key": "submission-answer",
+      "title": "پاسخ و پیوست تکلیف",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/answer",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/answer",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-110",
+      "key": "submission-review",
+      "title": "بازبینی پاسخ تکلیف",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/answer",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/answer",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-111",
+      "key": "submission-receipt",
+      "title": "رسید تحویل تکلیف",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/answer",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/answer",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-112",
+      "key": "assignment-history",
+      "title": "تاریخچهٔ تحویل تکلیف",
+      "previous": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/history",
+      "current": "/personal/education/assignments/00000000-0000-4000-8000-000000000003/history",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-113",
+      "key": "exams",
+      "title": "فهرست آزمون‌ها",
+      "previous": "/personal/education/exams",
+      "current": "/personal/education/exams",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-114",
+      "key": "exam-before",
+      "title": "پیش از شروع آزمون",
+      "previous": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "current": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-115",
+      "key": "exam-taking",
+      "title": "پاسخ‌دادن به آزمون",
+      "previous": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "current": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-116",
+      "key": "exam-review",
+      "title": "مرور پاسخ‌های آزمون",
+      "previous": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "current": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-117",
+      "key": "exam-receipt",
+      "title": "رسید ثبت نهایی آزمون",
+      "previous": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "current": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-118",
+      "key": "exam-new",
+      "title": "ایجاد آزمون کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-119",
+      "key": "exam-author-edit",
+      "title": "ویرایش پیش‌نویس آزمون",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-120",
+      "key": "exam-question",
+      "title": "افزودن پرسش و سیاست پیوست",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-121",
+      "key": "exam-publish",
+      "title": "بازبینی و انتشار آزمون",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/exams/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-122",
+      "key": "evaluation-queue",
+      "title": "صف ارزیابی تکلیف‌ها",
+      "previous": "/personal/education/evaluations",
+      "current": "/personal/education/evaluations",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-123",
+      "key": "evaluation-edit",
+      "title": "ارزیابی پاسخ تکلیف",
+      "previous": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/evaluate",
+      "current": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/evaluate",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-124",
+      "key": "evaluation-review",
+      "title": "بازبینی انتشار ارزیابی تکلیف",
+      "previous": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/evaluate",
+      "current": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/evaluate",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-125",
+      "key": "assignment-result",
+      "title": "نتیجهٔ منتشرشدهٔ تکلیف",
+      "previous": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/result",
+      "current": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/result",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-126",
+      "key": "grading-queue",
+      "title": "صف تصحیح آزمون",
+      "previous": "/personal/education/exams/00000000-0000-4000-8000-000000000006/grading",
+      "current": "/personal/education/exams/00000000-0000-4000-8000-000000000006/grading",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-127",
+      "key": "grading",
+      "title": "تصحیح پاسخ‌برگ آزمون",
+      "previous": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "current": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-128",
+      "key": "grading-question",
+      "title": "تصحیح یک پرسش",
+      "previous": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "current": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-129",
+      "key": "grading-review",
+      "title": "بازبینی نتیجهٔ آزمون",
+      "previous": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "current": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-130",
+      "key": "exam-result",
+      "title": "نتیجهٔ منتشرشدهٔ آزمون",
+      "previous": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "current": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-131",
+      "key": "manager-classes",
+      "title": "کلاس‌های مدیر",
+      "previous": "/personal/education/classes",
+      "current": "/personal/education/classes",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-132",
+      "key": "manager-class-members",
+      "title": "مدیریت کلاس - اعضا",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=members",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=members",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-133",
+      "key": "manager-class-sessions",
+      "title": "مدیریت کلاس - جلسه‌ها",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=sessions",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=sessions",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-134",
+      "key": "manager-class-lessons",
+      "title": "مدیریت کلاس - درس و جزوه",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=lessons",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=lessons",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-135",
+      "key": "manager-class-assignments",
+      "title": "مدیریت کلاس - تکلیف‌ها",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=assignments",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=assignments",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-136",
+      "key": "manager-class-exams",
+      "title": "مدیریت کلاس - آزمون‌ها",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=exams",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=exams",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-137",
+      "key": "manager-class-reports",
+      "title": "مدیریت کلاس - گزارش کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=reports",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002?tab=reports",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-138",
+      "key": "class-new",
+      "title": "ایجاد کلاس آموزشگاه",
+      "previous": "/personal/education/classes/new",
+      "current": "/personal/education/classes/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-139",
+      "key": "class-review",
+      "title": "بازبینی کلاس جدید",
+      "previous": "/personal/education/classes/new",
+      "current": "/personal/education/classes/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-140",
+      "key": "class-add-teachers",
+      "title": "افزودن چند معلم به کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/teachers/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/teachers/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-141",
+      "key": "class-add-students",
+      "title": "ثبت‌نام چند دانشجو در کلاس",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002/enrollments/new",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002/enrollments/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-142",
+      "key": "members",
+      "title": "اعضا و نقش‌های آموزشگاه",
+      "previous": "/personal/education/members",
+      "current": "/personal/education/members",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-143",
+      "key": "people",
+      "title": "پرونده‌های افراد",
+      "previous": "/personal/education/people",
+      "current": "/personal/education/people",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-144",
+      "key": "person-new",
+      "title": "ایجاد پروندهٔ فرد",
+      "previous": "/personal/education/people/new",
+      "current": "/personal/education/people/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-145",
+      "key": "person-detail",
+      "title": "جزئیات پروندهٔ فرد",
+      "previous": "/personal/education/people/00000000-0000-4000-8000-000000000830",
+      "current": "/personal/education/people/00000000-0000-4000-8000-000000000830",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-146",
+      "key": "person-edit",
+      "title": "ویرایش پروندهٔ فرد",
+      "previous": "/personal/education/people/new",
+      "current": "/personal/education/people/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-147",
+      "key": "guardians",
+      "title": "رابطهٔ والد و فرزند",
+      "previous": "/personal/education/guardians",
+      "current": "/personal/education/guardians",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-148",
+      "key": "guardian-new",
+      "title": "ایجاد دعوت والد",
+      "previous": "/personal/education/guardians/new",
+      "current": "/personal/education/guardians/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-149",
+      "key": "manager-invitations",
+      "title": "مدیریت دعوت‌های آموزشگاه",
+      "previous": "/personal/education/invitations",
+      "current": "/personal/education/invitations",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-150",
+      "key": "course-new",
+      "title": "ایجاد درس در کاتالوگ",
+      "previous": "/personal/education/courses/new",
+      "current": "/personal/education/courses/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-151",
+      "key": "period-new",
+      "title": "ایجاد دورهٔ آموزشی",
+      "previous": "/personal/education/periods/new",
+      "current": "/personal/education/periods/new",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-152",
+      "key": "report-teacher-workload",
+      "title": "گزارش مدیر - کارکرد معلمان",
+      "previous": "/personal/education/reports?kind=teacher-workload",
+      "current": "/personal/education/reports?kind=teacher-workload",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-153",
+      "key": "report-attendance",
+      "title": "گزارش مدیر - حضور کلاس‌ها",
+      "previous": "/personal/education/reports?kind=attendance",
+      "current": "/personal/education/reports?kind=attendance",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-154",
+      "key": "report-assessments",
+      "title": "گزارش مدیر - تکلیف‌ها و آزمون‌ها",
+      "previous": "/personal/education/reports?kind=assessments",
+      "current": "/personal/education/reports?kind=assessments",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-155",
+      "key": "report-enrollments",
+      "title": "گزارش مدیر - ثبت‌نام‌ها",
+      "previous": "/personal/education/reports?kind=enrollments",
+      "current": "/personal/education/reports?kind=enrollments",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-156",
+      "key": "parent-classes",
+      "title": "کلاس‌های فرزند",
+      "previous": "/personal/education/classes",
+      "current": "/personal/education/classes",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-157",
+      "key": "parent-class",
+      "title": "جزئیات کلاس فرزند",
+      "previous": "/personal/education/classes/00000000-0000-4000-8000-000000000002",
+      "current": "/personal/education/classes/00000000-0000-4000-8000-000000000002",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-158",
+      "key": "parent-schedule",
+      "title": "برنامهٔ فرزند",
+      "previous": "/personal/education/schedule",
+      "current": "/personal/education/schedule",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-159",
+      "key": "parent-assignments",
+      "title": "گزارش تکلیف‌های فرزند",
+      "previous": "/personal/education/assignments",
+      "current": "/personal/education/assignments",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-160",
+      "key": "parent-exams",
+      "title": "گزارش آزمون‌های فرزند",
+      "previous": "/personal/education/exams",
+      "current": "/personal/education/exams",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-161",
+      "key": "sources-Personal",
+      "title": "منابع شخصی",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-162",
+      "key": "sources-Class",
+      "title": "منابع کلاس",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-163",
+      "key": "sources-Organization",
+      "title": "منابع آموزشگاه",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-164",
+      "key": "sources-Library",
+      "title": "منابع کتابخانه",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-165",
+      "key": "source-detail",
+      "title": "جزئیات و مدیریت منبع",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-166",
+      "key": "source-library",
+      "title": "جزئیات منبع کتابخانه",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001503",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001503",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-167",
+      "key": "source-file",
+      "title": "بارگذاری و ثبت منبع",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-168",
+      "key": "source-version",
+      "title": "نسخهٔ جدید منبع",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-169",
+      "key": "personal-classes",
+      "title": "کلاس‌های شخصی",
+      "previous": "/personal/classes",
+      "current": "/personal/classes",
+      "file": "src/app/(personal)/personal/classes/page.tsx"
+    },
+    {
+      "id": "UI-170",
+      "key": "personal-class-new",
+      "title": "ایجاد کلاس شخصی",
+      "previous": "/personal/classes/new",
+      "current": "/personal/classes/new",
+      "file": "src/app/(personal)/personal/classes/[id]/page.tsx"
+    },
+    {
+      "id": "UI-171",
+      "key": "personal-class-detail",
+      "title": "جزئیات کلاس شخصی",
+      "previous": "/personal/classes",
+      "current": "/personal/classes",
+      "file": "src/app/(personal)/personal/classes/page.tsx"
+    },
+    {
+      "id": "UI-172",
+      "key": "subscription",
+      "title": "اشتراک و مصرف شخصی",
+      "previous": "/personal/subscription",
+      "current": "/personal/subscription",
+      "file": "src/app/(personal)/personal/subscription/page.tsx"
+    },
+    {
+      "id": "UI-173",
+      "key": "subscription-org",
+      "title": "اشتراک آموزشگاه",
+      "previous": "/personal/subscription?scope=organization",
+      "current": "/personal/subscription?scope=organization",
+      "file": "src/app/(personal)/personal/subscription/page.tsx"
+    },
+    {
+      "id": "UI-174",
+      "key": "quote",
+      "title": "پیش‌فاکتور و سفارش در انتظار",
+      "previous": "/personal/subscription",
+      "current": "/personal/subscription",
+      "file": "src/app/(personal)/personal/subscription/page.tsx"
+    },
+    {
+      "id": "UI-175",
+      "key": "assistant-base",
+      "title": "گفتگو با دستیار پیش از فعال‌سازی",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant",
+      "file": "src/app/(personal)/personal/assistant/page.tsx"
+    },
+    {
+      "id": "UI-176",
+      "key": "assistant-sources",
+      "title": "منابع واقعی و نمونهٔ دستیار",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant",
+      "file": "src/app/(personal)/personal/assistant/page.tsx"
+    },
+    {
+      "id": "UI-177",
+      "key": "assistant-chat",
+      "title": "پرسش و پاسخ نمونه با استناد",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-178",
+      "key": "assistant-studio",
+      "title": "استودیوی مطالعه",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-179",
+      "key": "assistant-summary",
+      "title": "خلاصهٔ نمونه",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-180",
+      "key": "assistant-cards",
+      "title": "فلش‌کارت نمونه",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-181",
+      "key": "assistant-quiz",
+      "title": "خودآزمایی نمونه",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-182",
+      "key": "assistant-map",
+      "title": "نقشهٔ مفهومی نمونه",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-183",
+      "key": "assistant-audio",
+      "title": "طرح مرور شنیداری",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-184",
+      "key": "assistant-guide",
+      "title": "راهنمای مطالعهٔ نمونه",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant/studio",
+      "file": "src/app/(personal)/personal/assistant/studio/page.tsx"
+    },
+    {
+      "id": "UI-185",
+      "key": "assistant-preflight",
+      "title": "بررسی دسترسی منابع واقعی دستیار",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant",
+      "file": "src/app/(personal)/personal/assistant/page.tsx"
+    },
+    {
+      "id": "UI-186",
+      "key": "empty-messages",
+      "title": "فهرست خالی پیام‌ها",
+      "previous": "/personal/messages?q=بدون_نتیجه_مستند",
+      "current": "/personal/messages?q=بدون_نتیجه_مستند",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-187",
+      "key": "service-error",
+      "title": "خطای دریافت و امکان تلاش مجدد",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-188",
+      "key": "permission-denied",
+      "title": "نمای دسترسی محدود",
+      "previous": "/personal/education/reports",
+      "current": "/personal/education/reports",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-189",
+      "key": "source-pending",
+      "title": "انتظار آماده‌شدن فایل منبع",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-190",
+      "key": "source-conflict",
+      "title": "تعارض نسخه و حفظ متن منبع",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-191",
+      "key": "profile-save-error",
+      "title": "خطای ذخیره و حفظ ویرایش پروفایل",
+      "previous": "/personal/profile/edit",
+      "current": "/personal/profile/edit",
+      "file": "src/app/(personal)/personal/profile/edit/page.tsx"
+    },
+    {
+      "id": "UI-192",
+      "key": "dark-profile",
+      "title": "تم تاریک - پروفایل",
+      "previous": "/personal/profile",
+      "current": "/personal/profile",
+      "file": "src/app/(personal)/personal/profile/page.tsx"
+    },
+    {
+      "id": "UI-193",
+      "key": "dark-inbox",
+      "title": "تم تاریک - صندوق پیام‌ها",
+      "previous": "/personal/messages",
+      "current": "/personal/messages",
+      "file": "src/app/(personal)/personal/messages/page.tsx"
+    },
+    {
+      "id": "UI-194",
+      "key": "dark-direct",
+      "title": "تم تاریک - چت مستقیم",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-195",
+      "key": "dark-group",
+      "title": "تم تاریک - چت گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-196",
+      "key": "dark-settings",
+      "title": "تم تاریک - تنظیمات",
+      "previous": "/personal/settings",
+      "current": "/personal/settings",
+      "file": "src/app/(personal)/personal/settings/page.tsx"
+    },
+    {
+      "id": "UI-197",
+      "key": "dark-education",
+      "title": "تم تاریک - آموزشگاه",
+      "previous": "/personal/education",
+      "current": "/personal/education",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-198",
+      "key": "dark-resources",
+      "title": "تم تاریک - منابع",
+      "previous": "/personal/resources",
+      "current": "/personal/resources",
+      "file": "src/app/(personal)/personal/resources/page.tsx"
+    },
+    {
+      "id": "UI-199",
+      "key": "dark-assistant",
+      "title": "تم تاریک - دستیار",
+      "previous": "/personal/assistant",
+      "current": "/personal/assistant",
+      "file": "src/app/(personal)/personal/assistant/page.tsx"
+    },
+    {
+      "id": "UI-200",
+      "key": "evaluation-correction",
+      "title": "اصلاح ارزیابی منتشرشده",
+      "previous": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/evaluate?correction=1",
+      "current": "/personal/education/submissions/00000000-0000-4000-8000-000000000004/evaluate?correction=1",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-201",
+      "key": "grading-correction",
+      "title": "اصلاح نتیجهٔ منتشرشدهٔ آزمون",
+      "previous": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading?correction=1",
+      "current": "/personal/education/exam-submissions/00000000-0000-4000-8000-000000000007/grading?correction=1",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-202",
+      "key": "attachment-options",
+      "title": "گزینه‌های انتخاب پیوست پیام",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000009",
+      "file": "src/app/(personal)/personal/messages/[id]/page.tsx"
+    },
+    {
+      "id": "UI-203",
+      "key": "leave-confirm",
+      "title": "تأیید ترک گروه",
+      "previous": "/personal/messages/00000000-0000-4000-8000-000000000950/info",
+      "current": "/personal/messages/00000000-0000-4000-8000-000000000950/info",
+      "file": "src/app/(personal)/personal/messages/[id]/[section]/page.tsx"
+    },
+    {
+      "id": "UI-204",
+      "key": "source-publish-confirm",
+      "title": "تأیید انتشار منبع",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-205",
+      "key": "source-archive-confirm",
+      "title": "تأیید بایگانی منبع",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-206",
+      "key": "source-visibility-confirm",
+      "title": "تأیید تغییر نمایش منبع",
+      "previous": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "current": "/personal/resources/00000000-0000-4000-8000-000000001500",
+      "file": "src/app/(personal)/personal/resources/[id]/page.tsx"
+    },
+    {
+      "id": "UI-207",
+      "key": "quiet-hours",
+      "title": "تنظیم ساعات سکوت اعلان",
+      "previous": "/personal/settings/notifications/Messages",
+      "current": "/personal/settings/notifications/Messages",
+      "file": "src/app/(personal)/personal/settings/notifications/[[...category]]/page.tsx"
+    },
+    {
+      "id": "UI-208",
+      "key": "roleless-profile",
+      "title": "پروفایل حساب شخصی بدون نقش آموزشی",
+      "previous": "/personal/profile",
+      "current": "/personal/profile",
+      "file": "src/app/(personal)/personal/profile/page.tsx"
+    },
+    {
+      "id": "UI-209",
+      "key": "exam-descriptive",
+      "title": "پاسخ آزمون تشریحی و پیوست فایل",
+      "previous": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "current": "/personal/education/exams/00000000-0000-4000-8000-000000000006",
+      "file": "src/app/(personal)/personal/education/[...section]/page.tsx"
+    },
+    {
+      "id": "UI-210",
+      "key": "offline-page",
+      "title": "صفحهٔ آفلاین برنامه",
+      "previous": "/offline.html",
+      "current": "/offline.html",
+      "file": "public/offline.html"
+    },
+    {
+      "id": "UI-211",
+      "key": "install-help",
+      "title": "راهنمای نصب روی دستگاه",
+      "previous": "/personal/settings",
+      "current": "/personal/settings",
+      "file": "src/app/(personal)/personal/settings/page.tsx"
+    }
+  ],
+  "unmapped": []
+}

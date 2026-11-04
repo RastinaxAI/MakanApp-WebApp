@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-11-02T21:20:56.551Z",
+  "url": "http://94.184.32.84:8090/openapi/v1.json",
+  "status": 200,
+  "method": "GET",
+  "domainMutations": 0,
+  "paths": 342,
+  "operations": 388,
+  "schemas": 651,
+  "normalizedSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+  "matchesInstalledContract": true
+}

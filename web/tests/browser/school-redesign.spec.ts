@@ -76,13 +76,13 @@ test('school has four destinations, three nearest items and a separate class pag
   });
   await page.goto('/personal/education');
   const nav = page.getByRole('navigation', { name: 'بخش‌های آموزشگاه', exact: true });
-  await expect(nav.getByRole('link')).toHaveText(['نمای کلی', 'کلاس‌ها', 'برنامه‌ها', 'دعوت‌ها']);
+  await expect(nav.getByRole('link')).toHaveText(['امروز', 'کلاس‌ها', 'برنامه', 'دعوت‌ها']);
   for (const [name, title] of [
     ['نزدیک‌ترین جلسه', 'جلسهٔ نزدیک'],
     ['نزدیک‌ترین تکلیف', 'تکلیف نزدیک'],
     ['نزدیک‌ترین آزمون', 'آزمون نزدیک'],
   ])
-    await expect(page.getByRole('region', { name, exact: true })).toContainText(title);
+    await expect(page.getByRole('link').filter({ hasText: title }).first(), name).toBeVisible();
   for (const [width, height] of [
     [390, 844],
     [834, 1194],

@@ -7,7 +7,7 @@ test('profile exposes identity and age below spaces and moves preference menus t
 }) => {
   await login(context);
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/personal/profile');
+  await page.goto('/personal/profile/details');
   const spaces = page.getByRole('region', { name: 'فضاهای من', exact: true }),
     details = page.getByRole('region', { name: 'مشخصات فردی', exact: true });
   await expect(details).toBeVisible();
@@ -51,10 +51,12 @@ test('profile exposes identity and age below spaces and moves preference menus t
     'ایجاد گروه',
     'ایجاد کانال',
     'مخاطبین',
+    'گفتگوهای مستقیم',
+    'تنظیمات پیام‌رسان',
     'آرشیو',
     'پیام‌های ذخیره‌شده',
   ]);
-  expect(await menu.getByRole('menuitem').locator('svg').count()).toBe(5);
+  expect(await menu.getByRole('menuitem').locator('svg').count()).toBe(7);
   await page.screenshot({ path: 'test-results/profile-school-files/message-menu-mobile.png' });
   await page.keyboard.press('Escape');
   await page.goto('/personal/assistant');
@@ -67,7 +69,7 @@ test('school header searches authorized classes, assignments and published exams
   request,
 }) => {
   await login(context);
-  await page.goto('/personal/education');
+  await page.goto('/personal/education/classes');
   await page.getByRole('button', { name: 'جستجو در آموزشگاه', exact: true }).click();
   await page.getByRole('textbox', { name: 'جستجوی کلاس، تکلیف یا آزمون' }).fill('ریاضی');
   await page.getByRole('button', { name: 'جستجو', exact: true }).click();

@@ -43,7 +43,21 @@ export function fileTransfer<T>(
     const guid = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
     if (
       !new RegExp(
-        '^/api/client/files(?:/' + guid + '(?:/content)?)?\\?conversationId=' + guid + '$',
+        '^/api/client/files(?:/' +
+          guid +
+          '(?:/content)?)?\\?conversationId=' +
+          guid +
+          '(?:&purpose=photo)?$',
+        'i',
+      ).test(path) &&
+      !new RegExp(
+        '^/api/client/source-files(?:/' +
+          guid +
+          '/content\\?revision=[1-9][0-9]*|(?:/' +
+          guid +
+          ')?\\?scope=(?:Personal|Class|Organization)(?:&classId=' +
+          guid +
+          ')?)$',
         'i',
       ).test(path) &&
       !new RegExp('^/api/client/profile-media(?:/' + guid + '(?:/metadata)?)?$', 'i').test(path) &&
@@ -55,7 +69,11 @@ export function fileTransfer<T>(
         'i',
       ).test(path) &&
       !new RegExp(
-        '^/api/client/submission-files(?:/' + guid + '(?:/content)?)?\\?attemptId=' + guid + '$',
+        '^/api/client/submission-files(?:/' +
+          guid +
+          '(?:/content)?)?\\?attemptId=' +
+          guid +
+          '(?:&audience=(?:learner|evaluator))?$',
         'i',
       ).test(path) &&
       !new RegExp(
@@ -65,7 +83,7 @@ export function fileTransfer<T>(
           guid +
           '&questionId=' +
           guid +
-          '$',
+          '(?:&audience=(?:learner|evaluator))?$',
         'i',
       ).test(path)
     ) {

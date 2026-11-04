@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Clock3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -47,37 +48,37 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
     );
   return (
     <Card
-      title="برنامهٔ هفتگی کلاس‌ها"
+      title={uiText.text_2fdcd8a1bdba}
       className={s.schedule}
       action={
         teach &&
         classId && (
           <Button asChild>
-            <Link href={`${base}/classes/${classId}/sessions/new`}>ایجاد جلسه</Link>
+            <Link href={`${base}/classes/${classId}/sessions/new`}>{uiText.text_8a8bca7672c8}</Link>
           </Button>
         )
       }
     >
       <nav
         className={s.weekNavigation}
-        aria-label="جابه‌جایی هفته"
+        aria-label={uiText.text_ba767b9a0d5e}
         data-week-start={range.first}
         data-week-end={range.last}
       >
         <Button
           variant="outline"
           className={`${s.navigationButton} ${s.previous}`}
-          aria-label="هفتهٔ قبل"
+          aria-label={uiText.text_e32082a4e12f}
           onClick={() => setWeek((v) => shiftSchoolWeek(v, -1))}
         >
           <ChevronRight size={18} />
-          <span>هفتهٔ قبل</span>
+          <span>{uiText.text_e32082a4e12f}</span>
         </Button>
         <div className={s.range}>
           <p className={s.weekLabel} aria-live="polite" aria-atomic="true">
             {range.label}
           </p>
-          <span>شنبه تا جمعه</span>
+          <span>{uiText.text_fcd0612e300b}</span>
         </div>
         <Button
           variant="ghost"
@@ -85,15 +86,15 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
           disabled={week === thisWeek}
           onClick={() => setWeek(thisWeek)}
         >
-          هفتهٔ جاری
+          {uiText.text_cf12b2fabd7e}
         </Button>
         <Button
           variant="outline"
           className={`${s.navigationButton} ${s.next}`}
-          aria-label="هفتهٔ بعد"
+          aria-label={uiText.text_4c6c8570d091}
           onClick={() => setWeek((v) => shiftSchoolWeek(v, 1))}
         >
-          <span>هفتهٔ بعد</span>
+          <span>{uiText.text_4c6c8570d091}</span>
           <ChevronLeft size={18} />
         </Button>
       </nav>
@@ -102,9 +103,9 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
       ) : q.isError ? (
         <ErrorState error={q.error} onRetry={() => void q.refetch()} />
       ) : invalid ? (
-        <p role="alert">برنامهٔ این فضای آموزشی قابل نمایش نیست.</p>
+        <p role="alert">{uiText.text_be58b9137dd7}</p>
       ) : groups.length ? (
-        <div className={s.agenda} aria-label="جلسه‌های هفته">
+        <div className={s.agenda} aria-label={uiText.text_85454321f228}>
           {groups.map((day) => (
             <section
               key={day.date}
@@ -127,11 +128,18 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
                         <span>
                           <Clock3 size={15} />
                           <bdi>
-                            {time(item.startUtc)} تا {time(item.endUtc)}
+                            {time(item.startUtc)}
+                            {uiText.text_7168a3799fbf}
+                            {time(item.endUtc)}
                             {sessionEndDayLabel(item.startUtc, item.endUtc) && (
-                              <time dateTime={localCalendarDay(item.endUtc)} title="روز پایان جلسه">
+                              <time
+                                dateTime={localCalendarDay(item.endUtc)}
+                                title={uiText.text_d61ca8f948c8}
+                              >
                                 {' '}
-                                ({sessionEndDayLabel(item.startUtc, item.endUtc)})
+                                {uiText.text_32ebb1abcc1c}
+                                {sessionEndDayLabel(item.startUtc, item.endUtc)}
+                                {uiText.text_ba5ec51d07a4}
                               </time>
                             )}
                           </bdi>
@@ -146,7 +154,7 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          ورود به جلسه
+                          {uiText.text_b1fa64d456bf}
                         </a>
                       </Button>
                     )}
@@ -158,10 +166,7 @@ export function Schedule({ classId, teach }: { classId?: string; teach: boolean 
         </div>
       ) : (
         <div className={s.empty}>
-          <EmptyState
-            title="برای این هفته جلسه‌ای ثبت نشده است"
-            description="با دکمه‌های هفتهٔ قبل و هفتهٔ بعد، جلسه‌های دیگر را ببینید."
-          />
+          <EmptyState title={uiText.text_0ebd449a5ce9} description={uiText.text_a2a9b91a28ef} />
         </div>
       )}
     </Card>

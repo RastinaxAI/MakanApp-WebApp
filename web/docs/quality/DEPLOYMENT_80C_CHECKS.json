@@ -1,0 +1,191 @@
+{
+  "release": "V3 Blue / 80c2e61 deployment handoff",
+  "date": "2026-11-04",
+  "scope": "prepare server update/install shell, instructions, complete source ZIP; no remote deployment",
+  "application": "web/ only; sibling platform-owner and retired root Vite untouched",
+  "shell": {
+    "syntax": "bash -n setup.sh: passed",
+    "readmeCopiesIdentical": true,
+    "tests": {
+      "command": "MAKAN_DEPLOY_TEST_RUNNER=bwrap python3 web/tests/deployment/test_setup.py",
+      "passed": 16,
+      "failed": 0,
+      "isolation": "Linux user/PID/network namespaces; actual setup.sh; mocked Docker; no daemon socket, private env, system services or network",
+      "covers": [
+        "no-op help",
+        "root guard",
+        "preflight",
+        "missing/incomplete upload",
+        "invalid effective config",
+        "fixed project and session volume",
+        "check without build/replacement",
+        "lock contention",
+        "build failure preserves running service",
+        "health failure never reports success",
+        "concurrent env change blocks replacement",
+        "only known retired theme module backed up"
+      ]
+    },
+    "freshInstallProvisioningExecuted": false
+  },
+  "runtimeEntryTests": {
+    "command": "python3 web/tests/deployment/test_runtime.py",
+    "passed": 9,
+    "failed": 0,
+    "uses": "real docker-start.mjs with disposable server module; no network",
+    "covers": [
+      "canonical backend fallback",
+      "explicit backend override",
+      "secret validation without leaks",
+      "origin validation without credential leaks",
+      "secure cookies",
+      "production preview/fixture rejection",
+      "missing config rejection",
+      "check without listening",
+      "cookie name validation"
+    ]
+  },
+  "compose": {
+    "dockerComposeVersion": "5.5.1",
+    "normalizationExitCode": 0,
+    "validatorExitCode": 0,
+    "serviceNames": [
+      "web"
+    ],
+    "sessionVolumeName": "makan-client_sessions",
+    "backend": "config/network.json fallback",
+    "secrets": "disposable dummy; no private file loaded or configuration values printed",
+    "daemonRequired": false
+  },
+  "cleanBuild": {
+    "node": "v22.23.4",
+    "staging": "new directory containing only files permitted by current .dockerignore allowlist",
+    "inputs": 426,
+    "inputManifestSha256": "e76f9c00cf50ab4c8f63f627de9b6765b5cb354a77ac39f23e2b77b57efc90a7",
+    "noPrivateEnvOrSessionsOrPreviousDependenciesOrBuild": true,
+    "environment": {
+      "NEXT_STANDALONE": "true",
+      "NODE_OPTIONS": "--max-old-space-size=1536",
+      "NEXT_TELEMETRY_DISABLED": "1"
+    },
+    "steps": [
+      {
+        "command": "npm ci --no-audit --no-fund --prefer-offline",
+        "exitCode": 0,
+        "seconds": 7.3,
+        "log": "tmp/deployment-80c/install.log"
+      },
+      {
+        "command": "npm run build -- --webpack",
+        "exitCode": 0,
+        "seconds": 94.4,
+        "log": "tmp/deployment-80c/build.log"
+      }
+    ],
+    "typescript": "passed within production build",
+    "dockerEngineBuildExecuted": false
+  },
+  "standalone": {
+    "node": "v22.23.4",
+    "entryCheckExitCode": 0,
+    "layout": "Dockerfile standalone/static/public/config/runtime entry copies; executed directly as current nonroot user, not a container",
+    "backendFallback": "config/network.json copied unchanged; no backend-authenticated operation requested",
+    "httpChecks": [
+      {
+        "path": "/enter",
+        "method": "GET",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "path": "/_next/static/chunks/4bd1b696-8cd12253b448cc13.js",
+        "method": "GET",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "path": "/brand/makan-logo-v2.webp",
+        "method": "GET",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "path": "/fonts/makan-reference/Vazirmatn-Regular.ttf",
+        "method": "GET",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "path": "/sw.js",
+        "method": "GET",
+        "status": 200,
+        "expected": 200
+      },
+      {
+        "path": "/api/client/session",
+        "method": "GET",
+        "status": 401,
+        "expected": 401
+      },
+      {
+        "path": "/preview/reference/MK-19",
+        "method": "GET",
+        "status": 404,
+        "expected": 404
+      },
+      {
+        "path": "/api/client/auth/challenge",
+        "method": "POST",
+        "status": 403,
+        "expected": 403
+      },
+      {
+        "path": "/api/client/backend/me",
+        "method": "POST",
+        "status": 403,
+        "expected": 403
+      }
+    ],
+    "securityHeaders": true,
+    "noPrivateEnvironmentInRuntime": true,
+    "sessionFilesCreated": 0,
+    "ownServerStopped": true,
+    "publicDeploymentPerformed": false
+  },
+  "format": "npm run format:check passed",
+  "packagePolicy": {
+    "sourceRootLayout": [
+      "setup.sh",
+      "readme.md",
+      "README.md",
+      "web/",
+      ".github/workflows/"
+    ],
+    "manifest": "SOURCE_MANIFEST.json; per-file SHA-256 and byte count",
+    "checksum": "makan-client-source.zip.sha256; companion file avoids circular archive hash",
+    "excluded": [
+      "private .env",
+      "local session stores",
+      "node_modules",
+      ".next",
+      "browser traces/logs",
+      "historical authentication captures",
+      "platform-owner app",
+      "retired root Vite"
+    ]
+  },
+  "previousApplicationEvidence": {
+    "report": "RELEASE_80C_CHECKS.json",
+    "unitPassed": 447,
+    "latestUniqueBrowserPassed": 209,
+    "rerunThisDeploymentTask": false
+  },
+  "limitations": [
+    "Docker client is installed but configured Docker daemon socket is unavailable; no real image build, container health, volume ownership or Compose up was run locally.",
+    "Standalone Node22 and actual Compose normalization checks do not replace a target-server Docker build and health check.",
+    "No SSH access or remote deployment, Nginx reload, DNS change, firewall change or certificate issuance performed.",
+    "Public Compose uses app.makanapp.org HTTPS; other domains require matching APP_ORIGIN and reverse proxy.",
+    "Existing Nginx/TLS and env are preserved during --update. A failed health check has no automatic image rollback.",
+    "No backend-authenticated operations or OTP were requested in deployment smoke checks."
+  ]
+}

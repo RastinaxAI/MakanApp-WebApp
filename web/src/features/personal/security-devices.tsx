@@ -1,11 +1,14 @@
 'use client';
-import { PageBack } from '@/components/navigation/page-back';
+import '@/features/reference/bundles/features-personal-security-devices';
+
+import * as uiText from '@/content/fa';
+import { ReferenceFrame } from '@/features/reference/frame';
 
 import { ConfirmAction } from '@/components/ui/confirm-action';
 import { ErrorState, LoadingSkeleton, EmptyState } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
 import { date } from '@/lib/formatting';
-import { MonitorSmartphone, ChevronLeft } from 'lucide-react';
+import { MonitorSmartphone, ChevronLeft, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePersonal, usePersonalApi } from './provider';
@@ -19,19 +22,23 @@ export function SecurityDevices({ id }: { id?: string }) {
   const rows = id ? q.data?.filter((row) => row.id === id) : q.data;
   async function revoke(path: string, method: string) {
     await call(path, { method });
-    setNotice('نشست‌های انتخاب‌شده پایان یافتند.');
+    setNotice(uiText.text_5b1d3659c3d8);
     await q.refetch();
     return true;
   }
   return (
-    <div className={s.page}>
-      <header className={s.heading}>
-        <div>
-          <h1>{id ? 'جزئیات دستگاه' : 'امنیت و دستگاه‌ها'}</h1>
-          <p>نشست‌های ورود حساب خود را بررسی و مدیریت کنید.</p>
+    <ReferenceFrame
+      id="MK-48"
+      title={id ? uiText.text_bcdc391af4f9 : undefined}
+      back={id ? '/personal/settings/devices' : '/personal/profile'}
+    >
+      <div className="card hero">
+        <div className="between">
+          <h3>{uiText.text_c7645d8f947c}</h3>
+          <ShieldCheck size={23} />
         </div>
-        <PageBack href={id ? '/personal/settings/devices' : '/personal/profile/preferences'} />
-      </header>
+        <p>{uiText.text_d03ca0340b3d}</p>
+      </div>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -43,22 +50,27 @@ export function SecurityDevices({ id }: { id?: string }) {
               {notice}
             </p>
           )}
-          <div className={s.list}>
+          <div className="list">
             {rows?.length ? (
               rows.map((row) => (
-                <section className={s.card} key={row.id}>
-                  <div className={s.row}>
-                    <span className={s.icon}>
+                <section className="mk-session-row" key={row.id}>
+                  <div className="row">
+                    <span className="tile-icon">
                       <MonitorSmartphone size={23} />
                     </span>
-                    <div>
-                      <strong>{row.deviceName || 'دستگاه بدون نام'}</strong>
-                      <small>ورود: {date(row.createdAtUtc, true)}</small>
-                      {row.isCurrent && <span className={s.badge}>دستگاه فعلی</span>}
+                    <div className="grow">
+                      <strong>{row.deviceName || uiText.text_012b8e7bb3b3}</strong>
+                      <small className="muted">
+                        {uiText.text_975d46ff5255}
+                        {date(row.createdAtUtc, true)}
+                      </small>
+                      {row.isCurrent && <span className="badge">{uiText.text_ea0c56a7535c}</span>}
                     </div>
                     {!id && (
                       <Link
-                        aria-label={'جزئیات ' + (row.deviceName || 'دستگاه')}
+                        aria-label={
+                          uiText.text_f307f4a9a432 + (row.deviceName || uiText.text_f7c6ee7ceb27)
+                        }
                         href={'/personal/settings/devices/' + row.id}
                       >
                         <ChevronLeft size={20} />
@@ -68,15 +80,15 @@ export function SecurityDevices({ id }: { id?: string }) {
                   {id && (
                     <dl className={s.details}>
                       <div>
-                        <dt>آغاز نشست</dt>
+                        <dt>{uiText.text_1b292af7dfa0}</dt>
                         <dd>{date(row.createdAtUtc, true)}</dd>
                       </div>
                       <div>
-                        <dt>اعتبار نشست</dt>
+                        <dt>{uiText.text_5856d67fad0a}</dt>
                         <dd>{date(row.expiresAtUtc, true)}</dd>
                       </div>
                       <div>
-                        <dt>پایان اعتبار نهایی</dt>
+                        <dt>{uiText.text_ac852c2d9d64}</dt>
                         <dd>{date(row.absoluteExpiresAtUtc, true)}</dd>
                       </div>
                     </dl>
@@ -84,10 +96,10 @@ export function SecurityDevices({ id }: { id?: string }) {
                   <div className={s.actions}>
                     {row.isCurrent ? (
                       <ConfirmAction
-                        trigger="خروج از این دستگاه"
-                        title="خروج از حساب؟"
-                        description="برای ورود دوباره به این دستگاه به تأیید شماره نیاز دارید."
-                        confirm="خروج از حساب"
+                        trigger={uiText.text_989d2fe946b8}
+                        title={uiText.text_2ddbb4f12b8f}
+                        description={uiText.text_d6e7c047c656}
+                        confirm={uiText.account_logout}
                         onConfirm={async () => {
                           await logout();
                           return true;
@@ -96,10 +108,12 @@ export function SecurityDevices({ id }: { id?: string }) {
                     ) : (
                       <ConfirmAction
                         destructive
-                        trigger="پایان این نشست"
-                        title="پایان نشست دستگاه؟"
-                        description={`${row.deviceName || 'این دستگاه'} برای دسترسی دوباره باید وارد حساب شود.`}
-                        confirm="پایان نشست"
+                        trigger={uiText.text_1706ef5d00c1}
+                        title={uiText.text_c074ded08bf3}
+                        description={uiText.format_9ca356a23f7a(
+                          row.deviceName || uiText.text_a7973bda076f,
+                        )}
+                        confirm={uiText.text_b1c8d490edb2}
                         onConfirm={() => revoke(endpoint + '/' + row.id, 'DELETE')}
                       />
                     )}
@@ -107,25 +121,23 @@ export function SecurityDevices({ id }: { id?: string }) {
                 </section>
               ))
             ) : (
-              <EmptyState
-                title={id ? 'این نشست دیگر در فهرست شما نیست' : 'نشست فعالی گزارش نشده است'}
-              />
+              <EmptyState title={id ? uiText.text_f2415eaf96f4 : uiText.text_99bab8fc872f} />
             )}
           </div>
           {!id && q.data.some((row) => !row.isCurrent) && (
             <div className={s.actions}>
               <ConfirmAction
                 destructive
-                trigger="پایان همهٔ نشست‌های دیگر"
-                title="خروج دستگاه‌های دیگر؟"
-                description="نشست همین دستگاه حفظ می‌شود؛ دستگاه‌های دیگر باید دوباره وارد شوند."
-                confirm="پایان نشست‌های دیگر"
+                trigger={uiText.text_a2d7c2cecc5f}
+                title={uiText.text_38e1bb39e307}
+                description={uiText.text_d555aaf8e0a0}
+                confirm={uiText.text_a0fa8bc3a1ab}
                 onConfirm={() => revoke(endpoint + '/revoke-others', 'POST')}
               />
             </div>
           )}
         </>
       )}
-    </div>
+    </ReferenceFrame>
   );
 }

@@ -1,4 +1,6 @@
 'use client';
+import { useAcademicScope } from './academic-scope';
+import * as uiText from '@/content/fa';
 import { useEffect, useRef, useState } from 'react';
 import { Download, Paperclip, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,6 +22,7 @@ export function ExamFileDownload({
   questionId: string;
   file: S['AcademicAnswerAttachmentDto'];
 }) {
+  const scope = useAcademicScope();
   const { transfer } = usePersonal();
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<unknown>();
@@ -44,7 +47,7 @@ export function ExamFileDownload({
           setError(undefined);
           try {
             const blob = await transfer<Blob>(
-              `/api/client/exam-files/${file.fileAssetId}/content?attemptId=${attemptId}&questionId=${questionId}`,
+              `/api/client/exam-files/${file.fileAssetId}/content?attemptId=${attemptId}&questionId=${questionId}${scope.personal ? '&audience=' + (scope.personal.grade ? 'evaluator' : 'learner') : ''}`,
               { signal: active.signal, binary: true, expectedBytes: file.sizeBytes },
             );
             const url = URL.createObjectURL(blob),
@@ -62,11 +65,11 @@ export function ExamFileDownload({
         }}
       >
         <Download size={17} />
-        {busy ? 'در حال دریافت…' : 'دریافت ' + file.originalFileName}
+        {busy ? uiText.text_80516c4adbbe : uiText.text_1e229eb338a6 + file.originalFileName}
       </Button>
       {busy && (
         <Button type="button" variant="ghost" onClick={() => controller.current?.abort()}>
-          لغو دریافت
+          {uiText.text_6373daa09bbc}
         </Button>
       )}
       {!!error && <ErrorState error={error} />}
@@ -95,6 +98,7 @@ export function ExamAnswerFiles({
   onSaved: () => Promise<void>;
   onPending: (value: boolean) => void;
 }) {
+  const scope = useAcademicScope();
   const { call, transfer } = usePersonal();
   const input = useRef<HTMLInputElement>(null),
     lock = useRef(false),
@@ -112,7 +116,7 @@ export function ExamAnswerFiles({
     onPending(busy || !!pending || uncertain);
   }, [busy, pending, uncertain, onPending]);
   useEffect(() => () => abort.current?.abort(), []);
-  const suffix = `?attemptId=${attemptId}&questionId=${questionId}`,
+  const suffix = `?attemptId=${attemptId}&questionId=${questionId}${scope.personal ? '&audience=' + (scope.personal.grade ? 'evaluator' : 'learner') : ''}`,
     endpoint = `/api/v1/academic/exam-attempts/${attemptId}/answers/${questionId}/attachments`;
   function failed(error: unknown) {
     setError(error);
@@ -159,6 +163,7 @@ export function ExamAnswerFiles({
       if (file) {
         const form = new FormData();
         form.append('File', file);
+        if (scope.personal) form.append('PersonalClassId', scope.personal.classId);
         asset = await transfer<S['FileAssetResult']>('/api/client/exam-files' + suffix, {
           method: 'POST',
           body: form,
@@ -198,26 +203,26 @@ export function ExamAnswerFiles({
   }
   if (!policy?.attachmentsAllowed && !files.length) return null;
   return (
-    <section className={s.panel} aria-label="پیوست‌های پاسخ سؤال">
-      <h3>پیوست‌های پاسخ</h3>
+    <section className={s.panel} aria-label={uiText.text_b439b4e56bb0}>
+      <h3>{uiText.text_b7504f07794e}</h3>
       {policy?.attachmentsAllowed && (
         <>
           <p>
-            {policy.textRequired
-              ? 'پاسخ متنی الزامی است؛ فایل نیز می‌توانید اضافه کنید.'
-              : 'می‌توانید پاسخ را به‌صورت متن، فایل یا هر دو ارسال کنید.'}
+            {policy.textRequired ? uiText.text_d50adbf6e0b9 : uiText.text_b964b3c3580f}
             {policy.maximumCount !== null
-              ? ' · حداکثر ' + policy.maximumCount.toLocaleString('fa-IR') + ' فایل'
+              ? uiText.text_1cff2dd80daa +
+                policy.maximumCount.toLocaleString('fa-IR') +
+                uiText.text_8db870221ba1
               : ''}
             {policy.maximumTotalBytes !== null
-              ? ' · مجموع ' + formatFileSize(policy.maximumTotalBytes)
+              ? uiText.text_03708fe63973 + formatFileSize(policy.maximumTotalBytes)
               : ''}
           </p>
           <input
             hidden
             ref={input}
             type="file"
-            aria-label="انتخاب پیوست پاسخ آزمون"
+            aria-label={uiText.text_e3ec7a8925bb}
             accept={policy.allowedContentTypes.join(',')}
             disabled={disabled || busy || !!pending || uncertain}
             onChange={(e) => {
@@ -233,7 +238,7 @@ export function ExamAnswerFiles({
             onClick={() => input.current?.click()}
           >
             <Upload size={18} />
-            افزودن فایل پاسخ
+            {uiText.text_f8f86f78eba4}
           </Button>
         </>
       )}
@@ -267,21 +272,22 @@ export function ExamAnswerFiles({
               }
             }}
           >
-            حذف پیوست {file.originalFileName}
+            {uiText.text_d3f1f47d3218}
+            {file.originalFileName}
           </Button>
         </div>
       ))}
       {busy && (
         <div role="status">
-          <p>در حال انتقال یا ثبت پیوست…</p>
+          <p>{uiText.text_82ab4ab38d75}</p>
           <progress
-            aria-label="پیشرفت پیوست آزمون"
+            aria-label={uiText.text_25e99a8def0a}
             max={progress?.total ?? undefined}
             value={progress?.total ? progress.loaded : undefined}
           />
           {!action.current && (
             <Button type="button" variant="ghost" onClick={() => abort.current?.abort()}>
-              لغو بارگذاری
+              {uiText.text_f5bcc4fdc106}
             </Button>
           )}
         </div>
@@ -291,12 +297,12 @@ export function ExamAnswerFiles({
           <strong dir="auto">{pending.originalFileName}</strong>
           <p>
             {rejected
-              ? 'این پیوست پذیرفته نشد؛ آن را کنار بگذارید و فایل مناسب انتخاب کنید.'
+              ? uiText.text_99018e28b4f5
               : pending.status === 'Pending'
-                ? 'فایل در حال بررسی است؛ هنوز به پاسخ وصل نشده.'
+                ? uiText.text_f403362f5b06
                 : pending.status === 'Ready'
-                  ? 'ثبت اتصال فایل به پاسخ هنوز تأیید نشده است.'
-                  : 'فایل قابل استفاده نیست.'}
+                  ? uiText.text_47e46ddabacf
+                  : uiText.text_2a65835729e2}
           </p>
           {!conflict && !rejected && (
             <Button
@@ -304,7 +310,7 @@ export function ExamAnswerFiles({
               disabled={disabled || busy || !['Ready', 'Pending'].includes(pending.status)}
               onClick={() => void upload()}
             >
-              {pending.status === 'Pending' ? 'بررسی وضعیت فایل' : 'بررسی و ثبت همین پیوست'}
+              {pending.status === 'Pending' ? uiText.text_64197e65a1c9 : uiText.text_d8fbdcdc1e91}
             </Button>
           )}
           {!uncertain && (
@@ -314,7 +320,7 @@ export function ExamAnswerFiles({
               disabled={busy}
               onClick={() => setPending(undefined)}
             >
-              کنار گذاشتن فایل
+              {uiText.text_0cce97418be8}
             </Button>
           )}
         </div>
@@ -338,7 +344,7 @@ export function ExamAnswerFiles({
             }
           }}
         >
-          دریافت نسخهٔ جدید پاسخ
+          {uiText.text_2b54916cf17a}
         </Button>
       )}
       {uncertain && !pending && !conflict && action.current && (
@@ -356,7 +362,7 @@ export function ExamAnswerFiles({
             }
           }}
         >
-          بررسی دوبارهٔ همین تغییر پیوست
+          {uiText.text_d5b9e3a11d42}
         </Button>
       )}
       {!!issue && <p role="alert">{issue}</p>}

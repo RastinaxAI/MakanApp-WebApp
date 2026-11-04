@@ -1,5 +1,10 @@
 'use client';
+import '@/features/reference/bundles/features-personal-messaging-privacy';
+
+import * as uiText from '@/content/fa';
 import { MessagingSurface } from './messaging-surface';
+import { ReferenceFrame } from '@/features/reference/frame';
+import Link from 'next/link';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -19,15 +24,7 @@ export function MessagingPrivacyPage() {
     '/api/v1/messaging/privacy',
   );
   return (
-    <MessagingSurface className={f.page}>
-      <div className={s.headingRow}>
-        <div className={s.heading}>
-          <span>تنظیمات / پیام‌رسان</span>
-          <h1>حریم خصوصی</h1>
-          <p>انتخاب کنید چه کسانی بتوانند با شما ارتباط بگیرند.</p>
-        </div>
-        <PageBack href="/personal/settings" />
-      </div>
+    <ReferenceFrame id="MK-49" back="/personal/profile">
       {privacy.isPending ? (
         <LoadingSkeleton />
       ) : privacy.isError && !privacy.data ? (
@@ -42,20 +39,42 @@ export function MessagingPrivacyPage() {
           }}
         />
       )}
-    </MessagingSurface>
+      <div className="list">
+        <Link className="row" href="/personal/settings/blocked">
+          <span className="tile-icon">
+            <Ban size={21} />
+          </span>
+          <span className="grow">
+            <h4>{uiText.text_3393e0c3cb74}</h4>
+            <p>{uiText.text_a636c65f53a1}</p>
+          </span>
+        </Link>
+        <Link className="row" href="/personal/profile/details">
+          <span className="tile-icon">
+            <ShieldCheck size={21} />
+          </span>
+          <span className="grow">
+            <h4>{uiText.text_49475717c2c3}</h4>
+            <p>{uiText.text_9972b94c18ef}</p>
+          </span>
+        </Link>
+        <Link className="row" href="/personal/education/guardians">
+          <span className="grow">
+            <h4>{uiText.text_a62bc2f40f0c}</h4>
+            <p>{uiText.text_0dfe1563bdb0}</p>
+          </span>
+        </Link>
+      </div>
+    </ReferenceFrame>
   );
 }
 const privacyFields = [
-  ['directMessagesAudience', 'دریافت پیام مستقیم', 'چه کسانی بتوانند برای شما پیام بفرستند؟'],
-  ['phoneNumberVisibilityAudience', 'نمایش شمارهٔ همراه', 'چه کسانی شمارهٔ همراه شما را ببینند؟'],
-  [
-    'phoneNumberDiscoveryAudience',
-    'پیداشدن با شمارهٔ همراه',
-    'چه کسانی با واردکردن شماره، حساب شما را پیدا کنند؟',
-  ],
-  ['groupInvitesAudience', 'دعوت به گروه', 'چه کسانی بتوانند شما را به گروه دعوت کنند؟'],
-  ['onlineAudience', 'نمایش آنلاین‌بودن', 'چه کسانی وضعیت آنلاین شما را ببینند؟'],
-  ['lastSeenAudience', 'نمایش آخرین بازدید', 'چه کسانی زمان آخرین حضور شما را ببینند؟'],
+  ['directMessagesAudience', uiText.text_aea007437dcd, uiText.text_2c200604a458],
+  ['phoneNumberVisibilityAudience', uiText.text_ff36750eb49e, uiText.text_b6626668a7fb],
+  ['phoneNumberDiscoveryAudience', uiText.text_77fdd18e61ea, uiText.text_b6a4e992aaf8],
+  ['groupInvitesAudience', uiText.text_d081756dcca9, uiText.text_0fefec72ebf9],
+  ['onlineAudience', uiText.text_13d5a41bae50, uiText.text_9d3e90cf697f],
+  ['lastSeenAudience', uiText.text_f69bd374c9b5, uiText.text_0a51d924c603],
 ] as const;
 function PrivacyForm({
   current,
@@ -76,7 +95,7 @@ function PrivacyForm({
   useUnsavedChanges(dirty);
   return (
     <form
-      className={f.form}
+      className={f.form + ' mk-privacy-form'}
       data-privacy-form
       onSubmit={async (event) => {
         event.preventDefault();
@@ -121,13 +140,13 @@ function PrivacyForm({
       <div className={f.intro}>
         <ShieldCheck size={24} />
         <div>
-          <h2>کنترل ارتباطات شما</h2>
-          <p>تغییرات پس از زدن «ثبت تنظیمات» اعمال می‌شوند.</p>
+          <h2>{uiText.text_d82b15f3fac3}</h2>
+          <p>{uiText.text_be5f42fbe752}</p>
         </div>
       </div>
       {[
-        { title: 'ارتباط و پیدا شدن', keys: privacyFields.slice(0, 4) },
-        { title: 'وضعیت حضور', keys: privacyFields.slice(4) },
+        { title: uiText.text_c1ca1e8b2d02, keys: privacyFields.slice(0, 4) },
+        { title: uiText.text_5f78cf2b8f06, keys: privacyFields.slice(4) },
       ]
         .filter((group) => group.keys.some(([key]) => values[key] !== undefined))
         .map((group) => (
@@ -152,11 +171,11 @@ function PrivacyForm({
                     }}
                   >
                     <option value="" disabled>
-                      تنظیم مؤثر گزارش نشده
+                      {uiText.text_fa03e1b8bb9e}
                     </option>
-                    <option value="Everyone">همه</option>
-                    <option value="Contacts">مخاطبین من</option>
-                    <option value="Nobody">هیچ‌کس</option>
+                    <option value="Everyone">{uiText.text_15270886eadd}</option>
+                    <option value="Contacts">{uiText.text_e7648aa5d077}</option>
+                    <option value="Nobody">{uiText.text_29dbbef63dce}</option>
                   </select>
                 </div>
               ))}
@@ -167,23 +186,23 @@ function PrivacyForm({
         {saved && (
           <p className={f.success} role="status">
             <CheckCircle2 size={18} />
-            تنظیمات در سرور ثبت شد.
+            {uiText.text_b0806e32d30f}
           </p>
         )}
       </div>
       <footer className={f.footer} data-privacy-actions>
-        <p>{dirty ? 'تغییرات ثبت‌نشده دارید.' : 'تنظیمات با آخرین نسخهٔ دریافت‌شده یکسان است.'}</p>
+        <p>{dirty ? uiText.text_00d4b98d0841 : uiText.text_d37da57e6b25}</p>
         <div className={f.buttons}>
           <Button type="submit" disabled={busy || !dirty}>
             <Save size={18} />
-            {busy ? 'در حال ثبت…' : 'ثبت تنظیمات'}
+            {busy ? uiText.text_b5ef00b1806f : uiText.text_1d615f338733}
           </Button>
           <Button
             type="button"
             variant="outline"
             disabled={busy}
             onClick={async () => {
-              if (dirty && !window.confirm('تغییرات ثبت‌نشده کنار گذاشته شوند؟')) return;
+              if (dirty && !window.confirm(uiText.text_e00522c63330)) return;
               if (lock.current) return;
               lock.current = true;
               setBusy(true);
@@ -203,7 +222,7 @@ function PrivacyForm({
               }
             }}
           >
-            دریافت نسخهٔ تازه
+            {uiText.text_aae95f355460}
           </Button>
         </div>
       </footer>
@@ -215,9 +234,9 @@ export function BlockedAccountsPage() {
     <MessagingSurface>
       <div className={s.headingRow}>
         <div className={s.heading}>
-          <span>تنظیمات / پیام‌رسان</span>
-          <h1>حساب‌های مسدودشده</h1>
-          <p>مسدودکردن ارتباط با حذف مخاطب از دفترچه تفاوت دارد.</p>
+          <span>{uiText.text_6390b19951fb}</span>
+          <h1>{uiText.text_3393e0c3cb74}</h1>
+          <p>{uiText.text_a06763105959}</p>
         </div>
         <PageBack href="/personal/settings" />
       </div>
@@ -239,10 +258,7 @@ function BlockedPeople() {
       ) : blocked.isError ? (
         <ErrorState error={blocked.error} onRetry={() => void blocked.refetch()} />
       ) : !blocked.data.length ? (
-        <EmptyState
-          title="حساب مسدودشده‌ای ندارید"
-          description="حساب‌هایی که مسدود می‌کنید، برای مدیریت در این بخش نمایش داده می‌شوند."
-        />
+        <EmptyState title={uiText.text_8fa2b3ccd332} description={uiText.text_92d06ba85662} />
       ) : (
         <div className={s.contactRows}>
           {blocked.data.map((item) => (
@@ -272,7 +288,7 @@ function BlockedPeople() {
                   }
                 }}
               >
-                {busy === item.user.userId ? 'در حال ثبت…' : 'رفع مسدودی'}
+                {busy === item.user.userId ? uiText.text_b5ef00b1806f : uiText.text_304587745c01}
               </Button>
             </article>
           ))}

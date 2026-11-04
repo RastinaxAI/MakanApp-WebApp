@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-02",
+  "application": "web/ Next.js 16.4.2",
+  "reference": "design/telegram-reference.json",
+  "build": {
+    "command": "npm run build -- --webpack",
+    "result": "passed",
+    "log": "tmp/telegram-build.log"
+  },
+  "unit": {
+    "command": "npm test",
+    "passed": 281,
+    "files": 51,
+    "failed": 0,
+    "notes": "Includes expanded contrast pairs for outgoing message content, timestamps and fallback avatar initials."
+  },
+  "browser": {
+    "command": "PLAYWRIGHT_CHANNEL=chrome npm run test:e2e",
+    "uniqueInventory": 159,
+    "uniqueLatestPassed": 159,
+    "remainingFailures": 0,
+    "missing": 0,
+    "singleUninterruptedFullPass": false,
+    "stages": [
+      {
+        "file": "TELEGRAM_REFERENCE_INITIAL_BROWSER.json",
+        "passed": 147,
+        "failed": 4,
+        "notCompleted": 8,
+        "reason": "SIGTERM ended the run after 151 observed tests; eight were run separately."
+      },
+      {
+        "file": "TELEGRAM_REFERENCE_COMPLETION_BROWSER.json",
+        "passed": 10,
+        "failed": 2,
+        "reason": "Four superseded UI expectations corrected; two recorded flows used an invalid outline-width assumption for this Chrome."
+      },
+      {
+        "file": "TELEGRAM_REFERENCE_FINAL_BROWSER.json",
+        "passed": 6,
+        "failed": 0,
+        "reason": "Assert outline-style:none on the inner field and the visible outer focus ring. Group/channel fixtures also confirm the real read-cursor request."
+      }
+    ],
+    "coverage": [
+      "five account types",
+      "light and dark",
+      "320, 390, 700, 834, 1024 and 1440 widths in existing/new suites",
+      "private and official message boundaries",
+      "profile save failures",
+      "group/channel edit, members, mute, media, invite links, topics",
+      "education and assistant demo flows",
+      "keyboard, back and focus restoration"
+    ]
+  },
+  "visual": {
+    "directory": "output/review/telegram-reference",
+    "overview": "output/review/telegram-reference/overview.png",
+    "videos": 6,
+    "performanceClaim": "No claim of native simulator validation or sustained 60 fps on a physical device."
+  },
+  "runtime": {
+    "files": 256,
+    "sha256": "f289807d4f70800e8b23c02cc66c0c8a3b667c9db1c6fc399713d5fb228b33f6",
+    "changedAfterMainRun": ["src/features/personal/assistant.module.css"],
+    "finalChange": "Explicitly suppress the assistant input outline; retain the parent focus ring. Final six recorded flows passed after rebuilding."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:3133/enter",
+    "fixture": false,
+    "backendSource": "Existing Compose backend origin; no authenticated live business operation performed.",
+    "verified": [
+      "HTTP 200",
+      "all initial stylesheets HTTP 200",
+      "current light and dark tokens present",
+      "fixture banner absent"
+    ]
+  },
+  "deployment": {
+    "performed": false,
+    "limitations": [
+      "Docker daemon unavailable on this host",
+      "web/.env.docker is absent",
+      "No deployment, private environment file or session volume was changed."
+    ]
+  },
+  "limitations": [
+    "No pixel parity claim for all 351 PDF pages. The PDF has mobile Telegram variants, not Makan school screens or a desktop specification.",
+    "G23 unsupported controls remain explicitly unavailable.",
+    "Assistant output remains an explicitly labeled local preview.",
+    "All automated mutations were against the isolated local fixture."
+  ]
+}

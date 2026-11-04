@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 
 export const routes = {
@@ -7,28 +8,34 @@ export const routes = {
   messages: '/personal/messages',
   contacts: '/personal/contacts',
   assistant: '/personal/assistant',
+  extracurricular: '/personal/extracurricular',
   profile: '/personal/profile',
   profileEdit: '/personal/profile/edit',
   settings: '/personal/settings',
 } as const;
 export const roleLabels = {
-  Manager: 'مدیر آموزشگاه',
-  Teacher: 'استاد',
-  Student: 'دانشجو',
-  Parent: 'والدین',
+  Manager: uiText.text_330525bbfa1f,
+  Teacher: uiText.text_2000c11f322c,
+  Student: uiText.text_fbd179d162db,
+  Parent: uiText.text_dcc74caa0918,
 } as const;
 export type SchoolRole = keyof typeof roleLabels;
 export const isSchoolRole = (value: unknown): value is SchoolRole =>
   typeof value === 'string' && Object.hasOwn(roleLabels, value);
 export const navigation = [
-  { href: routes.education, name: 'آموزشگاه', icon: 'education' },
-  { href: routes.assistant, name: 'دستیار ماکان', icon: 'assistant' },
-  { href: routes.messages, name: 'پیام‌ها', icon: 'messages' },
-  { href: routes.profile, name: 'پروفایل', icon: 'profile' },
+  { href: routes.education, name: uiText.navigation_education, icon: 'education' },
+  {
+    href: routes.extracurricular,
+    name: uiText.navigation_extracurricular,
+    icon: 'extracurricular',
+  },
+  { href: routes.assistant, name: uiText.navigation_assistant, icon: 'assistant' },
+  { href: routes.messages, name: uiText.navigation_messages, icon: 'messages' },
+  { href: routes.profile, name: uiText.navigation_profile, icon: 'profile' },
 ] as const;
 export function activeNavigation(path: string) {
-  if (path.startsWith('/personal/subscription') || path.startsWith('/personal/classes'))
-    return routes.profile;
+  if (path.startsWith('/personal/classes')) return routes.extracurricular;
+  if (path.startsWith('/personal/subscription')) return routes.profile;
   if (path === routes.personal) return routes.education;
   if (path === '/personal/ai') return routes.assistant;
   if (path === routes.contacts) return routes.messages;
@@ -40,6 +47,13 @@ export function isMessageRoom(path: string) {
 }
 /** Semantic fallback for direct entry; never navigate outside the app via browser history. */
 export function defaultBackTarget(path: string) {
+  if (path.startsWith(routes.extracurricular + '/')) {
+    const parts = path.slice(routes.extracurricular.length + 1).split('/');
+    if (parts.length <= 2) return routes.extracurricular;
+    return routes.extracurricular + '/' + parts.slice(0, 2).join('/');
+  }
+  if (path.startsWith(routes.assistant + '/') || path.startsWith('/personal/ai/'))
+    return routes.assistant;
   if (path === routes.settings || path.startsWith(routes.profile + '/')) return routes.profile;
   if (path.startsWith(routes.settings + '/')) return path.slice(0, path.lastIndexOf('/'));
   if (path === routes.contacts || path === routes.messages + '/new') return routes.messages;

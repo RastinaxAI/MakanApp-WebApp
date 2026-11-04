@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -34,19 +35,24 @@ export function People() {
   return (
     <div className={s.page}>
       <DirectoryHeader records />
-      <section className={s.panel} aria-label="جستجوی پرونده‌های آموزشی">
+      <section className={s.panel} aria-label={uiText.text_e4b1c0f12b56}>
         <SchoolSearch
-          label="جستجوی پرونده‌ها"
+          label={uiText.text_e52c421dff2c}
           onSearch={(value) => {
             setSearch(value);
             setPage(1);
           }}
         />
       </section>
-      <section className={s.panel} aria-label="فهرست پرونده‌ها">
+      <section className={s.panel} aria-label={uiText.text_2b7ab2fd590c}>
         <header className={s.resultHeading}>
-          <h2>پرونده‌های آموزشگاه</h2>
-          {q.data && <span>{number(q.data.totalCount)} نتیجه</span>}
+          <h2>{uiText.text_761e229676b7}</h2>
+          {q.data && (
+            <span>
+              {number(q.data.totalCount)}
+              {uiText.text_028c8faf7935}
+            </span>
+          )}
         </header>
         {q.isPending ? (
           <LoadingSkeleton />
@@ -59,10 +65,10 @@ export function People() {
                 <table role="table" className={s.table}>
                   <thead role="rowgroup">
                     <tr role="row">
-                      <th role="columnheader">نام فرد</th>
-                      <th role="columnheader">وضعیت پرونده</th>
-                      <th role="columnheader">اتصال حساب</th>
-                      <th role="columnheader">جزئیات</th>
+                      <th role="columnheader">{uiText.text_5e535aba42de}</th>
+                      <th role="columnheader">{uiText.text_dd1b208f270b}</th>
+                      <th role="columnheader">{uiText.text_8ca78e1b4814}</th>
+                      <th role="columnheader">{uiText.text_35c2efc6a99d}</th>
                     </tr>
                   </thead>
                   <tbody role="rowgroup">
@@ -71,15 +77,17 @@ export function People() {
                         <td role="cell">
                           <RecordIdentity
                             name={record.displayName || record.firstName + ' ' + record.lastName}
-                            caption="پروندهٔ آموزشی"
+                            caption={uiText.text_5d33f6812cd4}
                           />
                         </td>
-                        <td role="cell" data-label="پرونده">
+                        <td role="cell" data-label={uiText.text_68d976ba9e81}>
                           <StatusBadge value={record.status} />
                         </td>
-                        <td role="cell" data-label="حساب">
+                        <td role="cell" data-label={uiText.text_c28daebcd3bf}>
                           <span className={s.muted}>
-                            {record.isAccountLinked ? 'متصل' : 'متصل نشده'}
+                            {record.isAccountLinked
+                              ? uiText.text_490a4c57bf7a
+                              : uiText.text_33547bc78c38}
                           </span>
                         </td>
                         <td role="cell" className={s.actionCell}>
@@ -87,12 +95,12 @@ export function People() {
                             <Link
                               href={`${base}/people/${record.id}`}
                               aria-label={
-                                'مشاهدهٔ پروندهٔ ' +
+                                uiText.text_cefa283cd307 +
                                 (record.displayName || record.firstName + ' ' + record.lastName)
                               }
                             >
                               <FolderOpen size={16} />
-                              مشاهدهٔ پرونده
+                              {uiText.text_895400e35aa6}
                             </Link>
                           </Button>
                         </td>
@@ -102,10 +110,7 @@ export function People() {
                 </table>
               </div>
             ) : (
-              <EmptyState
-                title="پرونده‌ای پیدا نشد"
-                description="نام دیگری جستجو کنید یا پروندهٔ جدیدی ثبت کنید."
-              />
+              <EmptyState title={uiText.text_c49da5be84b7} description={uiText.text_d22a20b5f223} />
             )}
             <Pager
               page={q.data.page}
@@ -122,8 +127,8 @@ export function People() {
 export function PersonFormPage({ id }: { id?: string }) {
   return (
     <WorkflowPage
-      title={id ? 'ویرایش پرونده' : 'افزودن پرونده'}
-      eyebrow="آموزشگاه / پرونده‌های آموزشی"
+      title={id ? uiText.text_5fe4a18d76e9 : uiText.text_68c9cbc200a9}
+      eyebrow={uiText.text_09de2f309ec3}
       back={id ? `${base}/people/${id}` : base + '/people'}
     >
       {id ? <ExistingPerson id={id} edit /> : <PersonEditor />}
@@ -133,8 +138,8 @@ export function PersonFormPage({ id }: { id?: string }) {
 export function PersonDetailPage({ id }: { id: string }) {
   return (
     <WorkflowPage
-      title="جزئیات پرونده"
-      eyebrow="آموزشگاه / پرونده‌های آموزشی"
+      title={uiText.text_520b2ae78d67}
+      eyebrow={uiText.text_09de2f309ec3}
       back={base + '/people'}
     >
       <ExistingPerson id={id} />
@@ -166,14 +171,14 @@ function ExistingPerson({ id, edit = false }: { id: string; edit?: boolean }) {
         </span>
         <div>
           <h2>{name}</h2>
-          <p>پروندهٔ آموزشی در آموزشگاه فعال</p>
+          <p>{uiText.text_803b2a679970}</p>
         </div>
         <StatusBadge value={record.status} />
         {record.canEditNames && (
           <Button asChild>
             <Link href={`${base}/people/${id}/edit`}>
               <Pencil size={17} />
-              ویرایش پرونده
+              {uiText.text_5fe4a18d76e9}
             </Link>
           </Button>
         )}
@@ -182,23 +187,23 @@ function ExistingPerson({ id, edit = false }: { id: string; edit?: boolean }) {
         <section className={s.panel}>
           <h2>
             <FileUser size={20} />
-            مشخصات فردی
+            {uiText.text_61d235c5d463}
           </h2>
           <dl className={s.facts}>
             <div>
-              <dt>نام</dt>
+              <dt>{uiText.text_69c1e5b1fe20}</dt>
               <dd>{record.firstName}</dd>
             </div>
             <div>
-              <dt>نام خانوادگی</dt>
+              <dt>{uiText.text_3fe7ba4a2131}</dt>
               <dd>{record.lastName}</dd>
             </div>
             <div>
-              <dt>نام نمایشی</dt>
-              <dd>{record.displayName || 'ثبت نشده'}</dd>
+              <dt>{uiText.text_5903c1c121cb}</dt>
+              <dd>{record.displayName || uiText.text_5749a86140fa}</dd>
             </div>
             <div>
-              <dt>وضعیت پرونده</dt>
+              <dt>{uiText.text_dd1b208f270b}</dt>
               <dd>
                 <StatusBadge value={record.status} />
               </dd>
@@ -206,31 +211,32 @@ function ExistingPerson({ id, edit = false }: { id: string; edit?: boolean }) {
           </dl>
         </section>
         <section className={s.panel}>
-          <h2>{record.isAccountLinked ? <Link2 size={20} /> : <Unlink size={20} />}حساب کاربری</h2>
+          <h2>
+            {record.isAccountLinked ? <Link2 size={20} /> : <Unlink size={20} />}
+            {uiText.text_7ff9b551cfbc}
+          </h2>
           <div className={s.accountState}>
             {record.isAccountLinked ? <Link2 size={20} /> : <Unlink size={20} />}
-            <strong>{record.isAccountLinked ? 'حساب متصل است' : 'حساب متصل نشده'}</strong>
+            <strong>
+              {record.isAccountLinked ? uiText.text_76e5a8315199 : uiText.text_86c185646c12}
+            </strong>
           </div>
-          <p>
-            {record.isAccountLinked
-              ? 'این پرونده به یک حساب کاربری متصل است. نقش‌ها و ثبت‌نام کلاس جداگانه مدیریت می‌شوند.'
-              : 'این پرونده اطلاعات آموزشی فرد را نگه می‌دارد؛ ساخت آن به‌تنهایی حساب کاربری یا نقش آموزشی ایجاد نمی‌کند.'}
-          </p>
-          {!record.canEditNames && <p>نام این پرونده در وضعیت فعلی قابل ویرایش نیست.</p>}
+          <p>{record.isAccountLinked ? uiText.text_53437dbf427f : uiText.text_808e1b11e334}</p>
+          {!record.canEditNames && <p>{uiText.text_678da4712ae9}</p>}
         </section>
       </div>
       <section className={s.panel}>
         <details className={s.identifiers}>
-          <summary>شناسه‌های پرونده</summary>
+          <summary>{uiText.text_1a4e5a33c6e7}</summary>
           <dl className={s.facts}>
             <div>
-              <dt>شناسهٔ پروندهٔ آموزشگاه</dt>
+              <dt>{uiText.text_9adbdd5ac00c}</dt>
               <dd>
                 <bdi>{record.id}</bdi>
               </dd>
             </div>
             <div>
-              <dt>شناسهٔ شخص</dt>
+              <dt>{uiText.text_53c9bf7c39f9}</dt>
               <dd>
                 <bdi>{record.personId}</bdi>
               </dd>
@@ -263,12 +269,12 @@ function PersonEditor({ original }: { original?: S['OrganizationPersonDto'] }) {
       ready={d.ready && !d.stale}
       canCommit={valid}
       busy={a.busy}
-      notice="پروندهٔ سازمانی، حساب جدید یا نقش آموزشی ایجاد نمی‌کند."
+      notice={uiText.text_ac610f52cfdf}
       rows={[
-        ['نام', d.values.first],
-        ['نام خانوادگی', d.values.last],
-        ['نام نمایشی', d.values.display],
-        ['دلیل', d.values.reason],
+        [uiText.text_69c1e5b1fe20, d.values.first],
+        [uiText.text_3fe7ba4a2131, d.values.last],
+        [uiText.text_5903c1c121cb, d.values.display],
+        [uiText.text_ecaf3518c67b, d.values.reason],
       ]}
       error={
         <>
@@ -303,10 +309,10 @@ function PersonEditor({ original }: { original?: S['OrganizationPersonDto'] }) {
       <section className={s.formGroup}>
         <h2>
           <FileUser size={20} />
-          مشخصات فردی
+          {uiText.text_61d235c5d463}
         </h2>
         <div className={s.formFields}>
-          <Field label="نام">
+          <Field label={uiText.text_69c1e5b1fe20}>
             <input
               autoComplete="given-name"
               required
@@ -314,7 +320,7 @@ function PersonEditor({ original }: { original?: S['OrganizationPersonDto'] }) {
               onChange={(e) => d.set('first', e.target.value)}
             />
           </Field>
-          <Field label="نام خانوادگی">
+          <Field label={uiText.text_3fe7ba4a2131}>
             <input
               autoComplete="family-name"
               required
@@ -322,11 +328,11 @@ function PersonEditor({ original }: { original?: S['OrganizationPersonDto'] }) {
               onChange={(e) => d.set('last', e.target.value)}
             />
           </Field>
-          <Field label="نام نمایشی (اختیاری)">
+          <Field label={uiText.text_0c372fe12c90}>
             <input
               value={d.values.display}
               onChange={(e) => d.set('display', e.target.value)}
-              placeholder="نامی که در آموزشگاه نمایش داده می‌شود"
+              placeholder={uiText.text_97098199cc52}
             />
           </Field>
         </div>
@@ -334,15 +340,15 @@ function PersonEditor({ original }: { original?: S['OrganizationPersonDto'] }) {
       <section className={s.formGroup}>
         <h2>
           <ClipboardList size={20} />
-          توضیح ثبت
+          {uiText.text_2979f12cb485}
         </h2>
-        <p>دلیل ثبت یا اصلاح اطلاعات را کوتاه بنویسید.</p>
-        <Field label="دلیل ثبت یا تغییر پرونده">
+        <p>{uiText.text_d38f60c41090}</p>
+        <Field label={uiText.text_e3f9741e73bf}>
           <textarea
             required
             value={d.values.reason}
             onChange={(e) => d.set('reason', e.target.value)}
-            placeholder="برای مثال: اصلاح نام ثبت‌شده در پرونده"
+            placeholder={uiText.text_c02ab0f896b2}
           />
         </Field>
       </section>

@@ -1,4 +1,8 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
+import { useState } from 'react';
+import { PublicationReceipt } from './publication-receipt';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -12,14 +16,15 @@ import { usePersonal, usePersonalApi } from '../provider';
 import { ActivityDeliveryStatus } from './activity-delivery';
 import { WorkflowPage, WorkflowForm, WorkflowDraftConflict, useWorkflowDraft } from './workflow';
 import { useAssessmentAction } from './use-assessment-action';
-import { base, Field, Status, toUtc } from './shared';
+import { Field, Status, toUtc } from './shared';
 import e from './evaluation.module.css';
 import s from './school.module.css';
 type S = components['schemas'];
 export function AssignmentEditPage({ id, publish = false }: { id: string; publish?: boolean }) {
+  const { base } = useAcademicScope();
   return (
     <WorkflowPage
-      title={publish ? 'بازبینی انتشار تکلیف' : 'ویرایش پیش‌نویس تکلیف'}
+      title={publish ? uiText.text_75b3b6a69681 : uiText.text_1d3577cf9675}
       back={`${base}/assignments/${id}`}
       roles={['Teacher', 'Manager']}
     >
@@ -28,12 +33,11 @@ export function AssignmentEditPage({ id, publish = false }: { id: string; publis
   );
 }
 function AssignmentLoader({ id, publish }: { id: string; publish: boolean }) {
-  const { session } = usePersonal();
+  const scope = useAcademicScope();
   const q = usePersonalApi<S['AssignmentResult']>('/api/v1/academic/assignments/' + id);
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
-  if (q.data.id !== id || q.data.organizationId !== session.context.organizationId)
-    return <ErrorState error={new ApiError(404)} />;
+  if (q.data.id !== id || !scope.matches(q.data)) return <ErrorState error={new ApiError(404)} />;
   return publish ? (
     <AssignmentPublish value={q.data} refresh={() => q.refetch({ throwOnError: true })} />
   ) : (
@@ -41,6 +45,7 @@ function AssignmentLoader({ id, publish }: { id: string; publish: boolean }) {
   );
 }
 function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
+  const { base } = useAcademicScope();
   const d = useWorkflowDraft(
     'assignment-edit:' + value.id,
     {
@@ -58,10 +63,10 @@ function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
   if (value.status !== 'Draft')
     return (
       <section className={e.panel}>
-        <h2>این تکلیف پیش‌نویس نیست</h2>
-        <p className={s.hint}>ویرایش این نسخه از مسیر پیش‌نویس مجاز نیست.</p>
+        <h2>{uiText.text_fea95daa2cd8}</h2>
+        <p className={s.hint}>{uiText.text_fa2690fb6104}</p>
         <Button variant="outline" asChild>
-          <Link href={`${base}/assignments/${value.id}`}>مشاهدهٔ تکلیف</Link>
+          <Link href={`${base}/assignments/${value.id}`}>{uiText.text_187e46cf3b71}</Link>
         </Button>
       </section>
     );
@@ -74,20 +79,23 @@ function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
     Number(d.values.attempts) > 0 &&
     d.values.score.trim() !== '' &&
     Number.isFinite(Number(d.values.score)) &&
-    Number(d.values.score) >= 0;
+    Number(d.values.score) > 0;
   return (
     <WorkflowForm
       busy={a.busy}
       ready={d.ready}
       canCommit={valid && !d.stale}
-      button="تأیید و ذخیرهٔ پیش‌نویس"
+      button={uiText.text_44e4555f21d7}
       rows={[
-        ['عنوان', d.values.title],
-        ['شرح', d.values.description],
-        ['مهلت', date(d.values.due, true)],
-        ['نمرهٔ کل', d.values.score],
-        ['دفعات مجاز', d.values.attempts],
-        ['تحویل با تأخیر', d.values.late ? 'مجاز' : 'غیرمجاز'],
+        [uiText.text_74190f4bb095, d.values.title],
+        [uiText.text_dd322d284113, d.values.description],
+        [uiText.text_fbf33464a790, date(d.values.due, true)],
+        [uiText.text_25823dfdfd3f, d.values.score],
+        [uiText.text_9f129855c90d, d.values.attempts],
+        [
+          uiText.text_1acb0e529075,
+          d.values.late ? uiText.text_d70d2d795615 : uiText.text_5c7f069cd852,
+        ],
       ]}
       error={
         <>
@@ -117,17 +125,17 @@ function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
         }
       }}
     >
-      <Field label="عنوان تکلیف">
+      <Field label={uiText.text_c864088e1061}>
         <input required value={d.values.title} onChange={(ev) => d.set('title', ev.target.value)} />
       </Field>
-      <Field label="شرح تکلیف">
+      <Field label={uiText.text_1d3c268468ff}>
         <textarea
           required
           value={d.values.description}
           onChange={(ev) => d.set('description', ev.target.value)}
         />
       </Field>
-      <Field label="مهلت تحویل">
+      <Field label={uiText.text_2b26e703adf2}>
         <JalaliDateInput
           required
           withTime
@@ -136,7 +144,7 @@ function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
         />
       </Field>
       <div className={s.two}>
-        <Field label="حداکثر دفعات تحویل">
+        <Field label={uiText.text_0e469bc1ffab}>
           <input
             required
             type="number"
@@ -146,7 +154,7 @@ function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
             onChange={(ev) => d.set('attempts', ev.target.value)}
           />
         </Field>
-        <Field label="نمرهٔ کل">
+        <Field label={uiText.text_25823dfdfd3f}>
           <input
             required
             type="number"
@@ -163,7 +171,7 @@ function AssignmentEditor({ value }: { value: S['AssignmentResult'] }) {
           checked={d.values.late}
           onChange={(ev) => d.set('late', ev.target.checked)}
         />
-        تحویل با تأخیر مجاز باشد
+        {uiText.text_8dd151936022}
       </label>
     </WorkflowForm>
   );
@@ -175,54 +183,64 @@ function AssignmentPublish({
   value: S['AssignmentResult'];
   refresh: () => Promise<unknown>;
 }) {
+  const { base } = useAcademicScope();
+  const scope = useAcademicScope();
   const { call } = usePersonal();
+  const [receipt, setReceipt] = useState<S['AcademicPublicationReceipt']>();
   return (
     <section className={e.panel}>
-      <Status>{value.status === 'Draft' ? 'پیش‌نویس' : 'منتشرشده'}</Status>
+      <Status>
+        {value.status === 'Draft' ? uiText.text_410c47c7f8b7 : uiText.text_e4f1cf0d1e04}
+      </Status>
       <h2>{value.title}</h2>
       <p className={e.answer} dir="auto">
         {value.description}
       </p>
       <dl className={e.summary}>
         <div>
-          <dt>کلاس</dt>
+          <dt>{uiText.text_56c43e096bb9}</dt>
           <dd>{value.classTitle}</dd>
         </div>
         <div>
-          <dt>مهلت</dt>
+          <dt>{uiText.text_fbf33464a790}</dt>
           <dd>{date(value.dueAtUtc, true)}</dd>
         </div>
         <div>
-          <dt>نمرهٔ کل و تعداد تلاش</dt>
+          <dt>{uiText.text_b48aed6cd968}</dt>
           <dd>
-            {value.maxScore.toLocaleString('fa-IR')} نمره ·{' '}
-            {value.maxAttempts.toLocaleString('fa-IR')} بار
+            {value.maxScore.toLocaleString('fa-IR')}
+            {uiText.text_fcd548d11d3f} {value.maxAttempts.toLocaleString('fa-IR')}
+            {uiText.text_c23a4b046c4e}
           </dd>
         </div>
         <div>
-          <dt>تحویل با تأخیر</dt>
-          <dd>{value.allowLateSubmission ? 'مجاز' : 'غیرمجاز'}</dd>
+          <dt>{uiText.text_1acb0e529075}</dt>
+          <dd>{value.allowLateSubmission ? uiText.text_d70d2d795615 : uiText.text_5c7f069cd852}</dd>
         </div>
       </dl>
       <div className={e.actions}>
         {value.status === 'Draft' && (
           <>
             <Button asChild variant="outline">
-              <Link href={`${base}/assignments/${value.id}/edit`}>بازگشت و ویرایش</Link>
+              <Link href={`${base}/assignments/${value.id}/edit`}>{uiText.text_250a7c7f7fe9}</Link>
             </Button>
             <ConfirmAction
-              title="انتشار تکلیف"
-              trigger="انتشار تکلیف برای کلاس"
-              confirm="تأیید انتشار تکلیف"
-              description="این نسخه با تنظیمات نمایش‌داده‌شده برای دانش‌آموزان مجاز کلاس منتشر شود؟"
+              title={uiText.text_e6701e88678e}
+              trigger={uiText.text_d165c340ec56}
+              confirm={uiText.text_2391d7b29480}
+              description={uiText.text_a6eef9f48911}
               onConfirm={async () => {
-                await call('/api/v1/academic/assignments/' + value.id + '/publish', {
-                  method: 'POST',
-                  body: JSON.stringify({
-                    expectedAssignmentRowVersion: value.assignmentRowVersion,
-                    expectedVersionRowVersion: value.versionRowVersion,
-                  }),
-                });
+                const result = await call<S['PublishAssignmentResult']>(
+                  '/api/v1/academic/assignments/' + value.id + '/publish',
+                  {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      expectedAssignmentRowVersion: value.assignmentRowVersion,
+                      expectedVersionRowVersion: value.versionRowVersion,
+                    }),
+                  },
+                );
+                setReceipt(result.publicationReceipt);
                 await refresh();
                 return true;
               }}
@@ -230,10 +248,11 @@ function AssignmentPublish({
           </>
         )}
         <Button asChild variant="ghost">
-          <Link href={`${base}/assignments/${value.id}`}>جزئیات تکلیف</Link>
+          <Link href={`${base}/assignments/${value.id}`}>{uiText.text_31b5276a70f5}</Link>
         </Button>
       </div>
-      {value.status === 'Published' && (
+      <PublicationReceipt value={receipt} />
+      {!scope.personal && value.status === 'Published' && (
         <ActivityDeliveryStatus
           classId={value.classId}
           kind="Assignment"

@@ -14,7 +14,7 @@ test('members and records retain the same selected school destination and naviga
     await page.setViewportSize({ width, height: 1000 });
     await page.goto(base + '/members');
     const nav = page.getByRole('navigation', { name: 'بخش‌های آموزشگاه', exact: true });
-    const destination = nav.getByRole('link', { name: 'پرونده‌ها و اعضا', exact: true });
+    const destination = nav.getByRole('link', { name: 'اعضا', exact: true });
     const sections = page.getByRole('navigation', { name: 'اعضا و پرونده‌ها', exact: true });
     await expect(destination).toHaveAttribute('aria-current', 'page');
     const before = await nav.boundingBox();

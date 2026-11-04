@@ -1,0 +1,181 @@
+.page {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+}
+.columns {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+.settingsList {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.settingsList a {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  min-height: 108px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.settingsList a > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.settingsList strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+}
+.settingsList small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.settingsList a > svg {
+  flex-shrink: 0;
+  color: var(--muted);
+}
+.settingsList a:hover {
+  background: var(--soft);
+  border-color: var(--primary);
+}
+.aside {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.appearance,
+.account {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  padding: 24px;
+}
+.aside h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+.aside p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 2;
+  margin-top: 8px;
+}
+.appearance fieldset {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  border: 0;
+  padding: 0;
+  margin-top: 20px;
+}
+.appearance label {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  min-height: 90px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+.appearance label[data-selected='true'] {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+.appearance input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.appearance label:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+.account {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 12px;
+}
+.account a {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  color: var(--primary);
+  font-size: 12px;
+}
+@media (min-width: 900px) {
+  .columns {
+    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+  }
+}
+@media (min-width: 1400px) {
+  .settingsList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .settingsList a {
+    align-items: flex-start;
+    min-height: 140px;
+    padding: 22px 18px;
+    gap: 12px;
+  }
+}
+@media (min-width: 650px) and (max-width: 899px) {
+  .settingsList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aside {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aside > :last-child {
+    grid-column: 1/-1;
+  }
+}
+@media (max-width: 600px) {
+  .page,
+  .columns {
+    gap: 18px;
+  }
+  .settingsList {
+    gap: 0;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 0 16px;
+  }
+  .settingsList a {
+    padding: 18px 0;
+    border: 0;
+    border-radius: 0;
+    min-height: 84px;
+  }
+  .settingsList a + a {
+    border-top: 1px solid var(--border);
+  }
+  .settingsList strong {
+    font-size: 14px;
+  }
+  .appearance,
+  .account {
+    padding: 20px;
+  }
+}
+
+.account > :global(button) {
+  grid-column: 1/-1;
+}

@@ -84,7 +84,7 @@
 }
 .tabs a[aria-current='page'] {
   background: var(--primary);
-  color: white;
+  color: var(--on-primary);
   border-color: var(--primary);
 }
 .updated,
@@ -425,7 +425,7 @@
 .invitationActions .primaryAction {
   background: var(--primary-button);
   border-color: var(--primary-button);
-  color: #fff;
+  color: var(--on-primary);
 }
 .invitationActions .primaryAction svg {
   color: inherit;
@@ -465,7 +465,7 @@
 }
 .reportTabs a[aria-current='page'] {
   background: var(--primary-button);
-  color: #fff;
+  color: var(--on-primary);
 }
 .reportTabs a[aria-current='page'] svg {
   color: inherit;

@@ -205,36 +205,78 @@ test('personal class invitation needs recipient acceptance and grants no organiz
   context,
   browser,
 }) => {
-  await login(context, 'Teacher', false);
-  await page.goto('/personal/classes/new');
-  await page.getByLabel('نام کلاس شخصی', { exact: true }).fill('کلاس شخصی محلی');
-  await page.getByRole('button', { name: 'ثبت کلاس شخصی', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'کلاس شخصی محلی', exact: true })).toBeVisible();
-  await page.getByLabel('شماره یا نام کاربری', { exact: true }).fill('@test.Student');
-  await page.getByRole('button', { name: 'پیدا کردن حساب', exact: true }).click();
-  await page.getByRole('button', { name: 'ارسال دعوت کلاس شخصی', exact: true }).click();
-  await expect(
-    page.getByRole('heading', { name: 'عضوی در کلاس ثبت نشده است', exact: true }),
-  ).toBeVisible();
+  const session = await login(context, 'Teacher', false);
+  // Existing legacy classes still support consent. Seed one through the isolated
+  // fixture contract; the new formation UI correctly requires platform review.
+  const created = await context.request.post(
+    origin + '/api/client/backend/api/v1/personal-classes',
+    {
+      headers: { Origin: origin, 'X-Makan-Context': session.revision },
+      data: { title: 'کلاس شخصی محلی', clientOperationId: crypto.randomUUID() },
+    },
+  );
+  expect(created.status()).toBe(201);
+  const cls = await created.json();
+  const hostHeaders = { Origin: origin, 'X-Makan-Context': session.revision };
+  const participantsUrl =
+    origin + '/api/client/backend/api/v1/personal-classes/' + cls.id + '/participants';
+  expect(
+    await (await context.request.get(participantsUrl, { headers: hostHeaders })).json(),
+  ).toHaveLength(0);
   const student = await browser.newContext({ baseURL: origin });
   try {
-    await login(student, 'Student', false);
-    const p = await student.newPage();
-    await p.goto('/personal/classes');
-    await p.getByRole('button', { name: 'پذیرش دعوت کلاس شخصی', exact: true }).click();
-    await expect(p.getByRole('heading', { name: 'کلاس شخصی محلی', exact: true })).toBeVisible();
-    const state = await (await student.request.get(origin + '/api/client/session')).json();
+    const studentSession = await login(student, 'Student', false),
+      studentHeaders = { Origin: origin, 'X-Makan-Context': studentSession.revision };
+    const invited = await context.request.post(
+      origin + '/api/client/backend/api/v1/personal-classes/' + cls.id + '/invitations',
+      {
+        headers: hostHeaders,
+        data: { destinationUserId: studentSession.user.id, clientOperationId: crypto.randomUUID() },
+      },
+    );
+    expect(invited.status()).toBe(201);
+    const invitation = await invited.json();
+    expect(invitation.accepted).toBe(false);
+    expect(
+      await (await context.request.get(participantsUrl, { headers: hostHeaders })).json(),
+    ).toHaveLength(0);
+    const accepted = await student.request.post(
+      origin +
+        '/api/client/backend/api/v1/personal-classes/invitations/' +
+        invitation.id +
+        '/accept',
+      { headers: studentHeaders },
+    );
+    expect(accepted.ok()).toBe(true);
+    const state = await (await student.request.get('/api/client/session')).json();
     expect(state.context.workspaceType).toBe('Personal');
     expect(state.context.activeRole).toBeNull();
+    const participants = await (
+      await context.request.get(participantsUrl, { headers: hostHeaders })
+    ).json();
+    expect(participants).toHaveLength(1);
+    expect(participants[0].studentUserId).toBe(studentSession.user.id);
+    expect(participants[0].active).toBe(true);
+    expect(
+      (
+        await context.request.delete(participantsUrl + '/' + participants[0].id, {
+          headers: hostHeaders,
+          data: { expectedVersion: cls.version, reason: 'پایان عضویت آزمایشی' },
+        })
+      ).ok(),
+    ).toBe(true);
+    const archived = await context.request.post(
+      origin + '/api/client/backend/api/v1/personal-classes/' + cls.id + '/archive',
+      { headers: hostHeaders, data: { expectedVersion: cls.version, reason: 'بایگانی آزمایشی' } },
+    );
+    expect(archived.ok()).toBe(true);
+    expect((await archived.json()).archived).toBe(true);
   } finally {
     await student.close();
   }
-  await page.reload();
-  await expect(page.getByText('عضو ۱ · فعال', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'پایان عضویت ۱', exact: true }).click();
-  await page.getByRole('dialog').getByRole('button', { name: 'تأیید', exact: true }).click();
-  await expect(page.getByText('عضو ۱ · پایان‌یافته', { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'بایگانی کلاس', exact: true }).click();
-  await page.getByRole('dialog').getByRole('button', { name: 'تأیید', exact: true }).click();
-  await expect(page.getByText('کلاس بایگانی‌شده', { exact: true })).toBeVisible();
+  // The user retired this destination; the underlying consent contract remains compatible.
+  await page.goto('/personal/classes/' + cls.id);
+  await expect(page).toHaveURL(/\/personal\/extracurricular$/);
+  await page.goto('/personal/classes');
+  await expect(page).toHaveURL(/\/personal\/extracurricular$/);
 });

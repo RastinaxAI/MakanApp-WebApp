@@ -137,6 +137,7 @@ export function releaseRoute({ state, url, req, body, auth, send }) {
         isHost: true,
         canCreateEducationalContent: false,
         educationalWorkflowStatus: 'Unavailable',
+        version: 'MDAwMDAwMDE=',
       });
       r.classes.push(c);
       r.participants.set(c.id, []);
@@ -153,6 +154,8 @@ export function releaseRoute({ state, url, req, body, auth, send }) {
   if (req.method === 'GET')
     return send(p.endsWith('/participants') ? members : { ...c, isHost: host });
   if (!host || c.archived) return send({ code: 'FORBIDDEN' }, 403);
+  if ((p.endsWith('/archive') || req.method === 'DELETE') && body.expectedVersion !== c.version)
+    return send({ code: 'VERSION_CONFLICT' }, 409);
   if (p.endsWith('/archive')) {
     c.archived = true;
     return send({ ...c, isHost: true });

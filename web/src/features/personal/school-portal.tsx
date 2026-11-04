@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/button';
 import { EmptyState, ErrorState, label, LoadingSkeleton } from '@/components/ui/states';
@@ -15,7 +16,7 @@ import {
   ChartNoAxesCombined,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePersonal, usePersonalApi } from './provider';
 import { useWorkspaceSnapshot } from './workspaces';
 import { visibleWorkspaces, canEnterWorkspace } from './workspace-model';
@@ -25,6 +26,7 @@ import { base, Card, Pager, SchoolHeading } from './school/shared';
 import { ChildSelector } from './school/child-selector';
 import { SchoolSearch } from './school/search';
 import layout from './school/education-layout.module.css';
+import { ReferenceSchoolFrame } from '@/features/reference/connected-school';
 const LessonFormPage = dynamic(() => import('./school/lessons').then((m) => m.LessonFormPage), {
   loading: LoadingSkeleton,
 });
@@ -187,6 +189,12 @@ export function PersonalEducation({ section = [] }: { section?: string[] }) {
     teacher = role === 'Teacher',
     parent = role === 'Parent';
   const page = section[0] ?? 'overview';
+  const tabsRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    tabsRef.current
+      ?.querySelector('[aria-current="page"]')
+      ?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }, [page, manager]);
   const focused =
     (page === 'people' && !!section[1]) ||
     (page === 'exams' && !!section[1] && !teacher && !manager) ||
@@ -206,25 +214,26 @@ export function PersonalEducation({ section = [] }: { section?: string[] }) {
     );
   const tabs = manager
     ? ([
-        ['overview', 'نمای مدیریت', Building2],
-        ['classes', 'کلاس‌ها', BookOpen],
-        ['members', 'پرونده‌ها و اعضا', Users],
-        ['guardians', 'والد و فرزند', UserRoundCheck],
-        ['invitations', 'دعوت‌ها', Mail],
-        ['reports', 'گزارش‌ها', ChartNoAxesCombined],
+        ['overview', uiText.text_ca3c4420b9b8, Building2],
+        ['classes', uiText.text_e7b1ccd0bda3, BookOpen],
+        ['members', uiText.text_102f79b3f87c, Users],
+        ['guardians', uiText.text_d61b3d58a5e7, UserRoundCheck],
+        ['invitations', uiText.text_016c18389868, Mail],
+        ['reports', uiText.text_5dc634b07b21, ChartNoAxesCombined],
       ] as const)
     : ([
-        ['overview', 'نمای آموزشگاه', Building2],
-        ['classes', 'کلاس‌ها', BookOpen],
-        ['schedule', 'برنامه‌های کلاسی', CalendarDays],
-        ['invitations', 'دعوت‌ها', Mail],
+        ['overview', uiText.text_9a8e4bfdd18e, Building2],
+        ['classes', uiText.text_e7b1ccd0bda3, BookOpen],
+        ['schedule', uiText.text_82ec67c14936, CalendarDays],
+        ['invitations', uiText.text_016c18389868, Mail],
       ] as const);
   const navigationPage =
     manager && ['people', 'members', 'teachers', 'students'].includes(page) ? 'members' : page;
   const navigation = (
     <nav
+      ref={tabsRef}
       className={`${layout.navigation} ${manager ? layout.managerNavigation : ''}`}
-      aria-label="بخش‌های آموزشگاه"
+      aria-label={uiText.text_589d5004f227}
     >
       {tabs.map(([key, title, Icon]) => (
         <Link
@@ -234,14 +243,29 @@ export function PersonalEducation({ section = [] }: { section?: string[] }) {
           aria-label={title}
         >
           <Icon size={20} />
-          <span>
-            {key === 'schedule' ? 'برنامه‌ها' : key === 'overview' && !manager ? 'نمای کلی' : title}
-          </span>
+          <span>{title}</span>
         </Link>
       ))}
     </nav>
   );
   if (!isSchoolPath(section)) return <ErrorState error={new ApiError(404)} />;
+  if (section.length === 0 || (section.length === 1 && page === 'overview'))
+    return (
+      <ReferenceSchoolFrame>
+        {navigation}
+        {!active ? (
+          <WorkspaceList />
+        ) : !isSchoolRole(role) ? (
+          <ErrorState error={new ApiError(403)} />
+        ) : parent ? (
+          <ParentSchool page="overview" />
+        ) : manager ? (
+          <ManagerHome />
+        ) : (
+          <SchoolOverview />
+        )}
+      </ReferenceSchoolFrame>
+    );
   if (page === 'invitations')
     return (
       <div className={s.portal}>
@@ -253,10 +277,7 @@ export function PersonalEducation({ section = [] }: { section?: string[] }) {
     return (
       <div className={s.portal}>
         {navigation}
-        <SchoolHeading
-          title="آموزشگاه‌های من"
-          description="آموزشگاه و نقش خود را انتخاب کنید؛ فعالیت آموزشی در همان فضای مجاز انجام می‌شود."
-        />
+        <SchoolHeading title={uiText.text_8fa4122032f4} description={uiText.text_13e372aa992c} />
         <WorkspaceList />
       </div>
     );
@@ -415,7 +436,7 @@ export function PersonalEducation({ section = [] }: { section?: string[] }) {
         <Exams teach={teacher || manager} />
       ) : page === 'schedule' ? (
         <>
-          <SchoolHeading title="برنامهٔ کلاس‌ها" />
+          <SchoolHeading title={uiText.text_0465a6813992} />
           <Schedule teach={teacher || manager} />
         </>
       ) : (
@@ -458,17 +479,14 @@ function WorkspaceList() {
                   }
                 }}
               >
-                ورود به این آموزشگاه
+                {uiText.text_0cff2209b91a}
               </Button>
             </div>
           ))}
         </div>
       ) : (
         <Card>
-          <EmptyState
-            title="هنوز عضو آموزشگاهی نیستید"
-            description="پس از عضویت معتبر، آموزشگاه اینجا نمایش داده می‌شود. امکانات شخصی شما مستقل باقی می‌ماند."
-          />
+          <EmptyState title={uiText.text_aa11114d1a2f} description={uiText.text_d738b763f126} />
         </Card>
       )}
       {!!error && <ErrorState error={error} />}
@@ -541,12 +559,12 @@ function ParentSchool({ page, classId }: { page: string; classId?: string }) {
         <SchoolHeading
           title={
             page === 'overview'
-              ? 'فرزندان من'
+              ? uiText.text_14130edb2ced
               : page === 'assignments'
-                ? 'تکلیف‌های فرزند'
-                : 'آزمون‌های فرزند'
+                ? uiText.text_5a73fd9b2b49
+                : uiText.text_960478099184
           }
-          description="اطلاعات فقط برای فرزند انتخاب‌شده و رابطهٔ معتبر نمایش داده می‌شود."
+          description={uiText.text_77c36f68bc81}
         />
       )}
 
@@ -576,7 +594,7 @@ function ParentReports({ kind }: { kind: 'assignments' | 'exams' }) {
     S['ReportPageOfParentAssignmentReportItem'] | S['ReportPageOfParentExamReportItem']
   >(`/api/v1/reports/parent/${kind}?PageNumber=${page}&PageSize=30`);
   return (
-    <Card title={kind === 'assignments' ? 'وضعیت تکلیف‌های فرزند' : 'وضعیت آزمون‌های فرزند'}>
+    <Card title={kind === 'assignments' ? uiText.text_813016dea0b5 : uiText.text_58bde8323225}>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -593,16 +611,16 @@ function ParentReports({ kind }: { kind: 'assignments' | 'exams' }) {
                     {'submissionStatus' in item
                       ? item.submissionStatus
                         ? label(item.submissionStatus)
-                        : 'تحویل نداده'
+                        : uiText.text_2675dd46965d
                       : item.latestAttemptStatus
                         ? label(item.latestAttemptStatus)
-                        : 'هنوز شرکت نکرده'}
+                        : uiText.text_8b56533a0281}
                   </p>
                   <p>
-                    نمرهٔ منتشرشده:{' '}
+                    {uiText.text_faeb420f283e}{' '}
                     {item.releasedScore === null
-                      ? 'هنوز منتشر نشده'
-                      : item.releasedScore + ' از ' + item.maximumScore}
+                      ? uiText.text_0765fd5b5dc0
+                      : item.releasedScore + uiText.text_a624a1e41ffd + item.maximumScore}
                   </p>
                   {item.guardianVisibleFeedback && (
                     <p className={s.bodyText}>{item.guardianVisibleFeedback}</p>
@@ -611,7 +629,7 @@ function ParentReports({ kind }: { kind: 'assignments' | 'exams' }) {
               ))}
             </div>
           ) : (
-            <EmptyState title="موردی برای فرزند انتخاب‌شده موجود نیست" />
+            <EmptyState title={uiText.text_248322604318} />
           )}
           <Pager page={page} total={q.data.totalCount} onChange={setPage} />
         </>

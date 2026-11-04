@@ -1,0 +1,60 @@
+{
+  "stats": {
+    "startTime": "2026-11-02T06:29:53.900Z",
+    "duration": 18791.894,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "results": [
+    {
+      "title": "recorded light: chat, profile, assistant, dialogs and back remain coherent",
+      "file": "instagram-motion.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 3270,
+      "errors": []
+    },
+    {
+      "title": "recorded dark: chat, profile, assistant, dialogs and back remain coherent",
+      "file": "instagram-motion.spec.ts",
+      "line": 10,
+      "status": "passed",
+      "durationMs": 2825,
+      "errors": []
+    },
+    {
+      "title": "Group light: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2578,
+      "errors": []
+    },
+    {
+      "title": "Channel light: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2401,
+      "errors": []
+    },
+    {
+      "title": "Group dark: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2129,
+      "errors": []
+    },
+    {
+      "title": "Channel dark: reference message rows retain identity, reply focus and draft through resizing",
+      "file": "telegram-reference.spec.ts",
+      "line": 13,
+      "status": "passed",
+      "durationMs": 2297,
+      "errors": []
+    }
+  ]
+}

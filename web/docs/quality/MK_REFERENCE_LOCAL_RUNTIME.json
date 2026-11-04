@@ -1,0 +1,29 @@
+{
+  "checkedAtUtc": "2026-11-02T20:07:05.426Z",
+  "checks": [
+    {
+      "url": "http://127.0.0.1:3145/enter",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "url": "http://127.0.0.1:3145/preview/reference/MK-19",
+      "status": 404,
+      "expected": 404,
+      "passed": true
+    },
+    {
+      "url": "http://127.0.0.1:3144/preview/reference",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    },
+    {
+      "url": "http://127.0.0.1:3144/fonts/makan-reference/Vazirmatn.ttf",
+      "status": 200,
+      "expected": 200,
+      "passed": true
+    }
+  ]
+}

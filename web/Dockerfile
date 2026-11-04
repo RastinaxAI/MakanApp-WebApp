@@ -21,6 +21,7 @@ ENV NODE_ENV=production \
 COPY --from=build --chown=node:node /app/.next/standalone ./
 COPY --from=build --chown=node:node /app/.next/static ./.next/static
 COPY --from=build --chown=node:node /app/public ./public
+COPY --from=build --chown=node:node /app/config/network.json ./config/network.json
 COPY --chown=node:node scripts/docker-start.mjs ./docker-start.mjs
 RUN mkdir -p .makan-sessions .next/cache \
     && chown node:node .makan-sessions .next/cache \

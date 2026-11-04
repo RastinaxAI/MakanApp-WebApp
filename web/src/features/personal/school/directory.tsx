@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { ConfirmAction } from '@/components/ui/confirm-action';
 import { EmptyState, ErrorState, LoadingSkeleton, label } from '@/components/ui/states';
@@ -19,7 +20,7 @@ export function schoolQuery(page: number, search = '', extra: Record<string, str
 }
 export function SchoolSearch({
   onSearch,
-  label: title = 'جستجو',
+  label: title = uiText.text_2a93eb7f06ce,
   disabled = false,
   embedded = false,
 }: {
@@ -54,7 +55,7 @@ export function SchoolSearch({
         disabled={disabled}
         onClick={embedded ? search : undefined}
       >
-        جستجو
+        {uiText.text_2a93eb7f06ce}
       </Button>
     </>
   );
@@ -89,7 +90,7 @@ export function MemberPicker({
   return (
     <>
       <SchoolSearch
-        label={role === 'Teacher' ? 'جستجوی معلم آموزشگاه' : 'جستجوی دانش‌آموز آموزشگاه'}
+        label={role === 'Teacher' ? uiText.text_1145531ebd7a : uiText.text_e6598afab142}
         onSearch={(v) => {
           setSearch(v);
           setPage(1);
@@ -102,14 +103,14 @@ export function MemberPicker({
         <ErrorState error={q.error} onRetry={() => void q.refetch()} />
       ) : (
         <>
-          <Field label={role === 'Teacher' ? 'معلم آموزشگاه' : 'دانش‌آموز آموزشگاه'}>
+          <Field label={role === 'Teacher' ? uiText.text_21bd12880c60 : uiText.text_3419a22ae8f0}>
             <select
               value={value}
               onChange={(e) =>
                 onChange(q.data.items.find((x) => x.membershipId === e.target.value) ?? null)
               }
             >
-              <option value="">انتخاب کنید…</option>
+              <option value="">{uiText.text_b1f76db217bd}</option>
               {q.data.items.map((m) => (
                 <option key={m.membershipId} value={m.membershipId}>
                   {m.displayName}
@@ -148,9 +149,9 @@ export function ClassRoster({
   >(`/api/v1/academic/classes/${classId}/${kind}?` + schoolQuery(page, search));
   const command = useSchoolCommand();
   return (
-    <Card title={kind === 'learners' ? 'فهرست دانش‌آموزان کلاس' : 'فهرست معلمان کلاس'}>
+    <Card title={kind === 'learners' ? uiText.text_4cdeeb638917 : uiText.text_a803103e88cf}>
       <SchoolSearch
-        label="جستجو در اعضای کلاس"
+        label={uiText.text_bd48b6b60f08}
         onSearch={(v) => {
           setSearch(v);
           setPage(1);
@@ -167,10 +168,10 @@ export function ClassRoster({
               <table role="table" className={s.table}>
                 <thead role="rowgroup">
                   <tr role="row">
-                    <th role="columnheader">نام</th>
-                    <th role="columnheader">نام کاربری</th>
-                    <th role="columnheader">وضعیت</th>
-                    {manage && <th role="columnheader">عملیات</th>}
+                    <th role="columnheader">{uiText.text_69c1e5b1fe20}</th>
+                    <th role="columnheader">{uiText.text_173fec6019a6}</th>
+                    <th role="columnheader">{uiText.text_68d7eb08efbc}</th>
+                    {manage && <th role="columnheader">{uiText.text_9d08b60ae631}</th>}
                   </tr>
                 </thead>
                 <tbody role="rowgroup">
@@ -189,13 +190,15 @@ export function ClassRoster({
                             {m.status === 'Active' && (
                               <ConfirmAction
                                 destructive
-                                title={'حذف ' + m.displayName + ' از کلاس'}
-                                trigger={'حذف از کلاس · ' + m.displayName}
-                                confirm="حذف از این کلاس"
+                                title={
+                                  uiText.text_454d4aebcf48 +
+                                  m.displayName +
+                                  uiText.text_e09a66220579
+                                }
+                                trigger={uiText.text_276cb596ac92 + m.displayName}
+                                confirm={uiText.text_329f02ad417c}
                                 description={
-                                  learner
-                                    ? 'ثبت‌نام دانش‌آموز در همین کلاس پایان می‌یابد؛ حساب و سابقهٔ آموزشی حذف نمی‌شود.'
-                                    : 'انتساب معلم به همین کلاس پایان می‌یابد. برای جایگزینی، معلم دیگری را جداگانه اضافه کنید.'
+                                  learner ? uiText.text_7e52cd6c1407 : uiText.text_c1259e061304
                                 }
                                 onConfirm={async () => {
                                   await command(
@@ -215,7 +218,7 @@ export function ClassRoster({
               </table>
             </div>
           ) : (
-            <EmptyState title="عضوی در این فهرست نیست" />
+            <EmptyState title={uiText.text_88ee345f182d} />
           )}
           <Pager
             page={q.data.page}
@@ -247,7 +250,7 @@ export function CatalogPicker({
     <>
       <SchoolSearch
         embedded
-        label={kind === 'courses' ? 'جستجوی کاتالوگ درس‌ها' : 'جستجوی دوره‌های آموزشی'}
+        label={kind === 'courses' ? uiText.text_7469916c83c5 : uiText.text_65d3d3894fde}
         onSearch={(v) => {
           setSearch(v);
           setPage(1);
@@ -259,7 +262,7 @@ export function CatalogPicker({
         <ErrorState error={q.error} onRetry={() => void q.refetch()} />
       ) : (
         <>
-          <Field label={kind === 'courses' ? 'درس از کاتالوگ' : 'دوره از کاتالوگ'}>
+          <Field label={kind === 'courses' ? uiText.text_c7176bc1cb46 : uiText.text_2fddb8bfbb56}>
             <select
               value={value}
               onChange={(e) => {
@@ -267,10 +270,10 @@ export function CatalogPicker({
                 onChange(e.target.value);
               }}
             >
-              <option value="">انتخاب کنید یا مورد تازه بسازید…</option>
+              <option value="">{uiText.text_83def3e32c24}</option>
               {value && !q.data.items.some((i) => i.id === value) && (
                 <option value={value}>
-                  {selected?.id === value ? selected.title : 'مورد انتخاب‌شده'}
+                  {selected?.id === value ? selected.title : uiText.text_f240dea8c236}
                 </option>
               )}
               {q.data.items.map((x) => (

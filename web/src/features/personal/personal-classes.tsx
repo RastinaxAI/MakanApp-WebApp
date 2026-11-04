@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -27,11 +28,11 @@ export function PersonalClasses() {
       <PageBack href="/personal/profile" />
       <header className={s.heading}>
         <div>
-          <h1>کلاس‌های شخصی</h1>
-          <p>این کلاس‌ها مستقل از آموزشگاه و نقش‌های سازمانی شما هستند.</p>
+          <h1>{uiText.text_85a8acadb0ae}</h1>
+          <p>{uiText.text_ac2dc499bebf}</p>
         </div>
         <Button asChild>
-          <Link href={base + '/new'}>ایجاد کلاس شخصی</Link>
+          <Link href={base + '/new'}>{uiText.text_256911182e54}</Link>
         </Button>
       </header>
       {q.isPending ? (
@@ -44,23 +45,20 @@ export function PersonalClasses() {
             <section className={s.panel} key={c.id}>
               <h2>{c.title}</h2>
               <p className={s.hint}>
-                {c.isHost ? 'میزبان کلاس' : 'عضو کلاس'}
-                {c.archived ? ' · بایگانی‌شده' : ''}
+                {c.isHost ? uiText.text_3d196c2db0d9 : uiText.text_fb4c8c6d1e7e}
+                {c.archived ? uiText.text_c2fd54962a03 : ''}
               </p>
               <Button asChild variant="outline">
-                <Link href={base + '/' + c.id}>مشاهدهٔ کلاس شخصی</Link>
+                <Link href={base + '/' + c.id}>{uiText.text_35fc8d0443cb}</Link>
               </Button>
             </section>
           ))}
         </div>
       ) : (
-        <EmptyState
-          title="کلاس شخصی ندارید"
-          description="در صورت مجازبودن حساب، می‌توانید کلاس شخصی بسازید یا دعوتی را بپذیرید."
-        />
+        <EmptyState title={uiText.text_5f25c1774e08} description={uiText.text_901a0833748c} />
       )}
       <section className={s.panel}>
-        <h2>دعوت‌های کلاس شخصی</h2>
+        <h2>{uiText.text_486b2669b1ec}</h2>
         {invitations.isPending ? (
           <LoadingSkeleton />
         ) : invitations.isError ? (
@@ -68,13 +66,13 @@ export function PersonalClasses() {
         ) : invitations.data.length ? (
           invitations.data.map((i) => <PersonalInvitation key={i.id} value={i} />)
         ) : (
-          <p className={s.hint}>دعوتی دریافت نشده است.</p>
+          <p className={s.hint}>{uiText.text_77f620a3b627}</p>
         )}
       </section>
     </div>
   );
 }
-function PersonalInvitation({ value }: { value: S['PersonalClassInvitationDto'] }) {
+export function PersonalInvitation({ value }: { value: S['PersonalClassInvitationDto'] }) {
   const { session } = usePersonal(),
     a = useAccountAction();
   const q = usePersonalApi<S['PersonalClassDto']>(api + '/' + value.personalClassId);
@@ -82,17 +80,13 @@ function PersonalInvitation({ value }: { value: S['PersonalClassInvitationDto'] 
   const expired = Date.parse(value.expiresAtUtc) <= Date.now();
   return (
     <div className={s.panel}>
-      <strong>{q.data?.title ?? 'دعوت به کلاس شخصی'}</strong>
+      <strong>{q.data?.title ?? uiText.text_2c331e5ca4ce}</strong>
       <details className={s.meta}>
-        <summary>شناسهٔ کلاس و مهلت دعوت</summary>
+        <summary>{uiText.text_480ed7c313e6}</summary>
         <bdi>{value.personalClassId}</bdi>
         <p>{date(value.expiresAtUtc, true)}</p>
       </details>
-      {!q.data && (
-        <p className={s.hint}>
-          نام کلاس در اطلاعات این دعوت در دسترس نیست؛ شناسهٔ آن را با دعوت‌کننده تطبیق دهید.
-        </p>
-      )}
+      {!q.data && <p className={s.hint}>{uiText.text_ceb37a7376be}</p>}
       <Button
         disabled={a.busy || accepted || expired || value.destinationUserId !== session.user.id}
         onClick={async () => {
@@ -102,7 +96,11 @@ function PersonalInvitation({ value }: { value: S['PersonalClassInvitationDto'] 
           if (result) setAccepted(true);
         }}
       >
-        {accepted ? 'پذیرفته‌شده' : expired ? 'مهلت دعوت تمام شده' : 'پذیرش دعوت کلاس شخصی'}
+        {accepted
+          ? uiText.text_479574e266a4
+          : expired
+            ? uiText.text_d659ae8f35a9
+            : uiText.text_e6b19e2c1935}
       </Button>
       {!!a.error && <ErrorState error={a.error} />}
     </div>
@@ -118,7 +116,7 @@ export function PersonalClassCreate() {
   return (
     <div className={s.page}>
       <PageBack href={base} />
-      <h1>ایجاد کلاس شخصی</h1>
+      <h1>{uiText.text_256911182e54}</h1>
       <form
         className={s.panel}
         onSubmit={async (e) => {
@@ -133,7 +131,7 @@ export function PersonalClassCreate() {
         }}
       >
         <label className={s.field}>
-          نام کلاس شخصی
+          {uiText.text_10e4dddca732}
           <input
             required
             value={title}
@@ -141,18 +139,15 @@ export function PersonalClassCreate() {
             onChange={(e) => setTitle(e.target.value)}
           />
         </label>
-        <p className={s.hint}>
-          ساخت این کلاس، آموزشگاه یا نقش آموزشی رسمی ایجاد نمی‌کند. امکانات درسی مستقل این نوع کلاس
-          هنوز ارائه نشده‌اند.
-        </p>
+        <p className={s.hint}>{uiText.text_8c2549d015d8}</p>
         <Button disabled={a.busy || !title.trim()}>
-          {frozen ? 'بررسی دوبارهٔ ساخت همین کلاس' : 'ثبت کلاس شخصی'}
+          {frozen ? uiText.text_46f20fac8405 : uiText.text_d2fa39a58fdf}
         </Button>
         {!!a.error && (
           <>
             <ErrorState error={a.error} />
             <Button type="button" variant="outline" onClick={() => setFrozen(undefined)}>
-              ویرایش نام پیش از درخواست تازه
+              {uiText.text_5bba5935b193}
             </Button>
           </>
         )}
@@ -201,17 +196,17 @@ function PersonalClassBody({
           <h1>{value.title}</h1>
           <p>
             {value.archived
-              ? 'کلاس بایگانی‌شده'
+              ? uiText.text_fa799b6ad568
               : value.isHost
-                ? 'شما میزبان این کلاس هستید'
-                : 'عضویت در کلاس شخصی'}
+                ? uiText.text_b5d3894a5230
+                : uiText.text_27646ca6f7ba}
           </p>
         </div>
         {value.isHost && !value.archived && (
           <ConfirmAction
-            trigger="بایگانی کلاس"
-            title="بایگانی کلاس شخصی"
-            description="این کلاس بایگانی می‌شود؛ حساب و نقش‌های آموزشگاهی تغییر نمی‌کنند."
+            trigger={uiText.text_2927be7c5ee8}
+            title={uiText.text_f2f9a49275fb}
+            description={uiText.text_21a66f4f4475}
             onConfirm={async () => {
               await call(api + '/' + value.id + '/archive', { method: 'POST' });
               await refresh();
@@ -221,7 +216,7 @@ function PersonalClassBody({
         )}
       </header>
       <section className={s.panel}>
-        <h2>اعضای کلاس</h2>
+        <h2>{uiText.text_29c02fa4bd09}</h2>
         {participants.isPending ? (
           <LoadingSkeleton />
         ) : participants.isError ? (
@@ -231,18 +226,21 @@ function PersonalClassBody({
             {participants.data.map((p, i) => (
               <li key={p.id}>
                 <strong>
-                  عضو {(i + 1).toLocaleString('fa-IR')} · {p.active ? 'فعال' : 'پایان‌یافته'}
+                  {uiText.text_052f63565706}
+                  {(i + 1).toLocaleString('fa-IR')}
+                  {uiText.text_588da4105320}
+                  {p.active ? uiText.text_a3fa2a3ffcb9 : uiText.text_996db6061aa9}
                 </strong>
                 <details className={s.meta}>
-                  <summary>شناسهٔ حساب</summary>
+                  <summary>{uiText.text_89b515f684ce}</summary>
                   <bdi>{p.studentUserId}</bdi>
                 </details>
                 {value.isHost && !value.archived && p.active && (
                   <ConfirmAction
                     destructive
-                    trigger={'پایان عضویت ' + (i + 1).toLocaleString('fa-IR')}
-                    title="پایان عضویت در کلاس شخصی"
-                    description="عضویت این حساب در همین کلاس پایان می‌یابد؛ عضویت آموزشگاه او تغییر نمی‌کند."
+                    trigger={uiText.text_9727cc8c703c + (i + 1).toLocaleString('fa-IR')}
+                    title={uiText.text_047a780267a6}
+                    description={uiText.text_8d169927938f}
                     onConfirm={async () => {
                       await call(`${api}/${value.id}/participants/${p.id}`, { method: 'DELETE' });
                       await participants.refetch();
@@ -254,14 +252,14 @@ function PersonalClassBody({
             ))}
           </ul>
         ) : (
-          <EmptyState title="عضوی در کلاس ثبت نشده است" />
+          <EmptyState title={uiText.text_6a571285362b} />
         )}
       </section>
       {value.isHost && !value.archived && (
         <section className={s.panel}>
-          <h2>دعوت به کلاس شخصی</h2>
+          <h2>{uiText.text_2c331e5ca4ce}</h2>
           <label className={s.field}>
-            شماره یا نام کاربری
+            {uiText.text_04825cc9442a}
             <input
               value={target}
               disabled={a.busy}
@@ -283,13 +281,13 @@ function PersonalClassBody({
                   resolvePersonInput(target),
                 );
                 if (result?.isDiscoverable && result.profile) setPerson(result.profile);
-                else if (result) setIssue('حساب قابل دعوت پیدا نشد.');
+                else if (result) setIssue(uiText.text_b855dd109c8e);
               } catch {
-                setIssue('شماره یا نام کاربری معتبر وارد کنید.');
+                setIssue(uiText.text_a6f1d8a9c45b);
               }
             }}
           >
-            پیدا کردن حساب
+            {uiText.text_840b843fe1ff}
           </Button>
           {person && (
             <>
@@ -302,10 +300,10 @@ function PersonalClassBody({
                     `${api}/${value.id}/invitations`,
                     { destinationUserId: person.userId, clientOperationId: operation.current },
                   );
-                  if (result) setIssue('دعوت ارسال شد؛ عضویت پس از پذیرش حساب مقصد برقرار می‌شود.');
+                  if (result) setIssue(uiText.text_5d15df0c5b9f);
                 }}
               >
-                ارسال دعوت کلاس شخصی
+                {uiText.text_cc6360828441}
               </Button>
             </>
           )}
@@ -313,9 +311,7 @@ function PersonalClassBody({
           {!!a.error && <ErrorState error={a.error} />}
         </section>
       )}
-      <p className={s.hint}>
-        امکانات تکلیف و آزمون مستقل برای کلاس شخصی در انتشار فعلی ارائه نشده است.
-      </p>
+      <p className={s.hint}>{uiText.text_5ee39dc725d4}</p>
     </div>
   );
 }

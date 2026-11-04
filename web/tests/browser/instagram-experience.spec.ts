@@ -1,10 +1,14 @@
 import { test, expect, login, fixture, origin } from './test';
 import { mkdir } from 'node:fs/promises';
 
-const output = 'output/review/instagram-experience';
+const output = 'output/review/mk-connected';
 for (const theme of ['light', 'dark']) {
   for (const role of ['Student', 'Teacher', 'Parent', 'Manager', 'Personal']) {
-    test(`Instagram-style four-tab shell: ${role} ${theme}`, async ({ page, context, request }) => {
+    test(`MK reference five-destination shell: ${role} ${theme}`, async ({
+      page,
+      context,
+      request,
+    }) => {
       test.setTimeout(90000);
       await context.addInitScript((value) => localStorage.setItem('makan-theme', value), theme);
       await request.post(fixture + '/__test__/design');
@@ -17,13 +21,14 @@ for (const theme of ['light', 'dark']) {
         await page.setViewportSize({ width, height: width < 768 ? 844 : 1000 });
         for (const [label, area] of [
           ['آموزشگاه', 'education'],
-          ['دستیار ماکان', 'assistant'],
+          ['فوق‌برنامه', 'extracurricular'],
+          ['دستیار', 'assistant'],
           ['پیام‌ها', 'messages'],
           ['پروفایل', 'profile'],
         ]) {
           const nav = page.getByRole('navigation', { name: 'ناوبری حساب شخصی', exact: true });
           await expect(nav).toHaveCount(1);
-          await expect(nav.getByRole('link')).toHaveCount(4);
+          await expect(nav.getByRole('link')).toHaveCount(5);
           await nav.getByRole('link', { name: label, exact: true }).click();
           await expect(nav.getByRole('link', { name: label, exact: true })).toHaveAttribute(
             'aria-current',
@@ -31,9 +36,8 @@ for (const theme of ['light', 'dark']) {
           );
           await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
           if (area === 'education' && role === 'Student' && width < 768) {
-            const card = page.locator('[data-education-upcoming] > section').first();
-            await expect(card).toBeVisible();
-            expect((await card.boundingBox())!.width).toBeGreaterThanOrEqual(width - 48);
+            await expect(page.locator('[data-mk-view="MK-04"]')).toBeVisible();
+            await expect(page.getByRole('main')).toContainText('جلسهٔ بعدی');
           }
           await expect(
             page.getByRole('dialog', { name: 'انتخاب فضای کار', exact: true }),
@@ -47,7 +51,7 @@ for (const theme of ['light', 'dark']) {
             expect(box.width).toBeGreaterThanOrEqual(44);
           }
           const navBox = (await nav.boundingBox())!;
-          expect(width < 1024 ? navBox.y > 700 : navBox.y < 500).toBe(true);
+          expect(width < 768 ? navBox.y > 700 : navBox.y < 500).toBe(true);
           if (role === 'Student' && [390, 834, 1440].includes(width)) {
             await page.evaluate(() => document.fonts.ready);
             await page.screenshot({ path: `${output}/${area}-${theme}-${width}.png` });
@@ -57,6 +61,7 @@ for (const theme of ['light', 'dark']) {
       const after = await (await context.request.get(origin + '/api/client/session')).json();
       expect(after.context).toEqual(before.context);
       expect(errors).toEqual([]);
+      await page.goto('/personal/profile/details');
       await expect(page.getByRole('link', { name: 'ویرایش پروفایل', exact: true })).toBeVisible();
       await expect(page.getByRole('region', { name: 'شناسهٔ حساب', exact: true })).toBeVisible();
     });
@@ -80,7 +85,7 @@ for (const theme of ['light', 'dark']) {
       await expect(page.locator('body')).toBeAttached();
       await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
       expect(await page.locator('meta[name="theme-color"]').getAttribute('content')).toBe(
-        theme === 'dark' ? '#000000' : '#ffffff',
+        theme === 'dark' ? '#101a2b' : '#f5f8fe',
       );
     } finally {
       release();
@@ -102,13 +107,13 @@ test('temporary inbox failure retains known conversations; permission denial rem
   const row = inbox.getByRole('link').filter({ hasText: 'مریم رضایی' });
   await expect(row).toBeVisible();
   let status = 503;
-  await page.route('**/api/client/backend/api/v1/conversations?**', (route) =>
+  await page.route('**/api/client/backend/api/v1/conversations/account?**', (route) =>
     route.fulfill({ status, json: { code: 'UPSTREAM_UNAVAILABLE', traceId: 'fixture-only' } }),
   );
   await expect(inbox.getByRole('alert')).toBeVisible();
   await expect(row).toBeVisible();
   status = 403;
-  await inbox.getByRole('button', { name: 'دریافت دوباره', exact: true }).click();
+  // The next authoritative poll may revoke access before a retry click can settle.
   await expect(row).toHaveCount(0);
   await expect(inbox.getByRole('alert')).toBeVisible();
 });

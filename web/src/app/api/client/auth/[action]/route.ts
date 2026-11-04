@@ -1,4 +1,8 @@
+import { readBoundedJson } from '@/lib/server/bounded-json';
+import { ApiError } from '@/lib/api/errors';
+import { network } from '@/config/network';
 import { randomUUID } from 'node:crypto';
+import { AUTH_RETURN_COOKIE } from '@/lib/auth-return';
 import { NextResponse } from 'next/server';
 import {
   backendFetch,
@@ -22,6 +26,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ act
   if (!checkOrigin(request)) return problem(403, 'ORIGIN_REJECTED');
   const { action } = await params;
   if (!['challenge', 'verify', 'logout'].includes(action)) return problem(404);
+  const signal = AbortSignal.any([
+    request.signal,
+    AbortSignal.timeout(network.timeouts.authentication),
+  ]);
   try {
     if (action === 'logout') {
       const id = await clientSessionId();
@@ -29,16 +37,18 @@ export async function POST(request: Request, { params }: { params: Promise<{ act
         await withSessionLock(id, async () => {
           const session = await readSession(id);
           if (session)
-            await authenticatedFetch(id, session, '/api/v1/auth/logout', { method: 'POST' }).catch(
-              () => {},
-            );
+            await authenticatedFetch(id, session, '/api/v1/auth/logout', {
+              method: 'POST',
+              signal: AbortSignal.timeout(network.timeouts.cleanup),
+            }).catch(() => {});
           await removeSession(id);
         });
       const result = new NextResponse(null, { status: 204 });
       result.cookies.set(CLIENT_COOKIE, '', { ...cookieOptions(), maxAge: 0 });
+      result.cookies.set(AUTH_RETURN_COOKIE, '', { ...cookieOptions(), maxAge: 0 });
       return result;
     }
-    const body = await request.json().catch(() => null);
+    const body = await readBoundedJson(request, network.limits.authJsonBytes, signal);
     const parsed = validator({
       $ref: `#/components/schemas/${action === 'challenge' ? 'RequestOtpCommand' : 'VerifyOtpCommand'}`,
     }).safeParse(body);
@@ -52,6 +62,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ act
       `/api/v1/auth/otp/${action === 'challenge' ? 'challenges' : 'verify'}`,
       {
         method: 'POST',
+        signal,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...input,
@@ -79,7 +90,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ act
     let accepted = false;
     let createdSessionId: string | undefined;
     try {
-      const me = await backendFetch('/api/v1/me', {}, value.accessToken);
+      const me = await backendFetch('/api/v1/me', { signal }, value.accessToken);
       if (!me.ok) return safeResponse(me);
       const identity = validator({ $ref: '#/components/schemas/CurrentUserResult' }).safeParse(
         await me.json().catch(() => null),
@@ -106,17 +117,21 @@ export async function POST(request: Request, { params }: { params: Promise<{ act
         { headers: { 'Cache-Control': 'no-store, private' } },
       );
       result.cookies.set(CLIENT_COOKIE, id, cookieOptions());
+      result.cookies.set(AUTH_RETURN_COOKIE, '', { ...cookieOptions(), maxAge: 0 });
       accepted = true;
       return result;
     } finally {
       if (!accepted) {
         if (createdSessionId) await removeSession(createdSessionId).catch(() => {});
-        await backendFetch('/api/v1/auth/logout', { method: 'POST' }, value.accessToken).catch(
-          () => {},
-        );
+        await backendFetch(
+          '/api/v1/auth/logout',
+          { method: 'POST', signal: AbortSignal.timeout(network.timeouts.cleanup) },
+          value.accessToken,
+        ).catch(() => {});
       }
     }
   } catch (error) {
+    if (error instanceof ApiError) return problem(error.status, error.problem.code);
     return problem(
       error instanceof Error && ['TimeoutError', 'AbortError'].includes(error.name) ? 504 : 503,
       'UPSTREAM_UNAVAILABLE',

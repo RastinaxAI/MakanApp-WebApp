@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 16px 24px max(16px, env(safe-area-inset-bottom));
+  padding: 16px 24px calc(var(--action-edge-gap) + env(safe-area-inset-bottom, 0px));
   border-top: 1px solid var(--border);
   background: var(--surface);
   box-shadow: 0 -6px 22px #24283e03;
@@ -128,7 +128,7 @@
   }
   .actions {
     min-height: 82px;
-    padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+    padding: 14px 20px calc(var(--action-edge-gap) + env(safe-area-inset-bottom, 0px));
   }
   .actions > :global(.button):not([type='submit']) {
     display: none;

@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useRef, useState } from 'react';
 import { ChevronLeft, UserRound, GraduationCap, LoaderCircle } from 'lucide-react';
 import { EmptyState, ErrorState, LoadingSkeleton, label } from '@/components/ui/states';
@@ -40,17 +41,17 @@ export function WorkspaceSelection() {
   }
   return (
     <div className={s.page} data-reference-public>
-      <header className={s.header}>کجا ادامه می‌دهید؟</header>
+      <header className={s.header}>{uiText.text_f22fc41872c4}</header>
       <main className={s.main}>
         <div className={`${s.card} ${s.workspaceCard}`}>
-          <h1>کجا ادامه می‌دهید؟</h1>
-          <p className={s.intro}>برای ورود، فضای موردنظرتان را انتخاب کنید.</p>
+          <h1>{uiText.text_f22fc41872c4}</h1>
+          <p className={s.intro}>{uiText.text_f736bd2c5640}</p>
           {q.isPending ? (
             <LoadingSkeleton />
           ) : q.isError ? (
             <ErrorState error={q.error} onRetry={() => void q.refetch()} />
           ) : !workspaces.length ? (
-            <EmptyState title="فضایی برای ورود موجود نیست" />
+            <EmptyState title={uiText.text_1e8321671f3f} />
           ) : (
             <div className={s.spaces}>
               {workspaces.map((w, index) => (
@@ -68,14 +69,20 @@ export function WorkspaceSelection() {
                     )}
                   </span>
                   <span>
-                    <strong>{w.organizationName ?? 'حساب شخصی'}</strong>
+                    <strong>{w.organizationName ?? uiText.text_d034f3bcfe7f}</strong>
                     <small>
-                      {w.workspaceType === 'Personal' ? 'ارتباطات شما' : label(w.role ?? '')}
+                      {w.workspaceType === 'Personal'
+                        ? uiText.text_9336384b74e8
+                        : label(w.role ?? '')}
                     </small>
-                    {!canEnterWorkspace(w) && <small>در حال حاضر قابل ورود نیست</small>}
+                    {!canEnterWorkspace(w) && <small>{uiText.text_c7581e2c4ccf}</small>}
                   </span>
                   {entering === `${w.membershipId}:${w.role}:${index}` ? (
-                    <LoaderCircle className={s.spinner} size={20} aria-label="در حال ورود" />
+                    <LoaderCircle
+                      className={s.spinner}
+                      size={20}
+                      aria-label={uiText.text_d04bf8106c45}
+                    />
                   ) : (
                     <ChevronLeft size={18} />
                   )}

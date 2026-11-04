@@ -1,0 +1,12 @@
+{
+  "backendOrigin": "http://94.184.32.84:8090",
+  "clientApiPrefix": "/api/client",
+  "timeouts": {
+    "upstream": 25000,
+    "authentication": 10000,
+    "cleanup": 2000
+  },
+  "limits": {
+    "authJsonBytes": 16384
+  }
+}

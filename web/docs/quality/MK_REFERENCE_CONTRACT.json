@@ -1,0 +1,11 @@
+{
+  "checkedAtUtc": "2026-11-02T19:24:24.853Z",
+  "httpStatus": 200,
+  "paths": 342,
+  "operations": 388,
+  "schemas": 651,
+  "normalizedSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+  "packSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+  "installedSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+  "equal": true
+}

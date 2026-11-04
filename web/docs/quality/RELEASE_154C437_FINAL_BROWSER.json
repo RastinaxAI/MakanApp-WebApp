@@ -1,0 +1,109 @@
+{
+  "checkedAtUtc": "2026-11-02T07:44:41.016Z",
+  "environment": "local isolated fixture; final build",
+  "mode": "all 12 product scenarios plus two corrected regression cases",
+  "counts": {
+    "passed": 14,
+    "failed": 0
+  },
+  "tests": [
+    {
+      "file": "instagram-experience.spec.ts",
+      "title": "temporary inbox failure retains known conversations; permission denial removes them",
+      "status": "passed",
+      "durationMs": 2407,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source upload waits for Ready, then retries one frozen create operation after reload",
+      "status": "passed",
+      "durationMs": 3570,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source edit preserves text across opaque version conflict and explicitly adopts the refreshed version",
+      "status": "passed",
+      "durationMs": 2877,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Library stays metadata-only and forged binary transfer is denied",
+      "status": "passed",
+      "durationMs": 1844,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "assistant preflight preserves real source selection when retrieval is unavailable",
+      "status": "passed",
+      "durationMs": 1759,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "independent edit permission does not grant settings, members or invitations",
+      "status": "passed",
+      "durationMs": 2057,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "conversation photo uses Ready file and opaque version; retry preserves one upload",
+      "status": "passed",
+      "durationMs": 2563,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "initial invitations are pending rather than active membership and use server expiry",
+      "status": "passed",
+      "durationMs": 2568,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Student sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "durationMs": 1992,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Teacher sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "durationMs": 2406,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "Manager sees authorized class sources and only permitted upload controls",
+      "status": "passed",
+      "durationMs": 2627,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "definitive source validation rejection unlocks the retained draft without uploading again",
+      "status": "passed",
+      "durationMs": 2145,
+      "attempts": 1
+    },
+    {
+      "file": "release-154c437.spec.ts",
+      "title": "source version conflict keeps its uploaded file and requires explicit review before a new version",
+      "status": "passed",
+      "durationMs": 2320,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-details.spec.ts",
+      "title": "reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes",
+      "status": "passed",
+      "durationMs": 39820,
+      "attempts": 1
+    }
+  ]
+}

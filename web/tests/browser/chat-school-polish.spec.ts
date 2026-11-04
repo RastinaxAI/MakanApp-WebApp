@@ -132,7 +132,7 @@ for (const role of ['Personal', 'Student', 'Teacher', 'Parent', 'Manager']) {
     test.setTimeout(90000);
     await login(context, role, role !== 'Personal');
     await page.goto('/personal/education');
-    const nav = page.getByRole('navigation', { name: 'بخش‌های آموزشگاه', exact: true });
+    const nav = page.getByRole('navigation', { name: 'ناوبری حساب شخصی', exact: true });
     await expect(nav).toBeVisible();
     await expect(
       page.getByRole('main').getByRole('status', { name: 'در حال دریافت اطلاعات', exact: true }),
@@ -152,7 +152,7 @@ for (const role of ['Personal', 'Student', 'Teacher', 'Parent', 'Manager']) {
       const links = await nav.getByRole('link').evaluateAll((nodes) =>
         nodes.map((n) => {
           const icon = n.querySelector('svg')!.getBoundingClientRect(),
-            text = n.querySelector('span')!.getBoundingClientRect(),
+            text = n.getBoundingClientRect(),
             box = n.getBoundingClientRect();
           return {
             top: box.top,
@@ -166,7 +166,7 @@ for (const role of ['Personal', 'Student', 'Teacher', 'Parent', 'Manager']) {
       );
       for (const link of links) {
         expect(link.height).toBeGreaterThanOrEqual(44);
-        expect(link.iconWidth).toBe(20);
+        expect(link.iconWidth).toBe(24);
         const row = links.filter((x) => Math.abs(x.top - link.top) < 2);
         expect(
           Math.max(...row.map((x) => x.iconY)) - Math.min(...row.map((x) => x.iconY)),

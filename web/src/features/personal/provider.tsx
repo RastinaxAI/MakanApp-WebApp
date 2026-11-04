@@ -1,6 +1,7 @@
 'use client';
 import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
+import { network } from '@/config/network';
 import { request, type ContextGuard } from '@/lib/api/client';
 import { ApiError } from '@/lib/api/errors';
 import { fileTransfer, type TransferOptions } from '@/lib/api/file-transfer';
@@ -18,6 +19,8 @@ import {
   type ReactNode,
 } from 'react';
 import { MessagingLiveProvider } from './messaging/live';
+import { rememberBrowserAuthReturn } from '@/lib/auth-return';
+import { ScrollMemoryProvider } from '@/components/navigation/scroll-memory';
 type ClientAccess = {
   session: ClientState;
   changing: boolean;
@@ -28,6 +31,7 @@ type ClientAccess = {
     value: components['schemas']['SelectWorkspaceCommand'],
     destination?:
       | '/personal'
+      | '/personal/profile'
       | '/personal/contacts'
       | '/personal/messages'
       | '/personal/messages?view=organization',
@@ -96,8 +100,10 @@ export function PersonalProvider({ children }: { children: ReactNode }) {
         current.current = null;
         setSession(null);
         cache.clear();
-        if (e instanceof ApiError && e.status === 401) router.replace('/enter');
-        else setError(e);
+        if (e instanceof ApiError && e.status === 401) {
+          rememberBrowserAuthReturn();
+          router.replace('/enter');
+        } else setError(e);
       } finally {
         if (loadAbort.current === controller) {
           loadMode.current = null;
@@ -115,6 +121,7 @@ export function PersonalProvider({ children }: { children: ReactNode }) {
       if (document.visibilityState === 'visible') void reload(true);
     };
     const expired = () => {
+      rememberBrowserAuthReturn();
       generation.current++;
       loadAbort.current?.abort();
       current.current = null;
@@ -154,7 +161,9 @@ export function PersonalProvider({ children }: { children: ReactNode }) {
       onContextChanged: () => void reload(),
     };
     const result = await request<T>(
-      path.startsWith('/api/client/security/sessions') ? path : '/api/client/backend' + path,
+      path.startsWith('/api/client/security/sessions')
+        ? path
+        : network.clientApiPrefix + '/backend' + path,
       init,
       guard,
     );
@@ -169,6 +178,7 @@ export function PersonalProvider({ children }: { children: ReactNode }) {
     value: components['schemas']['SelectWorkspaceCommand'],
     destination:
       | '/personal'
+      | '/personal/profile'
       | '/personal/contacts'
       | '/personal/messages'
       | '/personal/messages?view=organization' = '/personal',
@@ -247,14 +257,16 @@ export function PersonalProvider({ children }: { children: ReactNode }) {
       value={{ session, changing, reload, call, transfer, selectWorkspace, logout }}
     >
       <QueryClientProvider client={cache}>
-        <MessagingLiveProvider
-          key={session.user.id + ':' + session.revision}
-          userId={session.user.id}
-          revision={session.revision}
-          onContextInvalidated={() => reload(true)}
-        >
-          {children}
-        </MessagingLiveProvider>
+        <ScrollMemoryProvider namespace={session.user.id + ':' + session.revision}>
+          <MessagingLiveProvider
+            key={session.user.id + ':' + session.revision}
+            userId={session.user.id}
+            revision={session.revision}
+            onContextInvalidated={() => reload(true)}
+          >
+            {children}
+          </MessagingLiveProvider>
+        </ScrollMemoryProvider>
       </QueryClientProvider>
     </PersonalContext.Provider>
   );

@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { latinDigits } from '@/lib/formatting';
 import {
   dateRangeError,
@@ -87,8 +88,8 @@ export function JalaliDateInput({
     const message =
       parsed === null
         ? withTime
-          ? 'تاریخ و ساعت شمسی معتبر وارد کنید؛ مانند ۱۴۰۵/۰۸/۰۷ ۱۴:۳۰.'
-          : 'تاریخ شمسی معتبر وارد کنید؛ مانند ۱۴۰۵/۰۸/۰۷.'
+          ? uiText.text_aa2e6cea4edd
+          : uiText.text_9675d1e1f4e2
         : dateRangeError(parsed, min, max);
     setError(message);
     input.current?.setCustomValidity(message);
@@ -111,8 +112,8 @@ export function JalaliDateInput({
     const message =
       parsed === null
         ? withTime
-          ? 'تاریخ و ساعت شمسی معتبر وارد کنید؛ مانند ۱۴۰۵/۰۸/۰۷ ۱۴:۳۰.'
-          : 'تاریخ شمسی معتبر وارد کنید؛ مانند ۱۴۰۵/۰۸/۰۷.'
+          ? uiText.text_aa2e6cea4edd
+          : uiText.text_9675d1e1f4e2
         : dateRangeError(parsed, min, max);
     setError(message);
     input.current?.setCustomValidity(message);
@@ -154,7 +155,7 @@ export function JalaliDateInput({
     container.setAttribute('role', 'group');
     container.setAttribute(
       'aria-label',
-      withTime ? 'انتخاب تاریخ و ساعت شمسی' : 'انتخاب تاریخ شمسی',
+      withTime ? uiText.text_e3211dce980c : uiText.text_401b4bf7fd95,
     );
     container
       .querySelectorAll<HTMLElement>(
@@ -169,7 +170,7 @@ export function JalaliDateInput({
         element.tabIndex = unavailable ? -1 : 0;
         element.setAttribute('aria-disabled', String(unavailable));
         if (element.classList.contains('jdp-day')) {
-          element.setAttribute('aria-label', 'انتخاب روز ' + element.textContent);
+          element.setAttribute('aria-label', uiText.text_6f32eaf56515 + element.textContent);
           element.setAttribute('aria-pressed', String(element.classList.contains('selected')));
         } else if (
           element.classList.contains('jdp-icon-plus') ||
@@ -177,8 +178,10 @@ export function JalaliDateInput({
         )
           element.setAttribute(
             'aria-label',
-            (element.closest('.jdp-years') ? 'سال' : 'ماه') +
-              (element.classList.contains('jdp-icon-plus') ? ' بعد' : ' قبل'),
+            (element.closest('.jdp-years') ? uiText.text_0d20732d1cce : uiText.text_76abcc3c38cf) +
+              (element.classList.contains('jdp-icon-plus')
+                ? uiText.text_11029c92c84b
+                : uiText.text_6fab8bd45895),
           );
       });
     container.querySelectorAll<HTMLSelectElement>('select').forEach((element, index) => {
@@ -186,14 +189,14 @@ export function JalaliDateInput({
       element.setAttribute(
         'aria-label',
         element.closest('.jdp-year')
-          ? 'سال شمسی'
+          ? uiText.text_9f129764c164
           : element.closest('.jdp-month')
-            ? 'ماه شمسی'
+            ? uiText.text_46ad15777dc0
             : element.closest('.jdp-time-container')
               ? index === 2
-                ? 'دقیقه'
-                : 'ساعت'
-              : 'زمان',
+                ? uiText.text_fa95e25fd538
+                : uiText.text_74d72b104059
+              : uiText.text_9699c34220a4,
       );
     });
   }
@@ -289,7 +292,7 @@ export function JalaliDateInput({
           required={required}
           disabled={disabled}
           autoComplete="off"
-          placeholder={withTime ? '۱۴۰۵/۰۸/۰۷ ۱۴:۳۰' : '۱۴۰۵/۰۸/۰۷'}
+          placeholder={withTime ? uiText.text_7aa4140b0d61 : uiText.text_1097f8d4306d}
           aria-invalid={!!error || rest['aria-invalid']}
           aria-describedby={
             [describedBy, error ? errorId : ''].filter(Boolean).join(' ') || undefined
@@ -309,7 +312,7 @@ export function JalaliDateInput({
           type="button"
           className="makan-date-trigger"
           disabled={disabled}
-          aria-label={open ? 'بستن تقویم شمسی' : 'باز کردن تقویم شمسی'}
+          aria-label={open ? uiText.text_2d85945743f6 : uiText.text_d220baef32d8}
           aria-expanded={open}
           aria-controls={hostId}
           onClick={() => {
@@ -340,7 +343,7 @@ export function JalaliDateInput({
       )}
       {loadingError && (
         <small role="status" className="makan-date-error">
-          تقویم باز نشد؛ تاریخ شمسی را در کادر وارد کنید یا دوباره دکمهٔ تقویم را بزنید.
+          {uiText.text_91dd003a74aa}
         </small>
       )}
     </div>

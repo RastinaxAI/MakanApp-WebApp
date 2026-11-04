@@ -6,6 +6,9 @@ export function seedConversationDetails(state, body) {
   state.qaTopics = [];
   state.qaJoinRequests = [];
   state.qaMuted = new Map();
+  state.conversationMessages = body.messages
+    ? state.messages.map((message) => ({ ...message, conversationId: id(950) }))
+    : [];
   state.conversationMediaTitle = body.mediaTitle ?? 'جزوه';
   state.conversationDetail = make('ManagedConversationResult', {
     conversationId: id(950),
@@ -52,7 +55,11 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
       return send({ code: 'VALIDATION_ERROR' }, 400);
     const users = [
       auth.user.id,
-      ...new Set((body.initialParticipantUserIds ?? []).filter((id) => id !== auth.user.id)),
+      ...new Set(
+        (body.initialParticipantUserIds ?? []).filter(
+          (id) => id !== auth.user.id && !state.release154?.pendingInitial,
+        ),
+      ),
     ];
     if (users.some((id) => !state.users.has(id))) return send({ code: 'USER_NOT_FOUND' }, 404);
     const value = make('ManagedConversationResult', {
@@ -68,6 +75,12 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
       managementPolicy: 'UserManaged',
       status: 'Active',
       version: '1',
+      initialTargets: (body.initialParticipantUserIds ?? []).map((userId) => ({
+        targetUserId: userId,
+        outcome: state.release154?.pendingInitial ? 'InvitationPending' : 'Added',
+        invitationId: state.release154?.pendingInitial ? randomUUID() : null,
+        invitationExpiresAtUtc: state.release154?.pendingInitial ? '2099-11-09T12:00:00Z' : null,
+      })),
       participants: users.map((userId, i) =>
         make('ConversationParticipantResult', {
           participantId: randomUUID(),
@@ -104,6 +117,7 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
               scope: v.scope,
               organizationId: v.organizationId,
               title: v.title,
+              photo: v.photo,
               isMuted: state.qaMuted?.get(auth.user.id) ?? false,
               isArchived: false,
               unreadCount: 0,
@@ -189,10 +203,12 @@ export function conversationDetailsRoute({ state, auth, url, req, body, send }) 
     return send(
       make('ConversationMessagePageResult', {
         conversationId: v.conversationId,
-        messages: [],
+        messages: state.conversationMessages ?? [],
         nextBeforeSequence: null,
       }),
     );
+  if ((p.endsWith('/read') || p.endsWith('/delivered')) && req.method === 'POST')
+    return send(null, 204);
   if (p.endsWith('/read-states')) return send([]);
   if (p.endsWith('/me/restriction'))
     return send(

@@ -1,3 +1,7 @@
+import { independentRoute, seedIndependent } from './independent-class.mjs';
+import { sourcesRoute, seedSources } from './sources.mjs';
+import { messageActionsRoute } from './message-actions.mjs';
+import { release154Route, enrichConversation } from './release-154.mjs';
 import { emitReplay, replayRoute } from './replay.mjs';
 import { createServer } from 'node:http';
 import { createState, make, ids } from './state.mjs';
@@ -16,6 +20,7 @@ import { release42Route } from './release-42c.mjs';
 export function fixtureBackend(port = 3457) {
   let state = createState();
   const server = createServer(async (req, res) => {
+    let currentAuth;
     try {
       const url = new URL(req.url, 'http://127.0.0.1:' + port),
         chunks = [];
@@ -29,7 +34,11 @@ export function fixtureBackend(port = 3457) {
           'Content-Type': 'application/json',
           'X-Makan-Test-Fixture': 'true',
         });
-        res.end(status === 204 ? undefined : JSON.stringify(value));
+        res.end(
+          status === 204
+            ? undefined
+            : JSON.stringify(enrichConversation(value, currentAuth, state)),
+        );
         return true;
       };
       if (url.pathname === '/__test__/reset') {
@@ -42,6 +51,10 @@ export function fixtureBackend(port = 3457) {
           attempt: state.attempt,
           lessonCount: state.lessons.size,
         });
+      if (url.pathname === '/__test__/profile-roles') {
+        state.profileRoles = true;
+        return send({ configured: true });
+      }
       if (url.pathname === '/__test__/design') {
         seedReferenceCase(state);
         return send({ seeded: true });
@@ -51,6 +64,11 @@ export function fixtureBackend(port = 3457) {
           make('AuthorizedChildResult', { ...referenceChild(), ...row }),
         );
         return send({ configured: true });
+      }
+      if (url.pathname === '/__test__/personal-class') return send(seedIndependent(state, body));
+      if (url.pathname === '/__test__/personal-class-revoke') {
+        state.independent.removed = true;
+        return send({ revoked: true });
       }
       if (url.pathname === '/__test__/assessments') {
         seedAssessments(state);
@@ -83,6 +101,10 @@ export function fixtureBackend(port = 3457) {
         state.chatDisplayName = body.displayName;
         return send({ configured: true });
       }
+      if (url.pathname === '/__test__/release-154') {
+        state.release154 = body;
+        return send({ configured: true });
+      }
       if (url.pathname === '/__test__/conversation-details') {
         seedConversationDetails(state, body);
         return send({ seeded: true });
@@ -112,6 +134,16 @@ export function fixtureBackend(port = 3457) {
       }
       if (url.pathname === '/__test__/next-file-status') {
         state.nextFileStatus = body.status;
+        return send({ configured: true });
+      }
+      if (url.pathname === '/__test__/source-ai-ready') {
+        seedSources(state);
+        const source = state.sources.get(body.sourceId);
+        if (!source) return send({ code: 'NOT_FOUND' }, 404);
+        source.fileReady = true;
+        source.sourceReady = true;
+        source.aiReady = true;
+        source.aiUnavailableReason = null;
         return send({ configured: true });
       }
       if (url.pathname === '/__test__/exam-policy') {
@@ -164,6 +196,11 @@ export function fixtureBackend(port = 3457) {
       const ctx = { state, req, res, url, body, bytes, send, auth: null };
       if (authRoute(ctx)) return;
       if (!ctx.auth) return;
+      currentAuth = ctx.auth;
+      if (independentRoute(ctx)) return;
+      if (messageActionsRoute(ctx)) return;
+      if (release154Route(ctx)) return;
+      if (sourcesRoute(ctx)) return;
       if (release42Route(ctx)) return;
       if (replayRoute(ctx)) return;
       if (managerRoute(ctx)) return;

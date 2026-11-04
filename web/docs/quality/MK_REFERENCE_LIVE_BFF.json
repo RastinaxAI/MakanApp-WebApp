@@ -1,0 +1,363 @@
+{
+  "checkedAtUtc": "2026-11-02T19:04:50.204Z",
+  "origin": "http://127.0.0.1:3145",
+  "backend": "http://94.184.32.84:8090",
+  "domainWrites": false,
+  "roles": [
+    {
+      "role": "Student",
+      "checks": [
+        {
+          "path": "/api/client/auth/challenge",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "path": "/api/client/auth/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/messages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/resources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/extracurricular",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/profile",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/education",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "contextPreserved": true,
+      "unexpectedWrites": 0
+    },
+    {
+      "role": "Teacher",
+      "checks": [
+        {
+          "path": "/api/client/auth/challenge",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "path": "/api/client/auth/verify",
+          "method": "POST",
+          "status": 503,
+          "code": "UPSTREAM_UNAVAILABLE"
+        },
+        {
+          "path": "/api/client/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": false,
+      "failure": "Live BFF/UI check did not complete"
+    },
+    {
+      "role": "Parent",
+      "checks": [
+        {
+          "path": "/api/client/auth/challenge",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "path": "/api/client/auth/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/messages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/resources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/extracurricular",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/profile",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/education",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "contextPreserved": true,
+      "unexpectedWrites": 0
+    },
+    {
+      "role": "Manager",
+      "checks": [
+        {
+          "path": "/api/client/auth/challenge",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "path": "/api/client/auth/verify",
+          "method": "POST",
+          "status": 503,
+          "code": "UPSTREAM_UNAVAILABLE"
+        },
+        {
+          "path": "/api/client/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": false,
+      "failure": "Live BFF/UI check did not complete"
+    },
+    {
+      "role": "Personal",
+      "checks": [
+        {
+          "path": "/api/client/auth/challenge",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "path": "/api/client/auth/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/backend/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/messages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/resources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/extracurricular",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/profile",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/personal/education",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/session",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/client/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "contextPreserved": true,
+      "unexpectedWrites": 0
+    }
+  ]
+}

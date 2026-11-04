@@ -28,6 +28,26 @@ describe('account replay lifecycle', () => {
     expect(p.searchParams.get('cursor')).toBe('personal-only');
     expect(w.searchParams.get('cursor')).toBe('selected-only');
   });
+  it('keeps the account-wide inbox stream separate and includes stream version in duplicate detection', async () => {
+    const event = { eventId: 'same', streamVersion: '1', conversation: null, invalidation: null };
+    const read = vi
+      .fn()
+      .mockResolvedValueOnce(page({ changes: [event] }))
+      .mockResolvedValueOnce(page({ changes: [event] }))
+      .mockResolvedValue(page({ changes: [{ ...event, streamVersion: '2' }] }));
+    const invalidate = vi.fn();
+    const inbox = new AccountReplay(
+      read,
+      invalidate,
+      undefined,
+      '/api/v1/realtime/account-inbox/changes',
+    );
+    await inbox.catchUp();
+    await inbox.catchUp();
+    await inbox.catchUp();
+    expect(read.mock.calls[0][0]).toBe('/api/v1/realtime/account-inbox/changes?limit=100');
+    expect(invalidate).toHaveBeenCalledTimes(2);
+  });
   it('refreshes hints from an accepted page even if the following page fails', async () => {
     const read = vi
       .fn()

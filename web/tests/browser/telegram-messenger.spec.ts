@@ -7,7 +7,7 @@ for (const theme of ['light', 'dark']) {
     [834, 1194],
     [1440, 1000],
   ]) {
-    test(`Instagram-style messenger ${theme} ${width}: usable list, chat and menus`, async ({
+    test(`Telegram-reference messenger ${theme} ${width}: usable list, chat and menus`, async ({
       page,
       context,
       request,
@@ -29,6 +29,8 @@ for (const theme of ['light', 'dark']) {
         'ایجاد گروه',
         'ایجاد کانال',
         'مخاطبین',
+        'گفتگوهای مستقیم',
+        'تنظیمات پیام‌رسان',
         'آرشیو',
         'پیام‌های ذخیره‌شده',
       ]);
@@ -51,7 +53,7 @@ for (const theme of ['light', 'dark']) {
         peerBox = await incoming.boundingBox();
       expect(ownBox!.x).toBeLessThan(peerBox!.x); // RTL: your messages remain on the left.
       expect(await outgoing.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(
-        'rgb(80, 88, 217)',
+        theme === 'dark' ? 'rgb(27, 49, 86)' : 'rgb(234, 242, 255)',
       );
       const room = page.locator('[data-message-room]');
       expect(await room.evaluate((el) => getComputedStyle(el).backgroundImage)).toBe('none');
@@ -123,7 +125,7 @@ test('chat survives live resizing and attachment failure retains both file and c
     await dialog
       .getByRole('button', { name: 'ارسال ۱ پیوست', exact: true })
       .evaluate((el) => getComputedStyle(el).backgroundColor),
-  ).toBe('rgb(80, 88, 217)');
+  ).toBe('rgb(21, 111, 238)');
   await request.post(fixture + '/__test__/fault', {
     data: { path: '/api/v1/files', method: 'POST', status: 503 },
   });
@@ -181,7 +183,9 @@ test('messenger directory, creation and settings pages remain usable above navig
       ['/personal/settings/blocked', 'حساب‌های مسدودشده'],
     ]) {
       await page.goto(path);
-      await expect(page.getByRole('heading', { name, exact: true, level: 1 })).toBeVisible();
+      await expect(
+        page.getByRole('heading', { name, exact: true, level: path.endsWith('/privacy') ? 2 : 1 }),
+      ).toBeVisible();
       if (path.includes('/new?'))
         await expect(
           page.getByRole('textbox', {

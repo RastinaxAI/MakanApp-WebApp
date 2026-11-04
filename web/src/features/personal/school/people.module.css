@@ -60,7 +60,7 @@
 }
 .sections a[aria-current='page'] {
   background: var(--primary-button);
-  color: #fff;
+  color: var(--on-primary);
   font-weight: 700;
 }
 .sections a:focus-visible {

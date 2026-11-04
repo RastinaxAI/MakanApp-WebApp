@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 function calendarDate(value: string) {
   const date = new Date(value + 'T12:00:00Z');
   if (
@@ -5,7 +6,7 @@ function calendarDate(value: string) {
     !Number.isFinite(date.getTime()) ||
     date.toISOString().slice(0, 10) !== value
   )
-    throw new Error('تاریخ برنامه معتبر نیست.');
+    throw new Error(uiText.text_89f2f0361773);
   return date;
 }
 function addDays(value: string, amount: number) {
@@ -47,9 +48,10 @@ function compactWeekLabel(first: string, last: string) {
   };
   const from = parts(first),
     to = parts(last);
-  if (from.year !== to.year) return `${schoolDayLabel(first)} تا ${schoolDayLabel(last)}`;
+  if (from.year !== to.year)
+    return uiText.format_6b7e4665ee37(schoolDayLabel(first), schoolDayLabel(last));
   const start = from.month === to.month ? from.day : `${from.day} ${from.month}`;
-  return `${start} تا ${to.day} ${to.month} ${to.year}`;
+  return uiText.format_d70df362599d(start, to.day, to.month, to.year);
 }
 export function schoolWeekRange(anchor: string) {
   const first = weekStart(anchor),

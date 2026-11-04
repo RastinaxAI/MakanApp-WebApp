@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { PageBack } from '@/components/navigation/page-back';
 import { useState } from 'react';
 
@@ -33,9 +34,9 @@ export function PersonalProfileEdit() {
   return (
     <div className={s.page} data-profile-form>
       <header className={s.heading}>
-        <span>حساب من</span>
-        <h1>ویرایش پروفایل</h1>
-        <p>اطلاعات و تصویر حساب خود را به‌روز کنید.</p>
+        <span>{uiText.text_8b4cb595cd35}</span>
+        <h1>{uiText.text_7f941e8233a2}</h1>
+        <p>{uiText.text_6d5706853462}</p>
       </header>
       <div className={s.photoPanel}>
         <ProfilePhotoEditor disabled={busy || dirty} onBusyChange={setPhotoBusy} />
@@ -64,14 +65,14 @@ export function PersonalProfileEdit() {
         <fieldset className={s.section} disabled={busy || photoBusy}>
           <legend>
             <UserRound size={20} />
-            مشخصات فردی
+            {uiText.text_61d235c5d463}
           </legend>
           <div className={s.fields}>
             {(
               [
-                { key: 'firstName', label: 'نام', autoComplete: 'given-name' },
-                { key: 'lastName', label: 'نام خانوادگی', autoComplete: 'family-name' },
-                { key: 'displayName', label: 'نام نمایشی', autoComplete: 'nickname' },
+                { key: 'firstName', label: uiText.text_69c1e5b1fe20, autoComplete: 'given-name' },
+                { key: 'lastName', label: uiText.text_3fe7ba4a2131, autoComplete: 'family-name' },
+                { key: 'displayName', label: uiText.text_5903c1c121cb, autoComplete: 'nickname' },
               ] as const
             ).map((field) => (
               <label key={field.key} className={field.key === 'displayName' ? s.full : undefined}>
@@ -88,11 +89,11 @@ export function PersonalProfileEdit() {
         <fieldset className={s.section} disabled={busy || photoBusy}>
           <legend>
             <AtSign size={20} />
-            نام کاربری
+            {uiText.text_173fec6019a6}
           </legend>
-          <label htmlFor="profile-username">نام کاربری</label>
+          <label htmlFor="profile-username">{uiText.text_173fec6019a6}</label>
           <div className={s.username}>
-            <span aria-hidden="true">@</span>
+            <span aria-hidden="true">{uiText.text_c3641f8544d7}</span>
             <input
               id="profile-username"
               dir="ltr"
@@ -107,9 +108,9 @@ export function PersonalProfileEdit() {
         <fieldset className={s.section} disabled={busy || photoBusy}>
           <legend>
             <CalendarDays size={20} />
-            تاریخ تولد
+            {uiText.text_ec1ab14da9e6}
           </legend>
-          <label htmlFor="profile-birth-date">تاریخ تولد (اختیاری)</label>
+          <label htmlFor="profile-birth-date">{uiText.text_7bc42d578dfb}</label>
           <JalaliDateInput
             id="profile-birth-date"
             value={values.dateOfBirth}
@@ -119,16 +120,14 @@ export function PersonalProfileEdit() {
             onValueChange={(dateOfBirth) => setValues((v) => ({ ...v, dateOfBirth }))}
           />
           <p id="birth-date-help" className={s.help}>
-            این تاریخ خوداظهاری است و جای تأیید سن را نمی‌گیرد.
-            {session.user.dateOfBirth && !values.dateOfBirth
-              ? ' خالی‌گذاشتن این فیلد، تاریخ قبلی را حفظ می‌کند.'
-              : ''}
+            {uiText.text_9329e1335db1}
+            {session.user.dateOfBirth && !values.dateOfBirth ? uiText.text_79778d4644fa : ''}
           </p>
         </fieldset>
         {!!error && <ErrorState error={error} />}
         <footer className={s.actions}>
           <Button type="submit" disabled={busy || photoBusy}>
-            {busy ? 'در حال ثبت…' : 'ثبت تغییرات'}
+            {busy ? uiText.text_b5ef00b1806f : uiText.text_9aeab8fa8092}
           </Button>
           <PageBack href="/personal/profile" />
         </footer>

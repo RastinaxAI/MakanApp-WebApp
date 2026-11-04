@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { useState, type ReactNode } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -12,10 +13,10 @@ import { ManagerPageHeader } from './manager-page-header';
 import s from './manager-workspace.module.css';
 type S = components['schemas'];
 const reports = [
-  ['teacher-workload', 'کارکرد معلمان', ChartNoAxesCombined],
-  ['attendance', 'حضور کلاس‌ها', CalendarCheck],
-  ['assessments', 'تکلیف‌ها و آزمون‌ها', ClipboardCheck],
-  ['enrollments', 'ثبت‌نام‌ها', GraduationCap],
+  ['teacher-workload', uiText.text_c8522eec5d85, ChartNoAxesCombined],
+  ['attendance', uiText.text_6f5f2828fcf2, CalendarCheck],
+  ['assessments', uiText.text_3e76be8bc98c, ClipboardCheck],
+  ['enrollments', uiText.text_dc5de3fc6954, GraduationCap],
 ] as const;
 type Kind = (typeof reports)[number][0];
 export function ManagerReports() {
@@ -25,11 +26,8 @@ export function ManagerReports() {
   const classes = usePersonalApi<S['ClassResult'][]>('/api/v1/academic/classes');
   return (
     <div className={s.stack}>
-      <ManagerPageHeader
-        title="گزارش‌های آموزشگاه"
-        description="کارکرد آموزشی، حضور، ارزیابی و ثبت‌نام را از گزارش‌های آموزشگاه پیگیری کنید."
-      />
-      <nav className={s.reportTabs} aria-label="نوع گزارش مدیر">
+      <ManagerPageHeader title={uiText.text_2cbe62e265bd} description={uiText.text_ce15f1346b55} />
+      <nav className={s.reportTabs} aria-label={uiText.text_cbdfdaa8e710}>
         {reports.map(([key, title, Icon]) => (
           <Link
             key={key}
@@ -44,13 +42,13 @@ export function ManagerReports() {
       {classes.isError ? (
         <ErrorState error={classes.error} onRetry={() => void classes.refetch()} />
       ) : (
-        <Field label="کلاس گزارش">
+        <Field label={uiText.text_437fb367adf5}>
           <select
             value={classId}
             disabled={classes.isPending}
             onChange={(e) => setClassId(e.target.value)}
           >
-            <option value="">همهٔ کلاس‌های آموزشگاه</option>
+            <option value="">{uiText.text_5314e6ad0a8f}</option>
             {classes.data?.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.title}
@@ -96,10 +94,7 @@ function ReportTable<T>({
       </table>
     </div>
   ) : (
-    <EmptyState
-      title="گزارشی در این محدوده ثبت نشده است"
-      description="کلاس دیگری انتخاب کنید یا پس از ثبت فعالیت‌ها دوباره بررسی کنید."
-    />
+    <EmptyState title={uiText.text_746a98fe61fd} description={uiText.text_b68ff13bf161} />
   );
 }
 export function ReportData({ kind, classId = '' }: { kind: Kind; classId?: string }) {
@@ -122,18 +117,21 @@ export function ReportData({ kind, classId = '' }: { kind: Kind; classId?: strin
   );
   return (
     <Card title={reports.find(([key]) => key === kind)![1]}>
-      <p className={s.updated}>به‌روزرسانی گزارش: {date(q.data.dataAsOfUtc, true)}</p>
+      <p className={s.updated}>
+        {uiText.text_25ae6cfe3ea0}
+        {date(q.data.dataAsOfUtc, true)}
+      </p>
       {kind === 'teacher-workload' ? (
         <ReportTable
           items={(q.data as S['ReportPageOfManagerTeacherWorkloadReportItem']).items}
           rowKey={(r) => r.teacherMembershipId}
           columns={[
-            'معلم',
-            'کلاس فعال',
-            'جلسهٔ برگزارشده',
-            'حضور ثبت‌نشده',
-            'تکلیف در انتظار ارزیابی',
-            'آزمون در انتظار ارزیابی',
+            uiText.text_46a81f723a28,
+            uiText.text_e85db0fb2a48,
+            uiText.text_2e939b293219,
+            uiText.text_3f42a06dca7e,
+            uiText.text_bc2ae0bd2843,
+            uiText.text_0e85a9de7d6d,
           ]}
           cells={(r) => [
             r.teacherDisplayName,
@@ -148,7 +146,14 @@ export function ReportData({ kind, classId = '' }: { kind: Kind; classId?: strin
         <ReportTable
           items={(q.data as S['ReportPageOfManagerAttendanceReportItem']).items}
           rowKey={(r) => r.classId}
-          columns={['کلاس', 'ثبت‌شده', 'حاضر', 'غایب', 'تأخیر', 'ثبت‌نشده']}
+          columns={[
+            uiText.text_56c43e096bb9,
+            uiText.text_fc40112dcc6b,
+            uiText.text_40284b78e717,
+            uiText.text_921c15ca4d6d,
+            uiText.text_ce9a296bdb67,
+            uiText.text_cbf88cdc3070,
+          ]}
           cells={(r) => [
             classLink(r.classId, r.classTitle),
             r.recordedCount,
@@ -163,18 +168,22 @@ export function ReportData({ kind, classId = '' }: { kind: Kind; classId?: strin
           items={(q.data as S['ReportPageOfManagerAssessmentReportItem']).items}
           rowKey={(r) => r.kind + r.assessmentId}
           columns={[
-            'عنوان',
-            'نوع',
-            'کلاس',
-            'مهلت',
-            'مخاطبان',
-            'تحویل‌شده',
-            'نتیجهٔ منتشرشده',
-            'ارزیابی باقی‌مانده',
+            uiText.text_74190f4bb095,
+            uiText.text_b55501074dc5,
+            uiText.text_56c43e096bb9,
+            uiText.text_fbf33464a790,
+            uiText.text_b119e3358137,
+            uiText.text_5b81f53beda1,
+            uiText.text_9ea506c7898d,
+            uiText.text_5392fc21c0d3,
           ]}
           cells={(r) => [
             r.title,
-            r.kind === 'Assignment' ? 'تکلیف' : r.kind === 'Exam' ? 'آزمون' : label(r.kind),
+            r.kind === 'Assignment'
+              ? uiText.text_b9bdf50e5da3
+              : r.kind === 'Exam'
+                ? uiText.text_206d5b48e297
+                : label(r.kind),
             classLink(r.classId, r.classTitle),
             date(r.deadlineUtc, true),
             r.recipientCount,
@@ -187,7 +196,12 @@ export function ReportData({ kind, classId = '' }: { kind: Kind; classId?: strin
         <ReportTable
           items={(q.data as S['ReportPageOfManagerEnrollmentReportItem']).items}
           rowKey={(r) => r.enrollmentId}
-          columns={['دانش‌آموز', 'کلاس', 'وضعیت', 'تاریخ ثبت‌نام']}
+          columns={[
+            uiText.text_fbd179d162db,
+            uiText.text_56c43e096bb9,
+            uiText.text_68d7eb08efbc,
+            uiText.text_aaf7c2e138a5,
+          ]}
           cells={(r) => [
             r.learnerDisplayName,
             classLink(r.classId, r.classTitle),
@@ -212,26 +226,26 @@ export function ClassPerformance({ id }: { id: string }) {
   );
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
-  if (q.data.classId !== id) return <EmptyState title="گزارش این کلاس قابل نمایش نیست" />;
+  if (q.data.classId !== id) return <EmptyState title={uiText.text_5c5f6e089f42} />;
   const d = q.data;
   return (
-    <Card title="گزارش عملکرد کلاس">
+    <Card title={uiText.text_599bb8087251}>
       <dl className={s.metrics}>
         {[
-          ['دانش‌آموز فعال', d.activeLearnerCount],
-          ['نتیجهٔ تکلیف منتشرشده', d.assignmentReleasedResultCount],
+          [uiText.text_8192485568dd, d.activeLearnerCount],
+          [uiText.text_ab3e7cbab1a8, d.assignmentReleasedResultCount],
           [
-            'میانگین تکلیف',
+            uiText.text_a1315a65ca38,
             d.assignmentAveragePercentage === null
-              ? 'هنوز محاسبه نشده'
-              : d.assignmentAveragePercentage.toLocaleString('fa-IR') + '٪',
+              ? uiText.text_917a63d23e58
+              : d.assignmentAveragePercentage.toLocaleString('fa-IR') + uiText.text_a489ae36a167,
           ],
-          ['نتیجهٔ آزمون منتشرشده', d.examReleasedResultCount],
+          [uiText.text_b84635985b83, d.examReleasedResultCount],
           [
-            'میانگین آزمون',
+            uiText.text_2999be99037f,
             d.examAveragePercentage === null
-              ? 'هنوز محاسبه نشده'
-              : d.examAveragePercentage.toLocaleString('fa-IR') + '٪',
+              ? uiText.text_917a63d23e58
+              : d.examAveragePercentage.toLocaleString('fa-IR') + uiText.text_a489ae36a167,
           ],
         ].map(([title, value]) => (
           <div key={title}>
@@ -240,7 +254,10 @@ export function ClassPerformance({ id }: { id: string }) {
           </div>
         ))}
       </dl>
-      <p className={s.updated}>داده‌های گزارش: {date(d.dataAsOfUtc, true)}</p>
+      <p className={s.updated}>
+        {uiText.text_9ac2d07cb58e}
+        {date(d.dataAsOfUtc, true)}
+      </p>
     </Card>
   );
 }

@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { number } from '@/lib/formatting';
 import {
@@ -20,37 +21,55 @@ import {
 } from 'lucide-react';
 import { useRef, useState, type ReactNode } from 'react';
 import s from './assistant.module.css';
+import { AssistantSourceConnection } from './sources/assistant-connection';
 type Source = { id: number; title: string; kind: string; excerpt: string };
 const sampleSources: Source[] = [
   {
     id: 1,
-    title: 'ساختار و کار یاخته',
-    kind: 'متن آموزشی · نمونه',
-    excerpt:
-      'یاخته واحد ساختاری و عملکردی جانداران است. غشای یاخته ورود و خروج مواد را تنظیم می‌کند. هسته اطلاعات وراثتی را در خود نگه می‌دارد و فعالیت‌های یاخته را هماهنگ می‌کند.',
+    title: uiText.text_1a892edc1838,
+    kind: uiText.text_0adfcda5e4b9,
+    excerpt: uiText.text_f47db0e19977,
   },
   {
     id: 2,
-    title: 'یادداشت‌های کلاس زیست',
-    kind: 'یادداشت · نمونه',
-    excerpt:
-      'بخش بزرگی از فعالیت‌های یاخته در سیتوپلاسم انجام می‌شود. میتوکندری در فراهم‌کردن انرژی نقش دارد. ریبوزوم محل ساخت پروتئین است. ارتباط ساختار هر اندامک با کار آن، به فهم بهتر یاخته کمک می‌کند.',
+    title: uiText.text_f2e9bbc90dc7,
+    kind: uiText.text_e1cce87dadcb,
+    excerpt: uiText.text_54ff7685e1c1,
   },
   {
     id: 3,
-    title: 'مرور نکته‌های فصل اول',
-    kind: 'راهنمای مطالعه · نمونه',
-    excerpt:
-      'برای مرور فعال، نقش غشا، هسته، میتوکندری و ریبوزوم را با زبان خودتان توضیح دهید. پس از مطالعه، کتاب را ببندید و تفاوت نقش هر بخش را از حافظه بازگو کنید.',
+    title: uiText.text_7ed6fdbd51db,
+    kind: uiText.text_460a4047ff59,
+    excerpt: uiText.text_c0bd763a2d58,
   },
 ];
 const tools = [
-  { id: 'summary', title: 'خلاصهٔ هوشمند', detail: 'مهم‌ترین نکته‌ها', icon: FileText },
-  { id: 'cards', title: 'فلش‌کارت', detail: 'مرور و یادآوری', icon: Layers },
-  { id: 'quiz', title: 'خودت را بسنج', detail: 'پرسش و تمرین', icon: ListChecks },
-  { id: 'map', title: 'نقشهٔ مفهومی', detail: 'ارتباط بین ایده‌ها', icon: Network },
-  { id: 'audio', title: 'مرور شنیداری', detail: 'یادگیری با شنیدن', icon: Headphones },
-  { id: 'guide', title: 'راهنمای مطالعه', detail: 'مسیر قدم‌به‌قدم', icon: Lightbulb },
+  {
+    id: 'summary',
+    title: uiText.text_6db905812233,
+    detail: uiText.text_5ffcdcf1418f,
+    icon: FileText,
+  },
+  { id: 'cards', title: uiText.text_72536904ad94, detail: uiText.text_5e6630dbb06e, icon: Layers },
+  {
+    id: 'quiz',
+    title: uiText.text_fd4cfc32a485,
+    detail: uiText.text_70d6ba9db6ab,
+    icon: ListChecks,
+  },
+  { id: 'map', title: uiText.text_b1faa8fffe50, detail: uiText.text_a6cfd50bbe46, icon: Network },
+  {
+    id: 'audio',
+    title: uiText.text_4a5e94c41f2f,
+    detail: uiText.text_cfe0abc887ca,
+    icon: Headphones,
+  },
+  {
+    id: 'guide',
+    title: uiText.text_c2f0032b35be,
+    detail: uiText.text_0e5acde2ffd7,
+    icon: Lightbulb,
+  },
 ];
 export function MakanAssistant() {
   const [demo, setDemo] = useState(false),
@@ -77,9 +96,9 @@ export function MakanAssistant() {
     show(
       source.title,
       <>
-        <span className={s.samplePill}>منبع نمونه</span>
+        <span className={s.samplePill}>{uiText.text_7e554f8878f0}</span>
         <p className={s.excerpt}>{source.excerpt}</p>
-        <p className={s.small}>این متن، محتوای نمونهٔ مستقل برای بررسی رابط است.</p>
+        <p className={s.small}>{uiText.text_e3b5971a5cc0}</p>
       </>,
       trigger,
     );
@@ -90,18 +109,15 @@ export function MakanAssistant() {
         title,
         <div className={s.activation}>
           <Bot size={32} />
-          <h3>استودیوی شما اینجا شکل می‌گیرد</h3>
-          <p>
-            ساخت خروجی واقعی پس از فعال‌شدن سرویس دستیار و مشخص‌شدن منابع و اعتبار مصرفی در دسترس
-            خواهد بود.
-          </p>
+          <h3>{uiText.text_38983ac5551d}</h3>
+          <p>{uiText.text_fc68119ba419}</p>
           <button
             onClick={() => {
               setDemo(true);
               setDetail(null);
             }}
           >
-            مشاهدهٔ محیط نمونه
+            {uiText.text_2d2a6bc9349c}
           </button>
         </div>,
         trigger,
@@ -115,13 +131,13 @@ export function MakanAssistant() {
         <SampleQuiz />
       ) : id === 'map' ? (
         <div className={s.mindMap}>
-          <strong>یاخته</strong>
+          <strong>{uiText.text_f08a9801ceef}</strong>
           <div>
             {[
-              'غشا: تنظیم تبادل',
-              'هسته: اطلاعات وراثتی',
-              'میتوکندری: انرژی',
-              'ریبوزوم: ساخت پروتئین',
+              uiText.text_fc25f14c183d,
+              uiText.text_20376e24cc20,
+              uiText.text_e84e0fb134d4,
+              uiText.text_fd88424c55fd,
             ].map((text) => (
               <span key={text}>{text}</span>
             ))}
@@ -130,27 +146,20 @@ export function MakanAssistant() {
       ) : id === 'audio' ? (
         <div className={s.activation}>
           <Headphones size={36} />
-          <h3>طرح مرور شنیداری</h3>
-          <p>
-            پخش صدای واقعی در این نمونه فعال نیست. در نسخهٔ متصل، فایل صوتیِ آماده‌شده و وضعیت تولید
-            آن اینجا نمایش داده می‌شود.
-          </p>
+          <h3>{uiText.text_8af6997cd79d}</h3>
+          <p>{uiText.text_f33ab5c7b3dd}</p>
         </div>
       ) : (
         <div className={s.excerpt}>
-          <h3>{id === 'summary' ? 'از ساختار تا عملکرد' : 'یک مسیر کوتاه برای مرور'}</h3>
-          <p>
-            {id === 'summary'
-              ? sampleSources[0].excerpt
-              : '۱. ساختارهای اصلی را بخوانید. ۲. برای هر بخش یک کاربرد بنویسید. ۳. بدون نگاه به متن پاسخ فلش‌کارت‌ها را بدهید. ۴. به نکته‌هایی که فراموش کردید برگردید.'}
-          </p>
+          <h3>{id === 'summary' ? uiText.text_0da122fa3614 : uiText.text_afd7d663b964}</h3>
+          <p>{id === 'summary' ? sampleSources[0].excerpt : uiText.text_fc6afe072fc3}</p>
           <blockquote>{sampleSources[1].excerpt}</blockquote>
         </div>
       );
     show(
       title,
       <>
-        <span className={s.samplePill}>خروجی نمونه · تولید AI نیست</span>
+        <span className={s.samplePill}>{uiText.text_96fdb70b6062}</span>
         {body}
       </>,
       trigger,
@@ -158,12 +167,12 @@ export function MakanAssistant() {
   }
   return (
     <div className={s.assistant} data-assistant>
-      <h1 className="sr-only">دستیار ماکان</h1>
-      <div className={s.tabs} role="tablist" aria-label="بخش‌های دستیار">
+      <h1 className="sr-only">{uiText.text_7168b7bf2f42}</h1>
+      <div className={s.tabs} role="tablist" aria-label={uiText.text_9b37b15e9cb4}>
         {[
-          { id: 'sources', title: 'منابع', icon: BookOpen },
-          { id: 'chat', title: 'گفتگو', icon: MessageCircle },
-          { id: 'studio', title: 'استودیو', icon: Bot },
+          { id: 'sources', title: uiText.text_3b15ef5a6e60, icon: BookOpen },
+          { id: 'chat', title: uiText.text_4172b29c8925, icon: MessageCircle },
+          { id: 'studio', title: uiText.text_2c38482cbb71, icon: Bot },
         ].map((item) => (
           <button
             key={item.id}
@@ -200,35 +209,32 @@ export function MakanAssistant() {
       <div className={s.workbench}>
         <section
           id="assistant-panel-sources"
-          aria-label="منابع دستیار"
+          aria-label={uiText.text_d10c65961f64}
           className={`${s.sources} ${tab === 'sources' ? s.paneActive : ''}`}
         >
           <div className={s.paneHeader}>
             <h2>
               <BookOpen size={18} />
-              منابع
+              {uiText.text_3b15ef5a6e60}
             </h2>
-            <span>{demo ? number(sampleSources.length) : '۰'}</span>
+            <span>{demo ? number(sampleSources.length) : uiText.text_9b5548a0482d}</span>
           </div>
           <button
             className={s.addSource}
             onClick={(event) =>
               show(
-                'افزودن منبع',
+                uiText.text_1d488a965baa,
                 <div className={s.activation}>
                   <BookOpen size={34} />
-                  <h3>مطالعه از منابع خودتان</h3>
-                  <p>
-                    افزودن و پردازش منبع واقعی هنوز فعال نیست. پس از فعال‌شدن سرویس، می‌توانید منابع
-                    مجاز خود را انتخاب کنید.
-                  </p>
+                  <h3>{uiText.text_b3b6ab6c3b7f}</h3>
+                  <p>{uiText.text_2daaecb60c15}</p>
                   <button
                     onClick={() => {
                       setDemo(true);
                       setDetail(null);
                     }}
                   >
-                    بررسی با منابع نمونه
+                    {uiText.text_88e5ddd3c318}
                   </button>
                 </div>,
                 event.currentTarget,
@@ -236,8 +242,9 @@ export function MakanAssistant() {
             }
           >
             <Plus size={19} />
-            افزودن منبع
+            {uiText.text_1d488a965baa}
           </button>
+          <AssistantSourceConnection />
           {demo ? (
             <>
               <label className={s.selectAll}>
@@ -250,7 +257,7 @@ export function MakanAssistant() {
                     )
                   }
                 />
-                انتخاب همهٔ منابع
+                {uiText.text_47350c3ef300}
               </label>
               <div className={s.sourceList}>
                 {sampleSources.map((source) => (
@@ -258,7 +265,7 @@ export function MakanAssistant() {
                     <label>
                       <input
                         type="checkbox"
-                        aria-label={'انتخاب ' + source.title}
+                        aria-label={uiText.text_89e9053371c8 + source.title}
                         checked={selected.has(source.id)}
                         onChange={(event) =>
                           setSelected((previous) => {
@@ -282,7 +289,7 @@ export function MakanAssistant() {
               </div>
               <div className={s.sourceTip}>
                 <Lightbulb size={19} />
-                <p>منبعی را انتخاب کنید که می‌خواهید در گفتگوی نمونه بررسی شود.</p>
+                <p>{uiText.text_ceb7a80a0b63}</p>
               </div>
             </>
           ) : (
@@ -290,28 +297,31 @@ export function MakanAssistant() {
               <span>
                 <FileText size={30} />
               </span>
-              <h3>هر فهم تازه، از یک منبع</h3>
-              <p>کتاب، جزوه و یادداشت‌های شما، نقطهٔ شروع یادگیری‌اند.</p>
+              <h3>{uiText.text_a3056b93b3de}</h3>
+              <p>{uiText.text_733d4da7dbb7}</p>
               <button onClick={() => setDemo(true)}>
-                دیدن منابع نمونه <ChevronLeft size={16} />
+                {uiText.text_b46673243f8e}
+                <ChevronLeft size={16} />
               </button>
             </div>
           )}
           <footer className={s.sourceFooter}>
-            {demo ? number(chosen.length) + ' منبع نمونه انتخاب شده' : 'هنوز منبعی انتخاب نشده'}
+            {demo ? number(chosen.length) + uiText.text_92392a6f95ab : uiText.text_074439484fe9}
           </footer>
         </section>
         <section
           id="assistant-panel-chat"
-          aria-label="گفتگو با دستیار"
+          aria-label={uiText.text_dfac17a65e7a}
           className={`${s.chat} ${tab === 'chat' ? s.paneActive : ''}`}
         >
           <div className={s.paneHeader}>
             <h2>
               <MessageCircle size={18} />
-              گفتگو
+              {uiText.text_4172b29c8925}
             </h2>
-            <span className={s.privateLabel}>{demo ? 'محیط نمونه' : 'پیش‌نمایش'}</span>
+            <span className={s.privateLabel}>
+              {demo ? uiText.text_a92a3df4a112 : uiText.text_f309d92e2d72}
+            </span>
           </div>
           <div className={s.chatBody}>
             {!conversation.length || !demo ? (
@@ -321,22 +331,18 @@ export function MakanAssistant() {
                   <i />
                   <i />
                 </div>
-                <span className={s.eyebrow}>با کنجکاوی شروع کنید</span>
+                <span className={s.eyebrow}>{uiText.text_a7a964d74a5f}</span>
                 <h2>
-                  از منبع،
+                  {uiText.text_66c6f479a6cb}
                   <br />
-                  <em>تا فهمیدن.</em>
+                  <em>{uiText.text_47867d703d42}</em>
                 </h2>
-                <p>
-                  {demo
-                    ? 'بین ایده‌های یک فصل ارتباط پیدا کنید، نکته‌ها را مرور کنید و پرسش‌های تازه بسازید.'
-                    : 'منابع خود را کنار هم بیاورید؛ بپرسید، کشف کنید و به زبان خودتان یاد بگیرید.'}
-                </p>
+                <p>{demo ? uiText.text_7e4e81d1931f : uiText.text_e4d0e396c63c}</p>
                 <div className={s.promptGrid}>
                   {[
-                    'ایده‌های اصلی را خلاصه کن',
-                    'این موضوع‌ها چه ارتباطی دارند؟',
-                    'برای مرور، چند سؤال بساز',
+                    uiText.text_6388a1ee7308,
+                    uiText.text_c84904d0e08b,
+                    uiText.text_147fe2c1e343,
                   ].map((prompt) => (
                     <button key={prompt} onClick={() => (demo ? send(prompt) : setDemo(true))}>
                       <span>{prompt}</span>
@@ -344,9 +350,7 @@ export function MakanAssistant() {
                     </button>
                   ))}
                 </div>
-                {!demo && (
-                  <p className={s.small}>برای بررسی تعامل‌ها، «دیدن منابع نمونه» را انتخاب کنید.</p>
-                )}
+                {!demo && <p className={s.small}>{uiText.text_da84fe1b1072}</p>}
               </div>
             ) : (
               <div className={s.answers}>
@@ -356,18 +360,16 @@ export function MakanAssistant() {
                     <article className={s.answer} data-assistant-response>
                       <span className={s.answerBrand}>
                         <Bot size={18} />
-                        ماکان <small>پاسخ نمایشی</small>
+                        {uiText.text_6866c8be836f}
+                        <small>{uiText.text_7303ff111f09}</small>
                       </span>
-                      <p>
-                        این پاسخ نمونه برای بررسی رابط است. در نسخهٔ متصل، پرسش شما با منابع مجاز
-                        انتخاب‌شده بررسی خواهد شد. بخشی از منابع انتخاب‌شده در این نمونه:
-                      </p>
+                      <p>{uiText.text_23a7aa8d1e70}</p>
                       {item.sources.map((source) => (
                         <p key={source.id}>
                           {source.excerpt}
                           <button
                             className={s.citation}
-                            aria-label={'مشاهدهٔ استناد ' + source.id}
+                            aria-label={uiText.text_a44139def117 + source.id}
                             onClick={(event) => sourceDetails(source, event.currentTarget)}
                           >
                             {number(source.id)}
@@ -384,7 +386,7 @@ export function MakanAssistant() {
                         }
                       >
                         <StickyNote size={16} />
-                        افزودن به یادداشت‌های این نشست
+                        {uiText.text_ec84052031a5}
                       </button>
                     </article>
                   </div>
@@ -404,10 +406,8 @@ export function MakanAssistant() {
               <input
                 type="text"
                 autoComplete="off"
-                aria-label="پرسش از دستیار"
-                placeholder={
-                  demo ? 'دربارهٔ منابع نمونه بپرسید…' : 'پرسش‌های شما از اینجا شروع می‌شوند…'
-                }
+                aria-label={uiText.text_9cd586907a1f}
+                placeholder={demo ? uiText.text_3a48a21e60d2 : uiText.text_19d70e40664b}
                 value={draft}
                 disabled={!demo}
                 onChange={(event) => setDraft(event.target.value)}
@@ -418,32 +418,28 @@ export function MakanAssistant() {
               />
               <button
                 type="submit"
-                aria-label="ارسال پرسش نمونه"
+                aria-label={uiText.text_f78d14e6ce59}
                 disabled={!demo || !draft.trim() || !chosen.length}
               >
                 <ArrowUp size={21} />
               </button>
             </form>
-            <p>
-              {demo
-                ? 'پاسخ نمایشی است؛ اعتباری مصرف نمی‌شود.'
-                : 'پیش‌نمایش دستیار؛ ارسال واقعی فعلاً فعال نیست.'}
-            </p>
+            <p>{demo ? uiText.text_00a188a1a0ae : uiText.text_a785deedc049}</p>
           </div>
         </section>
         <section
           id="assistant-panel-studio"
-          aria-label="استودیوی دستیار"
+          aria-label={uiText.text_aceecadc2cd5}
           className={`${s.studio} ${tab === 'studio' ? s.paneActive : ''}`}
         >
           <div className={s.paneHeader}>
             <h2>
               <Bot size={18} />
-              استودیو
+              {uiText.text_2c38482cbb71}
             </h2>
-            <span className={s.studioBadge}>از دانستن، به ساختن</span>
+            <span className={s.studioBadge}>{uiText.text_8f45e8da411d}</span>
           </div>
-          <p className={s.studioIntro}>منابع را به ابزار یادگیری تبدیل کنید.</p>
+          <p className={s.studioIntro}>{uiText.text_1f9ae852e049}</p>
           <div className={s.toolGrid}>
             {tools.map((tool) => (
               <button
@@ -459,7 +455,7 @@ export function MakanAssistant() {
             ))}
           </div>
           <div className={s.notesHeading}>
-            <h3>یادداشت‌های این نشست</h3>
+            <h3>{uiText.text_700e0dc89890}</h3>
             <span>{number(notes.length)}</span>
           </div>
           {notes.length ? (
@@ -469,14 +465,17 @@ export function MakanAssistant() {
                   key={index}
                   onClick={(event) =>
                     show(
-                      'یادداشت این نشست',
+                      uiText.text_854483bf1036,
                       <p className={s.excerpt}>{note}</p>,
                       event.currentTarget,
                     )
                   }
                 >
                   <StickyNote size={18} />
-                  <span>{note.slice(0, 70)}…</span>
+                  <span>
+                    {note.slice(0, 70)}
+                    {uiText.text_b4935894c8ce}
+                  </span>
                   <ChevronLeft size={16} />
                 </button>
               ))}
@@ -484,10 +483,10 @@ export function MakanAssistant() {
           ) : (
             <div className={s.noteEmpty}>
               <StickyNote size={26} />
-              <p>ایده‌ای که می‌خواهید نگه دارید، اینجا جای می‌گیرد.</p>
+              <p>{uiText.text_1440b0963cde}</p>
             </div>
           )}
-          <p className={s.small}>یادداشت‌های نمونه با خروج از صفحه حفظ نمی‌شوند.</p>
+          <p className={s.small}>{uiText.text_c1f6661907f4}</p>
         </section>
       </div>
       <Dialog
@@ -500,7 +499,7 @@ export function MakanAssistant() {
           <DialogContent
             className={s.outputDialog}
             title={detail.title}
-            description={demo ? 'پیش‌نمایش دستیار ماکان؛ دادهٔ نمونه' : 'دستیار ماکان'}
+            description={demo ? uiText.text_edf8ab126e8a : uiText.text_7168b7bf2f42}
             onCloseAutoFocus={(event) => {
               event.preventDefault();
               opener.current?.focus();
@@ -517,19 +516,21 @@ function SampleFlashcards() {
   const [flipped, setFlipped] = useState(false),
     [index, setIndex] = useState(0);
   const cards = [
-    { question: 'کدام بخش، تبادل مواد را تنظیم می‌کند؟', answer: 'غشای یاخته' },
-    { question: 'کدام اندامک در فراهم‌کردن انرژی نقش دارد؟', answer: 'میتوکندری' },
-    { question: 'محل ساخت پروتئین کجاست؟', answer: 'ریبوزوم' },
+    { question: uiText.text_c356c5795ec2, answer: uiText.text_77965539787c },
+    { question: uiText.text_72d55d7f6343, answer: uiText.text_cdf8a680b26d },
+    { question: uiText.text_b79d6aa8e2be, answer: uiText.text_ae5ed820017c },
   ];
   return (
     <div className={s.flashcards}>
       <small>
-        {number(index + 1)} از {number(cards.length)}
+        {number(index + 1)}
+        {uiText.text_a624a1e41ffd}
+        {number(cards.length)}
       </small>
-      <button aria-label="نمایش یا پنهان‌کردن پاسخ فلش‌کارت" onClick={() => setFlipped(!flipped)}>
+      <button aria-label={uiText.text_6c4bd5ff0464} onClick={() => setFlipped(!flipped)}>
         <Layers size={28} />
         <strong>{flipped ? cards[index].answer : cards[index].question}</strong>
-        <span>{flipped ? 'برای دیدن سؤال بزنید' : 'برای دیدن پاسخ بزنید'}</span>
+        <span>{flipped ? uiText.text_41539e7b1611 : uiText.text_22c7dc610a49}</span>
       </button>
       <button
         onClick={() => {
@@ -537,7 +538,8 @@ function SampleFlashcards() {
           setFlipped(false);
         }}
       >
-        کارت بعدی <ArrowLeft size={17} />
+        {uiText.text_37ac8a217a0d}
+        <ArrowLeft size={17} />
       </button>
     </div>
   );
@@ -546,16 +548,20 @@ function SampleQuiz() {
   const [answer, setAnswer] = useState<string | null>(null);
   return (
     <div className={s.quiz}>
-      <h3>کدام بخش، اطلاعات وراثتی را در خود نگه می‌دارد؟</h3>
-      {['غشا', 'هسته', 'ریبوزوم'].map((item) => (
-        <button key={item} aria-pressed={answer === item} onClick={() => setAnswer(item)}>
-          {item}
-          {answer === item && <Check size={18} />}
-        </button>
-      ))}
+      <h3>{uiText.text_e6a1b6a2b7c8}</h3>
+      {[uiText.text_9a26ac6c7cc9, uiText.text_dc1f941e46e2, uiText.text_ae5ed820017c].map(
+        (item) => (
+          <button key={item} aria-pressed={answer === item} onClick={() => setAnswer(item)}>
+            {item}
+            {answer === item && <Check size={18} />}
+          </button>
+        ),
+      )}
       {answer && (
         <p role="status">
-          {answer === 'هسته' ? 'پاسخ نمونه درست است: هسته.' : 'در این مثال، پاسخ درست «هسته» است.'}
+          {answer === uiText.text_dc1f941e46e2
+            ? uiText.text_bbbed45bce72
+            : uiText.text_fcbec29a8d08}
         </p>
       )}
     </div>

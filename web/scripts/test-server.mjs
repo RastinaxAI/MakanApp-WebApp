@@ -22,6 +22,7 @@ const child = spawn(
     env: {
       ...process.env,
       MAKAN_TEST_MODE: 'fixture',
+      MAKAN_REFERENCE_PREVIEW: 'false',
       APP_ORIGIN: 'http://127.0.0.1:3132',
       BACKEND_BASE_URL: 'http://127.0.0.1:3457',
       SESSION_DIRECTORY: sessions,

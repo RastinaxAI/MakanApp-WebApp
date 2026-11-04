@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { useState } from 'react';
 import {
   Mail,
@@ -19,17 +20,17 @@ import { useSchoolAction } from './shared';
 import s from './invitations.module.css';
 type S = components['schemas'];
 const filters = [
-  ['all', 'همه'],
-  ['Pending', 'در انتظار'],
-  ['Accepted', 'پذیرفته‌شده'],
-  ['Declined', 'ردشده'],
+  ['all', uiText.text_15270886eadd],
+  ['Pending', uiText.text_caac18ea6580],
+  ['Accepted', uiText.text_479574e266a4],
+  ['Declined', uiText.text_c7009e8ab420],
 ] as const;
 const number = (value: number) => value.toLocaleString('fa-IR');
 const emptyTitles: Record<string, string> = {
-  all: 'هنوز دعوتی دریافت نکرده‌اید',
-  Pending: 'دعوتی در انتظار پاسخ ندارید',
-  Accepted: 'هنوز دعوتی را نپذیرفته‌اید',
-  Declined: 'دعوت ردشده‌ای ندارید',
+  all: uiText.text_34e352a86527,
+  Pending: uiText.text_5c91e0906d2b,
+  Accepted: uiText.text_522b5b16dc24,
+  Declined: uiText.text_112ea868a35b,
 };
 function invitationStatus(i: S['InvitationResult']) {
   return i.status === 'Pending' && Date.parse(i.expiresAtUtc) <= Date.now() ? 'Expired' : i.status;
@@ -45,22 +46,22 @@ export function InvitationsPage() {
           <MailOpen size={24} />
         </span>
         <div>
-          <h1>دعوت‌های من</h1>
-          <p>دعوت‌های آموزشگاه و ارتباط با فرزندتان را اینجا پیگیری کنید.</p>
+          <h1>{uiText.text_9b8c54ad174a}</h1>
+          <p>{uiText.text_e3198594c669}</p>
         </div>
         <Button
           variant="outline"
           size="icon"
-          aria-label="دریافت دوبارهٔ دعوت‌ها"
-          title="دریافت دوبارهٔ دعوت‌ها"
+          aria-label={uiText.text_21c00a2ccfa2}
+          title={uiText.text_21c00a2ccfa2}
           disabled={q.isFetching}
           onClick={() => void q.refetch()}
         >
           <RefreshCw size={18} />
         </Button>
       </header>
-      <section className={s.panel} aria-label="دعوت‌های دریافتی">
-        <nav className={s.filters} aria-label="وضعیت دعوت">
+      <section className={s.panel} aria-label={uiText.text_ae57af37bd8e}>
+        <nav className={s.filters} aria-label={uiText.text_d153e2c3035c}>
           {filters.map(([key, title]) => (
             <button
               type="button"
@@ -82,9 +83,16 @@ export function InvitationsPage() {
         <div className={s.results}>
           <div className={s.resultsHeading}>
             <h2>
-              {filter === 'all' ? 'همهٔ دعوت‌ها' : filters.find(([key]) => key === filter)?.[1]}
+              {filter === 'all'
+                ? uiText.text_d4b0fea5ef5e
+                : filters.find(([key]) => key === filter)?.[1]}
             </h2>
-            {q.isSuccess && <span role="status">{number(rows?.length ?? 0)} دعوت</span>}
+            {q.isSuccess && (
+              <span role="status">
+                {number(rows?.length ?? 0)}
+                {uiText.text_b3edaffbfcc7}
+              </span>
+            )}
           </div>
           {q.isPending ? (
             <LoadingSkeleton />
@@ -102,13 +110,9 @@ export function InvitationsPage() {
                 <MailOpen size={32} strokeWidth={1.5} />
               </span>
               <h3>{emptyTitles[filter]}</h3>
-              <p>
-                {filter === 'all'
-                  ? 'وقتی آموزشگاهی برای شما دعوت بفرستد، جزئیات و امکان پاسخ‌دادن همین‌جا نمایش داده می‌شود.'
-                  : 'برای دیدن دعوت‌ها با وضعیت‌های دیگر، به فهرست همهٔ دعوت‌ها برگردید.'}
-              </p>
+              <p>{filter === 'all' ? uiText.text_59825af86252 : uiText.text_95cc4b7c9c91}</p>
               {filter !== 'all' && (
-                <Button onClick={() => setFilter('all')}>نمایش همهٔ دعوت‌ها</Button>
+                <Button onClick={() => setFilter('all')}>{uiText.text_d8500c556282}</Button>
               )}
             </div>
           )}
@@ -126,14 +130,17 @@ function InvitationCard({ invitation: i }: { invitation: S['InvitationResult'] }
     expired = status === 'Expired';
   const pending = i.status === 'Pending' && Number.isFinite(Date.parse(i.expiresAtUtc)) && !expired;
   return (
-    <article className={s.card} aria-label={'دعوت ' + i.organizationName}>
+    <article className={s.card} aria-label={uiText.text_e287db188fec + i.organizationName}>
       <header>
         <span className={s.icon}>
           <Building2 size={23} />
         </span>
         <div>
           <h2>{i.organizationName}</h2>
-          <p>دعوت به {i.guardianLearnerDisplayName ? 'رابطهٔ والد و فرزند' : 'عضویت آموزشگاه'}</p>
+          <p>
+            {uiText.text_52b5719c93bf}
+            {i.guardianLearnerDisplayName ? uiText.text_d4add45dd348 : uiText.text_fbf138fe1b5a}
+          </p>
         </div>
         <span className={s.status} data-status={status}>
           {label(status)}
@@ -143,55 +150,55 @@ function InvitationCard({ invitation: i }: { invitation: S['InvitationResult'] }
         <div className={s.role}>
           <Mail size={18} />
           <span>
-            نقش پیشنهادی: <strong>{label(i.role)}</strong>
+            {uiText.text_7749ac890d07}
+            <strong>{label(i.role)}</strong>
           </span>
         </div>
         <div className={s.deadline}>
           <CalendarDays size={17} />
           <span>
-            اعتبار دعوت <strong>{date(i.expiresAtUtc)}</strong>
+            {uiText.text_36a9f930995b}
+            <strong>{date(i.expiresAtUtc)}</strong>
           </span>
         </div>
       </div>
       {i.guardianLearnerDisplayName && (
         <p className={s.person}>
-          فرزند: <strong>{i.guardianLearnerDisplayName}</strong>
+          {uiText.text_9a8ff9e33a79}
+          <strong>{i.guardianLearnerDisplayName}</strong>
         </p>
       )}
       {i.organizationPersonDisplayName && (
         <p className={s.person}>
-          پروندهٔ آموزشی: <strong>{i.organizationPersonDisplayName}</strong>
+          {uiText.text_fe34977f1c1d}
+          <strong>{i.organizationPersonDisplayName}</strong>
         </p>
       )}
       <details className={s.details}>
         <summary>
-          جزئیات دعوت
+          {uiText.text_fc6edfd5cebe}
           <ChevronDown size={17} />
         </summary>
         <dl>
           <div>
-            <dt>آموزشگاه</dt>
+            <dt>{uiText.navigation_education}</dt>
             <dd>{i.organizationName}</dd>
           </div>
           <div>
-            <dt>نقش</dt>
+            <dt>{uiText.text_628d512903fe}</dt>
             <dd>{label(i.role)}</dd>
           </div>
           <div>
-            <dt>وضعیت</dt>
+            <dt>{uiText.text_68d7eb08efbc}</dt>
             <dd>{label(status)}</dd>
           </div>
           <div>
-            <dt>مهلت پاسخ</dt>
+            <dt>{uiText.text_b4f08dbb3ac5}</dt>
             <dd>{date(i.expiresAtUtc, true)}</dd>
           </div>
         </dl>
-        {i.requiresPersonLinkConsent && (
-          <p>پذیرش این دعوت، پروندهٔ آموزشی نمایش‌داده‌شده را به حساب شما متصل می‌کند.</p>
-        )}
-        {i.requiresGuardianConsent && (
-          <p>پذیرش این دعوت، رابطهٔ والد با فرزند مشخص‌شده را در همین آموزشگاه تأیید می‌کند.</p>
-        )}
+        {i.requiresPersonLinkConsent && <p>{uiText.text_55e6bc158c7d}</p>}
+        {i.requiresGuardianConsent && <p>{uiText.text_7c074caf8735}</p>}
       </details>
       {pending && (
         <div className={s.response}>
@@ -203,7 +210,7 @@ function InvitationCard({ invitation: i }: { invitation: S['InvitationResult'] }
                 onChange={(e) => setPersonConsent(e.target.checked)}
                 disabled={a.busy}
               />
-              اتصال این پروندهٔ آموزشی به حساب خودم را تأیید می‌کنم.
+              {uiText.text_f187d8d6bfc6}
             </label>
           )}
           {i.requiresGuardianConsent && (
@@ -214,7 +221,7 @@ function InvitationCard({ invitation: i }: { invitation: S['InvitationResult'] }
                 onChange={(e) => setGuardianConsent(e.target.checked)}
                 disabled={a.busy}
               />
-              رابطهٔ والد با فرزند مشخص‌شده در همین آموزشگاه را تأیید می‌کنم.
+              {uiText.text_0cd10f957b27}
             </label>
           )}
           <div className={s.actions}>
@@ -233,18 +240,18 @@ function InvitationCard({ invitation: i }: { invitation: S['InvitationResult'] }
               }}
             >
               <Check size={18} />
-              پذیرش دعوت
+              {uiText.text_89c9d5704210}
             </Button>
             <Button
               variant="outline"
               disabled={a.busy}
               onClick={() => {
-                if (window.confirm('این دعوت رد شود؟'))
+                if (window.confirm(uiText.text_a403d91d1d93))
                   void a.run(`/api/v1/invitations/${i.id}/decline`);
               }}
             >
               <X size={18} />
-              رد دعوت
+              {uiText.text_60b03c070e6f}
             </Button>
           </div>
         </div>

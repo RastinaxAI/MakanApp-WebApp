@@ -32,7 +32,7 @@ for (const theme of ['light', 'dark']) {
       })),
     ).toEqual({
       width: '3px',
-      color: theme === 'dark' ? 'rgb(165, 180, 252)' : 'rgb(80, 88, 217)',
+      color: theme === 'dark' ? 'rgb(140, 183, 255)' : 'rgb(36, 108, 224)',
     });
     await nav.getByRole('link', { name: 'پیام‌ها', exact: true }).click();
     await page.getByRole('button', { name: 'ایجاد گفت‌وگو یا مخاطب', exact: true }).click();
@@ -43,23 +43,22 @@ for (const theme of ['light', 'dark']) {
     ).toBeFocused();
     await page.getByRole('link').filter({ hasText: 'مریم رضایی' }).click();
     const field = page.getByRole('textbox', { name: 'متن پیام', exact: true });
-    await field.fill('پیام نمونهٔ بررسی جریان اینستاگرامی');
+    await field.fill('پیام نمونهٔ بررسی جریان مرجع تلگرام');
     await field.press('Enter');
     await expect(
       page
         .getByLabel('پیام‌های گفتگو', { exact: true })
         .locator('[data-message-state="history"]')
-        .filter({ hasText: 'پیام نمونهٔ بررسی جریان اینستاگرامی' }),
+        .filter({ hasText: 'پیام نمونهٔ بررسی جریان مرجع تلگرام' }),
     ).toHaveCount(1);
     await page.getByRole('link', { name: 'بازگشت به فهرست گفتگوها', exact: true }).click();
     await nav.getByRole('link', { name: 'پروفایل', exact: true }).click();
-    await page.getByRole('link', { name: 'حساب و ترجیحات', exact: true }).first().click();
-    await page.locator('a[href="/personal/settings/privacy"]').first().click();
+    await page.getByRole('link', { name: /حریم خصوصی و امنیت/ }).click();
     await expect(page).toHaveURL(/\/settings\/privacy$/);
     await page.goBack();
-    await page.goBack();
     await expect(page).toHaveURL(/\/profile$/);
-    await nav.getByRole('link', { name: 'دستیار ماکان', exact: true }).click();
+    await nav.getByRole('link', { name: 'دستیار', exact: true }).click();
+    await page.getByRole('link', { name: 'استودیو و ابزارهای نمونه', exact: true }).click();
     await page.getByRole('tab', { name: 'منابع', exact: true }).click();
     await page.getByRole('button', { name: 'دیدن منابع نمونه', exact: true }).click();
     await page.getByRole('tab', { name: 'گفتگو', exact: true }).click();
@@ -67,20 +66,20 @@ for (const theme of ['light', 'dark']) {
     await question.fill('نقش هسته چیست؟');
     expect(
       await question.evaluate((el) => ({
-        inner: getComputedStyle(el).outlineWidth,
+        inner: getComputedStyle(el).outlineStyle,
         outer: getComputedStyle(el.closest('form')!).outlineWidth,
         color: getComputedStyle(el.closest('form')!).outlineColor,
       })),
     ).toEqual({
-      inner: '0px',
+      inner: 'none',
       outer: '2px',
-      color: theme === 'dark' ? 'rgb(165, 180, 252)' : 'rgb(80, 88, 217)',
+      color: theme === 'dark' ? 'rgb(140, 183, 255)' : 'rgb(36, 108, 224)',
     });
     await question.press('Enter');
     await expect(page.locator('[data-assistant-response]')).toHaveCount(1);
-    await mkdir('output/review/instagram-experience', { recursive: true });
+    await mkdir('output/review/telegram-reference', { recursive: true });
     await page.screenshot({
-      path: `output/review/instagram-experience/assistant-focused-${theme}-390.png`,
+      path: `output/review/telegram-reference/assistant-focused-${theme}-390.png`,
     });
     await page.getByRole('tab', { name: 'استودیو', exact: true }).click();
     const tool = page.getByRole('button', { name: /فلش‌کارت/ }).first();

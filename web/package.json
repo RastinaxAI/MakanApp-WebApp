@@ -23,7 +23,9 @@
     "quality": "node scripts/quality.mjs",
     "test:browser": "playwright test",
     "format:check": "prettier --check src tests/browser tests/unit tests/fixtures scripts design/tokens.json *.ts *.mts *.mjs package.json",
-    "repro:check": "node scripts/repro-check.mjs"
+    "repro:check": "node scripts/repro-check.mjs",
+    "prebuild": "node scripts/build-public-brand.mjs",
+    "content:check": "vitest run tests/unit/content-architecture.test.ts"
   },
   "dependencies": {
     "@fontsource-variable/vazirmatn": "5.2.8",

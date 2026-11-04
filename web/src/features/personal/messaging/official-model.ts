@@ -61,7 +61,14 @@ export function officialConversationCapabilities(
     !readableOfficialEndpoint(pair, purpose)
   )
     return null;
-  return endpoint.capabilities;
+  const effective = endpoint.effectiveCapabilities;
+  return {
+    ...endpoint.capabilities,
+    canSend: effective ? effective.canPublish : endpoint.capabilities.canSend,
+    canManage: effective
+      ? Object.entries(effective).some(([key, allowed]) => key !== 'canPublish' && allowed)
+      : endpoint.capabilities.canManage,
+  };
 }
 
 export function academicActivityMatches(
@@ -82,6 +89,8 @@ export function academicActivityMatches(
   );
 }
 export function academicActivityHref(card: NonNullable<S['AcademicActivityCardResult']>) {
+  if (card.kind === 'Session')
+    return `/personal/education/classes/${encodeURIComponent(card.classId)}?tab=sessions`;
   const area = { Lesson: 'lessons', Assignment: 'assignments', Exam: 'exams' }[card.kind];
   return `/personal/education/${area}/${encodeURIComponent(card.sourceId)}`;
 }

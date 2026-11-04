@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 import { latinDigits } from '@/lib/formatting';
 export function resolvePersonInput(input: string): components['schemas']['ResolvePersonCommand'] {
@@ -5,10 +6,10 @@ export function resolvePersonInput(input: string): components['schemas']['Resolv
   if (/^[+\d\s()-]+$/.test(value)) {
     let phone = value.replace(/[\s()-]/g, '');
     if (/^09\d{9}$/.test(phone)) phone = '+98' + phone.slice(1);
-    if (!/^\+989\d{9}$/.test(phone)) throw new Error('شمارهٔ همراه معتبر وارد کنید.');
+    if (!/^\+989\d{9}$/.test(phone)) throw new Error(uiText.text_33698387f1a0);
     return { username: null, phoneNumber: phone };
   }
   const username = value.replace(/^@/, '');
-  if (!/^[a-zA-Z0-9._]{3,32}$/.test(username)) throw new Error('نام کاربری معتبر وارد کنید.');
+  if (!/^[a-zA-Z0-9._]{3,32}$/.test(username)) throw new Error(uiText.text_ed1379baea73);
   return { username, phoneNumber: null };
 }

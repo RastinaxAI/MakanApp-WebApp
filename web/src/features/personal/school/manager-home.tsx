@@ -1,17 +1,16 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
-import { Plus, ArrowLeft, CalendarDays, ClipboardCheck, Users } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { EmptyState, ErrorState, LoadingSkeleton } from '@/components/ui/states';
+import { Plus, CalendarDays, ClipboardCheck, Users, Mail, ChevronLeft } from 'lucide-react';
+import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
 import { ApiError } from '@/lib/api/errors';
 import { date } from '@/lib/formatting';
 import { usePersonal, usePersonalApi } from '../provider';
-import { base, Card } from './shared';
+import { base } from './shared';
+import layout from './dashboard-layout.module.css';
 import { ManagerClassCards } from './manager-class-cards';
-import { ManagerPageHeader } from './manager-page-header';
 import { OfficialSpaces } from './official-spaces';
-import s from './manager-workspace.module.css';
 type S = components['schemas'];
 export function ManagerHome() {
   const { session } = usePersonal();
@@ -29,118 +28,103 @@ export function ManagerHome() {
   )
     return <ErrorState error={new ApiError(403)} />;
   return (
-    <div className={s.stack}>
-      <ManagerPageHeader
-        title="مدیریت آموزشگاه"
-        description="کلاس‌ها، اعضا و پیگیری‌های شما"
-        action={
-          <Button asChild>
-            <Link href={base + '/classes/new'}>
-              <Plus size={19} />
-              ایجاد کلاس
-            </Link>
-          </Button>
-        }
-      />
-
-      <section className={s.stack} aria-label="کلاس‌های آموزشگاه">
-        <header className={s.sectionHeading}>
-          <h2>کلاس‌های آموزشگاه</h2>
-          <Link href={base + '/classes'}>
-            همهٔ کلاس‌ها <ArrowLeft size={16} />
-          </Link>
-        </header>
-        {classes.isPending ? (
-          <LoadingSkeleton />
-        ) : classes.isError ? (
-          <ErrorState error={classes.error} onRetry={() => void classes.refetch()} />
-        ) : classes.data.length ? (
-          <>
-            <ManagerClassCards items={classes.data.slice(0, 4)} />
-            {classes.data.length > 4 && (
-              <p className={s.hint}>
-                ۴ کلاس از {classes.data.length.toLocaleString('fa-IR')} کلاس؛ برای فهرست کامل «همهٔ
-                کلاس‌ها» را انتخاب کنید.
-              </p>
-            )}
-          </>
-        ) : (
-          <Card>
-            <EmptyState
-              title="اولین کلاس آموزشگاه را بسازید"
-              description="پس از ساخت، معلمان و دانش‌آموزان را در همان کلاس اضافه کنید."
-            />
-          </Card>
-        )}
-      </section>
-      <dl className={s.compactMetrics} aria-label="آمار آموزشگاه">
-        {(
-          [
-            ['کلاس فعال', d.operationalCounts.activeClassCount],
-            ['دانش‌آموز ثبت‌نام‌شده', d.operationalCounts.enrolledLearnerCount],
-            ['معلم', d.operationalCounts.teacherCount],
-            ['دعوت در انتظار', d.pendingInvitationCount],
-          ] as const
-        ).map(([name, value]) => (
-          <div key={name}>
-            <dd>{value.toLocaleString('fa-IR')}</dd>
-            <dt>{name}</dt>
+    <>
+      <div className={layout.heading}>
+        <div>
+          <h1>{uiText.text_a4dd29fe7d67}</h1>
+          <p>{uiText.text_45db6dacb1d1}</p>
+        </div>
+        <Link className="btn" href={base + '/classes/new'}>
+          <Plus size={19} />
+          {uiText.text_413337c38036}
+        </Link>
+      </div>
+      <div className="stats" aria-label={uiText.text_622d10d391a9}>
+        {[
+          [uiText.text_e85db0fb2a48, d.operationalCounts.activeClassCount],
+          [uiText.text_fbd179d162db, d.operationalCounts.enrolledLearnerCount],
+          [uiText.text_3d4c3d92cfad, d.pendingInvitationCount],
+        ].map(([name, count]) => (
+          <div className="stat" key={name}>
+            <b>{Number(count).toLocaleString('fa-IR')}</b>
+            <span>{name}</span>
           </div>
         ))}
-      </dl>
-      <section aria-label="پیگیری‌های مدیر" className={s.followups}>
-        <Link href={base + '/reports?kind=attendance'}>
-          <CalendarDays size={23} />
-          <div>
-            <strong>ثبت حضور کلاس‌ها</strong>
-            <p>
-              {d.attendancePending.length
-                ? `${d.attendancePending.length.toLocaleString('fa-IR')} جلسه نیازمند پیگیری در این نما`
-                : 'مشاهدهٔ گزارش حضور کلاس‌ها'}
-            </p>
-          </div>
-          <ArrowLeft size={18} />
-        </Link>
-        <Link href={base + '/reports?kind=assessments'}>
-          <ClipboardCheck size={23} />
-          <div>
-            <strong>ارزیابی‌های باقی‌مانده</strong>
-            <p>
-              {(
-                d.assignmentGradingQueue.totalPendingCount + d.examGradingQueue.totalPendingCount
-              ).toLocaleString('fa-IR')}{' '}
-              مورد در صف ارزیابی
-            </p>
-          </div>
-          <ArrowLeft size={18} />
-        </Link>
-        <Link href={base + '/members'}>
-          <Users size={23} />
-          <div>
-            <strong>پرونده‌ها و اعضا</strong>
-            <p>معلم، دانش‌آموز و والد را پیدا و مدیریت کنید.</p>
-          </div>
-          <ArrowLeft size={18} />
-        </Link>
-      </section>
-      {d.upcomingSessions.length > 0 && (
-        <Card title="جلسه‌های نزدیک">
-          {d.upcomingSessions.slice(0, 3).map((row) => (
-            <Link
-              className={s.sessionRow}
-              key={row.sessionId}
-              href={`${base}/classes/${row.classId}?tab=sessions`}
-            >
-              <strong>
-                {row.classTitle} · {row.title}
-              </strong>
-              <span>{date(row.startUtc, true)}</span>
+      </div>
+      <div className={layout.grid}>
+        <section className={layout.followup}>
+          <h2 className="section-title">{uiText.text_5419ed3bd524}</h2>
+          <div className="list">
+            <Link href={base + '/invitations'} className="row">
+              <span className="tile-icon">
+                <Mail size={22} />
+              </span>
+              <span className="grow">
+                <h4>{uiText.text_2c55a75e6b60}</h4>
+                <p>
+                  {d.pendingInvitationCount.toLocaleString('fa-IR')}
+                  {uiText.text_7330fa8e33d9}
+                </p>
+              </span>
+              <span className="badge warn">{d.pendingInvitationCount.toLocaleString('fa-IR')}</span>
             </Link>
-          ))}
-        </Card>
-      )}
-      <p className={s.updated}>اطلاعات آموزشگاه: {date(d.dataAsOfUtc, true)}</p>
-      <OfficialSpaces />
-    </div>
+            <Link href={base + '/schedule'} className="row">
+              <span className="tile-icon">
+                <CalendarDays size={22} />
+              </span>
+              <span className="grow">
+                <h4>{uiText.text_55e5cd56489f}</h4>
+                <p>{uiText.text_3d7d49b37d72}</p>
+              </span>
+              <ChevronLeft size={18} />
+            </Link>
+            <Link href={base + '/reports'} className="row">
+              <span className="tile-icon">
+                <ClipboardCheck size={22} />
+              </span>
+              <span className="grow">
+                <h4>{uiText.text_35d50af580db}</h4>
+                <p>{uiText.text_6c1681d6d4e1}</p>
+              </span>
+              <ChevronLeft size={18} />
+            </Link>
+            <Link href={base + '/guardians'} className="row">
+              <span className="tile-icon">
+                <Users size={22} />
+              </span>
+              <span className="grow">
+                <h4>{uiText.text_d61b3d58a5e7}</h4>
+                <p>{uiText.text_6cdd6f97ebf5}</p>
+              </span>
+              <ChevronLeft size={18} />
+            </Link>
+          </div>
+        </section>
+        <section className={layout.classes}>
+          <div className="section-title">
+            <h2>{uiText.text_9d936eeca4e2}</h2>
+            <Link className="text-action" href={base + '/classes'}>
+              {uiText.text_5477ed00df38}
+            </Link>
+          </div>
+          {classes.isPending ? (
+            <LoadingSkeleton />
+          ) : classes.isError ? (
+            <ErrorState error={classes.error} onRetry={() => void classes.refetch()} />
+          ) : (
+            <ManagerClassCards items={classes.data.slice(0, 2)} />
+          )}
+        </section>
+      </div>
+      <div className="alert">{uiText.text_ab4d76d96a3a}</div>
+      <details className="card">
+        <summary>{uiText.text_030eacc9e686}</summary>
+        <OfficialSpaces />
+      </details>
+      <p className="tiny muted">
+        {uiText.text_7b586f9d7764}
+        {date(d.dataAsOfUtc, true)}
+      </p>
+    </>
   );
 }

@@ -1,4 +1,6 @@
 'use client';
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
@@ -14,12 +16,15 @@ import { useExamClock } from './use-exam-clock';
 import e from './exam-reference.module.css';
 import { isMissingActiveAttempt } from './policy';
 import s from './school.module.css';
+import { ApiError } from '@/lib/api/errors';
 import { examAnswerPresent, examAttachmentsValid } from '@/lib/exam-attachment';
 import { ExamAnswerFiles, ExamFileDownload } from './exam-files';
-import { base, Card, Field, SchoolHeading, useSchoolAction } from './shared';
+import { Card, Field, SchoolHeading, useSchoolAction } from './shared';
 type S = components['schemas'];
 
 export function StudentExam({ id }: { id: string }) {
+  const scope = useAcademicScope();
+  const { base } = useAcademicScope();
   const q = usePersonalApi<S['StudentSafeExamPreview']>(
     '/api/v1/academic/exams/' + id + '/student-preview',
   );
@@ -39,13 +44,18 @@ export function StudentExam({ id }: { id: string }) {
   const a = useSchoolAction();
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
+  if (scope.personal && !scope.matches(q.data.exam))
+    return <ErrorState error={new ApiError(404)} />;
   const active = started ?? current.data;
+  if (active && active.examId !== id) return <ErrorState error={new ApiError(502)} />;
   return (
     <>
-      {!active && <SchoolHeading title={q.data.exam.title} description="آزمون دانش‌آموز" back />}
+      {!active && (
+        <SchoolHeading title={q.data.exam.title} description={uiText.text_f5bf0241c376} back />
+      )}
       {!active && (
         <Button asChild variant="outline">
-          <Link href={`${base}/exams/${id}/history`}>سابقهٔ تلاش‌ها و نتایج</Link>
+          <Link href={`${base}/exams/${id}/history`}>{uiText.text_bdce5ddbe1d3}</Link>
         </Button>
       )}
       {active ? (
@@ -54,12 +64,15 @@ export function StudentExam({ id }: { id: string }) {
         <Card>
           <p className={s.bodyText}>{q.data.exam.description}</p>
           <p className={s.hint}>
-            {q.data.exam.rules.durationMinutes} دقیقه · حداکثر {q.data.exam.rules.maxAttempts} بار ·{' '}
-            {q.data.exam.rules.maxScore} نمره
+            {q.data.exam.rules.durationMinutes}
+            {uiText.text_af5d165eb42a}
+            {q.data.exam.rules.maxAttempts}
+            {uiText.text_2c2981408a00} {q.data.exam.rules.maxScore}
+            {uiText.text_931d9d5a6b04}
           </p>
           <p className={s.hint}>
-            {date(q.data.exam.rules.availableFromUtc, true)} تا{' '}
-            {date(q.data.exam.rules.availableUntilUtc, true)}
+            {date(q.data.exam.rules.availableFromUtc, true)}
+            {uiText.text_f6d897a5e343} {date(q.data.exam.rules.availableUntilUtc, true)}
           </p>
           {current.isError && !isMissingActiveAttempt(current.error) && (
             <ErrorState error={current.error} />
@@ -80,7 +93,7 @@ export function StudentExam({ id }: { id: string }) {
               if (result) setStarted(result);
             }}
           >
-            شروع آزمون
+            {uiText.text_974bdfc23e33}
           </Button>
           {a.feedback}
         </Card>
@@ -95,16 +108,20 @@ export function StudentExam({ id }: { id: string }) {
   );
 }
 function PastExam({ attempt }: { attempt: S['StudentExamAttemptSummaryDto'] }) {
+  const { base } = useAcademicScope();
   const a = useSchoolAction();
   const [receipt, setReceipt] = useState<S['ExamFinalReceiptDto']>();
   return (
-    <Card title={'آزمون ثبت‌شده · نوبت ' + attempt.attemptNumber}>
+    <Card title={uiText.text_135af069de25 + attempt.attemptNumber}>
       <Button asChild variant="outline">
         <Link href={`${base}/exam-submissions/${attempt.examAttemptId}/result`}>
-          مشاهدهٔ وضعیت نتیجه
+          {uiText.text_4ccea8691b55}
         </Link>
       </Button>
-      <p className={s.hint}>شروع: {date(attempt.startedAtUtc, true)}</p>
+      <p className={s.hint}>
+        {uiText.text_d6a19d2e814a}
+        {date(attempt.startedAtUtc, true)}
+      </p>
       <Button
         variant="outline"
         disabled={a.busy}
@@ -117,12 +134,17 @@ function PastExam({ attempt }: { attempt: S['StudentExamAttemptSummaryDto'] }) {
           if (result) setReceipt(result);
         }}
       >
-        مشاهدهٔ رسید ثبت آزمون
+        {uiText.text_95ff5b1021e8}
       </Button>
       {receipt && (
         <p role="status">
-          ثبت نهایی در {date(receipt.finalizedAtUtc, true)} · {receipt.answeredQuestionCount} پاسخ
-          از {receipt.totalQuestionCount} پرسش
+          {uiText.text_5abb68cbb3ee}
+          {date(receipt.finalizedAtUtc, true)}
+          {uiText.text_588da4105320}
+          {receipt.answeredQuestionCount}
+          {uiText.text_23d5cbc3c0e0}
+          {receipt.totalQuestionCount}
+          {uiText.text_5c2e40bca3fb}
         </p>
       )}
       {a.feedback}
@@ -131,11 +153,12 @@ function PastExam({ attempt }: { attempt: S['StudentExamAttemptSummaryDto'] }) {
 }
 export function ExamAttempt({
   attempt,
-  title = 'آزمون',
+  title = uiText.text_206d5b48e297,
 }: {
   attempt: S['StudentExamAttemptDto'];
   title?: string;
 }) {
+  const { base } = useAcademicScope();
   const answers = usePersonalApi<S['StudentExamAnswersDto']>(
     '/api/v1/academic/exam-attempts/' + attempt.examAttemptId + '/answers',
   );
@@ -171,9 +194,12 @@ export function ExamAttempt({
   if (receipt)
     return (
       <div className={s.receipt}>
-        <h2>آزمون ثبت نهایی شد</h2>
+        <h2>{uiText.text_003f88cafd19}</h2>
         <p>
-          {receipt.answeredQuestionCount} پاسخ از {receipt.totalQuestionCount} پرسش
+          {receipt.answeredQuestionCount}
+          {uiText.text_23d5cbc3c0e0}
+          {receipt.totalQuestionCount}
+          {uiText.text_5c2e40bca3fb}
         </p>
         <p>{date(receipt.finalizedAtUtc, true)}</p>
         <PageBack href={base + '/exams'} />
@@ -182,7 +208,7 @@ export function ExamAttempt({
   return (
     <div className={e.stage} data-exam-room>
       <header className={e.header}>
-        <Link href={base + '/exams'} aria-label="بازگشت به آزمون‌ها">
+        <Link href={base + '/exams'} aria-label={uiText.text_2a9639fad252}>
           <ChevronRight size={20} />
         </Link>
         <h1>{title}</h1>
@@ -191,11 +217,11 @@ export function ExamAttempt({
           data-exam-timer
           data-urgent={seconds !== null && seconds <= 300}
           role="timer"
-          aria-label="زمان باقی‌ماندهٔ آزمون"
+          aria-label={uiText.text_260462be74d1}
         >
           <Clock3 size={20} />
           <span>
-            <small>زمان باقی‌مانده</small>
+            <small>{uiText.text_05323c282dc5}</small>
             <strong dir="ltr">{seconds === null ? '—' : examClockLabel(seconds)}</strong>
           </span>
         </div>
@@ -207,21 +233,23 @@ export function ExamAttempt({
               <div className={e.progress}>
                 <strong>
                   {review
-                    ? 'مرور و تحویل آزمون'
-                    : `سؤال ${(index + 1).toLocaleString('fa-IR')} از ${attempt.questions.length.toLocaleString('fa-IR')}`}
+                    ? uiText.text_b90491b0d105
+                    : uiText.format_63f311d97e40(
+                        (index + 1).toLocaleString('fa-IR'),
+                        attempt.questions.length.toLocaleString('fa-IR'),
+                      )}
                 </strong>
-                <span>{savedCount.toLocaleString('fa-IR')} پاسخ ذخیره‌شده</span>
+                <span>
+                  {savedCount.toLocaleString('fa-IR')}
+                  {uiText.text_1dfb2d843a4b}
+                </span>
               </div>
               {seconds === null && (
                 <p role="alert" className={s.notice}>
-                  زمان معتبر آزمون دریافت نشد. برای ادامه، وضعیت آزمون را دوباره دریافت کنید.
+                  {uiText.text_1e55b02eb966}
                 </p>
               )}
-              {seconds === 0 && (
-                <p className={s.notice}>
-                  زمان پاسخ‌دهی به پایان رسیده است. وضعیت نهایی را از سرور بازخوانی کنید.
-                </p>
-              )}
+              {seconds === 0 && <p className={s.notice}>{uiText.text_b3bf53045bdc}</p>}
               {answers.isPending ? (
                 <LoadingSkeleton />
               ) : answers.isError ? (
@@ -230,10 +258,7 @@ export function ExamAttempt({
                 <>
                   {!writer?.isCurrentSessionWriter && (
                     <>
-                      <p className={s.notice}>
-                        برای پاسخ‌دادن، نوشتن در همین دستگاه باید فعال باشد. کنترل پاسخ‌دهی دستگاه
-                        دیگر خودکار منتقل نمی‌شود.
-                      </p>
+                      <p className={s.notice}>{uiText.text_eb7524c89b59}</p>
                       <Button
                         disabled={a.busy || !seconds || attempt.status !== 'InProgress'}
                         onClick={async () => {
@@ -245,21 +270,17 @@ export function ExamAttempt({
                           if (result) setLease(result);
                         }}
                       >
-                        فعال‌کردن پاسخ‌دهی در این دستگاه
+                        {uiText.text_0368f96b438f}
                       </Button>
                     </>
                   )}
                   <details className={e.sync}>
-                    <summary>وضعیت ذخیرهٔ پاسخ‌ها</summary>
+                    <summary>{uiText.text_cb2f84efe820}</summary>
                     <Button
                       variant="outline"
                       disabled={a.busy || finalizing}
                       onClick={async () => {
-                        if (
-                          hasDirty &&
-                          !window.confirm('پاسخ‌های ذخیره‌نشده با نسخهٔ سرور جایگزین شوند؟')
-                        )
-                          return;
+                        if (hasDirty && !window.confirm(uiText.text_e4bc4f41bf23)) return;
                         const fresh = await answers.refetch();
                         if (fresh.isSuccess) {
                           setLease(undefined);
@@ -268,7 +289,7 @@ export function ExamAttempt({
                         }
                       }}
                     >
-                      بازخوانی پاسخ‌های ثبت‌شده
+                      {uiText.text_3c4e01e958ec}
                     </Button>
                   </details>
                 </>
@@ -314,24 +335,19 @@ export function ExamAttempt({
                 ))}
               {answers.data && (
                 <div className={e.review} hidden={!review}>
-                  <h2>مرور و تحویل آزمون</h2>
-                  {!validAttachments && (
-                    <p role="alert">
-                      پیوست آماده‌نشده یا متن الزامیِ ثبت‌نشده وجود دارد؛ پاسخ را اصلاح کنید.
-                    </p>
-                  )}
-                  <p className={s.hint}>
-                    فقط پاسخ‌هایی که ذخیره شده‌اند ثبت نهایی می‌شوند. پس از ثبت نهایی امکان تغییر
-                    پاسخ وجود ندارد.
-                  </p>
+                  <h2>{uiText.text_b90491b0d105}</h2>
+                  {!validAttachments && <p role="alert">{uiText.text_ada70c7f74e9}</p>}
+                  <p className={s.hint}>{uiText.text_1fa88a22344c}</p>
                   <div className={e.reviewSummary}>
                     <FileCheck2 size={24} />
                     <span>
                       <strong>
-                        {savedCount.toLocaleString('fa-IR')} از{' '}
-                        {attempt.questions.length.toLocaleString('fa-IR')} پاسخ ذخیره شده
+                        {savedCount.toLocaleString('fa-IR')}
+                        {uiText.text_8d6ea6982b74}{' '}
+                        {attempt.questions.length.toLocaleString('fa-IR')}
+                        {uiText.text_c29fedbad608}
                       </strong>
-                      <small>پاسخ‌های زیر نسخهٔ ثبت‌شده در سرویس هستند.</small>
+                      <small>{uiText.text_e7fd700f0cb0}</small>
                     </span>
                   </div>
                   {attempt.questions.map((question, i) => {
@@ -346,7 +362,10 @@ export function ExamAttempt({
                     return (
                       <article key={question.attemptQuestionId} className={e.reviewItem}>
                         <div>
-                          <strong>پرسش {(i + 1).toLocaleString('fa-IR')}</strong>
+                          <strong>
+                            {uiText.text_649c0357f354}
+                            {(i + 1).toLocaleString('fa-IR')}
+                          </strong>
                           <Button
                             variant="ghost"
                             onClick={() => {
@@ -354,16 +373,19 @@ export function ExamAttempt({
                               setReview(false);
                             }}
                           >
-                            مشاهدهٔ پرسش {(i + 1).toLocaleString('fa-IR')}
+                            {uiText.text_7b83fe622ee7}
+                            {(i + 1).toLocaleString('fa-IR')}
                           </Button>
                         </div>
                         <p dir="auto">
                           {text?.trim() ||
                             (answer?.attachments?.length
-                              ? 'پاسخ پیوست‌شده'
-                              : 'پاسخی ذخیره نشده است.')}
+                              ? uiText.text_64ebb8942651
+                              : uiText.text_d1decdf85c3b)}
                         </p>
-                        {dirty[question.attemptQuestionId] && <small>تغییر ذخیره‌نشده دارد.</small>}
+                        {dirty[question.attemptQuestionId] && (
+                          <small>{uiText.text_c7936aa549f3}</small>
+                        )}
                         {answer?.attachments?.map((file) => (
                           <ExamFileDownload
                             key={file.fileAssetId}
@@ -377,7 +399,7 @@ export function ExamAttempt({
                   })}
                   {hasDirty && (
                     <p role="status" className={s.notice}>
-                      پاسخ ذخیره‌نشده دارید؛ ابتدا آن‌ها را ذخیره کنید.
+                      {uiText.text_d0c32833d55f}
                     </p>
                   )}
                   <Button
@@ -403,7 +425,7 @@ export function ExamAttempt({
                       if (result) setReceipt(result);
                     }}
                   >
-                    {finalizing ? 'تلاش مجدد برای ثبت نهایی' : 'ثبت نهایی آزمون'}
+                    {finalizing ? uiText.text_887583bed820 : uiText.text_9e3a00bd25d6}
                   </Button>
                   <Button
                     variant="outline"
@@ -417,18 +439,19 @@ export function ExamAttempt({
                       if (result) setReceipt(result);
                     }}
                   >
-                    بررسی رسید نهایی
+                    {uiText.text_b000b2b3ef87}
                   </Button>
                 </div>
               )}
             </section>
           </div>
-          <aside className={e.sidebar} aria-label="پاسخ‌برگ آزمون">
+          <aside className={e.sidebar} aria-label={uiText.text_37f16de1385c}>
             <section className={e.navigator}>
-              <h2>پاسخ‌برگ آزمون</h2>
+              <h2>{uiText.text_37f16de1385c}</h2>
               <p>
-                {savedCount.toLocaleString('fa-IR')} پاسخ ذخیره‌شده از{' '}
-                {attempt.questions.length.toLocaleString('fa-IR')} پرسش
+                {savedCount.toLocaleString('fa-IR')}
+                {uiText.text_cf2bfba20bfc} {attempt.questions.length.toLocaleString('fa-IR')}
+                {uiText.text_5c2e40bca3fb}
               </p>
               <div className={e.questionGrid}>
                 {attempt.questions.map((question, i) => {
@@ -448,7 +471,14 @@ export function ExamAttempt({
                       type="button"
                       data-state={state}
                       aria-current={!review && index === i ? 'step' : undefined}
-                      aria-label={`رفتن به پرسش ${(i + 1).toLocaleString('fa-IR')}؛ ${state === 'dirty' ? 'ذخیره‌نشده' : state === 'saved' ? 'ذخیره‌شده' : 'بی‌پاسخ'}`}
+                      aria-label={uiText.format_21050785023d(
+                        (i + 1).toLocaleString('fa-IR'),
+                        state === 'dirty'
+                          ? uiText.text_17e99e000a84
+                          : state === 'saved'
+                            ? uiText.text_7d24bb2778c3
+                            : uiText.text_431772a570a9,
+                      )}
                       onClick={() => {
                         setIndex(i);
                         setReview(false);
@@ -460,19 +490,20 @@ export function ExamAttempt({
                 })}
               </div>
               <div className={e.legend}>
-                <span data-state="saved">ذخیره‌شده</span>
-                <span data-state="dirty">ذخیره‌نشده</span>
-                <span>بی‌پاسخ</span>
+                <span data-state="saved">{uiText.text_7d24bb2778c3}</span>
+                <span data-state="dirty">{uiText.text_17e99e000a84}</span>
+                <span>{uiText.text_431772a570a9}</span>
               </div>
             </section>
             <section className={e.navigator}>
-              <h2>پیش از تحویل</h2>
+              <h2>{uiText.text_698330b28e93}</h2>
+              <p>{uiText.text_ec6cacb8d486}</p>
               <p>
-                پاسخ هر پرسش را ذخیره کنید. در پایان، پاسخ‌ها را مرور و آزمون را ثبت نهایی کنید.
+                {uiText.text_7e8130682096}
+                {date(attempt.effectiveDeadlineUtc, true)}
               </p>
-              <p>پایان مهلت: {date(attempt.effectiveDeadlineUtc, true)}</p>
               <Button variant="outline" onClick={() => setReview(true)}>
-                مرور و تحویل آزمون
+                {uiText.text_b90491b0d105}
               </Button>
             </section>
           </aside>
@@ -481,7 +512,7 @@ export function ExamAttempt({
       <footer className={e.footer}>
         {review ? (
           <Button variant="outline" onClick={() => setReview(false)}>
-            بازگشت به پاسخ‌ها
+            {uiText.text_3613801e807e}
           </Button>
         ) : (
           <>
@@ -490,11 +521,13 @@ export function ExamAttempt({
                 index < attempt.questions.length - 1 ? setIndex(index + 1) : setReview(true)
               }
             >
-              {index < attempt.questions.length - 1 ? 'سؤال بعد' : 'مرور پاسخ‌ها'}
+              {index < attempt.questions.length - 1
+                ? uiText.text_906e0c72a3b4
+                : uiText.text_2dd10ba71f63}
             </Button>
             {index > 0 && (
               <Button variant="ghost" onClick={() => setIndex(index - 1)}>
-                سؤال قبل
+                {uiText.text_8904de0bfc67}
               </Button>
             )}
           </>
@@ -539,15 +572,22 @@ function ExamQuestion({
     <section data-exam-question>
       <div className={e.questionMeta}>
         <span>
-          پرسش {number.toLocaleString('fa-IR')} ·{' '}
-          {question.questionType === 'Descriptive' ? 'تشریحی' : 'چهارگزینه‌ای'}
+          {uiText.text_649c0357f354}
+          {number.toLocaleString('fa-IR')}
+          {uiText.text_78887da22764}{' '}
+          {question.questionType === 'Descriptive'
+            ? uiText.text_65f21708171c
+            : uiText.text_8fc194cdb8aa}
         </span>
-        <span>{question.score.toLocaleString('fa-IR')} نمره</span>
+        <span>
+          {question.score.toLocaleString('fa-IR')}
+          {uiText.text_931d9d5a6b04}
+        </span>
       </div>
       {saved && !dirty && !a.busy && (
         <p className={e.saved} role="status">
           <CheckCircle2 size={17} />
-          آخرین پاسخ ذخیره شد.
+          {uiText.text_8b4c29b1f0f6}
         </p>
       )}
       <p className={e.prompt}>
@@ -566,12 +606,12 @@ function ExamQuestion({
         ))}
       {question.questionType === 'Descriptive' ? (
         <div>
-          <Field label={'پاسخ پرسش ' + number}>
+          <Field label={uiText.text_31e133b70dc2 + number}>
             <textarea
               disabled={disabled || a.busy || uncertain || filePending}
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="پاسخ خود را اینجا بنویسید…"
+              placeholder={uiText.text_59ca5495819c}
             />
           </Field>
           <ExamAnswerFiles
@@ -588,7 +628,7 @@ function ExamQuestion({
         </div>
       ) : (
         <fieldset className={s.question}>
-          <legend>یک گزینه انتخاب کنید</legend>
+          <legend>{uiText.text_0861b9a398f9}</legend>
           {question.options.map((item) => (
             <label className={s.option} key={item.id}>
               <input
@@ -637,16 +677,12 @@ function ExamQuestion({
       >
         <Save size={18} />
         {a.busy
-          ? 'در حال ذخیره…'
+          ? uiText.text_a143258455bb
           : uncertain
-            ? 'تلاش مجدد برای همین پاسخ'
-            : 'ذخیرهٔ پاسخ ' + number}
+            ? uiText.text_16009dd36439
+            : uiText.text_7ed2fc6e7f87 + number}
       </Button>
-      {uncertain && (
-        <p className={s.hint}>
-          نتیجهٔ ذخیره تأیید نشد؛ همین درخواست را تکرار کنید یا پاسخ‌های ثبت‌شده را بازخوانی کنید.
-        </p>
-      )}
+      {uncertain && <p className={s.hint}>{uiText.text_a54c150e64e9}</p>}
       {!!a.error && a.feedback}
     </section>
   );

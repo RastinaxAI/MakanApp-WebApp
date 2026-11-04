@@ -12,6 +12,7 @@ export class AccountReplay {
     private read: (path: string) => Promise<Page>,
     private invalidate: () => Promise<unknown> | void,
     private scope?: 'Personal',
+    private endpoint = '/api/v1/realtime/changes',
   ) {}
   stop() {
     this.stopped = true;
@@ -27,7 +28,8 @@ export class AccountReplay {
         let next: Page;
         try {
           next = await this.read(
-            '/api/v1/realtime/changes?' +
+            this.endpoint +
+              '?' +
               new URLSearchParams({
                 limit: '100',
                 ...(this.scope ? { scope: this.scope } : {}),
@@ -72,8 +74,9 @@ export class AccountReplay {
         const initial = this.cursor === undefined;
         this.boundary = boundary;
         for (const event of next.changes) {
-          if (this.seen.has(event.eventId)) continue;
-          this.seen.add(event.eventId);
+          const eventKey = event.eventId + ':' + event.streamVersion;
+          if (this.seen.has(eventKey)) continue;
+          this.seen.add(eventKey);
           dirty = true;
           if (this.seen.size > 2000) this.seen.delete(this.seen.values().next().value!);
         }

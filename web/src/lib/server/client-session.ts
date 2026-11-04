@@ -70,7 +70,10 @@ async function loadClientState(id: string): Promise<ClientState | null> {
   return { user, context, revision };
 }
 export async function requireClientPage() {
+  if (!(await hasClientPageSession())) redirect('/enter');
+}
+export async function hasClientPageSession() {
   const id = await clientSessionId();
   const valid = id ? await withSessionRead(id, () => readSession(id)) : null;
-  if (!valid) redirect('/enter');
+  return !!valid;
 }

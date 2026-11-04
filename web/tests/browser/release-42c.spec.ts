@@ -9,6 +9,7 @@ test('Manager opens the organization official group through its own binding', as
   await request.post(fixture + '/__test__/official-spaces', { data: {} });
   await login(context, 'Manager');
   await page.goto('/personal/education');
+  await page.getByText('گروه‌ها و کانال‌های رسمی آموزشگاه', { exact: true }).click();
   await page
     .getByRole('region', { name: 'گروه و کانال رسمی آموزشگاه', exact: true })
     .getByRole('link', { name: 'ورود به گروه', exact: true })
@@ -40,7 +41,7 @@ for (const role of ['Student', 'Teacher', 'Parent', 'Manager'])
       (r: { path: string; method: string }) =>
         r.path === '/api/v1/workspaces/select' && r.method === 'POST',
     ).length;
-    await page.goto('/personal/profile');
+    await page.goto('/personal/profile/details');
     const spaces = page.getByRole('region', { name: 'فضاهای من', exact: true });
     await expect(spaces.getByRole('button', { name: /حساب شخصی/ })).toHaveCount(0);
     await expect(spaces.getByRole('button', { name: /آموزشگاه/ })).toBeVisible();
@@ -66,7 +67,7 @@ for (const role of ['Student', 'Teacher', 'Parent', 'Manager'])
     expect(
       state.requests.some(
         (r: { path: string; query: { scope?: string } }) =>
-          r.path === '/api/v1/conversations' && r.query.scope === 'Personal',
+          r.path === '/api/v1/conversations/account',
       ),
     ).toBe(true);
     await expect
@@ -74,8 +75,12 @@ for (const role of ['Student', 'Teacher', 'Parent', 'Manager'])
         const s = await (await request.get(fixture + '/__test__/state')).json();
         return new Set(
           s.requests
-            .filter((r: { path: string }) => r.path === '/api/v1/realtime/changes')
-            .map((r: { query: { scope?: string } }) => r.query.scope ?? 'Current'),
+            .filter((r: { path: string }) =>
+              ['/api/v1/realtime/changes', '/api/v1/realtime/account-inbox/changes'].includes(
+                r.path,
+              ),
+            )
+            .map((r: { path: string }) => r.path),
         ).size;
       })
       .toBe(2);
@@ -87,7 +92,7 @@ test('a roleless user has a personal card; unresolved visibility is not guessed'
   request,
 }) => {
   await login(context, 'Personal', false);
-  await page.goto('/personal/profile');
+  await page.goto('/personal/profile/details');
   const spaces = page.getByRole('region', { name: 'فضاهای من', exact: true });
   await expect(spaces.getByRole('button', { name: /حساب شخصی/ })).toBeVisible();
   await request.post(fixture + '/__test__/workspace-visibility', { data: { unresolved: true } });

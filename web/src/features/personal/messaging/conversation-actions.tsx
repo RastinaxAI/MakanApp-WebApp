@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import * as Menu from '@radix-ui/react-dropdown-menu';
 import { Files, Info, MoreVertical, Settings } from 'lucide-react';
 import Link from 'next/link';
@@ -9,7 +10,7 @@ export function ConversationActions({ id, managed }: { id: string; managed: bool
   return (
     <Menu.Root dir="rtl">
       <Menu.Trigger asChild>
-        <Button size="icon" variant="ghost" aria-label="گزینه‌های گفتگو">
+        <Button size="icon" variant="ghost" aria-label={uiText.text_1e0263ee04dd}>
           <MoreVertical size={22} />
         </Button>
       </Menu.Trigger>
@@ -18,20 +19,20 @@ export function ConversationActions({ id, managed }: { id: string; managed: bool
           <Menu.Item asChild>
             <Link href={`/personal/messages/${id}/info`}>
               <Info size={20} />
-              اطلاعات گفتگو
+              {uiText.text_3a3510c0ba99}
             </Link>
           </Menu.Item>
           <Menu.Item asChild>
             <Link href={`/personal/messages/${id}/media`}>
               <Files size={20} />
-              رسانه و فایل
+              {uiText.text_563cba00d087}
             </Link>
           </Menu.Item>
           {managed && (
             <Menu.Item asChild>
               <Link href={`/personal/messages/${id}/settings`}>
                 <Settings size={20} />
-                تنظیمات گفتگو
+                {uiText.text_ad01ea1c94b6}
               </Link>
             </Menu.Item>
           )}

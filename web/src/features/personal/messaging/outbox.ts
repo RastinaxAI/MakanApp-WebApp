@@ -1,3 +1,4 @@
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 import { ApiError } from '@/lib/api/errors';
 export type QueuedMessage = {
@@ -85,10 +86,10 @@ export class MessageQueue {
           state === 'rejected'
             ? error instanceof ApiError
               ? error.message
-              : 'ارسال پذیرفته نشد. وضعیت دسترسی یا متن پیام را بررسی کنید.'
+              : uiText.text_5fd06a3c4c14
             : state === 'rate-limited'
-              ? 'ارسال موقتاً محدود شده است. تا زمان مجاز صبر کنید.'
-              : 'نتیجهٔ ارسال هنوز تأیید نشده است. ابتدا پیام‌های گفتگو را بررسی کنید.',
+              ? uiText.text_80457c1dd4a2
+              : uiText.text_27fa67add2f7,
         retryAt: status === 429 && retryAfter ? Date.now() + retryAfter * 1000 : undefined,
       });
       throw error;
@@ -99,7 +100,7 @@ let database: Promise<IDBDatabase> | undefined;
 function openDatabase() {
   return (database ??= new Promise<IDBDatabase>((resolve, reject) => {
     if (!globalThis.indexedDB) {
-      reject(new Error('ذخیرهٔ پیام تأییدنشده در این مرورگر در دسترس نیست.'));
+      reject(new Error(uiText.text_7a962146b807));
       return;
     }
     const request = indexedDB.open('makan-personal-outbox-v1', 1);
@@ -107,7 +108,7 @@ function openDatabase() {
     request.onsuccess = () => resolve(request.result);
     request.onerror = () => {
       database = undefined;
-      reject(new Error('ذخیرهٔ پیام روی این دستگاه انجام نشد.'));
+      reject(new Error(uiText.text_7ea74f37862c));
     };
   }));
 }
@@ -120,8 +121,8 @@ async function transaction<T>(
     const tx = db.transaction('messages', mode);
     const result = work(tx.objectStore('messages'));
     tx.oncomplete = () => resolve(result.result);
-    tx.onerror = () => reject(new Error('ذخیرهٔ پیام روی این دستگاه انجام نشد.'));
-    tx.onabort = () => reject(new Error('ذخیرهٔ پیام لغو شد.'));
+    tx.onerror = () => reject(new Error(uiText.text_7ea74f37862c));
+    tx.onabort = () => reject(new Error(uiText.text_3a9949fcd7d5));
   });
 }
 export const personalMessageQueue = new MessageQueue({

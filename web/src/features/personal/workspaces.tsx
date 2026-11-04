@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import type { components } from '@/generated/api/schema';
 import { usePersonalApi } from './provider';
 import s from './personal.module.css';
@@ -16,7 +17,7 @@ export function WorkspaceVisibilityNotice({
 }) {
   return snapshot?.personalWorkspaceVisible === null ? (
     <p className={s.muted} role="status">
-      وضعیت نمایش فضای شخصی هنوز مشخص نشده است. امکانات مجاز حساب شما از منوی اصلی در دسترس‌اند.
+      {uiText.text_2c65dfd06215}
     </p>
   ) : null;
 }

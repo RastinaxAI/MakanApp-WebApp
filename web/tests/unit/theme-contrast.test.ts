@@ -32,12 +32,22 @@ describe('readable theme color combinations', () => {
         [t.primary, t['primary-soft'], 'selected navigation label'],
         [t['on-primary'], t['primary-button'], 'primary action'],
         [t['on-primary'], t['primary-hover'], 'hovered primary action'],
-        [t['on-primary'], t['danger-button'], 'destructive action'],
+        [t['on-danger'], t['danger-button'], 'destructive action'],
         [t.success, t['success-soft'], 'success status'],
         [t.warning, t['warning-soft'], 'warning status'],
+        [t['chat-outgoing-text'], t['chat-outgoing'], 'outgoing message body'],
+        [t['chat-outgoing-meta'], t['chat-outgoing'], 'outgoing time and delivery state'],
+        [t['avatar-text'], t['avatar-bg'], 'fallback avatar initials'],
       ];
       for (const [foreground, background, name] of pairs)
         expect(contrast(foreground, background), `${mode}: ${name}`).toBeGreaterThanOrEqual(4.5);
+    });
+    it(`${mode} keeps boundaries visible against the input fill and focus visible on both surfaces`, () => {
+      const t = tokens[mode];
+      expect(contrast(t['control-border'], t.surface)).toBeGreaterThanOrEqual(3);
+      for (const surface of [t.bg, t.surface]) {
+        expect(contrast(t.focus, surface)).toBeGreaterThanOrEqual(3);
+      }
     });
   }
 });

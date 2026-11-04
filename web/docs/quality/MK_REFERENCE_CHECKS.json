@@ -1,0 +1,1578 @@
+{
+  "checkedAtUtc": "2026-11-02T20:07:05.658Z",
+  "reference": "MakanApp_Codex_Reference_Pack",
+  "application": "web/ only; no deployment or backend modifications",
+  "source": {
+    "files": 277,
+    "sha256": "0a97bb225daf895f8b47d519721ffb8de307ddb24b94f1ba9486e7a146861f10"
+  },
+  "commands": [
+    {
+      "name": "build",
+      "command": "NEXT_STANDALONE=true npm run build -- --webpack",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/build-final.log"
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/typecheck-final.log"
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/lint-final.log"
+    },
+    {
+      "name": "unit",
+      "command": "npm test",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/test-final.log"
+    },
+    {
+      "name": "generated:check",
+      "command": "npm run generated:check",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/generated-final.log"
+    },
+    {
+      "name": "format:check",
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/format-final.log"
+    },
+    {
+      "name": "flows",
+      "command": "node scripts/verify-mk-reference.mjs",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/flows-final.log"
+    },
+    {
+      "name": "capture",
+      "command": "node scripts/capture-mk-reference.mjs",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/capture-final.log"
+    },
+    {
+      "name": "responsive",
+      "command": "node scripts/check-mk-responsive.mjs",
+      "exitCode": 0,
+      "log": "tmp/mk-reference/responsive-final.log"
+    }
+  ],
+  "units": {
+    "passed": 344,
+    "failed": false
+  },
+  "browser": {
+    "unique": 176,
+    "passed": 176,
+    "failed": [],
+    "runs": [
+      {
+        "file": "docs/quality/MK_REFERENCE_BROWSER_FULL.json",
+        "stats": {
+          "startTime": "2026-11-02T19:21:02.056Z",
+          "duration": 1431085.372,
+          "expected": 150,
+          "skipped": 0,
+          "unexpected": 26,
+          "flaky": 0
+        },
+        "outsideErrors": 0
+      },
+      {
+        "file": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json",
+        "stats": {
+          "startTime": "2026-11-02T19:46:54.055Z",
+          "duration": 241413.93000000002,
+          "expected": 18,
+          "skipped": 0,
+          "unexpected": 8,
+          "flaky": 0
+        },
+        "outsideErrors": 0
+      },
+      {
+        "file": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json",
+        "stats": {
+          "startTime": "2026-11-02T19:53:40.529Z",
+          "duration": 38170.791,
+          "expected": 8,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "outsideErrors": 0
+      }
+    ],
+    "cases": [
+      {
+        "key": "assessment-evaluation.spec.ts:assignment evaluation retains failed drafts, previews audience feedback and releases only after confirmation:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "assignment evaluation retains failed drafts, previews audience feedback and releases only after confirmation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-evaluation.spec.ts:exam manual grading separates saving, completion and publication, and supports a correction revision:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "exam manual grading separates saving, completion and publication, and supports a correction revision",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-evaluation.spec.ts:student and parent cannot open author data; unpublished results and unrelated attachments do not masquerade as success:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "student and parent cannot open author data; unpublished results and unrelated attachments do not masquerade as success",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-evaluation.spec.ts:new assessment pages remain readable without overflow at three viewports:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "new assessment pages remain readable without overflow at three viewports",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-evaluation.spec.ts:editing and publishing a homework draft uses versioned review and retains a failed save:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "editing and publishing a homework draft uses versioned review and retains a failed save",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-evaluation.spec.ts:a server version change preserves the local evaluation draft until explicit replacement:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "a server version change preserves the local evaluation draft until explicit replacement",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-evaluation.spec.ts:parent result uses the selected child relation and guardian feedback without author notes:",
+        "file": "assessment-evaluation.spec.ts",
+        "title": "parent result uses the selected child relation and guardian feedback without author notes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-settings.spec.ts:assignment answer sheet has context, stages and in-flow actions at all supported widths:",
+        "file": "assessment-settings.spec.ts",
+        "title": "assignment answer sheet has context, stages and in-flow actions at all supported widths",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-settings.spec.ts:exam answer map preserves edits on failed refresh, reviews only saved answers and adapts to each width:",
+        "file": "assessment-settings.spec.ts",
+        "title": "exam answer map preserves edits on failed refresh, reviews only saved answers and adapts to each width",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-settings.spec.ts:exam countdown expires from server time, locks writing and never fabricates final submission:",
+        "file": "assessment-settings.spec.ts",
+        "title": "exam countdown expires from server time, locks writing and never fabricates final submission",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assessment-settings.spec.ts:privacy save stays inside its form, retains failed edits and uses returned versions for later saves:",
+        "file": "assessment-settings.spec.ts",
+        "title": "privacy save stays inside its form, retains failed edits and uses returned versions for later saves",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "assistant-theme.spec.ts:dark theme stays coherent across panels and the assistant gives the answer most of the height:",
+        "file": "assistant-theme.spec.ts",
+        "title": "dark theme stays coherent across panels and the assistant gives the answer most of the height",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:chat header light fa: avatar stays beside the title and controls never overlap:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header light fa: avatar stays beside the title and controls never overlap",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:chat header light en: avatar stays beside the title and controls never overlap:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header light en: avatar stays beside the title and controls never overlap",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:chat header dark fa: avatar stays beside the title and controls never overlap:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header dark fa: avatar stays beside the title and controls never overlap",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:chat header dark en: avatar stays beside the title and controls never overlap:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "chat header dark en: avatar stays beside the title and controls never overlap",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "dark inbox uses neutral surfaces, readable previews, underlined filters and an accessible compose button",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:school weekly agenda Student: compact dates, usable controls, real range requests and current-week reset:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "school weekly agenda Student: compact dates, usable controls, real range requests and current-week reset",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-education-layout.spec.ts:school weekly agenda Teacher: compact dates, usable controls, real range requests and current-week reset:",
+        "file": "chat-education-layout.spec.ts",
+        "title": "school weekly agenda Teacher: compact dates, usable controls, real range requests and current-week reset",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:Direct: one bubble from sending through delayed receipt history without server-status text:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "Direct: one bubble from sending through delayed receipt history without server-status text",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:Saved: one bubble from sending through delayed receipt history without server-status text:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "Saved: one bubble from sending through delayed receipt history without server-status text",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:failed send remains visible and is never rendered as confirmed:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "failed send remains visible and is never rendered as confirmed",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:a history refresh failure retains displayed messages while a real access denial hides them:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "a history refresh failure retains displayed messages while a real access denial hides them",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:school Personal: icon and text rows stay aligned in mobile tablet desktop:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "school Personal: icon and text rows stay aligned in mobile tablet desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:school Student: icon and text rows stay aligned in mobile tablet desktop:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "school Student: icon and text rows stay aligned in mobile tablet desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:school Teacher: icon and text rows stay aligned in mobile tablet desktop:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "school Teacher: icon and text rows stay aligned in mobile tablet desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:school Parent: icon and text rows stay aligned in mobile tablet desktop:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "school Parent: icon and text rows stay aligned in mobile tablet desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "chat-school-polish.spec.ts:school Manager: icon and text rows stay aligned in mobile tablet desktop:",
+        "file": "chat-school-polish.spec.ts",
+        "title": "school Manager: icon and text rows stay aligned in mobile tablet desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "client-scope.spec.ts:client entry, install targets and former platform surfaces:",
+        "file": "client-scope.spec.ts",
+        "title": "client entry, install targets and former platform surfaces",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "conversation-pages.spec.ts:conversation members and media follow server pagination and a media filter restarts its cursor:",
+        "file": "conversation-pages.spec.ts",
+        "title": "conversation members and media follow server pagination and a media filter restarts its cursor",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "conversation-pages.spec.ts:conversation settings retain failed selections and leave confirmation retains failure until accepted:",
+        "file": "conversation-pages.spec.ts",
+        "title": "conversation settings retain failed selections and leave confirmation retains failure until accepted",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "conversation-pages.spec.ts:education roles do not grant group ownership and system managed conversation does not expose manual management:",
+        "file": "conversation-pages.spec.ts",
+        "title": "education roles do not grant group ownership and system managed conversation does not expose manual management",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "conversation-pages.spec.ts:direct conversation info is reached from chat and archive uses confirmed user state:",
+        "file": "conversation-pages.spec.ts",
+        "title": "direct conversation info is reached from chat and archive uses confirmed user state",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "conversation-pages.spec.ts:conversation detail pages preserve RTL and layout at mobile tablet and desktop:",
+        "file": "conversation-pages.spec.ts",
+        "title": "conversation detail pages preserve RTL and layout at mobile tablet and desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "design-reference.spec.ts:standalone V2 reference renders all 130 screens at three sizes with valid route targets:",
+        "file": "design-reference.spec.ts",
+        "title": "standalone V2 reference renders all 130 screens at three sizes with valid route targets",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "header-back.spec.ts:class entry is a filled navigation button and lesson direct entry has one contextual back arrow in the header:",
+        "file": "header-back.spec.ts",
+        "title": "class entry is a filled navigation button and lesson direct entry has one contextual back arrow in the header",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "header-back.spec.ts:the header arrow respects unsaved edits and each settings page keeps its own parent destination:",
+        "file": "header-back.spec.ts",
+        "title": "the header arrow respects unsaved edits and each settings page keeps its own parent destination",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Student light:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Student light",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Teacher light:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Teacher light",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Parent light:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Parent light",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Manager light:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Manager light",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Personal light:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Personal light",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:theme light is applied before the application JavaScript can hydrate:",
+        "file": "instagram-experience.spec.ts",
+        "title": "theme light is applied before the application JavaScript can hydrate",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Student dark:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Student dark",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Teacher dark:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Teacher dark",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Parent dark:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Parent dark",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Manager dark:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Manager dark",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:MK reference five-destination shell: Personal dark:",
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Personal dark",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:theme dark is applied before the application JavaScript can hydrate:",
+        "file": "instagram-experience.spec.ts",
+        "title": "theme dark is applied before the application JavaScript can hydrate",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-experience.spec.ts:temporary inbox failure retains known conversations; permission denial removes them:",
+        "file": "instagram-experience.spec.ts",
+        "title": "temporary inbox failure retains known conversations; permission denial removes them",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-motion.spec.ts:recorded light: chat, profile, assistant, dialogs and back remain coherent:",
+        "file": "instagram-motion.spec.ts",
+        "title": "recorded light: chat, profile, assistant, dialogs and back remain coherent",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "instagram-motion.spec.ts:recorded dark: chat, profile, assistant, dialogs and back remain coherent:",
+        "file": "instagram-motion.spec.ts",
+        "title": "recorded dark: chat, profile, assistant, dialogs and back remain coherent",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "invitations-design.spec.ts:invitation filters, readable cards and recoverable empty states fit phone, tablet and desktop:",
+        "file": "invitations-design.spec.ts",
+        "title": "invitation filters, readable cards and recoverable empty states fit phone, tablet and desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "learning.spec.ts:Teacher uses independent lesson create, edit and review pages; Student reads only Published:",
+        "file": "learning.spec.ts",
+        "title": "Teacher uses independent lesson create, edit and review pages; Student reads only Published",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "learning.spec.ts:exam saves an answer and shows a receipt only after accepted finalization:",
+        "file": "learning.spec.ts",
+        "title": "exam saves an answer and shows a receipt only after accepted finalization",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "manager-navigation.spec.ts:members and records retain the same selected school destination and navigation position:",
+        "file": "manager-navigation.spec.ts",
+        "title": "members and records retain the same selected school destination and navigation position",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "manager-navigation.spec.ts:manager actions and report choices remain clear, reachable and responsive:",
+        "file": "manager-navigation.spec.ts",
+        "title": "manager actions and report choices remain clear, reachable and responsive",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "manager-workspace.spec.ts:multi-selection preserves successful members and retries only unresolved additions:",
+        "file": "manager-workspace.spec.ts",
+        "title": "multi-selection preserves successful members and retries only unresolved additions",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "manager-workspace.spec.ts:Manager has a dedicated workspace and reports; other roles cannot enter manager reports:",
+        "file": "manager-workspace.spec.ts",
+        "title": "Manager has a dedicated workspace and reports; other roles cannot enter manager reports",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "manager-workspace.spec.ts:Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships:",
+        "file": "manager-workspace.spec.ts",
+        "title": "Manager creates a class, assigns multiple teachers and students, then removes only the selected class relationships",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "manager-workspace.spec.ts:Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent:",
+        "file": "manager-workspace.spec.ts",
+        "title": "Guardian invitation is retryable, revocable and only becomes a relationship after explicit parent consent",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "member-directory.spec.ts:member directory uses server filters, clear record actions and responsive cards:",
+        "file": "member-directory.spec.ts",
+        "title": "member directory uses server filters, clear record actions and responsive cards",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "member-directory.spec.ts:read-only person flags remain authoritative and a failed member read can be retried:",
+        "file": "member-directory.spec.ts",
+        "title": "read-only person flags remain authoritative and a failed member read can be retried",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "member-directory.spec.ts:person list and editor stay readable on all layouts and preserve a failed draft:",
+        "file": "member-directory.spec.ts",
+        "title": "person list and editor stay readable on all layouts and preserve a failed draft",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "message-actions.spec.ts:save to self retries one frozen forward operation and receives the real fixture receipt:",
+        "file": "message-actions.spec.ts",
+        "title": "save to self retries one frozen forward operation and receives the real fixture receipt",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "message-actions.spec.ts:report preserves reason and description after failure and retries the same report id:",
+        "file": "message-actions.spec.ts",
+        "title": "report preserves reason and description after failure and retries the same report id",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messaging.spec.ts:two isolated accounts exchange messages and update recipient inbox without reload:",
+        "file": "messaging.spec.ts",
+        "title": "two isolated accounts exchange messages and update recipient inbox without reload",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messaging.spec.ts:Parent cannot read a Student private conversation through the BFF:",
+        "file": "messaging.spec.ts",
+        "title": "Parent cannot read a Student private conversation through the BFF",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messaging.spec.ts:Manager cannot read a Student private conversation through the BFF:",
+        "file": "messaging.spec.ts",
+        "title": "Manager cannot read a Student private conversation through the BFF",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:groups: two-step creation persists information and invited contacts, then creates once:",
+        "file": "messenger-management.spec.ts",
+        "title": "groups: two-step creation persists information and invited contacts, then creates once",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:channels: two-step creation persists information and invited contacts, then creates once:",
+        "file": "messenger-management.spec.ts",
+        "title": "channels: two-step creation persists information and invited contacts, then creates once",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:unknown creation failure retries the identical operation after reload, without creating in the information step:",
+        "file": "messenger-management.spec.ts",
+        "title": "unknown creation failure retries the identical operation after reload, without creating in the information step",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:owner edits information, adds a contact, changes administrator role and removes membership with confirmed server responses:",
+        "file": "messenger-management.spec.ts",
+        "title": "owner edits information, adds a contact, changes administrator role and removes membership with confirmed server responses",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:school Teacher cannot mutate another conversation owner data, including through direct API requests:",
+        "file": "messenger-management.spec.ts",
+        "title": "school Teacher cannot mutate another conversation owner data, including through direct API requests",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:unified inbox includes direct and official conversations without a personal-school switch in three layouts:",
+        "file": "messenger-management.spec.ts",
+        "title": "unified inbox includes direct and official conversations without a personal-school switch in three layouts",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:unified inbox follows the server cursor and retains earlier conversations:",
+        "file": "messenger-management.spec.ts",
+        "title": "unified inbox follows the server cursor and retains earlier conversations",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:creation and member management remain usable in both themes across mobile tablet desktop:",
+        "file": "messenger-management.spec.ts",
+        "title": "creation and member management remain usable in both themes across mobile tablet desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:a definitive invitation-required rejection preserves the draft and reopens contacts without replaying the denied operation:",
+        "file": "messenger-management.spec.ts",
+        "title": "a definitive invitation-required rejection preserves the draft and reopens contacts without replaying the denied operation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "messenger-management.spec.ts:loading more remains clickable during a background inbox refresh and the intent survives it:",
+        "file": "messenger-management.spec.ts",
+        "title": "loading more remains clickable during a background inbox refresh and the intent survives it",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "mk-boundaries.spec.ts:uncontracted linked class space cannot render a sample conversation in connected mode:",
+        "file": "mk-boundaries.spec.ts",
+        "title": "uncontracted linked class space cannot render a sample conversation in connected mode",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "mk-boundaries.spec.ts:catalog preserves the query and scroll position after Back:",
+        "file": "mk-boundaries.spec.ts",
+        "title": "catalog preserves the query and scroll position after Back",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "mk-boundaries.spec.ts:native lesson and answer routes keep authorization and school context:",
+        "file": "mk-boundaries.spec.ts",
+        "title": "native lesson and answer routes keep authorization and school context",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:Student keeps the selected role across tabs, reload and another browser tab:",
+        "file": "navigation-experience.spec.ts",
+        "title": "Student keeps the selected role across tabs, reload and another browser tab",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:Teacher keeps the selected role across tabs, reload and another browser tab:",
+        "file": "navigation-experience.spec.ts",
+        "title": "Teacher keeps the selected role across tabs, reload and another browser tab",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:Parent keeps the selected role across tabs, reload and another browser tab:",
+        "file": "navigation-experience.spec.ts",
+        "title": "Parent keeps the selected role across tabs, reload and another browser tab",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:Manager keeps the selected role across tabs, reload and another browser tab:",
+        "file": "navigation-experience.spec.ts",
+        "title": "Manager keeps the selected role across tabs, reload and another browser tab",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:assistant uses the full viewport and readable sample outputs without the extra header:",
+        "file": "navigation-experience.spec.ts",
+        "title": "assistant uses the full viewport and readable sample outputs without the extra header",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:PWA install offer has a persistent close control and manual installation help:",
+        "file": "navigation-experience.spec.ts",
+        "title": "PWA install offer has a persistent close control and manual installation help",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "navigation-experience.spec.ts:PWA installation calls the browser prompt only after a click and does not reload the app:",
+        "file": "navigation-experience.spec.ts",
+        "title": "PWA installation calls the browser prompt only after a click and does not reload the app",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "performance.spec.ts:records cold entry and school payloads plus a controlled concurrent read benchmark:",
+        "file": "performance.spec.ts",
+        "title": "records cold entry and school payloads plus a controlled concurrent read benchmark",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "preferences-weekly.spec.ts:preference links and dialog buttons share one aligned responsive layout and restore focus:",
+        "file": "preferences-weekly.spec.ts",
+        "title": "preference links and dialog buttons share one aligned responsive layout and restore focus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "preferences-weekly.spec.ts:weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read:",
+        "file": "preferences-weekly.spec.ts",
+        "title": "weekly agenda groups real session DTOs, keeps navigation clear and handles a failed next-week read",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "profile-school-files.spec.ts:profile exposes identity and age below spaces and moves preference menus to their own page:",
+        "file": "profile-school-files.spec.ts",
+        "title": "profile exposes identity and age below spaces and moves preference menus to their own page",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "profile-school-files.spec.ts:school header searches authorized classes, assignments and published exams without contact navigation:",
+        "file": "profile-school-files.spec.ts",
+        "title": "school header searches authorized classes, assignments and published exams without contact navigation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "profile-school-files.spec.ts:Student attaches a PDF and photo, retries an attachment failure without reuploading and submits a file-only answer:",
+        "file": "profile-school-files.spec.ts",
+        "title": "Student attaches a PDF and photo, retries an attachment failure without reuploading and submits a file-only answer",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "profile-school-files.spec.ts:pending file never enables final review and a Parent cannot use the Student file proxy:",
+        "file": "profile-school-files.spec.ts",
+        "title": "pending file never enables final review and a Parent cannot use the Student file proxy",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "profile.spec.ts:profile form retains user input after a failed save and persists theme through settings:",
+        "file": "profile.spec.ts",
+        "title": "profile form retains user input after a failed save and persists theme through settings",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion-visual.spec.ts:expanded workflow and account pages preserve RTL, visible controls and responsive bounds:",
+        "file": "project-expansion-visual.spec.ts",
+        "title": "expanded workflow and account pages preserve RTL, visible controls and responsive bounds",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:Manager creates a class only after review; catalog search, failed submit and reload keep the draft:",
+        "file": "project-expansion.spec.ts",
+        "title": "Manager creates a class only after review; catalog search, failed submit and reload keep the draft",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:Teacher creates and edits a session on independent pages and cancellation stays pending after a failed service:",
+        "file": "project-expansion.spec.ts",
+        "title": "Teacher creates and edits a session on independent pages and cancellation stays pending after a failed service",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:Teacher and Student cannot enter Manager creation pages and deep-link review cannot bypass validation:",
+        "file": "project-expansion.spec.ts",
+        "title": "Teacher and Student cannot enter Manager creation pages and deep-link review cannot bypass validation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:Manager person create/edit uses stable operations, server versions and authoritative details:",
+        "file": "project-expansion.spec.ts",
+        "title": "Manager person create/edit uses stable operations, server versions and authoritative details",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:exam author uses independent creation/question/review and a confirmation before publication:",
+        "file": "project-expansion.spec.ts",
+        "title": "exam author uses independent creation/question/review and a confirmation before publication",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:notification preferences preserve failed edits, mandatory flags and scope while center reads server notifications:",
+        "file": "project-expansion.spec.ts",
+        "title": "notification preferences preserve failed edits, mandatory flags and scope while center reads server notifications",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "project-expansion.spec.ts:device revocation requires confirmation, preserves failure and is bound to account, origin and context:",
+        "file": "project-expansion.spec.ts",
+        "title": "device revocation requires confirmation, preserves failure and is bound to account, origin and context",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "reference-fidelity.spec.ts:current responsive geometry and historical route reference at 390, 834 and 1440:",
+        "file": "reference-fidelity.spec.ts",
+        "title": "current responsive geometry and historical route reference at 390, 834 and 1440",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "reference-fidelity.spec.ts:workspace selection is explicit and a Student cannot author a class assignment:",
+        "file": "reference-fidelity.spec.ts",
+        "title": "workspace selection is explicit and a Student cannot author a class assignment",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "reference-fidelity.spec.ts:Parent sees only the selected child dashboard and Manager uses the reference layout:",
+        "file": "reference-fidelity.spec.ts",
+        "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "reference-fidelity.spec.ts:exam question navigation retains answers and exposes final review separately:",
+        "file": "reference-fidelity.spec.ts",
+        "title": "exam question navigation retains answers and exposes final review separately",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "reference-fidelity.spec.ts:public introduction and phone sign-in follow the PDF without owner navigation:",
+        "file": "reference-fidelity.spec.ts",
+        "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "reference-fidelity.spec.ts:desktop inbox restores only a previously opened, currently filtered conversation:",
+        "file": "reference-fidelity.spec.ts",
+        "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:source upload waits for Ready, then retries one frozen create operation after reload:",
+        "file": "release-154c437.spec.ts",
+        "title": "source upload waits for Ready, then retries one frozen create operation after reload",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:source edit preserves text across opaque version conflict and explicitly adopts the refreshed version:",
+        "file": "release-154c437.spec.ts",
+        "title": "source edit preserves text across opaque version conflict and explicitly adopts the refreshed version",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:Library stays metadata-only and forged binary transfer is denied:",
+        "file": "release-154c437.spec.ts",
+        "title": "Library stays metadata-only and forged binary transfer is denied",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:assistant preflight preserves real source selection when retrieval is unavailable:",
+        "file": "release-154c437.spec.ts",
+        "title": "assistant preflight preserves real source selection when retrieval is unavailable",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:independent edit permission does not grant settings, members or invitations:",
+        "file": "release-154c437.spec.ts",
+        "title": "independent edit permission does not grant settings, members or invitations",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:conversation photo uses Ready file and opaque version; retry preserves one upload:",
+        "file": "release-154c437.spec.ts",
+        "title": "conversation photo uses Ready file and opaque version; retry preserves one upload",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:initial invitations are pending rather than active membership and use server expiry:",
+        "file": "release-154c437.spec.ts",
+        "title": "initial invitations are pending rather than active membership and use server expiry",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:Student sees authorized class sources and only permitted upload controls:",
+        "file": "release-154c437.spec.ts",
+        "title": "Student sees authorized class sources and only permitted upload controls",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:Teacher sees authorized class sources and only permitted upload controls:",
+        "file": "release-154c437.spec.ts",
+        "title": "Teacher sees authorized class sources and only permitted upload controls",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:Manager sees authorized class sources and only permitted upload controls:",
+        "file": "release-154c437.spec.ts",
+        "title": "Manager sees authorized class sources and only permitted upload controls",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:definitive source validation rejection unlocks the retained draft without uploading again:",
+        "file": "release-154c437.spec.ts",
+        "title": "definitive source validation rejection unlocks the retained draft without uploading again",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "release-154c437.spec.ts:source version conflict keeps its uploaded file and requires explicit review before a new version:",
+        "file": "release-154c437.spec.ts",
+        "title": "source version conflict keeps its uploaded file and requires explicit review before a new version",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Manager opens the organization official group through its own binding:",
+        "file": "release-42c.spec.ts",
+        "title": "Manager opens the organization official group through its own binding",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Student retains the educational context while using personal capabilities:",
+        "file": "release-42c.spec.ts",
+        "title": "Student retains the educational context while using personal capabilities",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Teacher retains the educational context while using personal capabilities:",
+        "file": "release-42c.spec.ts",
+        "title": "Teacher retains the educational context while using personal capabilities",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Parent retains the educational context while using personal capabilities:",
+        "file": "release-42c.spec.ts",
+        "title": "Parent retains the educational context while using personal capabilities",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Manager retains the educational context while using personal capabilities:",
+        "file": "release-42c.spec.ts",
+        "title": "Manager retains the educational context while using personal capabilities",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:a roleless user has a personal card; unresolved visibility is not guessed:",
+        "file": "release-42c.spec.ts",
+        "title": "a roleless user has a personal card; unresolved visibility is not guessed",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Teacher sends a personal message and uploads a personal file without switching educational context:",
+        "file": "release-42c.spec.ts",
+        "title": "Teacher sends a personal message and uploads a personal file without switching educational context",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:official pair keeps a healthy group available, shows a structured card and reauthorizes its source:",
+        "file": "release-42c.spec.ts",
+        "title": "official pair keeps a healthy group available, shows a structured card and reauthorizes its source",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:Ready without read permission and parent relationship never grant official access:",
+        "file": "release-42c.spec.ts",
+        "title": "Ready without read permission and parent relationship never grant official access",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:revocation removes open official content while personal messaging remains available:",
+        "file": "release-42c.spec.ts",
+        "title": "revocation removes open official content while personal messaging remains available",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-42c.spec.ts:superseded cards disable the old CTA and refresh current activity and source without republishing:",
+        "file": "release-42c.spec.ts",
+        "title": "superseded cards disable the old CTA and refresh current activity and source without republishing",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-e11.spec.ts:background session checks do not cancel a foreground child selection:",
+        "file": "release-e11.spec.ts",
+        "title": "background session checks do not cancel a foreground child selection",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-e11.spec.ts:account replay refreshes a school snapshot without navigation or a page polling timer:",
+        "file": "release-e11.spec.ts",
+        "title": "account replay refreshes a school snapshot without navigation or a page polling timer",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-e11.spec.ts:exam file-only answer waits for Ready, enforces policy, handles conflict and downloads private bytes:",
+        "file": "release-e11.spec.ts",
+        "title": "exam file-only answer waits for Ready, enforces policy, handles conflict and downloads private bytes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-e11.spec.ts:personal commerce shows unknown usage honestly and an order never activates subscription:",
+        "file": "release-e11.spec.ts",
+        "title": "personal commerce shows unknown usage honestly and an order never activates subscription",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "release-e11.spec.ts:personal class invitation needs recipient acceptance and grants no organization role:",
+        "file": "release-e11.spec.ts",
+        "title": "personal class invitation needs recipient acceptance and grants no organization role",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "responsive.spec.ts:small desktop layout remains a sidebar across manager pages and client-side tab changes:",
+        "file": "responsive.spec.ts",
+        "title": "small desktop layout remains a sidebar across manager pages and client-side tab changes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "responsive.spec.ts:V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths:",
+        "file": "responsive.spec.ts",
+        "title": "V2 navigation stays labeled and clear at mobile, tablet, intermediate and desktop widths",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "responsive.spec.ts:focused chat and independent form reserve their own footer without the tablet dock:",
+        "file": "responsive.spec.ts",
+        "title": "focused chat and independent form reserve their own footer without the tablet dock",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "responsive.spec.ts:workspace dialog restores focus and an external context change clears prior role data:",
+        "file": "responsive.spec.ts",
+        "title": "workspace dialog restores focus and an external context change clears prior role data",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "school-redesign.spec.ts:profile edit has grouped readable fields and a footer after the form at all screen sizes:",
+        "file": "school-redesign.spec.ts",
+        "title": "profile edit has grouped readable fields and a footer after the form at all screen sizes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "school-redesign.spec.ts:school has four destinations, three nearest items and a separate class page with URL-backed sections:",
+        "file": "school-redesign.spec.ts",
+        "title": "school has four destinations, three nearest items and a separate class page with URL-backed sections",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "school-redesign.spec.ts:Teacher opens class members alongside activities without gaining management actions:",
+        "file": "school-redesign.spec.ts",
+        "title": "Teacher opens class members alongside activities without gaining management actions",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "school-redesign.spec.ts:weekly schedule changes the server range and can return to the same week without date fields:",
+        "file": "school-redesign.spec.ts",
+        "title": "weekly schedule changes the server range and can return to the same week without date fields",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "school-redesign.spec.ts:invitation details, consent, failed acceptance and decline retain truthful server state:",
+        "file": "school-redesign.spec.ts",
+        "title": "invitation details, consent, failed acceptance and decline retain truthful server state",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "sign-in-layout.spec.ts:phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste:",
+        "file": "sign-in-layout.spec.ts",
+        "title": "phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "sign-in-layout.spec.ts:all invitation entry points converge on one inbox:",
+        "file": "sign-in-layout.spec.ts",
+        "title": "all invitation entry points converge on one inbox",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "sign-in-layout.spec.ts:entry actions follow viewport size without retaining a mobile layout on desktop:",
+        "file": "sign-in-layout.spec.ts",
+        "title": "entry actions follow viewport size without retaining a mobile layout on desktop",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "submission.spec.ts:S09 → S17 → S10 persists drafts, retains text on save failure and submits once:",
+        "file": "submission.spec.ts",
+        "title": "S09 → S17 → S10 persists drafts, retains text on save failure and submits once",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "submission.spec.ts:a receipt deep link cannot announce success before actual submission:",
+        "file": "submission.spec.ts",
+        "title": "a receipt deep link cannot announce success before actual submission",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "submission.spec.ts:unsaved draft survives reload and cancelled link navigation:",
+        "file": "submission.spec.ts",
+        "title": "unsaved draft survives reload and cancelled link navigation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "telegram-details.spec.ts:mute is confirmed by the service and a failed change never shows false success:",
+        "file": "telegram-details.spec.ts",
+        "title": "mute is confirmed by the service and a failed change never shows false success",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-details.spec.ts:invite link creation retries with one command, requires approval, then can be revoked:",
+        "file": "telegram-details.spec.ts",
+        "title": "invite link creation retries with one command, requires approval, then can be revoked",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-details.spec.ts:topic draft survives errors and status changes only after server confirmation:",
+        "file": "telegram-details.spec.ts",
+        "title": "topic draft survives errors and status changes only after server confirmation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-details.spec.ts:non owners never see invite management and the service rejects a direct mutation:",
+        "file": "telegram-details.spec.ts",
+        "title": "non owners never see invite management and the service rejects a direct mutation",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-details.spec.ts:reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes:",
+        "file": "telegram-details.spec.ts",
+        "title": "reference group and channel surfaces keep RTL, focus and touch targets in both themes at three sizes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:Telegram-reference messenger light 390: usable list, chat and menus:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 390: usable list, chat and menus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:Telegram-reference messenger light 834: usable list, chat and menus:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 834: usable list, chat and menus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:Telegram-reference messenger light 1440: usable list, chat and menus:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 1440: usable list, chat and menus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:Telegram-reference messenger dark 390: usable list, chat and menus:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 390: usable list, chat and menus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:Telegram-reference messenger dark 834: usable list, chat and menus:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 834: usable list, chat and menus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:Telegram-reference messenger dark 1440: usable list, chat and menus:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 1440: usable list, chat and menus",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FINAL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:chat survives live resizing and attachment failure retains both file and caption:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "chat survives live resizing and attachment failure retains both file and caption",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:message context menu replies to the selected message and returns focus to the composer:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "message context menu replies to the selected message and returns focus to the composer",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:messenger directory, creation and settings pages remain usable above navigation in both themes:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FOLLOWUP.json"
+      },
+      {
+        "key": "telegram-messenger.spec.ts:photo video and file reach the other fixture account and download with identical bytes:",
+        "file": "telegram-messenger.spec.ts",
+        "title": "photo video and file reach the other fixture account and download with identical bytes",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-reference.spec.ts:Group light: reference message rows retain identity, reply focus and draft through resizing:",
+        "file": "telegram-reference.spec.ts",
+        "title": "Group light: reference message rows retain identity, reply focus and draft through resizing",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-reference.spec.ts:Channel light: reference message rows retain identity, reply focus and draft through resizing:",
+        "file": "telegram-reference.spec.ts",
+        "title": "Channel light: reference message rows retain identity, reply focus and draft through resizing",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-reference.spec.ts:Group dark: reference message rows retain identity, reply focus and draft through resizing:",
+        "file": "telegram-reference.spec.ts",
+        "title": "Group dark: reference message rows retain identity, reply focus and draft through resizing",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "telegram-reference.spec.ts:Channel dark: reference message rows retain identity, reply focus and draft through resizing:",
+        "file": "telegram-reference.spec.ts",
+        "title": "Channel dark: reference message rows retain identity, reply focus and draft through resizing",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "workspace-child-attachments.spec.ts:one workspace click enters it once; a failed switch never claims entry:",
+        "file": "workspace-child-attachments.spec.ts",
+        "title": "one workspace click enters it once; a failed switch never claims entry",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "workspace-child-attachments.spec.ts:Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child:",
+        "file": "workspace-child-attachments.spec.ts",
+        "title": "Parent chooses a child in a selector; switching hides previous content and failure preserves the selected child",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      },
+      {
+        "key": "workspace-child-attachments.spec.ts:Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files:",
+        "file": "workspace-child-attachments.spec.ts",
+        "title": "Teacher manages ready attachments, retains them after failure, checks Pending and saves only accepted files",
+        "status": "passed",
+        "retries": 0,
+        "batch": "docs/quality/MK_REFERENCE_BROWSER_FULL.json"
+      }
+    ]
+  },
+  "flows": {
+    "passed": 25,
+    "failed": 0,
+    "evidence": "output/review/mk-reference/flows/results.json"
+  },
+  "capture": {
+    "screens": 59,
+    "failures": [],
+    "evidence": "output/review/mk-reference/final/capture.json"
+  },
+  "visual": {
+    "meanMae255": 1.2208,
+    "maxMae255": 4.3525,
+    "manuallyReviewed": "59 views across five contact sheets, overlay/diff; 44px hit areas and native focus intentional",
+    "evidence": "output/review/mk-reference/final/comparison.json"
+  },
+  "responsive": {
+    "checks": 480,
+    "failures": [],
+    "evidence": "output/review/mk-reference/responsive/results.json"
+  },
+  "gallery": {
+    "images": 236,
+    "missing": [],
+    "sections": 59,
+    "overflow": false
+  },
+  "retainedRoutes": {
+    "entries": 211,
+    "unmapped": []
+  },
+  "contract": {
+    "checkedAtUtc": "2026-11-02T19:24:24.853Z",
+    "httpStatus": 200,
+    "paths": 342,
+    "operations": 388,
+    "schemas": 651,
+    "normalizedSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+    "packSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+    "installedSha256": "abf0ac9ed6fd21c47226f7e6a5e04923ed4668c178b24998328e83f80ac40e5f",
+    "equal": true
+  },
+  "live": {
+    "primary": "docs/quality/MK_REFERENCE_LIVE_BFF.json",
+    "followup": "docs/quality/MK_REFERENCE_LIVE_BFF_TEACHER_MANAGER.json",
+    "previousManager": "docs/quality/MK_REFERENCE_LIVE_BFF_MANAGER.json",
+    "latestManager": "503 UPSTREAM_UNAVAILABLE at OTP verification; not converted to success",
+    "domainWrites": false
+  },
+  "limits": [
+    "Formation/membership/linked-space backend contracts pending",
+    "Independent education flags off",
+    "AI runtime/RAG not enabled",
+    "Domain mutations tested with local fixture, not live users",
+    "No Native device, external CI or production deployment"
+  ]
+}

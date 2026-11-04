@@ -38,6 +38,18 @@ const conversation = {
   title: 'test',
   description: null,
   managementPolicy: 'UserManaged',
+  effectiveCapabilities: {
+    canPublish: true,
+    canEditInfo: true,
+    canManageMembers: false,
+    canManageMessages: false,
+    canManageAdmins: false,
+    canChangeSettings: false,
+    canInviteMembers: false,
+    canManageInvites: false,
+    canBanMembers: false,
+    canManageTopics: false,
+  },
   visibility: 'Private',
   groupHistoryPolicy: 'FullHistory',
   memberCapabilities: 'LegacyMemberDefault',
@@ -158,6 +170,37 @@ afterEach(() => {
   vi.unstubAllEnvs();
 });
 describe('conversation-bound streaming file BFF', () => {
+  it('requires canEditInfo independently of Owner and publishing when uploading a conversation photo', async () => {
+    mocks.authenticated.mockImplementation(
+      async (_id: string, _session: unknown, path: string) => ({
+        response: Response.json(
+          path.endsWith('/summary')
+            ? summary
+            : {
+                ...conversation,
+                effectiveCapabilities: {
+                  ...conversation.effectiveCapabilities,
+                  canEditInfo: false,
+                },
+              },
+        ),
+      }),
+    );
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    const original = request(true);
+    const photo = new Request(original.url + '&purpose=photo', original);
+    expect((await POST(photo, parameters(true))).status).toBe(403);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+  it('binds photo downloads to the current conversation photo asset before fetching bytes', async () => {
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    const original = request();
+    const photo = new Request(original.url + '&purpose=photo', original);
+    expect((await GET(photo, parameters())).status).toBe(404);
+    expect(fetch).not.toHaveBeenCalled();
+  });
   it('uploads in a direct conversation without calling the group-only metadata endpoint', async () => {
     mocks.authenticated.mockImplementation(
       async (_id: string, _session: unknown, path: string) => ({

@@ -1,0 +1,22 @@
+{
+  "reviewedAtUtc": "2026-11-02T07:48:02.100Z",
+  "file": "output/pdf/MakanApp_Server_Integration_154c437_FA.pdf",
+  "pages": 7,
+  "renderedPages": 7,
+  "visuallyReviewedPages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "footerOverflow": 0,
+  "issues": [],
+  "sizeBytes": 476318,
+  "sha256": "013d3c86e076257d345a879120989d0667f2dc9eedc2325034c95a82681aa188",
+  "renderEvidence": "tmp/pdfs/release-154c437/page-*.png",
+  "font": "Vazirmatn embedded",
+  "format": "A4 tagged PDF"
+}

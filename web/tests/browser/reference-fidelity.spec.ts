@@ -27,13 +27,19 @@ test('current responsive geometry and historical route reference at 390, 834 and
       await page.setViewportSize({ width, height });
       await reference.setViewportSize({ width, height });
       await page.goto('/personal/education');
-      await expect(page.locator('[data-education-upcoming] > section')).toHaveCount(3);
+      await expect(page.locator('[data-mk-view="MK-04"]')).toHaveCount(1);
       const destinations = page
         .getByRole('navigation', { name: 'ناوبری حساب شخصی' })
         .filter({ visible: true })
         .getByRole('link');
-      await expect(destinations).toHaveCount(4);
-      for (const [index, name] of ['آموزشگاه', 'دستیار ماکان', 'پیام‌ها', 'پروفایل'].entries()) {
+      await expect(destinations).toHaveCount(5);
+      for (const [index, name] of [
+        'آموزشگاه',
+        'فوق‌برنامه',
+        'دستیار',
+        'پیام‌ها',
+        'پروفایل',
+      ].entries()) {
         await expect(destinations.nth(index)).toHaveAccessibleName(name);
       }
       expect(
@@ -41,7 +47,7 @@ test('current responsive geometry and historical route reference at 390, 834 and
           .locator('header')
           .first()
           .evaluate((el) => Math.round(el.getBoundingClientRect().height)),
-      ).toBe(device === 'mobile' ? 58 : 64);
+      ).toBe(76);
       await page.screenshot({ path: `test-results/reference-match/S01-actual-${width}.png` });
       await reference.evaluate((device) => {
         document.body.classList.add('clean');
@@ -57,12 +63,12 @@ test('current responsive geometry and historical route reference at 390, 834 and
       metrics.push({
         screen: 'S01',
         width,
-        note: 'School overview follows the newer explicit request: four destinations and three upcoming summaries; old featured-cover geometry is intentionally superseded.',
+        note: 'School overview follows the newer explicit request: five destinations and native MK-04 geometry; historical prototype artwork is superseded.',
       });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
         true,
       );
-      await page.goto('/personal/profile');
+      await page.goto('/personal/profile/details');
       await expect(page.getByRole('heading', { name: 'سارا احمدی', exact: true })).toBeVisible();
       await expect(page.getByRole('button', { name: /آموزشگاه آفتاب/ }).last()).toBeVisible();
       await page.screenshot({ path: `test-results/reference-match/U01-actual-${width}.png` });
@@ -109,7 +115,7 @@ test('current responsive geometry and historical route reference at 390, 834 and
       await expect(submit).toBeInViewport();
       await expect(
         page.getByRole('navigation', { name: 'ناوبری حساب شخصی' }).filter({ visible: true }),
-      ).toHaveCount(width >= 1024 ? 1 : 0);
+      ).toHaveCount(width >= 768 ? 1 : 0);
       await page.screenshot({ path: `test-results/reference-match/T02-actual-${width}.png` });
     }
     await page.getByRole('button', { name: 'ذخیرهٔ پیش‌نویس', exact: true }).click();
@@ -163,7 +169,7 @@ test('workspace selection is explicit and a Student cannot author a class assign
   }
   await page.getByRole('button', { name: /آموزشگاه آفتاب/ }).click();
   await expect(page).toHaveURL(/\/personal$/);
-  await expect(page.getByRole('heading', { name: 'نمای آموزشگاه', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'آموزشگاه', exact: true })).toBeVisible();
   await page.goto(`/personal/education/classes/${ids.class}/assignments/new`);
   await expect(page.getByRole('main').getByRole('alert')).toContainText('دسترسی محدود است');
   await expect(page.getByRole('button', { name: 'ذخیرهٔ پیش‌نویس تکلیف' })).toHaveCount(0);
@@ -194,10 +200,8 @@ test('Parent sees only the selected child dashboard and Manager uses the referen
   }
   await login(context, 'Manager');
   await page.goto('/personal/education');
-  await expect(page.getByRole('heading', { name: 'مدیریت آموزشگاه', exact: true })).toBeVisible();
-  await expect(
-    page.getByRole('link', { name: /پرونده‌ها و اعضا معلم، دانش‌آموز و والد/ }),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'آموزشگاه', exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'اعضا', exact: true })).toBeVisible();
   for (const [width, height] of [
     [390, 844],
     [834, 1194],
@@ -248,13 +252,11 @@ test('public introduction and phone sign-in follow the PDF without owner navigat
   ]) {
     await page.setViewportSize({ width, height });
     await page.goto('/welcome');
-    await expect(
-      page.getByRole('heading', { name: 'یادگیری، کنار هم.', exact: true }),
-    ).toBeVisible();
+    await expect(page.getByRole('heading', { name: /یادگیری،.*کنار آدم‌های شما/ })).toBeVisible();
     await page.screenshot({ path: `test-results/reference-match/W01-actual-${width}.png` });
     await page.goto('/enter');
     await expect(page.getByLabel('شماره همراه', { exact: true })).toBeVisible();
-    await page.getByRole('heading', { name: 'به ماکان خوش آمدید' }).click();
+    await page.getByRole('heading', { name: 'شماره همراه شما', exact: true }).click();
     await page.screenshot({ path: `test-results/reference-match/A01-actual-${width}.png` });
   }
 });

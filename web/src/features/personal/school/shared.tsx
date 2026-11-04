@@ -1,4 +1,6 @@
 'use client';
+import { useAcademicScope } from './academic-scope';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ErrorState } from '@/components/ui/states';
@@ -6,6 +8,8 @@ import { routes } from '@/config/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PageBack } from '@/components/navigation/page-back';
+import type { components } from '@/generated/api/schema';
+import { PublicationReceipt } from './publication-receipt';
 
 import {
   cloneElement,
@@ -30,9 +34,10 @@ export function SchoolHeading({
   action?: ReactNode;
   back?: boolean;
 }) {
+  const scope = useAcademicScope();
   return (
     <div className={s.heading}>
-      {back && <PageBack href={base + '/classes'} />}
+      {back && <PageBack href={scope.personal ? scope.base : base + '/classes'} />}
       <div>
         <div>
           <h1>{title}</h1>
@@ -104,7 +109,8 @@ export function useSchoolAction() {
     cache = useQueryClient();
   const [busy, setBusy] = useState(false),
     [error, setError] = useState<unknown>(),
-    [success, setSuccess] = useState('');
+    [success, setSuccess] = useState(''),
+    [receipt, setReceipt] = useState<components['schemas']['AcademicPublicationReceipt']>();
   const pending = useRef(false),
     alive = useRef(true);
   useEffect(() => {
@@ -119,13 +125,18 @@ export function useSchoolAction() {
     setBusy(true);
     setError(undefined);
     setSuccess('');
+    setReceipt(undefined);
     try {
       const result = await call<T>(path, {
         method,
         ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
       });
       if (!alive.current) return;
-      setSuccess('تغییرات ثبت شد.');
+      setSuccess(uiText.text_6afc863be80c);
+      if (result && typeof result === 'object' && 'publicationReceipt' in result)
+        setReceipt(
+          result.publicationReceipt as components['schemas']['AcademicPublicationReceipt'],
+        );
       void cache.invalidateQueries({ queryKey: ['personal', session.user.id, session.revision] });
       return result;
     } catch (e) {
@@ -141,6 +152,7 @@ export function useSchoolAction() {
     error,
     feedback: (
       <>
+        <PublicationReceipt value={receipt} />
         {!!error && <ErrorState error={error} />}
         {success && (
           <p className={s.success} role="status">
@@ -182,19 +194,21 @@ export function Pager({
         variant="outline"
         disabled={page === 1}
         onClick={() => onChange(page - 1)}
-        aria-label="صفحهٔ قبل"
+        aria-label={uiText.text_88e65319d694}
       >
         <ChevronRight size={18} />
       </Button>
       <span>
-        صفحهٔ {new Intl.NumberFormat('fa-IR').format(page)} ·{' '}
-        {new Intl.NumberFormat('fa-IR').format(total)} مورد
+        {uiText.text_2714496eef16}
+        {new Intl.NumberFormat('fa-IR').format(page)}
+        {uiText.text_78887da22764} {new Intl.NumberFormat('fa-IR').format(total)}
+        {uiText.text_7506c95e2fd6}
       </span>
       <Button
         variant="outline"
         disabled={page * size >= total}
         onClick={() => onChange(page + 1)}
-        aria-label="صفحهٔ بعد"
+        aria-label={uiText.text_12ca1a58c6ca}
       >
         <ChevronLeft size={18} />
       </Button>
@@ -203,7 +217,7 @@ export function Pager({
 }
 export function toUtc(value: string) {
   const date = new Date(value);
-  if (!value || !Number.isFinite(date.getTime())) throw new Error('زمان معتبر وارد کنید.');
+  if (!value || !Number.isFinite(date.getTime())) throw new Error(uiText.text_0319845ca603);
   return date.toISOString();
 }
 export { safeMeetingUrl } from './policy';

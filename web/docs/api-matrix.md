@@ -104,7 +104,7 @@
 | `POST /api/v1/organization/people/{id}/invitations/{invitationId}/revoke` | OnboardingStateCommand | PersonLinkInvitationDto |
 | `POST /api/v1/reports/exports` | CreateReportExportCommand | ReportExportJobResult |
 | `GET /api/v1/reports/exports/{jobId}` | — | ReportExportJobResult |
-| `GET /api/v1/reports/exports/{jobId}/download` | — | FileStreamResult |
+| `GET /api/v1/reports/exports/{jobId}/download` | — | بدون JSON |
 | `GET /api/v1/reports/student/attendance` | — | AttendanceReportPageOfStudentAttendanceReportItem |
 | `GET /api/v1/reports/student/assignments` | — | ReportPageOfStudentAssignmentReportItem |
 | `GET /api/v1/reports/student/exams` | — | ReportPageOfStudentExamReportItem |
@@ -197,12 +197,12 @@
 | `POST /api/v1/personal-classes` | CreatePersonalClassCommand | PersonalClassDto |
 | `GET /api/v1/personal-classes` | — | array |
 | `GET /api/v1/personal-classes/{classId}` | — | PersonalClassDto |
-| `POST /api/v1/personal-classes/{classId}/archive` | — | PersonalClassDto |
+| `POST /api/v1/personal-classes/{classId}/archive` | PersonalClassReasonCommand | PersonalClassDto |
 | `POST /api/v1/personal-classes/{classId}/invitations` | InvitePersonalClassStudentCommand | PersonalClassInvitationDto |
 | `GET /api/v1/personal-classes/invitations` | — | array |
 | `POST /api/v1/personal-classes/invitations/{invitationId}/accept` | — | PersonalClassDto |
 | `GET /api/v1/personal-classes/{classId}/participants` | — | array |
-| `DELETE /api/v1/personal-classes/{classId}/participants/{participantId}` | — | بدون JSON |
+| `DELETE /api/v1/personal-classes/{classId}/participants/{participantId}` | PersonalClassReasonCommand | بدون JSON |
 | `GET /api/v1/realtime/changes` | — | AccountChangePageResult |
 | `GET /api/v1/workspaces/snapshot` | — | WorkspaceSnapshotResult |
 | `GET /api/v1/organization/official-spaces` | — | OfficialSpacesPairResult |
@@ -225,3 +225,59 @@
 | `GET /api/v1/conversations/{conversationId}/join-requests` | — | ConversationJoinRequestPageResult |
 | `POST /api/v1/messaging/join-requests/{requestId}/approve` | CompleteJoinRequestCommand | ConversationJoinRequestResult2 |
 | `POST /api/v1/messaging/join-requests/{requestId}/reject` | CompleteJoinRequestCommand | ConversationJoinRequestResult2 |
+| `GET /api/v1/conversations/account` | — | AccountInboxPageResult |
+| `GET /api/v1/conversations/permissions` | — | array |
+| `PUT /api/v1/conversations/{conversationId}/photo` | SetConversationPhotoCommand | ConversationPhotoMutationResult |
+| `DELETE /api/v1/conversations/{conversationId}/photo` | — | ConversationPhotoMutationResult |
+| `GET /api/v1/realtime/account-inbox/changes` | — | AccountChangePageResult |
+| `POST /api/v1/ai/sources/preflight` | AiSourcePreflightCommand | AiSourcePreflightResult |
+| `GET /api/v1/sources` | — | SourcePage |
+| `POST /api/v1/sources` | CreateEducationalSourceCommand | EducationalSourceResult |
+| `GET /api/v1/sources/{id}` | — | EducationalSourceResult |
+| `GET /api/v1/sources/{id}/processing` | — | EducationalSourceResult |
+| `PATCH /api/v1/sources/{id}/draft` | UpdateSourceDraftCommand | EducationalSourceResult |
+| `POST /api/v1/sources/{id}/versions` | CreateSourceVersionCommand | EducationalSourceResult |
+| `POST /api/v1/sources/{id}/publish` | SourceMutationCommand | EducationalSourceResult |
+| `POST /api/v1/sources/{id}/archive` | SourceMutationCommand | EducationalSourceResult |
+| `PUT /api/v1/sources/{id}/visibility` | SourceVisibilityCommand | EducationalSourceResult |
+| `GET /api/v1/conversations/saved` | — | SavedConversationResult |
+| `POST /api/v1/conversations/{conversationId}/messages/{messageId}/forward` | ForwardMessageCommand | MessageReceiptResult |
+| `POST /api/v1/conversations/{conversationId}/messages/{messageId}/reports` | ReportMessageCommand | AbuseReportReceiptResult |
+| `GET /api/v1/academic/evaluations/queue/page` | — | AcademicPageOfEvaluationQueueItemResult |
+| `GET /api/v1/academic/exams/{examId}/grading/page` | — | AcademicPageOfExamGradingQueueItemDto |
+| `GET /api/v1/academic/exams/{examId}/attempts/me/page` | — | AcademicPageOfStudentExamAttemptSummaryDto |
+| `PUT /api/v1/personal-classes/{classId}/academic-permissions/{membershipId}` | SetPersonalClassAcademicPermissionCommand | PersonalClassAcademicPermissionDto |
+| `GET /api/v1/personal-classes/{classId}/academic-permissions` | — | PersonalClassPageOfPersonalClassAcademicPermissionDto |
+| `POST /api/v1/academic/personal-classes/{classId}/assignments` | CreateAssignmentDraftCommand | AssignmentResult |
+| `GET /api/v1/academic/personal-classes/{classId}/assignments` | — | AcademicPageOfAssignmentResult |
+| `POST /api/v1/academic/personal-classes/{classId}/exams` | CreateExamDraftCommand | ExamEditorDto |
+| `GET /api/v1/academic/personal-classes/{classId}/exams` | — | AcademicPageOfStudentExamSummary |
+| `GET /api/v1/personal-classes/{classId}/history` | — | PersonalClassPageOfPersonalClassHistoryItem |
+| `GET /api/v1/personal-classes/page` | — | PersonalClassPageOfPersonalClassDto |
+| `GET /api/v1/personal-classes/invitations/page` | — | PersonalClassPageOfPersonalClassInvitationDto |
+| `GET /api/v1/personal-classes/{id}/memberships` | — | PersonalClassPageOfPersonalClassMembershipDto |
+| `PUT /api/v1/personal-classes/{id}/settings` | ConfigurePersonalClassCommand | PersonalClassDto |
+| `POST /api/v1/personal-classes/{id}/activate` | PersonalClassReasonCommand | PersonalClassDto |
+| `POST /api/v1/personal-classes/{id}/suspend` | PersonalClassReasonCommand | PersonalClassDto |
+| `PUT /api/v1/personal-classes/{id}/memberships/{memberId}/roles` | ChangePersonalClassRolesCommand | PersonalClassMembershipDto |
+| `DELETE /api/v1/personal-classes/{id}/memberships/{memberId}` | PersonalClassReasonCommand | بدون JSON |
+| `POST /api/v1/personal-classes/invitations/{id}/decline` | PersonalClassReasonCommand | PersonalClassInvitationDto |
+| `POST /api/v1/personal-classes/invitations/{id}/revoke` | PersonalClassReasonCommand | PersonalClassInvitationDto |
+| `POST /api/v1/personal-classes/{id}/join-requests` | CreatePersonalClassJoinCommand | PersonalClassJoinDto |
+| `POST /api/v1/personal-classes/join-requests/{id}/decision` | DecidePersonalClassJoinCommand | PersonalClassJoinDto |
+| `GET /api/v1/personal-classes/join-requests` | — | PersonalClassPageOfPersonalClassJoinDto |
+| `POST /api/v1/personal-classes/{id}/manager-transfers` | CreatePersonalClassTransferCommand | PersonalClassTransferDto |
+| `POST /api/v1/personal-classes/manager-transfers/{id}/decision` | DecidePersonalClassTransferCommand | PersonalClassTransferDto |
+| `GET /api/v1/personal-classes/manager-transfers` | — | PersonalClassPageOfPersonalClassTransferDto |
+| `GET /api/v1/personal-classes/{id}/spaces` | — | OfficialSpacesPairResult |
+| `POST /api/v1/personal-classes/{id}/spaces/repair` | RepairPersonalClassSpacesCommand | بدون JSON |
+| `POST /api/v1/personal-class-requests` | CreatePersonalClassRequestCommand | PersonalClassRequestDto |
+| `GET /api/v1/personal-class-requests` | — | PersonalClassPageOfPersonalClassRequestDto |
+| `GET /api/v1/personal-class-requests/{id}` | — | PersonalClassRequestDto |
+| `PUT /api/v1/personal-class-requests/{id}` | EditPersonalClassRequestCommand | PersonalClassRequestDto |
+| `POST /api/v1/personal-class-requests/{id}/submit` | PersonalClassVersionCommand | PersonalClassRequestDto |
+| `POST /api/v1/personal-class-requests/{id}/cancel` | PersonalClassVersionCommand | PersonalClassRequestDto |
+| `GET /api/v1/personal-class-requests/{id}/history` | — | PersonalClassPageOfPersonalClassDecisionDto |
+| `GET /api/v1/academic/assignments/{assignmentId}/attempts/me/page` | — | AcademicPageOfSubmissionAttemptResult |
+| `GET /api/v1/academic/assignments/{assignmentId}/submitted-attempts/page` | — | AcademicPageOfSubmissionAttemptResult |
+| `GET /api/v1/people/{userId}` | — | MessagingPublicProfileResult |

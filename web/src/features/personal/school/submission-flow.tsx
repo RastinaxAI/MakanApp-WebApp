@@ -1,9 +1,13 @@
 'use client';
+import '@/features/reference/bundles/features-personal-school-submission-flow';
+
+import * as uiText from '@/content/fa';
+import { useAcademicScope } from './academic-scope';
 import { PageBack } from '@/components/navigation/page-back';
+import { ReferenceFrame } from '@/features/reference/frame';
 import { useTextDraft } from '@/components/hooks/use-text-draft';
 import { Button } from '@/components/ui/button';
 import { ErrorState, LoadingSkeleton } from '@/components/ui/states';
-import { schoolRoutes } from '@/config/navigation';
 import type { components } from '@/generated/api/schema';
 import { ApiError } from '@/lib/api/errors';
 import { contextSignature } from '@/lib/client-surface';
@@ -19,7 +23,6 @@ import { SubmissionFiles } from './submission-files';
 import { Card, Field, SchoolHeading, useSchoolAction } from './shared';
 import {
   canReviewSubmission,
-  matchesSubmission,
   receiptFromAttempt,
   validSubmissionReceipt,
   type SubmissionStage,
@@ -27,11 +30,30 @@ import {
 type S = components['schemas'];
 
 export function SubmissionFlow({ id, stage }: { id: string; stage: SubmissionStage }) {
+  const { routes: schoolRoutes } = useAcademicScope();
   const { session } = usePersonal();
-  if (session.context.activeRole !== 'Student') return <ErrorState error={new ApiError(403)} />;
-  return <OwnSubmission key={session.revision + ':' + id + ':' + stage} id={id} stage={stage} />;
+  const scope = useAcademicScope();
+  if (!scope.learner) return <ErrorState error={new ApiError(403)} />;
+  if (scope.personal)
+    return <OwnSubmission key={session.revision + ':' + id + ':' + stage} id={id} stage={stage} />;
+  return (
+    <ReferenceFrame
+      id="MK-06"
+      title={
+        stage === 'review'
+          ? uiText.text_9e0ab9989a34
+          : stage === 'receipt'
+            ? uiText.text_9b6a410d2fd4
+            : uiText.text_e9579f397088
+      }
+      back={schoolRoutes.assignment(id)}
+    >
+      <OwnSubmission key={session.revision + ':' + id + ':' + stage} id={id} stage={stage} />
+    </ReferenceFrame>
+  );
 }
 function OwnSubmission({ id, stage }: { id: string; stage: SubmissionStage }) {
+  const { routes: schoolRoutes } = useAcademicScope();
   const router = useRouter(),
     requested = useSearchParams().get('attempt');
   const q = usePersonalApi<S['SubmissionAttemptResult'][]>(
@@ -51,9 +73,9 @@ function OwnSubmission({ id, stage }: { id: string; stage: SubmissionStage }) {
   if (!candidate)
     return (
       <>
-        <SchoolHeading title="پاسخ من" />
+        <SchoolHeading title={uiText.text_185168f80806} />
         <Card>
-          <p>برای این تکلیف، پاسخ جدیدی شروع کنید.</p>
+          <p>{uiText.text_b534c9378ec0}</p>
           <Button
             disabled={a.busy || stage !== 'answer'}
             onClick={async () => {
@@ -63,7 +85,7 @@ function OwnSubmission({ id, stage }: { id: string; stage: SubmissionStage }) {
               if (result) router.replace(schoolRoutes.answer(id) + '?attempt=' + result.id);
             }}
           >
-            شروع پاسخ جدید
+            {uiText.text_42c85a968ff2}
           </Button>
           <PageBack href={schoolRoutes.assignment(id)} />
           {a.feedback}
@@ -81,13 +103,13 @@ function LoadedSubmission({
   attemptId: string;
   stage: SubmissionStage;
 }) {
-  const { session } = usePersonal();
+  const scope = useAcademicScope();
   const q = usePersonalApi<S['SubmissionAttemptResult']>(
     `/api/v1/academic/submission-attempts/${attemptId}`,
   );
   if (q.isPending) return <LoadingSkeleton />;
   if (q.isError) return <ErrorState error={q.error} onRetry={() => void q.refetch()} />;
-  if (!matchesSubmission(q.data, id, session.context.organizationId))
+  if (q.data.assignmentId !== id || !scope.matches(q.data) || !q.data.contentVisible)
     return <ErrorState error={new ApiError(403)} />;
   return (
     <SubmissionEditor
@@ -106,6 +128,7 @@ function SubmissionEditor({
   stage: SubmissionStage;
   reload: () => Promise<S['SubmissionAttemptResult'] | undefined>;
 }) {
+  const { routes: schoolRoutes } = useAcademicScope();
   const { session } = usePersonal(),
     router = useRouter(),
     a = useSchoolAction();
@@ -159,17 +182,23 @@ function SubmissionEditor({
   if (stage === 'receipt')
     return (
       <>
-        <SchoolHeading title="رسید تحویل تکلیف" />
+        <SchoolHeading title={uiText.text_a92abd249599} />
         <Card>
           {confirmed ? (
             <div className={s.receipt}>
-              <h2>تکلیف تحویل داده شد</h2>
-              <p>شمارهٔ تلاش: {confirmed.attemptNumber.toLocaleString('fa-IR')}</p>
-              <p>زمان ثبت: {date(confirmed.submittedAtUtc, true)}</p>
-              <p>در انتظار ارزیابی استاد</p>
+              <h2>{uiText.text_db45f95e898b}</h2>
+              <p>
+                {uiText.text_911bee269a92}
+                {confirmed.attemptNumber.toLocaleString('fa-IR')}
+              </p>
+              <p>
+                {uiText.text_9160be1d11fd}
+                {date(confirmed.submittedAtUtc, true)}
+              </p>
+              <p>{uiText.text_929f03ab605c}</p>
             </div>
           ) : (
-            <p role="alert">تحویل این پاسخ هنوز توسط سرویس تأیید نشده است.</p>
+            <p role="alert">{uiText.text_7b938dd0baa1}</p>
           )}
           {confirmed && <SubmissionFiles value={value} />}
           <PageBack href={schoolRoutes.assignment(value.assignmentId)} />
@@ -179,11 +208,13 @@ function SubmissionEditor({
   if (confirmed)
     return (
       <>
-        <SchoolHeading title="پاسخ ثبت‌شده" />
+        <SchoolHeading title={uiText.text_bd904ba4e9f5} />
         <Card>
-          <p>این پاسخ قبلاً تحویل شده است.</p>
+          <p>{uiText.text_b178997648da}</p>
           <Button asChild>
-            <Link href={schoolRoutes.receipt(value.assignmentId) + query}>مشاهدهٔ رسید</Link>
+            <Link href={schoolRoutes.receipt(value.assignmentId) + query}>
+              {uiText.text_9560630f8636}
+            </Link>
           </Button>
         </Card>
       </>
@@ -192,54 +223,57 @@ function SubmissionEditor({
     <div className={r.workspace} data-school-form data-submission-workspace>
       <header className={r.heading}>
         <div>
-          <span className={r.eyebrow}>آموزشگاه / تکالیف</span>
-          <h1>{stage === 'review' ? 'بازبینی پاسخ تکلیف' : 'پاسخ‌نامهٔ تکلیف'}</h1>
-          <p className={r.muted}>پاسخ خود را آماده کنید، بازبینی کنید و سپس تحویل دهید.</p>
+          <span className={r.eyebrow}>{uiText.text_d7be740f493d}</span>
+          <h1>{stage === 'review' ? uiText.text_9e0ab9989a34 : uiText.text_8936687a1593}</h1>
+          <p className={r.muted}>{uiText.text_fdda4c37fb68}</p>
         </div>
         <PageBack href={schoolRoutes.assignment(value.assignmentId)} />
       </header>
-      <ol className={r.steps} aria-label="مراحل تحویل تکلیف">
-        {['نوشتن پاسخ', 'بازبینی', 'رسید تحویل'].map((title, i) => (
-          <li
-            key={title}
-            aria-current={(stage === 'answer' ? i === 0 : i === 1) ? 'step' : undefined}
-          >
-            <span>{(i + 1).toLocaleString('fa-IR')}</span>
-            {title}
-          </li>
-        ))}
+      <ol className={r.steps} aria-label={uiText.text_f863f1753616}>
+        {[uiText.text_08ca6c6d28a0, uiText.text_8315dc440d8b, uiText.text_db72fa383443].map(
+          (title, i) => (
+            <li
+              key={title}
+              aria-current={(stage === 'answer' ? i === 0 : i === 1) ? 'step' : undefined}
+            >
+              <span>{(i + 1).toLocaleString('fa-IR')}</span>
+              {title}
+            </li>
+          ),
+        )}
       </ol>
       <div className={r.layout}>
         <div className={r.mainColumn}>
           <section className={r.panel}>
             <div className={r.panelTitle}>
               <FilePenLine size={22} />
-              <h2>{stage === 'answer' ? 'متن پاسخ شما' : 'مرور پاسخ شما'}</h2>
+              <h2>{stage === 'answer' ? uiText.text_303aed19e640 : uiText.text_de52acd1c81a}</h2>
             </div>
             {stage === 'answer' ? (
               <>
                 <div className={r.answerField}>
-                  <Field label="پاسخ تکلیف">
+                  <Field label={uiText.text_e9579f397088}>
                     <textarea
                       rows={10}
                       value={draft.text}
                       disabled={fileBusy || a.busy || !draft.ready || value.status !== 'Draft'}
                       onChange={(e) => draft.setText(e.target.value)}
-                      placeholder="پاسخ خود را اینجا بنویسید…"
+                      placeholder={uiText.text_59ca5495819c}
                     />
                   </Field>
                 </div>
                 {draft.baseVersion !== value.rowVersion && (
-                  <p role="alert">
-                    نسخهٔ سرور تغییر کرده است؛ پیش از ادامه، تغییرات خود را مقایسه کنید.
-                  </p>
+                  <p role="alert">{uiText.text_268a03f27704}</p>
                 )}
                 <div className={r.editorBar} data-dirty={draft.dirty}>
                   <span>
                     {draft.dirty ? <Save size={15} /> : <CheckCircle2 size={15} />}
-                    {draft.dirty ? 'تغییرات ذخیره‌نشده' : 'همگام با پاسخ ذخیره‌شده'}
+                    {draft.dirty ? uiText.text_384ce99126d0 : uiText.text_06746a73b060}
                   </span>
-                  <span>{draft.text.length.toLocaleString('fa-IR')} نویسه</span>
+                  <span>
+                    {draft.text.length.toLocaleString('fa-IR')}
+                    {uiText.text_c3e146dab247}
+                  </span>
                 </div>
                 <div className={r.actions}>
                   <Button
@@ -257,7 +291,7 @@ function SubmissionEditor({
                       }
                     }}
                   >
-                    ذخیرهٔ پاسخ
+                    {uiText.text_3377c18a0960}
                   </Button>
                   <Button
                     disabled={
@@ -268,27 +302,27 @@ function SubmissionEditor({
                     }
                     onClick={() => router.push(schoolRoutes.review(value.assignmentId) + query)}
                   >
-                    بازبینی پاسخ
+                    {uiText.text_2f5412466e47}
                   </Button>
                 </div>
                 <p className={s.hint}>
                   {draft.dirty
-                    ? 'تغییرات شما هنوز در سرویس ذخیره نشده‌اند.'
+                    ? uiText.text_9d50c961e634
                     : canReviewSubmission(value, draft.text, false)
-                      ? 'پاسخ ذخیره‌شده آمادهٔ بازبینی است.'
-                      : 'پاسخ متنی بنویسید یا عکس و PDF پیوست کنید.'}
+                      ? uiText.text_c40f664ec596
+                      : uiText.text_eb751dedb61d}
                 </p>
               </>
             ) : (
               <>
                 <p className={r.reviewText} dir="auto">
-                  {value.answerText || 'پاسخ متنی ندارد.'}
+                  {value.answerText || uiText.text_c524c2bf4099}
                 </p>
-                <p className={s.hint}>پس از تحویل نهایی، این پاسخ دیگر پیش‌نویس نیست.</p>
+                <p className={s.hint}>{uiText.text_6f26079ce668}</p>
                 <div className={r.actions}>
                   <Button asChild variant="outline">
                     <Link href={schoolRoutes.answer(value.assignmentId) + query}>
-                      بازگشت و ویرایش پاسخ
+                      {uiText.text_765ece4bf409}
                     </Link>
                   </Button>
                   <Button
@@ -300,7 +334,7 @@ function SubmissionEditor({
                     }
                     onClick={() => void submit()}
                   >
-                    {submitting ? 'در حال بررسی و تحویل…' : 'تحویل نهایی تکلیف'}
+                    {submitting ? uiText.text_1d97dfd8b2fc : uiText.text_f6a1f07de0a0}
                   </Button>
                 </div>
               </>
@@ -319,28 +353,28 @@ function SubmissionEditor({
             }}
           />
         </div>
-        <aside className={r.sidebar} aria-label="اطلاعات تکلیف">
+        <aside className={r.sidebar} aria-label={uiText.text_a386b4b3f356}>
           <AssignmentBrief value={value} />
           <section>
-            <h2>وضعیت پاسخ</h2>
+            <h2>{uiText.text_7b00ccc5488b}</h2>
             <dl>
               <div>
-                <dt>نوبت پاسخ</dt>
+                <dt>{uiText.text_b65a1b4e036c}</dt>
                 <dd>{value.attemptNumber.toLocaleString('fa-IR')}</dd>
               </div>
               <div>
-                <dt>پیوست‌ها</dt>
-                <dd>{value.attachments.length.toLocaleString('fa-IR')} فایل</dd>
+                <dt>{uiText.text_71e6f07218a9}</dt>
+                <dd>
+                  {value.attachments.length.toLocaleString('fa-IR')}
+                  {uiText.text_8db870221ba1}
+                </dd>
               </div>
               <div>
-                <dt>وضعیت</dt>
-                <dd>پیش‌نویس</dd>
+                <dt>{uiText.text_68d7eb08efbc}</dt>
+                <dd>{uiText.text_410c47c7f8b7}</dd>
               </div>
             </dl>
-            <p className={r.note}>
-              ذخیرهٔ پاسخ، تحویل نهایی نیست. بعد از بازبینی، «تحویل نهایی تکلیف» را بزنید تا رسید
-              بگیرید.
-            </p>
+            <p className={r.note}>{uiText.text_a432b50514c8}</p>
           </section>
         </aside>
       </div>
@@ -354,7 +388,7 @@ function AssignmentBrief({ value }: { value: S['SubmissionAttemptResult'] }) {
   );
   return (
     <section>
-      <h2>صورت تکلیف</h2>
+      <h2>{uiText.text_7647e0a413cb}</h2>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -364,25 +398,23 @@ function AssignmentBrief({ value }: { value: S['SubmissionAttemptResult'] }) {
           <strong>{q.data.title}</strong>
           <dl>
             <div>
-              <dt>کلاس</dt>
+              <dt>{uiText.text_56c43e096bb9}</dt>
               <dd>{q.data.classTitle}</dd>
             </div>
             <div>
-              <dt>مهلت تحویل</dt>
+              <dt>{uiText.text_2b26e703adf2}</dt>
               <dd>{date(q.data.dueAtUtc, true)}</dd>
             </div>
           </dl>
           {q.data.versionId === value.assignmentVersionId ? (
             <details>
-              <summary>شرح تکلیف</summary>
+              <summary>{uiText.text_1d3c268468ff}</summary>
               <p className={r.instructions} dir="auto">
                 {q.data.description}
               </p>
             </details>
           ) : (
-            <p className={r.muted}>
-              نسخهٔ تکلیف تغییر کرده است؛ جزئیات نسخهٔ مربوط به پاسخ را از صفحهٔ تکلیف بررسی کنید.
-            </p>
+            <p className={r.muted}>{uiText.text_f5687ebf71ed}</p>
           )}
         </>
       )}

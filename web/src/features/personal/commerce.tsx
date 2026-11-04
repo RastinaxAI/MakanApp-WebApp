@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -66,12 +67,8 @@ function Commerce({ organization }: { organization: boolean }) {
       <PageBack href={organization ? '/personal/education' : '/personal/profile'} />
       <header className={s.heading}>
         <div>
-          <h1>{organization ? 'اشتراک آموزشگاه' : 'اشتراک و مصرف شخصی'}</h1>
-          <p>
-            {organization
-              ? 'مصرف و قرارداد آموزشگاه فعال'
-              : 'این اشتراک متعلق به حساب شماست و نقش آموزشی ایجاد نمی‌کند.'}
-          </p>
+          <h1>{organization ? uiText.text_2ae205425d42 : uiText.text_ab67aa4d93be}</h1>
+          <p>{organization ? uiText.text_6ff6f7651ca5 : uiText.text_7341b0ece9cc}</p>
         </div>
         {(organization ||
           (session.context.workspaceType === 'Organization' &&
@@ -79,71 +76,75 @@ function Commerce({ organization }: { organization: boolean }) {
           !orderUncertain && (
             <Button variant="outline" asChild>
               <Link href={'/personal/subscription' + (organization ? '' : '?scope=organization')}>
-                {organization ? 'اشتراک شخصی' : 'اشتراک آموزشگاه'}
+                {organization ? uiText.text_d86b9666ec8d : uiText.text_2ae205425d42}
               </Link>
             </Button>
           )}
       </header>
       <section className={s.panel}>
         <span className={s.status}>{subscriptionLabels[current.state] ?? current.state}</span>
-        <h2>{current.planDisplayName ?? 'وضعیت قرارداد'}</h2>
+        <h2>{current.planDisplayName ?? uiText.text_f596b5c9d314}</h2>
         <dl className={s.detail}>
           <div>
-            <dt>دورهٔ فعلی</dt>
+            <dt>{uiText.text_7ed97f2495a5}</dt>
             <dd>
               {current.periodStartsAtUtc && current.periodEndsAtUtc
-                ? date(current.periodStartsAtUtc) + ' تا ' + date(current.periodEndsAtUtc)
-                : 'هنوز دوره‌ای اعلام نشده است'}
+                ? date(current.periodStartsAtUtc) +
+                  uiText.text_7168a3799fbf +
+                  date(current.periodEndsAtUtc)
+                : uiText.text_c71eb9b208c8}
             </dd>
           </div>
           {current.scheduledPlanVersionId && (
             <div>
-              <dt>تغییر دورهٔ بعد</dt>
-              <dd>ثبت شده است</dd>
+              <dt>{uiText.text_a92c3461295f}</dt>
+              <dd>{uiText.text_82752778baed}</dd>
             </div>
           )}
         </dl>
-        {current.hasPendingPayment && (
-          <p className={s.hint}>
-            پرداخت هنوز تأیید نشده است؛ امکانات پولی از روی این وضعیت فعال نمی‌شوند.
-          </p>
-        )}
+        {current.hasPendingPayment && <p className={s.hint}>{uiText.text_8731cd667f6e}</p>}
       </section>
       <section className={s.panel}>
-        <h2>مصرف و سهمیه</h2>
+        <h2>{uiText.text_86a2d2d4def4}</h2>
         {current.quotas.length ? (
           <div className={s.grid}>
             {current.quotas.map((q) => (
               <div className={s.quota} key={q.key} data-exceeded={q.isOverQuota}>
                 <h3>{quotaLabels[q.key]}</h3>
-                <strong>باقی‌مانده: {quotaRemaining(q)}</strong>
+                <strong>
+                  {uiText.text_9abd6e4940e3}
+                  {quotaRemaining(q)}
+                </strong>
                 <p>
-                  مصرف:{' '}
+                  {uiText.text_2f1247d5894e}{' '}
                   {q.isUsageAvailable === true
                     ? q.consumed.toLocaleString('fa-IR') + ' ' + q.unit
-                    : 'هنوز گزارش نشده'}
+                    : uiText.text_257b66a50f43}
                 </p>
-                {q.isOverQuota && <p>سقف مصرف این سهمیه تمام شده است.</p>}
+                {q.isOverQuota && <p>{uiText.text_e2229ea0cb31}</p>}
               </div>
             ))}
           </div>
         ) : (
-          <p className={s.hint}>سهمیه‌ای برای نمایش گزارش نشده است.</p>
+          <p className={s.hint}>{uiText.text_5de725f5f494}</p>
         )}
-        <p className={s.meta}>اطلاعات سرویس: {date(current.observedAtUtc, true)}</p>
+        <p className={s.meta}>
+          {uiText.text_dc39ddb24c12}
+          {date(current.observedAtUtc, true)}
+        </p>
       </section>
       <section className={s.panel}>
-        <h2>پلن‌ها و برآورد هزینه</h2>
+        <h2>{uiText.text_16d1d8fb88d8}</h2>
         {plans.isPending ? (
           <LoadingSkeleton />
         ) : plans.isError ? (
           <ErrorState error={plans.error} onRetry={() => void plans.refetch()} />
         ) : !plans.data.length ? (
-          <EmptyState title="پلنی برای خرید عرضه نشده است" />
+          <EmptyState title={uiText.text_13877f13269f} />
         ) : (
           <>
             <label className={s.field}>
-              پلن
+              {uiText.text_d9772fd00176}
               <select
                 value={selected}
                 disabled={a.busy || orderUncertain}
@@ -153,18 +154,20 @@ function Commerce({ organization }: { organization: boolean }) {
                   command.current = undefined;
                 }}
               >
-                <option value="">انتخاب پلن…</option>
+                <option value="">{uiText.text_c47e8cf0803f}</option>
                 {plans.data
                   .filter((p) => p.audience === owner)
                   .map((p) => (
                     <option key={p.planVersionId} value={p.planVersionId}>
-                      {p.displayName} · {p.priceToman.toLocaleString('fa-IR')} {p.displayCurrency}
+                      {p.displayName}
+                      {uiText.text_588da4105320}
+                      {p.priceToman.toLocaleString('fa-IR')} {p.displayCurrency}
                     </option>
                   ))}
               </select>
             </label>
             <label className={s.field}>
-              نوع درخواست
+              {uiText.text_a1dbc531a2cd}
               <select
                 value={purpose}
                 disabled={a.busy || orderUncertain}
@@ -174,9 +177,9 @@ function Commerce({ organization }: { organization: boolean }) {
                   command.current = undefined;
                 }}
               >
-                <option value="Purchase">خرید</option>
-                <option value="Renewal">تمدید</option>
-                <option value="Upgrade">ارتقا</option>
+                <option value="Purchase">{uiText.text_06e54bf7afe6}</option>
+                <option value="Renewal">{uiText.text_3225fab3cd96}</option>
+                <option value="Upgrade">{uiText.text_a5ebe3e6fe5e}</option>
               </select>
             </label>
             <Button
@@ -195,7 +198,7 @@ function Commerce({ organization }: { organization: boolean }) {
                 }
               }}
             >
-              دریافت برآورد هزینه
+              {uiText.text_d2160f8eb18d}
             </Button>
             {quote && (
               <div className={s.panel}>
@@ -203,20 +206,18 @@ function Commerce({ organization }: { organization: boolean }) {
                   {quote.priceToman.toLocaleString('fa-IR')} {quote.displayCurrency}
                 </strong>
                 <p className={s.hint}>
-                  اعتبار برآورد:{' '}
-                  {quote.expiresAtUtc ? date(quote.expiresAtUtc, true) : 'اعلام نشده'} · آغاز دوره و
-                  دسترسی به تأیید معتبر سرویس وابسته است.
+                  {uiText.text_bae7e088f1e1}{' '}
+                  {quote.expiresAtUtc ? date(quote.expiresAtUtc, true) : uiText.text_2b1bf830baea}
+                  {uiText.text_9ae95d6b5b73}
                 </p>
-                {!previewReady && (
-                  <p role="status">اعتبار این برآورد پایان یافته؛ دوباره هزینه را دریافت کنید.</p>
-                )}
+                {!previewReady && <p role="status">{uiText.text_194fed9c2345}</p>}
                 {!organization && (
                   <ConfirmAction
-                    trigger="ساخت سفارش در انتظار پرداخت"
-                    title="ثبت سفارش شخصی"
-                    description="ثبت سفارش به‌تنهایی پرداخت یا فعال‌شدن اشتراک نیست."
+                    trigger={uiText.text_6ff723ebc69c}
+                    title={uiText.text_cdc6409eb6a5}
+                    description={uiText.text_2a70b317c5f5}
                     disabled={!previewReady && !command.current}
-                    confirm="ثبت سفارش"
+                    confirm={uiText.text_0c2133fae476}
                     onConfirm={async () => {
                       command.current ??= {
                         planVersionId: quote.planVersionId,
@@ -254,13 +255,13 @@ function Commerce({ organization }: { organization: boolean }) {
             {current.subscriptionId && (
               <>
                 <label className={s.field}>
-                  دلیل تغییر پلن دورهٔ بعد
+                  {uiText.text_4097df6f7123}
                   <input value={reason} onChange={(e) => setReason(e.target.value)} />
                 </label>
                 <ConfirmAction
-                  trigger="درخواست کاهش پلن دورهٔ بعد"
-                  title="برنامه‌ریزی تغییر پلن"
-                  description="تغییر، در صورت پذیرش سرویس برای دورهٔ بعد ثبت می‌شود؛ اطلاعات شخصی حذف نمی‌شوند."
+                  trigger={uiText.text_bca8396dc77f}
+                  title={uiText.text_b15663c9902c}
+                  description={uiText.text_353836470669}
                   disabled={orderUncertain || !selected || !reason.trim() || !current.version}
                   onConfirm={async () => {
                     await call(prefix + '/subscription/downgrade', {
@@ -283,13 +284,14 @@ function Commerce({ organization }: { organization: boolean }) {
       </section>
       {order && (
         <section className={s.panel} role="status">
-          <h2>سفارش ثبت شد</h2>
+          <h2>{uiText.text_ed47f8b6e65c}</h2>
           <p>
-            وضعیت: {label(order.status)} · انجام خدمت: {label(order.fulfillmentState)}
+            {uiText.text_2b18443f7114}
+            {label(order.status)}
+            {uiText.text_5adab0015a6e}
+            {label(order.fulfillmentState)}
           </p>
-          <p className={s.hint}>
-            پرداخت آنلاین در انتشار فعلی فعال نیست. ثبت سفارش، مجوز یا نقش آموزشی ایجاد نمی‌کند.
-          </p>
+          <p className={s.hint}>{uiText.text_f22a3f010537}</p>
         </section>
       )}
       {!organization && <PersonalOrders />}
@@ -306,7 +308,7 @@ function PersonalOrders() {
   });
   return (
     <section className={s.panel}>
-      <h2>۲۰ سفارش اخیر</h2>
+      <h2>{uiText.text_efb1be1f18cb}</h2>
       {q.isPending ? (
         <LoadingSkeleton />
       ) : q.isError ? (
@@ -316,18 +318,20 @@ function PersonalOrders() {
           {q.data.items.map((o) => (
             <li key={o.orderId}>
               <strong>
-                {label(o.status)} · {(o.priceToman ?? o.amount).toLocaleString('fa-IR')}{' '}
+                {label(o.status)}
+                {uiText.text_588da4105320}
+                {(o.priceToman ?? o.amount).toLocaleString('fa-IR')}{' '}
                 {o.displayCurrency ?? o.currency}
               </strong>
               <p className={s.meta}>{date(o.createdAtUtc, true)}</p>
               <Button variant="outline" onClick={() => setSelected(o.orderId)}>
-                جزئیات سفارش
+                {uiText.text_f0452fb92a5a}
               </Button>
             </li>
           ))}
         </ul>
       ) : (
-        <EmptyState title="سفارشی ثبت نشده است" />
+        <EmptyState title={uiText.text_f53c7f5829aa} />
       )}
       {selected &&
         (detail.isPending ? (
@@ -337,17 +341,19 @@ function PersonalOrders() {
         ) : (
           <dl className={s.detail}>
             <div>
-              <dt>وضعیت سفارش</dt>
+              <dt>{uiText.text_cb52f9e6dc45}</dt>
               <dd>{label(detail.data.status)}</dd>
             </div>
             <div>
-              <dt>انجام خدمت</dt>
+              <dt>{uiText.text_62b1f7b3faed}</dt>
               <dd>{label(detail.data.fulfillmentState)}</dd>
             </div>
             <div>
-              <dt>پرداخت تأییدشده</dt>
+              <dt>{uiText.text_3962cd7270f8}</dt>
               <dd>
-                {detail.data.paidAtUtc ? date(detail.data.paidAtUtc, true) : 'تأیید نشده است'}
+                {detail.data.paidAtUtc
+                  ? date(detail.data.paidAtUtc, true)
+                  : uiText.text_d2793bd966f1}
               </dd>
             </div>
           </dl>

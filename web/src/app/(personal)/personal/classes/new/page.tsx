@@ -1,4 +1,4 @@
-import { PersonalClassCreate } from '@/features/personal/personal-classes';
+import { redirect } from 'next/navigation';
 export default function Page() {
-  return <PersonalClassCreate />;
+  redirect('/personal/extracurricular/requests/new?step=details');
 }

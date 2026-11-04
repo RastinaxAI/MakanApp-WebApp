@@ -1,4 +1,4 @@
-import { PersonalClasses } from '@/features/personal/personal-classes';
+import { redirect } from 'next/navigation';
 export default function Page() {
-  return <PersonalClasses />;
+  redirect('/personal/extracurricular');
 }

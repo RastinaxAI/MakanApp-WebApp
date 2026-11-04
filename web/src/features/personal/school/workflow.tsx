@@ -1,4 +1,6 @@
 'use client';
+import { useAcademicScope } from './academic-scope';
+import * as uiText from '@/content/fa';
 import { useTextDraft } from '@/components/hooks/use-text-draft';
 import { Button } from '@/components/ui/button';
 import { ConfirmAction } from '@/components/ui/confirm-action';
@@ -20,7 +22,7 @@ export function WorkflowPage({
   children,
   roles = ['Manager'],
   classId,
-  eyebrow = 'آموزشگاه / مدیریت فعالیت‌ها',
+  eyebrow = uiText.text_c4e5cf604afe,
 }: {
   title: string;
   back: string;
@@ -30,9 +32,11 @@ export function WorkflowPage({
   eyebrow?: string;
 }) {
   const { session } = usePersonal();
+  const scope = useAcademicScope();
   if (
-    session.context.workspaceType !== 'Organization' ||
-    !roles.includes(session.context.activeRole ?? '')
+    !scope.personal &&
+    (session.context.workspaceType !== 'Organization' ||
+      !roles.includes(session.context.activeRole ?? ''))
   )
     return <ErrorState error={new ApiError(403)} />;
   return (
@@ -50,9 +54,12 @@ export function WorkflowPage({
 }
 function ClassWorkflowGate({ id, children }: { id: string; children: ReactNode }) {
   const { session } = usePersonal();
+  const scope = useAcademicScope();
   const classes = usePersonalApi<components['schemas']['ClassResult'][]>(
     '/api/v1/academic/classes',
+    { enabled: !scope.personal },
   );
+  if (scope.personal) return <>{children}</>;
   if (classes.isPending) return <LoadingSkeleton />;
   if (classes.isError)
     return <ErrorState error={classes.error} onRetry={() => void classes.refetch()} />;
@@ -62,7 +69,10 @@ function ClassWorkflowGate({ id, children }: { id: string; children: ReactNode }
   if (!item) return <ErrorState error={new ApiError(404)} />;
   return (
     <>
-      <p className={r.note}>کلاس: {item.title}</p>
+      <p className={r.note}>
+        {uiText.text_aee307f783b6}
+        {item.title}
+      </p>
       {children}
     </>
   );
@@ -73,9 +83,10 @@ export function useWorkflowDraft<T extends Record<string, string | boolean>>(
   version = 'new',
 ) {
   const { session } = usePersonal();
+  const academic = useAcademicScope();
   const [initial, setInitial] = useState(() => JSON.stringify(defaults));
   const draft = useTextDraft(
-    `${session.user.id}:${contextSignature(session.context)}:workflow:${scope}`,
+    `${session.user.id}:${contextSignature(session.context)}:workflow:${academic.personal?.classId ?? 'organization'}:${scope}`,
     initial,
     version,
   );
@@ -117,15 +128,12 @@ export function WorkflowDraftConflict({
   if (!stale) return null;
   return (
     <div role="alert">
-      <p>
-        نسخهٔ اطلاعات در سرویس تغییر کرده است. متن شما حفظ شده؛ پیش از ادامه آن را بررسی و در صورت
-        نیاز کپی کنید.
-      </p>
+      <p>{uiText.text_78d0088bdedd}</p>
       <ConfirmAction
-        title="جایگزینی پیش‌نویس"
-        trigger="استفاده از نسخهٔ سرویس"
-        confirm="جایگزینی اطلاعات فرم"
-        description="تغییرات ذخیره‌نشدهٔ این فرم با اطلاعات تازهٔ سرویس جایگزین شوند؟"
+        title={uiText.text_35a1c9b683d8}
+        trigger={uiText.text_363bc802fb51}
+        confirm={uiText.text_c36e75eccc66}
+        description={uiText.text_883fc794a5da}
         onConfirm={async () => {
           onDiscard();
           return true;
@@ -142,7 +150,7 @@ export function WorkflowForm({
   ready = true,
   canCommit = true,
   onSave,
-  button = 'تأیید و ثبت',
+  button = uiText.text_796a59104e57,
   notice,
 }: {
   children: ReactNode;
@@ -167,12 +175,14 @@ export function WorkflowForm({
   };
   return (
     <section className={`${r.panel} ${s.workflowPanel}`}>
-      <ol className={r.steps} aria-label="مراحل ثبت">
+      <ol className={r.steps} aria-label={uiText.text_acf974d20dd2}>
         <li aria-current={!review ? 'step' : undefined}>
-          <span>۱</span>تکمیل اطلاعات
+          <span>{uiText.text_62b67013987e}</span>
+          {uiText.text_16adf56a6387}
         </li>
         <li aria-current={review ? 'step' : undefined}>
-          <span>۲</span>بازبینی و ثبت
+          <span>{uiText.text_bc9c03bb975e}</span>
+          {uiText.text_2fd8a3150ccd}
         </li>
       </ol>
       {notice && <p className={r.note}>{notice}</p>}
@@ -180,22 +190,22 @@ export function WorkflowForm({
         <>
           <div className={r.panelTitle}>
             <ClipboardCheck size={22} />
-            <h2>بازبینی اطلاعات</h2>
+            <h2>{uiText.text_4a9a328e6b5b}</h2>
           </div>
           <dl className={s.summary}>
             {rows.map(([name, value]) => (
               <div key={name}>
                 <dt>{name}</dt>
-                <dd dir="auto">{value || 'ثبت نشده'}</dd>
+                <dd dir="auto">{value || uiText.text_5749a86140fa}</dd>
               </div>
             ))}
           </dl>
           <div className={r.actions}>
             <Button variant="outline" disabled={busy} onClick={() => step(false)}>
-              بازگشت و ویرایش
+              {uiText.text_250a7c7f7fe9}
             </Button>
             <Button disabled={busy || !ready || !canCommit} onClick={() => void onSave()}>
-              {busy ? 'در حال ثبت…' : button}
+              {busy ? uiText.text_b5ef00b1806f : button}
             </Button>
           </div>
         </>
@@ -211,7 +221,7 @@ export function WorkflowForm({
           </fieldset>
           <div className={r.actions}>
             <Button type="submit" disabled={busy || !ready}>
-              بازبینی اطلاعات
+              {uiText.text_4a9a328e6b5b}
             </Button>
           </div>
         </form>

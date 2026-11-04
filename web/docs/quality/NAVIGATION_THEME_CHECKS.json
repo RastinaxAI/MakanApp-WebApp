@@ -1,0 +1,444 @@
+{
+  "checkedAt": "2026-11-03T17:50:46.727Z",
+  "scope": "web client; shared navigation and theme consistency",
+  "cause": "Messages used PersonalShell while the connected assistant rendered its own ReferenceScreen chrome and navigation glyphs.",
+  "changes": {
+    "sharedNavigation": "src/components/navigation/app-navigation.tsx",
+    "sharedNavigationStyle": "src/components/navigation/app-navigation.module.css",
+    "assistantSurface": "src/features/reference/assistant-surface.module.css",
+    "canonicalNavigation": "src/config/navigation.ts",
+    "canonicalPalette": "design/tokens.json",
+    "canonicalCopy": "src/content/fa.ts",
+    "iconSize": 24,
+    "iconStroke": 1.8,
+    "iconFamily": "Existing Lucide React",
+    "minimumTarget": 44,
+    "baseDockHeight": 72,
+    "largeTextDock": "Rem-based height grows with text; keyboard focus and safe area retained",
+    "reducedMotion": "No link transition when reduce is requested",
+    "assistantChrome": "Same shell/header/sidebar/bottom navigation as messages; no duplicate chrome",
+    "legacyAdaptiveViews": "ReferenceScreen delegates its five-destination bar to the same component"
+  },
+  "checks": {
+    "build": "passed",
+    "typecheck": "passed",
+    "lint": "passed; 333 source module boundaries, no cycles",
+    "generated": "passed; 239 client operations / 447 schemas; no owner endpoints",
+    "format": "passed",
+    "diffWhitespace": "passed",
+    "unit": {
+      "passed": 423,
+      "files": 61,
+      "failed": 0
+    }
+  },
+  "browser": {
+    "uniqueCases": 60,
+    "latestPassed": 60,
+    "latestFailed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "runs": [
+      {
+        "file": "docs/quality/NAVIGATION_CONSISTENCY_BROWSER.json",
+        "startTime": "2026-11-03T17:28:57.160Z",
+        "duration": 16842.096999999998,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      {
+        "file": "docs/quality/NAVIGATION_REGRESSION_BROWSER_INITIAL.json",
+        "startTime": "2026-11-03T17:32:24.799Z",
+        "duration": 214541.81199999998,
+        "expected": 55,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      },
+      {
+        "file": "docs/quality/NAVIGATION_BROWSER_FOLLOWUP.json",
+        "startTime": "2026-11-03T17:40:02.610Z",
+        "duration": 21667.093,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      {
+        "file": "docs/quality/NAVIGATION_BROWSER_COMPLETION.json",
+        "startTime": "2026-11-03T17:46:35.587Z",
+        "duration": 24586.983999999997,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    ],
+    "initialRegressionFailure": "Two reduced-motion cases found the global 0.01ms fallback rather than no transition. The shared component now explicitly disables transitions; both pass on follow-up.",
+    "fullHistoricalSuiteRerun": false,
+    "latest": [
+      {
+        "file": "navigation-consistency.spec.ts",
+        "title": "light: messages and assistant share one navigation geometry and icon family through live transitions",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-consistency.spec.ts",
+        "title": "dark: messages and assistant share one navigation geometry and icon family through live transitions",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-consistency.spec.ts",
+        "title": "bottom navigation stays readable with enlarged text, a safe area and a short viewport",
+        "status": "expected"
+      },
+      {
+        "file": "assistant-theme.spec.ts",
+        "title": "dark theme stays coherent across panels and the assistant gives the answer most of the height",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "phone and code reject typed letters and normalize Persian and Arabic numerals",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "logo stays in both login steps and the action follows its field instead of sticking to the viewport",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "assistant studio goes back to the assistant and the retired class destination redirects",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "restored profile logout ends the current session after confirmation",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "forged or missing origins never forward an authentication mutation",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "injection and malformed authentication payloads are rejected before the upstream service",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "an oversized authentication body is rejected before upstream processing",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "proxy rejects owner namespaces, encoded traversal and arbitrary destinations",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "context spoofing and unauthorized membership selection cannot change the current role",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "session responses expose no tokens and carry private no-store headers",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "profile renders a stored HTML payload as text without executing it",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "security headers prevent framing and restrict external connections",
+        "status": "expected"
+      },
+      {
+        "file": "brand-security.spec.ts",
+        "title": "a slow OTP service releases the form within its deadline without silently retrying",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Student light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Teacher light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Parent light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Manager light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Personal light",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "theme light is applied before the application JavaScript can hydrate",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Student dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Teacher dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Parent dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Manager dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "MK reference five-destination shell: Personal dark",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "theme dark is applied before the application JavaScript can hydrate",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-experience.spec.ts",
+        "title": "temporary inbox failure retains known conversations; permission denial removes them",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-motion.spec.ts",
+        "title": "recorded light: chat, profile, assistant, dialogs and back remain coherent",
+        "status": "expected"
+      },
+      {
+        "file": "instagram-motion.spec.ts",
+        "title": "recorded dark: chat, profile, assistant, dialogs and back remain coherent",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "Student keeps the selected role across tabs, reload and another browser tab",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "Teacher keeps the selected role across tabs, reload and another browser tab",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "Parent keeps the selected role across tabs, reload and another browser tab",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "Manager keeps the selected role across tabs, reload and another browser tab",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "assistant uses the full viewport and readable sample outputs without the extra header",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "PWA install offer has a persistent close control and manual installation help",
+        "status": "expected"
+      },
+      {
+        "file": "navigation-experience.spec.ts",
+        "title": "PWA installation calls the browser prompt only after a click and does not reload the app",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "current responsive geometry and historical route reference at 390, 834 and 1440",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "workspace selection is explicit and a Student cannot author a class assignment",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "exam question navigation retains answers and exposes final review separately",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+        "status": "expected"
+      },
+      {
+        "file": "reference-fidelity.spec.ts",
+        "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "desktop entry puts product information on the right and both login steps on the left",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "education sections keep the same responsive header, navigation and content edges",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "settings uses the content width and theme selection remains functional",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "profile switches only authorized workspaces in place and reloads the authoritative context",
+        "status": "expected"
+      },
+      {
+        "file": "reference-v2-layout.spec.ts",
+        "title": "a rejected profile role switch preserves the previous server context",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 390: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 834: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger light 1440: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 390: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 834: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "Telegram-reference messenger dark 1440: usable list, chat and menus",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "chat survives live resizing and attachment failure retains both file and caption",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "message context menu replies to the selected message and returns focus to the composer",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+        "status": "expected"
+      },
+      {
+        "file": "telegram-messenger.spec.ts",
+        "title": "photo video and file reach the other fixture account and download with identical bytes",
+        "status": "expected"
+      }
+    ]
+  },
+  "visual": {
+    "captureCount": 16,
+    "widths": [
+      320,
+      390,
+      834,
+      1440
+    ],
+    "themes": [
+      "light",
+      "dark"
+    ],
+    "errors": 0,
+    "overflow": 0,
+    "file": "output/review/navigation-unify/after/results.json",
+    "adaptiveNavigationCases": 24,
+    "adaptiveFile": "output/review/navigation-unify/after/adaptive.json",
+    "enlargedText": "200% at 320x500 with 34px safe area; composer remains above navigation",
+    "manualReview": [
+      "Messages and assistant at 390 light",
+      "Both pages at 834 dark",
+      "Both recorded flows sampled as ordered frame contact sheets"
+    ],
+    "gallery": "output/review/navigation-unify/index.html",
+    "comparison": "output/review/navigation-unify/after/bottom-bars.png"
+  },
+  "motion": {
+    "file": "output/review/navigation-unify/motion/results.json",
+    "flows": 2,
+    "roleAndDraftPreserved": true,
+    "recordings": [
+      "output/review/navigation-unify/motion/light-flow.webm",
+      "output/review/navigation-unify/motion/dark-flow.webm"
+    ],
+    "measurementScope": "Local headless Chrome production build; not physical-device or native-simulator certification"
+  },
+  "runtime": {
+    "entryStatus": 200,
+    "privatePreviewStatus": 404,
+    "javascriptDecodedBytes": 806314,
+    "scripts": 13,
+    "liveOtpSent": false,
+    "environment": "local public entry only"
+  },
+  "preserved": [
+    "Server API and authorization logic",
+    "Assistant source readiness and no fake AI result",
+    "Session-scoped draft and scroll memory",
+    "Assistant studio back target",
+    "20px form action clearance plus safe area",
+    "Remote backend configuration and centralized copy",
+    "Private environment files and Docker session volumes",
+    "Separate owner application and retired root Vite"
+  ],
+  "limitations": [
+    "Browser and visual checks use isolated local fixtures.",
+    "No live OTP, message or domain mutation was performed.",
+    "The complete historical browser suite was not rerun.",
+    "Native emulator, physical keyboard and slow-device 60fps certification were not performed."
+  ]
+}

@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { PageBack } from '@/components/navigation/page-back';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
@@ -40,7 +41,9 @@ import { findConversationSummary, isManagedConversation } from './summary';
 import { OfficialBadge, useOfficialConversationAccess } from './official';
 import { AcademicActivity } from './academic-activity';
 import { ConversationActions } from './conversation-actions';
-import { MessageBubble } from './message-bubble';
+import { ConversationAvatar } from './conversation-photo';
+import { MessageBubble, MessageBody } from './message-bubble';
+import { canForwardMessage } from './message-action-policy';
 import { visibleLocalMessages, type AcknowledgedMessage } from './message-reconciliation';
 type Summary = components['schemas']['ConversationSummaryResult'];
 type Message = components['schemas']['ConversationMessageResult'];
@@ -398,7 +401,15 @@ function ResolvedConversationRoom({
       return false;
     }
   }
-  const name = summary ? conversationTitle(summary) : metadata.data?.title || 'گفت‌وگو';
+  const name = summary
+    ? conversationTitle(summary)
+    : metadata.data?.title || uiText.text_99c891fdab48;
+  const localAuthor = managed
+    ? {
+        displayName: session.user.displayName || session.user.firstName || uiText.text_578786ff448b,
+        profilePhoto: session.user.profilePhoto,
+      }
+    : undefined;
   const peerRead =
     reads.data?.conversationId === id && reads.data.visibility === 'Visible'
       ? reads.data.peerReadThroughSequence
@@ -442,7 +453,8 @@ function ResolvedConversationRoom({
         className={s.room}
         data-message-room
         data-scope={conversation.scope}
-        aria-label={'گفتگو با ' + name}
+        data-conversation-type={conversation.type}
+        aria-label={uiText.text_6a022c87a2bf + name}
       >
         <header className={s.roomHeader} data-chat-header>
           <Button asChild className={s.back} size="icon" variant="ghost">
@@ -452,7 +464,7 @@ function ResolvedConversationRoom({
                   ? '/personal/messages?view=organization'
                   : '/personal/messages'
               }
-              aria-label="بازگشت به فهرست گفتگوها"
+              aria-label={uiText.text_5d8f912f993a}
             >
               <ArrowRight size={21} />
             </Link>
@@ -460,40 +472,64 @@ function ResolvedConversationRoom({
           <Link
             className={s.identity}
             href={`/personal/messages/${id}/info`}
-            aria-label="اطلاعات گفتگو"
+            aria-label={uiText.text_3a3510c0ba99}
           >
-            <ProfileAvatar
-              photo={
-                conversation.type === 'Direct'
-                  ? summary.otherParticipant?.profilePhoto
-                  : conversation.type === 'Saved'
-                    ? session.user.profilePhoto
-                    : undefined
-              }
-              name={name}
-              className={s.avatar}
-            />
+            {managed ? (
+              <ConversationAvatar
+                id={id}
+                photo={metadata.data?.photo ?? summary.photo}
+                name={name}
+                className={s.avatar}
+              />
+            ) : (
+              <>
+                <ProfileAvatar
+                  photo={
+                    conversation.type === 'Direct'
+                      ? summary.otherParticipant?.profilePhoto
+                      : conversation.type === 'Saved'
+                        ? session.user.profilePhoto
+                        : undefined
+                  }
+                  name={name}
+                  className={s.avatar}
+                />
+              </>
+            )}
             <div className={s.identityText}>
               <h2 dir="auto">{name}</h2>
               <OfficialBadge summary={summary} />
               <span className={s.identitySubtitle}>
                 {conversation.type === 'Direct'
-                  ? 'گفت‌وگوی مستقیم'
+                  ? uiText.text_8f421b73047d
                   : conversation.type === 'Saved'
-                    ? 'یادداشت‌های شخصی'
+                    ? uiText.text_c8d071ed9a9d
                     : conversation.type === 'Channel'
-                      ? 'کانال'
-                      : 'گروه'}
+                      ? uiText.text_2db356b462dd
+                      : uiText.text_774668d4acc7}
               </span>
             </div>
           </Link>
           <ConversationActions id={id} managed={isManagedConversation(conversation.type)} />
         </header>
+        <CreationReceipt
+          targets={
+            metadata.data?.initialTargets?.length
+              ? metadata.data.initialTargets
+              : (cache.getQueryData([
+                  'personal',
+                  session.user.id,
+                  session.revision,
+                  'creation-receipt',
+                  id,
+                ]) ?? [])
+          }
+        />
         <div className={s.scope}>
           <Building2 size={14} />
           {conversation.scope === 'Personal'
-            ? 'فضای شخصی · مستقل از عضویت آموزشگاهی'
-            : (summary?.organization?.organizationName ?? 'فضای آموزشگاه')}
+            ? uiText.text_25d5b2def6af
+            : (summary?.organization?.organizationName ?? uiText.text_7298890ac877)}
         </div>
         <div
           className={s.history}
@@ -505,7 +541,7 @@ function ResolvedConversationRoom({
               setAtBottom(node.scrollHeight - node.scrollTop - node.clientHeight < 24);
             }
           }}
-          aria-label="پیام‌های گفتگو"
+          aria-label={uiText.text_d27b9667efd9}
           tabIndex={0}
         >
           {history.isPending ? (
@@ -524,13 +560,13 @@ function ResolvedConversationRoom({
                   disabled={history.isFetchingNextPage}
                   onClick={() => void history.fetchNextPage()}
                 >
-                  {history.isFetchingNextPage ? 'در حال دریافت…' : 'پیام‌های قدیمی‌تر'}
+                  {history.isFetchingNextPage ? uiText.text_80516c4adbbe : uiText.text_14411b1e6c7b}
                 </Button>
               )}
               {!messages.length &&
                 !localMessages.acknowledged.length &&
                 !localMessages.pending.length && (
-                  <section className={s.startConversation} aria-label="شروع گفتگو">
+                  <section className={s.startConversation} aria-label={uiText.text_4ca85a23d967}>
                     <ProfileAvatar
                       name={name}
                       photo={
@@ -543,11 +579,11 @@ function ResolvedConversationRoom({
                     <h2>{name}</h2>
                     <p>
                       {conversation.type === 'Saved'
-                        ? 'پیام‌ها و فایل‌های خود را اینجا نگه دارید.'
-                        : 'پیام‌ها و فایل‌های این گفتگو اینجا نمایش داده می‌شوند.'}
+                        ? uiText.text_f8b315b8d51e
+                        : uiText.text_95aa33dd2c6c}
                     </p>
                     <Button asChild variant="ghost">
-                      <Link href={`/personal/messages/${id}/info`}>مشاهدهٔ اطلاعات</Link>
+                      <Link href={`/personal/messages/${id}/info`}>{uiText.text_ea3d101400ed}</Link>
                     </Button>
                   </section>
                 )}
@@ -559,12 +595,15 @@ function ResolvedConversationRoom({
                       date(messages[index - 1].sentAtUtc) !== date(message.sentAtUtc)) && (
                       <p className={s.dayDivider}>
                         {date(message.sentAtUtc) === date(new Date().toISOString())
-                          ? 'امروز'
+                          ? uiText.text_9a8e4bfdd18e
                           : date(message.sentAtUtc)}
                       </p>
                     )}
                     <MessageBubble
+                      message={message}
+                      canForward={canForwardMessage(message, conversation, writable)}
                       own={own}
+                      sender={isManagedConversation(conversation.type) ? message.sender : undefined}
                       sequence={message.sequence}
                       text={message.isDeleted ? null : message.text}
                       onReply={
@@ -576,9 +615,6 @@ function ResolvedConversationRoom({
                           : undefined
                       }
                     >
-                      {conversation.type === 'Group' && !own && (
-                        <span className={s.messageSender}>{message.sender.displayName}</span>
-                      )}
                       {message.reply && <blockquote>{visibleReply(message.reply)}</blockquote>}
                       {!message.isDeleted &&
                       message.originKind === 'System' &&
@@ -588,15 +624,15 @@ function ResolvedConversationRoom({
                         (message.isDeleted || message.text || !message.attachments.length) && (
                           <p dir="auto">
                             {message.isDeleted
-                              ? 'این پیام حذف شده است'
+                              ? uiText.text_105c4ade8a0f
                               : (message.text ??
                                 (message.attachments.length
-                                  ? 'پیوست فایل'
+                                  ? uiText.text_03049af97fa6
                                   : message.kind === 'Poll'
-                                    ? 'نظرسنجی'
+                                    ? uiText.text_dc81ca4bc376
                                     : message.kind === 'Checklist'
-                                      ? 'فهرست کارها'
-                                      : 'پیام'))}
+                                      ? uiText.text_b769871263a6
+                                      : uiText.text_a5fc55f1f6ee))}
                           </p>
                         )
                       )}
@@ -624,7 +660,7 @@ function ResolvedConversationRoom({
                       <div className={s.messageMeta}>
                         <time title={date(message.sentAtUtc, true)}>
                           {shortTime(message.sentAtUtc)}
-                          {message.isEdited ? ' · ویرایش‌شده' : ''}
+                          {message.isEdited ? uiText.text_d1260a2bc5bc : ''}
                         </time>
                         {own &&
                           (peerRead !== null &&
@@ -633,10 +669,10 @@ function ResolvedConversationRoom({
                             <CheckCheck
                               className={s.readTick}
                               size={16}
-                              aria-label="خوانده‌شدن مطابق وضعیت مجاز سرور"
+                              aria-label={uiText.text_bb4316d764c2}
                             />
                           ) : (
-                            <Check size={15} aria-label="ارسال‌شده" />
+                            <Check size={15} aria-label={uiText.text_d2bf2d21c42a} />
                           ))}
                       </div>
                     </MessageBubble>
@@ -646,81 +682,85 @@ function ResolvedConversationRoom({
               {localMessages.acknowledged.map((item) => (
                 <article
                   key={item.receipt.clientMessageId}
-                  className={`${s.bubble} ${s.own}`}
+                  className={`${s.bubble} ${s.own} ${managed ? s.feedMessage : ''}`}
                   data-message-state="confirmed"
                 >
-                  <p dir="auto">{item.text}</p>
-                  <AttachmentSummary attachments={item.attachments} />
-                  <div className={s.messageMeta}>
-                    <time title={date(item.receipt.sentAtUtc, true)}>
-                      {shortTime(item.receipt.sentAtUtc)}
-                    </time>
-                    <Check size={15} aria-label="ارسال‌شده" />
-                  </div>
+                  <MessageBody sender={localAuthor}>
+                    <p dir="auto">{item.text}</p>
+                    <AttachmentSummary attachments={item.attachments} />
+                    <div className={s.messageMeta}>
+                      <time title={date(item.receipt.sentAtUtc, true)}>
+                        {shortTime(item.receipt.sentAtUtc)}
+                      </time>
+                      <Check size={15} aria-label={uiText.text_d2bf2d21c42a} />
+                    </div>
+                  </MessageBody>
                 </article>
               ))}
               {localMessages.pending.map((message) => (
                 <article
                   key={message.id}
-                  className={`${s.bubble} ${s.own} ${sending === message.id ? '' : s.pending}`}
+                  className={`${s.bubble} ${s.own} ${managed ? s.feedMessage : ''} ${sending === message.id ? '' : s.pending}`}
                   data-message-state={sending === message.id ? 'sending' : 'unconfirmed'}
                 >
-                  <p dir="auto">{message.command.text}</p>
-                  <AttachmentSummary attachments={message.attachments} />
-                  {sending === message.id ? (
-                    <div className={s.messageMeta}>
-                      <time>{shortTime(message.createdAt)}</time>
-                      <Clock size={14} aria-label="در حال ارسال" />
-                    </div>
-                  ) : (
-                    <small className={s.localStatus}>
-                      {message.error ?? 'نتیجهٔ ارسال هنوز تأیید نشده است.'}
-                    </small>
-                  )}
-                  {sending !== message.id && (
-                    <div className={s.pendingActions}>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        disabled={
-                          !!sending ||
-                          !writable ||
-                          message.state === 'rejected' ||
-                          message.retryable === false ||
-                          (!!message.retryAt && message.retryAt > now)
-                        }
-                        onClick={() => void transmit(message)}
-                      >
-                        تلاش دوباره با همین پیام
-                      </Button>
-                      <Button size="sm" variant="ghost" onClick={() => void refresh()}>
-                        بررسی سابقه
-                      </Button>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button size="sm" variant="ghost">
-                            حذف از این دستگاه
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent
-                          title="حذف پیام تأییدنشده از این دستگاه"
-                          description="این کار فقط نسخهٔ در انتظار را پاک می‌کند. اگر سرور پیام را قبلاً دریافت کرده باشد، پیام ارسال‌شده حذف نمی‌شود."
+                  <MessageBody sender={localAuthor}>
+                    <p dir="auto">{message.command.text}</p>
+                    <AttachmentSummary attachments={message.attachments} />
+                    {sending === message.id ? (
+                      <div className={s.messageMeta}>
+                        <time>{shortTime(message.createdAt)}</time>
+                        <Clock size={14} aria-label={uiText.text_53bf8bd91a86} />
+                      </div>
+                    ) : (
+                      <small className={s.localStatus}>
+                        {message.error ?? uiText.text_1ec80fd5a1e8}
+                      </small>
+                    )}
+                    {sending !== message.id && (
+                      <div className={s.pendingActions}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          disabled={
+                            !!sending ||
+                            !writable ||
+                            message.state === 'rejected' ||
+                            message.retryable === false ||
+                            (!!message.retryAt && message.retryAt > now)
+                          }
+                          onClick={() => void transmit(message)}
                         >
-                          <Button
-                            variant="destructive"
-                            onClick={() =>
-                              void personalMessageQueue
-                                .remove(message.id)
-                                .then(loadPending)
-                                .catch(setError)
-                            }
+                          {uiText.text_c46b279861d2}
+                        </Button>
+                        <Button size="sm" variant="ghost" onClick={() => void refresh()}>
+                          {uiText.text_bdf647a61e01}
+                        </Button>
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button size="sm" variant="ghost">
+                              {uiText.text_fbe57107fa7a}
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent
+                            title={uiText.text_13071319d8cf}
+                            description={uiText.text_707149982ab3}
                           >
-                            حذف نسخهٔ محلی
-                          </Button>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  )}
+                            <Button
+                              variant="destructive"
+                              onClick={() =>
+                                void personalMessageQueue
+                                  .remove(message.id)
+                                  .then(loadPending)
+                                  .catch(setError)
+                              }
+                            >
+                              {uiText.text_984e98b25e78}
+                            </Button>
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    )}
+                  </MessageBody>
                 </article>
               ))}
               <div ref={bottom} />
@@ -730,18 +770,18 @@ function ResolvedConversationRoom({
         <div className={s.composerArea}>
           {writable && needsRestriction && restriction.isError && (
             <div className={s.mediaPermissionError} role="status">
-              بررسی دسترسی ارسال پیوست انجام نشد.
-              <button onClick={() => void restriction.refetch()}>بررسی دوباره</button>
+              {uiText.text_917b9bf81a8b}
+              <button onClick={() => void restriction.refetch()}>{uiText.text_41c9d368bbac}</button>
             </div>
           )}
           {!!error && (
             <div className={s.sendError} role="alert">
-              {error instanceof Error ? error.message : 'عملیات انجام نشد.'}
+              {error instanceof Error ? error.message : uiText.text_ee786ae11865}
             </div>
           )}
           {!!readError && (
             <button className={s.readRetry} onClick={() => void markRead(lastReadAttempt.current)}>
-              خواندن هنوز تأیید نشده؛ تلاش دوباره
+              {uiText.text_0ac3a64e7697}
             </button>
           )}
           {reply && (
@@ -749,20 +789,22 @@ function ResolvedConversationRoom({
               <ArrowUpLeft size={18} />
               <span>
                 <strong>
-                  {currentReply ? 'پاسخ به ' + currentReply.sender.displayName : 'پاسخ به پیام'}
+                  {currentReply
+                    ? uiText.text_690c0f7da867 + currentReply.sender.displayName
+                    : uiText.text_a6340bbd29bf}
                 </strong>
                 <small>
                   {!currentReply
-                    ? 'پیام در دسترس نیست'
+                    ? uiText.text_1ca12aac9cb5
                     : currentReply.isDeleted
-                      ? 'پیام حذف شده'
-                      : currentReply.text || 'پیوست'}
+                      ? uiText.text_a50a7cb6d955
+                      : currentReply.text || uiText.text_9b48d3d38fcb}
                 </small>
               </span>
               <Button
                 size="icon"
                 variant="ghost"
-                aria-label="لغو پاسخ"
+                aria-label={uiText.text_9a9aac0aea02}
                 onClick={() => setReply(null)}
               >
                 <X size={17} />
@@ -786,8 +828,8 @@ function ResolvedConversationRoom({
               <div className={s.composeInput}>
                 <textarea
                   ref={composer}
-                  aria-label="متن پیام"
-                  placeholder="پیامی بنویسید…"
+                  aria-label={uiText.text_8b2fcc6817d9}
+                  placeholder={uiText.text_5be55bdb4435}
                   rows={1}
                   value={draft}
                   onChange={(event) => setDraft(event.target.value)}
@@ -807,29 +849,35 @@ function ResolvedConversationRoom({
                 type="submit"
                 className={s.send}
                 disabled={!!sending || !draft.trim()}
-                aria-label="ارسال پیام"
+                aria-label={uiText.text_51dd685556b8}
               >
                 <Send size={21} />
               </button>
             </form>
           ) : (
-            <p className={s.readOnly}>ارسال با وضعیت فعلی این گفتگو در دسترس نیست.</p>
+            <p className={s.readOnly}>{uiText.text_afacfaf1253c}</p>
           )}
         </div>
       </section>
       <aside className={s.inspector}>
         <span className={s.largeAvatar}>{name.slice(0, 1)}</span>
         <h2>{name}</h2>
-        <p>{conversation.scope === 'Personal' ? 'فضای شخصی' : 'فضای آموزشگاه'}</p>
+        <p>
+          {conversation.scope === 'Personal' ? uiText.text_ab3c684df5df : uiText.text_7298890ac877}
+        </p>
         <dl>
           {managed && metadata.data ? (
             <>
               <div>
-                <dt>وضعیت گفتگو</dt>
-                <dd>{metadata.data.status === 'Active' ? 'فعال' : 'آرشیوشده'}</dd>
+                <dt>{uiText.text_841155a2a14a}</dt>
+                <dd>
+                  {metadata.data.status === 'Active'
+                    ? uiText.text_a3fa2a3ffcb9
+                    : uiText.text_1c83101a8251}
+                </dd>
               </div>
               <div>
-                <dt>عضویت‌های فعال</dt>
+                <dt>{uiText.text_c013d6520838}</dt>
                 <dd>
                   {number(
                     metadata.data.participants.filter((item) => item.status === 'Active').length,
@@ -839,22 +887,70 @@ function ResolvedConversationRoom({
             </>
           ) : (
             <div>
-              <dt>نوع گفتگو</dt>
-              <dd>{summary.type === 'Saved' ? 'پیام‌های ذخیره‌شده' : 'گفت‌وگوی مستقیم'}</dd>
+              <dt>{uiText.text_36ee8a4d404c}</dt>
+              <dd>
+                {summary.type === 'Saved' ? uiText.text_9f3597ff2f66 : uiText.text_8f421b73047d}
+              </dd>
             </div>
           )}
           {managed && (
             <div>
-              <dt>نقش شما در گفتگو</dt>
-              <dd>{membership ? conversationRoleLabels[membership.role] : 'ثبت نشده'}</dd>
+              <dt>{uiText.text_d2e8c7886801}</dt>
+              <dd>
+                {membership ? conversationRoleLabels[membership.role] : uiText.text_5749a86140fa}
+              </dd>
             </div>
           )}
         </dl>
         <Link href="/personal/settings">
           <Settings size={16} />
-          تنظیمات
+          {uiText.navigation_settings}
         </Link>
       </aside>
     </>
+  );
+}
+
+function CreationReceipt({
+  targets,
+}: {
+  targets: components['schemas']['ConversationInitialTargetResult'][];
+}) {
+  if (!targets.length) return null;
+  const pending = targets.filter((target) => target.outcome === 'InvitationPending'),
+    added = targets.filter((target) => target.outcome === 'Added').length,
+    unavailable = targets.filter((target) => target.outcome === 'NotAvailable').length;
+  return (
+    <section className={s.readOnly} aria-label={uiText.text_18e4bfbdd46c} role="status">
+      {pending.length > 0 && (
+        <p>
+          {pending.length.toLocaleString('fa-IR')}
+          {uiText.text_5d9847e7a6c5}
+        </p>
+      )}
+      {pending.map(
+        (target, index) =>
+          target.invitationExpiresAtUtc && (
+            <small key={index}>
+              {uiText.text_5ab557da3fac}
+              {(index + 1).toLocaleString('fa-IR')}
+              {uiText.text_e7ac0786668e} {date(target.invitationExpiresAtUtc, true)}{' '}
+            </small>
+          ),
+      )}
+      {added > 0 && (
+        <p>
+          {added.toLocaleString('fa-IR')}
+          {uiText.text_f08f6d214f82}
+        </p>
+      )}
+      {unavailable > 0 && (
+        <p>
+          {uiText.text_dc08253feac0}
+          {unavailable.toLocaleString('fa-IR')}
+          {uiText.text_259d82026478}
+        </p>
+      )}
+    </section>
   );
 }

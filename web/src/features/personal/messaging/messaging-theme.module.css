@@ -1,10 +1,9 @@
 .theme {
-  --chat-header: var(--surface);
+  --chat-header: var(--bg);
+  --detail-action: var(--surface);
   --chat-background: var(--bg);
   --chat-wallpaper: none;
-  --chat-outgoing: var(--primary-button);
-  --chat-outgoing-meta: #eeefff;
-  --chat-selected: var(--soft);
+  --chat-selected: var(--primary-soft);
   --chat-badge-text: var(--on-primary);
   color: var(--text);
   background: var(--bg);
@@ -29,27 +28,27 @@
 .page select {
   background: var(--surface);
   color: var(--text);
-  border-color: var(--border);
-  border-radius: 8px;
+  border-color: var(--control-border);
+  border-radius: 12px;
 }
 .page :global(.button) {
-  border-radius: 9px;
+  border-radius: 12px;
 }
 .page :global(.button-ghost),
 .page :global(.button-outline) {
   color: var(--primary);
 }
 .page :global(.button-primary) {
-  color: #fff;
+  color: var(--on-primary);
 }
 .page :global(.button-danger) {
-  color: #fff;
+  color: var(--on-danger);
 }
 /* Portals inherit neither the room nor the page: apply this class explicitly. */
 .menu {
   min-width: 230px;
   border-radius: 14px;
-  background: var(--chat-header);
+  background: var(--surface);
   padding: 4px;
   box-shadow: 0 12px 40px #0003;
 }
@@ -73,7 +72,8 @@
   color: var(--primary);
 }
 .dialog {
-  background: var(--bg);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
 }

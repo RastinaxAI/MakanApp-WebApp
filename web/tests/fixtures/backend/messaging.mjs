@@ -45,7 +45,9 @@ export function messagingRoute({ state, url, body, auth, send, req }) {
         u.username.toLowerCase() ===
           String(body.username ?? '')
             .replace(/^@/, '')
-            .toLowerCase() || u.phoneNumber === body.phoneNumber,
+            .toLowerCase() ||
+        (typeof body.phoneNumber === 'string' &&
+          u.phoneNumber.replace(/^0/, '+98') === body.phoneNumber.replace(/^0/, '+98')),
     );
     return send(
       make('PeopleResolveResult', { isDiscoverable: !!u, profile: u ? profile(u) : null }),

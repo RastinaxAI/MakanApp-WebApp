@@ -1,4 +1,5 @@
 'use client';
+import * as uiText from '@/content/fa';
 import { Button } from '@/components/ui/button';
 import { ErrorState } from '@/components/ui/states';
 import type { components } from '@/generated/api/schema';
@@ -48,7 +49,7 @@ export function ProfileAvatar({
       {url && !broken ? (
         <img src={url} alt="" onError={() => setBroken(true)} />
       ) : (
-        <span aria-hidden="true">{name.trim().slice(0, 1) || 'م'}</span>
+        <span aria-hidden="true">{name.trim().slice(0, 1) || uiText.text_988ada1c5b97}</span>
       )}
     </span>
   );
@@ -106,9 +107,7 @@ export function ProfilePhotoEditor({
       }
       if (asset.status !== 'Ready') {
         throw new Error(
-          asset.status === 'Pending'
-            ? 'عکس هنوز در حال آماده‌سازی است؛ کمی بعد «بررسی و ثبت عکس» را بزنید.'
-            : 'این عکس آمادهٔ استفاده نیست. عکس دیگری انتخاب کنید.',
+          asset.status === 'Pending' ? uiText.text_b3b3f1b6a329 : uiText.text_6d2f60a19929,
         );
       }
       setProgress({ phase: 'processing', loaded: 0, total: null });
@@ -141,29 +140,30 @@ export function ProfilePhotoEditor({
     }
   }
   return (
-    <section className={s.editor} aria-label="عکس پروفایل">
+    <section className={s.editor} aria-label={uiText.text_81387363cbf9}>
       <div className={s.identity}>
         {preview ? (
           <span className={s.preview}>
-            <img src={preview} alt="پیش‌نمایش عکس انتخاب‌شده" />
+            <img src={preview} alt={uiText.text_c54182000e02} />
           </span>
         ) : (
           <ProfileAvatar
             photo={session.user.profilePhoto}
-            name={session.user.displayName || session.user.firstName || 'حساب من'}
+            name={session.user.displayName || session.user.firstName || uiText.text_8b4cb595cd35}
             className={s.preview}
           />
         )}
         <div>
-          <h2>عکس پروفایل</h2>
-          <p>عکس JPEG یا PNG انتخاب کنید.</p>
+          <h2>{uiText.text_81387363cbf9}</h2>
+          <p>{uiText.text_cb7c102e0609}</p>
         </div>
       </div>
       <div className={s.actions}>
         <label className={s.choose}>
-          <Camera size={18} /> انتخاب عکس
+          <Camera size={18} />
+          {uiText.text_679d612cbfb1}
           <input
-            aria-label="انتخاب عکس پروفایل"
+            aria-label={uiText.text_6e3ddb3deb6e}
             type="file"
             accept="image/jpeg,image/png"
             disabled={busy || disabled}
@@ -172,7 +172,7 @@ export function ProfilePhotoEditor({
               setError(undefined);
               setUploaded(undefined);
               if (next && !['image/jpeg', 'image/png'].includes(next.type)) {
-                setError(new Error('فقط عکس JPEG یا PNG انتخاب کنید.'));
+                setError(new Error(uiText.text_5113d0e0e0e8));
                 setFile(undefined);
                 e.target.value = '';
                 return;
@@ -183,7 +183,11 @@ export function ProfilePhotoEditor({
         </label>
         {file && (
           <Button type="button" disabled={busy || disabled} onClick={() => void save()}>
-            {busy ? 'در حال ثبت عکس…' : uploaded ? 'بررسی و ثبت عکس' : 'ثبت عکس'}
+            {busy
+              ? uiText.text_56ec52fa6f01
+              : uploaded
+                ? uiText.text_13f81bac7421
+                : uiText.text_2295bdb30596}
           </Button>
         )}
         {session.user.profilePhoto && (
@@ -193,23 +197,27 @@ export function ProfilePhotoEditor({
             disabled={busy || disabled}
             onClick={() => void remove()}
           >
-            <Trash2 size={17} /> حذف عکس پروفایل
+            <Trash2 size={17} />
+            {uiText.text_8474776a5a95}
           </Button>
         )}
       </div>
-      {disabled && (
-        <p className={s.help}>برای تغییر عکس، ابتدا تغییرات اطلاعات پروفایل را ثبت کنید.</p>
-      )}
+      {disabled && <p className={s.help}>{uiText.text_a8c3522a70b0}</p>}
       {progress && (
         <div role="status" className={s.progress}>
           <span>
-            {progress.phase === 'uploading' ? 'در حال بارگذاری عکس' : 'در حال آماده‌سازی و ثبت عکس'}
+            {progress.phase === 'uploading' ? uiText.text_1f91726d3ebc : uiText.text_43bcd5743f72}
             {progress.total
-              ? ` · ${Math.min(100, Math.round((progress.loaded / progress.total) * 100)).toLocaleString('fa-IR')}٪`
+              ? uiText.format_8d561def130a(
+                  Math.min(
+                    100,
+                    Math.round((progress.loaded / progress.total) * 100),
+                  ).toLocaleString('fa-IR'),
+                )
               : '…'}
           </span>
           <progress
-            aria-label="بارگذاری عکس"
+            aria-label={uiText.text_a0a04eb3df38}
             {...(progress.total ? { value: progress.loaded, max: progress.total } : {})}
           />
         </div>
@@ -218,9 +226,7 @@ export function ProfilePhotoEditor({
         (error instanceof ApiError ? (
           <ErrorState error={error} />
         ) : (
-          <p role="alert">
-            {error instanceof Error ? error.message : 'ثبت عکس انجام نشد؛ دوباره بررسی کنید.'}
-          </p>
+          <p role="alert">{error instanceof Error ? error.message : uiText.text_15c9eafb834f}</p>
         ))}
     </section>
   );

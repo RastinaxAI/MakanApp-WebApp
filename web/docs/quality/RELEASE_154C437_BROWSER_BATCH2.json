@@ -1,0 +1,356 @@
+{
+  "checkedAtUtc": "2026-11-02T07:35:54.531Z",
+  "batch": 2,
+  "environment": "isolated local fixture; no external domain writes",
+  "files": [
+    "assessment-settings.spec.ts",
+    "chat-school-polish.spec.ts",
+    "design-reference.spec.ts",
+    "instagram-motion.spec.ts",
+    "manager-navigation.spec.ts",
+    "messaging.spec.ts",
+    "performance.spec.ts",
+    "profile.spec.ts",
+    "reference-fidelity.spec.ts",
+    "release-e11.spec.ts",
+    "sign-in-layout.spec.ts",
+    "telegram-messenger.spec.ts"
+  ],
+  "exitCode": 0,
+  "counts": {
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0
+  },
+  "tests": [
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "assignment answer sheet has context, stages and in-flow actions at all supported widths",
+      "status": "passed",
+      "durationMs": 5364,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "exam answer map preserves edits on failed refresh, reviews only saved answers and adapts to each width",
+      "status": "passed",
+      "durationMs": 5288,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "exam countdown expires from server time, locks writing and never fabricates final submission",
+      "status": "passed",
+      "durationMs": 2372,
+      "attempts": 1
+    },
+    {
+      "file": "assessment-settings.spec.ts",
+      "title": "privacy save stays inside its form, retains failed edits and uses returned versions for later saves",
+      "status": "passed",
+      "durationMs": 5373,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "Direct: one bubble from sending through delayed receipt history without server-status text",
+      "status": "passed",
+      "durationMs": 7250,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "Saved: one bubble from sending through delayed receipt history without server-status text",
+      "status": "passed",
+      "durationMs": 7589,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "failed send remains visible and is never rendered as confirmed",
+      "status": "passed",
+      "durationMs": 2381,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "a history refresh failure retains displayed messages while a real access denial hides them",
+      "status": "passed",
+      "durationMs": 13234,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "school Personal: icon and text rows stay aligned in mobile tablet desktop",
+      "status": "passed",
+      "durationMs": 3091,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "school Student: icon and text rows stay aligned in mobile tablet desktop",
+      "status": "passed",
+      "durationMs": 3049,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "school Teacher: icon and text rows stay aligned in mobile tablet desktop",
+      "status": "passed",
+      "durationMs": 4494,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "school Parent: icon and text rows stay aligned in mobile tablet desktop",
+      "status": "passed",
+      "durationMs": 2969,
+      "attempts": 1
+    },
+    {
+      "file": "chat-school-polish.spec.ts",
+      "title": "school Manager: icon and text rows stay aligned in mobile tablet desktop",
+      "status": "passed",
+      "durationMs": 3816,
+      "attempts": 1
+    },
+    {
+      "file": "design-reference.spec.ts",
+      "title": "standalone V2 reference renders all 130 screens at three sizes with valid route targets",
+      "status": "passed",
+      "durationMs": 2947,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-motion.spec.ts",
+      "title": "recorded light: chat, profile, assistant, dialogs and back remain coherent",
+      "status": "passed",
+      "durationMs": 5909,
+      "attempts": 1
+    },
+    {
+      "file": "instagram-motion.spec.ts",
+      "title": "recorded dark: chat, profile, assistant, dialogs and back remain coherent",
+      "status": "passed",
+      "durationMs": 5419,
+      "attempts": 1
+    },
+    {
+      "file": "manager-navigation.spec.ts",
+      "title": "members and records retain the same selected school destination and navigation position",
+      "status": "passed",
+      "durationMs": 7199,
+      "attempts": 1
+    },
+    {
+      "file": "manager-navigation.spec.ts",
+      "title": "manager actions and report choices remain clear, reachable and responsive",
+      "status": "passed",
+      "durationMs": 11518,
+      "attempts": 1
+    },
+    {
+      "file": "messaging.spec.ts",
+      "title": "two isolated accounts exchange messages and update recipient inbox without reload",
+      "status": "passed",
+      "durationMs": 14502,
+      "attempts": 1
+    },
+    {
+      "file": "messaging.spec.ts",
+      "title": "Parent cannot read a Student private conversation through the BFF",
+      "status": "passed",
+      "durationMs": 1565,
+      "attempts": 1
+    },
+    {
+      "file": "messaging.spec.ts",
+      "title": "Manager cannot read a Student private conversation through the BFF",
+      "status": "passed",
+      "durationMs": 1345,
+      "attempts": 1
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "records cold entry and school payloads plus a controlled concurrent read benchmark",
+      "status": "passed",
+      "durationMs": 3264,
+      "attempts": 1
+    },
+    {
+      "file": "profile.spec.ts",
+      "title": "profile form retains user input after a failed save and persists theme through settings",
+      "status": "passed",
+      "durationMs": 3674,
+      "attempts": 1
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "current responsive geometry and historical route reference at 390, 834 and 1440",
+      "status": "passed",
+      "durationMs": 18201,
+      "attempts": 1
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "workspace selection is explicit and a Student cannot author a class assignment",
+      "status": "passed",
+      "durationMs": 2506,
+      "attempts": 1
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "Parent sees only the selected child dashboard and Manager uses the reference layout",
+      "status": "passed",
+      "durationMs": 4884,
+      "attempts": 1
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "exam question navigation retains answers and exposes final review separately",
+      "status": "passed",
+      "durationMs": 3656,
+      "attempts": 1
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "public introduction and phone sign-in follow the PDF without owner navigation",
+      "status": "passed",
+      "durationMs": 3480,
+      "attempts": 1
+    },
+    {
+      "file": "reference-fidelity.spec.ts",
+      "title": "desktop inbox restores only a previously opened, currently filtered conversation",
+      "status": "passed",
+      "durationMs": 3338,
+      "attempts": 1
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "background session checks do not cancel a foreground child selection",
+      "status": "passed",
+      "durationMs": 3531,
+      "attempts": 1
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "account replay refreshes a school snapshot without navigation or a page polling timer",
+      "status": "passed",
+      "durationMs": 4734,
+      "attempts": 1
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "exam file-only answer waits for Ready, enforces policy, handles conflict and downloads private bytes",
+      "status": "passed",
+      "durationMs": 6249,
+      "attempts": 1
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "personal commerce shows unknown usage honestly and an order never activates subscription",
+      "status": "passed",
+      "durationMs": 3043,
+      "attempts": 1
+    },
+    {
+      "file": "release-e11.spec.ts",
+      "title": "personal class invitation needs recipient acceptance and grants no organization role",
+      "status": "passed",
+      "durationMs": 5326,
+      "attempts": 1
+    },
+    {
+      "file": "sign-in-layout.spec.ts",
+      "title": "phone and OTP enforce exact lengths, normalize Persian digits and reject oversized paste",
+      "status": "passed",
+      "durationMs": 2613,
+      "attempts": 1
+    },
+    {
+      "file": "sign-in-layout.spec.ts",
+      "title": "all invitation entry points converge on one inbox",
+      "status": "passed",
+      "durationMs": 3201,
+      "attempts": 1
+    },
+    {
+      "file": "sign-in-layout.spec.ts",
+      "title": "entry actions follow viewport size without retaining a mobile layout on desktop",
+      "status": "passed",
+      "durationMs": 1462,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram-reference messenger light 390: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 3752,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram-reference messenger light 834: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 3715,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram-reference messenger light 1440: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 4246,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram-reference messenger dark 390: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 3929,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram-reference messenger dark 834: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 3757,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "Telegram-reference messenger dark 1440: usable list, chat and menus",
+      "status": "passed",
+      "durationMs": 3446,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "chat survives live resizing and attachment failure retains both file and caption",
+      "status": "passed",
+      "durationMs": 3915,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "message context menu replies to the selected message and returns focus to the composer",
+      "status": "passed",
+      "durationMs": 2962,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "messenger directory, creation and settings pages remain usable above navigation in both themes",
+      "status": "passed",
+      "durationMs": 14798,
+      "attempts": 1
+    },
+    {
+      "file": "telegram-messenger.spec.ts",
+      "title": "photo video and file reach the other fixture account and download with identical bytes",
+      "status": "passed",
+      "durationMs": 9701,
+      "attempts": 1
+    }
+  ]
+}

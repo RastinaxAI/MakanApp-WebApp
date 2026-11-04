@@ -66,9 +66,10 @@ describe('client navigation contract', () => {
     expect(isSchoolPath(['invitations'])).toBe(true);
     expect(isSchoolPath(['invitations', id])).toBe(false);
   });
-  it('keeps four user destinations and maps nested settings/contacts correctly', () => {
+  it('keeps five reference destinations and maps nested settings/contacts correctly', () => {
     expect(navigation.map((n) => n.href)).toEqual([
       routes.education,
+      routes.extracurricular,
       routes.assistant,
       routes.messages,
       routes.profile,
