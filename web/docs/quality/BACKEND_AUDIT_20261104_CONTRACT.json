@@ -1,0 +1,241 @@
+{
+  "checkedContract": {
+    "checkedAtUtc": "2026-11-04T14:36:31Z",
+    "base": "http://94.184.32.84:8090",
+    "status": 200,
+    "seconds": 10.16,
+    "sha256": "f0f59622119672a0c87c193ef22dc6e6e3008ddd55f51965ffb6aa04ae242d57",
+    "liveOperations": 433,
+    "snapshotOperations": 433,
+    "added": [],
+    "removed": [],
+    "liveSchemaCount": 702
+  },
+  "orgInvitationPaths": [
+    "/api/v1/organization/people/{id}/invitations",
+    "/api/v1/organization/people/{id}/invitations/{invitationId}/revoke",
+    "/api/v1/organization/people/{learnerId}/guardian-invitations",
+    "/api/v1/organization/guardian-invitations/{invitationId}/revoke"
+  ],
+  "orgMemberPaths": [
+    "/api/v1/organization/members"
+  ],
+  "classCommand": {
+    "schema": "CreateClassCommand",
+    "properties": [
+      "academicPeriodId",
+      "courseId",
+      "title",
+      "capacity",
+      "activateImmediately"
+    ],
+    "methodsAtClassItem": []
+  },
+  "relationConcurrency": {
+    "EndEnrollmentCommand": [
+      "finalStatus"
+    ],
+    "teacherEndHasBody": false
+  },
+  "identities": {
+    "PersonalClassInvitationDto": [
+      "id",
+      "personalClassId",
+      "destinationUserId",
+      "expiresAtUtc",
+      "accepted",
+      "status",
+      "version",
+      "localRoles",
+      "delegatedCapabilities"
+    ],
+    "PersonalClassMembershipDto": [
+      "id",
+      "userId",
+      "localRoles",
+      "delegatedCapabilities",
+      "status",
+      "joinedAtUtc",
+      "endedAtUtc",
+      "endReason",
+      "version"
+    ],
+    "SchoolGuardianRelationDto": [
+      "id",
+      "organizationId",
+      "guardianUserId",
+      "learnerOrganizationPersonId",
+      "status",
+      "validFromUtc",
+      "endedAtUtc",
+      "rowVersion",
+      "replayed"
+    ],
+    "ManagerTeacherWorkloadReportItem": [
+      "teacherMembershipId",
+      "teacherUserId",
+      "teacherDisplayName",
+      "activeClassCount",
+      "completedSessionCount",
+      "attendanceMissingCount",
+      "assignmentPendingGradingCount",
+      "examPendingGradingCount"
+    ],
+    "ConversationJoinRequestResult": [
+      "id",
+      "conversationId",
+      "userId",
+      "status",
+      "createdAtUtc",
+      "expiresAtUtc",
+      "version"
+    ]
+  },
+  "organizationExamList": {
+    "parameters": [],
+    "responseSchema": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/StudentExamSummary"
+      }
+    }
+  },
+  "independentExamList": {
+    "parameters": [
+      "classId",
+      "Page",
+      "PageSize",
+      "Search",
+      "Published"
+    ]
+  },
+  "releasedExamResults": {
+    "StudentExamResultDto": [
+      "examAttemptId",
+      "examId",
+      "examVersionId",
+      "attemptNumber",
+      "finalizedAtUtc",
+      "releaseStatus",
+      "gradeRevisionNumber",
+      "releasedAtUtc",
+      "score",
+      "maximumScore",
+      "learnerFeedback"
+    ],
+    "GuardianExamResultDto": [
+      "examAttemptId",
+      "examId",
+      "examVersionId",
+      "attemptNumber",
+      "finalizedAtUtc",
+      "releaseStatus",
+      "gradeRevisionNumber",
+      "releasedAtUtc",
+      "score",
+      "maximumScore",
+      "guardianVisibleFeedback"
+    ]
+  },
+  "quote": {
+    "properties": [
+      "purpose",
+      "planVersionId",
+      "subscriptionId",
+      "priceToman",
+      "displayCurrency",
+      "effectiveAtUtc",
+      "periodEndsAtUtc",
+      "effectiveQuotas",
+      "autoRenew",
+      "expiresAtUtc",
+      "previewOnly",
+      "startsUponVerifiedPayment"
+    ],
+    "required": [
+      "purpose",
+      "planVersionId",
+      "subscriptionId",
+      "priceToman",
+      "displayCurrency",
+      "effectiveAtUtc",
+      "periodEndsAtUtc",
+      "effectiveQuotas",
+      "autoRenew"
+    ]
+  },
+  "supportDeletionNotesMatches": [],
+  "messagingSettings": [
+    "visibility",
+    "groupHistoryPolicy",
+    "memberCapabilities",
+    "expectedVersion"
+  ],
+  "managedConversation": [
+    "conversationId",
+    "type",
+    "scope",
+    "organizationId",
+    "title",
+    "description",
+    "managementPolicy",
+    "visibility",
+    "groupHistoryPolicy",
+    "memberCapabilities",
+    "status",
+    "createdAtUtc",
+    "archivedAtUtc",
+    "version",
+    "participants",
+    "alreadyExisted",
+    "initialTargets",
+    "effectiveCapabilities",
+    "photo"
+  ],
+  "membersQuery": [
+    "conversationId",
+    "page",
+    "pageSize"
+  ],
+  "mediaKindSchema": {
+    "type": "string"
+  },
+  "inviteLinkProperties": [
+    "id",
+    "conversationId",
+    "createdByUserId",
+    "createdAtUtc",
+    "expiresAtUtc",
+    "maximumUses",
+    "usedCount",
+    "requiresApproval",
+    "revokedAtUtc",
+    "version"
+  ],
+  "resolved": {
+    "courseAndPeriodLists": true,
+    "lessonPublicationReceipt": true,
+    "lessonReceiptIdentity": [
+      "eventId",
+      "activityKind",
+      "sourceId",
+      "sourceVersionId",
+      "sourceRevision",
+      "deliveryState"
+    ],
+    "assignmentStatementFiles": {
+      "AssignmentResult": true,
+      "CreateAssignmentDraftCommand": true,
+      "UpdateAssignmentDraftCommand": true
+    },
+    "scheduleRequired": {
+      "fromUtc": true,
+      "toUtc": true
+    },
+    "conversationPhotoAndCapabilities": true,
+    "permissionsCatalog": true,
+    "independentInvitationStatus": true,
+    "independentMembershipPage": true,
+    "personalFormation": true
+  }
+}

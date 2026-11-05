@@ -202,11 +202,17 @@ test('organization Teacher does not gain independent authoring without the retur
       await route.fulfill({ response, json: body });
     },
   );
+  const previewResponse = page.waitForResponse((response) =>
+    response.url().includes('/academic/exams/' + eid + '/student-preview'),
+  );
   await page.goto(base + '/exams/' + eid);
+  const preview = await previewResponse;
+  expect((await preview.json()).exam.classRef.classId).toBe(cid.replace('1800', '1809'));
   await expect(page.getByRole('alert').first()).toBeVisible();
   await expect(page.getByRole('button', { name: copy.text_974bdfc23e33, exact: true })).toHaveCount(
     0,
   );
+  await page.unrouteAll({ behavior: 'wait' });
 });
 test('personal learner saves and submits an independent assignment without school context', async ({
   page,

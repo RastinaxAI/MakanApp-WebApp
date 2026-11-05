@@ -1,0 +1,831 @@
+{
+  "checkedAtUtc": "2026-11-04T14:40:27.331Z",
+  "backend": "http://94.184.32.84:8090",
+  "domainWrites": false,
+  "allowedPosts": [
+    "auth challenge/verify/logout",
+    "own workspace selection",
+    "source/quota preflight"
+  ],
+  "roles": [
+    {
+      "role": "Manager",
+      "requests": [
+        {
+          "path": "/api/v1/me",
+          "method": "GET",
+          "status": 401,
+          "expected": [
+            401
+          ],
+          "milliseconds": 255,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202,
+          "expected": [
+            202
+          ],
+          "milliseconds": 103
+        },
+        {
+          "path": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 74
+        },
+        {
+          "path": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 67
+        },
+        {
+          "path": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 70
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 64
+        },
+        {
+          "path": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 53
+        },
+        {
+          "path": "/api/v1/notifications/devices/web-push/configuration",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 82
+        },
+        {
+          "path": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 46
+        },
+        {
+          "path": "/api/v1/organization/official-spaces",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 61
+        },
+        {
+          "path": "/api/v1/organization/members",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 257
+        },
+        {
+          "path": "/api/v1/organization/guardian-relations",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 86
+        },
+        {
+          "path": "/api/v1/organization/classes/{id}/official-spaces",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 64
+        },
+        {
+          "path": "/api/v1/academic/classes/{id}/assignments",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 283
+        },
+        {
+          "path": "/api/v1/organization/classes/{id}/official-spaces/activities",
+          "method": "GET",
+          "status": 404,
+          "expected": [
+            200,
+            404
+          ],
+          "milliseconds": 68,
+          "code": "CONVERSATION_NOT_FOUND"
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 53
+        },
+        {
+          "path": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204,
+          "expected": [
+            204
+          ],
+          "milliseconds": 43
+        }
+      ],
+      "passed": true,
+      "messaging": {
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverUsers",
+          "CreatePersonalGroup",
+          "CreatePersonalChannel",
+          "CreateDirect"
+        ],
+        "nextAction": "None"
+      },
+      "push": {
+        "isConfigured": false
+      },
+      "organizationSpaces": {
+        "group": "Missing",
+        "channel": "Missing",
+        "groupAttempts": 0,
+        "channelAttempts": 0
+      },
+      "guardianRelationSample": {
+        "available": true,
+        "hasGuardianName": false
+      },
+      "classSpaces": {
+        "sampleCount": 1,
+        "group": "Missing",
+        "channel": "Missing",
+        "groupAttempts": 0,
+        "channelAttempts": 0
+      },
+      "publishedAssignmentDelivery": {
+        "sampleCount": 1,
+        "status": 404,
+        "code": "CONVERSATION_NOT_FOUND",
+        "states": []
+      },
+      "contextPreserved": true
+    },
+    {
+      "role": "Teacher",
+      "requests": [
+        {
+          "path": "/api/v1/me",
+          "method": "GET",
+          "status": 401,
+          "expected": [
+            401
+          ],
+          "milliseconds": 38,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202,
+          "expected": [
+            202
+          ],
+          "milliseconds": 41
+        },
+        {
+          "path": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 48
+        },
+        {
+          "path": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 55
+        },
+        {
+          "path": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 60
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 44
+        },
+        {
+          "path": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 44
+        },
+        {
+          "path": "/api/v1/notifications/devices/web-push/configuration",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 63
+        },
+        {
+          "path": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 66
+        },
+        {
+          "path": "/api/v1/organization/people",
+          "method": "GET",
+          "status": 403,
+          "expected": [
+            403
+          ],
+          "milliseconds": 66,
+          "code": "WORKSPACE_NOT_ALLOWED"
+        },
+        {
+          "path": "/api/v1/organization/classes/{id}/official-spaces",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 61
+        },
+        {
+          "path": "/api/v1/academic/classes/{id}/assignments",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 70
+        },
+        {
+          "path": "/api/v1/organization/classes/{id}/official-spaces/activities",
+          "method": "GET",
+          "status": 404,
+          "expected": [
+            200,
+            404
+          ],
+          "milliseconds": 59,
+          "code": "CONVERSATION_NOT_FOUND"
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 47
+        },
+        {
+          "path": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204,
+          "expected": [
+            204
+          ],
+          "milliseconds": 51
+        }
+      ],
+      "passed": true,
+      "messaging": {
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverUsers",
+          "CreatePersonalGroup",
+          "CreatePersonalChannel",
+          "CreateDirect"
+        ],
+        "nextAction": "None"
+      },
+      "push": {
+        "isConfigured": false
+      },
+      "classSpaces": {
+        "sampleCount": 1,
+        "group": "Missing",
+        "channel": "Missing",
+        "groupAttempts": 0,
+        "channelAttempts": 0
+      },
+      "publishedAssignmentDelivery": {
+        "sampleCount": 1,
+        "status": 404,
+        "code": "CONVERSATION_NOT_FOUND",
+        "states": []
+      },
+      "contextPreserved": true
+    },
+    {
+      "role": "Student",
+      "requests": [
+        {
+          "path": "/api/v1/me",
+          "method": "GET",
+          "status": 401,
+          "expected": [
+            401
+          ],
+          "milliseconds": 43,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202,
+          "expected": [
+            202
+          ],
+          "milliseconds": 43
+        },
+        {
+          "path": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 57
+        },
+        {
+          "path": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 54
+        },
+        {
+          "path": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 52
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 62
+        },
+        {
+          "path": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 46
+        },
+        {
+          "path": "/api/v1/notifications/devices/web-push/configuration",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 42
+        },
+        {
+          "path": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 40
+        },
+        {
+          "path": "/api/v1/organization/people",
+          "method": "GET",
+          "status": 403,
+          "expected": [
+            403
+          ],
+          "milliseconds": 42,
+          "code": "WORKSPACE_NOT_ALLOWED"
+        },
+        {
+          "path": "/api/v1/organization/classes/{id}/official-spaces",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 55
+        },
+        {
+          "path": "/api/v1/academic/classes/{id}/assignments",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 210
+        },
+        {
+          "path": "/api/v1/organization/classes/{id}/official-spaces/activities",
+          "method": "GET",
+          "status": 404,
+          "expected": [
+            200,
+            404
+          ],
+          "milliseconds": 77,
+          "code": "CONVERSATION_NOT_FOUND"
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 48
+        },
+        {
+          "path": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204,
+          "expected": [
+            204
+          ],
+          "milliseconds": 197
+        }
+      ],
+      "passed": true,
+      "messaging": {
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverUsers",
+          "CreatePersonalGroup",
+          "CreatePersonalChannel",
+          "CreateDirect"
+        ],
+        "nextAction": "None"
+      },
+      "push": {
+        "isConfigured": false
+      },
+      "classSpaces": {
+        "sampleCount": 1,
+        "group": "Missing",
+        "channel": "Missing",
+        "groupAttempts": 0,
+        "channelAttempts": 0
+      },
+      "publishedAssignmentDelivery": {
+        "sampleCount": 1,
+        "status": 404,
+        "code": "CONVERSATION_NOT_FOUND",
+        "states": []
+      },
+      "contextPreserved": true
+    },
+    {
+      "role": "Parent",
+      "requests": [
+        {
+          "path": "/api/v1/me",
+          "method": "GET",
+          "status": 401,
+          "expected": [
+            401
+          ],
+          "milliseconds": 44,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202,
+          "expected": [
+            202
+          ],
+          "milliseconds": 41
+        },
+        {
+          "path": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 53
+        },
+        {
+          "path": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 52
+        },
+        {
+          "path": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 53
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 46
+        },
+        {
+          "path": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 50
+        },
+        {
+          "path": "/api/v1/notifications/devices/web-push/configuration",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 49
+        },
+        {
+          "path": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 403,
+          "expected": [
+            403
+          ],
+          "milliseconds": 51,
+          "code": "ACADEMIC_READ_NOT_ALLOWED"
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 51
+        },
+        {
+          "path": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204,
+          "expected": [
+            204
+          ],
+          "milliseconds": 39
+        }
+      ],
+      "passed": true,
+      "messaging": {
+        "allowedActions": [
+          "ReadExistingConversations",
+          "DiscoverUsers",
+          "CreatePersonalGroup",
+          "CreatePersonalChannel",
+          "CreateDirect"
+        ],
+        "nextAction": "None"
+      },
+      "push": {
+        "isConfigured": false
+      },
+      "contextPreserved": true
+    },
+    {
+      "role": "Personal",
+      "requests": [
+        {
+          "path": "/api/v1/me",
+          "method": "GET",
+          "status": 401,
+          "expected": [
+            401
+          ],
+          "milliseconds": 43,
+          "code": "AUTH_REQUIRED"
+        },
+        {
+          "path": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202,
+          "expected": [
+            202
+          ],
+          "milliseconds": 45
+        },
+        {
+          "path": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 54
+        },
+        {
+          "path": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 36
+        },
+        {
+          "path": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 51
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 51
+        },
+        {
+          "path": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 48
+        },
+        {
+          "path": "/api/v1/notifications/devices/web-push/configuration",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 51
+        },
+        {
+          "path": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 403,
+          "expected": [
+            403
+          ],
+          "milliseconds": 55,
+          "code": "ACADEMIC_READ_NOT_ALLOWED"
+        },
+        {
+          "path": "/api/v1/sources",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 58
+        },
+        {
+          "path": "/api/v1/ai/sources/preflight",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 106
+        },
+        {
+          "path": "/api/v1/commerce/ai/simple-text/preflight",
+          "method": "POST",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 84
+        },
+        {
+          "path": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200,
+          "expected": [
+            200
+          ],
+          "milliseconds": 60
+        },
+        {
+          "path": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204,
+          "expected": [
+            204
+          ],
+          "milliseconds": 50
+        }
+      ],
+      "passed": true,
+      "messaging": {
+        "allowedActions": [
+          "ReadExistingConversations"
+        ],
+        "nextAction": "ProfileCompletionRequired"
+      },
+      "push": {
+        "isConfigured": false
+      },
+      "sourcePreflight": {
+        "selectedExistingSource": false,
+        "authorized": true,
+        "retrievalAvailable": false,
+        "commercialStatus": "UseExistingCommercePreflight"
+      },
+      "quotaPreflight": {
+        "allowed": false,
+        "errorCode": "SUBSCRIPTION_INACTIVE",
+        "authorizesEducationalData": false
+      },
+      "contextPreserved": true
+    }
+  ]
+}

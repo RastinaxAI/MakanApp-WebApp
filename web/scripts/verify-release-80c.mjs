@@ -142,7 +142,7 @@ for (const [role, phone] of [
   report.roles.push(row);
   await fs.mkdir('docs/quality', { recursive: true });
   await fs.writeFile(
-    'docs/quality/RELEASE_80C_LIVE_READS.json',
+    process.env.MAKAN_TEST_REPORT || 'docs/quality/RELEASE_80C_LIVE_READS.json',
     JSON.stringify(report, null, 2) + '\n',
   );
 }

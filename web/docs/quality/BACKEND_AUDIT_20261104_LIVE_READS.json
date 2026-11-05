@@ -1,0 +1,736 @@
+{
+  "checkedAtUtc": "2026-11-04T14:38:00.762Z",
+  "environment": "http://94.184.32.84:8090",
+  "domainWrites": false,
+  "roles": [
+    {
+      "role": "Student",
+      "requests": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/{id}",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/commerce/personal/subscription",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-class-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/invitations/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/join-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/manager-transfers",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "workspaceAvailable": true,
+      "allowedActions": [
+        "ReadExistingConversations",
+        "DiscoverUsers",
+        "CreatePersonalGroup",
+        "CreatePersonalChannel",
+        "CreateDirect"
+      ],
+      "inbox": {
+        "serverPage": true,
+        "hasMore": false,
+        "loaded": 2,
+        "scopes": [
+          "Personal"
+        ]
+      },
+      "sampleManaged": {
+        "type": "Group",
+        "effectiveCapabilities": {
+          "canEditInfo": true,
+          "canManageMembers": true,
+          "canManageMessages": true,
+          "canPublish": true,
+          "canManageAdmins": true,
+          "canChangeSettings": true,
+          "canInviteMembers": true,
+          "canManageInvites": true,
+          "canBanMembers": true,
+          "canManageTopics": true
+        },
+        "memberCapabilities": "LegacyMemberDefault",
+        "managementPolicy": "UserManaged"
+      },
+      "permissionCatalogCount": 16,
+      "contextPreserved": true
+    },
+    {
+      "role": "Teacher",
+      "requests": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/{id}",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/commerce/personal/subscription",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-class-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/invitations/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/join-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/manager-transfers",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "workspaceAvailable": true,
+      "allowedActions": [
+        "ReadExistingConversations",
+        "DiscoverUsers",
+        "CreatePersonalGroup",
+        "CreatePersonalChannel",
+        "CreateDirect"
+      ],
+      "inbox": {
+        "serverPage": true,
+        "hasMore": false,
+        "loaded": 3,
+        "scopes": [
+          "Personal",
+          "Organization"
+        ]
+      },
+      "sampleManaged": {
+        "type": "Group",
+        "effectiveCapabilities": {
+          "canEditInfo": true,
+          "canManageMembers": true,
+          "canManageMessages": true,
+          "canPublish": true,
+          "canManageAdmins": true,
+          "canChangeSettings": true,
+          "canInviteMembers": true,
+          "canManageInvites": true,
+          "canBanMembers": true,
+          "canManageTopics": true
+        },
+        "memberCapabilities": "LegacyMemberDefault",
+        "managementPolicy": "UserManaged"
+      },
+      "permissionCatalogCount": 16,
+      "contextPreserved": true
+    },
+    {
+      "role": "Parent",
+      "requests": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/commerce/personal/subscription",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-class-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/invitations/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/join-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/manager-transfers",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "workspaceAvailable": true,
+      "allowedActions": [
+        "ReadExistingConversations",
+        "DiscoverUsers",
+        "CreatePersonalGroup",
+        "CreatePersonalChannel",
+        "CreateDirect"
+      ],
+      "inbox": {
+        "serverPage": true,
+        "hasMore": false,
+        "loaded": 0,
+        "scopes": []
+      },
+      "permissionCatalogCount": 16,
+      "contextPreserved": true
+    },
+    {
+      "role": "Manager",
+      "requests": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/{id}",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/commerce/personal/subscription",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-class-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/invitations/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/join-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/manager-transfers",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/official-spaces",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/academic/classes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/organization/classes/{id}/official-spaces",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "workspaceAvailable": true,
+      "allowedActions": [
+        "ReadExistingConversations",
+        "DiscoverUsers",
+        "CreatePersonalGroup",
+        "CreatePersonalChannel",
+        "CreateDirect"
+      ],
+      "inbox": {
+        "serverPage": true,
+        "hasMore": false,
+        "loaded": 1,
+        "scopes": [
+          "Personal"
+        ]
+      },
+      "sampleManaged": {
+        "type": "Group",
+        "effectiveCapabilities": {
+          "canEditInfo": true,
+          "canManageMembers": true,
+          "canManageMessages": true,
+          "canPublish": true,
+          "canManageAdmins": true,
+          "canChangeSettings": true,
+          "canInviteMembers": true,
+          "canManageInvites": true,
+          "canBanMembers": true,
+          "canManageTopics": true
+        },
+        "memberCapabilities": "LegacyMemberDefault",
+        "managementPolicy": "UserManaged"
+      },
+      "permissionCatalogCount": 16,
+      "contextPreserved": true
+    },
+    {
+      "role": "Personal",
+      "requests": [
+        {
+          "operation": "/api/v1/auth/otp/challenges",
+          "method": "POST",
+          "status": 202
+        },
+        {
+          "operation": "/api/v1/auth/otp/verify",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/snapshot",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/select",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/me/messaging-status",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/account",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/conversations/permissions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/realtime/account-inbox/changes",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/contacts",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/commerce/personal/subscription",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-class-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/invitations/page",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/join-requests",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/personal-classes/manager-transfers",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/sources",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/workspaces/current",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "operation": "/api/v1/auth/logout",
+          "method": "POST",
+          "status": 204
+        }
+      ],
+      "passed": true,
+      "workspaceAvailable": true,
+      "allowedActions": [
+        "ReadExistingConversations"
+      ],
+      "inbox": {
+        "serverPage": true,
+        "hasMore": false,
+        "loaded": 0,
+        "scopes": []
+      },
+      "permissionCatalogCount": 16,
+      "contextPreserved": true
+    }
+  ]
+}

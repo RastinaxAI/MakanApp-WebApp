@@ -178,12 +178,13 @@ try {
   await browser.close();
 }
 await fs.writeFile(
-  new URL(
-    '../docs/quality/RELEASE_80C_LIVE_BFF' +
-      (selectedRoles ? '_' + selectedRoles.join('_').toUpperCase() : '') +
-      '.json',
-    import.meta.url,
-  ),
+  process.env.MAKAN_TEST_REPORT ||
+    new URL(
+      '../docs/quality/RELEASE_80C_LIVE_BFF' +
+        (selectedRoles ? '_' + selectedRoles.join('_').toUpperCase() : '') +
+        '.json',
+      import.meta.url,
+    ),
   JSON.stringify(report, null, 2) + '\n',
 );
 if (report.roles.some((row) => !row.passed)) process.exitCode = 1;

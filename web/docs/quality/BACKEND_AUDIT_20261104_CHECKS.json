@@ -1,0 +1,110 @@
+{
+  "checkedAtUtc": "2026-11-04T14:55:29Z",
+  "backend": "http://94.184.32.84:8090",
+  "unit": {
+    "passed": 447,
+    "failed": 0,
+    "skipped": 0,
+    "files": 63,
+    "command": "npm test -- --reporter=json"
+  },
+  "browser": {
+    "passed": 209,
+    "failedLatest": 0,
+    "skipped": 0,
+    "initial": {
+      "startTime": "2026-11-04T14:36:49.414Z",
+      "duration": 702707.315,
+      "expected": 208,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "followup": {
+      "startTime": "2026-11-04T14:52:51.001Z",
+      "duration": 39749.641,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "uniqueLatestPassed": 209,
+    "automaticRetries": 0,
+    "initialFailure": {
+      "file": "release-80c.spec.ts",
+      "title": "organization Teacher does not gain independent authoring without the returned capability",
+      "reason": "A route.fetch callback was still running when test teardown closed the context; initial failure retained.",
+      "fix": "Wait for the intercepted preview response, assert the mismatched class binding, then await route-handler completion; permission assertions retained."
+    },
+    "command": "PLAYWRIGHT_CHANNEL=chrome npx playwright test; followup: release-80c.spec.ts"
+  },
+  "contract": {
+    "checkedAtUtc": "2026-11-04T14:36:31Z",
+    "base": "http://94.184.32.84:8090",
+    "status": 200,
+    "seconds": 10.16,
+    "sha256": "f0f59622119672a0c87c193ef22dc6e6e3008ddd55f51965ffb6aa04ae242d57",
+    "liveOperations": 433,
+    "snapshotOperations": 433,
+    "added": [],
+    "removed": [],
+    "liveSchemaCount": 702
+  },
+  "live": {
+    "roles": [
+      "Student",
+      "Teacher",
+      "Parent",
+      "Manager",
+      "Personal"
+    ],
+    "directRequests": 113,
+    "readinessRequests": 72,
+    "bffChecks": 110,
+    "uiPages": 15,
+    "expectedNegativeChecks": 9,
+    "domainMutations": 0,
+    "writeScope": "own Test auth sessions and workspace selections; source/quota preflight only; logout attempted for each own session",
+    "allContextsPreserved": true,
+    "logoutUnconfirmed": 0
+  },
+  "deploymentTests": {
+    "setupPassed": 16,
+    "runtimePassed": 9,
+    "actualDockerDaemonAvailable": false,
+    "remoteDeploymentPerformed": false
+  },
+  "staticChecks": {
+    "lint": "passed; 343 modules, no cycles",
+    "typecheck": "passed",
+    "generated": "277 client-only operations, 492 schemas, no platform-admin paths",
+    "format": "passed"
+  },
+  "findingCounts": {
+    "total": 15,
+    "liveOrEnvironment": 4,
+    "publicContractOrClarification": 10,
+    "futureProductScope": 1
+  },
+  "observations": {
+    "officialSpaceMissing": true,
+    "publishedAssignmentDelivery404": true,
+    "webPushConfigured": false,
+    "aiRuntime": "Disabled in release guide; selected-source inference not confirmed because sample had zero personal sources",
+    "personalAccount": "ProfileCompletionRequired observed; this is not evidence of age/role gating defect"
+  },
+  "rawLogPolicy": "Raw fixture browser traces may contain ephemeral test session identifiers; retained under tmp/test-results and excluded from the public PDF/source evidence.",
+  "limitations": [
+    "سورس بک‌اند، DB، migration، jobها و logs داخلی در این workspace در دسترس نیستند؛ این گزارش patch یا attestation کد سرور نیست.",
+    "در این نوبت هیچ کلاس، عضویت، پیام، فایل، درخواست تشکیل، سفارش یا پرداخت زنده ایجاد/ویرایش نشد؛ فقط نشست QA، انتخاب فضای خودش و preflight غیرمولد انجام شد.",
+    "CRUD پیش‌نویس تشکیل که در گزارش انتشار قبلی موفق و Cancelled شده، سابقه است و به آمار آزمون زندهٔ امروز اضافه نشده است.",
+    "موفقیت fixture کلاینت، اثبات امنیت DB/ACL واقعی یا اجرای jobهای backend نیست؛ چک‌های منفی زنده محدود و مشخص‌اند.",
+    "AI Runtime طبق راهنمای انتشار خاموش است؛ تولید AI، درگاه پرداخت، ارسال Push واقعی و پذیرش چند replica اجرا نشدند.",
+    "Docker daemon محلی فعال نیست و SSH مقصد ارائه نشده؛ استقرار کانتینر، Nginx، TLS و سلامت دامنهٔ مقصد در این نوبت تأیید نشد.",
+    "پاسخ Web Push مربوط به محیط تست و نمونهٔ official spaces مربوط به منابع بررسی‌شده است؛ تعمیم به همهٔ داده‌ها و production مجاز نیست.",
+    "نام 80c2e61 به راهنمای ارسالی اشاره دارد؛ info.version در OpenAPI برابر 1.0.0 است و شناسهٔ دقیق binary مستقر از این بررسی attestation ندارد."
+  ],
+  "sourceContentSha256": "4911442184139303e7b2c7abef504bbc4825090bf3a3e31c8d48f96d0c874eac",
+  "typecheckAfterTestFix": "passed",
+  "pdfQualityReport": "BACKEND_AUDIT_20261104_PDF_QA.json"
+}

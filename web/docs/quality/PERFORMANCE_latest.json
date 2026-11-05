@@ -2,18 +2,18 @@
   "environment": "isolated local fixture; synthetic latency; not production latency",
   "entry": {
     "javascriptRequests": 13,
-    "javascriptDecodedBytes": 807330,
-    "documentTtfbMs": 11,
-    "firstContentfulPaintMs": 180
+    "javascriptDecodedBytes": 807360,
+    "documentTtfbMs": 12,
+    "firstContentfulPaintMs": 172
   },
-  "schoolReadyMs": 329,
+  "schoolReadyMs": 325,
   "school": {
     "javascriptRequests": 18,
-    "javascriptDecodedBytes": 962225,
-    "documentTtfbMs": 9,
-    "firstContentfulPaintMs": 60
+    "javascriptDecodedBytes": 962255,
+    "documentTtfbMs": 10,
+    "firstContentfulPaintMs": 64
   },
-  "concurrentBatchMs": 321,
+  "concurrentBatchMs": 316,
   "identityReads": 1,
   "contextReads": 1
 }
